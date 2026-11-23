@@ -707,11 +707,33 @@ def save(corpus: dict, path: Path | None = None) -> Path:
     return path
 
 
+def _rebase(rec: dict, root: Path) -> dict:
+    """把记录里的 file 从「建索引时的绝对路径」改成「相对语料根的路径」。
+
+    索引可能是在另一台机器、另一个盘符下建的；`file` 里存绝对路径会让索引
+    一换位置就失效。这里统一成相对路径，取用时拼 root。
+    `zip://` / `rar://` 前缀的虚拟路径原样保留（它们指向包内成员，包已解开时无效）。
+    """
+    f = rec.get("file") or ""
+    if f.startswith(("zip://", "rar://")):
+        return rec
+    try:
+        rel = Path(f).resolve().relative_to(root.resolve())
+    except (ValueError, OSError):
+        # 不在当前语料根下（旧索引、跨盘），保留原值让调用方能看出问题
+        return rec
+    return {**rec, "file": str(rel), "abs": f}
+
+
 def load(path: Path | None = None) -> dict:
     p = path or corpus_path()
     if not p.exists():
         raise FileNotFoundError(f"语料索引不存在：{p}（先跑 corpus_index.py --build）")
-    return json.loads(p.read_text(encoding="utf-8"))
+    data = json.loads(p.read_text(encoding="utf-8"))
+    root = corpus_root()
+    if data.get("records"):
+        data["records"] = [_rebase(r, root) for r in data["records"]]
+    return data
 
 
 def grams(text: str) -> set[str]:
