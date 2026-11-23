@@ -1,9 +1,0 @@
-MODULE backend.services.quality_receipts
-DOC: Version-bound evidence; existence and model claims are not passing receipts.
-CONSTANTS:
-RULE_VERSION [str] = '2026-09-11.core-2'
-_MODEL_FILES [frozenset] = frozenset({'DATA_PROFILE.json', 'PROBLEM_ANALYSIS.md', 'DATA_FACTS.json', 'MODELING_PRECHECK.json', 'MODELING_REPORT.md', 'CROSS_PROBLEM_LEDGER.json', 'TOPIC_PLAN.md', 'DATA_SOURCES.json', 'PROBLEM_FACTS.json', 'PARAMS_RAW.md'})
-_RESULT_SCOPES [frozenset] = frozenset({'comp-code', 'comp-stats-analysis'})
-_STEP_SCOPES [frozenset] = frozenset({'comp-stats-analysis', 'comp-code', 'comp-modeling'})
-CALLABLES:
-Path(*args, **kwargs) :: 

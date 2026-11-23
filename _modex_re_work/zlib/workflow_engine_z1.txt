@@ -1,1306 +1,0 @@
-：建模深度对照只用于数学建模论文，未检查0#[0-9A-Fa-f]{6}\1[已脱敏]可选提交“数据及其他材料”（数据、收集过程或出处、分析程序，总计不超过 100MB）：编译步骤会整理为 paper/数据及其他材料.zip，打包失败只提示、不影响出稿   **关键词**：词1；词2；词3 （docx 会自动渲染成黑体标签 + 宋体内容）
-3. 正文按问题依赖链和模型类型命名章节；每个核心模型闭环到真实结果与验证，不强制问题重述/模型建立/灵敏度分别独立成章。
-4. ## 参考文献（[1] [2] 编号，GB/T 7714）
-赛程约 13 天，侧重数据挖掘与机器学习方向注重原创与数据质量，不得抄袭已有研究；论文正文字符数（计空格）不得超过 16000，知网查重率不得超过 20%（2026 年大赛通知：字符数超标且重复率超过 20% 的取消参赛资格，超过 40% 视为学术不端；查重报告由参赛队自行在知网检测）1
-**规则：**
-1. 每张图嵌入它所说明的那一节（研究框架、方法、系统设计等），图前引出，图后说明它表达的关系
-2. 
-**规则：**
-1. 按论证主线把每张图分配到它支撑的论点所在的章节（方法、结果、讨论），全部嵌入
-2. **用户没有上传数据。** 请按以下方式规划：
-1. 「数据获取计划」先尝试公开数据：写清来源机构/网址、指标/字段、时间范围与地区，获取方式写“公开下载”
-2. 公开渠道拿不到的指标用模拟数据代替：获取方式写“模拟”，并写清模拟的规模、字段与分布假设
-3. 用了模拟数据的地方，论文与图表都要如实标注“模拟数据”；不得编造真实机构来源
-4. **正常规划完整的图表清单**，不要因为暂时没有数据就不规划图表
-5. 下一步「数据采集与统计分析」按这份计划获取或生成数据，并在 DATA_SOURCES.json 逐项登记
-**用户启用了数据分析与图表生成，但未上传数据文件。** 按这个顺序处理：
-1. 先找真实来源：可公开获取的数据（写明来源机构或网址、指标、时间范围）、文献里已发表的数据（注明出处）
-2. 不需要数据的图照常规划：研究框架图、技术路线图、文献对比表、概念关系图
-3. 确实需要数据图又拿不到真实数据时，才用模拟数据，**只作方法演示**：规划文档写明「模拟数据，仅作方法演示」（含数据规模、字段、分布假设），论证主线的「证据」和「边界」栏、图注、正文都如实写明；结论只说明方法怎么用，不说明真实世界的规律，不写成调查、实验、测试或实证结果；同时在 OPEN_QUESTIONS.md 里请作者补真实数据
-4. 后续 paper-analysis 步骤按这份规划获取或生成数据，并产出 figures/all_results.json
-**不要因为 user_data/ 为空就走「无图表分支」，那只在用户显式关闭开关时才用。**
-
-
-**铁律**:
-1. 已有的代码/结果/图 = 真值, **绝对禁止覆盖或重新生成**
-2. 已有 `code/`、`figures/`、`results.json`、`RESULTS.md` 中的内容 = 不动
-3. 新生成的代码必须使用用户已上传的 `data/` 中的真实数据, 不允许造数据
-4. 新生成的图文件名禁止与 `figures/user_fig_*` 重名(已有的不要覆盖)
-5. 完成后将新结果**追加**到 `results.json` 而不是覆盖
-**用户启用了数据分析与图表生成，但未上传数据文件。**
-请按以下方式处理：
-1. 在规划文档中写明：「**用户未提供数据，将使用仿真/示例数据**」
-2. **正常规划完整图表清单**（fig_desc / fig_main / fig_ablation 等），不要因为没数据就跳过
-3. 在分析任务部分明确数据来源：基于论文主题构造合理的仿真数据集（含数据规模、字段、分布假设）
-4. 图表说明里标注「（基于仿真数据）」，保持学术诚信
-5. 后续 paper-analysis 步骤会按这份规划生成仿真数据并产出 figures/all_results.json
-**绝对不要因为 user_data/ 为空就走「无图表分支」，那只在用户显式关闭开关时才用。**
-
-**铁律：**
-1. 上面列出的每张架构图/流程图都必须嵌入其对应的方法、建模或求解过程
-2. **必须用 `.png` 扩展名**（Word 模式只支持 PNG）
-3. **禁止**写任何数据图（柱状/折线/热力图等）
-4. **禁止**写「如表 X 所示」类引用数据图的措辞；两张图之间必须有完整解释段
-**用户已禁用数据图表生成，正文走「无图表分支」：**
-1. 正文不嵌入任何图片（不写 (#{1,3}\s*(?:图表预规划|图表清单|PDF\s*图表|数据图表|Figure\s*Plan).*?)(?=\n#{1,2}\s|\Z)摘要和目录用罗马数字页码、正文页码从 1 起正文页码从 1 起摘要专用页原则上不超过 1 页，含标题和关键词；电子版第一页必须是摘要专用页官方格式（不符合取消评奖资格）：第一页写题目、摘要和关键词（页首“队伍编号/题号”表格）；第二页为目录页；目录之后开始正文，从正文开始编页码，页脚居中、从 1 连续编号；不能有页眉，不能出现队员姓名和学校正文按官方要求写清：问题描述、指标选择、数据描述、模型建立、求解和检验、模型结果分析解释、结论建议；标题层次依次为 一、（一）1. ①官方格式（不符合取消评奖资格）：第一页写题目、摘要和关键词（页首“队伍编号/赛道”表格）；第二页为目录页；目录之后开始正文，从正文开始编页码，页脚居中、从 1 连续编号；不能有页眉，不能出现队员姓名和学校- 参考文献用 `[1] 作者. 题名[J]. 期刊, 年, 卷(期): 页码.` 格式
-### 规划阶段铁律
-1. PAPER_PLAN.md 必须基于上面的资产清单, **每章引用的图表/数据/结果必须从已有资产中来**
-2. 如果某章需要的资产**已存在**, 直接在 plan 里标注资产路径(如 `figures/user_fig_demand.png`)
-3. 如果某章需要的资产**缺失**, 在 plan 里标注 `[需后续步骤补全]`, 写明缺什么
-4. **禁止规划用户已有图之外的视觉风格大改**(避免 paper-figure 覆盖)
-5. 必须把用户自定义写作要求(如有)反映在 PAPER_PLAN.md 的「全局约束」章节
-**用户已禁用数据图表生成，正文走「无图表分支」：**
-1. **禁止在正文中写任何 `![alt](figures/...)` markdown 图片标记**
-2. **禁止写「如图 X 所示」「详见图 X」「图 X 展示」**
-3. 所有论点用文献引用 `[N]` / 概念推导 / markdown 表格支撑
-4. **即使 `figures/` 目录里有残留 fig_*.png 文件**（来自旧工作流或其他来源），**也禁止嵌入** — 这些文件不属于本次工作流的规划产物
-
-**铁律：**
-1. 建立 figure use plan，把每张图分配到建模/求解/结果/验证过程并全部嵌入
-2. **必须用 `.png` 扩展名**（Word 模式只支持 PNG）；不要写 `.pdf` 路径
-3. 引用语「如图 X-Y 所示」必须有对应的图片嵌入
-4. 每张正文图都要有图前问题/判断和图后完整解释；禁止连续贴图；任何生成图未嵌入都阻断
-### 撰写阶段铁律
-1. **已有结果数值 = 真值, 逐字保留**: results.json / RESULTS.md 中所有数字直接用, 禁止四舍五入或单位换算
-2. **已有图 = 真值, 直接引用**: figures/ 中现存文件必须用 `\includegraphics`(或 Markdown `![](figures/...)`) 引用, 禁止重绘
-3. **已有代码 = 方法依据**: 论文描述的方法必须与 code/ 中的实际实现一致
-4. **缺失资产已由前置步骤补全**, 直接引用即可
-5. 用户自定义写作要求是强制约束, 必须逐条满足
-6. 数据真实性自检会跑两道闸门, 不通过必须按 paper_data_check.py 提示修复
-/2已按 2026 参赛须知生成：全国大学生统计建模大赛（2026 第十二届）2026 官方提交规范：正文不要目录、正文不超过 30 页、正文后的附录不限页；本地生成阶段只提醒，超页不阻断、不自动压缩最终提交通常以 25 页为参考；本地生成不设硬上限，超出只提醒，不自动压缩2. ## 摘要（硬范围 600-720 字，优先 620-680 字：第一页最上方有队伍编号信息表，比别的赛事少两三行；按子问题分段、含数值结果，尽量铺满但不得跨页）
-2. ## 摘要（硬范围 600-800 字，优先 680-760 字；按子问题分段、含数值结果，尽量铺满但不得跨页）
-/3）[检查点] 等待人工确认，最长 30 分钟[检查点] 等满 30 分钟没有确认，工作流已暂停（这类材料要你看过才继续）；回来后点「继续」会重新打开确认；轮次 等待满 30 分钟自动继续正文控制在 30 页左右、附录页数不限；本地生成超出只提醒，不自动压缩正文控制在 30 页以内、附录页数不限；本地生成超出只提醒，不设硬上限最终提交参考 30 页；本地生成超出只提醒，不自动压缩- 用户没有自拟题目：第一步在 `## 候选题目` 列 3–5 个候选并写一行 `**推荐：候选 N**`，其余各节按推荐题目展开；第一步结束后会停下请用户选定题目。
-自主选题：官方只给选题方向，题目由参赛队自拟；没填自拟题目时，第一步列 3–5 个候选题目并写明推荐，结束后停下等用户选定（确认=采用推荐题目，或在建议里写“选候选 N”）**
-3. **逐个识别论文中的「数据性数字」**：实验结果、统计指标、对比数据、最优解等
-    （**跳过**叙述里的自然数字：章节号、年份、列号、引用 [1]、公式中的常数等）
-4. **核对每个数据性数字**：是否能在 JSON 数据清单或 TABLE 文件中找到？
-    - 未直接找到不等于编造：先检查单位换算、舍入、比值、差值、置信区间与明确推导；保留可复算依据。仍无依据时报告待确认，禁止猜测替换
-    - 与清单中同一数据字段的值不一致（且不是正常舍入）= 论文写错了，**以 JSON 原值为准修改论文**；清单标了「省略中间 N 项」的列表请直接读原 JSON 核对，不要当成编造
-    - **禁止反向操作**（禁止改 JSON、禁止编造解释）
-5. **表格优先用预生成的**：- 系统框图(3.2)与流程图(3.4)一律自主设计成自包含 HTML 图（fig_arch.html / fig_flow.html），不要 ASCII 文字框图、也不要 mermaid；导出时由 patent-build 用 Electron 截成 PNG。
-
-3. 不画、不嵌数据图（柱状、折线、热力图等）
-4. 两张图之间要有完整的正文，不连续贴图
-需要中文摘要 + 关键词（一般 3-5 个）
-3. 写了「如图 X 所示」就必须有对应的图片
-4. 每张图前写明要回答的问题，图后写清它支撑的论点、关键数值、与谁比较、由此引出什么；两张图之间要有正文，不连续贴图
- 字，上面只列了前 4000 字；全文在 `CUSTOM_REQUIREMENTS.md`，用 Read 分段读完。）
-- 华为杯详实正文档（默认）：每一问都必须先说明方法选择理由，再给出实际初始化/迭代或递推、约束与停止条件、真实结果来源和独立验证；正文通常恢复到约 40-50 页的证据密度仅作软参考。若低于该参考，先检查是否遗漏求解闭环，不得用重复文字、空白或虚构图表补页。
-历年长篇作品的页数只作排版参考；内容扩展必须来自真实建模、证据或结果解释缺口。页数不是完成条件，任何一问缺少方法选择—实际求解步骤—结果验证闭环才是必须修复的缺口；不得为凑上面 40-50 页的软参考而机械扩写或压缩封面需包含 4 个 Logo（组委会提供）4. 表格：
-   - **首选**（推荐）：直接 `cat figures/TABLE_xxx.md >> paper/main.md` 嵌入 Markdown 三线表
-     — `paper-figure` 步骤已经把所有结果表格输出为 `.md`，数值都来自 JSON，**最稳**
-     — 嵌入后在前后加叙述文字（介绍这张表 + 解读关键数字）
-   - **次选**（必要时）：手写 Markdown 表格 `| 列1 | 列2 |\n|---|---|\n`
-     — 数值**必须**从 `figures/all_results.json` 或 `RESULTS.md` 读取，禁止凭记忆填
-   - ⛔ **禁止**：写 `\begin{table}` / `\begin{tabular}` / `\toprule` / `\input{figures/TABLE_*.tex}`
-5. 图片：`![图 X：说明](figures/fig_xxx.png)` ⛔ **必须 `.png`**（Word 不能嵌 PDF）；如只有 PDF 必须先转 PNG
-4. 用户也禁用了架构图，不嵌入 fig_arch / fig_flow_* / fig_er 这类图
-4. 表格：
-   - **首选**：用 markdown 三线表 `| 列1 | 列2 |\n|---|---|\n`
-     — 数值**必须**从 `RESULTS.md` 读取或基于推导, 禁止凭记忆填
-   - ⛔ **禁止**：写 `\begin{table}` / `\begin{tabular}` / `\toprule`
-5. 图片：⛔ **用户已禁用数据图表生成 (skip_figures=True)**
-   - **禁止**写任何 `![alt](figures/...)` 图片标记
-   - **禁止**写「如图 X 所示」「详见图 X」「图 X 展示」
-   - 即使 `figures/` 目录里有残留文件 (来自旧工作流) 也**不嵌入**
-   - 论点用文字 + markdown 表格 + 文献引用 `[N]` 支撑
-4. 表格：
-   - **首选**：用 markdown 三线表 `| 列1 | 列2 |\n|---|---|\n`
-     — 数值**必须**从 `RESULTS.md` 读取或基于推导, 禁止凭记忆填
-   - ⛔ **禁止**：写 `\begin{table}` / `\begin{tabular}` / `\toprule`
-5. 图片：⛔ **用户禁用数据图但启用架构图 (skip_figures=True, skip_drawio=False)**
-   - **禁止**写数据图（柱状/折线/热力图）的 `![](...)` 标记
-   - **必须**嵌入架构图/流程图（fig_arch / fig_flow_* / fig_er / fig_roadmap / fig_pipeline / fig_framework / tikz_*）
-   - 在方法/系统结构章节用 `![](figures/fig_arch.png)` 嵌入
-   - 「如图 X 所示」类引用只针对架构图，不针对数据图
-摘要页：题目（方正小标宋三号）+“摘要”（黑体四号）+ 正文（宋体小四，500–700 字，按研究问题分段写方法与主要结论）+“关键词：”（黑体小四）与 3–5 个关键词（宋体小四，用“；”分隔）；正文首页再排一次题目，页码从正文起编5. ## 附录（如有代码，10-20 行精简版）
-5. ## Appendix（如有代码）
-⛔ 不生成目录页。
-5. ## Appendix（美赛放关键算法代码，不整份贴源码）
-⛔ 美赛目录（官方题面要求）：在 **Keywords** 那一行之后、第一个正文章节之前，单独写三行 `<!-- pagebreak -->`、`<!-- toc -->`、`<!-- pagebreak -->`，导出时变成摘要页之后的一页目录（Word 打开时自动填页码）；不要自己写 Contents 标题或手写目录。main.md 第一行（标题之上）写 `<!-- summary-sheet problem=题号 -->`（题号取上面的 problem_id），导出时变成摘要页顶部的官方表头（Problem Chosen / Team Control Number）。页眉「Team # 队号, Page N of M」和 12 号字由导出自动加，交付说明要提醒用户把 0000000 换成队号、Word 提示更新域时点“是”。不写 AI 使用报告（Report on Use of AI）：本软件不生成，队伍需要时自己补。官方以 25 页为参考（AI 使用报告之前，含摘要页、目录、备忘录/信件、参考文献），写得精炼即可，不为凑页删内容。
-5. ## 附录（大数据赛官方要求：开头写软件名称版本和运行命令，再把 code/ 下自己编写的全部程序按文件用代码块原样贴入，不是精简版）
-5. 用户也禁用了架构图，**禁止嵌入任何 fig_arch / fig_flow_* / fig_er** 类图
-6. 引用：上标 `[1]` `[2,3]`，文献列表用 `[1] 作者. 题名[J]. 期刊, 年, 卷(期): 页码.`
-7. 不要复制 LaTeX 模板，不要写 .tex 文件，不要走模板指纹校验
-8. SKILL.md 中提到的章节结构、内容深度、字数要求**仍然有效**，只是把每章用 Markdown 写到 `paper/main.md` 中（一篇完整论文，不是分散文件）
-赛程较长（7月中旬至9月上旬） 页 = 80% × MAX_PAGES=A 朴素竞赛风版式：A4，上下页边距 2.54cm、左右 3.17cm；正文宋体小四，行距固定 24 磅（表格内单倍），段前段后 0，首行缩进 2 字符；一级标题黑体小三、二级楷体四号、三级宋体小四加粗、四级宋体小四；图题置图下、表题置表上（宋体小四，“图1”与图名之间空两格）；图、表、公式全文连续编号，公式编号 (1) 右对齐[AI]
-## 美赛 AI 示意图画法 = ：目标期刊/会议的作者指南。排版、篇幅、匿名、参考文献、AI 使用声明等要求以它为准（页数仍只作参考，不因页数删改内容）；软件不自动解析它，写作、编译前各读一遍相关部分。它不是研究资料，不要引用、不要当数据。
-- 页数参考（美赛）: 官方要求 AI 使用报告之前不超过 
-## 上传图片内容（AI 自动识别）
-如在参赛过程中使用了 AI 工具，须按官方要求另行填写《AI 工具使用情况表》并签字后单独提交，不放进论文 PDF；本工作流不代填、不代签 页（摘要页+目录+正文+备忘录/信件+参考文献+附录）；没有最少页数。本软件不写 AI 使用报告（Report on Use of AI），论文里不要加这一节，队伍需要时自己补。按这个目标写得精炼（不注水、不重复，代码附录只放关键算法代码），但不设硬上限：该有的图表、回答、备忘录和附录都要有，不为凑页删内容，不缩字号、不压小图。编译后用 `_utils/mcm_page_budget.py` 报出精确页数，超出只提醒，由用户取舍。
-- 美赛计算量（适度计算）: 评委看假设、建模思路、验证与灵敏度和表达，不比数值精度。每问全部计算（含验证、灵敏度）按普通笔记本约 20 分钟以内规划，单次运行不超过约 10 分钟；蒙特卡洛约 1000 次、Sobol 基样本 512 以内（因子多时先粗筛）、合成恢复等重复实验每格 10 次以内、随机种子/多起点 3 个以内。结果稳定、合理就停，不做双算法交叉验证、不为小偏差反复重跑；缩小规模要在结果里写明样本量与理由。灵敏度分析和模型检验照做（评委看重），只是规模适度。
-投稿论文 AI 使用声明已按运行记录更新：%s投稿论文 AI 使用声明生成失败（不影响本步）：%sANALYSIS_NOTES.mdANALYSIS_PLAN.json；部分图片暂未识别，请检查所选模型是否支持图片、API 配置及网络亚太地区数学建模 (APMCM 中文赛项)亚太数学建模 (APMCM)亚太地区数学建模竞赛 (APMCM)亚太地区数学建模竞赛中文赛项 (APMCM 中文)ASSETS_CONFLICTS.md**检测到资产之间存在不一致**(详见 ASSETS_CONFLICTS.md):
-
-ASSETS_INVENTORY.md(无显式缺失列表, 请对照 ASSETS_INVENTORY.md 决定补什么)检查 ASSETS_INVENTORY.md 和 `code/`、`results.json`、`RESULTS.md` 中**哪些问号已经有解答**AUTO_REVIEW.md[A-Za-z一-鿿][^A-Za-z0-9._-]+[^A-Za-z0-9]A repair/continuation did not finish; its files cannot prove success.AccessModeError | AccountErrorAll placeholder sections filled after %d continuation passesAll produced files (papers, sections, references, captions, headings, figure/table captions) ## Appendix# Auto-generated by workflow_engine.B 现代精致风BEGIN FIGURE_MANIFEST(.*?)END FIGURE_MANIFEST
-## Bash 环境变量（页数/字数等检查脚本会用到）
-[系统] 检测到 Bun 运行时崩溃（claude-code 上游 bug），等待 C 纯黑白线稿CAPABILITY_VERDICT.json[CHECK_PENDING:\[CHECK_PENDING:(check_unavailable|quality_attention|continue_limit)\] (.*)[CHECK_UNAVAILABLE] 统计自洽检查器内部错误：[CHECK_UNAVAILABLE] [CHECK_UNAVAILABLE] 图表质量门运行超过 120 秒，未能确认图 PDF 可读性[CHECK_UNAVAILABLE] 当前版本统计自洽检查工具暂不可用；已有数据与结果已保留，请恢复连接后重新检查，不需要重算。[CHECK_UNAVAILABLE] 图表检查器内部错误：[CHECK_UNAVAILABLE] 当前版本图表检查工具暂不可用；已有图表已保留，请恢复连接后重新检查，不需要重绘。[CHECK_UNAVAILABLE] 图表质量门无法启动：[CHECK_UNAVAILABLE][CHECK_UNAVAILABLE] 图内文字检查超过 60 秒，未能确认图表信息密度[CHECK_UNAVAILABLE] 图内文字检查无法启动：[CHECK_UNAVAILABLE] 图内文字检查器未正常完成：[CHECK_UNAVAILABLE] 必需数据检查未完成：[CHECK_UNAVAILABLE] 图表 PDF 检查器未正常完成：[CHECK_UNAVAILABLE] Word 预检查文件访问不可用：[CHECK_UNAVAILABLE] Word 预检查未能完成[CHECK_UNAVAILABLE] Word 导出运行条件不可用：[CHECK_UNAVAILABLE] Word 转换进程未能完成：[CHECK_UNAVAILABLE] Word 导出程序自己出错了[CHECK_UNAVAILABLE] 图表质量门缺少 figure_pdf_quality_check.py，无法确认最终文件可读性[CHECK_UNAVAILABLE] 图表质量门缺少 figure_text_budget.py，无法确认图内文字是否精简CLAUDE.md无法写入 CLAUDE.md (marker=%s): %s挪开旧模板后重写 CLAUDE.md 失败（不影响写作）：%s无法更新 CLAUDE.md（去掉步骤专用段 %s）：%s命令行工具（CLI 程序）COMPLIANCE_REPORT.mdCOMP_REVIEW_VERDICT.json
-
-## CONTEXT RECOVERY
-上一次因固定上下文过大被安全终止。本次只按需读取文件，数据统计/训练仍必须遍历完整数据集。
-
-
-## CONTINUATION MODE — 续写未完成的章节
-以下章节是占位符，需要你补充完整内容：
-COURSE_PAPER.docxCOURSE_PAPER.mdCOURSE_REPORT.docxCOURSE_REPORT.md
-
-## CRASH RECOVERY — 续写被中断的章节
-上一次写作步骤异常退出被中断。以下章节需要补充完整内容：
- CROSSCHECK CROSS_PROBLEM_LEDGER.json国赛数学建模 (CUMCM)全国大学生数学建模竞赛 (CUMCM)CUSTOM_REQUIREMENTS.md
-## 📋 用户自定义需求/大纲（最高优先级）
-用户上传了自定义要求或大纲文档 `CUSTOM_REQUIREMENTS.md`。
-**请仔细按此文档的要求和思路执行工作流，此文档具有最高优先级指导。**
-**当与文档内容发生冲突，以此文档为准。**
-
-### 文档内容
-```
-
-## 📋 用户自定义需求/大纲（最高优先级）
-用户提供了较长的材料，已存为工作区文件 `CUSTOM_REQUIREMENTS.md`（约 按要求文档补写 CUSTOM_REQUIREMENTS.md 失败：%sCallable[[str], bool]Cannot find moduleCheckpoint '%s' resolved after a free recheck: %sCheckpoint '%s' resolved: %sCheckpoint stop cleanup failedCheckpoint template lookup failed; keep auto-continue- **Citation style**: pick one of APA / Chicago / MLA and stay consistent (NOT GB/T 7714).
-[系统] 数据真实性自检通过（Claude 已自证，共  条数据待 Claude 自检 轮后 Claude 仍未确认（无 PASSED 标记），建议人工核对 `PAPER_DATA_CHECKLIST.md` 轮后 Claude 仍未确认（无 TABLE_DATA_CHECK_PASSED 标记），建议人工核对 `TABLE_DATA_CHECKLIST.md`); 可能是 Claude context 爆了/中途退出, 需要重跑补齐（确因上游缺数据画不出的，按 SKILL 在 figures/FIGURE_SKIPPED.json 与 UPSTREAM_ISSUES.md 登记）[兜底] Claude 误产 paper/main.tex, 已自动转 paper/main.md (Cleanup _utils after completed failed (non-fatal)Cleanup _utils after exception failed (non-fatal)Cleanup _utils after failed-no-files failed (non-fatal)Cleanup _utils after step-failed failed (non-fatal)Compile & Compliance CheckCompressed CLAUDE.md: %d → %d chars (saved %d)Could not persist preparation progress
-
-## DATA-CHECK MODE — 数据真实性自检与修复（`（只写这一行）。不要在论文源文件里写 DATA_CHECK_PASSED 或其他检查说明；没有逐项核对就不要写回执。写后门禁会独立复查：回执绑定你结束时的源码与数据快照，缺回执或有具体硬错误时才会启动一次聚焦返修。
-`。
-   不要在论文末尾追加 DATA_CHECK_PASSED 或其他检查说明。若正文无需修改，就不要触碰论文源文件。回执绑定本次内容快照；若确实修改正文，请先完成修改，再重新编译最终 PDF。
-DATA_QUALITY.jsonDATA_SOURCES.jsonDB locked during workflow creation (attempt %d/%d), retrying...DEFENSE_OUTLINE.mdDESIGN.mdDOCX_FORMAT_CHECK_REPORT.mdDOCX_PRECHECK_REPORT.mdData check pass %d/%d (%s): %sData check pass %d errored: %sData check pass %d timed outDict[str, Any]
-## ⛔ 流程图/架构图引擎 = DrawIO（用户选定，全程遵守）
-按当前 DrawIO/TikZ 架构图步骤修订图源，并用本步骤授权的渲染流程导出图片。- 本工作流的流程图 / 架构图**用 DrawIO 绘制**（`paper-figure-drawio` skill：产出 .drawio 源文件 + .png/.pdf）。
-- 规划阶段 FIGURE_MANIFEST 的流程/架构图章节标题按「DrawIO 流程/架构图」写，与实际引擎一致。
-
-**E. Markdown 噪声（避免）**
-- 不要整段 `**加粗**`（看起来像标题但级别错乱）
-- 不要写 `<div>`/`<span>`/`<p>`/`<br>` 之外的 HTML 块
-- 不要把转义的双反斜杠 `\\` 留在正文（pandoc 转换残留），LaTeX 公式中除外
-- 不要在正文中混入 `&nbsp;`/`&amp;` 之类的 HTML 实体
-
-**写完后自检（强制）**：使用 Bash 工具运行下列检查，发现问题立即修复：
-```bash
-# 1. ``` 数量必须是偶数
-n=$(grep -c '^```' paper/main.md 2>/dev/null || echo 0)
-[ $((n % 2)) -ne 0 ] && echo "❌ 代码块标记不平衡（共 $n 个）"
-# 2. 公式编号必须是半角括号
-grep -nE '\$\$\s*[（][0-9]+[）]' paper/main.md && echo '⚠ 公式编号用了全角括号'
-# 3. 不能有 <img> HTML 标签
-grep -nE '<img\s' paper/main.md && echo '⚠ 出现 HTML img 标签'
-# 4. 表格分隔行检查
-python -c "import re; lines=open('paper/main.md',encoding='utf-8').read().split('\n'); "\
-    "in_t=False; bad=[]\n"\
-    "for i,l in enumerate(lines,1):\n"\
-    "  if l.strip().startswith('|'):\n"\
-    "    if not in_t: in_t=i; first=l\n"\
-    "    elif in_t and i==in_t+1 and not re.match(r'^\\s*\\|[\\s\\-:|]+\\|', l): bad.append((in_t,first))\n"\
-    "  else: in_t=False\n"\
-    "print('⚠ 表格缺分隔行：'+str(bad)) if bad else None" 2>/dev/null || true
-```
-**检查发现的问题必须就地用 Edit 工具修复，不能让格式问题流到 docx-format-check / docx-export 步骤。**
-
-**完成标志**：`paper/main.md` 存在且包含完整论文（摘要、章节、参考文献）。
-` 的完整内容（长文件先写第一段再用 Edit 分段续写，不要用 Bash heredoc），不要只调 Read/Bash 工具就 end_turn。Error handling cancel for step rerun %s/%sError handling pause for %sError pausing protected step %s/%sError pausing protected workflow %sError updating failed status for %sError updating failed status for step rerun %s/%sExecuting step '%s' for workflow %sFIELDWORK_LOG.json 步骤 FIGURE_MANIFEST 对账失败: 规划  FIGURE_MANIFEST 对账: 规划 - 📊 **数据图**：规划步骤写进规划文档（赛题分析 / 选题规划 / 论文大纲）的 FIGURE_MANIFEST 数据图（DATA 类）必须 ≥ `$MIN_FIGURES`；`paper-figure` 最终产出的 `figures/fig_*.png` + `figures/fig_*.pdf` 数量必须 ≥ `$MIN_FIGURES`。不达标会触发自检阻塞。
-规划步骤写入 FIGURE_MANIFEST + paper-figure 产出FORMAT_REQUIREMENTS.mdFailed to clear step License scopeFailed to clear workflow License scopeFailed to compress CLAUDE.md: %sFailed to decrypt %s: %sFailed to derive profile from user template bundle: %sFailed to describe image %s: %sFailed to flush logs: %sFailed to generate format reference: %sFailed to persist PDF vision retry state for %sFailed to save conflict_resolution_strategy: %sFailed to write CUSTOM_REQUIREMENTS.md: %sFailed to write FORMAT_REQUIREMENTS.md: %sFailed to write .env_skill: %sFigure Generation
-
-## ⚠ Figure Generation: Supplement Mode
-A previous step has already generated Figure PDF checker failed (%s, entered=%s)Figure checker failed (%s, entered=%s)File watchdog: step '%s' no file changes for %d min, killingFlow & Architecture Diagrams- 引用格式遵循 GB/T 7714 标准
-- 参考文献按 GB/T 7714 中文格式
-`。只影响 GPT Image 画的总览图、流程/原理图和背景图的画法；构图规则（不分字母面板、同篇构图族不重复）两种画法都一样。
-GUIDE.*Generated format reference: %s (%d bytes, derived=%s)流程图/架构图引擎 = HTML
-## ⛔ 流程图/架构图引擎 = HTML（用户选定，全程遵守）
-
-## HTML 流程图/架构图风格 = - 本工作流的流程图 / 技术路线图 / 系统架构图**一律用 HTML+CSS 绘制**（`paper-figure-html` skill：flex/grid 自动布局 → Electron printToPDF 转矢量 PDF），**不使用 DrawIO**。
-- 规划阶段（paper-plan / paper-plan-zh 等）写 FIGURE_MANIFEST 时，流程/架构图那一类的**章节标题请写「HTML 流程/架构图」**（不要写「DrawIO 流程/架构图」），与实际引擎保持一致，避免误导后续写作。图名前缀（fig_arch / fig_flow / fig_roadmap 等）不变。
-- 写作阶段按 `figures/latex_includes.tex` 里已生成的 `fig_*.pdf` 直接引用即可，**无需也不要提及 DrawIO / .drawio 文件**（本工作流不产生任何 .drawio 文件）。
-
-## HTML 流程图/架构图风格 = D 随机·跟随本篇数据图配色（仅限非数据图）
-- 识别标记：`MH_DIAGRAM_STYLE=R`。`paper-figure-html` Step 1 按种子在 A/B 中选字体与造型，强调色 H0 取本篇数据图主色的色相（`python _utils/plot_utils.py --paper-accent`）。
-- 同一篇的流程图、架构图、AI 总览图都用这同一个强调色，和本篇数据图同色系；不同论文因数据图配色按种子随机，颜色自然不同。
-- 数据图仍只读下方 MH_DATA_FIG_* 配置，不受本节影响。
-- LAYOUT/ARROW 等只允许在语义等价时改变结构或连线；同篇统一视觉 token，异篇差异来自题目真实依赖和种子。
-按当前 HTML 架构图步骤修订 HTML/CSS，并用本步骤授权的渲染流程导出图片。- 流程：起草技术交底书（含自主设计的 HTML 系统框图/流程图，查新号码记入 `_查新记录.json`，最后 `patent_kit.py check` 核对）→ 检查点确认 → 截图出 PNG 并导出 Word（附导出报告）。
-（调用诊断：HTTP HUMANITIES_PAPER.docxHUMANITIES_PAPER.mdHard fatal still present after %d passesIDEA_REPORT.md
-## IMPORTANT: 前步骤的关键文件
-<!-- INJECT:
-<!-- /INJECT:
-<!-- INJECT:INSERT INTO workflow_logs (workflow_id, step_name, level, message) VALUES (?,?,?,?)INSERT INTO workflow_logs (workflow_id,step_name,level,message) VALUES (?,?,?,?)INSERT INTO workflow_logs (workflow_id, step_name, message) VALUES (?,?,?)INSERT INTO workflow_steps (workflow_id, skill_name, display_name, step_order, status, has_checkpoint, checkpoint_type, output_files) VALUES (?,?,?,?,'pending',0,NULL,?)INSERT INTO workflow_steps (workflow_id, skill_name, display_name, step_order, has_checkpoint, checkpoint_type, output_files) VALUES (?,?,?,?,?,?,?)INSIGHTS.mdINSIGHT_EVIDENCE.json数维杯国际赛 (ISTIC)Idea 发现Idea 生成Image description failed after regenerating CLAUDE.md (non-fatal): %sImage description failed (non-fatal): %sImage description failed on single-step rerun (non-fatal): %sInjected DOCX traps checklist for academic-writing step '%s' (skip_fig=%s, skip_drw=%s, has_drawio=%s, has_any_fig=%s)Injected Markdown table (.md) output hint for course/docx workflowInjected PNG-only output hint for course/docx workflowInjected auto-review-loop docx mode noticeInjected auto-review-loop pdf mode noticeInjected docx-format-check context (target=%s, precheck=%s, ref=%s)Injected docx markdown writing hint for '%s' (target=%s, figures=%d)Injected drawio PNG-only hint for course/docx workflowInjected figure language overrides (Chinese) for %s stepInjected plan-stage guidance for %s (skip_figures=%s skip_drawio=%s)Injected writing-stage guidance for %s (no_fig_branch=%s, total_figs=%d, drawio_figs=%d, data_figs=%d, skip_fig=%s, skip_drw=%s)Inserted docx-template-map at step_order=%d for academic %sInserted format-profile at step_order=%d before %s (requirements have format rules) (汇总 JSON 无法完整解析或包含非有限数值) 无法解析：修成合法 JSON（图名 → ["文件::字段路径", …]） 不是合法 JSON 条真实数据与预生成表格。在本步骤处理论文源码时直接读取该清单，逐项核对结果数字；不得反向修改 JSON 来迁就正文。
-全部核对完、需要改的正文也改完之后，只在独立回执文件写入本次确认值：文件 `JSON 文件数 个 JSON（数字已经从 JSON 渲染好，最稳）
-6. 核对完成后，只在独立回执文件写入本次确认值：
-   文件：`[系统] 数据真实性核对：无需自检（无 JSON 数据或论文无残留） 个数字**：按其小数位四舍五入后，在 JSON/TABLE/题设里都没找到（已排除编号、年份、版式参数、参考文献和同一行可算出的推算量）。逐条判断是派生量、单位换算、数据描述还是写错了；确认无误的不要改，写错的以 JSON 原值为准改论文。全表见 `PAPER_DATA_CHECK_REPORT.md`。
- 无法解析：修成合法 JSON（skipped 列表，每项 name/reason/missing） KB，二进制文件) KB，大文件，请用 Read 工具查看) KB，内容太长未全文内联）。
-**这是最高优先级材料，与其它内容冲突时以它为准。**
-⛔ **下面只是文件开头的预览，不是全文。执行相关步骤前，必须用 Read/Grep 工具分段读取 `CUSTOM_REQUIREMENTS.md` 的完整内容，切勿只凭这段预览就假设已读全。**
-
-### 文件开头预览（前 LITERATURE_MAP.jsonLITERATURE_REVIEW.docxLITERATURE_REVIEW.md- LaTeX 模板: LaTeX 写作论文撰写（LaTeX）LaTeX 写作（中文） 个硬规则致命（LaTeX/Markdown 残留）- 已上传 LaTeX 模板：**不套内置模板**；栏数、版式以上传的模板为准，不改 `\documentclass`（见下方“用户上传的 LaTeX 模板”一段）
-- **LaTeX mode**: use `\documentclass{article}` (NOT `ctexart`); no Chinese fonts; no `xeCJK`.
-用户 LaTeX 模板放进 paper/：主文件 %s → main.tex，新放 %d 个，已有不覆盖 %d 个LaTeX 论文（`paper/sections/*.tex` 或 `paper/main.tex`）List[StepDef]List[str]**MAX_PAGES 仅作最终提交参考**；本地生成不设硬上限。华为杯默认采用详实正文档，四个问题的机理题通常以约 40-50 页正文（不含封面、摘要、参考文献和附录）作为软参考；不足时只能补齐真实的逐问推导、求解、验证与结果解释，不得用空白、重复图表、放大字号或编造内容凑页。美赛 (MCM/ICM)MCM/ICM (COMAP).MD
-<!-- MH_AI_DISCLOSURE=invalid -->
-## ⏸ AI 工具使用声明还没定（国赛要求）
-用户在对话里建项目时先跑前面的步骤，声明写论文前才定。论文写作、编译与合规检查步骤遇到这一条必须停止，不得自行假设“没有使用”或编造使用记录；请用户在对话里说明或在右栏「设置」里选好后再继续。
-
-<!-- MH_AI_DISCLOSURE=invalid -->
-## ⛔ AI 工具使用声明资料不完整
-这是旧版工作流，缺少用户确认的真实模型、使用日期或辅助用途。论文写作步骤必须停止，不得随机生成或沿用旧声明；请用户重新创建或更新 AI 使用记录后再继续。
-
-<!-- MH_AI_DISCLOSURE=none -->
-## 📝 AI 工具使用声明（用户已开启：未使用 AI 工具）
-写论文那一步（comp-paper）：在「参考文献」之前插入一句独立声明『本参赛队在竞赛过程中未使用任何AI工具。』不生成使用详情 PDF，不在参考文献列 AI 工具。
-
-<!-- MH_AI_DISCLOSURE=used -->
-## 📝 AI 工具使用声明（用户已开启：使用了 AI 工具）
-真实记录保存在 `.mh/ai_disclosure.json`，禁止自行增删、改写或猜测。
-用户确认的用途：（用户选定）
-- 识别标记：`MH_AI_FIG_LOOK=
-## 数据图配色与版式（仅限数据图，与流程图独立）
-<!-- MH_DATA_FIG_ENGINE=
-<!-- MH_DATA_FIG_PALETTE=
-<!-- MH_DATA_FIG_PALETTE=custom -->
-<!-- MH_DATA_FIG_COLORS=
-<!-- MH_DATA_FIG_PALETTE=random -->
-数据图配色：未指定固定色卡，使用对应引擎的工作区稳定默认配色；不继承流程图的黑白选择。
-
-<!-- MH_DATA_FIG_STYLE=
-<!-- MH_DATA_FIG_STYLE_CUSTOM=
-<!-- MH_DATA_FIG_VISION=1 -->
-## 🔍 数据图视觉质检（用户已开启，会消耗额度）
-用户在高级选项里开启了「数据图视觉质检」。在生成数据图（`gen_fig_*.py` → `figures/fig_*.pdf`）后，
-除了 `figure_check.sh` 静态检查，还要按 SKILL.md 对应步骤让 vision 模型把每张数据图看一次
-（同一版图看过就沿用结论、不重复付费），检查坐标轴标签截断/图例压数据/刻度重叠等【肉眼硬伤】：
-有问题必须改 gen_fig 脚本重出后复核；视觉服务不可用等没审成的图记为“视觉审查未完成”，
-不阻断、不要为此改图或反复重试。
- -->
-数据图只读取 MH_DATA_FIG_* 配置，不读取 diagram_style / MH_DIAGRAM_STYLE。默认配色按工作区固定种子选择；Nature 引擎保留 Nature 版式。黑白打印可辨认是可读性要求，不等于必须导出灰度。除非用户明确选择数据图灰阶，不得用灰阶列表覆盖配色或将正式 PNG/PDF 强制转灰。黑色文字、参考线和合理的中性区域仍可使用；不要求每张图必须出现彩色。质检核对所属图种的配置，不得自行增加全图灰阶断言；更改颜色不得更改原始数值。
-`**，跳过配色随机分配（识别标记：`MH_DIAGRAM_STYLE=
-<!-- MH_FAST_MODE=1 -->
-## ⚡ 快速模式（保证出完整初稿，跳过深度审查与反复修正）
-用户选择了快速模式，目标是**尽快产出一篇完整初稿**、节省 API 额度。原则：
-
-**✅ 必须保留（保证能出完整稿子，不许偷工）：**
-- 每一步的**主产物必须完整产出**（赛题分析/建模报告/代码结果/论文正文/图表都要有，且内容充实不留空壳）
-- 子问题**全覆盖**：题目有几问就做几问，不许漏问（用户设了「只做哪几问」时，指范围内的那几问）
-- 建模时参考防错手册（cat _utils/error_prevention*.md），避免一开始就犯低级错
-- 代码能跑通、结果能写进 results.json、论文能引用真实数据（不编造）
-
-**❌ 跳过（这些是「追求完美」的耗时循环，快速模式一律省略）：**
-- 结果合理性逐条审查（Q1-Q9 那种）——跑出结果直接用，不逐条质检
-- 发现小问题后的**反复修正重跑**——一次跑通即可，不为微调反复迭代
-- 已执行且依赖未变的重复约束检查；首次题设硬约束、有限数值与真实交付验证仍必须做
-- 多算法交叉验证、双求解器对比、灵敏度深挖等「锦上添花」的增强
-- 建模-代码一致性深度对照（Q9）、facts_audit 三方比对
-
-**一句话：主产物必须齐全完整（该有的都要有），但不做事后深度审查和反复打磨。**
-**快速模式省略的是重复打磨，不是正确性底线；未完成/未验证的内容必须如实标记，不能伪装成通过。**
-- 步骤授权边界同样适用：数据图/流程图/论文/编译步骤不改 code/、结果 JSON、output/、RESULTS.md 与上游报告，不重跑求解；上游问题写进 UPSTREAM_ISSUES.md 后按现有结果完成本步。
-
-<!-- MH_FLOW_PER_PROBLEM=1 -->
-## 🔀 每个研究问题各画一张方法流程图（用户已开启）
-用户在竞赛参数里开启了「每个问题都画流程图」。规划 FIGURE_MANIFEST 时，除技术路线图
-`fig_roadmap` 与研究框架图 `fig_framework` 外，**为每个研究问题各规划一张方法流程图**
-（`fig_flow_q1`/`fig_flow_q2`/…，有几个研究问题就几张、一一对应），放在对应研究问题的模型建立处；
-下游绘图步骤按清单逐张生成。
-⛔ 写作时每张方法流程图放在对应研究问题的章节里，不集中堆在总览处。
-
-<!-- MH_FLOW_PER_PROBLEM=1 -->
-## 🔀 每个子问题各画一张求解流程图（用户已开启）
-用户在竞赛参数里开启了「每个问题都画流程图」。规划 FIGURE_MANIFEST 时，除技术路线图
-`fig_roadmap` 外，**为每个子问题各规划一张求解流程图**（`fig_flow_q1`/`fig_flow_q2`/…，
-有几问就几张、一一对应；用户设了「只做哪几问」时只画范围内的问），放在对应模型首次建立处；下游绘图步骤按清单逐张生成。
-⛔ 写作时按实际模型章分散放置，章节文件可自适应命名；总览位置最多留 `fig_roadmap` 一张。
-
-<!-- MH_SKIP_DIAGRAM_VISION=1 -->
-## ⏭ 流程图/TikZ 视觉质检：用户已【关闭】（省额度）
-用户在高级选项里关闭了「流程图/架构图/TikZ 视觉质检」。流程图（HTML/DrawIO）与 TikZ 图
-仍要正常生成、并跑免费的结构自检（html_pdf_check / 元素级几何自检 / tikz_check），
-但【跳过调 vision 大模型看图】以省额度（看图账本记“按设置关闭”）——生成即用，不因缺 vision 记录而失败。
-<!-- MH_STATS_BODY_CHAR_LIMIT=MH_STATS_CUSTOM_TITLE=1MH_STATS_EN_ABSTRACT=1` 中明确给出 ≥ `$MIN_MODELS` 个有数学定义/伪代码/参数表的模型或算法（候选方法对比也算，比如 MLP / 随机森林 / 集成 三个就算 3 个）。不要为了凑数造假模型。
-MODELING_REPORT.MDMODELING_REPORT.mdMODELING_REPORT.md、RESULTS.md只为**缺失的问号**补建模方案（写进 MODELING_REPORT.md 对应小节）, 已有的问号**不要重做**；本步不写代码、不跑求解，这些由编程步完成(Markdown)Markdown 格式自检与修复未找到可校核的 Markdown 主文件，请先完成上游写作步骤未找到可导出的 Markdown 文件，请先完成论文撰写或选择正确的源文件- 所有公式用 Markdown 格式：行内 `$E=mc^2$`，块级 `$$...$$`
-- 写作步骤产出 **纯 Markdown 文件**，不要写 LaTeX 代码
-- 编译相关步骤会自动跳过，最后一步会把 Markdown 转 Word
-- 本流水线产出中文学术论文：写 Markdown 稿，最后一步导出 Word（.docx），不编译 LaTeX
-- 只用 Markdown 语法：`![图 X：图题](figures/fig_xxx.png)`
-- 不要用 `<img src=...>`（HTML 标签 docx 引擎不解析）
-- 引用 `.png`，不要直接引用 `.pdf`（docx 不能嵌 PDF；如确实只有 PDF，docx-precheck 会自动转）
-- 图题（alt 文本）建议带「图 X：」编号前缀，docx-export 会渲染成图题
-- 图片使用 Markdown 图片语法 `![描述](figures/xxx.png)`
-- 表格使用 Markdown 表格语法（`| 表头 | ... |\n|---|---|\n`），**优先用 `cat figures/TABLE_xxx.md >> Markdown 论文（`paper/main.md` / `COURSE_PAPER.md` / `COURSE_REPORT.md` / `PROPOSAL.md` / `LITERATURE_REVIEW.md` 之一）Materialized params.custom_requirements (%d chars) -> CUSTOM_REQUIREMENTS.mdMaterials check failed (non-fatal): %s和分页符。MathorCup 官方要求的首页“队伍编号 / MathorCup 数学建模MathorCup 大数据竞赛MathorCup 数学建模挑战赛⛔ 只需要中文摘要，不要英文摘要（MathorCup 不要求英文摘要）MathorCup 数学应用挑战赛—大数据竞赛使用 MathorCupmodeling 模板（\bianhao 参赛队号、\tihao 题号、\timu 题目；\end{abstract} 之后那一行生成目录页，不能删），XeLaTeX 编译使用 MathorCupmodeling 文档类（\bianhao/\tihao/\timu 设置队伍信息，\keyword 设置关键词），XeLaTeX 编译使用大数据专用的 MathorCupmodeling 模板（\bianhao 参赛编号、\tihao 赛道、\timu 题目；\end{abstract} 之后那一行生成目录页，不能删），XeLaTeX 编译本机没有可用的 Microsoft Word：目录和表格和插图清单要用 Word 打开后右键“更新域”才会显示；PDF 匿名版请用 Word 打开 paper/main.docx 更新目录后另存为 PDF本机没有 Microsoft Word：打开 paper/main.docx 时选“更新域”生成目录页码，交之前在 Word（或 WPS）里另存为 PDF——MathorCup 只收 PDFModeling & Solution多问题正文的一级标题必须写成‘问题N：本题模型/任务名’，既保留评委导航，又避免空泛标题NARRATIVE_REPORT.docxNARRATIVE_REPORT.md审稿意见、改写后的正文、最终产出文件（`NARRATIVE_REPORT.md` / `paper/main.md` / `paper/main.tex` 等）一律使用**中文**撰写。
-{NUMPAGES}
-### 选题检查点的特殊规则（统计建模）
-- 用户写「选候选 N」（或“用候选 N”“换成候选 N”“选第 N 个”）是用户对题目的最终选择，必须采纳，不得判定为不采纳；即使与上一轮的选择不同，也以这次为准。
-- 按 TOPIC_PLAN.md「## 候选题目」中的候选 N 重写整份 TOPIC_PLAN.md：第一行一级标题改为候选 N 的题目；研究问题、数据获取计划、变量定义、研究假设、论文结构、图表预规划（含 FIGURE_MANIFEST）全部按候选 N 展开；保留「## 候选题目」一节，并把推荐行改为「**推荐：候选 N**」。
-- 写完运行 `bash _utils/count_subproblems.sh TOPIC_PLAN.md`，确认研究问题个数与 `### 研究问题…` 标题一致。
-本论文是**中文论文**，配色与版式按 Nature 标准，但所有文字产出必须使用**中文**：
-Nature 写作Nature 论文写作Nature 图表Nature 引擎丢弃不适用的版式维度: %s（Nature 规范钉死这些项）No module namedNoneOUTLINE.MDOUTLINE.md## ⛔⛔⛔ OVERRIDE MODE: 用户第二轮建议审查
-
-用户对修改后的结果仍不满意，提出了第二轮建议：
-
-> ## ⛔⛔⛔ OVERRIDE MODE: 用户建议审查（最高优先级，覆盖 SKILL.md 中的所有指令）
-
-**你现在处于「建议审查模式」，不是「完整执行模式」。**
-**忽略 SKILL.md 中关于从头执行、生成完整报告的指令。**
-
-用户对步骤「Optional[Callable[[str], Awaitable[None]]]Optional[Dict]Optional[List[str]]Optional[Path]Optional[dict]Optional[float]Optional[int]Optional[str]
-## ⛔ Output Language Override (HIGHEST PRIORITY)
-{PAGE}PAPER_DATA_CHECKLIST.md
-## 写作会话内完成数据真实性核对（避免重复模型调用）
-引擎已在 `PAPER_DATA_CHECKLIST.md` 汇总 工作区已生成 **`PAPER_DATA_CHECKLIST.md`**，包含：
-- `figures/*.json` 中的全部真实数据（ 个硬规则致命问题，详见 `PAPER_DATA_CHECK_REPORT.md`PAPER_DATA_CHECK_REPORT.mdPAPER_PLAN.MDPAPER_PLAN.md
-
-## 📋 用户已提供大纲草稿（最高优先级）
-工作区中已有 `PAPER_PLAN.md`，包含用户上传的大纲草稿。
-**你不需要重新生成大纲，而是以用户大纲为基础来完善：**
-1. 保留用户的核心思路和章节结构：章节顺序和每章要点不删，用户没写到的部分可以补充
-2. 补充缺失的图表规划（每章需要哪些图/表）；图表以项目开关为准：关了数据图或流程图就不规划，大纲里写的图表和开关冲突时按开关来
-3. 添加 claims-evidence matrix（观点-证据对应关系）
-4. 估算各章节的页数分配
-5. 补充参考文献规划
-6. 将完善后的大纲覆盖写入 `PAPER_PLAN.md`；确需偏离用户大纲时，在末尾写一节「与用户大纲的差异」，逐条说明改了什么、为什么
-
-
-已完成的章节不要修改，只写完列出的缺失/占位章节；不要按字数扩写有效短章节。
-读取 PAPER_PLAN.md 了解每章应该包含的内容，读取 figures/*.tex 获取需要嵌入的图表。
-
-
-已完成的章节不要修改，只写完以下列出的占位章节。
-读取 PAPER_PLAN.md 了解每章应该包含的内容，读取 figures/*.tex 获取需要嵌入的图表。
-
-## ⛔ 论文类型（PAPER_TYPE，最高优先级）
-**（PAPER_TYPE=`[系统] 正在准备上传材料、识别图片与赛题 PDF，完成后进入第一步 页读 PDF 自带的文字 页识别失败；以下如有文字为文本兜底，公式和图示需对照原 PDF]
-
- 页；纯文本提取，图示和公式需对照原 PDF 页；内容需对照原 PDF未视觉识别：判断这一页没有图、公式不多；纯文本提取，表格线需对照原 PDF未视觉识别；纯文本提取，图示和公式需对照原 PDF 页之后只看有图、公式多或扫描的页，对话里看图识别过的页直接用转录），按 PDF 自带的文字提取到第  页；图示和公式请对照原 PDF。
-
- 视觉识别未完成，请检查 PDF 是否损坏、加密或缺少渲染组件；已有文本与原文均保留报告编译 PDF实际修订后重新编译并检查最终 PDF；不要重新运行上游求解或绘图。编译 PDF（中文）编译 PDFPDF 视觉识别未完成，将保留原文及文本提取结果按照官网上传的 PDF 模板格式提交按照官网上传的 PDF 模板格式提交（亚太赛中文赛项）PDF 一律匿名：封面、正文、页眉页脚、图表、附录中不得出现学校、队员、指导老师等可识别身份的信息PDF 匿名版没有生成（- 论文 PDF 默认匿名：不排封面和致谢，全文不出现学校、队员、指导老师等身份信息。
-没有识别成功的页，无法与 PDF 文本层交叉核对；详见 `# 赛题识别结果与 PDF 文本层数字核对： 页没有图像识别结果，提取结果里这些页是 PDF 自带文本：上下标、公式、表格可能丢失或错位，用到这些页的数字和公式时看页面图核对。
-PDF 已加密，需要先上传可读取版本PDF 中没有可读取页面提交：论文 PDF 命名“题号+参赛队号”（如 AMC2600001.pdf）；承诺书由每个队员手写或电子签名后扫描成 PDF 或 JPG（AI 不代签）；支撑材料命名如 AMC2600001附件.rar（不含赛题原始数据）；题目要求交计算结果时按题目给的 Excel 填写，命名如 AMC2600001计算结果.xlsx（题目另有要求以题目为准）官方提交四项：论文 PDF（题号+参赛编号，如 AMCB2600001.pdf）、承诺书（队员手写或电子签名后扫描成 PDF 或 JPG，AI 不代签）、支撑材料压缩包（程序、结果数据、操作说明，不含赛题原始数据）、按题目要求上传的计算结果文件
-## 用户的文字格式要求（PDF 输出）
-- 原文在 `FORMAT_REQUIREMENTS.md`。PDF 由 LaTeX 模板排版：字体、字号、行距、页边距以模板为准，不为它改导言区；要求里和模板不冲突的部分照做（摘要字数、关键词个数、章节编号方式、参考文献著录规则、图表标题写法等）。两者冲突时以模板为准，并在交付说明里写明。
-编译 PDF（中文 LaTeX）这是上传的赛题或研究材料 PDF 的一页。完整转录文字、编号、表格和数学公式（LaTeX）。保持原文语言和原文结构：英文就照英文转录，不翻译，不添加解释或描述。数字、小数点、正负号、单位和上下标逐字照抄，不要换算、取整、补全或改写单位；看不清的字符写 [?]，不要猜。空白页请注明空白；原文很短也照实转录，不要凑字数。
-## ⛔ 输出模式: PDF (LaTeX)
-
-本工作流期望输出 PDF。**只在工作区有 `paper/main.tex` 时**才跑 Phase D2 的 LaTeX 编译。
-如果用户没传 .tex 源文件，工作流退化为 markdown 模式：
-1. Phase C 改写写到 `paper/draft_v<round>.md`
-2. Phase D2 跳过编译
-3. Termination 时仅产出 `NARRATIVE_REPORT.md`，告诉用户"未提供 LaTeX 源, 输出仅为 markdown"
-与 PDF 文本层的数字交叉核对没有完成；关键参数请对照原 PDF 核实。
-
-
-⛔ 以上图表清单中的每一项都必须生成对应的 PDF。实际数量可以多于规划但不能少于规划。确因上游缺数据画不出的，按 SKILL 在 figures/FIGURE_SKIPPED.json 和 UPSTREAM_ISSUES.md 登记（最多规划数据图的一半），不要为凑数编造数据。
-PDF_VISION_STATE.json参赛论文由八个部分组成，依次为：封面、摘要（含关键词）、目录、表格和插图清单、正文、参考文献、附录、致谢；默认生成匿名版 PDF，不排封面和致谢（完整版只作 Word 参考）生成正式资料（PDF/Word/TXT） PDF figures and latex_includes.tex in figures/.
-**Supplement mode — compare existing figures against the plan:**
-1. Check each existing PDF quality (chart type, colors, language labels)
-2. Regenerate any that fail quality check
-3. Generate any planned figures that don't exist yet
-4. Generate TikZ architecture diagrams if planned
-5. Regenerate latex_includes.tex to include ALL figures
-PDF 匿名版 paper/匿名作品.pdf；PDF preparation unavailable for %s: %sPDF %s cross-check report failed: %sPDF %s 判断哪些页要看图失败（只看前 %d 页）: %sPDF %s page %d check image failed: %sPDF %s page %d cross-check failed: %sPDF %s page %d render failed: %sPDF %s page %d vision failed: %sPDF %s page %d vision refusedPDF vision extraction failed (non-fatal): %sPDF vision extraction failed on single-step rerun (non-fatal): %sPDF vision progress callback failedPFA bridge: copied results.json -> figures/all_results.jsonPFA bridge results.json failed: %sPFA bridge: results.json -> figures/all_results.jsonPFA: %s 缺失但 ASSETS_INVENTORY.md 存在, 跳过依赖警告 (skill=%s)PFA safety copy failed for %s: %sPFA safety copy failed (non-fatal): %sPFA safety copy: %s按当前数据图步骤修订绘图代码，使用已有真实数据生成对应 PNG/PDF。若任何产物（图表 PNG/PDF、paper/main.tex/md、figures/*.py 注释）出现大段英文（非上述例外），必须按中文规范改写。
-- ⛔ 后端服务端口必须读环境变量 `PORT`（预览服务会用 PORT 指定端口），没有 PORT 时用框架默认端口兜底。
-PRAGMA table_info(workflow_steps)
-
-## ⚠️ PREVIOUS ATTEMPT STOPPED — EMPTY TOOL CALLS
-Your last attempt kept sending tool calls whose parameters were empty. Usually a single tool call tried to carry too much text and was cut off before its parameters were complete.
-**CRITICAL RULES FOR THIS RETRY:**
-1. Write long files in parts: Write the first part (≤ 150 lines) plus one placeholder comment line, then Edit the placeholder into the next part + a new placeholder (never a Bash heredoc: it collapses `\\` into `\`)
-2. Do NOT try to write entire reports in one tool call
-3. Start with `echo 'starting...'` to confirm the tool works
-4. Read files on-demand with Read tool instead of loading everything upfront
-5. For DrawIO: write one .drawio file at a time, export, then move to next
-PROBLEM_ANALYSIS.MDPROBLEM_ANALYSIS.md
-
-请按用户选的理解重写 PROBLEM_ANALYSIS.md：「假设敏感性预检」里这几处的原文引用照旧（一字不改），选择改成用户选的那种、注明“用户选定”；问题分解、建模思路、数据处理计划和后面各节都按它重新展开。用户没提到的几处照报告原来的判断。与题目原文冲突时以题目原文为准，并在完成说明里写明。
-PROJECT_FACTS.mdPROPOSAL.docxPROPOSAL.mdPaper WritingPaper Writing (English)Path | NonePermission denied copying %s (file locked?), skippingPersist image descriptions failed: %s
-
-## Pipeline Context
-Pre-copied template files to paper/: %s (template=%s, folder=%s, step=%s)Pre-derive failed (non-fatal): %sPre-derived _derived_profile.json from %d template(s): %sProblem AnalysisProtected material cleanup after check pause failedProtected material cleanup after checkpoint timeout failedProtected material cleanup after License pause failedProtected material cleanup after pause failedProtected material cleanup after rerun check pause failed (Python 入口无法解析)Python/Node 脚本（自动化/小工具）输出对照表(必须打印到终端):
-   ```
-   === 赛题覆盖度对照 ===
-   Q1: [已有/缺失] 依据: code/q1.py + results 中 q1_obj=...
-   Q2: [已有/缺失] 依据: ...
-   Q3: [缺失] — 本步骤将补全
-   Q4: [缺失] — 本步骤将补全
-   ```新代码命名规则: 缺 Q3 → `code/q3_*.py`, 缺 Q4 → `code/q4_*.py`QA_BANK.mdQUESTIONNAIRE.json^(?:Q|q)?\d{1,3}\s*[、.．:：(（]- ⛔ 开发完成日期、首次发表日期、著作权人这类只有用户本人知道的事实，不要编日期或名字：用户说了就照用；材料里明确写着的（如 README、更新日志里的完成日期）可以照写，核对会提醒用户确认；都没有时开发完成日期留空（`➤开发完成日期：`，核对只提醒不拦），著作权人、证件号、联系人写 `待用户确认`，用户没说发表过就写未发表。开发 / 运行环境、开发工具可以按代码合理填写。起草完的汇报里写清哪些栏要用户自己填、哪些是按材料推断的请他核对。
-RECOMMENDATION_MATRIX.json[REDO@[REDO]^\[REDO(?:@(\d{9,12}))?\]REPORT.mdREQUIREMENTS.md- 各步骤共享工作区：需求→REQUIREMENTS.md，设计→DESIGN.md（全栈另产 schema.sql），编码→code/，自测→TEST_REPORT.md。
-RESEARCH_DESIGN.mdRESULTS.MDRESULTS.md
-先定位缺失结果对应的子问题/算例与最后一次真实异常，不要先凑 RESULTS.md 字节数。读取相关求解源码、精简日志及 .mh/compute-checkpoints/ 检查点；逐算例核对输入、共享代码、参数与验证版本，只恢复缺失或失效的算例。已有但无版本凭据的结果先作只读核对，不能仅凭文件存在跳过。用 _utils/run_compute.py 在正确工作目录执行，等待最终退出状态；工具自动转后台时用 TaskOutput 等待，不重复启动，不以等待通知结束回合。不得削弱题设硬约束、放宽容差迎合结果或把启发式未找到解写成不可行证明。真实结果齐全且检查通过后再汇总 JSON 与 RESULTS.md；若仍受限，保存已验证检查点并报告具体阻塞，不冒充完成，不重算无关问题。[RETRY-[RETRY-BUN] Bun 运行时崩溃 (rc=3)，退避 [RETRY-CONTEXT] 上下文快速回填熔断，压缩索引后进行唯一一次重试[RETRY] 空工具调用，压缩上下文后重试 (attempt [RETRY] 无活跃超时，自动重试 (attempt [RETRY] 文件 watchdog 超时，自动重试 (attempt RUN.md）+ `RUN.md`。
-），开始前不必通读：需要某个数、某段实现或某一节内容时，再用 Read 看相关片段或用脚本取数；路径见工作区文件索引。
- (已省略，请用 Read 工具查看)
-... (已压缩，请用 Read 工具查看完整内容)
-```
-## 页面图
-
-需要核对的页已存成图片，用 Read 打开 `以下文件是前面步骤的产出，内容在摘要中可能被截断。请在开始工作前使用 Read 工具完整读取这些文件。
-工作区文件（请用 Read 工具按需读取）:
-工作区中已有文件（请用 Read 工具按需读取）:
-
-
-...(已截断, 请用 Read 工具查看完整 ASSETS_INVENTORY.md)
-工作区中已有文件（请用 Read/Bash 工具按需读取具体内容）:
-` 的完整内容（不要只调 Read/Bash 工具就 end_turn）。如果不知道写什么，先按 SKILL.md 给的章节框架写一份初稿（≥ 最低字节阈值），再迭代完善。
-这是自动接着补，不是重写：先用 Read 看现有的 paper/main.md，再用 Edit 在对应章节补上缺的内容、公式和“式中”说明；已经写好的段落、表格和公式不要改，不要用 Write 整份重写 paper/main.md。附录和 AI 使用说明照技能“附录”一节用脚本生成。补完运行上面提到的核对命令，确认没有问题再结束；只读文件不算补完。
-## 上传图片内容
-(已压缩 — 请用 Read 工具查看 user_data/ 中的图片)
-
-## 文档原文
-(已压缩 — 请用 Read 工具查看 user_data/ 中的文档)
-
-**用法示例**: 如果你需要某篇论文的内容, 用 `Read` 工具读对应的 `user_data/xxx_extracted.md` 文件。可以用 `Grep` 工具按关键词搜索定位特定信息。
-Recovery: %d sections still incomplete after %d passes: %sRecovery pass %d: all sections completeRecovery pass %d failed: %sRecovery succeeded: all %d sections complete- **Reference list**: English entries only (author last-name first, title in English).
-Renamed %d legacy step display names for workflow %sResolved configured Skill variant: %s- **Reviewer feedback** in English; **revised draft** in English; final artefact (`NARRATIVE_REPORT.md` / `paper/main.tex` etc.) in English.
-Revision pass failed: %sRun-scope stop cleanup failedSAMPLE_SIZE_PLAN.jsonSAMPLING_PLAN.json{SECTIONPAGES}SELECT * FROM workflow_steps WHERE workflow_id=? ORDER BY step_orderSELECT * FROM workflows WHERE id=?SELECT completed_at FROM workflow_steps WHERE workflow_id=? AND step_order<? AND status='completed'SELECT display_name FROM workflow_steps WHERE workflow_id=? AND skill_name=?SELECT display_name FROM workflow_steps WHERE workflow_id=? AND step_order>? AND status='completed' ORDER BY step_orderSELECT handoff_reason, main_output_receipt, paid_continues FROM workflow_steps WHERE id=?SELECT id FROM workflow_steps WHERE workflow_id=? AND status='pending' ORDER BY step_order LIMIT 1SELECT id, skill_name, display_name FROM workflow_steps WHERE workflow_id=?SELECT id, status, output_files FROM workflow_steps WHERE workflow_id=?SELECT output_files FROM workflow_steps WHERE id=?SELECT params FROM workflows WHERE id=?SELECT run_scope FROM workflows WHERE id=?SELECT skill_name FROM workflow_steps WHERE workflow_id=? AND status='running' ORDER BY step_orderSELECT skill_name FROM workflow_steps WHERE workflow_id=? ORDER BY step_orderSELECT skill_name, display_name, status, model_used, started_at, completed_at, output_files FROM workflow_steps WHERE workflow_id=? ORDER BY step_orderSELECT status FROM workflow_steps WHERE id=?SELECT status FROM workflow_steps WHERE workflow_id=? ORDER BY step_orderSELECT status FROM workflow_steps WHERE workflow_id=?SELECT template FROM workflows WHERE id=?SELECT template, params FROM workflows WHERE id=?SEMANTIC_REVIEW_TODO.md- 只有变量符号、SI 单位、专有英文术语保留英文（如 `$R^2$`、`RMSE`、`km`）
-)（对应方法已在建模步降为交叉验证/备选的图，按 SKILL 在 figures/FIGURE_SKIPPED.json 与 UPSTREAM_ISSUES.md 登记后可不画；技术路线图必须画）
-
-## ⛔⛔⛔ 用户这次对本步骤的要求（最高优先级，覆盖 SKILL.md 的默认做法）
-
-）。必须扩展，参考 SKILL.md 的 12 类进阶扩展菜单：数据预处理章节 / 多算法对比 / 超参敏感性 / 消融实验 / 复杂度分析 / 理论支撑 / 可解释性 / 多目标 Pareto / 鲁棒性 / 求解器对比 / 大规模扩展 / 误差分解 等。每个扩展都要先跑 comp-code 真跑代码产 json，再嵌入正文写段落。严禁凭印象编公式 / 数字 / 流程图。扩展后必须重跑 facts_audit。**说明**：这些数值是目标参考值。SKILL.md 里若有页数/字数自检脚本，
-## ⛔ 输出语言：中文（覆盖 SKILL.md 默认英文）
-SKILL.md/SKILL.md生成失败，按 SKILL.md 默认规则检查
-
-## ⛔⛔⛔ 模式覆盖通知（最高优先级，先读这段再读 SKILL.md）
-**用户已选择 Word（.docx）输出，本工作流不编译 LaTeX。**
-下面 SKILL.md 中关于 LaTeX 的所有指令（main.tex/sections/*.tex/cls/sty/包/编译）**全部失效**，按以下规则操作：
-
-1. 输出文件 = `paper/main.md`（一个 Markdown 文件，UTF-8）
-2. 一级标题 `# 标题`，二级 `## `，三级 `### `；不要 `\section{}`
-3. 公式：行内 `$E=mc^2$`，块级 `$$...$$`；不要 `\begin{equation}`
-   - 公式编号：每个块级公式都在公式内部用 `\tag{N}` 连续编号，例如
-     ```
-     $$
-     y = \alpha x + \beta \tag{1}
-     $$
-     ```
-     `\tag{1}` 会由 docx-export 渲染成右侧的 (1) 编号；禁止在闭合 `$$` 后追加编号。
-
-⛔ **机器化自检**：上游 SKILL.md 会跑 `bash` 自检脚本（`source .env_skill` 后比较 `$MIN_FIGURES` 等），不达标时输出 ❌ 错误，触发 AUTO_RECOVERY 自动扩展。
-SKILL.md.encSTATISTICAL_RESULTS.jsonSUBMISSION_CHECKLIST.md**说明**：`SUBMISSION_PAGE_REFERENCE` 只供最终报告提示；正文不设页数目标，不据此扩写或压缩。其他数值按用户内容要求使用。脚本读取参数时，SURVEY_BRIEF.json极简专业（工具/SaaS 风）→ 读 `references/styles/minimal.md`Second revision pass failed: %sSingle-step cleanup failed (non-fatal)[Skill授权暂停] Skill 文件不存在: Skill not found: %sSkip injection for marker %s (already exists)Skipping compile step '%s' (output_format=docx)Skipping completed step '%s' (output verified)Skipping completed step '%s' (user-skipped)Skipping retired step '%s'Skipping '%s' — plan has no data figures/tables and no user dataSkipping '%s' — user disabled data analysisSkipping '%s' — user disabled drawio diagramsSkipping '%s' — user disabled figure generationSkipping step '%s' (skipped in chat mode)# Source this in any bash script: source .env_skillStats coherence checker failed (%s, entered=%s)'StepDef | None'。回到 Step 0.5，按 _utils/mcm_ai_figures.md 先用 GPT Image 画这几张，每张用 _mcm_ai/status.py 登记采用（ai），画不了才按原因代码退回（
-
-### 执行流程（必须严格按顺序）：
-
-**Step 1: 读取现有产出**
-用 Read 工具读取该步骤已生成的关键文件，了解当前内容。
-
-**Step 2: 逐条分析用户建议**
-对用户的每条建议，输出分析判断（必须打印到终端让用户看到）：
-```
-=== 建议审查 ===
-建议 1: [用户原文]
-  分析: [这条建议是否合理？为什么？]
-  判定: ✅ 采纳 / ❌ 不采纳
-  理由: [采纳则说明如何修改；不采纳则说明为什么不合理]
-
-建议 2: [用户原文]
-  分析: ...
-  判定: ...
-```
-
-**Step 3: 执行采纳的修改**
-- 只修改被判定为 ✅ 采纳的部分
-- 用 Write/Edit 工具保存修改
-- 保持文件格式和结构不变，只改必要的地方
-
-**Step 4: 写入审查报告到文件**
-用 Write 工具把完整的审查过程和修改总结写入 `checkpoint_revision_report.md`（不要用 Bash heredoc），格式如下：
-```markdown
-# 建议审查报告
-
-## 用户建议
-[原文]
-
-## 逐条审查
-| # | 建议内容 | 判定 | 理由 |
-|---|---------|------|------|
-| 1 | ... | ✅/❌ | ... |
-
-## 修改总结
-- 采纳: X 条
-- 不采纳: Y 条
-- 修改的文件: [列表]
-- 具体改动: [每个文件改了什么]
-```
-
-### 判断原则：
-- 用户建议如果与数据/事实矛盾 → 不采纳，给出数据依据
-- 用户建议如果改善了表达/逻辑/结构 → 采纳
-- 用户建议如果涉及方法论变更但当前数据不支持 → 不采纳，解释原因
-- 用户建议如果是补充遗漏内容 → 采纳
-- 不确定时倾向于采纳（用户通常比 AI 更了解自己的需求）
-Step not found: Step rerun %s/%s: 用户暂停请求，自动恢复循环退出Step rerun %s/%s cancelledStep rerun %s/%s: 用户暂停请求，第 %d 次尝试前退出Step rerun %s/%s failedStep rerun %s/%s paused: %sStep '%s': 写作会话内数据核对回执已绑定当前快照Step '%s': 出图会话内的表格核对已登记回执，不再另开核对会话Step '%s' AUTO-RECOVER %d SUCCEEDEDStep '%s' AUTO-RECOVER exhausted (%d/%d): %sStep '%s' AUTO-RECOVER stopped: no artifact/reason progressStep '%s' blocked by an external condition: %sStep '%s' completed after post-step checks: %sStep '%s' completed but primary output missing: %s (有其他文件变更, 继续)Step '%s' completed by a free recheck after the continue limitStep '%s' crash recovery aborted: figures health fail (%s)Step '%s' crash recovery aborted: required companions missing %sStep '%s' crash recovery stalled after %d pass(es)Step '%s' crashed (rc=%d) but has partial output (%d tex files), attempting recovery...Step '%s' failed (rc=%d, attempt %d/%d), retrying... error: %sStep '%s' failed: %sStep '%s' free recheck did not finish: %sStep '%s' got a topic choice after a free recheck — rerunning stepStep '%s' has checkpoint but enable_checkpoints=False, skippingStep '%s' has %d placeholder sections (pass %d/%d): %s — auto-continuingStep '%s' health-fail (%s); AUTO-RECOVER %d/%dStep '%s' hit Bun runtime panic (rc=3, attempt %d/%d), backing off %ds before retry. This is an upstream Bun/claude-code bug, not our code.Step '%s' hit context rapid-refill breaker; performing the only compact retryStep '%s' hit empty tool call loop (attempt %d/%d), retrying with compressed context...Step '%s' hit the step time limit (model activity only)Step '%s' killed by file watchdog (attempt %d/%d), retrying...Step '%s' main output ready; finalizing post-step checks: %sStep '%s' main output ready; post-write validation startedStep '%s' re-checkpoint after revisionStep '%s' re-entered topic checkpoint got feedback — rerunning stepStep '%s' re-entering checkpoint wait (%s)Step '%s' recovery checks unavailable: %sStep '%s' (rerun): 写作会话内数据核对回执已绑定当前快照Step '%s' (rerun) AUTO-RECOVER %d SUCCEEDEDStep '%s' (rerun) AUTO-RECOVER exhausted: %sStep '%s' (rerun) completed: %sStep '%s' (rerun) empty tool loop (attempt %d/%d), retrying...Step '%s' (rerun) failed: %sStep '%s' (rerun) health-fail (%s); AUTO-RECOVER %d/%dStep '%s' (rerun) hit context rapid-refill breaker; performing the only compact retryStep '%s' (rerun) marked failed: %sStep '%s' (rerun) stalled (attempt %d/%d), retrying...Step %s/%s waiting for protected-content authorization: %sStep '%s' stalled (attempt %d/%d), retrying...Step '%s' status=completed but primary_output `%s` missing — reset to pendingStep '%s' waiting_checkpoint companions missing: %s — re-runningStep '%s' waiting_checkpoint figures health fail (%s) — re-runningStep '%s' waiting for checkpoint (%s)Step '%s' was %s and cannot be recovered as completed (later steps completed: %s, current outputs pass: %s) — reset to pending and rerunStep '%s' was %s; current artifact checks passed with later completed steps — recovering completionStep '%s' was waiting_checkpoint and output still exists — re-entering checkpoint waitStep '%s' was waiting_checkpoint but primary_output `%s` lost — reset to pendingStill %d placeholders after %d passes: %sSummary 必须独立成页Summary Sheet (摘要页) 必须是第一印象，决定一票否决权Summary Sheet 置首，第 2 页是一页目录（Table of Contents，官方题面要求）；正文按问题依赖链自适应组织 formulation—solution—results—validation，不固定章名与章数Summary 置首；正文按问题依赖链自适应组织 formulation—solution—results—validation，不固定章名与章数，不生成目录页Summary 必须独立成页，包含 team control number[严重] TABLE 数据真实性核对在 [提醒] TABLE 数据真实性自检 [系统] TABLE 数据真实性聚焦核对 TABLE 文件数 个 TABLE × [警告] TABLE 数据自检第 
-
-## TABLE-CHECK MODE — TABLE 数据真实性自检（第 [系统] TABLE 数据真实性自检通过（Claude 已自证，共 TABLE_DATA_CHECKLIST.mdTABLE_DATA_CHECK_PASSED.txt 个硬规则致命问题，详见 `TABLE_DATA_CHECK_REPORT.md`[系统] TABLE 数据真实性核对：无需自检（无 TABLE 文件或无 JSON 数据）TEST_REPORT.mdTOPIC_CANDIDATES.jsonTOPIC_CANDIDATES.mdTOPIC_PLAN.mdTOPIC_PLAN.md、RESULTS.md
-
-工作区里已有上一轮的 TOPIC_PLAN.md：按这条意见修改或重写，不要无视意见重新随机选题。
-重写整份 TOPIC_PLAN.md：第一行一级标题换成这个候选的题目（一字不差），研究问题、数据获取计划、变量定义、研究假设、论文结构和图表预规划都按它重新展开；保留「## 候选题目」一节，把「**推荐：候选 N**」那一行改成「**已选：候选 ## 📌 请选定论文题目（统计建模必须先定题再往下做）
-
-- 点「确认继续」：采用 TOPIC_PLAN.md 里写的**推荐题目**，接着做数据采集与统计分析。
-- 想改用别的候选：在下方输入框写「选候选 N」（N 是候选题目编号），再点「提交建议」；本步会按候选 N 重写整份选题规划，改好后再请你确认。
-- 也可以写其他修改意见（如调整研究问题、换数据来源）后点「提交建议」。
-- 30 分钟内没有操作，会自动采用推荐题目继续。
-
----
-
-
-## 📊 统计建模模式
-- 本赛事要求论文“自圆其说”：研究问题、数据、方法、结果与结论前后对得上。数学建模的约束闭环、参数保真、物理合理性、建模深度等“算对类”检查对本赛事不适用，不要套用。
-- 规划文档是 `TOPIC_PLAN.md`（没有 PROBLEM_ANALYSIS.md / MODELING_REPORT.md）：第一行是论文题目，`## 研究问题` 下每个研究问题一个 `### 研究问题一：…` 标题。
-- 第二步「数据采集与统计分析」（老项目中技能名为 comp-code）产出 `DATA_SOURCES.json`、`figures/problem_N_results.json`、`figures/all_results.json`、`RESULTS.md` 与 `code/`；后面的步骤只读这些结果，不改动。
-**用户已关闭数据图表生成，后续数据图步骤会被跳过。**
-TOPIC_PLAN.md 的「图表预规划」**不规划数据图（fig_xxx 数据图）**，数据结果用表格表达；流程图/框架图按下面的设置规划。
-Table check pass %d/%d: %sTable check pass %d errored: %sTable check pass %d timed outTable hard fatal still present after %d passes
-## 等计算时的单次等待上限
-- 等后台任务（TaskOutput、sleep、轮询）单次最多 4 分钟（TaskOutput 的 timeout ≤ 240000 毫秒），没结束就再等同一个任务；不要一次等 10 分钟，也不要在一次前台调用里阻塞超过 4 分钟。超过 5 分钟没有新消息，提示缓存失效，下一轮要按全价重读整段上下文。
-- 两次等待之间只看进度（日志末几行、已完成算例数），不重读大文件，不另起第二份求解。
-- 赛题分析、建模步骤里的验证性试算单次不超过 3 分钟（命令前加 timeout 180），更长的求解留给编程实现步骤。
-'TemplateDef''TemplateDef | None'Template folder '%s' not found in _templates/ for template=%s- **Theorist names**: use the original English form (e.g. Foucault, not 福柯) unless quoting Chinese translations.
-宋体|黑体|楷体|仿宋|微软雅黑|等线|Times New Roman|ArialTraceback (most recent call last)Tuple[List[str], List[str]]Tuple[Optional[Path], str, Optional[dict]]Tuple[Optional[dict], Optional[str]]Tuple[bool, str]Tuple[int, List[str]]Tuple[set, str]UPDATE workflow_steps SET UPDATE workflow_steps SET display_name=? WHERE id=?UPDATE workflow_steps SET error_message=? WHERE id=?UPDATE workflow_steps SET error_message=NULL, output_files=?, writing_check=? WHERE id=?UPDATE workflow_steps SET handoff_reason=COALESCE(handoff_reason, ?) WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET model_used=? WHERE id=?UPDATE workflow_steps SET output_files=? WHERE id=?UPDATE workflow_steps SET paid_continues=MAX(COALESCE(paid_continues, 0) - 1, 0) WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET resume_strategy=NULL WHERE id=?UPDATE workflow_steps SET resume_session_id=? WHERE id=?UPDATE workflow_steps SET skill_name=? WHERE id=?UPDATE workflow_steps SET status='failed', error_message=?, completed_at=CURRENT_TIMESTAMP WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET status='completed', completed_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflow_steps SET status='failed', error_message=?, completed_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflow_steps SET status='pending', error_message=NULL, started_at=NULL, completed_at=NULL WHERE id=?UPDATE workflow_steps SET status='pending', error_message=NULL, started_at=NULL, completed_at=NULL WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET status='completed', completed_at=CURRENT_TIMESTAMP, error_message=? WHERE id=?UPDATE workflow_steps SET status='completed', completed_at=CURRENT_TIMESTAMP, vision_review=?, precompile_report=?, submission_check=?, writing_check=? WHERE id=?UPDATE workflow_steps SET status='running', error_message=NULL, started_at=CURRENT_TIMESTAMP, completed_at=NULL WHERE id=?UPDATE workflow_steps SET status='running', error_message=NULL, started_at=CURRENT_TIMESTAMP, completed_at=NULL, vision_review=NULL, precompile_report=NULL, submission_check=NULL, writing_check=NULL WHERE id=?UPDATE workflow_steps SET status='completed', error_message=NULL, output_files=?, completed_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflow_steps SET status='completed', error_message=?, output_files=?, completed_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflow_steps SET status='pending', completed_at=NULL, error_message=? WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET status='completed', error_message=?, output_files=?, completed_at=CURRENT_TIMESTAMP, writing_check=? WHERE id=?UPDATE workflow_steps SET status='pending', error_message=NULL, started_at=NULL, completed_at=NULL WHERE workflow_id=? AND status='running' AND id!=?UPDATE workflow_steps SET status='completed', error_message=?, output_files=?, completed_at=CURRENT_TIMESTAMP, resume_session_id=NULL, resume_error_code=NULL, resume_strategy=NULL, vision_review=?, precompile_report=?, submission_check=?, writing_check=? WHERE id=?UPDATE workflow_steps SET status='waiting_checkpoint' WHERE id=?UPDATE workflow_steps SET status='running', completed_at=NULL WHERE id=?UPDATE workflow_steps SET status='completed', error_message=NULL, completed_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflow_steps SET status='completed', completed_at=CURRENT_TIMESTAMP, error_message=? WHERE workflow_id=? AND skill_name=?UPDATE workflow_steps SET status='pending', error_message=NULL, started_at=NULL, completed_at=NULL WHERE workflow_id=? AND skill_name=? AND status='running'UPDATE workflow_steps SET status='pending', error_message=NULL, started_at=NULL, completed_at=NULL WHERE workflow_id=? AND skill_name=? AND status!='completed'UPDATE workflow_steps SET status='pending', started_at=NULL, completed_at=NULL, error_message=?, resume_session_id=?, resume_error_code=?, resume_strategy=NULL WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET status='pending', started_at=NULL, completed_at=NULL, error_message=NULL WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET status='pending', error_message=?, started_at=NULL, completed_at=NULL WHERE workflow_id=? AND status='running'UPDATE workflow_steps SET status='waiting_checkpoint' WHERE workflow_id=? AND skill_name=?UPDATE workflow_steps SET status='running' WHERE workflow_id=? AND skill_name=? AND status='waiting_checkpoint'UPDATE workflow_steps SET status='completed', error_message=NULL, completed_at=CURRENT_TIMESTAMP, resume_session_id=NULL, resume_error_code=NULL, resume_strategy=NULL, vision_review=?, precompile_report=?, submission_check=?, writing_check=? WHERE id=?UPDATE workflow_steps SET status='completed' WHERE id=?UPDATE workflow_steps SET step_order = step_order + 1 WHERE workflow_id=? AND step_order >= ?UPDATE workflows SET params=? WHERE id=?UPDATE workflows SET run_scope=NULL WHERE id=?UPDATE workflows SET status='failed', updated_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflows SET status='paused', updated_at=CURRENT_TIMESTAMP WHERE id=?UPDATE workflows SET template=?, title=?, params=?, status='pending', workspace_dir=?, enable_checkpoints=?, updated_at=CURRENT_TIMESTAMP WHERE id=? AND template='intake'UPSTREAM_ISSUES.md（UPSTREAM_ISSUES.md 里没有登记这张图缺数据）Unknown template: Unsafe/incomplete repair: retain receipts, do not blindly replay.User stopped at checkpoint '%s'User stopped at checkpoint '%s' after a free recheckUser stopped at re-checkpoint '%s'User stopped at re-entered checkpoint '%s'V1.0Vision OCR WHERE id=?
-这是已授权的自动聚焦返修，不是咨询或计划请求。请在本轮实际完成修改与验证，不要以‘是否继续/Want me to continue’或交接摘要结束。只处理诊断点名的文件和内容：题号问题只改标题，符号问题只改符号表，模型表达问题只补对应公式及必要解释。不要重写整篇或改上游 JSON/RESULTS。补公式前对照 MODELING_REPORT.md 与实际求解代码/结果，不得编新模型、虚构结果或为通过计数而添加公式。若现有证据矛盾或检查疑似误判，明确报告具体证据和阻塞原因，不要改检查器、伪造通过报告或无依据改写论文。
-这是已授权的自动聚焦返修，不是咨询或计划请求。请在本轮实际完成修改与验证，不要以‘是否继续/Want me to continue’或交接摘要结束。只处理诊断点名的文件、章节和段落：结构问题只补缺的节或段，引用问题只改引用和参考文献，数值问题先对照 RESULTS.md、figures/TABLE_* 和用户材料核对再改。不要重写整篇，不改上游数据和结果。补写前对照大纲（PAPER_PLAN.md 或 OUTLINE.md）的论证主线和论点—证据表、本篇写作指南 _guide/WRITING_GUIDE.md 和用户材料：不得编造数据、文献、引语、页码、注册号或伦理批号；材料里没有又不能编的，写“［待作者补充］”并逐条记进工作区根目录的 OPEN_QUESTIONS.md。若现有证据矛盾或检查疑似误判，明确报告具体证据和阻塞原因，不要改检查器、伪造通过报告或无依据改写论文。实际修订后仅运行本步骤的对应检查，不提前启动后续步骤。结束时简要报告实际修改文件、修改内容、实际检查结果和仍未解决的问题；只读取文件不算修复完成，不要声称未执行的操作已完成。论文正文不得出现本次检查、诊断、能力编号、通过状态或返修过程。全栈 Web 应用（前端 + 后端 + 数据库）全栈 Web 应用Word 源稿预检查未通过：
-## ⛔ 输出格式：Word（DOCX）
-），需要的话在 Word 里自己加封面基本信息表（题目、学位类别等已填，姓名、学号、学院、导师、开题日期留空，提交前在 Word 里填上）），目录和分页请在 Word 里自己调（目录页码已用本机 Word 更新）报告导出 Word识别 Word 模板占位导出为 Word格式检查与 Word 导出Word 导出出错，是软件内部的问题（Word 导出未能完成，已有文件已保留：Word 完整版没有生成：正在重试 Word 预检查文件访问这份 Word 模板还没有识别过占位位置（题目、摘要、正文各填在哪）Word 模板填充未完成，未替换用户模板：Word 导出遇到临时文件访问问题，正在重试 已跳过：用户选择 Word 输出格式渲染图示并导出 Word这份 Word 模板的占位位置记录读不出来了当前授权工作流没有可用于 Word 改稿的步骤的 Word 样式处理
-，Word 稿）论文撰写（Word 稿）（Word 稿） (Word)），是材料里没有、不能替你编的内容，提交前在 Word 里搜“［”逐一填上- Word 输出：不套 LaTeX 模板，版式由最后的导出步骤按
-**竞赛 Word 样式与自适应结构（英文）：** Markdown 标题样式由 docx-export 的 competition_en.json 自动应用。
-**直接从论文标题开始，不要写封面页 / 不要写 YAML frontmatter / 不要写承诺书**（Word 版本省略所有非正文页，由用户后续自行补充）。
-固定入口与收尾（正文中间不得照抄为固定目录）：
-1. # Title（论文标题，居中加粗 22pt）
-2. ## Summary（硬范围 300-400 词，优先 330-380 词，尽量铺满但不得跨页；含数值结果）
-   **Keywords**: keyword1; keyword2; ... 
-3. 正文按问题依赖链和模型类型命名章节；每个核心模型闭环到真实结果与验证，不强制 Introduction/Models/Sensitivity 分别独立成章。
-4. ## References（[1] [2] 编号）
-5. ## Appendix（如有代码）
-⛔ 不生成目录页。
-
-**统计建模 Word 样式与结构：** Markdown 标题样式由 docx-export 的 competition_zh.json 自动应用。
-**直接从论文标题开始，不写封面、不写 YAML frontmatter、不写致谢**（默认匿名，全文不出现学校、队员、指导老师信息）。
-固定入口与收尾：
-1. # 论文标题（居中加粗）
-2. ## 摘要（500–700 字，按研究问题分段写方法与主要结论，含关键数值）
-   **关键词**：词1；词2；词3 （docx 会自动渲染成黑体标签 + 宋体内容）
-3. 正文按官方要求覆盖问题描述、指标选择、数据描述、模型建立、求解和检验、模型结果分析解释、结论建议，标题层次 一、（一）1. ①
-4. ## 参考文献（[1] [2] 编号，GB/T 7714）
-5. ## 附录（如有代码）
-⛔ 正文不要手写目录、表格和插图清单（Word 版的目录与图表清单由用户在 Word 中插入自动目录生成）。
-
-**竞赛 Word 样式与自适应结构（中文）：** Markdown 标题样式由 docx-export 的 competition_zh.json 自动应用（A4 25mm 边距、12pt 宋体、1.5 倍行距、首行缩进 2 字符、SimHei 标题）。
-**直接从论文标题开始，不要写封面页 / 不要写 YAML frontmatter / 不要写承诺书**（Word 版本省略所有非正文页，由用户后续自行补充）。
-固定入口与收尾（正文中间不得照抄为固定目录）：
-1. # 论文标题（居中加粗 22pt）
-用本机 Word 导出 PDF 没成功（Word/PDF 导出正在按官方排版导出正文与附录（Word/PDF），并更新目录、统计页数）。**先读这份清单，再挑着读需要的文件**；文档读清单里给的文字版（Word/PDF/PPT/Excel 已转成文字），不要把 `user_data/` 下的文件逐个通读——大项目读不完，上下文会被压缩，最后只能凭印象复述。
-本机没有安装“方正小标宋简体”（须知规定的题目字体）：Word 和 PDF 里的题目会显示成替代字体，装上该字体后在 Word 里打开即可恢复，PDF 需重新导出（打开文档时 Word 问是否更新域，选“是”就会生成目录页码；WPS 用“引用 → 更新目录”）（导出的 Word 读不了），目录和分页请在 Word 里自己调：直接填的话题目换不上、正文只能接在模板自带内容的后面，所以没有导出，原来的 Word 没有动。请先重跑「识别 Word 模板占位」这一步，再导出课程论文只出 Word：这个项目的输出格式已改成 Word（课程论文写作步出的是 Markdown，编译 PDF 那一步接不上，以前选 PDF 最后一步会失败）- **本工作流将导出为 Word 文档（.docx），不编译 LaTeX**
-
-## ⛔⛔⛔ 输出模式: Word (docx)
-
-本工作流的最终产物是 **NARRATIVE_REPORT.docx**，由后续的 `docx-export` 步骤把 `NARRATIVE_REPORT.md` 自动转成 .docx。**你只需要写好 markdown**，不要尝试编译 LaTeX。
-
-### 关键调整
-
-1. **Phase C 改写**：把改进版写到 `paper/draft_v<round>.md`（markdown），公式用 `$..$`（行内）和 `$$..$$`（块级），不要写 LaTeX 命令如 `\section{}`。
-2. **Phase D2 重编译**：**跳过** xelatex/pdflatex 调用。docx 模式下没有 LaTeX 工具链可用。检查 markdown 内容（行数、引用、章节）即可。
-3. **每轮快照**：复制 `paper/draft_v<round>.md` 留存，但不要试图生成 PDF。
-4. **Termination 步骤**：把最终轮的 `paper/draft_vN.md` 复制为根目录的 `NARRATIVE_REPORT.md`（这是 docx-export 步要读的源文件）。
-5. **图表引用**：用户上传的 .docx 已经被 pandoc 提取到 `user_data/*_extracted.md`, 里面图片以 `![](path)` 引用。改写时如果想引用同一张图, 直接复用相对路径即可。
-
-### ⛔ 公式编号铁律 (docx 模式必读)
-
-块级公式 `$$...$$` 默认**没有编号**。每个块级公式都必须按正文顺序连续编号，统一在公式内部使用 `\tag{N}`：
-  ```
-  $$ E = mc^2 \tag{1} $$
-  $$ \nabla \cdot \vec{B} = 0 \tag{2} $$
-  ```
-
-闭合 `$$` 所在行不得再追加 `(N)`；正文引用使用可见编号，如"由式 (1) 可知..."。
-
-**禁止**: 写 `\begin{equation}...\end{equation}` / `\label{eq:xxx}` / `\eqref{...}` 这类 LaTeX 命令, docx 转换器不认。
-
-### 用户上传文件提示
-
-如果工作区有 `user_data/*_extracted.md`，那是从 .docx/.pdf 自动转换的 markdown，公式以 `$..$` 形式保留。**优先读这些 .md 文件而不是原始 .docx**。
-Word 完整版 paper/作品全文.docx（封面与致谢留了方括号占位，提交前填写）；）：请用 Word 打开 paper/main.docx，在目录上右键“更新域”后另存为 PDF）：交之前在 Word 里打开 paper/main.docx 另存为 PDF匿名版 Word paper/main.docx（与 PDF 匿名版内容一致）；已用本机 Word 导出同内容的 paper/main.pdf（官方只收 PDF，提交用它）Workflow not found: Workflow %s: 重读区间终点 / 步骤状态失败，照开跑时的走Workflow %s: 暂停闸收尾失败（不影响退出）Workflow %s: 用户暂停请求，占位符恢复循环退出Workflow %s: 用户暂停请求，自动恢复循环退出（不再起新进程）Workflow %s: 用户暂停请求，续写循环退出Workflow %s: 用户暂停请求，表格检查循环退出Workflow %s: 用户暂停请求，数据检查循环退出Workflow %s: AI 工具使用声明还没定，在步骤 '%s' 前停下Workflow %s: 没有识别占位这一步，重跑导出前插进来补跑 docx-template-mapWorkflow %s: 占位映射不可用，重跑导出前先补跑 docx-template-mapWorkflow %s failedWorkflow %s paused (CancelledError)Workflow %s paused because protected content is unavailable: %sWorkflow %s paused: checkpoint '%s' timed out without confirmationWorkflow %s: run_scope 与当前计划对不上，已清除并暂停Workflow %s: 步骤 %s 开始前存版本出错（不影响执行）Workflow %s: 检测到用户暂停请求，在步骤 '%s' 前退出（不再起新进程）Workflow %s: '%s' 上次只按数据做，上游有了，按上游重做Workflow %s: 还没有赛题，在步骤 '%s' 前停下Workflow %s: 用户暂停请求，步骤 '%s' 第 %d 次尝试前退出（不再起新进程）Workflow %s: 事件推送失败（不影响执行）type=%sWorkflow %s: 事件监听器出错（不影响执行）type=%sWorkflow %s waiting for protected-content authorization: %s 次自动重试，请**优先**用 Write 工具直接写出 `
-
-## 重要规则
-- 所有产出文件都写入当前工作目录（不要写到其他位置）
-- 用 Write 工具创建文件、Edit 工具修改；文件太长就先 Write 第一段（末尾留一行占位注释），再用 Edit 把占位换成下一段，每段不超过 150 行
-- 不要用 Bash heredoc（cat << 'EOF'）写文件：本机 Bash 会把成对的反斜杠吃成一个，加了引号也一样
-- 可能跑很久的脚本（模型拟合、Bootstrap、大循环）用 timeout 包着跑，如 `timeout 900 python code/xxx.py`：命令跑久了会被转到后台，卡住的后台进程不结束，这一步就一直等它。要停后台进程，先按命令行查出真实进程号再结束：`powershell -NoProfile -Command "Get-CimInstance Win32_Process | Where-Object CommandLine -like '*xxx.py*' | Select-Object ProcessId,CommandLine"`，不要凭记忆写进程号
-- 每个步骤完成后至少产出一个文件
-- 读取工作区中已有的文件，在前步骤的基础上继续工作
-- 使用中文撰写论文（除非是 LaTeX 代码）
-Wrote FORMAT_REQUIREMENTS.md (%d chars)Wrote checkpoint feedback to checkpoint_feedback.mdWrote .env_skill with %d vars: %s），不写「如图 X 所示」「详见图 X」
-2. 论点用文献引用、推导、表格或材料分析支撑
-3. 即使 `figures/` 里有残留的 fig_* 图片，也不嵌入——它们不是本次规划的产物
-”信息表、第二页目录页和从正文起编的页码（第 X 页 共 Y 页），由 Word 导出按官方格式自动排好；CLAUDE.md 赛事规则里的 MathorCupmodeling 模板和 XeLaTeX 编译说的是 PDF 版。
-用 `![图 X：图题](figures/xxx.png)` 嵌入，一律写 `.png`；只有 PDF 的图也写同名 `.png`，导出前会自动从 PDF 转出 PNG- 本流水线产出中文学术论文，使用 XeLaTeX + ctex 宏包编译
-）。请按**」。
-「」开始前」开始前没能存档（），这一步照常运行，但这次跑之前没留底。	⛔[接入暂停] > 用户在对话里的原话（上面是对话助手按原话整理的；两者不一致时以原话为准，原话里不属于本步骤的部分不用管）：
-
-
-
-先读已有产物再动手：按这条要求重做本步骤的正式产物，未提到的部分保持原有正确内容。与之前确认过的决定冲突时以这条新要求为准；与题目原文冲突时以题目原文为准，并在完成说明里写明。
-
-
-## ⛔⛔⛔ 用户在对话里采纳过的方案（和本步骤相关的照做，无关的不用管；与题目原文冲突时以题目原文为准）
-
-
-
-## ⛔⛔⛔ 用户在选题检查点提交的意见（最高优先级）
-
-（到时没确认就暂停，不会自动继续）；轮次 ；截止 [检查点] [用户操作： 个、
-前面步骤另有  个代码/数据/正文源码文件（ --> (无法完整解析：本问结果没有写完) -->
-_+ (没有任何结果)用户已提供代码与结果, 不重跑用户已提供建模报告与结果, 不重做建模用户已提供技术路线图, 不重画用户已提供图表且未标识缺路线图, 默认不补[格式模板]  (文件自己声明本问求解失败：创建  个文件，更新 更新 只动了  个内部文件（不列在产出里）-  ( (无法读取))### 
-```
-
-```上一轮本步骤异常退出（[待完善] :] (文件里记录了 ，但主产物  还是重做之前的版本（这次没有重新写）：要按当前上游重新做出来，不能原样保留旧的规划的图：。按当前上游把本步的图重新画、重新导出，覆盖重做前的旧图。按当前上游重新写出 ``（可以整份重写），覆盖重做前的版本。按当前上游重新做出本步的产出，覆盖重做前的版本。重做没有完成：
-这次是用户要求重做这一步，不是返修：：本问求解中途异常)不要只触碰文件时间戳或写解释；完成实际修改，等待全部命令回执，程序随后重新核验。本步骤之前执行过，但没有完成：
-这次是接着做，不是从头重来：先核对工作区里本步已有的产物、检查点和报告，针对上面的原因处理，只补未完成或没通过的部分；已有的有效内容不要推倒重写。
-
-（更早的情况）=?清零自动续跑次数失败（不影响完成）这次重新检查没通过的地方：这一步已经连续继续执行  次仍没有完成，为避免继续花钱，先停在这里（产物和记录都保留着）。可以这样处理：① 换个模型或调高这一步的思考强度，再点「继续执行」（会重新计数）；② 打开产物自己改好后点「继续执行」：只重新检查、不调用模型，检查通过就算完成；③ 点这一步右侧的「重新执行此步骤」，从头重做这一步。未返回有效完成结果；当前产物已保留未完成： 已有产物质量检查未通过：实际修订后仅运行本步骤的对应检查，不提前启动后续步骤。结束时简要报告实际修改文件、修改内容、实际检查结果和仍未解决的问题；只读取文件不算修复完成，不要声称未执行的操作已完成。论文正文不得出现本次检查、诊断、能力编号、通过状态或返修过程。自动修复执行超时，已有产物已保留；尚未取得有效完成回执，不将其判为论文质量失败，也不重复启动未确认的任务。自动修复：接回原会话的断线重试已用完，改按原来的方式再试一次自动修复请求暂未成功，正在安全重试 本次执行超过等待时限，已有产物已保留；待确认任务结束后可继续。 (文件里记录了错误信息：核验未完成，不能据此判定产物不合格；已有文件已保留。检查环境恢复前不继续改写内容：；因检查范围内的源码、结果与失败原因均未变化，已提前停止返修未通过（初次检查 +  次实际返修）：必需的二级文件缺失: 市调报告还没写全：: 数据采集与统计分析尚未完成：编程实现尚未完成：` 不存在或类型不正确` 完全为空` 仅含空文件核心产物 `` 是空文件缺失图名：。只补缺失图，保留已经合格的图。：核对诊断点名的已有图和对应图源，只修复实际不合格部分；无清单时按当前计划补齐。图表核验未通过：不要重跑上游计算或重画无关图片，不得删除清单条目、修改检查器或伪造图片凑通过。不要只触碰文件时间戳或写解释；完成实际修改，等待全部命令回执，程序随后重新核验。（软件的问题，不是稿子写得不对）源稿残留旧版导出的文档质量诊断块；只移除该诊断块，保留正文、数据和其他用户内容，并修复其实际问题。论文提交规范未通过：数据及其他材料压缩包没有生成（非必传）：-
-只修复源文件  及其直接引用文件中被点名的问题。保留公式数学语义、结果数值、表格和图片；不改转换器、不删必需内容、不改上游数据。诊断和修复说明只写技术报告，不追加到论文正文。若有旧版诊断块，仅移除该块，保留其他正文。不能安全修复时报告具体原因，不伪造通过；程序将重新实际检查与导出。 (缺失)数据检查仍有明确错误：重新检查没能完成（[]检查点已确认（沿用现有产物，没有调用模型）`，内容 `读取格式模板、要求文档的材料路径失败<!-- - 用户已自拟题目「」：第一步直接按此题目规划，不列候选题目。
- (入口为空或只有占位语句)- 英文摘要：用户已开启，中文摘要之后另起一页写英文摘要。
-- 英文摘要：用户未开启，默认不写。
-- 篇幅：论文正文字符数（计空格）不得超过 （大赛通知，超标可被取消参赛资格）。正文指第一章到最后一章，不含摘要、目录、清单、参考文献、附录；表格文字、图题、公式计入，图片不计。写作时控制在约  以内；超了先把次要表格和推导细节移到附录，再删重复解读，不删图。写作与编译步骤会按此核对。
-`- ⛔ 电脑上的数据位置也是用户给的材料：  - - 用户没有上传可用材料：按下面的描述撰写，代码材料按功能编写示例源码。
- (空文件)。
-  - 技术背景、要解决的问题、技术方案、实施例与参数以这些材料为准，下面的描述只作补充；效果数据只用材料里有出处的，没有的写定性描述或【待发明人补充实测数据】。
-：截图用来理解界面和功能，能当真实截图用（操作手册优先用真截图）。
-电脑上的数据位置 - ⛔ 用户给了材料，但里面没有源代码（  - 材料类型：以文档为主（源代码较少，非空   - 材料类型：只有文档（没有源代码）。业务以文档为准；代码材料按文档描述的功能编写示例源码（`草稿/示例源码/`），再由脚本抽取。
-  - 技术背景、要解决的问题、技术方案、实施例与参数以上传材料为准，下面的描述只作补充；效果数据只用材料里有出处的，没有的写定性描述或【待发明人补充实测数据】。
- /
-###  (没有可读取的汇总结构)
-用户没有单独填写描述：以上传材料为准理解，在检查点让用户确认。
-补充说明，与上传材料冲突时以材料为准）
-```
-（描述共约 .*投稿格式  不可用（）；拒绝改用别的模板## 附录投稿格式模板「」不完整：；拒绝改用别的模板
-  . - `模型 / 算法
-## 题目文件（建项目时和用户确认过的）
-正文页数严重不足（估算 ~ 行 /  行，仅供定位，非全文）
-```
-# 研究项目: 
-
-## 项目说明
-这是一个自动化研究管理的工作流引擎，当前正在执行「」流水线。
-
-## 流水线步骤
-
-## 参数
-- 研究主题: =```
-
-数值设置正确取到值。
-**最终以论文实际质量为准**，不要为了凑页数刻意注水。
-* 页 < 
-## ⛔ 用户指定的内容数量目标（来自前端「高级选项」，硬目标）
-- **** ≥ ****  阶段负责达标）
-
-这是用户显式指定的最低数量，**必须达标**：
-- 🧠 **模型 / 算法**：`**丰满（浅色分区、题目对象小插画、彩色数据小图形）简洁（线稿）
-## 中文论文写作说明
-- 正文标题、摘要等均使用中文
-- 根据内容判断中的论文类型（本科/硕士/期刊）选择合适的格式
-纯前端页面（静态站/交互页面）
-## 一句话生成项目 · 说明
-- 本工作流产出**可运行的软件项目** + 相关文档，流程：需求分析 → 系统设计 → 编码实现 → 自测验证。
-- **项目类型**：`）。
-- **技术栈**：前端  + 后端  + 数据库 - ⛔ 自测起服务必须用自限时模式（后台起→探活→立即杀），绝不前台阻塞式常驻。
-（纯前端，无后端/数据库）。
-- **技术栈**： 命令行工具。
- 脚本。
-- ⛔ 自测直接跑主脚本验证能正常执行、无报错，不起常驻服务。
-
-### 前端设计风格
-- 用户自定义风格：**(未填, 按项目性质自行把握)**。
-- 指定风格：
-### 用户的功能需求 / 自定义要求（需求分析时必须覆盖）
-需求分析步骤要把上面的要求拆解、补全成完整功能清单；用户没提但常识必要的功能也要补上。
-
-### 功能需求
-用户未单独填写功能清单，请在需求分析步骤根据项目想法自行拆解出合理的功能集，并在检查点让用户确认。
-
-## 一句话生成软著申请资料 · 说明
-- **软件全称**：(待起草时确认)。正式资料的文件名、页眉、操作手册标题都以申请表里的全称为准。
-- **版本号**：软件描述 / 大纲用户只给了软件全称：请据此合理拟定软件的行业、目标用户、核心功能，在检查点让用户确认。
-## 一句话生成专利交底书 · 说明
-- **案件名称**：(待起草时拟定)。写入交底书头部 `**案件名称**：` 行。
-- 交底书正文止于第六章，不得包含自检清单章节，不得出现指向技能/示例仓库的文末脚注。
- 顶层应为对象：图名 → 数据来源列表技术描述 / 交底要点：请据此合理拟定技术背景、要解决的技术问题和技术方案，在检查点让用户确认。- 本次论文类型为 **`）
-`
-::
-## 作者指南（用户上传）
-- - 写作步骤产出 `` 嵌入已生成的表格**（数据真实，杜绝编造）
-
-## 竞赛规则（- 语言: - 篇幅策略: 官方不设页数上限，按正文字符数（计空格）控制；页数只在最终报告里提示，不缩字号、不压小图来挤页。
-- 页数策略: 本地生成不设硬上限；最终提交参考为  页。超过只提醒，不失败、不删核心推导、不缩字号、不压小图；低于参考值也不按比例强制扩写。
-- 机理题写作：原始定律/几何关系 → 关键代入与变形 → 完整方程及初边值 → 与代码一致的离散、事件切换和停止准则 → 真实结果与误差依据。先写数学骨架再嵌图；不以图表数量代替推导，通用算法科普可省但本题求解过程不能省。
- 登记的数据来源 - 题号: - 编程工具: 
-## 文档原文（已自动提取，按需读取）
-** → `` (, 字符)
-  - 开头: …
- 不存在若产物中有大段英文（非引文/代码/参考文献条目），按中文论文规范改写。
-- 正文 / 章节标题 / 摘要 / 关键词 全部中文
-；字体/边框/网格等其余版式维度仍按工作区种子随机。
- -->
-## 🎨 数据图配色：用户已指定固定配色「;网格/线宽边框/网格/线宽 -->
-## 📐 数据图版式：用户高级自定义（ -->
-## 📐 数据图版式：用户已指定固定版式风格「... (已压缩) 无法解析### 图片: ### 来源: **用户禁用了数据图表，但启用了架构图/流程图。本次只嵌入下面这些图：**
- 张图，都要嵌入正文：**
-
-
-## ⛔ 规划阶段强制规则（用户已设置）
-**用户的数据在电脑上的数据位置（电脑访问开着）：**用户启用了数据分析与图表生成，数据在用户电脑上的数据位置（电脑访问开着）：⛔ 不生成目录页。
-/ 登记的 设置里选了格式以要求文档为准，但还没有解析出要求文档的格式（「解析格式要求」这一步还没跑）：这次照模板排设置里选了格式以要求文档为准，但没能比出要求和模板冲突的格式项：这次照模板排设置里选了格式以要求文档为准：要求文档写到的格式和模板一致，照模板排格式以要求文档为准，模板副本里按要求改了：（封面、页眉页脚照模板）材料核对：- 第  在  页有  处写成 `[?]`：对照原页补全，不要猜
-`。
-
-没有识别成功的页。
-
-## 识别失败的页
-
-第 ；第  页识别失败（已存页面图）。
-## 识别不清的位置
-
-；另有  处识别不清（[?]），详见 ` 里不存在/` 下的  即可看到原页。
-复用已有赛题识别结果或等待失败重试冷却：正在识别赛题文字：（转换页面中…） 共  页：前  页逐页看图识别，之后有图、公式多或扫描的  页也看图登记为画不出的图不符合要求：，其余  第  页 页识别未成功，正在重试（## 第  页
-
-[?] 页
-
-[第 ； 在识别期间已更新，本次旧版本结果未覆盖，请重新识别 页
-
-[对话里看图识别过的转录]
-
-未视觉识别：本页，超出自动看图的 未视觉识别：本页是扫描页（没有可用的文字层），超出自动看图的  页
-
-[]
-
-部分识别 / 文本兜底规划的 #  内容提取（）
-
-原文  页；视觉成功  页；看图转录。
-
-其余  页没有看图转录（前  已更新，本次旧版本结果未覆盖 张数据图里登记了 （视觉成功  页）；未成功页：，原文已保留这是数学建模竞赛或学术论文的数据/研究类图片以下是从上传图片中自动识别的内容描述，仅供参考。
-
-
-还没识别（下次运行步骤时会识别），请对照原图，不能把缺失内容当作不存在。
-
- 张画不出（上限 正在识别上传图片：（第  张）
-尚未识别成功，请对照原图，不能把缺失内容当作不存在。
-
-上传图片识别结束：共  张，本次  张成功；其余  张尚未自动识别，保留原图按需读取步骤定义重复： 张）：数据缺口太大，需要先回上游补齐结果，本步不能以跳过收尾（）论文撰写（[一-鿿]#稿子里有  处留给你自己填的方括号占位（“: 没有登记”已按学校模板的格子填写（ 格），论文题目已填进题目格；姓名、学号、导师、日期和各级意见栏留给你和老师填。学校模板里  没有对应内容，留空了：在报告里补上这一部分（标题照模板写）再导出一次没有加开题报告封面和评议意见栏（末页的指导教师意见、评议小组意见栏页眉“.: 退回原因不是规定的原因代码页脚“……建模求解(缺口补全) / 编程实现(缺口补全)图表生成(缺口补全)流程与架构图(缺口补全)竞赛论文撰写（英文）论文大纲（中文）\"|~$建项目对话（读材料、记下项目设置）已导出 ；正文 （上限 ），重新试也会一样；已有文件都保留着# 用户提供的文字格式要求
-
-图表最终文件未通过质量门：这个项目已经建好了，或者不是草稿未指定, 默认以用户提供资产为准**用户已确认的处理策略**: `` — 。在本步的汇报里列出这些不一致，告诉用户可以在设置「资料对不上时以谁为准」里改（比如“以题目要求为准，全部重做”），改了以后从规划那一步重跑。
-
-被外部条件卡住，没跑成：
-⚠ ` `` … | ；当前授权工作流没有可用于改稿的步骤，请保留产物并补充写作步骤[系统] 「」仍在执行（本次约  分钟）；当前是第  个进程，没有额外启动模型会话表格检查仍有明确错误：所选格式处理步骤不存在或重复，请先核对工作流配置要运行的步骤范围与当前计划对不上，已停下；请重新指定要跑的步骤。正在检查工作流授权；通过后识别上传材料[违规]上传图片识别未完成，将保留原图供后续读取材料预处理结束，正在进入待执行步骤」上次只按数据做；现在有了 ，按它重做上次只按数据做，现在按上游重做[系统] 之前标记完成但产出 `` 已丢失, 重新执行用户选择了跳过架构图/流程图图内存在应移入图注或正文的说明文字：规划里没有数据图和数据表，也没有上传数据：这一步不用做已跳过(资产已齐全): 只对**缺失的问号**编程求解, 已有的问号**绝对不要重做**如果题目里没有明确问号编号(纯文本要求), 按主要任务点拆分, 在对照表里写清楚
-### ⛔ 竞赛缺口识别(强制流程)
-**用户禁用了数据图表，但启用了架构图/流程图。本次仅嵌入架构图：**
- 张图，必须全部嵌入正文：**
-规划/建模阶段)
-
-本工作流是「已有资产 → 论文」, 用户已上传部分资产, 资产清单如下:
-
-
-
-...(已截断)
-**用户自定义写作要求(强制约束, 必须遵守)**:
-
-
-```
-
-# 用户对「」的修改意见
-
-上次没通过的检查：上次执行被中断，没有正常结束[来自  步骤 校核通过；建议性提醒  项已生成 。按须知上传时改名为“作品全文—组别—作品编号”“匿名作品—组别—作品编号” (过小  字节)[前置依赖警告] 步骤 '' 的上游产物缺失: 。步骤会继续执行但可能产出不完整。[前置依赖提醒] 以下文件存在但内容过少: [系统]  张架构图, 实际产出 本次还没生成（首次跑导出前）存在（含字号/字体/章节骨架/题注公式表格规范，**必读**）
-
-**铁律：** 上面每张图都必须在 `当前步骤: ) — 第  步
-已完成步骤: 剩余步骤: 
-该步骤必须产出的文件（至少）:
- 张, 缺失 
-### 图表预规划（来自 
-## ⛔ 图表预规划（从规划文档中提取，必须按此清单生成）
-
-⛔ 生成每张图前，必须先用以下命令提取对应配方的完整代码：
-复制输出的代码作为起点，适配实际数据。⛔ 不要从零写图表代码！
-[系统] 正在执行「」主任务；完成后将用真实文件和质量门核验产出
-
-## 可靠会话交接
-上一会话已按用户选择隔离。本轮为新会话：先读取当前步骤已存在的产物、」按要求重做：按当前上游重新做一遍，覆盖这一步上次的产出[系统] 这一步已连续继续  次仍没完成：这次只重新检查现有产物，不调用模型 张 (已重新检查通过（沿用现有产物，没有调用模型）[系统] 上次已完成这一步的主任务、产物还在：这次不重做整步，直接重新检查，没通过的地方再定点返修步骤  执行超时（模型自己思考、写东西的时间超过单步总时限；跑命令、等计算结果、等网络恢复、电脑睡眠的时间都不算）[系统] 上一轮有工具或后台任务未确认完成（），开新会话先核对已有产物再续做（第  次）[系统] 模型上下文过大，已压缩文件索引并进行唯一一次安全重试工作区文件（有预算索引；全量数据处理范围不变）：
-, 模型上下文压缩后仍快速回填至上限；为避免重复消耗额度，本步骤在一次安全重试后停止。请进一步缩小提示词固定内容。[系统] 检测到连续空参数的工具调用，压缩上下文后重试（第 压缩上下文后仍出现空工具调用；为避免重复消耗额度，已停止自动重试。[系统] 检测到进程无响应超时，自动重启（第  次重试）进程在一次自动重启后仍长时间没有输出；已停止重复启动，请检查网络、模型服务或本地子进程状态。[系统] 文件无变化超时，自动重试（第 文件监控重启一次后仍无进展，已停止重复执行。[系统] 接回原会话的断线重试已用完，改开一次新会话再试；已有产物保留...[系统] 自动恢复已止损：错误类型 ，允许  次重试，质量门不会被跳过 秒后重试（第 [系统] 步骤异常退出（），自动重试 [系统] 写作步骤异常退出，但有部分产出（[系统] 续写后缺失章节没有任何变化；已停止重复续写并保留当前产物供诊断[系统] 正在恢复续写  图的数据来源登记与实际数据对不上：异常恢复后仍有  个章节未完成：[系统] 续写已返回完成回执， 章节已补齐；继续执行统一产物验收。(无错误信息)；同时发现：[系统] 质量门发现具体问题，正在聚焦修复 上一次执行没有产出 ` 张数据图, 实际产出 `（原因：）。本次是第 自动修复达到总时限，已有产物已保留；确认执行状态后可继续核验。返修执行未成功结束，不能以已修改文件代替完成。命令缺少完成回执；先核对任务状态，不要重复启动。后台任务已返回失败或停止回执；需核对具体任务错误，不是缺少回执。；同时：[系统] 自动恢复成功 (第  次)[系统] 本轮聚焦修复后，检查范围内的源码、结果与失败原因均未变化；已触发无进展熔断，停止重复消耗额度 张, 实际 [警告]  (但有其他文件变更, 继续)[系统] 论文各章节已写入，正在核对章节完整性、摘要源码与目录结构；核对结束后将等待你确认，确认后由最终步骤统一编译和质检[系统] 论文主体已写入，正在进行写后完整性与数据真实性检查；检查结束后将等待你确认，确认后进入编译/导出步骤检查结束后将自动进入编译/导出步骤[警告] 步骤  未产出任何文件 张, 缺 [系统] 占位章节在上一轮续写后没有变化；已停止重复续写，等待质量门给出明确失败原因[系统] 正在补齐  个占位章节 [系统] 所有章节已写完成（共  次续写）[警告] 续写  次后仍有  个占位章节实际引用的章节仍未完成： 张）；已有产物已保留，检查环境恢复后点继续重新检查。 轮） 轮自检后仍有  轮超时 轮异常：[严重] 数据真实性核对在  轮自动修复后仍有 数据真实性核对未通过（ 轮后仍有  步骤无任何架构图产出[提醒] 数据真实性自检 [系统] 数据真实性聚焦核对  + 
-### 必修：以下硬规则致命问题
-
-
-
-这些是确定性问题，**必须修复**。
-**先核对这 - …另有  个
-
-### 数据真实性自检
-
-`；内容：` 模式，第  轮）
-
-前一次写作完成，现在进入数据真实性自检阶段。**有问题必须修，不能解释或忽略**。
-`，内容为 ``；不要修改源码来登记检查状态。
-[警告] 数据真实性自检第 [系统] 正在根据你的建议修改当前步骤产出...」提出了以下建议：
-
-> 工作区文件:
-[系统] 修改完成，请在弹窗中复审修改结果[警告] 修改未确认完成: ；当前产物已保留，请核对后恢复## 📋 修改审查报告
-
-
-
----
-
-（修改后）」的第二轮修改意见
-
-[系统] 正在根据你的第二轮建议继续修改...
-
-请按照与第一轮相同的流程执行：读取现有产出 → 分析建议 → 执行修改 → 写入审查报告。
-注意：这是在第一轮修改基础上的进一步调整，不要回退第一轮已采纳的修改。
-检查点已确认，当前产物核验完成所有步骤执行完毕但未产出任何文件。工作流某个步骤失败，请查看日志。上次执行被暂停，没有正常结束」重跑前 步（单步重跑）
-[系统] 正在重做「」：按当前上游重新做一遍，覆盖这一步上次的产出[系统] 正在重新执行「」；可恢复问题将先内部修复，次数受限且保留已有产物[系统] 模型上下文过大，压缩文件索引后进行唯一一次安全重试模型上下文压缩后仍快速回填至上限；为避免重复消耗额度，本步骤在一次安全重试后停止。[系统] 正在内部恢复（，第  次），已有产物保留；恢复后继续检查。工作区中已有文件（按需读取，保留并核对已完成产物，不从头重复运行）：
-[系统] 单步重跑的质量门发现具体问题，正在聚焦修复 上一次单步重跑没有产出 `单步自动修复达到总时限，已有产物已保留；确认执行状态后可继续核验。[系统] 单步返修后，检查范围内的源码、结果与失败原因均未变化；已停止重复模型调用」已重新执行；后面已完成的步骤（）是基于重跑前的结果生成的，数字和图可能对不上。需要前后一致时，请依次重跑这些步骤。
-已跳过：逻辑对抗复核已下线（结论没有后续步骤使用）已跳过：论文改进循环已下线方法精炼+实验规划实验实现+部署+出图实验实现+出图辽宁省/东三省数学建模认证杯国际赛 (小美赛)架构图/流程图绘制] 数据分析（可选）数据图表生成（可选）理论框架图/示意图（可选）已有资产 → 论文缺口补全(代码/结果)缺口补全(图表)缺口补全(架构图/路线图)软件著作权申请资料/草稿/软件著作权申请资料/正式资料/市调大赛（全国大学生市场调查与分析大赛）⛔ 只需要中文摘要，不要英文摘要（国赛不要求英文摘要）正文采用自适应章节：按问题依赖链组织建模—求解—结果—检验，不固定八章，不设空标题每个问题按理论或机理起点→题意映射→关键推导→完整模型→真实求解→结果解释组织，不能只列模型名和结果[网络等待] 本轮生成的图全部进入对应建模/求解/结果/验证过程；每张图前后有实质叙述，禁止图册式连排附录必须列支撑材料文件清单，并包含全部完整、可运行的源程序；确未使用程序时须明确说明正文与附录分开统计，附录代码是正式产出但不计入正文参考页数论文格式有严格要求（参见规程、评审标准）⛔ 华为杯重点考察推导过程深度 — 每个子问题都应按实际需要给出充分图表与逐式编号的公式。结构应是：建模假设 → 公式推导（每一步可解释）→ 算法步骤 → 结果讨论 → 验证。不能「列模型，给结果」，必须展示每个关键步骤怎么来的图表只服务于本题的构型、求解或结果证据，不设按赛事或题号分配的图表数量。机理题先完整推导再配必要图表；过程图和曲线不能代替方程、闭合条件与数值求解过程⛔ 只需要中文摘要，不要英文摘要（华为杯是中文竞赛）灵敏度分析与模型推广按关键参数和真实结果组织，不设固定页数；有必要时配图说明附录包含完整代码、关键数据和必要的补充推导/算法说明，不设固定页数且不计入正文参考页数[授权暂停] 正文按本题依赖链自适应组织建模—求解—结果—检验，不固定章名与章数参考文献按正文引用次序编号，正文用方括号标编号；书籍：[编号] 作者，书名，出版地：出版社，出版年；期刊：[编号] 作者，论文名，杂志名，卷期号：起止页码，出版年；网上资源：[编号] 作者，资源标题，网址，访问时间（年月日）；引用书籍要写页码附录写明实际使用的软件名称、运行命令和自己编写的全部源程序（官方要求）中文撰写，封面含参赛队号、参赛队员正文按本题依赖链自适应组织建模—求解—结果—检验，不固定章名与章数，不生成目录页目录列到三级标题（“目　录”黑体四号）；表格和插图清单先列表、后列图（标题黑体四号），条目与正文题注一致英文摘要可选：默认不写；用户开启英文摘要时才在中文摘要后另起一页写英文摘要数据优先用真实数据（用户上传或可公开获取的来源，写明机构/网址、指标与时间范围）；拿不到真实数据时可以用模拟数据，但必须在数据说明、图表和论文中如实标注“模拟数据”，不得编造真实机构来源正文按数据依赖链自适应组织预处理—建模—结果—检验，不固定章名与章数，不生成目录页；本轮自动重连尚未成功，资料与进度已保留。网络恢复后点击继续，无需重新激活或重建工作流。⛔ 只需要中文摘要，不要英文摘要官方评分四项：论文质量；代码完整、正确、高效并附详细操作说明；不公开测试集上的准确率/召回率等指标；创新性摘要简明写出解决问题的核心思想与效果（模型/算法与真实验证指标），只写中文摘要正文写清数据处理、模型与算法细节、求解过程和结果分析；按本题依赖链自适应组织附录写明实际使用的软件名称、运行命令和自己编写的全部源程序（官方要求），源程序同时作为支撑材料提交题目要求放进正文的结果表原样出现在正文；题目要求的结果文件按规定的文件名、列名和格式生成认证杯数学建模（第一/二阶段）；已保留资料与进度，请检查网络和激活状态后点击继续，无需重建工作流。数维杯数学建模（国内赛）辽宁省大学生数学建模/东三省数学建模联赛论文第一页为承诺书（模板已包含，不要删除）第二页为封面（题目+关键词+摘要，手动排版格式）承诺书与封面之后不生成目录页；正文按本题依赖链自适应组织建模—求解—结果—检验分两阶段：第一阶段提交初步方案，第二阶段提交完整论文正文按问题依赖链自适应组织建模—求解—结果—检验，不固定章名与章数，不生成目录页摘要之后不生成目录页；正文按本题依赖链自适应组织建模—求解—结果—检验上一轮在工具或后台任务未确认完成时中断。请先核对工作区现有文件、检查点与报告，判断哪些已经完成；只补完中断的部分，不要重复已完成的工具操作，也不要覆盖有效结果。上一轮在同一步骤发生临时断线。续接原会话并核对工作区现有文件；不要重复已经完成的工具操作或覆盖有效结果，只完成中断部分。## 工作区文件以上是前面步骤的产物，按需读取。用户上传的材料不在这里逐个列出，见下面说明里的材料清单。【新建任务时在“要求”框里填写的（后台接在上传的要求文档后面，同样是用户要求）】
-## 材料核对（后台自动检查，只提示不拦截）
-这是用户为申请软件著作权上传的图片，多半是软件界面截图、原型图或文档截图：请描述页面用途、菜单与导航、按钮、表单字段、表格列与示例数据、状态提示这是用户为撰写专利技术交底书上传的图片，可能是结构图、示意图、流程图、电路图、实验数据或界面：请描述其中的部件与连接关系、流程步骤、标注文字和数据行距|行间距|段前|段后|首行缩进页边距|边距|装订线|版心页眉|页脚|页码格式模板换过了，原来识别的占位位置（题目、摘要、正文各填在哪）是上一份模板的识别出来的占位位置里没有正文该填在哪（模板里的样例论文还在原处）导出时软件自己出错（模块没载对、调用参数不对……），不是外部原因，重试也一样。以用户提供的图为权威, 重新生成数据匹配图描述[检查暂停] [历史记录] 各自独立保留, 在论文中明确说明差异?{}- 「」：按 
-
-
-## ⛔⛔⛔ 用户在对话里选定的题面理解（最高优先级，本次必须照做）
-
-用户看了上一版赛题分析在「假设敏感性预检」里列出的几处可以有不止一种理解的地方，选了和报告原来倾向不一样的：
-
-候选 （
-
-## ⛔⛔⛔ 用户在选题卡上选定的题目（最高优先级，本次必须照做）
-
-用户已选定：选候选 : 登记为 ai，但没有采用标记 _mcm_ai/adopted/: 只能登记 ai（采用）或 fallback（按原因代码退回）: 登记为 ai，但 figures/ 里没有这张图ai_usage_intake.jsonai_usage_log.jsonall=all_results.json`![alt](figures/...)`` 中用 `![alt](figures/xxx.png)` 嵌入；**必须 `.png` 扩展名**（Word 不能嵌 PDF）。如果只有 PDF，先用脚本转 PNG 再引用。api error: unexpected eof使用 apmcmthesis 或通用模板，pdflatex 编译app.py使用 article 或 mcmthesis 文档类，pdflatex 编译使用 article 文档类，pdflatex 编译_assets_index.json无法解析 _assets_index.json: %sassets-inventory)
-
-用户已通过 assets-inventory 步骤盘点过资产。请**只生成下面缺失的部分**:
-
-, 自动重试 (attempt auto-paper-improvement-loopauto-review-loop.aux\bTABLE_[A-Za-z0-9]\b(?:api error|status(?: code)?|http)\b[^a-z]{0,6}(?:401|403)\b\b(?:api error|status(?: code)?|http)\b[^a-z]{0,6}500(?![\d.])bachelor_main.texbad gateway_base_profile.json```bash
-```bash
-python _utils/get_recipe.py basic 8    # 提取 basic #8 的完整代码
-在 bash 块开头加一行 `source .env_skill 2>/dev/null || true` 就能让\begin{document}.bibbigdata package refresh skipped#!/bin/bashblind_terms.json.bmp.bstbun has crashed.cache- 表格表头 / 单元格 / 题注（caption）全部中文
-。前端编码时 cat 该风格文件，按其配色/字体/组件规格 + 指定的 daisyUI 主题实现。
-`cat figures/TABLE_*.md` 嵌入 chars)checkpoint_feedback.md
-## 用户修改意见
-工作区中存在 `checkpoint_feedback.md`，是用户在检查点提交的修改意见，文件标题写明针对哪一步。
-**开始前先阅读：** 若针对的就是本步，优先遵从（最高优先级）；若针对的是前面的步骤，把它当作用户偏好参考，不要据此改动上游产物，与题面或本步要求冲突时以题面和本步要求为准。
-checkpoint_revision_report.md.clscn_degree_thesis.jsoncode/ + 兜底复制: code=code/backendcode/backend/`code/backend/app.py`（Flask 入口，`app = Flask(__name__)`，末尾 `app.run(host="127.0.0.1", port=int(os.environ.get("PORT", 5000)))` 读 PORT 环境变量）`code/backend/index.js` + `code/backend/package.json`（Express 入口，`package.json` 的 `scripts.start` 设为 `node index.js`，监听端口读 `process.env.PORT`）code/backend/main.py`code/backend/main.py`（FastAPI 入口，`app = FastAPI()`，用 uvicorn 启动）- 目录约定：`code/`（前端项目，入口 `code/index.html` 或框架入口）+ `RUN.md`。
-- 目录约定：`code/`（源码，主脚本如 `code/main.py`）+ `RUN.md`。
-- 目录约定：`code/`（源码，主入口如 `code/main.py` 或 `code/cli.py`）+ `RUN.md`。
-code/frontendcode/frontend/- 目录约定：`code/frontend/`（前端）+ `code/backend/`（后端，入口 code/main.py- **栏数：双栏**（column_layout=double）。⛔ `paper/main.tex` 的 `\documentclass[...]` 选项中**必须包含 `twocolumn`**。
-  非 journal 模板（本科/硕士）默认是单栏，需要在 `\documentclass` 加上 `twocolumn`；摘要建议用 `\twocolumn[\begin{@twocolumnfalse} ... \end{@twocolumnfalse}]` 跨栏显示。
-- **栏数：单栏**（column_layout=single）。⛔ `paper/main.tex` 的 `\documentclass[...]` 选项中**必须去掉 `twocolumn`**（改用默认单栏或显式 `onecolumn`）。
-  若套用的是 journal 模板（默认 twocolumn），除了改 `\documentclass`，还必须把摘要区的 `\twocolumn[\begin{@twocolumnfalse} ... \end{@twocolumnfalse}]` 结构降级为普通单栏写法（直接顺序排布 标题/作者/摘要/关键词），否则单栏下会编译报错。
-_combined_for_pandoc.texcomp-codecomp-compilecomp-compile-encomp-compile-zhcomp-modelingcomp-modeling 设计阶段覆盖comp-paper-comp-papercomp-paper-encomp-paper-en-docxcomp-paper-huawei-zhcomp-paper-huawei-zh-docxcomp-paper-zhcomp-paper-zh-docxcomp-prob-analysiscomp-reviewcomp-stats-analysiscomp-stats-topiccompetition_en.jsoncompetition_mathorcup.jsoncompetition_mcm.jsoncompetition_zh.jsonconnection abortedconnection refusedconnection resetconnection was interrupted before the response completedcontest_rules.jsoncontract skill lookup failed for %s: %sconversation-intakecopyright-buildcopyright-draft- 流程：起草（业务理解、申请表、挑代码文件后由 `copyright_kit.py prepare-code` 从源文件抽取代码、操作手册与截图，最后 `copyright_kit.py check` 核对并生成检查点预览）→ 检查点（用户看预览确认）→ 生成正式资料（程序鉴别材料 PDF 每页 50 行、文档鉴别材料 PDF、Word、申请表 TXT）。
-course-papercourse_paper.jsoncourse-plancourse-reportcourse_report.jsoncourse-report-plan.cppcredit balance.csv使用 ctexart 文档类，XeLaTeX 编译使用 cumcmthesis 文档类，XeLaTeX 编译使用 cumcmthesis 文档类（withoutpreface 选项），XeLaTeX 编译使用 cumcmthesis 文档类（withoutpreface 选项去掉封面），XeLaTeX 编译用户**没有额外要求**时(custom_requirements 为空), 一律按赛题原文要求做, 不要自己加发挥[^.\[\]]+|\[\d+\]等待 %d 个文件异步提取完成 (剩 %.0f 秒超时)(?<![\d.])(?:429|502|503|504|520|521|522|523|524|529)(?![\d.])等待提取超时 (剩 %d 个未完成), 工作流将照常启动, 这些文件 Claude 看不到原文提取完成: %d 个成功, %d 个失败初号|小初|一号|小一|二号|小二|三号|小三|四号|小四|五号|小五|六号|\d+(?:\.\d+)?\s*(?:pt|磅)补提取了 %d 份文档: %s- 前端界面必须使用 daisyUI 组件库（美观、统一），不手写零散 CSS。
-- 界面必须使用 daisyUI 组件库（美观、统一），不手写零散 CSS。
-- 前端编码时按这个风格描述设计配色/布局，配合 daisyUI 组件库实现（选一个最接近的 daisyUI 主题）。
-.datdata/ data=data/clean.csvdefault_cn_thesis.json_derived_profile.json
-</details>
-
-<details>
-<summary>ASSETS_CONFLICTS.md(节选)</summary>
-
-<details>
-<summary>ASSETS_INVENTORY.md(节选, 完整请用 Read 工具)</summary>
-
-dev-codedev-code-backenddev-code-frontenddev-designdev-reportdev-requirementdev-selfcheckdict | Nonedict[str, str]disable.doc_doc_extracted.md_doc_extracted.txt\documentclass{article}.docx-docx专利交底书/交底书.docxdocx 模式兜底: PANDOC_BIN 不可用, 无法转 tex → mddocx-export
-**样式对标说明**：
-- docx-export 会用与 LaTeX 模板对标的样式 profile（A4/25mm/12pt 宋体/1.5 倍行距/2 字符首行缩进/三线表/上标引用）
-- 你**只管按 Markdown 标准写**，不要在文档里手写格式控制（没必要，profile 会负责）
-
-## ⛔ DOCX 渲染陷阱清单（写作时必须遵守，否则导出 Word 会走样）
-**A. 代码块（附录代码最常踩坑）**
-- 任何 ≥ 3 行的代码 **必须** 用 fenced 代码块包围：
-  ````
-  ```python
-  import numpy as np
-  ...
-  ```
-  ````
-- ⛔ **绝不要** 把代码塞成一段普通正文（会全挤成一行）
-- ⛔ **绝不要** 把多段代码用单反引号 `code` 行内格式串起来（行内只能放短表达式）
-- ```` ``` ```` 必须成对出现（开 + 闭都要写）；嵌套代码块要先关闭外层
-- 附录章节的代码：每个完整段落都要单独的 ```python ... ``` 块，**不要** 把多个函数挤进一个块还少换行
-- 代码块 **不要** 加首行缩进（Markdown 中 4 空格缩进会被识别为另一种代码块语法，与 fenced 冲突）
-
-**B. 公式与编号（最容易出问题）**
-- ⛔ **绝对禁止：把 LaTeX 公式直接写在正文里不加 `$` 包裹**！例如：
-  - ❌ `MA_t^{(k)} = \frac{1}{k}\sum P_{t-i} (1)` ← 错！会显示成原始字符乱码
-  - ✅ 块公式（独占一段，最常用）：
-    ```
-    $$
-    MA_t^{(k)} = \frac{1}{k}\sum_{i=0}^{k-1} P_{t-i} \tag{1}
-    $$
-    ```
-  - ✅ 行内公式：`其中 $\sigma$ 为激活函数，$E=mc^2$ 是质能方程`
-- ⛔ **每个公式各自独占一对 `$$`**：禁止连续多个公式塞进同一对 `$$` 里
-  - ❌ `$$ f_1 = ... f_2 = ... f_3 = ... $$` ← 错
-  - ✅ 每个公式前后各加一对独立 `$$ ... $$`，公式间用空行分隔
-- 块公式 `$$` 必须独占一行（开头和结尾行都只有 `$$`）
-- ⛔ **每个块公式都必须加编号**（数模/学术论文硬性规范），按文档顺序连续编号
-- 编号统一写在公式内部：`\tag{1}`；**不要** 用全角 `（1）` / `**(1)**` / `\quad (1)`，也不要在闭合 `$$` 后追加 `(1)`
-- 行内公式用 **单** `$` 包围：`$E=mc^2$`，绝不用 `$$E=mc^2$$` 在行内
-- 中文紧贴 `$` 时记得加空格：`其中 $B$ 为...`（不是 `其中$B$为...`）
-- 上下标在 LaTeX 里用 `_` `^` 即可，不要写 `<sub>` `<sup>` HTML 标签
-- 不要写 `\begin{equation}`/`\begin{align}`（docx 引擎不解析 LaTeX 环境）
-- 公式后紧跟正文时，**必须新起一段**：`$$...$$` 后空一行再写中文
-  - ❌ `$$ f = ... $$ 其中 f 表示...` ← 错（公式和中文挤在一段）
-  - ✅ 公式独占一段，下一段再写「其中 f 表示...」
-
-**C. 三线表**
-- 标准格式必须含 **分隔行**：
-  ```
-  | 列1 | 列2 | 列3 |
-  |-----|-----|-----|
-  | 数据1 | 数据2 | 数据3 |
-  ```
-- 每行的 `|` 数量必须一致（列数对齐）
-- cell 内出现 `|` 字符必须转义为 `\|`，否则会被当作列分隔
-- 不要用 `<table>`/`<tr>`/`<td>` HTML 标签
-
-**D. 图片**
-
-- **本步骤定位**：在 `docx-export` 之前，按 SKILL.md 中的 Check A0/A/B/C/D/E/F/G/H/I/J/K 检查并**直接修复**源 md
-- **必修项**（最近版本新增、最高优先级）：把 LLM 误写为 list 的章节标题 / 图注 / 独行公式编号还原（参见 SKILL.md Step 2 Check A0）
-- **不要做**：不要重新生成图表、不要改公式语义、不要改 References 内容、不要在工作区创建新文件（除 DOCX_FORMAT_CHECK_REPORT.md）
-- **完成标志**：`DOCX_FORMAT_CHECK_REPORT.md` 写入工作区根目录；如有自动修复，源 md 已被 Edit 工具修改
-docx-export: abstract delivery checked (ok=%s): %sdocx-export: falling back to .tex source as-is (best effort)docx-export: filled user template %s -> %sdocx-export: generated candidate %s (%d bytes)docx-export: no .md found, trying to convert %s via pandocdocx-export: 期刊双栏，注入 page.columns=2docx-export: pandoc conversion produced empty/missing file: %sdocx-export: pandoc converted %s -> %s (%d bytes)docx-export: pandoc not found, cannot convert .texdocx-export: 合并学位论文样式失败，用 %s：%sdocx-export step failed: %sdocx-export step: precheck + format-check + converting Markdown to DOCXdocx-export: tex→md conversion failed: %sdocx-export: thesis base %s + %sdocx-export: using _text_profile.json (Claude-generated)docx-export: using user template bundle profile (%d files, primary=%s)docx-format-check
-## ⛔ 本步骤上下文：docx-format-check 自检与修复（最高优先级）
-
-- **目标源文件**：`docx legacy migration: renamed %d step(s) to *-docx variantdocx 模式兜底: pandoc 转换失败 (%s): %sdocx-precheckdocx-precheck did not completedocx-precheck: pandoc converted %s -> %sdocx-precheck step: validating markdown before docx exportdocx-precheck: tex→md conversion failed: %sdocx 模式兜底转换异常: %sdocx 模式兜底: %s 误产 paper/main.tex, 已用 pandoc 自动转换为 paper/main.md (%d bytes)docx-template-map.dotx.drawio*.drawio.drawio.xml.dta[effort] 读取全局思考强度失败，本步不传该参数: %sempty native equationenable.enc\end{document}工作区已自动生成 `.env_skill`，含以下数值参数：
-
-.env_skillerror decoding response bodyexperiment-bridgeexperiment_results.mdexport _export_profile.jsonextract-backfill.json.extract_status.json_extracted_check.md_extracted.md_extracted.txt-f 个 fatal）：
-fieldwork/问卷.mdfieldwork/发放指南.md等待真实调查数据：请先发放问卷、回收答卷，再点“继续”。①问卷星：创建问卷→从文本创建问卷，粘贴 fieldwork/问卷星导入.txt，按 fieldwork/问卷星导入_手工设置清单.md 补设置后发放；回收后在“下载答卷数据”选按选项序号的 Excel 或 SPSS，点“上传文件”传到本工作流（协同模式用输入框上方的“上传文件 / 图片”）；线下纸质问卷录成表格后同样上传。②问卷互助中心：在本工作流的“问卷互助中心”面板发布（全自动在详情页，协同模式在右侧“做项目”栏），把问卷码发给同学，回收后在同一面板点“导回答卷”。协同模式里数据就绪后让助手重新执行这一步。AI 不会、也不能代替真实受访者填写问卷。**用户启用了架构图/流程图。** 请按需规划 fig_arch / fig_er / fig_flow_* / fig_framework，每张图须明确归属到哪一节。
-- ⛔ **用户禁用数据图但启用架构图**：禁止数据图，必须嵌架构图
-- 架构图前缀：`fig_arch` / `fig_flow_*` / `fig_er` / `fig_roadmap` / `fig_pipeline` / `fig_framework` / `tikz_*`
-- Markdown 语法：`![图 X：架构图标题](figures/fig_arch.png)`
-- 引用 `.png`，不要直接引用 `.pdf`
-**用户启用了理论框架图/示意图。** 按需规划 fig_framework（概念关系或分析框架）、fig_roadmap（研究路线）等，每张图须明确归属到哪一节；图里只放标签，不放大段文字。
-**用户已关闭流程图/框架图，后续流程图步骤会被跳过：** 图表预规划中禁止规划 fig_roadmap / fig_framework / fig_flow_*。
-**用户启用了流程图/框架图：** 图表预规划须含技术路线图 `fig_roadmap` 与研究框架/变量关系图 `fig_framework`；开启“每个问题都画流程图”时，再为每个研究问题各规划一张 `fig_flow_qN`。
-。**
-这些就是附件 / 数据，就地读取、不要复制进项目文件夹；不要用仿真或构造的数据代替。
-请按真实数据规划具体图表（fig_xxx），图表数量与数据资产匹配。
-figure_pdf_quality_check.pyfigure_text_budget.py**figures/ 目录无图表文件**（规划阶段未规划或被跳过）：
-1. 正文不嵌入图片，不写「如图 X 所示」
-2. 论点用文献引用、推导、表格或材料分析支撑
-figures/，但一张架构图 / 流程图都没有重画（figures/ 里的都是重做之前的）：按当前上游重新画，不能原样保留旧图，但一张数据图都没有重画（figures/ 里的都是重做之前的）：按当前上游的数据和结果重新出图，不能原样保留旧图 步骤无任何数据图产出 (figures/ 仅含架构图或为空)
-
-## ⛔ 撰写阶段强制规则（基于用户开关 + figures/ 实际产物）
-**figures/ 中已有 （figures/ 中无可嵌入图片，纯文字论文） figures=figures/FIGURES.jsonfigures/FIGURE_SKIPPED.jsonfigures/FIGURE_SOURCES.json 条）
-- `figures/TABLE_*.tex|md` 中已生成的表格全文
-
-**请按以下步骤执行**（详细规则见清单内的「自检步骤」段落）：
-
-1. **读 `PAPER_DATA_CHECKLIST.md`** 了解可用的真实数据
-2. **打开 figures/_gptimg_status.txtfigures/all_results.jsonfigures/experiment_data.json 步骤未产生任何数据图 (figures/ 下没有新增 fig_*.png/pdf, 且 figures/ 中也无既有数据图, 仅可能含上一步遗留的架构图), 用户也未禁用 skip_figures; 可能是 Claude 跳过了 Python 执行或脚本失败figures/fig_roadmap.pngfigures/latex_includes.tex**figures/ 目录无图表文件**（plan 阶段未规划或被跳过）：
-1. **禁止在正文中写 `![](figures/...)` 图片标记**
-2. **禁止写「如图 X 所示」**
-3. 所有论点用文献 `[N]` 或概念推导支撑
-
-### 通用要求
-- 不要重写整篇论文，只修问题部分
-- 修完后保持论文叙事流畅，不要留下生硬拼接
-- ⛔ **本轮只改论文正文/表格嵌入，绝对不要重新生成或修改任何图片文件（`figures/*.png`、`figures/*.pdf`、`figures/fig_*`）和画图脚本（`figures/gen_*.py` 等）**——图已经画好了，本轮不碰图。
-- 如果你确信论文中所有数据性数字都已正确，只写独立回执 `
-只补诊断点名的缺口，不重做已有的有效结果：缺哪个研究问题的 `figures/problem_N_results.json` 就补算哪个研究问题（顶层写 research_question、status、method、n_obs 和关键统计量）；`DATA_SOURCES.json` 缺失、无法解析或登记的文件不存在时，按实际用到的数据如实登记（名称、origin=user/public/simulated、来源机构或网址、文件路径、行列数、时间范围、处理说明）。用了模拟数据就写 origin=simulated、source=模拟生成，并在 RESULTS.md 的数据说明里写明“模拟数据”，不得编造真实机构来源。不要改 TOPIC_PLAN.md，不要为通过检查删减研究问题、改写结论或伪造数字。改完重新汇总 `figures/all_results.json` 与 RESULTS.md（末尾 RESULTS_KEYS 用 `python _utils/results_consistency_check.py --emit` 生成），再运行 `python _utils/stats_coherence_check.py --stage analysis` 确认退出码不是 1；仍受限时如实报告具体阻塞，不冒充完成。figures/*results*.jsonfloat | Noneformat-profileformat-profile: 写 _base_profile.json 失败：%s_format_reference.md
-- **格式对照表**：`_format_reference.md` gateway timeout参考文献使用 gbt7714-numerical 样式gc.gif.git使用 gmcmthesis 文档类，XeLaTeX 编译gpt image.gradle_guide/.h.h5handoff metadata directory cannot be a link.hdf5- ⛔ 自测用 `--help` + 跑一两条核心命令验证，不起常驻服务。
-.htm*.html.html使用 huazhong_main.tex 模板hub_*.csvhumanities-planhumanities-writehumanities-write-latex(?i)(authorization\s*[:=]\s*bearer\s+|api[_-]?key\s*[:=]\s*|token\s*[:=]\s*)[^\s,;]+.ideaidea-creatoridea-discoveryimage-descriptions.json`\includegraphics`用 `\includegraphics` 嵌入 `figures/` 里的图（PDF 优先，`figures/latex_includes.tex` 里有现成的图块），不用 Markdown 图片语法index.htmlindex.js\\input\{([^}]+)\}`\input{figures/TABLE_*.tex}` 引入internal error during token generationinvalid api keyinvalid model.ipynbisenabled.java.jljournal_main.tex.jpeg.jpg.js.json  - 材料类型：有源代码。代码材料从真实源码里挑（写 `草稿/代码文件选择.json` 后由脚本抽取，不手抄），文档用于理解业务；材料与下面的描述冲突时以材料为准。
-  - 源码不够 60 页要补写时，补写的行数不超过上传的真实代码（主体必须是真实代码）；申请表「软件的主要功能」、操作手册只写真实代码里有的功能，补写代码不新增功能。
- 里有真实源代码：代码材料从这里挑，和上传的源码一样按真实代码处理，不要另编示例代码；`草稿/代码文件选择.json` 的 `path` 写完整路径（如 `D:/项目/src/main.ts`），prepare-code 认数据位置里的文件。
-latex_includes.texlist | Nonelist[Path]list[int]list[str]list[str] | Noneliterature_notes.mdliterature-reviewliterature_review.jsonliterature_review.md.log.m(?m)^## ⚠ 文档质量提醒[ \t]*\r?\n[\s\S]{0,1500}?DOCX_PRECHECK_REPORT\.mdmain.md⛔ main.md 里不手写目录（`## 目录`、`[TOC]` 都不要），也不手写队伍编号、main.pdfmain.pymain.texmain.tex.enc⛔ 不要加 \maketitle（五一杯用手写承诺书页）- 📋 **数据表**：写稿章节里 markdown pipe table（含 `|---|` 分隔行）数量 ≥ `$MIN_TABLES`。不要为了凑数造假表 — 真实数据/结果对比/参数表/灵敏度表都算。
-markdown_strict+pipe_tables+raw_html+tex_math_dollarsmarkdown_strict+pipe_tables+tex_math_dollarsmarket_survey_zh.jsonmaster_main.tex.mat_materials/ 张，见 `_materials/材料清单.md`），没有技术文档或源码：图片只作参考（界面、结构示意），技术方案按下面的技术描述写、和图片不矛盾；图里看不出的不要写成材料里有的。
- 张，多半是界面截图，见 `_materials/材料清单.md`- ⛔ 用户上传的材料已盘点成 `_materials/材料清单.md`（mathorcup word pdf failed: %smathorcup word pdf: old pdf is locked: %smathorcup word pdf: outputs=%s notes=%s」
-本篇所有 matplotlib 数据图统一用 `）
-本篇所有 matplotlib 数据图统一用这组自定义版式（ -->
-## 🎨 数据图配色：用户自定义取色
-本篇所有 matplotlib 数据图统一用这组自定义颜色（plot_utils 自动读取）：_mcm_ai/STATUS.json）；时间紧、步骤多不是退回理由。登记齐后 _mcm_ai/status.py --verify 要打印 MCM_AI_STATUS_OK全英文撰写，使用 mcmthesis 文档类，pdflatex 编译.md*.md软件著作权申请资料/草稿/检查点预览.md软件著作权申请资料/草稿/申请表信息.md软件著作权申请资料/正式资料/生成报告.md专利交底书/交底书草稿.md`（**必须**就这一个，不要去找其它 .md）
-- **上游 precheck 报告**：`DOCX_PRECHECK_REPORT.md` .mh.mh/compute-checkpoints/ 与 .mh/compute-checkpoints/；只继续未完成部分，不把旧对话摘要当作事实，不重算已有有效检查点。
- 个文件挪开（挪开的文件备份在 .mh/pb/），按现在的模板重写.mh/quality/data-review-ack-- 系统自动：前端编码时根据项目类型/性质自行选一个合适风格（工具类→极简 minimal，展示类→优雅 apple，消费级→活泼 vibrant，开发者工具→科技 tech），cat 对应 `references/styles/*.md` 参考。
-model not found[model_used] 解析实际模型失败，快照留空: %s[model_used] 落库主循环模型快照失败: %s[model_used] 落库单步重跑模型快照失败: %smodex.survey.ai_usage/v1`）。
-- 仅这些流程图/架构图遵守该族：mono 使用黑白；plain 使用暖棕强调；modern 使用靛蓝强调。不得跨族换色。
-- 此设置不适用于 matplotlib/seaborn 数据图；不得因 diagram_style=mono 把数据图、热力图或论文中的全部图片转成灰度。数据图使用下方独立配置。
-- LAYOUT/ARROW 等只允许在语义等价时改变结构或连线；同篇统一视觉 token，异篇差异来自题目真实依赖。
-must be in **English**. Do NOT write in Chinese. This overrides the default 'Use Chinese' rule above.
-.mypy_cache\n## [［\[](?:待作者|待补充|待填写|请作者|请填写)[^］\]\n]{0,80}[］\]][,，;；、\n]+\n## 上传图片内容（AI 自动识别）\n[\s\S]*?\n<!-- INJECT:([A-Za-z0-9_.-]+) -->\nn/a(?=\n## |\n<!-- (?:MH_|/?INJECT:)|\Z)(?=\n### |\n## |\n<!-- (?:MH_|/?INJECT:)|\Z)\n## (?:用户上传的文件|工作区文件)\n[\s\S]*?\n## 文档原文（已自动提取）\n[\s\S]*?### 图片: (.+?)\n([\s\S]*?)### 来源: (.+?)\n([\s\S]*?)
-## ⛔ 输出语言：中文（覆盖 nature 系列 SKILL.md 默认英文）
-nature-figure.ncnetwork errornetwork timeout.nextno such columnnon-finite JSON constant: non-finite JSON numbernovelty-checknovelty_check_report.md- ⛔ 自测只需 `npm run build` 通过（若是纯 HTML 则确认能在浏览器打开），不起后端服务。
-.npy.npz.nuxt-o--only；按代码文件后缀核过）。截图、文档用来理解界面和业务，截图能当真实截图用；代码材料按材料里体现的功能编写示例源码（`草稿/示例源码/`，选择清单 origin 写“合成”），只写材料里体现的功能、不新增功能，业务理解和起草完的汇报里如实写明代码是合成的、提交前要换成用户自己的真实代码。
- 行）。业务以文档为准；代码材料先放上传的真实代码（选择清单 origin 写“上传”），上传的只是部分代码时，不够的按文档描述在 `草稿/补充源码/` 补写（origin 写“补充”），再由脚本抽取。
-。就地读取，优先使用这些数据。**
-「数据获取计划」把它们登记为“用户提供”（origin 写 user，来源写“用户提供（电脑上的数据位置：完整路径）”）；研究还缺的指标可以先尝试公开数据（写清来源机构/网址、指标、时间范围），实在拿不到再用模拟数据：获取方式写“模拟”，论文与图表如实标注“模拟数据”，不得编造真实机构来源。
-按实际数据规划具体图表（fig_xxx），图表数量与数据匹配。
-.otf--out.outputoutput.docxoutput_format=docx: will skip LaTeX compile and write steps switch to Markdownoutput/*results*.json统计结果建议如实报告样本量、估计值、标准误或置信区间、p 值与拟合优度（提示项，不作硬性门槛）；每个研究问题都要有对应的结果与结论package.jsonpage--pagespanic(thread--paperpaper 写稿阶段嵌入paper/格式模板换过：先把 paper/ 里旧模板放进来的 paper-analysis**用户已关闭数据分析与数据图表，后续 paper-analysis 与 paper-figure 步骤会被跳过；流程图/框架图照常（见下一条）。**
-因此本步骤生成规划文档（PAPER_PLAN.md / OUTLINE.md）时：
-1. 不规划数据图和数据表（不列 fig_ 数据图、TABLE_xxx），FIGURE_MANIFEST 的数据图一类留空
-2. 大纲章节描述里不写「将绘制」「如图 X 所示」这类指向数据图的话
-3. 论点—证据表的证据用「文献 [N]」「材料出处」「概念推导」支撑，不写数据图
-4. 写作阶段的数据用文字和必要的 Markdown 表格表达
-5. 触发原因: skip_figures=**用户已禁用数据分析与图表生成，后续 paper-analysis 与 paper-figure 步骤会被跳过。**
-因此本步骤生成规划文档（PAPER_PLAN.md / PROBLEM_ANALYSIS.md / TOPIC_PLAN.md）时：
-1. 必须使用「无图表分支」格式
-2. **禁止规划任何 fig_xxx 或 TABLE_xxx**（不要列「图表预规划」「Figure Plan」章节）
-3. 大纲章节描述里禁止写「将绘制」「如图 X 所示」「图 X 展示」
-4. Claims-Evidence Matrix 中所有 Evidence 用「文献 [N]」「概念推导」支撑，不写 fig_xxx
-5. 写作阶段会用纯文字 + 必要的 markdown 表格表达数据，不嵌入图片
-6. 触发原因: skip_figures=paper/appendix.docxpaper/appendix.mdpaper-compilepaper-compile-zh表格核对检查器暂时不可用（无法加载 paper_data_check：数据核对检查器暂时不可用（无法加载 paper_data_check：无法加载 paper_data_check: %s无法加载 paper_data_check，表格核对暂停等待核验：%s无法加载 paper_data_check，数据核对暂停等待核验：%spaper/作品全文.docxpaper-figurepaper-figure-drawiopaper-figure-drawio 步骤 FIGURE_MANIFEST 对账失败: 规划 **用户已禁用架构图/流程图，后续 paper-figure-drawio 步骤会被跳过。**
-因此规划文档中 **禁止规划 fig_arch / fig_er / fig_flow_* / fig_framework / fig_roadmap**。
-方法/系统结构、理论框架用纯文字 + Markdown 表格表达。
-paper-figure-drawio 步骤未产生任何架构图/流程图 (figures/fig_arch*/fig_flow_*/fig_roadmap*/tikz_* 均无新增, 且 figures/ 中也无既有架构图), 用户也未禁用 skip_drawio; 可能是 Claude 跳过了 drawio 渲染 轮）
-
-前一次 paper-figure 步骤已生成 `figures/TABLE_*.tex|md`。**你刚刚生成的表格中所有数字必须 100% 来自 `figures/*.json`。**
-现在工作区已生成 **`TABLE_DATA_CHECKLIST.md`**，包含：
-- 所有 TABLE 文件的全文
-- 所有 JSON 数据的扁平化清单
-
-### 自检步骤
-
-1. **读 `TABLE_DATA_CHECKLIST.md`**
-2. **逐个打开每个 TABLE 文件**（`figures/TABLE_*.tex|md`）
-3. **对每张表的每个数字单元格**：在 JSON 数据清单里找对应（含合理的精度截断如 `0.94` ↔ `0.93724`）
-    - ✅ 找到 = 真实，OK
-    - ❌ JSON 里没有 = **编造**，必须修：
-        a) **首选**：用真实 JSON 数据重新生成该表（推荐用 `_utils/stats_utils.py` 的 `regression_table` / `descriptive_table` / `correlation_table`，或写个 Python 脚本读 JSON 渲染）
-        b) **次选**：如果 JSON 中确实没有支撑这张表的数据（如规划了「数据集统计特征」但 JSON 只存了模型对比结果），**直接删除该 TABLE 文件**（`rm figures/TABLE_xxx.tex`）+ 在 figures/_REMOVED_TABLES.md 里记录原因（写作步骤会避开该表）
-4. **跳过非数据型数字**：列号 `(1)(2)(3)`、列宽、字号等格式标记中的数字
-5. **修完所有 TABLE 后**，写自证标记：
-    ```bash
-    touch figures/TABLE_DATA_CHECK_PASSED.txt
-    ```
-    下一轮看到此文件会跳过自检循环。
-
-### 关键禁忌
-- ⛔ **禁止改 JSON 让数字"对得上"**
-- ⛔ **禁止编造解释**（如「这是估计值」「这是从其他指标推算的」）
-- ⛔ **禁止保留疑似编造的 TABLE**
-- ⛔ **禁止跳过这一步直接写 PASSED 标记**——必须真做自检
-
-### ⛔⛔⛔ 本轮作用域铁律（最高优先级，覆盖 SKILL.md 的画图指令）
-**本轮是「TABLE 表格数据核对」，不是图表生成。你只能读取/修改/删除 `figures/TABLE_*.tex` 和 `figures/TABLE_*.md` 文件。**
-- ⛔ **绝对禁止**重新生成、覆盖、修改、删除任何**图片文件**（`figures/*.png`、`figures/*.pdf`、`figures/fig_*`）——上一步已经画好的图是正确的，本轮一个像素都不许动。
-- ⛔ **绝对禁止**重新运行画图脚本（`figures/gen_*.py`、`figures/plot_*.py` 等），也不要新建画图脚本。
-- ⛔ **绝对禁止**修改 `figures/latex_includes.tex`（图表引用清单）。
-- 即使你觉得某张图有问题，本轮也**不要碰图**——只管表格(TABLE_*)的数字核对。
-- SKILL.md 里关于「生成图表 / 画 heatmap / 跑可视化脚本」的所有指令**本轮全部失效**，只执行下面的「自检步骤」。
-
-### 通用要求
-- 不要重新生成已经正确的 TABLE
-- 重新生成 TABLE 时保留原文件名和 caption
-- 如果你确信所有 TABLE 中的数字都已正确（来自 JSON），**必须**写 PASSED 标记
-paper-figure: found %d existing PDFs + latex_includes.tex, will run in supplement modepaper-figure-htmlpaper-figure-html 步骤美赛 AI 出图登记不全（本步必交产出）：（仅限非数据图）
-- `paper-figure-html` 的 Step 1 计算风格种子时，**强制 `STYLE_FAMILY=
-
-## ⛔ paper_from_assets: 仅补全缺失资产 (当前步骤: 
-
-## ⛔ paper_from_assets 资产铁律(paper_from_assets course: output_format -> docx for %spaper_from_assets: injected assets-rules for %spaper_from_assets: injected gap-fill hint for '%s'paper_from_assets: saved conflict_resolution_strategy=%spaper_from_assets: skipping '%s' — %spaper-illustrationpaper/main.docxpaper/main.md未找到报告正文 paper/main.md，请先完成报告撰写步骤- 论文写作步骤产出 `paper/main.md`（不是 main.tex）
-- 竞赛论文写作步骤产出 `paper/main.md`（不是 main.tex）
-paper/main.pdfpaper/main.pdf 正被别的程序打开，没能换成这次的内容：关掉它后在编辑器里重新导出 Word，或用 Word 打开 paper/main.docx 另存为 PDF——MathorCup 只收 PDFpaper/main.texpaper/匿名作品.pdfpaper-planpaper-plan-zhpaper/references.bibpaper/sections/⛔ **章节文件归类约束**：paper/sections/ 只放正文章节（绪论/方法/结果/讨论/结论），**严禁把代码、长数据表、求解日志放到 sections/** — 这些必须放 paper/appendix/。页数预检脚本仅统计 sections/，sections 含代码会让页数虚高但正文实际单薄paper_source_scope.pypaper-writepaper-write-docxpaper-write-naturepaper-write-nature-docxpaper-write-zhpaper-write-zh-docxpaper-writing以题目要求为准, 全部重做(退化到 paper_writing 模式)；数据及其他材料 paper/数据及其他材料.zippaper/数据及其他材料.zippapers_pool.md.parquetpatent-buildpatent-draftpayment required.pdf*.pdfpermission denied` 配色（plot_utils 自动读取）；字体/边框/网格等其余版式维度仍按工作区种子随机，保持自然差异。
-，plot_utils 自动读取）；配色/字体等其余维度仍按工作区种子随机，保持自然差异。
-` 版式（边框/刻度/网格/线宽，plot_utils 自动读取）；配色/字体等其余维度仍按工作区种子随机，保持自然差异。
-.png[preset] 重读 step_models 失败，用内存旧值: %spretest/PRETEST_REPORT.mdprimary_output 目录 `primary_output 文件 `
-清点资产时这几份就是题目 / 任务说明（problem 类），不要再按文件名猜。
-problem_*_results.json_problem_file.txt_problem_files.txt注入双栏 profile 失败，回退单栏: %s（`project_type=project_type[:=]\s*(fullstack|frontend|cli|script)proposal layout: %sproposal layout skipped: %s.py*.py__pycache__/.pytest_cachepython _utils/get_recipe.py competition 16  # 提取 competition #16 的完整代码
-```
-.rrate limit] 步骤退出码 rc=（缺 reason 或 missing：要写清缺哪个文件/字段/哪一问的结果）reference_paper_general.json_references/references.bib优雅留白（展示/高端风）→ 读 `references/styles/apple.md`复古风 → 读 `references/styles/retro.md`科技感（深色/开发者风）→ 读 `references/styles/tech.md`活泼多彩（消费级风）→ 读 `references/styles/vibrant.md`refine-logs/EXPERIMENT_PLAN.mdrefine-logs/FINAL_PROPOSAL.mdresearch-litresearch-pipelineresearch-refine-pipelineresearch-reviewresults.json以用户提供的 results.json/figures 为权威, 论文按已有资产写, 缺的让 paper-analysis 补新结果**追加**到 `results.json`(用 q3_xxx, q4_xxx 字段名), **禁止覆盖** Q1/Q2 已有字段results/*results*.jsonreview_report.md--rootrun-旧的数据核对回执删除失败（新确认值不同，旧回执不会被接受）: %s同步提取失败 (跳过): %s算要求和模板冲突的格式项失败：%s[。；，、：:（(\s|]等待提取完成时出错 (继续执行): %s用户模板不可用，编译步不换回模板文件：%s论文数据清单前置失败，将由写后门禁兜底: %s单步重跑论文数据清单刷新失败: %s写作会话内数据核对回执登记失败（写后门禁照常复查）: %s出图会话内的表格核对回执登记失败（照常另行核对）: %s材料盘点失败（不影响开跑）：%s记录补提取结果失败: %s补提取文档没做成（继续）: %s写投稿格式规格失败：%s投稿格式模板按用户选项调整：%s\s+<!--\s*BEGIN FIGURE_MANIFEST\s*-->按要求文档 %s 补写了 CUSTOM_REQUIREMENTS.md（%d 字）<!--\s*END FIGURE_MANIFEST\s*-->```[\s\S]*?```|~~~[\s\S]*?~~~s 后重试 (attempt 字数\s*\d+\s*(?:高于|低于)目标[-*]\s+`?(fig_[A-Za-z0-9_]+)无法读取 %s: %s补提取 %s 失败（跳过）: %s写入 %s 的提取文本失败（跳过）: %s投稿格式规格不可用（%s）：%s投稿格式模板 %s 不完整，编译步不刷新：%s读对话识别结果失败（照常识别）%s: %s无图表|图表清单\s*[:：]?\s*(?:无|空|none)|纯文字论文|不需要图表|无需图表%s will refine the user-provided outline in PAPER_PLAN.md.savschema.sqlsegmentation faultserver.jsserver-side issueservice unavailableshared-scripts--shift-heading-level-by=1single native route is not a native step, skip_analysis=
-
-## ⛔ 用户已禁用数据图表 (skip_figures=True)
-- **本论文走「无图分支」**：禁止写任何 `![alt](figures/...)` 图片标记
-- **禁止**写「如图 X 所示」「详见图 X」「图 X 展示」
-- 即使 `figures/` 里有残留文件 (旧工作流) 也不嵌入
-- 论点用文字 + markdown 表格 + 文献引用 `[N]` 支撑
-- 上面 D. 图片段的 `![]()` 语法说明仅作参考, 本次工作流**不嵌图**
-- ⛔ **用户已禁用数据图表 (skip_figures=True)**：禁止写任何 `![alt](figures/...)` 图片标记
-- 即使 `figures/` 里有残留文件 (旧工作流) 也不嵌入
-- 论点用文字 + markdown 表格 + 文献引用支撑
-
-
-## ⛔ 用户禁用数据图表但启用架构图 (skip_figures=True, skip_drawio=False)
-- **禁止**写数据图（柱状/折线/热力图等数据可视化）的 `![](...)`标记
-- **必须嵌入**所有架构图/流程图/路线图（fig_arch / fig_flow_* / fig_er / fig_roadmap / fig_pipeline / fig_framework / tikz_*）
-- 在方法/系统结构章节用 `![](figures/fig_arch.png)` 嵌入架构图
-- 写「如图 X 所示」时只引用架构图，不引用数据图
- 缺少 skipped 列表socket connection was closed unexpectedlysocket hang upstats_package.pystats word deliverables: outputs=%s notes=%sstats_zh.jsonstep checkpoint directory cannot be a linkstep-checkpointsstr | Nonestream ended without receiving any events.sty⛔ 不要重复加载 subcaption 和 float（cls 已包含）⛔ 禁止使用 subfigure 并排图片，每张图独占一个 figure 环境，宽度 ≥ 0.85\textwidthsurvey ai usage log write failedsurvey-analysissurvey-datasurvey-defensesurvey-designsurvey docx export failed: %ssurvey-insightsurvey-pretestsurvey-questionnairesurvey-reportsurvey-reviewsurvey-topic.svg-t^[ \t]*-[ \t]+(fig_[A-Za-z0-9_]+|tikz_[A-Za-z0-9_]+)task-
-- template: ^- template: (\S+)- template: comp_mcm_template_map.json_templates/- 套用内置模板时优先选 `templates/_templates/ not found in workspace for step %stemporarily unavailable*.tex.tex`（不是 .tex）
- 个 .tex 文件），尝试续写恢复..._text_profile.json_text_profile.json 不是合法 JSON，回退到默认 profile: %sthesis layout: Word 更新目录没成功：%sthesis layout failed: %sthesis layout: %sthesis layout skipped: %sthesis-proposalthesis_proposal.json.tif.tifftimed out.tmp），本轮是新会话，看不到上一轮的对话。先核对工作区现有产物与检查点，判断本步已完成到哪里，只补未完成的部分。上一轮留下的 _tmp/ 备份、探针脚本和未经核对的中间结论不是事实，不要直接沿用；不要重跑已有有效检查点的计算，也不要改动上游步骤的产物。_tmp/
-... (truncated, total .ts.tsv.ttc.ttftuple[Optional[dict], str]tuple[bool, str]tuple[list[str], list[str]]tuple[list[str], str]tuple[list[str], str, str | None]tuple[str, float | None]tuple[str, int]tuple[str, str]_twocol_profile.json.txt[\u4e00-\u9fff]unknown errorunknown modelupstream error: do request failed**处理策略**：用户还没选，先按默认 `use_user_results` — \usepackage{amsmath}⛔ 不要加 \usepackage{cite}（和 natbib 冲突导致编译错误）\usepackage{graphicx}**用户开启了数据图表，但 user_data/ 里没有数据文件。**
-人文社科论文的数据图只用真实可量化的材料（用户上传的问卷、词频统计、档案统计，或公开统计数据并注明出处），**不用模拟数据**：
-1. 能找到公开统计数据的，写明来源机构或网址、指标、时间范围，再规划对应的数据图
-2. 找不到就不规划数据图：FIGURE_MANIFEST 的数据图一类留空，并在 PAPER_PLAN.md 写一句「数据图：无需图表（没有可量化的真实材料）」；这时数据分析、数据图两步会自动跳过
-3. 在 OPEN_QUESTIONS.md 里写明需要作者补什么材料
-user_data/- 用户上传的只有图片（`user_data/` 里 `user_data/` 里只有图片 上传材料盘点没有完成，模型将直接读取 user_data/`user_data/- ⛔ 不要在 `user_data/` 里新建、修改或删除任何文件：那是用户上传的原件。
-[系统] 这一步按 user_data 里的数据直接做（不用先跑前面的步骤）`user_data/` 下是用户上传的原始材料，请完整阅读并作为研究基础；其余是前面步骤的产物，按需读取，未经本步核对不要当成题目事实。目录摘要只压缩重复路径，不允许把全量数据分析降级为抽样分析。。材料清单只盘点了 `user_data/`，不含这些位置；就地读取（Glob / Read 用上面的完整路径，跳过 node_modules、dist 这类依赖和构建产物，项目大时同样先列目录再挑着读），不要复制进项目文件夹，也不要改动那里的文件。
-user_data/*_extracted.mduser_data/*_extracted.txt先读赛题提取结果 `user_data/*_extracted.txt`（有同名 `_extracted_check.md` 时一并读，按其中标出的页核对数字）；不要 `cat` PDF 本身（二进制读不出文字）。列出所有问号(Q1/Q2/Q3/Q4 等)- 用户上传了材料（在 `user_data/`）。开跑前后台会把它们盘点成 `_materials/材料清单.md`：先读清单再挑着读，不要逐个通读。
-
-## 统计分析前后一致（统计建模）
-- 数据如实：用户上传的数据只读于 user_data/；公开下载或模拟生成的数据存 data/raw/，处理后存 data/processed/；每份数据都在 DATA_SOURCES.json 登记来源与获取方式，模拟数据写“模拟生成”，不得编造真实机构来源。
-- 每个研究问题都有 figures/problem_N_results.json（含 research_question、status、method、n_obs 与关键统计量）；RESULTS.md、汇总 JSON 与论文里的同一数字必须一致。
-- 样本量、标准误或置信区间、p 值、拟合优度等建议如实报告，只作提示、不作硬性门槛；结果不显著也如实写，不为“好看”改数据或挑结果。
-- 步骤授权边界：每一步只改本步产物。数据图/流程图/论文撰写/编译导出步骤不得修改 TOPIC_PLAN.md、DATA_SOURCES.json、data/ 下的数据、code/、figures/*_results.json、figures/all_results.json、RESULTS.md，也不重跑分析；发现上游问题写进 UPSTREAM_ISSUES.md（问题、证据、影响哪个研究问题）后按现有结果完成本步。后台会在这些步骤结束时核对上游的规划与结果文件，被改动的会还原。
-- 本地检查失败先区分真实错误、缺证据与环境故障；缺说明补说明，环境故障修环境，不自动调用付费生成。
-- 使用工作流统一的返修与时间预算；耗尽时保存进展、如实报告未完成，不假报成功也不无限重试。
-**检测到 user_data/ 中有用户上传的数据文件：优先使用这些数据。**
-「数据获取计划」把它们登记为“用户上传”；研究还缺的指标可以先尝试公开数据（写清来源机构/网址、指标、时间范围），实在拿不到再用模拟数据：获取方式写“模拟”，论文与图表如实标注“模拟数据”，不得编造真实机构来源。
-按实际数据规划具体图表（fig_xxx），图表数量与数据匹配。
-**用户启用了数据分析与图表生成，且检测到 user_data/ 中有数据文件。**
-请按真实数据规划具体图表（fig_xxx），图表数量与数据资产匹配。
-  - 材料类型：`user_data/` 里只有文档，源代码在电脑上的数据位置（见下）。业务以文档为准；代码材料从那里的真实源码里挑（写 `草稿/代码文件选择.json` 后由脚本抽取，不手抄）。
-用户上传的文档已经在 `user_data/` 目录下提取为文本/markdown 文件，**用 Read 工具按需读取，不要尝试一次性读所有文件**。
-- 每个提取文件的第一行括号写明来源：`Vision OCR` / `部分识别` 是图像逐字转录（PDF 或赛题图片），`PDF 文本层` 是还没做图像识别的临时文本（上下标、公式会丢），`pandoc 转换` 基本保真，`python-docx 兜底` / `旧版 .doc 兜底解析` 会丢公式或符号
-- 同名的 `*_extracted_check.md` 是图像识别与 PDF 原文的数字核对清单，有就要逐条核对
-
-文件清单（按字符数排序）：
-
-- ⛔ 不要在 `user_data/` 里新建、修改或删除任何文件：那是用户上传的原件。补写的代码按技能写到 `软件著作权申请资料/草稿/补充源码/`（合成的示例源码写到 `草稿/示例源码/`），选择清单里用 origin 如实标明。
-user_fig_*user_template/usually temporaryutf-8utf-8-sig_utils/。
-写论文时严格执行 `_utils/ai_disclosure_rules.md`：在参考文献前写规定格式的简短声明，并调用确定性脚本生成工作区根目录 `AI工具使用详情.pdf`。详情不得放入论文附录，不得把 AI 工具另列为参考文献，也不得出现任何未经用户确认的模型、日期或用途。
-按当前上游重新实现，用 _utils/run_compute.py 重新运行并等待最终退出状态，重新汇总 JSON 与 RESULTS.md，覆盖重做前的版本；不得削弱题设硬约束或放宽容差迎合结果。
-## 计算质量与有界验证
-- 题设硬约束、真实数据、计算正确性必须同时满足，不通过改数据/放宽题设让结果显得合理。
-- 编程实现步骤每问执行 validate_constraints()，从实际保存的结果核对必要条件、有限数值和任务能力。
-- 编程实现步骤发现真实违例须定位并修受影响实现；模型变更要有依据，不能凭空加接触/公平性约束。
-- 步骤授权边界：每一步只改本步产物。数据图/流程图/论文撰写/编译导出步骤不得修改 code/、figures/*_results.json、figures/all_results.json、output/、RESULTS.md、MODELING_REPORT.md、PROBLEM_ANALYSIS.md、PROBLEM_FACTS.json，也不重跑求解；发现上游结果有问题，写进 UPSTREAM_ISSUES.md（问题、证据、影响哪一问）后按现有结果完成本步。后台会在这些步骤结束时核对上游产物，被改动的会还原。
-- 高分、负测试 R²、相同最优值、闲置资源、边界解仅是待解释现象，不单凭现象重算。
-- 跨问单调比较须同目标同口径且可行域包含；最优值允许相等，启发式结果不冒充最优性证明。
-- 用完整物理几何与正确单位；等价简化需要依据。全覆盖题不得以中心覆盖替代，局部覆盖题也不升级任务。
-- 方法、步长、误差和验证次数按题设/建模方案确定，不统一强制 1e-6、双算法、五个种子或十维降维。
-- 有可核对求解证书、解析对照或真实独立验证时可复用；必须做的验证不能以文件存在或关键词代替。
-- 编程保存完整结果数据，图表排版在绘图步骤，章节在撰写步骤，最终排版/编译在导出步骤。
-- 同版本输入、源码、参数和验证器的检查点可复用；变化只重验受影响算例，不在每层各跑一次全量求解。
-- 本地检查失败先区分真实错误、缺证据与环境故障；缺说明补说明，环境故障修环境，不自动调用付费生成。
-- 使用工作流统一的返修与时间预算；耗尽时保存进展、如实报告未完成，不假报成功也不无限重试。
-.venvvision-跳过 vision 识别附件 PDF: 共 %d 个 (>3), 只精读赛题 (%d 个)vision-pages.webp对话里跑完选题后没能整理候选题目 wf=%s对话里跑完赛题分析后没能整理题面的几种理解 wf=%s开跑前核对格式模板的结果没能写进运行日志 wf=%swf=%s 开跑前核对：%swf=%s 单步重跑前核对：%s拼自定义步骤说明失败 wf=%s step=%sworkflow:workflow_engine.py步骤证据文件写入失败，不影响本步骤完成状态：workflow=%s skill=%s 错误=%rworkspace cannot be a link--wrap=none--wrap=preserve读用户选的题面理解失败 ws=%s读用户选的候选题目失败 ws=%s记这一步开跑 / 跑完的时间失败 ws=%s skill=%s使用 wuyi_main.tex 模板- 图表标签（xlabel / ylabel / legend / annotate）全部中文（如 '准确率 (%)'、'迭代次数'、'本文方法'）
-.xls.xlsm.xlsx.xml使用 yrdmcm 文档类（模板自带，封面表头有队伍编号、选题、参赛赛道，按 \mcmsetup 填），XeLaTeX 编译_ACADEMIC_BACKLINK_SKILLS_ACADEMIC_DOCX_SKILLSACADEMIC_DOCX_TRAPS_ACADEMIC_DOCX_WRITE_PROMPT_SKILLS_ACADEMIC_LATEX_WRITERS_ACADEMIC_PLAN_GUIDANCE_SKILLS_ACADEMIC_WORD_OUTPUT_BY_TEMPLATE_ACADEMIC_WRITE_SKILLSACCESS_MODE_CHANGEDACCOUNT_MODEL_REFUSEDACCOUNT_NATIVE_RESULT_UNCONFIRMED_ACTIVE_TIME_POLL_SECONDSADVISORY_REPAIR_PREFIXAI_DISCLOSURE_PDF_NAMEAI_DISCLOSURE_PURPOSESALLOWED_PURPOSES_AUTHOR_SLOT_AUTO_RECOVERY_LIMITAUTO_REVIEW_DOCX_MODEAUTO_REVIEW_PDF_MODEAccessModeErrorAccountErrorAnyAwaitable_BACKFILL_SUFFIXESBACKGROUND_WAIT_METERS_BACKLINK_DIAGRAM_PREFIXESBIGDATA_PREFIX_BUN_PANIC_RETRIESBackgroundWaitMeterBaseExceptionCAPSULE_NETWORK_ERRORCAPSULE_SERVICE_UNAVAILABLE_CHECKPOINT_DIGEST_CHARS_CHECKPOINT_REPLACE_ATTEMPTS_CHECKPOINT_STAGE_ATTEMPTS_CHECKPOINT_STAGE_CHARSCHECK_FAIL_CLAUDE_MD_FILES_HEADING_CLAUDE_MD_FILES_NOTE_CLAUDE_MD_LISTING_SKIP_NAMES_CLAUDE_MD_LISTING_SKIP_PREFIXESCLIENT_CONFIG_UNAVAILABLECOMPACT_INDEX_MAX_CHARS_COMPILE_SKILLS_COMPILE_SKILL_NAMESCOMPUTE_SKILLS_COMP_EN_TEMPLATES_COMP_RULESCORE_FAILURECOURSE_DOCX_DRAWIO_PNGCOURSE_DOCX_PNG_ONLYCOURSE_DOCX_TABLE_MDCOURSE_PAPERCOURSE_REPORT_COURSE_WORD_NOTECallableCancelledErrorCheckIssueCheckpointTimeoutPausedConstantContextVarContinueLimitReachedCounter_DATA_FILE_SUFFIXESDATA_STEPSDETAIL_PDF_NAMEDIAGNOSTIC_REPORTSDISCLOSURE_PENDING_MESSAGE_DOCX_COMPILE_SKILLSDOCX_FORMAT_CHECK_CONTEXTDOCX_FORMULA_ERROR_DOCX_PROFILE_BY_TEMPLATEDOCX_WRITE_MARKDOWNDOCX_WRITE_SKILLS_DOCX_WRITE_SKILLSDOTALLDRAFT_CHECK_SKILLSDRAWIO_DRAWIO_FIG_PREFIXESDict_DocxPrecheckFailure_DocxPrecheckFailure.__init___EMPTY_TOOL_RETRIES_EXPORT_INTERNAL_ERRORSEnglishEventExceptionExportInternalErrorExpr_FAILED_SOLVE_STATUS_FIGURE_CHECKER_FILES_FIGURE_HEALTH_SKILLS_FIGURE_PLAN_FILES_FIGURE_SKIP_FILE_FIGURE_SOURCES_FILE_FIGURE_STEP_SKILLSFIGURE_SUPPLEMENT_MODE_FIG_IMG_EXTSFILE_ATTRIBUTE_REPARSE_POINT_FINAL_MODELING_GATE_SKILLSFIX_REPAIR_PREFIX_FORMAT_RULE_GROUPSFalseFastAPI_GENERIC_ZH_COMPGEN_FAIL_HANDOFF_MAX_CHARSHUMANITIES_PAPERIIGNORECASE_IMAGE_CONTEXTS_IMPROVEMENT_LOOP_SKILL_INACTIVITY_RETRIES_INLINE_MAX_BYTES来自IP_IP_FILES_NOTE_IP_GATE_SKILLSLEGACY_TEMPLATESLICENSE_NETWORK_ERRORLICENSE_SERVICE_UNAVAILABLELIMITListLockM_MANIFEST_ITEM_RE_MATERIALS_SECTION_HEAD_MATHORCUP_TEMPLATESMAX_AUTO_PAGES_MAX_DATA_CHECK_PASSESMAX_PAGES_MAX_STEP_RETRIES_MAX_TABLE_CHECK_PASSESMAX_VISION_PAGES_MCM_AI_FALLBACK_CODES_MCM_AI_METHOD_PREFIXES_MCM_AI_STATUS_FILEMCM_PAGE_LIMIT_MHMH_APP_VERSIONMODEL_PAYER_CHANGEDMODEL_PAYER_STORAGE_FAILEDMODEL_PRESET_UNAVAILABLEMODE_DOCSMODE_NONEMODE_SOURCEMULTILINEMathorCupmodelingMatrixModelingQualityReportModex_NATIVE_STEP_ROUTESNATURE_FIGURE_LANG_NATURE_STYLE_DIMS_NON_PAPER_MD_WRITE_SKILLS_NO_DATA_SKIP_TEMPLATESNO_KEYNO_VISION_NUMERIC_KEYSNoneOptional_PAID_CONTINUE_LIMITPANDOC_BIN_PAPER_BODY_PAGE_SKILLS_PAPER_DATA_CHECK_SKILLSPAPER_FIGURE_LANG_ZHPAPER_PLAN_BACKLINK_PAPER_TYPE_PAGESPARAMPATHPAUSE_MESSAGE_PAUSE_ON_CHECKPOINT_TIMEOUTPDF_COMPILE_SKILLS_PDF_PAGE_TRANSCRIBE_PROMPT_PDF_VISION_RETRY_COOLDOWN_SECONDS_PDF_VISION_RULEPENDING_MESSAGEPFA_ASSETS_RULES_PFA_GAP_FILL__PFA_MAP_PFA_STRATEGY_DESCPIPE_PLAN_GUIDANCE_SKILLSPLAN_STAGE_GUIDANCE_PLAN_STOP_SKILLSPLAN_USER_OUTLINEPNG_POST_WRITE_CHECK_SKILLS_PROBLEM_IMAGE_SUFFIXES_PROBLEM_READING_SKILLSPYTHONIOENCODINGPassPathPdfReaderProgrammingProtectedContentUnavailablePurePosixPathPyPDF2Python__Pyx_PyDict_NextRef_READINGS_SKILLREASONREASON_PREFIX_RECEIPT_MAX_FILESREDO_MARK_REDO_RE_REDO_REASON_HEAD_RESULT_CODE_SKILLS_RETIRED_SKILLS_RETRY_BACKOFF_SECONDS_RR_AUTO_LIMIT_RUNTIME_MODEL_KEYSRUNTIME_TEXLIVERUN_SCOPE_REQUEST_MAX_CHARSReactRegistryErrorRepairStoppedS_SCENE_NAME_PREFIXESSECTION_MARKERSKILLS_DIRSKILL_CONTENT_UNAVAILABLESKILL_TEMPLATE_UNAVAILABLE_SKIP_SUPPORTED_TEMPLATES_SPLIT_LATEX_WRITER_SKILLSSQLite_STATE_STATS_ANALYSIS_SKILLSTATS_ANON_PDF_STATS_BODY_CHAR_LIMITSTATS_COHERENCE_CHECKERSTATS_COHERENCE_REASON_STATS_COHERENCE_RULES_STATS_CUSTOM_TITLE_MARKERSTATS_DATA_ZIP_STATS_EN_ABSTRACT_MARKERSTATS_FULL_DOCXSTATS_MODE_MARKERSTATS_NOT_APPLICABLESTATS_PLAN_REASON_STATS_TOPIC_SKILL_STATS_UPSTREAM_DEPSSTDOUT_STEP_MIN_SIZE_STEP_REQUIRED_COMPANIONS_STEP_SCOPED_SECTIONS_STEP_WALL_TIMEOUT_SECONDSSUBMISSION_PAGE_REFERENCE_SURVEY_DATA_EXTSSURVEY_EXPORT_PROGRESS_SURVEY_HEADER_HINTS_SURVEY_WAIT_MESSAGEStepCheckPendingStepDefStepExecutionFailedStepRepairInterruptedStepStatusSubmissionLayoutErrorSubprocessError_TABLE_CHECK_FIGURE_SKILLS_TABLE_PASSED_MARKER_FILETASK_CONTEXT_PARAMTEMPLATES_TEMPLATE_TO_FOLDER_THESIS_GENRESTOOLS_DIR_TOPIC_CHECKPOINT_NOTICE_TOPIC_REVISION_RULESTOPIC_SOURCE_TRANSIENT_PROVIDER_RETRIES_TRANSIENT_RESUME_REASON_TYPED_REQUIREMENTS_MARKTemplateDefTemplateErrorTemplateTypeTemporaryDirectoryThesisLayoutErrorTimeoutErrorTimeoutExpiredTracebackTrueTuple_UNFINISHED_TURN_HANDOFF_UNFINISHED_TURN_KINDS_UNFINISHED_TURN_RETRIES_UNKNOWN_PROCESS_RETRIES_UPSTREAM_DEPS_USER_OUTLINE_NOTE_USER_OUTLINE_PLAN_SKILLS_USER_TEMPLATE_LATEX_WRITERS_VALID_FIG_STYLES_VALID_STYLE_CUSTOM_VENUE_TEMPLATE_SKILLS_VISION_PSEUDO_STEPWAIT_FOR_NETWORK_WORD_COUNT_ADVICE_WORD_MAP_MISSING_WHYWORKSPACES_DIR_WRITE_SKILL_NAMES_WRITING_BACKLINK_SKILLSWorkflowStatusXY存档出错原因不明代码数据正文源码其他_题目赛题课题作业题赛需求要求路线图用户已提供图表且无缺图标识没能没做成无文件变更未返回明确错误已跳过跳过无命令尚未确认完成或返回失败回执执行异常退出权限不足模型不存在余额不足额度不足激活失败激活码无效没有未激活自动修复自动修复重试预算已耗尽质量检查核心产物检查论文模型表达必需的二级文件缺失这一步没有可以直接检查的主产物起草时必须覆盖数据表张个数据采集与统计分析阶段覆盖总数数据图场景图用户只给了案件名和几张图片用户只给了案件名本科毕业论文硕士学位论文期刊论文中文读取格式模板的文字版路径失败赛道题号识别失败未视觉识别部分识别复用对话里识别过的页面复用已成功识别的页面有图公式多赛题识别完成部分完成代码实现数据分析与建模队伍编号已加学位论文版式没有排第一页最上方的信息表目录第二页目录每章另起一页已排研究设计需求分析系统设计前端编码后端编码联调自测自测验证编码实现项目报告撰写资产清点与一致性检查论文大纲大纲与图表规划课程论文撰写论文规划解析格式要求页数待确认检查器返回失败论文提交规范未通过用户选择了跳过图表生成用户选择了跳过数据分析撰写阶段文字预算检查失败已恢复检查点确认存在沿用上次已完成的主产物空工具调用循环执行失败章节恢复写作恢复核对结束后将自动进入最终编译与质量检查章节续写表格自检返修数据条目数赛题分析数据自检返修建模求解建议修改编程实现第二轮建议修改图表生成流程与架构图绘制统计分析前后不一致统计建模图表规划缺项文献调研新颖性验证外部评审竞赛论文撰写实验桥接自动审稿循环论文写作中文论文写作数据分析架构图绘制论文编译全流程编译与合规检查华为杯研究生数学建模统计建模大赛泰迪杯数据挖掘挑战赛认证杯数学建模华中杯数学建模华东杯数学建模五一杯数学建模数维杯数学建模中青杯数学建模数据采集与统计分析长三角数学建模电工杯数学建模深圳杯数学建模华数杯数学建模天府杯数学建模数维杯国际赛开题报告文献调研与开题撰写选题与数据规划技术路线图绘制文献综述文献检索与综述撰写课程论文课程报告事实提取与大纲规划数据图表生成课程报告撰写人文社科论文论文撰写选题与结构规划一句话生成项目一句话生成软著申请资料授权暂不可用起草申请资料一句话生成专利交底书起草技术交底书候选选题选题与研究设计问卷与抽样设计预调查与样本量测算系统回收数据导入与清洗统计分析洞察与对策报告撰写合规与一致性检查答辩准备预处理华为杯全国研究生数学建模竞赛全英文撰写必须包含完整的数据预处理和特征工程描述代码附录需包含关键算法实现华中杯数学建模邀请赛华东杯数学建模邀请赛中青杯数学建模竞赛长三角高校数学建模竞赛电工杯数学建模竞赛深圳杯数学建模竞赛华数杯数学建模竞赛天府杯数学建模竞赛五一杯数学建模竞赛开始执行附录第一节为文件列表表格侧重电气工程与能源方向的建模问题步骤完成这次是用户要求重做这一步执行停止提交答卷时间所用时间答卷编号开始答题时间结束答题时间答题时长正在准备上传材料并检查识别结果a_academic_backlink_notes_academic_backlink_notes.<locals>.genexpracademic_docx_trapsacademic_enacademic_plan_academic_repair_promptacademic_zhacceptedaccount_account_modelaccount_modelsacknowledgement_tokenactionactivateactiveactive_sourcesactive_stepsactual_data_figsactual_drawio_figsactual_figs_actual_model_idaddadd_event_listeneradd_fataladopted_adopted_adopted_proposals_context_advice_before_advice_since_advisory_editedadvisory_maxadvisory_polish_advisory_repair_budget__aenter____aexit__afterageagent_stateaggregateai_ai_discai_disclosureai_disclosure_detailsai_disclosure_neededai_figure_look_ai_payload_ai_writtenall_figsall_okall_statusesallow_feedbackallow_unfinished_turn_allowedambiguous_terminalanalysis__annotations__anyapi_keyapmcmapmcm_zhapmcmthesis_app_versionappend_append_materials_checkappendixappleappliedapplyapply_template_options_apply_venue_main_optionsapprove_ar_claude_md_ar_format_ar_has_format_md_ar_has_format_text_ar_has_user_docx_tpl_ar_need_fp_ar_noteargsargumentsarticle_artifact_progress_signature_artifact_progress_signature.<locals>.genexpr_artifact_progress_signature.<locals>.linked_artifact_progress_signature.<locals>.<lambda>as_posixaskasks_before_runasset_assets_resolveassignmentastasyncioasyncio.coroutinesatattemptattempt_number_attempt_resume_session_idattempted_atattempts_audit_ownerauroraauthentication_error_author_placeholders_authority_lineauthority_note_authority_noteautoauto_review_autorecov_n_autorecov_prev_progress_autorecov_prev_reason_autorecov_progress_autorecov_stalled_autorecov_unchanged_rounds__await___await_recoveryawaitableawake_clockbachelorbackend_backfill_document_extracts_backfill_document_extracts.<locals>.genexpr_backfill_document_extracts.<locals>.<lambda>_backfill_documents_backlink_text_backoffbase_base_errbase_id_base_profile_path_base_srcbatchbe_be_entrybeforebefore_commitbeginbegin_workflow_license_scope_asyncbestbgbigdata_repairbilling_errorbilling_hard_limitbilling_not_activebinbindbind_contract_bind_in_session_table_review_blind_termsblockblocked_reasonblocked_stepsbodybody_charsbody_footer_body_ok_body_ok_r_body_ok_rr_body_ok_rr2body_pages_body_reason_body_reason_r_body_reason_rr_body_reason_rr2bold_edgeboolboth_bounded_detail_broadcastbrokenbroken_toolbudgetbuild_build_context_summarybuild_data_checklistbuild_full_versionbuild_inventorybuild_packagebuild_reference_mdbun_runtimebundled_binsby_data_by_databytesc_ccachecache_keycache_namecache_pathcachedcached_onlycall_idcan_repaircancelcancelledcandidate_candidate_outputcandidatescandycapture_outputcase_name_case_namecasefoldcertcupcfgcfp_textchchangedchanged_files_changed_sincechangeschangsanjiaochapter_breakschar_limit_charschars_per_pagechat_decisionschat_executorchat_materialschat_modechat_template_chat_template_chat_tpl_chat_tpl_envcheckcheck_analysis_outputscheck_code_outputs_check_data_figure_qualitycheck_exported_docx_submission_contract_check_figure_pdf_quality_check_figures_step_health_check_figures_step_health_off_loop_check_figures_step_health_static_check_figures_step_health_static_off_loop_check_figures_step_health_static.<locals>.genexprcheck_ip_stepcheck_materials_check_modecheck_page_check_paper_body_pagescheck_paper_modeling_quality_check_paper_modeling_quality_rawcheck_paper_outputscheck_paper_submission_contractcheck_pendingcheck_results_consistency_check_stats_coherence_check_step_companions_check_step_companions.<locals>.finite_float_check_step_companions.<locals>.invalid_constant_check_step_companions_off_loopcheck_template_paramscheckedcheckerchecker_environment_checker_rootchecker_unavailablechecklist_checklist_syscheckpoint_dircheckpoint_hitcheckpoint_idcheckpoint_runtime_checkpoint_stoppedcheckpoint_timeoutcheckpoint_timeout_pausecheckpoint_typecheckpoint_user_stopcheckschinesechosen_chosen_problemschunk__class____class_getitem___classify_manifest_by_sectionsclaude_md_claude_md_claude_md_listing_claude_md_listing.<locals>.genexprclaude_md_noteclaude_md_sectionclaude_runnercleanclean_opencleanup_workspace_protected_materialcleanup_workspace_utilsclearclear_blocked_clear_compute_blockedclear_pause_requestclear_run_scopeclicline_in_tracebackclosecobalt_coralcodecode_dircode_extscode_placescode_step_colcollectcollect_submissioncollect_writingcollectionscolorblindcolumn_layoutcolumn_spacing_cmcolumns_combined_parts_combined_texcommandcommitcomp_comp_apmcmcomp_apmcm_zhcomp_certcupcomp_certcup_encomp_changsanjiaocomp_cumcmcomp_diangongcomp_dongsansheng_comp_en_steps_comp_en_templatescomp_extracomp_huadongcomp_huashucomp_huaweicomp_huazhongcomp_liaoningcomp_mathorcupcomp_mathorcup_bigdatacomp_mcm_comp_missing_h_comp_missing_h2_comp_missing_r_comp_missing_rr_comp_missing_rr2_comp_missing_wc_comp_ok_h_comp_ok_h2_comp_ok_r_comp_ok_rr_comp_ok_rr2_comp_ok_wccomp_shenzhencomp_shuweicomp_shuwei_encomp_stats_comp_stats_steps_comp_structure_notecomp_teddycomp_tianfucomp_wuyicomp_yangtze_comp_zh_stepscomp_zhongqingcompact_index_compact_preamble_companion_reason_companion_reason.<locals>.is_checkcompanionscompanions_okcompetition_competition_rulecompilecompile_envcompiler_complete_step_without_modelcompletedcompleted_atcompleted_stepscompose_requirements_compress_claude_md_compress_claude_md.<locals>._truncate_image_section_compress_claude_md.<locals>._truncate_doc_section_compress_claude_md.<locals>.<lambda>_compute_blocked_compute_health_blocks_compute_repair_promptcomputer_access_computer_accessconfigconfiguration_confirm_checkpoint_without_modelconfirmed_for_executorconfirmed_truthfulconflict_countconflict_resolution_strategyconflict_textconflictsconflicts_md_contcont_contextcont_filescont_pass_cont_statecont_summarycontentcontent_errorcontent_network_unavailablecontest_contest_keycontext_context_actioncontext_overflow_actioncontext_recovery_handledcontext_summarycontextvars_continuation_attempts_continuation_performed_continuation_prev_state_continuation_resultcontinuation_stalled_continuation_state_continue_limit_message_continue_state_continuingcontract_contract_gate_contract_gate_r_contract_gate_rr_contract_gate_rr2contract_skill_conv_errconversation_dispatchconvert_from_pathcopied_copiedcopycopy2_copycopy_statscopyrightcopyright_materialcoralcore_file_problemcore_problemcount_count_existing_figs_forcoursecourse_docx_drawio_pngcourse_docx_png_onlycourse_docx_table_mdcourse_paper_course_paper_word_only_course_paper_word_only_savedcourse_reportcovercoverage_cp_actioncp_typecr_cr_desccrashcrash_recoverycrashedcreate_new_workflow_create_new_workflowcreate_taskcreate_workflowcreatedcreated_ncrisp_dark_crosscheck_line_crosscheck_slot_cs_params_cs_rowctexartcumcmcumcmthesiscurcur2cur_pcur_params_cur_steps_curr_matchedcurrentcurrent_filescurrent_skillcurrent_stepcursorcustomcustom_reqcustom_req_pathcustom_req_section_custom_req_textcustom_requirementscustom_steps_custom_stepscustom_title_custom_writtencwdddata_data_ack_filedata_dir_data_enginedata_extsdata_fig_colorsdata_fig_palettedata_fig_styledata_fig_style_customdata_fig_visiondata_figs_data_fix_contextdata_namesdata_only_data_only_data_passdata_places_data_problem_rr_data_problem_rr2_data_repair_limit_data_report_data_review_ack_path_data_review_result_data_review_token_data_run_checkdataclassdataclassesdbdb_attempt_dc_dc2_dc_ai_dchk_dcustomdeadlinedeadline_atdebugdecodedecrypt_skill_file_to_memory_decrypted_deep_merge_profiledeepcopydefaultdefault_effortdefault_factorydegree_typedelaysdeliver_delivery_notes_dep_dep_pathdependency_derive_errderive_profile_autoderive_profile_unified_derivedderived_derived_arg_derived_pathdescdescribe_image_describe_workspace_imagesdesertdesign_styledesign_style_customdesktopdetail_detect_grad_project_type_detected_md_stem_dev_custom_dfp_dfs_dfscdiagramdiagram_figsdiagram_namesdiagram_stylediagramsdiangongdiangongbeidictdiffdigestdirdirectorydirsdirtydiscarddisclosure_pendingdispatchdispatch_policydisplay_namedistdoc__doc___doc_layersdocsdoctordocx_docx_advisories_docx_base_profile_name_docx_comp_structure_note_docx_contents_line_docx_contract_docx_contract_skill_docx_err_docx_layered_profiledocx_pathdocx_precheck_docx_repair_skill_docx_skill_map_docx_skill_migration_docx_source_reldocx_style_profilesdocx_template_fill_docx_write_display_namedocx_write_markdowndocx_write_markdown_academic_docx_write_skills_docx_write_skills_fallback_docx_write_text_docx_writingdonedongsanshengdotdouble_downstream_donedpidraftdrawiodrawio_figs_drawio_figsdrawio_png_note_drawio_prefixesdrop_default_task_limit_dropped_ds_ds_cur_ds_label_ds_map_ds_sys_dst_dstyledumpdumpsdutch_fielde_eearth_foresteconnrefusedeconnresetefeffective_skill_nameeffort_effortelapsed_minelegantembed_embed_extsemptyempty_textenenable_checkpointsenable_cpencencodeencodingendend_stepend_tagend_workflow_license_scopeendswithengineengine_contextenglishensure_asciiensure_futureensure_profile__enter__enteredentriesentryenumerateenvenv_linesenv_varsenvironerr_err_msg_err_summaryerrorerror_hinterror_messageerror_msgerrorsescapeest_pagesevent_event_listenersexactexcexc_infoexceptionexcludes_exec_note_exec_note_rrexecutableexecuteexecutemanyexecutionexecution_contextexecution_error_message_execution_heartbeatexecutorexist_okexisting_existingexisting_binsexisting_content_existing_export_idxexisting_filesexisting_pdfsexisting_texexists__exit___expand_input_expandedexpectedexpected_fingerprintexpected_outputsexperiment_bridge_export_advice_export_check_export_failure_export_order_export_progress_export_repair_export_stepexportingexpressext_extextendextraextra_materials_extra_outputsextra_params_extract_forks_for_extract_pdf_with_vision_extract_pdf_with_vision.<locals>.genexpr_extract_pdf_with_vision.<locals>.reportextract_text_extract_to_markdownextract_worker_extractedextractedextracted_filesextracted_path_extracted_targetextractingf_f_f_pathfailfailedfailed_background_tasksfailed_pages_failed_problem_results_failed_problem_results.<locals>.genexprfailed_stepfailed_stepsfailure_failure_messagefallbackfalsefastfatalfb_pathfc_fc_engine_fc_note_fc_target_fc_target_mapfefeedbackfeedback_sectionfeedback_textfetchallfetchonefieldfieldsfig_fig_archfig_classfig_dataflowfig_decisionfig_dirfig_erfig_flowfig_frameworkfig_ganttfig_hierarchyfig_index_fig_index_fig_matchfig_model_decisionfig_modulefig_multiagentfig_network_fig_ok_h_fig_ok_h2_fig_ok_r_fig_ok_rr_fig_ok_rr2_fig_ok_wcfig_overviewfig_pipelinefig_pkg_fig_reason_h_fig_reason_h2_fig_reason_r_fig_reason_rr_fig_reason_rr2_fig_reason_wcfig_roadmapfig_scenefig_seqfig_statefig_systemfig_topologyfig_umlfigs_figs_dir_checkfigure_figure_lang_notefigure_missing_figure_plan_text_figure_repair_prompt_figure_source_problems_figure_source_problems.<locals>.genexprfigure_style_figure_table_sectionfiguresfigures_block_figures_blockfigures_dirfigures_okfigures_why__file__filefile_idle_timeout_file_infofile_list_onlyfile_pathfile_stat_file_watchdog_file_watchdog_killedfilenamefilenofilesfiles_affectedfiles_createdfiles_modified_files_summary_fill_err_fill_reportfill_templatefilledfilled_out_of_placefinalfinal_complete_countfinal_filesfinal_incomplete_final_repairfinal_texfinalize_plan_safefindfindallfinditer_finish_continue_statefinish_local_operationfinished_atfinite_floatfirstfirst_pagefirst_pendingfirst_skillfitz_fix_err_fix_files_fix_summaryflagflagsflamingoflaskfloatflow_per_problemflowchart_engineflush_flush_logsfmfmtfnfnmatch_focused_quality_repair_promptfocused_repairfolder_folder_namefollowerfollowlinksfontfonts_fonts_for_fillforbidden_forced_plan_checkpoint_forced_plan_cpforced_topic_forced_topic_checkpoint_forced_topic_cp_forced_topic_free_forced_topic_wc_form_noteformat_authorityformat_check_insertedformat_profile_insertedformat_submissionformat_text_format_textformat_workspace_indexfoundfp_fpframeframedframed_journal_free_ok_free_outputs_free_recheck_free_recheck.<locals>.<lambda>_free_recheck_outputs_free_recheck_outputs.<locals>.genexpr_free_whyfreshfresh_contextfresh_fallback_used_fresh_fallback_usedfresh_figs_fresh_handoff_fresh_retry_handoff_fresh_stepsfrom_stderrfrom_step_idfromkeysfront_matter_numberingfront_tablefrontendfsyncfullfull_contextfull_pipelinefull_textfullmatchfullstack__func__functionfunctoolsgap_note_gap_rulesgategate_skillgathergb18030gen_fig_generate_claude_md_generate_claude_md.<locals>.genexpr_generate_claude_md.<locals>.<lambda>generate_format_reference_generic_fallbackgenexprgenregetgetLoggerget_access_modeget_all_settingsget_dbget_decrypt_keyget_event_loopget_markdown_to_docxget_pixmapget_presetget_statusget_textget_workflow_get_workflowgivenglobgmcmthesisgrad_projectgraytintgridgroup_guide_dir_guide_filesh_had_retire_markerhandlehandoff_handoff_handoff_block_handoff_errhandoff_reasonhard_hard_fatal_blockhas_actual_codehas_actual_figureshas_actual_results_has_any_has_any_fighas_checkpointhas_codehas_data_has_data_figures_has_dk_has_document_extract_has_document_extract.<locals>.genexpr_has_docx_step_has_drawio_fighas_fatalhas_figures_has_format_md_has_format_text_has_hard_fatalhas_latex_includeshas_materialshas_modeling_reporthas_partial_output_has_passed_marker_has_precheckhas_private_parthas_problemhas_real_later_completed_has_refhas_resultshas_roadmaphas_task_executor_has_template_file_has_template_map_has_template_map_acadhas_templateshas_uploaded_materialshas_uploads_has_user_docx_template_has_user_docx_tpl_has_user_docx_tpl_acad_has_vision_extractionhashlibheadheaderheadingheadingshealth_ok_health_requires_repair_health_requires_repair.<locals>.genexprheartbeat_startedheartbeat_taskhex_hexhexdigesthiddenhigh_severity_counthinthit_hlhowhtmlhuashuhuashubeihuaweihuazhong_hub_response_id_hum_latex_stepshumanities_paperhumanities_thesisi_iicmididea_discoveryidentityidle_secsidsidxidx_pathignoreignore_errorsillustration_image_context_for_image_descriptionsimage_dirimage_extsimage_filesimagesimgimg_dirimg_extsimg_fileimg_path_imgs_imp_errinactivity_timeoutinclude_defenseincomplete_background_tasksincomplete_followupincomplete_tool_callsindentindexinfo__init___inject_onceinnerinputs_insinsert_insert_missing_format_profile_insert_missing_format_profile.<locals>.genexpr_insert_missing_format_profile.<locals>.genexpr.<locals>.genexprinsert_stepsinsufficient_quotaintintakeinv_invinv_mdinv_textinvalid_api_keyinvalid_constantinvocation_ip_description_note_ip_inventoryip_materials_ip_materials_ip_materials_note_ip_materials_note.<locals>.genexpr_ip_place_note_ip_place_note.<locals>.genexprip_repair_prompt_ip_templateis_bigdata_workspaceis_checkis_comp_step_is_contract_syntax_reason_is_coroutineis_dir_is_docx_mode_is_docx_mode_runis_drawio_is_drawio_fig_is_drawio_fig.<locals>.genexpr_is_drawio_only_branchis_empty_loopis_excludedis_file_is_hard_fail_is_nature_fig_is_no_fig_branchis_pause_requested_is_pfais_plan_stepis_problemis_redois_relative_to_is_stats_analysis_step_is_stats_template_is_stats_workspaceis_stats_workspaceis_symlink_is_user_skipis_v2is_zhisdigitisfiniteissueissuesitemitem_relitemsiter_rowsiterdirjoin_joinedjoinedjournaljournal_two_column_profilejpg_qualityjson_kkkeep_bothkeep_memokept_kept_contextkey_keykey_files_key_pause_codeskeyskindkindskwkwargslabel_labellabel_zhlabels<lambda>_langlanguagelargelast_log_tlast_page_last_session_id_late_checks_late_progress_late_repairlater_stepslatest_latestlatest_mtimelatex_latex_template_folder_latex_writer_stepslayerlayerslayout_configledgerledger_pathleftlegacylegacy_step_display_namelegacy_stepslegacy_warninglegendlevellicense_expiredlicense_invalidlicense_required_license_scope_tokenlicensed_plan_skillslimitlimit_secondslimitedlinelines_lineslinkedlistlistenerliterature_reviewliveloadload_manifest_load_paper_data_check_load_pdf_vision_stateload_profileload_promptload_run_scopeload_summaryload_venue_specload_workbookloadedloadslockedlog_log_bufferlog_dblog_detail_log_flush_locklog_step_log_template_notelogging_look_look_labellookedlooks_like_refusal_looks_like_survey_export_looks_like_survey_export.<locals>.genexprlookuplowlowerlowerRomanlslstatlstriplw_mmm_beginm_endmain__main___main_contentmain_docxmain_mdmain_output_receipt_main_output_receiptmanifest_manifest_datamanifest_datamanifest_drawio_manifest_drawiomanual_rerunmap_map_state_map_stepmapped_folder_mapping_mark_active_step_failedmark_fields_updated_mark_workflow_preparingmarkdownmarkdown_to_docxmarkermarker_tagmarkersmastermatch_matched_itemsmatchesmaterial_excludesmaterialize_ai_disclosure_manifestmaterialize_skill_templatesmaterialized_materialized_checkersmathmathorcupmathorcup_bigdata_mathorcup_front_table_mathorcup_word_pdfmatplotlibmatrixmaxmax_advisory_repairsmax_body_pagesmax_charsmax_continuation_passesmax_db_retries_max_ordermax_pages_max_pages_max_pages_r_max_pages_rr_max_pages_rr2max_recovery_passesmax_retriesmax_rowmcm_mcm_ai_mcm_ai_candidatesmcm_ai_reason_mcm_ai_status_problems_mcm_ai_status_problems.<locals>.genexpr_mcm_ai_status_reason_mcm_limitmcmthesis_mdmd_path_md_path_md_target_mediamediamedia_dirmediummemo_blockmergedmerged_outputsmessagemeta__metaclass__metermh_dirmid_migrated_countmiktexmin_figuresmin_modelsmin_row_min_size_for_min_size_recover_min_size_wcmin_tablesminimalminimal_baremint_lavmissingmissing_assets_missing_depsmissing_namesmissing_okmissing_strmkdirmodemodelmodel_idmodel_preset_idmodel_stalledmodel_usedmodel_visible_params_modeling_report_modeling_report_r_modeling_report_rr_modeling_report_rr2models.schemasmodernmodifiedmodified_n__module__monomonotonicmorandimoss_clay__mro_entries___msgmt_mu_mu_errmutaten_nn_lower__name__namenamednames_native_conversion_native_conversion_attemptnative_single_step_finishednaturenature_figure_lang_nature_lang_notenature_writingneed_need_fmt_check_step_need_format_check_need_format_profile_need_fp_step_need_reloadneed_self_check_need_self_check_need_template_map_need_tm_stepneeds_pass_needs_pdf_visionneeds_topic_choicenejmnetwork_waitnew_new_compile_new_compile_dispnew_data_figsnew_diagramsnew_displaynew_drawio_srcnew_filesnew_len_new_name_new_output_files_new_plan_new_plan_disp_new_primarynew_skillnew_stepsnew_sub_steps_new_write_new_write_dispnextnono_fig_branchno_text_layernodenode_modulesnoframenonenordnormalize_ai_disclosurenormalize_paramsnormalize_team_idnormalize_venue_params_normalize_writing_paramsnormalized_not_materialnotenote_partsnote_runnotednotesnotice_text_notify_notify.<locals>.genexpr_notify_vision_nownow_now_row_now_scope_now_step_now_tonpgnullnumbernumberednumbers_ofobjectobserve_completed_stepoceanofof_pathoffoffer_readings_choice_offer_readings_stop_offer_topic_choiceofficialofficial_intokok_staticokabe_itoold_old_reportonon_outputon_revision_outputon_timeout_only_images_only_native_skillopenopenpyxloptimizeorder_orders_orig_nameoriginaloriginal_kwargsoriginal_lenosother_otherother_files_other_matched_other_pother_pdfs_other_profileoutoutput_output_exists_recoveroutput_filesoutput_format_output_format_output_health_ok_output_health_reason_output_nameoutput_path_output_path_output_still_thereoutputs_outputsouts_outsoverloadedoverrideoverrides_overridesownerowner_workflow_idp_ppagepage_checkspage_idxpage_policy_page_policy_page_policy_r_page_policy_rr_page_policy_rr2_page_spanpage_text_page_text_layerpagespages_ok_pages_to_lookpaid_continues_paid_continues_palette_marker_writtenpandoc_pandocpaperpaper_data_check_paper_data_modepaper_data_validationpaper_dir_paper_dirpaper_figure_lang_zhpaper_from_assetspaper_skill_paper_submission_report_paper_template_sourcepaper_type_paper_typepaper_type_targetpaper_writingpaper_writing_zhparamsparentparentsparseparse_constantparse_floatparsedpartpartialpartitionparts_partspassed_marker_foundpastelpatpatentpatent_disclosurepathpathlibpathspathseppause_pause_for_access_mode_pause_for_check_pause_for_protected_content_pause_requested_pause_statepaused_payer_slotpayer_taskpayload_pdc_syspdfpdf2imagepdf_filepdf_files_pdf_vision_signature_pdf_vision_state_path_pdf_vision_targets_pdf_vision_targets.<locals>.<lambda>pdfspeacockpendingpending_background_task_idspending_check_statepending_tool_call_idspermission_errorpermission_ofpersist_keypersist_pathpersistedpersisted_dirtypersisted_error_pf_pfa_compilerpfa_contest_pfa_contest_pfa_contest_steps_pfa_contest_steps.<locals>.genexpr_pfa_inventory_exists_pfa_problem_files_pfa_safety_copy_assets_pfa_safety_copy_assets.<locals>._to_safe_name_pfa_safety_copy_assets.<locals>.genexpr_pfa_strategy_line_pfa_writerphase_pickedpickspidpipeline_skillpixpkgplace_codeplace_inventoryplace_note_placeholder_placeholder_mtime_placeholder_path_placeholder_sizeplaceholdersplaces_placesplainplan_plan_candidates_plan_contentplan_cursorplan_file_plan_file_plan_has_no_data_work_plan_issues_rrplan_name_plan_path_plan_says_no_figuresplan_skills_plan_stage_guidance_plan_stage_guidance.<locals>.genexprplan_textplannedplanned_setplum_goldpngpng_notepopo_content_po_contentpo_file_po_filepo_path_po_path_check_po_recover_po_wcpolicypoll_intervalpop_positive_int_post_edit_issues_post_edit_issues.<locals>.<lambda>_post_file_post_path_post_review_performed_post_write_logpost_write_validation_postcheck_postcheck_created_postcheck_files_postcheck_modifiedprecheck_precheck_check_precheck_progress_precheck_repairprecompileprecompile_report_precompile_reportprefer_derivedprefix_preparation_log_dbpreparation_log_db_preparation_token__prepare___prepare_ip_materialsprepare_paper_prepare_paper_data_checklistprepare_skill_packageprepare_snapshot_repoprepare_stepprepare_task_payerspreparing_content_present_checkpointpreset_preset_idpreset_idpretestprev_key_filesprev_ofsprev_on_demand_prev_on_demand_note_prev_on_demand_note.<locals>.genexpr_prev_output_is_reportprev_step_preview_previous_memo_prewrite_data_entries_prewrite_data_mode_prewrite_data_review_note_prewrite_data_token_prewrite_errprimary_primary_primary_checkprimary_executionprimary_okprimary_outputprimary_output_contentprimary_output_file_primary_output_health_primary_output_health.<locals>.genexpr_primary_output_sizeprimary_path_primary_recover_primary_wc_prior_health_reason_prior_health_reason_r_prior_health_reason_rr_prior_health_reason_rr2priority_extsprivateproblemproblem_files_sectionproblem_id_problem_markerproblem_neededproblem_pdfsproblem_relproblem_scope_problem_scopeproblems_process_retry_policy_process_retry_policy.<locals>.genexprproducedproduced_countprof_profile_profile_nameprofile_path_profile_pathprogressprogress_callback_progress_candidatesproject_sourceproject_typeproject_versionsproposal_docx_layout_proposal_docx_layout_proposal_docx_layout.<locals>._readproposal_layout_proposal_noteproseprotected_content_errorprotected_content_unavailableprovider_refusal_pt_desc_pt_label_pt_template_ptype_ptype_labelpublic_public_workflow_errorpublish_checked_document_purpose_purpose_labelspurposes__pycache__pythonqqualityquality_attentionquality_failure_quality_hard_failure_quality_hard_failure_rrquality_receipts__qualname__questions_quote_lines_quote_lines.<locals>.genexprquotedrrandomrank_rankedrate_limitraw_rawraw_detailraw_pathrbrc_rc_ok_rc_reason_re_re2re_re_input_re_localread_read_read_assets_indexread_bytes_read_figure_manifest_read_figure_manifest.<locals>.genexprread_onlyread_textreader_reading_problem_readings_choice_context_readings_choice_context.<locals>.genexprreadings_rewrite_requestready_real_real_recoverreasonrec_errrec_pass_receipt_primary_receipt_raw_receipt_started_recognizerecognizedrecognized_pagesreconcilerecord_record_record_pdf_vision_attempt_record_pdf_vision_attempt.<locals>.<lambda>_record_prewrite_data_reviewrecord_requirementsrecord_review_record_step_progressrecords_recov_recov_extra_recov_wall_startrecover_checked_steprecovered_file_recoveryrecovery_affected_recovery_attempts_recovery_error_recovery_failure_messagerecovery_filesrecovery_message_recovery_outputs_pass_recovery_outputs_pass.<locals>.genexprrecovery_phase_recovery_prev_state_recovery_resultrecovery_stalled_recovery_stateredo_appliesredo_continue_redo_fresh_figuresredo_markredo_needed_redo_output_fresh_redo_output_fresh.<locals>.genexpr_redo_repair_prompt_redo_since_ref_err_ref_md_path_ref_text_refresh_bigdata_packagerefresh_claude_mdrefresh_if_needed_refresh_model_paramsrefusal_regen_err_regenerate_claude_md_keeping_extras_registered_diagram_skips_registered_figure_skips_registered_figure_skips.<locals>.genexprrehearsalrejectedrel_relrel_path_rel_pathrelativerelative_toreleaseremaining_stepsremote_computeremoveremove_event_listenerremoved_rename_legacy_step_namesrenamedrenderrender_reportrender_sectionrender_summaryrender_with_wordrenderedrenderer_repairrepairrepair_attempt_prompt_repair_docx_source_repair_docx_source.<locals>.output_repair_progress_candidates_repair_progress_candidates.<locals>.genexprrepair_promptrepair_reasonrepair_skillrepair_stalledrepairablereplacereplace_attemptreplace_typed_requirementsreport_reportreport_from_runner_resultreport_name_report_outreport_pathreport_structure_problemsreport_text_req_bytes_req_doc_req_textreq_text_req_tplrequestrequest_pauserequest_steprequest_step_idrequestedrequested_intrequire_execution_moderequire_repair_complete_require_successful_skill_result.<locals>.genexpr_require_successful_skill_result_required_companions_forrequirementrequirement_overridesrequirement_overrides_forrequirementsrequirements_file_requirements_have_format_rules.<locals>.genexpr_requirements_have_format_rules_reread_errrerun_check_pendingrerun_exportrerun_params_rerun_recovresetreset_auto_resume_stateresolve_resolve_agent_config_resolve_competition_page_rule_resolve_competition_page_rule.<locals>._positive_intresolve_genreresolve_profile_resolve_step_effort_resolve_step_model_resolve_template_resolve_template.<locals>.genexprresolved_resolved_pages_resolved_policyresponserestrestore_activeresult_resultresult_summaryresultsresume_coderesume_error_coderesume_session_idresume_sidresume_strategy_resume_strategyresume_tool_activity_seenretire_noteretire_paper_templateretire_pending_retire_sections_retire_step_sections_retire_step_sections.<locals>.<lambda>_retiredretroretry_retry_backoff_seconds_retry_budgetretry_budgetretry_compact_retry_kindretry_kind_retry_overrides_retry_reasonretry_stoppedretry_unavailable_checkretryingreturnreturn_codereturn_exceptionsreturncode_reuse_receiptreused_main_outputrev_errrev_err2reversereversedreview_fingerprintreview_pagesreview_since_review_sysrevised_filesrevised_result_revised_writing_revision_revision2revision_contextrevision_context_2revision_filesrevision_files_2revision_promptrevision_prompt_2revision_report_revision_result_revision_result_2revive_messagerevivedrewriterglobrichrmtreeroadmaproadmap_missingrolerootroot_sizerouters.artifactsrow_rowrow_prowcountrowsrpartition_rr2_step_start_rr2_wall_start_rr_blocked_rr_call_params_rr_checklist_err_rr_extra_rr_failure_message_rr_fresh_fallback_used_rr_handoff_rr_kept_context_rr_last_session_id_rr_n_rr_prev_progress_rr_prev_reason_rr_prewrite_entries_rr_prewrite_mode_rr_prewrite_token_rr_progress_rr_progress_candidates_rr_redo_since_rr_resume_session_id_rr_stalled_rr_step_start_rr_unchanged_rounds_rr_wall_startrstriprule_rulerules_rules_rules_pathrunrun_check_run_checkerrun_finalrun_for_steprun_key_run_native_docx_precheck_run_onlyrun_precheckrun_process_run_recovery_skill_run_recovery_skill.<locals>.require_repair_complete.<locals>.genexpr_run_recovery_skill.<locals>.require_repair_completerun_scoperun_scope_invalidrun_scope_reachedrun_single_steprun_single_step.<locals>._flush_logsrun_single_step.<locals>._single_advice_progressrun_single_step.<locals>._single_advice_checksrun_single_step.<locals>._single_advice_checks.<locals>.<lambda>run_single_step.<locals>._single_advice_repairrun_single_step.<locals>.genexprrun_single_step.<locals>.<lambda>run_single_step.<locals>.on_outputrun_skillrun_stats_coherencerun_table_checkrun_workflowrun_workflow.<locals>._execution_heartbeatrun_workflow.<locals>._expand_inputrun_workflow.<locals>._export_check.<locals>.genexprrun_workflow.<locals>._export_checkrun_workflow.<locals>._export_progressrun_workflow.<locals>._export_repairrun_workflow.<locals>._file_watchdog.<locals>.genexprrun_workflow.<locals>._file_watchdogrun_workflow.<locals>._flush_logsrun_workflow.<locals>._late_checksrun_workflow.<locals>._late_checks.<locals>.<lambda>run_workflow.<locals>._late_progressrun_workflow.<locals>._late_repairrun_workflow.<locals>._native_conversion.<locals>.genexprrun_workflow.<locals>._native_conversion.<locals>.<lambda>run_workflow.<locals>._native_conversion_attemptrun_workflow.<locals>._native_conversionrun_workflow.<locals>._precheck_checkrun_workflow.<locals>._precheck_check.<locals>.<lambda>run_workflow.<locals>._precheck_progressrun_workflow.<locals>._precheck_repairrun_workflow.<locals>._verify_checkpoint_revisionrun_workflow.<locals>._verify_checkpoint_revision.<locals>.<lambda>run_workflow.<locals>.genexprrun_workflow.<locals>.<lambda>run_workflow.<locals>.on_outputrun_workflow.<locals>.on_revision_outputrunningrunsrxs_ss_newsafesafe_detailsafe_errorsafe_stemsafe_to_rechecksage_rosesame_sessionsanitizesave_save_check_page_images_save_step_versionsavedsaw_section_sc_ok_sc_reasonscale_scan_workspace_scan_workspace.<locals>.genexprscheduleschemasciencescope_scope_scope_from_orderscope_reached_scope_reached_scope_request_scope_request_step_id_scope_to_order_scope_user_wordsscoped_scr_scratch_pathscript_sddsearchseconds_sectionsectionsection_continuation_section_neededsectionssections_dir_sections_dirseenselectedselected_modelselected_stepsselection_paramsself_self_check_blocksend_serialize_workspaceserializedservicesservices.access_modeservices.account_executionservices.account_model_selectionservices.account_transportservices.ai_disclosureservices.bigdata_contestservices.chat_contractservices.chat_memoryservices.check_runtimeservices.checked_exportsservices.claude_runnerservices.contract_syntax_gateservices.docx_tool_loaderservices.editor_toolsservices.extract_crosscheckservices.ip_gatesservices.ip_materialsservices.license_guardservices.llm_clientservices.materials_checkservices.model_contextservices.model_paramsservices.paper_finalizationservices.paper_modeling_qualityservices.paper_source_scopeservices.paper_submission_contractservices.promptsservices.public_artifact_accessservices.results_consistency_gateservices.session_handoffservices.skill_cryptoservices.skill_sourceservices.state_storeservices.step_recoveryservices.step_review_reportservices.survey_flowservices.user_templateservices.venue_specservices.workflow_acceptanceservices.workflow_intakeservices.workspace_cleanupservices.workspace_contextservices.workspace_mutationservices.writing_profilesessionsession_idsetset_broadcast__set_name___set_step_fields_set_step_fields.<locals>.genexprsetdefaultsettingsseverity_sf_shsha1sha256_shell_varsshenzhenshortshotsshould_remove_should_skip_should_skip_step_by_assets_should_skip_step_by_assets.<locals>.genexprshownshown_step_nameshutil_shutil2shuweishuweibeisigsignaturesimulated_reviewsincesince_epochsingle_single_advice_checks_single_advice_progress_single_advice_repairsize_sk_drw_sk_figskillskill_mdskill_md_encskill_nameskill_package_skill_template_dependenciesskills_skipskip_anaskip_analysisskip_diagram_visionskip_dir_partsskip_drawioskip_drwskip_drw_userskip_figskip_fig_userskip_figures_skip_namesskip_names_skip_patternsskip_problem_skip_reasonskip_report_skip_setskippedsleepsleptslim_filesslot_slots_leftsmall_snsnapshot_snipsnippetsoftsoft_gridsoftwaresoftware_namesoftware_versionsolve_statussolver_statussortsort_keyssortedsource_source_source_candidatessource_contractsource_files_source_headersource_mdsource_nonblank_lines_source_problemssource_skillsources_sp_sp_ok_sp_reasonspec_specsplitsplitlinesspring_src_hintst_file_attributesst_mtimest_mtime_nsst_sizestagestalestalledstamp_stamp_step_run_stamp_step_run.<locals>.stampstampedstart_start_prewrite_data_review_start_redostartedstarted_atstartswithstat_statstatestatic_reasonstatsstats_body_char_limit_stats_body_char_limit_stats_custom_titlestats_docx_package_stats_docx_toolstats_english_abstract_stats_format_submission_stats_mode_section_stats_repair_prompt_stats_word_deliverablesstatusstatus_file_status_filestatus_pathstatusesstderrstdoutstem_stemstep_stepstep_completedstep_context_step_ctx_drawio_only_step_ctx_figs_dir_step_ctx_has_drawio_step_ctx_no_fig_step_ctx_total_figs_step_data_problem_step_effortstep_effortsstep_failedstep_id_step_inactivity_timeoutstep_inactivity_timeoutstep_indexstep_issues_timedstep_liststep_model_step_modelstep_modelsstep_needs_disclosurestep_notestep_order_step_outputs_step_outputs.<locals>.genexprstep_paramsstep_progress_step_recovery_statestep_recovery_statestep_review_reportstep_review_updatestep_runsstep_skippedstep_start_timestep_started_step_wall_startstep_wall_timeoutsteps_steps_still_therestop_stopstop_after_planstop_for_readings_stop_if_compute_blocked_stop_substore_stored_resume_session_idstrstrategy_strategystreamstrictstripstripped_stt_style_mapstyle_profilesubsub_steps_sub_steps_prunedsubjectsubmissionsubmission_advisoriessubmission_check_submission_check_submission_contract_hard_failure_submission_contract_hard_failure_rr_submission_contract_skillsubmission_repair_prompt_submission_report_submission_report_r_submission_report_rr_submission_report_rr2submission_review_submitted_atsubprocess_subprocesssubstantivesucceededsuccesssuccess_count_sufsuffix_suffixsumsummary_summarysummary_linesunburstsupersupplement_note_supported_extssurvey_contest_rules_survey_data_pending_survey_data_pending.<locals>.genexprsurvey_deliversurvey_docx_deliver_survey_drop_survey_exportsurvey_flow_survey_flow_survey_header_row_survey_intake_stepsurvey_market_survey_report_repair_promptsurvey_stage_survey_waitsuspended_seconds_sw_name_sw_versionsys_sys2_sys_sys_pre_sys_ref_sys_svt_t_err_t_files_t_pass_t_review_result_t_summarytable_table_check_contexttable_data_validation_table_form_note_table_form_note.<locals>.genexpr_table_marker_beforetable_md_note_table_repair_limit_table_report_table_review_marker_state_table_run_checktable_steptableautail_talk_cp_talk_free_talk_scoped_talk_wctalkedtalked_all_talked_image_texttargettarget_dir_target_maptarget_md_target_md_target_md_maptarget_mintarget_nametarget_paper_counttarget_pathtargetstasktask_executor_referencetask_message_id_tb_tb_lower_tchk_tdbteal_orangeteamteam_idtechtech_backendtech_dbtech_frontendtech_langteddytemptemp_cachetemp_dirtemp_pathtemp_texttempfiletemplatetemplate_clstemplate_filetemplate_filestemplate_folder_nametemplate_maptemplate_map_insertedtemplate_pathtemplate_paths_template_scope_template_step_for_template_step_for.<locals>.lookuptemplates_templatesterminal_tokensterms__test__tex_tex_candidates_tex_path_tex_srctext_texttext_commandtext_layer_incomplete_text_profile_path_tfthesisthesis_docx_layout_thesis_docx_layoutthesis_layout_thesis_note_thesis_notesthesis_proposalthickthinthresholdthrowtianfutikztikz_time_timetimeouttimeout_sectitletitle_font_installed_tl_tmptmptmp_roottmpltmpl_dir_tmpl_dirtmpl_step_tmpl_step_for_checktmpl_step_for_cp_tmpl_step_for_recover_tmpl_step_for_wc_tmpl_sub_to_safe_nameto_step_idto_threadtoctokentol_mutedtol_vibranttooltool_activity_seen_tool_fault_notetool_wordtools_tools_tools_pathtools_path_tools_path_pre_tools_str_toolsettopictopic_choice_topic_choice_topic_choice_context_topic_choice_step_topic_ctx_topic_rerun_context_topic_rerun_context.<locals>.genexpr_topic_rerun_feedbacktopic_rewrite_request_topic_steptotal_total_lines_tptpl_dirtpl_exts_tpl_note_tpl_rowtracebacktranscribetransient_providertransient_tokens_transport_trap_texttree_trigger_reasonstrue_truncate_doc_section_truncate_image_section_ts_systupletwintxttypetypedtyping_ug_guard_ug_restoredunauthorizedunavailableunclear_uncount_paid_continue_unfinishedunfinished_sections_unitunitunknown_processunlinkunlinked_unreaduntraced_untraced_untraced_blockupdateupdate_workflowupdated_updatedupdated_contentuploadedupperupperRomanupstreamupstream_completed_upstream_cur_upstream_deps_forupstream_guardupstream_of_usable_main_output_receiptusable_template_mapuse_problem_requirementuse_user_figuresuse_user_resultsused_used_template_fill_user_content_targetsuser_datauser_data_dir_user_data_has_data_files_user_docx_templateuser_fig_user_fig_fig_roadmapuser_fig_roadmapuser_filesuser_files_section_user_latex_tpl_user_outline_user_request_contextuser_results_user_skip_drw_user_skip_figuser_template_user_template_for_claude_md_user_templates_user_tpl_user_tpl_env_user_tpl_env_vars_user_tpl_err_user_tpl_list_user_tpl_mod_user_tpl_paths_user_tpl_paths_for_user_tpl_section_user_tpl_stateuser_words_ut_manifest_utilsuuiduuid4v_vval_valid_data_palettesvalidation_mode_validation_modevaluevaluesvalues_onlyvarvendorvenue_venue_venue_ai_venue_ai_errvenue_ai_statement_venue_env_venue_env_varsvenue_family_venue_now_venue_pre_venue_precopy_folder_venue_sectionvenue_spec_venue_spec_modvenv_verify_checkpoint_revisionverify_template_folderversionversion_failed_version_run_keyvibrantvisible_skillvisionvision_review_vision_reviewvivid_boldwait_wait_active_time_wait_for_extracts_wait_for_extracts.<locals>.genexprwaitingwaiting_checkpoint_waits_for_network_waits_for_network.<locals>.wrapped_waits_for_paper_checkpointwalkwall_timeoutwanted_warn_warn_depswarningwarnings_was_activewatchdog_taskwb_wc_feedback_wc_output_okwfwf_id_wf_rowwherewhichwhitewhywindowswine_with_handoffwith_namewith_suffixwith_typed_requirementswordword_availableword_countword_count_target_word_target_word_template_map_state_word_template_map_state.<locals>.genexprwordsworkerworkflowworkflow_completed_workflow_contract_skillworkflow_engineworkflow_exceptionworkflow_failedworkflow_failed_no_filesworkflow_failed_step_errorworkflow_idworkflow_license_requiredworkflow_pausedworkflow_preferencesworkflow_startedworkflow_step_license_scopeworkflow_stoppedworkflow_templateworksheetsworkspaceworkspace_dirworkspace_filesworkspace_git_workspace_venue_specwrappedwrapswritewrite_bytes_write_extract_crosscheck_write_extract_crosscheck.<locals>.genexprwrite_reportwrite_skillswrite_statement_fileswrite_step_write_step_handoff_write_step_handoff_evidence_write_survey_ai_log_write_survey_blind_termswrite_textwrite_venue_specwriterwritingwriting_check_writing_checkwriting_profile_writing_profilewriting_reviewwrittenwswuyixx64yyangtzeyesyrdmcmzh_zh_replacements� 0�0B�.�PQ�4=�Q���t�6��(�)�1��U�!�4�t�1�J�j���{�!��|�1��q��s�#�U�#�T��Q�i�s�+�T��T��+�S�PT�TX�X`�`c�cd��q�	�	,�A�����{�!�1��5��u�D��R�q��1���"�!�;�l�!��8�8�1� �0�0C�1���s�!��6���T��$�a�}�C�u�D���Q�l�RU�UV�0�0E�Q�d�-�Wc�cl�lr�rs�0�0@��.�.A��I`�`a� #�=�0D�I�Q� ��A�[��!��t�9�G�1��q�� � 5�Q�a��S��"�.����	���	��t�4�x�s�#�T��b�
-�"�F�"�A�����i�t�5��d�$�g�V�1��7�#�^�5��F�#�W�A��K�r���4�~�Q�f�C�q��1��9�D��K�r���4�w�d�)�S[�[f�fn�no��1��1��0����A�0��q�%2�2H��Uf�fg� )��� ��1�A� "�/�1D�DU�UV��t�6��D���v�Q��T��+�R�w�g�Q�a���6����}�A��F�(�#�T��u�B�j��6��1���v�Q��q��v�Q��8�2�Q�.�a�q� %�\�1I��RS�
- �Q�d�!�3�d�%�w�c��4�t�1�B�h�a��t�1��q����V�1�D���j���-�z�QR��Q����t�:�Q�h�f�C�t�:�Q�f�D��AS�ST��v�R�q���I�Q��4�v�Q�e�:�Q�i�q��z��&���,�A�X�Q��d�!�;�b���;�a�t�6��(�-�w�g�T��RS��I�_�A��8�1�7�v�R�r����v�R�q��u�A�1��Q�e�7�!�1�F�$�e�ST��1� (�	�� �1�K�0�����]�!���7�q��;�e�ST�TU���8�1�)��I�Q��q��t�1��q��D��Q�a��	�
-�!�<�q��q��(;�1�K�q��1M�Q�k�YZ���#�1�M����1�J�a�s�!�7�"�G�;�d�$�>Q�QR�RU�UV�VW��4�1����A�Z�q��
-�'��(�,�c��1�1�1�1�1�1�;�1�"�)�1� )��� �{�!��1��	��1��q��1� "�)�1����2�2�*�A�Y�i�w�V`�`k�kl���q��1�D��b����u�D���c��V�3�b�PQ� "�)�1���
-�"�2�*�A�Y�i�w�VW���q��C�w�a�I��s�RS��q���Q�����f�A�V�;�c��A��4�v�Q��8�;�a�q��(�&���E��I�S���4�s�'��C�x�q�PU�UV��n�G�3�d�#�Y�c��d�$�k�YZ���c��q�9���4�t�3�c��q��3�a���s�&����4�{�!�1��W�C�q���X�S���T��A�Q��1������1� ��1��4�q��t�5���;�b���q� #�1� �
-�"�A��t�9�G�1�	���y�
-�!�9�A��s�!�1�
- 	�.�a��a��a�|�<�z�QR� 	���A��s�$�a�0��!��� �	� 	�r��Q�)��1��� 	
-� 	�r��Q�)��1��� 	�3�a�v�R�q��2�T��2�"�A����2�T��.�b���� 	�#�Q�a��8�2�Q��[���y���u�A�Q�#�9�M��1��=���8�1�8�� (��^�1�
- �*�B�a��t�;�g�Q��s�$�a�q��!�������G�1�H�H�A���B�b���a�q��y���4�y��R�y��!���q����7�!�1��3�a�{�!������1�� �*�B�a��t�;�g�Q��v�Q��q��{�'���A��G�1���A�T���&���z��A�Q��Z�q��1�A��t�1�A��x�w�f�C�s�!��8�<�q���\��1��(�)�2�Y�a��t�7�%�t�6����D����G�1�A��Q�k��q���t�1��v�Q��~�S�� 	�7�q��!�	�'�q�(?�z��WX��!��0���L��VW��}�A��x�q�F�d�!�4�{�Zc�cl�lm��q� �w�>�a�t�1�D��UX�XY�Y]�]_�_`��7�!��n�B�a��t�7�(�!��w�a��a��=��1�J�c��!��3�a�z��1�����w�a�q�
-�$�l�!�<�y��
-�"�H�E���q��a��q��q���"�"�I�R�v�R�q���"�"�F�"�A����A�V�4�x�}�C�t�7�!��1��q�
-�"�H�E��.��!�3�d�!�8�1���*�!���A����1�A����:�Q��:�Q����Q��1��A��!��Q��w�a��;�a��w�6�a�7M�Q�a��v�\��A��v�Q���x�s�!��&��C�r��,P�PS�S^�^a�aw�wz�z{�	�	3�1��_�A�\���q��w�<�A�W�C�v�Q��7�/��'��A� *�(�!�$ �1��Q��1�
- �Q��!����[���4�v�Q��4�q���8�;�a�q��(�&���u�C�y��8�3�d�#�W�C�s�(�!�5�PQ��!��#�T��G�3�a��!���1�
- �!��s�)�3�m�3�d�#�Z�s�!��!��c��S��c���*�#�T��O�3�a��!��!��!����V�1�A��4�q���q��a�q��8�3�a��4�q��5��1���D����8�3�a��w�a�q��S���W�A�Q��t�1��t�1��;�a������1���~�S���7�q��!�	� (�q�(?�z��WX��!��1��+�\��WX��}�A��x�q�B�$�a�t�;�V_�_h�hi��q��w�>�a�t�1�D��UX�XY�Y]�]_�_`��7�!��*�B�a��n�B�a��t�7�(�!��w�a�
-�"�H�E���q��a��1�C�}�C�q�
-�#�Q�a��q��M����q���3�a�q���*�!���A����1�A����:�Q��:�Q����Q��1��A��!��Q��w�a��;�a��w�7�q�8N�a�q��v�\��A��V�8�3�a��;�3�k��Lb�be�ef��6��S��$�g�W�A���E��*�F�#�V�1��3�a�x�r���V�2�Q��1��7�=�Q�g�S��a��w�*�!�7�#�Q��$�A�[��N�!� (�	��
- ��1����a�q��4�)���l�!�<�q��A� *�)�1�
- ��)���&�a�t�1�A���q��t�1��q��	�
-�!�<�q��1�C�u�A�X�Q� �=�(;�1� 
-�	)���k��*�G�3�a��;�h�c��T���O�1� "�)�1�, ��q��A��A��q��q����!��Q��!��q��z��1��t�8�7�!��q���t�6��(�*�A�Y�i�w�a��4�z��&���1���K�q��E��/��\���WX��!�5��A�V�4�q���E��$�A���a�u�C�q��d�!�3�a��q��a�u�A��4�z��&��A�%8���!�'�q��4�z��&��A�^�1��!�?�!��q��=���8�1�3�1��q� �1��q��}�C�q��Q�k��A�]�!�1��q��u�A�%�S��a�/C�CS�ST��q��u�A�Q��S���"�D��R�z��3�j���E��Q��6��,�L����1��q�&�a��Q�a��q��v�%5�Q��q�!���Q�a��q��v�%5�Q��q��Q��Q�.�a��q��v�%5�Q��q� ���Q�a��q��q�'�q��Q�a��q��q�!���Q�a��q��v�%5�Q��q�#�1��Q�a��q� +�1��s�!�7�#�T��A��q�
-�#�Q�n�C�q��3�k��*�C�u�F�#�T��E��C�v�Q�d�RS�ST� "�)�1� ��t�1�H�J�a�y���Q��q����a����K�q��4�w�b��1�A��d�'��7�!�4�v�Q���E��Y�a�q��A�R�t�5��6��*<�D��!�6��c�QR��'��5��"�B�h�k��S���1�F�RS�ST��t�1��q��C�u�A�T��!�1��I�S����8�5��$�b���G�1�C�q�/�q�� �1��t�1��q����F�!�8�:�Q�e�:�T��!��v�S���a�1��A�U�!�1��|�1��q��c��%�t�1�K�s�#�V�2�R�q���s�!�5��!8���E��Q�Na�ah�hr�rs��q��q��C�q��T��.��3�f�B�b���5��A�Q���G�>��k��L^�^_��q��)�=��F�#�]�!��x�z��&�
-�!�(�2D�A�Q� %�]�2E�Q���d�!�<�q�
-�(�#�Z�q� %�]�2E�Q� �y��q��q�	�	)���W�C�q���A�V�4�q���c��Q�'�t�3�a�v�T��.��4�v�UW�WY�YZ��8�9�C�=�Q��O�1�A�X�W�A�V�1� "�"2�)�1����Q��~�.�a�{�,�a�x�x�W[�[\�\a�ab���q�2�*�<_�_`�2�.���2�(�!� !�!2�-�?R�RS��9�C�}�D��3�6I��T�Qd�de�ef�  � 2�!��c��a�s�!�4�v�S��c��C�z���c��Q�	�	�	��7�"�A� ��!2�!� �q��7�!�=��(��)9��*�!��7�!�2�!�(��)9��q�)*�*�!�*�&�0@���1��q�$�A��Q�a��q��v�%5�Q�	��q� ���Q�a��q��q�'�q��Q�a��q��q�!���Q�a��q��v�%5�Q��q�#�1��Q�a��q� !�!2�(�!��y��=��K�s�!��t�1�(����4�q��d�!�<�q�  � 3�1��3�e�1�C�r���3�d�!�+;�3�c��s�"�A��3�1��R�y����N�!�  � 3�1� �W�C�q��&�a�q��d�!�6��Q�a��'�q���a�w�a�0�0P�PQ�QR��q��w�a�w�a�q��q��w�a�w�a�q���R�t�5���"�A� �q���A�Q����2�!���A��%�Q�a��q��2�R�s�!��1� %�^�3E�X�Q�
- �t�6��Q�a��v�Q�	�	����z�)��+�Q��:�'�q��)���1�F�$�a�4�A�Q�����6��0���q� %�^�3H�HX�XY�",�A��4�v�Q���[���4�v�T��d�+�UZ�Z[�[\��4�q���"7�|�4�q�	�QS�ST��A��#�#3�>���� �{�#�Q��y�-�Q�k����4�q��6��Q���Q��d�!�:�R�q��:�4�A�U�!��9�D��3�a��-�Q���%�q� 1��#�U�!�1��Q��1��x�q�3�8�1��6����u�H�A�
-�$�a�z��1��t�3�g�S��6��R�{�'��D��B�o�U\�\]��a��M��q��A�Y�h�a��y��s�&�
-�"�K�w�c��Z�WY�Yh�ho�op��a���5��q� �3�=�	�� �
- �f�A�T���t�1��&�����'7�v�S���s�!�9�B�a��j���!�1��7�!�6��a�����3�a�{�'����E����C�q����q��=���8�1�1���q�4�4E�X�Q�4�4I��$�m�[g�gp�pv�vw�4�4N�N^�^_�*1�1E�Q�(�"4�A�Q��!�!4�A�� ��L��R�q���q���7�!��<�u�I�S��1��q���A��A��
-�!�:�R�|�:�R�q��4�v�W�A���J�f�F�!�1��v�[������u�B�a����1� $�$4�A� �W�C�q��s�!�6��Q�)��C�v�R�v�S��1��q��6��Q�a��z��&���t�6��6��D��X�W�A��5��S��T��Q�f�C�t�4�u�C�x�q� #�#4�I�Q� �$�a�{�"�H�B�a���7�!���;�a��8�1�A���t�1�A���1��t�4��a��t�1�A��	��&�a�t�1�L��U�!��s�$�c����q�#�1��x�q�1���4�q�'�s�!�7�"�A� !�!4�I�Q��q�$�A�W�H�D�	�� 	�	��a�q��N�6�a�q��{�'����q���1�4�J�>P�PQ� "�"4�O�=�PY�YZ� ��D� 0���t�;�d�+�W�A��q���3�a�{�'��A��u�G�1�C�s�!�1��%�[������/?�y���u�,�A�\��1��6��1��=��.��#�U�!�6��r���=���/�q��A�T���1�5�5G�x�q�5�5I�I[�[\� "�"5�5L�L\�\]� �W�C�q��v�T��&�c�� 	�#�1��v�T��!� 	�+�1��v�T��!� 	�$�A� �.�.I���v�T��!��&�a��v�T��!��*�!��v�T��!��(���v�T��!� 	�.�a��v�T��!� 	�%�Q��C�u�A�S���d�!�:�S��d�!�:�S���2�V�1� �$�a�v�T��!�	��t�1�A��s�#�R�~�Q� 	��a� �*�-�7L�A��|�>��� ���s�'��V�VW�� ����.�.F�a��$�$5�Q��0��� 	�/�q��/�q��H�I�Q���� ����n�N�!��2�!��,�M���&�a��.�a��Q� 	
-�	�	�	�	�	�	� �!��s�'��]�]^��s�'��]�]^��%�Q���a�  � 5�5O�q���y�
-�!�9�A��Q��q��a��
-�#�X�Q�H���4�}�A�Q����E��*�!�1��#�1�A��d�%�q�	���6��2�S��B�a���t�2�W�B�d�!�4�r��A�Q��w�a�q��q�	��[���y���{�!��x�q�9��!��1��1� �5�Q� �1��q��Q��Q�a��q��v�%5�Q��q�!���Q�a��q��v�%5�Q��q��Q��Q�.�a��q��v�%5�Q��q� ���Q�a��q��q�'�q��Q�a��q��q��Q��Q�a��q��v�%5�Q��q�#�1��Q�a��q� $�$5�Y�a��t�7�&��4�x�q��q���q���w�c���q��S��Q�a��Q��q��s�!�1��y��1��q���D��b�
-�"�$9��1�I�Q��a�s�!�1�D����E��$�a�}�C�s�#�Z�q�PS�ST��3�a�H��1��1��\���q����Q��t�1�C�{�!�8�2�T��!���q���!��5��1�M���v�S���A�Z�~�[��Q���D���:�Q�d�$�a�x�{�RS��A�Y�c���{�%�q� #�#5�^�CW�W_�_`� �{�#�Q��$�$9��!��!��D�0E�Ea�ab��q���$�e�1�G�2�X�[��B�a�	�C�q��q�	
-��m�1�A��a��I�Q�2�!��5�_�H�A� #�5��M�� �\��)�1��L���W�C�q��3�c��x�q��q��'�q�(8��1��	�
-�!�1�
-�1�	�+�+;�5��Mc�cd� #�#6�6G�q�!/�q� ��+�1�K�}�L�PQ��;�a� 	�8�1�A�!��Q��q� )��6G�q�
- �{�'���q�	�	���4�q��2�Q�	��:�4�A�T��B�g�Q�j�XY��q��L���G�1�A��5��%�S��Q�a��1�6�a� #�#6�a����2�W�C�s�$�a�'@��1��q��q��9�E��I�\�� %�%6�h�a��4�q�$�D��-�}�A� #�#7�7G�w�Nh�hi� �t�=��4�t�1�M����q��s�!�;�g�S���5��q��3�a�q����d�.���V�1�D���j���RS��Q��q��t�3�a��q��q��7�!�1��C�q��4�q�	��A���t�6��+�Q��4�%�Q��8�1�1���v�W�A�Q��=���8�1�0��Y�a��v�Q��A��t�4�q���W�A�Q��t�4�q���W�A�X�T��Q�&@��<�q��t�4�q�*�$�n�A��W�A�Q�	�T��,�c��1��W�A�Q��t�4�q����A�Q��G�8�1�A�Z�w�.@��~�UV��E���'���W�A�U�!�1��t�4�q���W�A�Q��t�4�q���W�A�U�!�4�q���5�	��3�e�1�J�k���t�4�q���$�A��1��9�O�1��	��"3�1�D���V�5�PQ��q��-�Q�d�!�1��1��8�1�>�a��)����u�A�"�!��1� "�(�!���7�!�*�*�C�t�3�a��?�$�a�q��a�v�W�D�� &�&7�}�DW�W_�_p�pq� �4�r���3�d�!�#7�t�;�c�I[�[_�_c�cd� %�%7�}�H�A�� � 5�Q�a���[��,A�A]�]^��z�)��+�Q��	��c��	��c��	��X�R�t�5���"�A��Q���!�9�A�X�Q�a�	� &�&7�v�Q��s�!�;�g�S���5��q��3�a�q�	�	�a��6��1�I�]�'���C�t�1�6�d�!� �T��#�W�A�O�q��\��(�+�Q��q��j����r�+�;�a�v�W�D�	�QR��v�Q��"�!��R�s�%�q��f�B�a��t�1�F�&��A�^�1��1� %�%7�x�q���1�K�q� %�%7�x�q��{�#�Q��q��&�a�q��t�1��q��C�u�A�X�R�t�3�h�c��*�B�g�Q��4�A� 	�%�u�A�Q�
-�!� '�'7�y���;�c�-�T��Q�+�8�1�
-�8�1� �8�1��2�Q�l�#�Q�d�#�S��d�&�� �|�8�1��A����1�E���%�s�+�R�r���W�A�U�"�B�e�1�$U�U\�\]��4�u�A�V�6�� #�8�1��T��a�q��	�
-�!�1�
-�!� #�8�1� �t�;�a�q���A�S���f�B�f�A�Q��w�a�*�+�Q��s�'��*�A��u�B�a��5��!� �8�1��w�a�q��-�Q����a�s�!�7�&���}�A�U�&���{�!��3�e�1�C�q��s�#�V�3�b����!� �+�8�1��w�c��D��!:�#�Q��q��'�r��E��)�2�Q��1� #�8�7�2C�1�	�	2�/���~�S���}�A�Q��q��#�1�A�	�	)�)J�!���c���~�Q�a���1�A� %�%8�8J�!��&�a�x�q��w�g�U�%�v�T��D�0C�1�F�'�QR��q� �*�!�;�a�!8�8M�Q� ��\��&��!8�8M�Q�d�R_�_k�kt�tz�z{�8�CU�UV�VW� +�=�8N�i�WX���y��q��g�Q�k��q��t�3�e�3�d�!��q���A��V�1�H�F�)�1��
-�!���2�W�A�Q�	��#�Q�g�R�r��A�W�D��q��Q��u�A�S���,�a�����q��}�A��x�q�A���PX�X\�\]�]a�ab��1� &�&8���	�	���{�#�^�1��n�A�Q� '�'8��8�1� �t�9�A�Q��'�q��B�a�s�!�>����{�#�&�d�%�s�'��Y�d�J[�[\��q��1�� 8����A� '�'8��EX�X`�`q�qr�
- ��Q�j��H�D��A� &�&8��FX�XY��t�1��v�Q��:�R�w�g�Q�a��w�i�q���7�+�Q�k��[��;Q�QU�Uj�jk�kl��6���4�t�7�!��7�/�q�����4�u�D���3�a�x�s�$�d�!�5��ST�TU� 	�4�q��7�/�q���$�$8��D��{�RS�ST��7�-�r�)>�a�q��v�Q��t�4�x�q��w�+�1�A��t�5��)�3�a��w�m�2�X�Q�a��$�A�[��A��q��w�a� �6�� &�&8��� �{�#�Q� 	�)���,�A�Q��q��K�q��)��,�a��t�1��;�c�,�E��Q�k��CS�S[�[\� �M�!7�q��1��9�F�,�a�q��;�c���1���*�!�1��1�C�q��s�$�a��;�d�+�1��1���'�q���1�C�q��s�$�a��;�c�� �*�!��M��+�Q��1�C�q��s�$�a��v�Q���3�a��a���q��J�b���4�q��s�#�T��(�!��7�!�2�Q�a��t�4�s�!� ���s�&���*�A�Y�a��a�u�D���F�#�T��1�F�RU�UV�#�5�
-�!�6��G�4�z�QR�RV�V^�^a�ab��4�q��7�!�2�Q�a��\���w�a�r��!��*�C�t�3�&;�4�q��R�y�PS�ST��7�!�2�Q�a��t�4�s�!� ��� �e�1�I�%5�Q� ��E��(�/�AS�S_�_`��4�z��,�f�G�3�d�!��7�!�2�Q�a��\���w�a�r��!��z��T���w�a�.�a�q��z��T�� 	�6�a���6�a�q��4�q��7�!�1��z��T���%<�A�[�� 	��3�1�K�q��4�q��7�!�1��{�#�\��T���-�Q��w�a�)��!��1�C�q�	��D��� (9��9�9K�1�7J�!� )�)9�9N�Nc�cl�lm��K�s�!��A�X�X�X�\��X�X�Y�VW����*�B�a��{�'���E��H�A��!�7�&���q���4�t�3�f�E��%�{�!�8�3�a�u�T_�_`�`a��u�F�!�1��1�F�'��c��b��A�Q�f�A�Q����*�F�!�1��1�D���a�s�$�h�f�A�Q��1�B�d�%�u�C�q��b��1�A��N�%�~�S��A��%�[���1����A�Q��q��W�A���a�q� 	�1�����	�t�1��W�A�Q��W�A�Q��W�A����!� 
-�Q��W�A��
- 	�W�A�&�a�s�!�1��W�A�Q��W�A����!� �2�U�!�1� )�)9�9P�PQ�+:�&��Ne�ef� 
-�	,�O�1���#�Q�m�3�a��"�A�X�Q��(�*�A�Q��
-�"�F�"�O�2�R�q����!�1�F�$�e�1��a�x�t�8�+<�A��C�q�	��3�a�q��$�A�U�*�F�!��t�1��7�!�;�a��q��A�]�-�r��DU�UV��q��|�1�M���}�A�X�W�A��/�q��'�q����q��%�R�t�5���A�U�!��1��1��4�w�a�u�B�e�1�D��Q�c��%�q��q����2�U�!�1��t�7�!�5��&���A�W�G�;P�PQ��q��i�|�1�J�i�q��6�a�q��3�e�1�H�B�a��;�j���F�"�D��$�f�B�e�2�Q���K�q��i�q��H�A�Q��G�1�K�q��5��!� %�%9�9T�T]�]^� �s�!�;�g�S���5��q��3�a�q���q� �5���2�3�2�Q��E��#�#5�Q��T��!��z��%�t�1�0���a�$�D��D��1D�C�w�e�ST�TU��z��%�t�1�K�q��a�|�5������Q���m�1�D���S����q��I�T��Q�i�s�*�O�4�t�1�A��d�$�a�q���t�6��$�a�|�4�~�Q�i�q��=���8�1�3�5�	���!��#�Z�q��A��t�4�q���W�A�Q��t�4�q���W�A�Q��t�4�q���W�A�U�!�4�q���u�A�$�A��1�E��3�e�1�K�{�!��|�9�A�+�+;�9�A� +�9�A� �
-�"�A���4�y��s�#�Y�k���1��v�R�q� �!���q��t�1��q�	�	"�!�	�	���^�;�a�z��Q�i�s�!��*�B�f�B�a����V�1�K�z��)�1���:�Q�h�k���Q����A�����q�	��s�%�r��#�R�s�*?�q�������d�!�3�a��:�Q�g�V�4�u�D���4�{�.�XY���)��!��6��Q�c���1����:�Q�c��r��c���c��Y�Vc�cd�	��'�-�Q�e�:�Q��}�A��x�q�-�S��t�1�D���'��q��4�q��!�3�i�q��A���u�C�q�	��^�#5�Q�k��a��4�w�a�y��z�����6��1�F�&��$�b��F�"�E��1���K�q��o�Q�c���b�PV�V_�_`��H�A�Q��G�1�K�q��{�!��x�q�1��G�1���w�a�v�Q��6��Q�c���g�Q��A��q��q��6��W�A��q��d�$�f�G�6��s�#�U�#�U�$�j�XY�Y^�^_�	��w�f�A�X�V�9�A��;�j���F�"�D��$�f�B�e�SU�UV���K�q��F�!�6��h�i�q��H�A�Q��G�1�K�q��{�!��x�q�)���q��5��$�C�q�
-�$�e�1�G�2�Q��1� #�9�A� �
-�"�A��t�9�G�1��q��/��!��A����a�y���D��	��t�4�x�s�#�T��b�	��A���T���a� �w�c���G�3�.F�d�,�VW�W[�[c�cf�fg��������t�1��q��1�E��X�Q��|�4�|�1�D���1���%�t�8�:�S��W�A��d�!�1��s�!�<�s�!��w�a�q��5����A�]�#�Q�a��1� �^�9�A�	�	&�m�1��l�!�1��q��q��v�T��4�C�{�!�1��H�M��q� %�^�9�A��t�6��Q�a��q�	�	����z�)��+�Q��:�'�q��8�1�(��d�!�3D�A��q���#�1�K�v�S���t�1�L�PS�ST��;�a��8�1�$�A��1� #�9�A� ��t�6��:�R�v�R�/F�j�PQ�QZ�Z[��Q��q��t�:�Q�f�A��q��I�,�,<�<Q�Q[�[\��S���T��)�3�d�#�V�>��T�QR�RS��D��A�%6�k�� (�(9��!� ��1����q�
-�&�
-�"�-�Z�r���	��&��	������q��t�?�!��I�T�*�!�;�e�5���1��$�A�Q��q�����q�� 	�W�A�Q����q��1��w�a�q��=���W�A�_�A�Q��y��C�x�q��w�a�q��t�4�$�A��W�A�Q���7�7O�q���2�Q�#�2�%;�:�^�ST��	��Q�e�2�Q�&'�z��A�\��#�Q�j�XY��3�d�&����7�!�1����/�q��b���=���W�A�+�1�A��9�A�9���U^�^_� '�'9����;�c�/�q��3�l�$�&9��$�a�q�(�*<�A�Q� -�\������A�Q��{�'��q��e�7�!�3�a�	�	!���z�-�Q�k���q�	�2�/�{�!��y���3�a�x�s�!�*�A�U�&�� �A�
- 
-�	0���1�B�d�%�t�9�A�%S�SV�VZ�Zj�jk�kl��(@���A� #�=��}�A�	�	���[��1�J�b���� ���8�1���y��A�Q����q��D��Q�a� �"�!�;�a� 
-�	�����a�{�*�A��,�A�[����d�!�:�T��$�a�x�s�!��#�1�O�1�L���9�C�q��q� 	�Q�b��E��C�t�1�K�r��q����q�	�����$�A�Q��d�!�%�%7�q� �q��j��!��w�g�Q�	�� �A��y��1��-�Q�a��1����$�e�1�A��!� ���j��!���d�!�#:�#�S��a��s�!�6��Q�3�3�a��t�?�'��D�� 	
-��!���� 5�Q�k��1��;�a�{�)�1��(���J�a��u�A�B�*�C�q�PQ��}�A��x�q�@���t�?�'���1���{�!�+=�Y�a��5����A�Q��=���8�1�J�!���g�S��D��	���j���)�7�!� ��A�X�W�A�Q�#�1��{�#�Q��� &�Q�a� ���A��4�u�A�V�2�Q��3�a�z��1��x�r���s�!�1�����,�A�[��1� $�5��A��1�A��
- �<�y��+<�L���ST��l�!�1� �$�/�z�� �� ��)�);�1�	���]�#�Q� 
-�	&�a���5�$�A�X�Z�v�Q��9�C�|�4�r��A���=��B�c����4�q��A�Q� �!��]�/��q�*�!���5��f�A��2�S��d�*�A�T��a��w�b���t�3�a�q��q��,�,J�!�>�YZ��b��3�d�#�U�,�c��3�a��9�C�q�!��"2�#�5E�Q��1��w�b� =�Q���T��4�{�!��y��|�4�v�T��.��CU�UY�Ye�el�lm�mo�os�sv�v{�{|��7�"�M�):�!�6��!��q��1��1��1��E����y���a�q��1��1��q��q��1��1��1�
- �A���#�Q���H�G�+�1�	��u�A�	�w�e�1�	�{�!�	�4�A��V�4�q���:�Q�e�5���D�
-�!�4�v�T��B�a�!���(�#�Q�e�7�!��q��1��G�3�f�I�Q��v�Q�m�1�E��&����1��A���
- 	�A��� 	�A��#�1�$4�4L�A� 	
-�� �u�!���]�&��A�-A��G�6�QT�TW�We�ef��;�c���q��� �y��:�S����#�Q�f�D��!2�#�S��b��a��t�4�t�9�C�q��a��t�3�a��� �S���Y�k��;�h�j�XY�YZ��,�A�Q�P�PQ�QX�XY�YZ�6�a�w�a�q� �q��� 	�9�C�q��C�q��d�!�#5�S��v�R�v�Q��I�V�4�x�~�Q��8��c��Q��%�Q�a�)��!�
- �y��1��1��6��Q�'�s�!��q��q��1��1��1� �y��1��&��A�-�S��F�!�	������1��a�	�Q�h�a��1��1��=��!=�Q�a��7�#�Q��&��A�.�c���&��A�-�S���6��Q�k��A���a�z��+�Q�a� ��6���x�s�!��A��3�j��7�#�Q��A��A��M�Q��q��q��q��C�q��&��A�.�c����a�q��q��q��q��C�q��&��A�]�#�Q��|�1�A��q��q��&��A�]�#�Q��|�1�A��q��q��1��7�$�m�1��v�T��"2�#�W�F�!���1����1������q��x�s�!��F�$�a�'>�c��F�!��>��)�3�a��1���A��9�A�Z�q���1��v�T��"9��C�v�Q��1��q��x�r��B�f�B�a��q��q��q�
- �y��1��F�$�a�0��6��C�v�Q��v�T��"6�c���a��F�$�a�6�c��F�!��}�A�[����Q��-�/�q���1��A� 	�=���#�Q��<�q���A� 	�A��%�Q�f�M���'�q�
-�&��()�(8��A�Y�c��Q�d�RV�VW�WX� �y��1��f�D���c��s�#�V�1��F�$�a�6�c��F�!��}�A�[����Q��-�/�q���1��A��=���C�q��1��1��1��%�Q�f�J�a��t�1�D��A�[��D���D��A�X�UV���}�L���'�q�
-�&��)<�<N�a�(*�!�(8��A�Q� �y��1���Q��j��&��!����;�h�a����V�1�K�z��)�1��Q����4�q��T���!��w�f�A�X�V�9�A��{�!�4�v�Q�h�m�7�'�QU�U^�^_��4�)��(�(�!� �&��A�Q��|�4�|�:�Q��\��:�Q� ��q����A�"�!�#�#6�a�q��1��>��";�1�A��1����4�q�)��A��:�!�1��1��!� 	�6��Q�'�s�'��T���6��Q�a��u�H�J�a��|�<�s�/���u�C�q��� �� ��1��!� �q��(���>��!� �q��+�1��$�A�Q�	�	���v�T��#�3�a��9�L����y��q�� �!�1�L��E��'��&��V�SV�V[�[]�]^���d�!�$�C�w�d�!���2�6�h�a�	�� ��2�Q��6��	
-�	�7�(�!��q�	�����E��!� �v�T��#�3�a��1��1��1���>��*�H�C�q��q��q��1��<�D���1��y��/�t�3�a�v�T��BW�WZ�Z]�]c�cf�fi�ij��q��|�1�A��1��A�9��!��1��1��1� �q��[����<�q��!�1��8�1�H�B�a�|�3�j����(F�a�~�UV��=��1����c�� �A�-�S�0@���0��� �,�A�Q� 	�>��"�A�Q��=��1��� 	�=��1��� 	�H�B�a�q��t�1�A��f�D���q��1��x�q����d�!�9�A��:�Q�a��=��1��*�!�1� 	�6��Q�&9����C�w�d�-�s�!��q��c����. ��( 	
-�� 
-�	���~�/�q��k��!� �y��1��-�Q��$�A�Q� �A�Y�e�1�A����%�q���t�1��z��<�r���4�|�7�!��+�1�A��=���8�1�/�q�$�A�Y�e�1�A����%�q�� ���Q���&8����1��a�s�$�f�A�"�$�n�L���Q�b�PY�YZ���6��$�I�Q��q� 	�1�	�� 	3�!��F�!����*�A�Y�i�w�a���5���f�C�r���'��4�s�!�8�1���'��4�s�!� 	�%�q��A��D��	����1����*�!��:�Y�a�q�!��2�Q�c��!���<�q��!��v�Q�0����q��q��:�Q�a�	�� �V�4�q��C�s�&��&���v�T��q��1��1��1��9�C�q��q��q��q��q��9�C�q��q�	�s�%�t�9�C�q��1��1��1�	�s�%�t�9�C�q��1��1��1��1��1��1��1��1� �v�T��!�	�� �v�T��&�d�)�3�a�	�� 
-�t�1�A�	�� �v�T��!�	�� �v�T��!��y��H�A��8���H�G�ST��<�t�;�d�!�8�3�a��a���;�a�q��L��q���3�1�I�Q�a��w�g�Q�'�w�a�q��� �!�3�e�1�A�
- ��[��A�X�S���� ��
- 
-�1�A�	�� ��A�U�!�� �q��|�6��Q�.>�c��q�	��&�a�q� �6��Q�a����7�(�+�^�1��:�]�-��a��<�y�	��9�A��
-�*�/��!��%�]�,�j���.���a��z��&��T��d�%�s�!��5��1���6��Q�1��A��t�:�Q�f�A��q��1�B�d�%�u�C�z��#�U�$�d�*�A�Ma�ab�bh�hi��s�!�6��A��#�U�(�!���.�a�q�E�Q�a� +�!��#�Q��-�Q�a�'�q��*�!�1� '�a����T��	�� ��m�1���Q��6��Q�a� ��(�!����a��x�w�a���*�A��;�a��y�� �(�!��f�D��!1��A��F�$�a�q��a��z��'���A�S��$�c��&9��q���#�Q�+�1��!�3�e�4�q��4�u�A��j���d�!�4�u�D��T��#�S��PQ�QR��1�B�d�%�v�S��'���9�D���u�A�Q���g�Q�a��1��C�u�A�Q��k�!5�Q��2�!�1�%�Q�a�0��� �a��t��4�z��&��T��c��	�'�q��%�Q�a�&�a�q� �r��[���)�1��z��+�Q�
- 
-�	$�A�	�	'�q�	�	�������M��Q�k�9K�1�A�.4�F�$�a�?P�PS�ST��|�3�k��N�$�j��-�w�VW�	������W�A�Q���W�A�����!�5�����W�A�����!�5�����W�A�����!�5����r��k���E��+�R�v�Y�a��u�A�:�#�Q�a��c��4�s�%�q��}�A��x�q�:�!�A�A�A�A����4�u�K�s�!�<�s�!��v�S���4�u�A��0���-�x�s�J^�^_�_f�fg�A�A�A� *�!��$�A��7�!�9�9�����2�Z�r��e�1���q��E��5��A�A���*�A�%A��!�A�	�,�A�X�Q��&�a���!�8�6��T��&��A�=M�S�PQ��F�!�?�#�Q��&�a� �'�q��1�F�2B�BX�XY�,�,A���M��Y�f�A�(�"A��+�Q�A�	��S����1��1��z���'����!�!A��'�'@���+�U[�[_�_`�`a�-�-=�Q�j��%�Q�g�\��*�I�T�QR�"�'��Q��~�T��Q�n�O�ST�TU� &�g�Q�d�!�>��Q�j�Xa�ab�4�A� .�a� )�� *�!�  �	��	�	�A�	����W�A���Q��M��#�Q�b����q��4�q��s�-�q������'��q��Q�h�g�S��8�7�#�]�*�T[�[^�^j�js�st��t�1��q��c��a�q��K�q��1�E��(;�1�A�A�(/�r��q��&��(,�K�q��A�,1��2�X�S��R�q�,/�r���07�r��1�I�Y�V]�]^�(/�r��q��&�&B�(�!�-�-B�!� ��\��&��&C�1�'�'C�8�1��.�.D�A� �q��q��q��q���k��.��+A��,�k�Y\�\g�gj�jk��v�[���c�1D�A�Q��v�[����q��q��z��7�'��!��7�)�1�A��4�t�7�#�S����t�4�x�s�#�T��b�	��A��4�~�T��Q�-�-=�]�!�"/�/E�Q��)E�Q�a�7�q��DV�V`�`a��)E�Q�a�7�q��DV�V`�`k�km�mn�no��)E�Q�k�QR�#�<�q�
-�)�4�|�ST�:�+�E[�[\�,:�:K�1���E��q���5��a�q��s�!�6��1��t�2�U�"�A��:�Q�h�a�q� )��!� ��F�&�	��5�����a�r��U�%�s�$�a�{�!�5��D���RS�ST�����4�{�!�5��=��1���4�q��W�F�#�S���1���q��1� *�*F�a� �u�F�$�a�(��9�D��d�!�>�QT�TU��q���q��=��D���g�Q��4�v�Q�d�!�=�
-�!�9�A��K�q���1�M���A�W�A�,�A���Q�k��1��k��$�f�A�V�=��w�d�)�ST��5����q��=���8�1�0���q��&,�G�3H�� 
-��!�!9���a��#�2�%@�
-�.�XY��a��	�,�A�T��'��Q�l�!��=���8�1�G�t�1�D�P[�[d�dm�mn��1��7�<�A�T��$�m�SV�VW�W[�[]�]^��x�q��q��v�Q���!�1��w�a��7�"�A�*�&��<�?W�WX�XY�<�H�A� ,�H�A���4�w�a��3�a�y�	��C�q��7�'���6��q�	��c��A���1� $�H�A���a�q��H�A� 	�e�6��[����4�q��&��a��I�T��"7�u�A��I�T��'��j��a�q���C�u�A�T����'��J�b��!��4�z��I�X�Q�e�3�h�c��C�q��SV�VW����� ��!�;�a�q��r��+�Q�i�y�� $�H�A��<�s�!� -�_�H�A��t�:�Q�h�a��!��"�A�Q��Q� 	��t�1�J�c��t�1�J�c���!��"�A�[��1�G�2�Q��v�T��/��A���t�1�J�c��t�1�J�c���!��"�A�[��1�G�2�Q� +�+<�H�A��v�[��2�!��q��{�#�^�1��&�a�q��	��d�-�Q����a�q� �1�	�*�+�_�H�G�S`�`a�H�L^�^_�_`� $�H�M��
- �y��1��M��7�7M�Q��z��A��q���Q��:�:P�PQ��3�1��)�)<�A�	��:�S���1��1� +�+=�_�H�TU�  �y��1���q�
-�
-�A�Q� �z��1��J�b���	���4�s�!�8�5����M���4�s�!�=��Q�a��	�2�_�G�1��J�b��W�A��J�b�
-�"�$7�w�a��*�B�j��s�$�c��	�2�Z�u�A�Q� �s�!�<�s�!��#�Q�o�S���#�Q�o�S���{�#�Q��9�D���F�!���q��{�#�Q� 	�Q��s�"�$9���4�s�"�L�XZ�Zo�ov�vw���t�1��F�!���q��{�#�Q��9�D���F�!���q��{�#�Q��A�"#� 	�<�t�4�q��F�!���q��{�$�-�Q��j��!��a��;�g�Q���q������H�A�_�,@��1���B�b���a�v�W�A�&�a���1���1��F�!��Q�#$� 	�4��t�1��F�!���q��G�1�H�Tf�fg�gh�H�4�A�X�[��H�,E�Q�i�{�Z`�`d�de�ef�)��]�&�H\�\]�,�,?�?V�VW� $�I�Q� �*�B�g�R�q��s�'��%�Q��q��
-�!�:�R�}�A��4�v�W�A���E��v�Q�a��t�1�H�C�s�!�7�&��7�:L�C�q�PU�U`�`a�ab���A�Q�f�C�t�5���Q�j��c���t�6��M��K�|�4�Oh�hi�il�lm��q��1� $�I�Q���x�u�A��r��$�j���Q���q��I[�[\�\]�  �	��.I�� �"�!�9�D����E��Q�h�j�
-�!�7�+�Q��t�:�Q�g�Q��t�)��!��u�D���c�!6�a�q��q��u�D���3�a���T��(�#�Q��4�x�z��"�A�X�5K�8�ST��u�D���3�a��t�)��!��u�D���8�<�q��q���e�1�D��V�4�s�*�E��5���a�q��k���q��4�r��3�d�#�Q�,�J�6K�1�J�a�q���*�*;�;K�9�TU�L��A�:�"�A��$�a�q� ,�L��H�A� �t�1��q����3�a�{�'��A��u�G�1�C�s�!�1��%�_�A��t�1�M��+�V�3H�HZ�Z[�[f�fg�"8���=���8�1�5�Q��q� �}�L��� ���Q��5�
-�"�K�u�B�k������'��!� 	�7�!�;�a���8�1�7�{�'��RS� �L��-=�Q�
- 
-�	&�k��a��3�d�!�1���q�����Q�g�T��q��u�C�q���&(���u�H�M����A�S��A�Z�s�!��4�w�d�$�a��A��.�e�3�6G�q��5��1��1��q��6�a�q��q���3�a��1��&�a�'T�T`�`a��1��D��G�{�RS��5��!���5����&�a�q� �!��3�1�K�q�� �u�C�q��5��1��Q� ��A�Q��/�q��4�q�8Q�QR� ��Q� �Q� 	���5��!� %�_�M�AR�R[�[\� �W�C�q��t�1�F�$�a�q��t�1�F�$�a�q��t�1�F�$�a�q��(���2�Q� 
-�	���V�>�!1��Q�a��C�u�E���A�Q��{�#�(��9�C�q��1����� ����� ����+�1�A� ���� 	�1����� ���� 	�r��a�q� �K�s�!��	��J�d�.��D���W�A�� %�A�%>�a�q� 
-�#�Q��W�A�� %�A�%>�a�q�	
-��W�A�� 
-��W�A�5�Q�a� 
-�C�q��W�A�� 
-��W�A�� 	�W�A�� �q��1����� ��1����� �����2�U�!�1� -�]�:M�Q� �K�t�1�J�a��U�$�a��a��u�D������3�d�!�1�� �=����M��!��N�#�^�1�(��M��G[�[\�+�+>�>U�UV� !��� 
-����M��#�Q�e�8�1�F�%�q��t�6��M��!��q��]�!�5��#�W�F�!��w�d�'���q��w�c���s�!�7�#�Q��w�c���u�A�S��1��1� +�?�:N�N^�^_� �{�#�Q��q��9�D���A�Y�c���u�C�q��q��T���5��A��#�6��Q�.?�s�,�a������Q��(���]�!��:�S���1��1� ,�N�/�� 
-�	���}�N�!�1��t�9�C�x�t�1�J�c���q��A�Q�l�$�e�1�G�1�F�-�v�S���6��Q�'�s�!��x�t�1�H�C�x�t�4�u�D��b���q��x�t�1�H�C�w�e�5��>��A��q��1� �N�.���" �t�9�G�1��q���9�J�a�y�	����=���8�1�O�;�a��q���q���{�#�Q��6��C�1��q����+�U�)�<�q��V�1�E���V�1�A��V�1�%�Q�a��q��=���8�1�6�h�a��q�,�,<�O�8�ST� ,�O�;O�q� +�+B�!���Q�a��q��'��!��{�#�Q��'��!��/�q�&�a��{�#�+�1��s�,�d�*�G�5��DW�WX�XY��'��!�0���{�#�1��4E�E]�]^��'��!��:�W�A��4�A��9�H�A��g�=�Q��4�q��I�Q�a�'�}�O�=�PY�YZ�O�<�r��q�� ,�,?�?P�PQ�*8����A�Q��y��1��g�Q�a��9�H�A��U�"�A��v�W�C�t�6��A��g�Q�a��W�B�a��&����y���~�[���g�Q�a� ��Q�d�)�1�A��n�,C�CU�UV��A���J�b���4�z��*�E��D�	��D��1���5��(�'��!��8�;�a���x�x�q��4�t�?�!�6��D��H�A�����q��q���a�y�����e�6���4�q����1�A��g�Q�a��W�B�h�d�,�a�u�I�T��!� ��j���z��O�=�	���s�!�4�u�E��!��_�A��w�a�z���:�R�r�9S�SU�UV���5�����j���&��$�b��F�"�D��2K�2�Q�	��U�%�q��Y�a���x�s�5�R�q���	���E��)�8�=��z���f�A��&���w�a� �#�5�����h�a�w�a����'�s�*G�r�����a�u�C�'7�r������A�	��1� !���=P�PQ��	��C�s�$�a�0��1��z��!�1��y�� � 1��� ������
- �{�(�*�*;�;P�Pg�gh��v�Q��*�B�a��t�;�g�Q��v�Q��q�
-�$�e�;�h�a��1�H�C�t�1�G�6��C�q� �{�$�-�Q��6��Q�a��6���-�Q�k���1��7�!��*�*?�q���1��,�,D�A�[�PQ��_�$=�Q�k���q��w�b���Q�a��A�U�$�h�n�C�u�G�1��q��q��a�:�!�3�a�?W�WX�Xm�mn�nq�qr�rs��,�A�[���d�(�JZ�Z]�]b�bi�ij��1�B�d�%�y�(H���1��,�A�[���&��E���3�a�{�%�q��S��1�K�u�A�Q��6��� ����6���w�b��� �v�T��!��v�Q��.�a�q��q��w�b��8��#�U�!�1��&�&;�1�A��q��(�(@���A��� 8���A��1��7�"�A�\��!����d�(�.��5��q��1��1��!�6�a�s�!�;Q�QR�Rg�gh�hk�kl�lm��)��+�Q�e�4�x�~�UX�X]�]d�de����4�u�I�S�(I���q��)��+�Q�a�v�T��a���A�Q��v�Q��7�"�A�Q��������" �{�(�*�*;�;P�Pg�gh��v�Q�	��s�!�	���1���
-�$�e�1�D���R�t�1�A��1�K�q��D���r��!�1� �{�$�-�Q��6��Q�a��6���-�Q�k���1��7�!��6��Q�o�W�E��T�9L�A��5���q�(9��!��8�2�Q�a� 	�q��$�e�;�c��q�����d�%�q��A�T��4�q���q��1�L��A�V�2�Y�b��?�Zc�cd� 	�*�*?�q���1��,�,D�A�[�PQ��_�$=�Q�k���q��w�b������A�U�$�h�n�C�u�G�1��q��q�F�a�s�!�1��1�2�!�3�a�q��q��E��-�r��Q�i�s�!�?�RT�T[�[\� �,�A�[���d�(�JZ�Z]�]b�bi�ij��=��1��,�A�[�� 	�#�#D�A�[�P\�\]��1��6���1� �7�!�� ����6���q�� �v�T��!��v�Q��.�a�q��q��w�b��8��#�U�!�1��v�T��/���T��5H���u�A�V�1�$5�Y�a��x�r��!� �A�R�t�5��3�d�.��� �&�&;�1�A��q��(�(@���A��� 8���A��1��7�"�A�_�A�Q����d�(�.��5��q��1��1��!�;�1�C�q���q�.�a�s�!�1��1�D��Q�m�2�T��)�3�a��b�PW�WX�
- 	�)��+�Q�e�4�x�~�UX�X]�]d�de��q��)��+�Q� ��@���L�XY��q��v�Q��q��w�a���A�Q��v�Q��1�
-�!�1�Q�%<�<Q�QR�RV�Vc�co�ox�x~�~�Q�Q�Q�Q�Q�Q� �Q����F�!�4�t�1�N�)�1��u�A�Z�v�W�J�a��|�1��q� (��~�Q� �:�R�q��t�4�x�q��s�$�a���t�6��$�j���!��Q��s�$�b����d�$�a�~�Z�q��k���t�:�Q�i�q��s�$�b�����J�b� 5�Z�q�	��RY�YZ���1��#�Q�a��n�D���	���4�z��'��s�%�t�1�H�G�1���u�A�Q��3�1��G�1�B�a�q��'���G�1�B�a�q��D����q��s�$�'�r��E��(�"�A��q��3�a�y��1��s�!�:�R�q��s�%�v�Q�c��"5�Q�c��:M�Q�a��:�Q���Q�g�V�3�d�)�1�"�!�7�&��4�x�q����Q�k��!��Q�k��.���@�@R�RS�=P�PQ��T��f�A����U�!�1��t�4�y����j����1��U�!�4�q��$�a�/?�s�!�:�-��VW�7@��M^�^_�WX� %�X�Q��3�e�1�C�q��3�c��s�"�E��A���Q�a� �X�Q��4�q�	��f�A��a� �X�Q� �6��G�1�0��Q� %�X�Q� �H�A�Q� #�:�X�Q���S��Q�c��$�f�C�r��I�Q���a�q�
-�!�1� �-�X�Q��v�[����w�c�����"�$�a�q��7�#�U�#�[��1�X�%A��+�Mh�hi�iu�  vH�  HR�  RS�X�-I��+�UV� '�|�1�J�i�t�<�WX�/�~�Y�a� %�Y�a� �1�K�3�1����]�!��.� 6�a�{�+�U�RS�ST���8�1�)��I�Q��q��t�1��q�	����E��%�q��K�u�A�Q��	��A�W�A�Q�&�a�q� %�Y�a���
-�!�2�Q�h�a���4�y���3�i�u�B�i�s�!��1��y�
-�!�9�I�W�A���S��B�e�4�w�g�Q��H�G�5��G�7�$�b���I�U�"�M��H�E��1���q��Y�a�	��4�{�#�S��A�W�A�T��t�CY�YZ�,.�g�Q�k�Aa�ab���1� %�Y�a��8�7�(�"�F�"�A� %�Y�a��!��!����F�!�4�z��)�1��y�
-�!�7�+�Q��\���q� %�Y�a� ����Q�'�'8�8O�q��J�b���1�G�3�d�!�8�1���Q�j���)�7�!���t�1��q��4�q��7�!�	�	��1� %�Y�a� 	��Q��J�b���4�q��s�#�T��(�!��	��1�J�a�y�	������#�W�A�D�A���7�!�@���4�x�s�$�f�C�u�F�#�S��t�1����A�W�D��5��a� 	�>�!?�q���:�S���;�a� 	��8�1����q��4�q���q����4�u�F�#�U�"�C�u�C�t�4�q���A��a��E���a�v�Q��&'�)���q��7�!�1������{�!��4�q� �Y�a����W�F�!��7�#�Q��$�k��2�Q���q��Q���C�w�a�t�;�b����1�A�V�2�V�1�E��U�%�v�Q�a�,�A���1��7�#�Q��!����a�v�Z�v�Z�q���d�!�2�[���:�Q�h�c���L�X_�_`��&���1�C�q��&��4�u�D��2�W�A���q��1� �Y�a��t�:�Q�h�f�C�v�T��(�#�Q��q��H�D���t�1�J�c��d�!�6��Q�i�s�RS��>��#�Q�a��v�T��!����A��q���5����	��!��1�  ��Y�a��v�S��t�6��Q�.>�c���q��v�T�(����A�V�4�q� 4�C�w�f�A��)���>���v�T��#�3�a�	��/�/A��"�"=�=N�a� %�A��Q�	�Q�g�Q�
- ��c���C�q��d�!�<�s�&��A�5J�#�T�QT�TU����1�� ��Y�f�A�Q� �1�'�':�!�!������!�#�>���(�(:�!���!�!��^�^_�)��!��!����� %-�,@������ !�������  ����)��!�a�05�5H��WX�a�I`�`a�a� )���a� �#�1�K�q��T����D�PT�T_�_`�`a�a�����1��1��a�a�a�a�a�a�a�a� �a�
-�"�H�D��+�3�f�A��q��q���d�!�9�H�B�h�a�s�"�J�b���s�!�4�v�Q�c��1�I�Y�d�!�;�c�QR��\���q�)�)>�a��M��Y�f�A�a�&�a��1� -�->�a� �&�a�q��v�S��S��c���q��$�A��x�s�!��q���t�1�G�>���y� 5�W�<O�q�P[�[\��=���8�1�4�A��q�a��?�q��  ��->�a��?�q� ��8�5��z��$�a�q��t�1��j��-�Q�a��5�	��!� �y��&�d�&��A�5F�c���1��F�$�a��r��S�� ��q��q�.�a�!��"4�A�#�1�#�2�Q�$�B�a��<�s�!� ��q��q�(��!��!�#�1� !��q���M��
- �y��1���Q�$�A��4�|�.�a�q���A�Q��3�a�v�T��*�#�S��c��A���A�Q��3�a�v�T��-�V�6��6��D�	�QV�V\�\]���A�Q��M��"�D��T��C�q��G�1��<�v�Q�a���,�&9��!���Q��8�1�C��g�5E�Q�)��<�t�1�L�PS�Sh�hi�ij��E��Q� �y��?�$�f�D����&��A�-�S��F�!����1�'�q�!��"6�o�Q�#�6�)9���1�N�!�!��-��o�Q�#�6�)9���7�#�Q��'��'��"7�q�!��"4�O�1�#�6�)9�� �'��'��"6�a�!��"3�?�!�#�6�)9���'��'��"3�1�!��"5�_�A��C�q��'��'��"7�q�!��)�?�!�#�6�)9���'��'��"3�1�!��"5�_�A��'��'��,�a�!��(�+�_�A�#�6�)9���'��'��"3�1�!��"5�_�A��4�v�T��!� �-�V�4�q�8I��L�XY��'��'��.��!��.��q�#�6�)9���v�T��+�3�a� �g�Q�g�Q�o�Q�%�Q�&:�/���g�Q�g�Q�&7�q�%�Q�&9����M�� �y��1��&��A�2�#�^�6�� 	�7�#�Q��)�);�1�L���ST���Q��q�,�A�%�Q�&=�Q�'�q�'�v�-=�Q��q�.�a�%�Q�a�'�q�'�v�-=�Q��q�)��%�Q�a�'�q�'�v�-=�Q��q��Q�%�Q�&6�a�'�q��q�(��%�Q�a�'�q��q�/�q�%�Q�a�'�q��q��%5�\��DY�YZ�%�Q�a�'�q�'�v�-=�Q��q��q�%�Q�a�'�q� ��%�Q�&�a�(���"�!�#�1�%�Q��#�1�$�A�(���"�!�*�!�%�Q� �x�t�1�H�H�A�Q��'�|�3D�N�Rf�fg���T���1�L��1��^�1��%�Q��l�#�Q��^�1��%�Q� �{�#�Q��+�1��)��!��l�#�Q��^�1��%�Q� �y��#�4�v�T��,�c��	��,�A��.�a��2�!��H�D���t�<�s�!��>�)9��$�a��N�!��$�A�
- �y��1��f�D��!2�#�[��a��;�c��$�A���1�A�V�4�q�(=�V�4�q�H^�^_��f�D��);�3�a��:�Q�i�u�D��v�R�y��)�ST�,�A��"�$�b��d�!�?�#�S��a�!��2�-F�g�Q��.�c�1C�3�a��D���Q��q��W�A�W�A��q�!��!��!�#�1��q��W�A�W�A��q�!��!��!�#�1� ������1��Q��Q�a��q�������1��Q��Q�a��q���Q���1� 	��d�!�$�C�q��	���0F�a�!3�3H����#�_�,@��	��Q��q��	��-�Q��5�Q� � 7�q�"�!�����E��Q��q��C�q���q��C�q���q��q��!�!9��!�1�!��!�#�1�#�1�A�$�A�Q��W�A�Q��W�A�Q��4�r��t�1�O�3�c��q��:�R�'@��q��<�A�Q��T��6��Q�.?�s�#�V�4�s�RV�VW�W]�]a�ab�bc��0��?�#�Q� 	#�!��K�q���t�1�$9��t�1�DZ�Z[��&��A�%7�s�!��z��)�5��G�6��9�B�i�q�*�!��
- 	 �q��D��i�q���r��S��'�q���-�T�1F�a��0��4I��
- 	
-�!�� 	� ��q��1��q��G�1�G�1��q�!��!��!�#�1��q��G�1�G�1��q�!��!��!�#�1��q��G�1�G�1��q�!��!��!�#�1�������W�A�%;�1� �q��W�A�W�A��q�!��!��!�#�1��q��W�A�W�A��q�!��!��!�#�1��q��W�A�W�A��q�!��!��!�#�1�������1��Q��Q�a��q� 	
-��a��a� �� 	�A��F�!��.�d�!�2�Q��q�$�A���1���F�)�1�A��2�\��N�$�b�8H��1��!��&��8�1��%�Q�b���'�r��!���M�� 
-�!��0�0@��	��4�r��t�1�O�3�c��q��:�R�'@��q��<�A�Q��T��6��Q�.?�s�#�V�4�s�RV�VW�W]�]a�ab�bc�"�!��G�1�A�V�4�q� 5�V�4�q�@V�VW��f�D��!3�3�a��z��%�u�D��6��9�B�i�q�*�!�� � 1��O�3�FZ�Z^�^_���5�T���
- 	
-�!�� 	� ��#6�c����&�a�$�A�$�A���T���)��T���A�\��A��W�A�W�A�#�1�%�Q�%�Q�a�'�q�.�a��'�t�4�q��A�\��A��W�A�W�A�#�1�%�Q�%�Q�a�'�q�,�A��'�t�4�q��A�\��A��W�A�W�A�#�1�%�Q�%�Q�a�'�q�,�A�������Q�
- 	��Q�b��E��[��1�L��1�$ ���	�	����� 	�o�%7�7Q�QR���n�L���1�	��	��A���d�!�1�!���6��Q�a��T��!��6��Q�a��T��!��6��Q�a��T��!��1���Q�b��E��[��1�L��q� �v�T��#�3�a�	�$�A�$�A�$�A�$�A�$�A�$�A��D�	��!�4�q���t�1�E�� �y��>��U�,�c���A��q��u�A��=��1�#�1�$�A�'�r��,B�!���Q�e�>��A� ��J�a�v�S�����q�#�1�!�� 	��d�!�'�s�'��s�#�Q���D�	��!�4�q��u�L��1��J�a�v�T���'��A� �v�T��#�3�a���D�	��!�4�q��u�L��!�!9��&�a����t�1�E��s�!��&�g�Q���q���J�a�v�V�8�1�G�=��
- �1� �a��s�'����q��)�)>�a�t�=�P\�\e�ek�kl��d�/��(�RS� �e�#3�3L�A� �>��Q�l�!� 	��3�a���t�>����Y�a�q��q��1� (��\��� �g�S��6���H�C�s�(�!�8�1��6��/�q���t�7�#�T��Y�a�q��q��4�s�!�3�a�q��"�!�6��F�#�S��h�a�h�0���h�.@���h�5�Q�k��h�&8���h�&E�Q�k�QR�h�=�Q�k��h�f�E��q� ,�,>�h�n�TU� ��!�4�q���&�a��e�7�!�2�Q�a��q��,�A�[��M�QR�.�i�q� (��i�q���+�1��4�r�r�rs��9�C�q��1��'�q��"�!�;�i�q����q�&�i�q� &�i�q�� ���2�Q��q���
-�"�,�J�a�y�	��PQ���q��C�w�a�>�a�
-�#�W�A�:�!��t�6��D��C�s�&��3�e�4�q��q��s�'��*�!��q���3�1�A��4�q� �i�q� ��S����w�g�W�A��u�G�1�C�q���t�8�1�A��4�r���Q�i�s�#�W�A��H�D����H�D����f�A�S��Q�j���+�\��F�RS�Sa�al�lm��x�t�1�L��1��6��3�e�1�J�c�� �.�i�q�
-�$�a�q���Y�h�f�A��1�H�'�q��1�F�!�!��'��t�:�Q�c��Q�f�K�WX��1� �i�q� �t�4�q�
-�#�Q��q��C�z��!��Q�d�$�a�'8��5��c���t�1��q���e�1�D�(<�E��!� #�?�!� �
-�!���]�!�;�j���+�Q��a�x�q��a��3�k��.��,C�1���7�!�1��1� )��k�9S�ST� �{�#�Q��q�� �{�#�Q��:�S���1��Z�r���!��4�r�����2�Q��4�r����1�A��I�Q�k��<�}�A���2�V�7�!��q��q��2�S��*�L���9�A�
- �{�#�Q��:�S���1��Z�r���!��4�r�����2�Q��4�r����1��C�r���s�$�c��=��q��1��3�a�r��q���3�b��\��*�I�Q��1�A��q��$�D���Q�&�k���.�k��� �k��4N�a� �Q��z���	��!���}�$6�a�q���v�Q�,�I�Q��1�B�d�%�q��t�1�K�q����A�R�v�W�A���Y�o�Q�kl� &�l�(�!� �V�3�c��q��t�6��C�t�1�H�D��s�#�T��(�$�a��q��2�Q�h�g�W�A�%B�!�1� &�m�3F�a��y��1��q��y��1��q��y��1��q��y��1��q��x�{�!�1��q����Q���.�a�z���1���q��u�D��D���#�_�D��D���S�PQ��q��$�D���1� &�m�9�A� �y��'�s�#�Q�f�D��9N�c�QU�UX�XY��v�T��+�3�a��q�
-�!��a��1� &�m�;�k�IY�YZ� �t�1��q��W�H�H�H�G�1����4�u�F�#�T��"�G�6��C�q��!�2�T��f�C�r����A��A���Z�r���Z�r���4�r�����r��b���5��!�����Q�d�!�5��1���2�W�F�#�T�����(�!�����Q�d�!�5��1��	��b�
-�!�9�I�W�A������Q�a���X�R�w�f�C�t�7�-�q��'��1��3�a�y��!��1��#�Q�a���a�y����6��3�a�w�b������Q�a���W�A�Q���A�Q��6��a�q�(��m�;�o�Ue�ef� ,�,>�n�A� ���v�Y�a� (�q��	����a���t�9�,�A��z��3�g�Q�a����6��&��4�t�8�2�_�A�Q���4�s�!��D���%�q�������K�v�Y�b��Q�f�L����a�r��U�%�s�"�H�O�9�Td�de�#�4�v�Q�d�!�;�b��$�D���B�b���/�QR�RS��� 1���������A�Q��H�A���D��H�C�s�&����4�t�8�2�_�A�Q���4�s�(�$�d�'��s�(�'��v�U\�\d�de���4�s�5�T��X�S����t�5���4�|�1�J�i�q��9�C�q���D����s�!�4�q����q���a�y���	��Q�&H���g�Q�a��G�2�Z�v�V�:�R�r���Q���5��q�� �n�L�
-�!��a����a�q��4�w�a��7�!�1��	��
-�"�D��R�z��1��w�a�q����1� &�o�^�?�R[�[\���!�1���"$�F�'��%�r���j��Q��/�}�A��B�a�"�!�?�!�1��a�v�W�A�Q�q�q�q�q� �q��4�q���a�s�!�7�#�S��a� "�.�	�� 	��q��4�s�!��!�7�&����$�a�u�A��q�	��4�v�Q�d�!�5�
-�!�9�A���Q��1��x�z��&��1�q� !�����q��� )��q�-�-H���w�h�k��[��	��!��!��"�!�1��e�4�q��J�a�u�D���;�a��1�H�A��*�!�1��!���Q�d�%�v�]�#�Z�q��� �s�!�9�B�a��$�a�v�Q��6�����A�	�1��{�#�Y�a���G�6��(�&�	���D��A�Q���A���a�y��W�G�4�y�����!���8�1�A��G�9�A�)��q��Q� �.��q��t�1��q��2�Q� ���q�� )��q��z��%�q����&��4�u�C�v�Q�o�Q�	�1�F�&�����A�R�v�S��E�����!�1�B�d�%�v�S��1�C�s�#�R�q��:�R�v�R�q���v�Q�h�f�I�Q���1�D��b�	���g�W�D�PY�YZ� ��q��z��%�q��"�!�!��$�a�t�<�q����1�2�!�7�,�a���s�!�;�g�S���5��q��3�a�q���1��$)��'��s�$�i�q�).�a�w�f�C�s�!�).�a�w�f�C�s�!�)*�  ��� �t�1�� ���A�Q�l�$�e�9�A�X�Q��T��D�A��t�2�H���8�1� !��� �t�1��q��C�u�A�Q��#�1�A� �u�C�|�4�v�Q����#�U�!�#I��1� �1� (��� �t�8�;�a�q��q��y��L��.A��	�� 	�9�C�q� �4�x�q�'�q��Q��� 	�q��y��1�	�� �	� 	�1�*3�3�a��
-�!� 	�1�'�s�!��
-�
-�Q�a�������� �{�'���v�Q��z��A�Q� 	�v�Q���C�q��j��z�����v�Q��z��A��v�Q����:�R�x�r���|�7�#�T��W�A�	���\��a�q��1�H�A�"�#�Q�a�z��)�9�G�1�� �{�#�Q��*�B�h�b���7�'��D��x�q���w�j���)�7�!��d�%�q���4�t�1��$�e�1�A��W�D��'��A�Q�� �{�#�Q��v�Q� �E��A��W�K�q���3�a��|�3�a��v�Q��|�3�a��v�Q���2�T��A��z��1��q��1�O�1�,K�1�A� �6���v�[�PQ�QR�%)���3F�a�q�x�GY�YZ�Z[� �/�{�%�x�Ga�ab� �m�3�a�y��5��1�K�s�!��$�A�Z�|�3�a�u�C�s�&�PQ��q��q��9�D�����"�!�6��W�C�w�e�7�R\�\]�����v�W�E��U�!��:�Y�a�y��E��S���+�1�E���u�A��1����x�{�!�1� !�$<�I�S��*I��RU�UV�/0� 2�2Q�QR�R]�]^� #�4��a�$*�,�a��g�Q� .�g�Q�6K�1�A�2�!� ��q� #�3�g�V�3�d�)�1�$:�!�$%��3�7�!� !�$)�)C�?�RS�$6�a�$'�~�T��g�Q�()�,2�$�f�A�]�*�TU�U^�^_�,>�c��Q�a�/0�$9��$0�0B�B[�[\�\g�gh�$1��(6�a�(2�!�(4�A�(2�!�(.�a�(6�a�(/�q�(2�!�$'�':�!�1� )/�l�!�,A��Q�l�RV�VW�WX�FG�,.�a�$1��q�$1�1A��!�$'�q�(5�W�A�Q�$6�n�A�^�ST�$'�q�(5�W�A�Q�$'�u�A�()�(;�7�,�a� %;�!�(E�Y�j�XY�$%� '�}�A� %+�,�a�7N�a�Oa�ab� 6�a��t�1� 0�0J�!�;�Ve�ef� 0��$.�a�$0��$2�!�$.�a�$+�1� #�9�C�q�$<�A�Q� %2��q�$3�3F�a�GZ�Z[�G]�]^�^h�hi�$'�q�(5�W�A�Q�$'�y��1�(9�9N�a�Ob�bq�qr�(+�1�,9�����u�A�%W�Wh�ho�  pA�  AF�  FH�  HI�
-  �x�{�!�1� !�$%�'0��1�*I��RU�UV�/0� 1�1X�XY�$/�/B�!� #�4�~�Q�$*�,�a�~�W�A� .�g�Q�6K�1�A� #�5��$%�$2�!�$)��a�~�X�R�q�x�?Q�QR�RS�'�x�q� +�<�x�q��	�2�*�!�6�����;�a��8�1�9���4�v�R�q� !��x�q��#�4�q���t�1��q��6��#�Q�j��C�q���!� (��<�x�q��	�,�A�Q� 	�a�$�A�\��!� �x�q��D��� '�x�q�	�	.�a��7�$�g�S���x�q���c��c��[��:R�RS��?�#�Q��4�{�!�1� "�(�!� �y��1��x�y��#A���A��!��A�Q��1� �y�� 
-�	2�!�	�	)����x�q�
- �A�R�t�5���4�x�q���Q�b��E���H�A�Q��A��q��W�A�]�!�4�u�A�Q�	�����3�e�1�A� /�y��
- ���A�[��";�:�Q�i�y�X_�_`���q��3�a�C�3�a� '�y�� �
-�"�A��X�S���;�c��c��A��t�9�G�1��q����f�H�A�, �z��1��z��1��j��!��j��!���
-�&��h�i�w�a����(�(�!����	������	����Y�h�a��4�q�����1�E��!�-�S���k��%�s�!�5�P[�[\�\]���a�w�f�A��Q��a�q��4�s�!�����A��q��V�2�[��+�Q��Q��Q���A�����A����=���!��t�4�{�!�=��D��K�q���k��!��a���A� �A�U�&�� ��
- �� �q���
-�"�B�a�q� 6�g�Q�����=���!��t�4�{�!�=��D��K�q���k��!��a���A��q��V�3�d�.��a�"8���Q��a�u�F�"�H�A�W�A� ���A����;�c���	��f�A�X�V�9�A��+�R�q��{�'���Q�n�A���&���A��{�#�Q��Q�k���C�q��Q�k���C�q��Q�n�A��C�q��Q�&�a��}�A��x�q�=�Q�g�Q��1� �y���A��t�9�G�1��q� 
-�	0����.�� ���	��	��!��	���/@���+�Y�j�
-�!���V�1�I�V�1�A��4�q�����c��!�<�q��8�1�F�!���Q�d�!��a���A���1�F�#�Q���C�{�!�;�c��K�q��s�#�[�XY�YZ��3�k��"2�#�S��1�A�� 	�3�k��!���W�A�Q��1� �y���G�3�i�s�!��s�'��s�#�Q���r��1�1����A�R�q�)��1�,F�b������.�a���q��t�1��W�A�R�q��&�a� '�y�� �:�R�q��t�4�x�q��q���t�6��$�j���!��Q��q��!�1��t�:�Q�f�A��q��!�1��!��A����4�v�Q��J�a�{�*�A�Y�k��!��t�:�Q�h�e�3�d�&��a���#�X�V�:�Q�a��4�v�Q���*�B�j��&�
-�"�F�*�TV�V_�_a�ab���B�E�Q��z��A���q��!�#3�1�A���t�6��I�W�F�#�S����u�G�1����(�$�f�A�Y�j���!�!����(�!��5����u�C�q���q��!�#3�1�A���	��H�A�%;�1��5��1�E��Z�q��f�D��1�E�QR�RU�UY�Y[�[^�^_�_`��4�q��1�E��#�Q���k��%�t�:�Q�f�F�$�f�TW�WX��4�q���G�1�B�a�|�1�J�a�q���8�2�Q� �y�� �S���t�1�<�C�q��q��!��Q�h�a��#�;�a�q��8��:L�A�Q��a� '�y��
- ��Z�r��Z�q�	��'�QR���q���g�Y�k��C�?R�RY�YZ��q��1��*�B�a��{�(�!�	��T��q��:�Q�i�q����1�B�a�q��z��1�H�K�q��!���"�!�1���T��!��4�z��(�!��G�1�B�a�q���	��t�1�K�s�!�6��Q�j��1��7�#�Q��u�J�b�
-�"�J�b��W�A���q��!�#I��!�I����q��!�1��C�q���f�C�s�!�4�q��7�!���q��!�1��G�1�B�a�q��1� �y���Z�r�����j���)�7�*�F�"�K�WX���q��5���6��8�1�F�(�+�Q� '�y�� �!����b�
-�"�J�e�1�A��d�,�a�z��!�	��4�v�Q�d�*�A�Y�a����G�1�B�a�q���4�q��G�1�B�a�q���4�z��&�����U�!�;<��6��r��s�#�Q��G�1�B�a�2�!�6��q����B�a�PQ��1��G�1�B�a�}�A�Q����D����J�a�w�e�4�s�'��2B�!��E��r��s�(�(�(�'��a��G�1�B�a�0���f�B�b���1� )��y�� 	��s�#�T��.�c���v�Q���t�6��4�q��2�-B�*�A�Y�VW��$�f�B�d�!�;�b�0H�
-�RS�S\�\]��Q��w�a���'�q��)��&���=���8�1�)���v�Q��t�1��v�Q��;�a� �z��6G�x�O`�`q�qr� 
-�	&�k���C�t�1�H�D��[��3�a��E��q��Q�a��t�1��1��8�1�A��x�q�����8�1�I�S� 8�8K�;�VX�XY��8�2�T��6��1��s�!�6��1�����A�Q��5��!� )��!� ��z��<�z��)�9�G�1��C�w�a�N�a��1��1�F�!�1���1

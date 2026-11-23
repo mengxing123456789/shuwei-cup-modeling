@@ -1,9 +1,0 @@
-MODULE backend.services.artifact_catalogue
-DOC: Read-only, bounded display catalogue. Never changes exports or quality inputs.
-CALLABLES:
-_dataset_members(values: 'list[dict]') -> 'list[dict]' :: 一个数据文件夹收进组里的文件（overview 和 select 用同一条规则，翻页看到的和组里数的一样）。
-annotate_questions(workspace: 'Path', rows: 'list[dict]') -> 'list[dict]' :: Use explicit manifest placement, not figure ordinals or caption guessing. |  | Stem-only manifest entries are accepted only in one directory. Duplicate | names in separate question folders remain unclassified rather than guessed. | Sources are tiny bounded prose files; result arrays are never read here.
-catalogue(workspace: 'Path', namespace: 'str', loader, *, refresh: 'bool' = False) :: 
-overview(rows: 'list[dict]') -> 'list[dict]' :: Fold only dense data subdirectories. Keep scripts, graphics and top-level results.
-questions(text: 'str') -> 'list[int]' :: 
-select(catalog: 'dict', *, view: 'str', collection: 'str' = '', offset: 'int' = 0, limit: 'int' = 40, query: 'str' = '', snapshot: 'str' = '') :: 

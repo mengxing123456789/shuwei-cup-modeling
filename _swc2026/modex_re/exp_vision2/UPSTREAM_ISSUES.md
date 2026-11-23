@@ -1,2 +1,0 @@
-- fig_cost 缺 results.json::cost
-- fig_sens 缺 results.json::sens

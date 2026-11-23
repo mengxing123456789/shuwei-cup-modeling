@@ -1,1 +1,0 @@
-{"version": 1, "entries": {"2:eca778d4def082be9a761efe37202e9d7d58250d5b6fa4d6e5ac984e5eecfff1": {"status": "pass", "reason": "", "reply": "PASS", "at_ts": 1795247576.9137087, "kind": "datafig", "file": "figures/fig_cost.pdf", "paid": true}}, "expected": {"datafig": {"files": ["figures/fig_cost.pdf"], "at": 1795247576.9137087, "at_ts": 1795247576.9137087}}}
