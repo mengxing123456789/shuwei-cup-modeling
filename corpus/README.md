@@ -54,3 +54,5 @@ $PY = python
 `_PROVENANCE.md` 记录 2026-11-19T08:49:16Z 的核验结果：**9 份 OK / 0 SUSPECT / 0 BROKEN**。判据是「PDF 首页可抽取 ≥200 字符、xlsx 至少一表 >1 行、docx ≥100 字符或有表格、zip/rar 条目 >0」。
 
 压缩包已全部解开并删除原包（用 `7z x`，因为它能正确还原 GBK 成员名，Python `zipfile` 不能）。`problems/2022/` 的原件是 `.rar`，NanaZip 7.0 也成功解出 427 个文件。
+
+<!-- path-note -->
