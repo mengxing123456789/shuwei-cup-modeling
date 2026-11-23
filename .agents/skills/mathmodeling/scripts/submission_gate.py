@@ -33,11 +33,11 @@
 `None` 记 SKIP 不拦，`False` 照样拦。
 
 用法（本机 mathmodel 解释器，自带 numpy/pymupdf/python-docx）：
-    E:\\Mini\\envs\\mathmodel\\python.exe submission_gate.py <论文目录>
-    E:\\Mini\\envs\\mathmodel\\python.exe submission_gate.py <论文目录> --only venue
-    E:\\Mini\\envs\\mathmodel\\python.exe submission_gate.py <论文目录> --only data
-    E:\\Mini\\envs\\mathmodel\\python.exe submission_gate.py <论文目录> --main main_en
-    E:\\Mini\\envs\\mathmodel\\python.exe submission_gate.py <论文目录> --with-writing --stage draft
+    python submission_gate.py <论文目录>
+    python submission_gate.py <论文目录> --only venue
+    python submission_gate.py <论文目录> --only data
+    python submission_gate.py <论文目录> --main main_en
+    python submission_gate.py <论文目录> --with-writing --stage draft
 
 写作规则默认**不跑**：它按「学术论文」文体判（要有 Limitations 一节、Discussion 要与已有研究比较…），
 数学建模竞赛论文没这些硬要求，强跑会出假 FIX。要查就先在论文目录写 `.mh\\writing_spec.json`
@@ -357,7 +357,7 @@ def run_vision(paper: Path, limit: int | None = None) -> tuple[bool | None, str]
         return None, f"缺 {RUNNER}"
     env = _vision_env()
     if not env.get("OPENAI_API_KEY"):
-        return None, ("没配视觉模型：写 E:\\数学建模\\.agents\\skills\\paper-kit\\vision.json"
+        return None, ("没配视觉模型：写 .agents/skills/paper-kit\\vision.json"
                       "（base_url/api_key/model），或跑 scripts\\set_vision.py 填。本图未审")
     if not env.get("REVIEWER_MODEL_ID"):
         return None, "没配视觉模型名（vision.json 的 model），本图未审"

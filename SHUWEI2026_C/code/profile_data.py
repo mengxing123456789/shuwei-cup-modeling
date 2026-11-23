@@ -1,8 +1,8 @@
 """C 题数据总盘点：把三套原始记录、质量标记、语义段、任务与采样约束压成一份可核对的 JSON。
 
 用法：
-    E:\\Mini\\envs\\mathmodel\\python.exe code\\profile_data.py            # 写 data/data_profile.json
-    E:\\Mini\\envs\\mathmodel\\python.exe code\\profile_data.py --print    # 同时打印摘要
+    python code\\profile_data.py            # 写 data/data_profile.json
+    python code\\profile_data.py --print    # 同时打印摘要
 
 只读 data/raw 与 data/constraints，不改任何原始文件；所有数字都可由本脚本重算。
 口径说明（写进报告时必须带着）：

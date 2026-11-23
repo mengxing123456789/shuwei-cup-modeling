@@ -485,7 +485,7 @@ def build_markdown(payload):
     lines.append("## 9 复现")
     lines.append("")
     lines.append("```powershell")
-    lines.append("& 'E:\\Mini\\envs\\mathmodel\\python.exe' code\\alt_p2_kalman.py")
+    lines.append("& (os.environ.get("MM_PY") or sys.executable) code\\alt_p2_kalman.py")
     lines.append("```")
     lines.append("")
     lines.append("VERDICT: PASS")

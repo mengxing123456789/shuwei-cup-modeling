@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """一键重跑：q1 → q2 → q3 → q4 → sens → q2b → figures，并打印关键数字汇总表。
 
-用法：E:\\Mini\\envs\\mathmodel\\python.exe code/run_all.py
+用法：python code/run_all.py
 """
 import json
 import os

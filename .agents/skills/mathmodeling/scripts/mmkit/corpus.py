@@ -15,7 +15,7 @@
     的可再生副本更可靠。grams 在查询时现算（大 gram 集合进 JSON 会让文件膨胀十倍）。
 
 用法
-    建索引：  python E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\corpus_index.py --build
+    建索引：  python <skill>\\scripts\\corpus_index.py --build
     查近邻：  python ... --query "主动减振 离心作动器" --top 5
     按题筛：  python ... --query "热解 催化" --year 2023 --problem B
     看统计：  python ... --stats
@@ -33,7 +33,7 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-DEFAULT_ROOT = Path(r"C:\Users\29900\Downloads\AsterLink")
+DEFAULT_ROOT = Path(r"C:\Users\29900\Downloads\AsterLink")  # 旧的本地语料根，仅作最后兜底
 CACHE_DIRNAME = ".asterlink-cache"
 OUT_REL = Path(".mh") / "corpus.json"
 
@@ -90,8 +90,14 @@ def corpus_path() -> Path:
 
 
 def corpus_root() -> Path:
+    """语料根：MM_CORPUS_ROOT > 仓库内 corpus/ > 旧的 AsterLink 兜底。"""
     env = os.environ.get("MM_CORPUS_ROOT")
-    return Path(env) if env else DEFAULT_ROOT
+    if env:
+        return Path(env)
+    local = workspace_root() / "corpus"
+    if local.is_dir():
+        return local
+    return DEFAULT_ROOT
 
 
 # ---------------------------------------------------------------- 文本抽取

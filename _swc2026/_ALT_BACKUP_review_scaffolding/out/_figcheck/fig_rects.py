@@ -8,7 +8,7 @@ five figure PDFs, then test the specific misuse claims numerically:
   D. coincident series                          (fig3: Kalman vs hold at L=1.0)
   E. presence of error-bar primitives           (all five)
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_rects.py
+Run:  python out\_figcheck\fig_rects.py
 """
 import sys, pathlib, json
 import pymupdf as fitz

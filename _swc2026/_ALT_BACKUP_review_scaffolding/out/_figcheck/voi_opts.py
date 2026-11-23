@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Q2 VOI: the three options' window counts, and the 5 strategies.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\voi_opts.py
+Run:  python out\_figcheck\voi_opts.py
 """
 import sys, json, pathlib
 

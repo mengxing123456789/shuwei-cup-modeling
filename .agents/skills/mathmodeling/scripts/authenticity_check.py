@@ -1,6 +1,6 @@
 """语料真实性核验 CLI：把下载来的真题/附录/论文逐份核一遍，落台账。
 
-    python E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\authenticity_check.py --build
+    python <skill>\\scripts\\authenticity_check.py --build
     python ... --build --verbose            # 边核边打（大目录能看进度）
     python ... --build --only pdf,xlsx      # 只核这两类
     python ... --build --root D:\\corpus    # 换目录

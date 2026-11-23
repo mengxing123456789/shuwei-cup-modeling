@@ -1,8 +1,21 @@
+
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 # -*- coding: utf-8 -*-
 import os, io, zipfile, subprocess, glob
 from pypdf import PdfReader
 
-ROOT = r"C:\Users\29900\Downloads\AsterLink"
+ROOT = _corpus_root()
 TMP = r"E:\数学建模\shuwei\_tmp2022"
 
 def probe(p):

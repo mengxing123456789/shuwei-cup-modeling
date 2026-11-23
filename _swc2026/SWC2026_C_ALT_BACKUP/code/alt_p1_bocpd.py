@@ -20,7 +20,7 @@ Outputs (inside this workspace only):
     out/alt_p1.md          first line ``BYTES <real byte count>``, last line ``VERDICT: PASS``
 
 Run:
-    & E:\\Mini\\envs\\mathmodel\\python.exe code\\alt_p1_bocpd.py
+    & python code\\alt_p1_bocpd.py
 """
 from __future__ import annotations
 

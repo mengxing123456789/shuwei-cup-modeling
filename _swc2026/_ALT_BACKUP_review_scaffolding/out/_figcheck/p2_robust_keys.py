@@ -3,7 +3,7 @@
 main.tex:291 says doubling q or R moves the mean by <0.005 cm;
 main.tex:367 says <0.01 cm. Same phenomenon, two numbers.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\p2_robust_keys.py
+Run:  python out\_figcheck\p2_robust_keys.py
 """
 import sys, json, pathlib
 

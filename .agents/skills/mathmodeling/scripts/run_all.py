@@ -39,7 +39,12 @@ import time
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
-PY = Path(r"E:\Mini\envs\mathmodel\python.exe")
+sys.path.insert(0, str(SCRIPTS))
+from mmkit.pyexe import resolve_py  # noqa: E402
+
+# 解释器不再写死盘符：MM_PY → 当前解释器 → 工作区内常见 venv → PATH。
+PY, _PY_OK = resolve_py()
+PY = Path(PY)
 
 
 def _run(argv: list[str], cwd: Path | None = None, timeout: int = 7200) -> tuple[int, str]:
@@ -84,8 +89,10 @@ def main(argv: list[str] | None = None) -> int:
     a = ap.parse_args(argv)
 
     if not PY.exists():
-        print(f"找不到解释器 {PY}（E:\\Mini\\envs\\mathmodel 是这套流水线指定的 3.11 环境）")
+        print(f"找不到解释器 {PY}——设 MM_PY 指向一个带 numpy/pandas/matplotlib 的 Python")
         return 2
+    if not _PY_OK:
+        print(f"警告：{PY} 无法 import numpy/pandas/matplotlib，后续步骤可能失败")
 
     paper = Path(a.paper).resolve()
     print(f"\n=== 目标 {paper}")

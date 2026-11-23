@@ -2,7 +2,7 @@
 """Exact text drawn inside fig3 (error) and fig4 (voi), plus the baselines table
 that fig3 plots, so every printed glyph can be traced to a JSON key.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_text.py
+Run:  python out\_figcheck\fig_text.py
 """
 import sys, json, pathlib
 import pymupdf as fitz

@@ -4,7 +4,7 @@
 本文件是 s3 棒次新增的**只读驱动**：不修改 solve.py / model_skeleton.py / numlib.py，
 只调用它们并把四类证据落盘到 data/results_*.json。
 
-复算：  E:\\Mini\\envs\\mathmodel\\python.exe code\\s3_deliver.py
+复算：  python code\\s3_deliver.py
 约束：  全程禁用 BLAS（A@B / np.dot / np.linalg.*），线性代数只走 numlib。
 """
 from __future__ import annotations

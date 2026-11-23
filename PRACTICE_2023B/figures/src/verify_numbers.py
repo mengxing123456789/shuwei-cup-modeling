@@ -28,7 +28,7 @@
 stdout \u540c\u65f6\u6253 `N claims` \u4e0e `claims=N declared=N checked=N failures=N verdict=...`
 \u4e24\u79cd\u53e3\u5f84\uff08WORKFLOW.md:347 \u8981\u6c42\u4e24\u79cd\u90fd\u6253\uff09\u3002
 
-\u8fd0\u884c\uff1aE:\\Mini\\envs\\mathmodel\\python.exe code\\verify_numbers.py
+\u8fd0\u884c\uff1apython code\\verify_numbers.py
 """
 from __future__ import annotations
 
@@ -38,6 +38,7 @@ import math
 import re
 import sys
 from pathlib import Path
+import os
 
 CODE = Path(__file__).resolve().parent
 ROOT = CODE.parent
@@ -943,7 +944,7 @@ def build_report(n_bytes, items, tex_stats, argv, exit_code, code_sizes,
     L += ["", "## 5 \u590d\u7b97\u547d\u4ee4", "",
           "```powershell",
           "cd E:\\\u6570\u5b66\u5efa\u6a21\\PRACTICE_2023B",
-          "& 'E:\\Mini\\envs\\mathmodel\\python.exe' code\\verify_numbers.py",
+          "& (os.environ.get("MM_PY") or sys.executable) code\\verify_numbers.py",
           "```", "",
           "\u672c\u811a\u672c\u53ea\u8bfb data/*.json \u4e0e main.tex\uff0c\u4e0d\u6539\u4efb\u4f55\u4e0a\u6e38\u6587\u4ef6\uff1b"
           "\u552f\u4e00\u5199\u5165\u7684\u662f\u672c\u62a5\u544a\u81ea\u8eab\uff08\u9996\u884c `BYTES <n>` \u7528 write_bytes \u8fed\u4ee3\u5230\u4e0d\u52a8\u70b9\uff09\u3002"]

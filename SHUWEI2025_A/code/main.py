@@ -9,9 +9,9 @@ figure is drawn here (code/figures.py reads the JSON instead, because it needs a
 matplotlib build that this numerical interpreter cannot provide).
 
 Interpreter used for every reported number:
-    E:\\Mini\\envs\\mathmodel\\python.exe -X utf8
+    python -X utf8
 Interpreter used for the figures:
-    E:\\Mini\\python.exe -X utf8 code/figures.py
+    python -X utf8 code/figures.py
 """
 from __future__ import annotations
 

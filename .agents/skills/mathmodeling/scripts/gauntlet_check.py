@@ -2,7 +2,7 @@
 """一键自检：把 RULES.md 里能自动化的条目跑成 PASS/FAIL 表。
 
 用法（必须用 mathmodel 解释器，裸 python 没有 numpy/matplotlib）：
-    E:\\Mini\\envs\\mathmodel\\python.exe gauntlet_check.py [PAPER_DIR]
+    python gauntlet_check.py [PAPER_DIR]
 
 退出码 0 = 全部 PASS（KNOWN OPEN 不计失败）；1 = 有 FAIL。
 每一项都打印它到底查了什么，不只是结论 —— "PASS" 而不给证据等于没查。
@@ -18,17 +18,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from mmkit import gauntlet as G  # noqa: E402
 from mmkit.paths import find_paper  # noqa: E402
+from mmkit.pyexe import mupdf_py  # noqa: E402
 
 
 def row(name: str, ok: bool, detail: str) -> tuple[str, bool, str]:
     return (name, ok, detail)
 
 
-FIG_PY_CANDIDATES = (
-    r"E:\Mini\envs\mathmodel\python.exe",
-    sys.executable,
-    sys.executable,
-)
+# 需要一个能 import pymupdf 的解释器；不再写死盘符（MM_PY → 当前 → venv → PATH）。
+FIG_PY_CANDIDATES = (mupdf_py(), sys.executable)
 
 
 def _figfont_via_subprocess(pdf) -> dict | None:
@@ -182,7 +180,7 @@ def check(paper_dir: str | None) -> list[tuple[str, bool, str]]:
     if fr is None:
         out.append(row("R-V14 figure text >= 6 pt", True,
                        "SKIP: no interpreter here has pymupdf; run "
-                       r"`E:\Mini\envs\mathmodel\python.exe -m mmkit.figfont` by hand"))
+                       r"`python -m mmkit.figfont` with one that does, by hand"))
     else:
         out.append(row("R-V14 figure text >= 6 pt", fr["ok"],
                        f"min={fr['min_pt']} pt median={fr['median_pt']} pt "

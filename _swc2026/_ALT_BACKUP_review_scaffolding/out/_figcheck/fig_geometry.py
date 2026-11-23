@@ -6,7 +6,7 @@ For each figure: every text span (size, bbox, string), plus the drawing primitiv
 (rects/lines) reduced to a summary: how many rects, their width/height ranges,
 whether any rect is thin enough to be an error bar, and the axis frame bbox.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_geometry.py
+Run:  python out\_figcheck\fig_geometry.py
 """
 import sys, pathlib, json
 import fitz

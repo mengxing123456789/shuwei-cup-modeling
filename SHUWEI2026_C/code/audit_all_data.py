@@ -4,10 +4,22 @@
 首/中/末三帧解码抽检，并与对应数值表/帧索引行数对齐。非视频文件逐一 SHA-256
 对照解压副本，CSV 全量解析、JSON 全量解析、Parquet 读 schema 与行数。
 
-复现：E:\Mini\envs\mathmodel\python.exe code\audit_all_data.py
+复现：python code\audit_all_data.py
 """
 
 from __future__ import annotations
+
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
 
 import collections
 import hashlib
@@ -25,7 +37,7 @@ import pyarrow.parquet as pq
 WS = pathlib.Path(__file__).resolve().parents[1]
 RAW = WS / "data" / "raw"
 SRC = pathlib.Path(
-    r"C:\Users\29900\Downloads\AsterLink\C_Problem_Data\C_Problem_Data"
+    _corpus_root() + r"\C_Problem_Data\C_Problem_Data"
     r"\Restocking_Problem_and_Data_EN\Restocking_Problem_and_Data_EN\Raw_Data"
 )
 OUT = WS / "data" / "full_audit.json"

@@ -49,6 +49,18 @@ numpy, and nothing here calls LAPACK (this environment aborts on it).
 """
 from __future__ import annotations
 
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 import json
 import sys
 from pathlib import Path
@@ -61,7 +73,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import model as M            # noqa: E402
 import solve_q2 as Q2        # noqa: E402
 
-DATA = Path(r"C:\Users\29900\Downloads\AsterLink\Problem A：Data.xlsx")
+DATA = Path(_corpus_root() + r"\Problem A：Data.xlsx")
 OUT = Path(__file__).resolve().parents[1] / "data"
 HZ = Q2.F_LINE               # 8 Hz
 W = 2 * np.pi * HZ

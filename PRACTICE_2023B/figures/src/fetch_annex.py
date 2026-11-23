@@ -35,6 +35,18 @@ xlsx \u5c31\u662f\u4e00\u5806 zip + XML\u3002\u7528 zipfile + xml.etree.ElementT
 """
 from __future__ import annotations
 
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 import datetime as _dt
 import hashlib
 import json
@@ -62,8 +74,8 @@ PRODUCTS = ("Tar yield", "Water yield", "Char yield", "Syngas yield")
 FETCH_ANCHOR_UTC = "2026-11-19T08:49:16Z"
 UPSTREAM_SOURCE = "2023 ShuWei Cup Problem B official annex (AsterLink)"
 UPSTREAM_ORIGIN = {
-    "I": r"C:\Users\29900\Downloads\AsterLink\Annex I- Pyrolysis Product Yields of Three Pyrolysis Combinations.xlsx",
-    "II": r"C:\Users\29900\Downloads\AsterLink\Annex II-Pyrolysis Gas Yields of Three Pyrolysis Combinations.xlsx",
+    "I": _corpus_root() + r"\Annex I- Pyrolysis Product Yields of Three Pyrolysis Combinations.xlsx",
+    "II": _corpus_root() + r"\Annex II-Pyrolysis Gas Yields of Three Pyrolysis Combinations.xlsx",
 }
 
 # ---------------------------------------------------------------- xlsx \u76f4\u8bfb
@@ -504,9 +516,9 @@ def build():
         "\u82e5\u9700\u8981\u300c\u6211\u4eca\u5929\u53c8\u8dd1\u4e86\u4e00\u904d\u300d\u8fd9\u79cd\u884c\u653f\u65f6\u95f4\uff0c\u5199\u8fdb logs/\uff0c\u4e0d\u5199\u8fdb\u53f0\u8d26\uff08\u5199\u8fdb\u6765\u5c31\u4e0d\u53ef\u91cd\u653e\uff09\u3002"
     )
     doc["replay"] = {
-        "build": "E:\\Mini\\envs\\mathmodel\\python.exe code\\fetch_annex.py",
-        "check": "E:\\Mini\\envs\\mathmodel\\python.exe code\\fetch_annex.py --check",
-        "payload": "E:\\Mini\\envs\\mathmodel\\python.exe code\\fetch_annex.py --payload",
+        "build": "python code\\fetch_annex.py",
+        "check": "python code\\fetch_annex.py --check",
+        "payload": "python code\\fetch_annex.py --payload",
         "cwd": "\u8bba\u6587\u6839\u76ee\u5f55\uff08E:\\\u6570\u5b66\u5efa\u6a21\\PRACTICE_2023B\uff09",
         "payload_sha256": payload_sha,
         "deterministic": True,

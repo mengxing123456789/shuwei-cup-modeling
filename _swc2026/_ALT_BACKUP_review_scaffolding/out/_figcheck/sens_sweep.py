@@ -6,7 +6,7 @@ main.tex:365 claims "the merge threshold and the drop fraction move it by less t
 Also: how many DISTINCT configurations does tab:p1sens contain? main.tex:173 says
 "Eight configurations were re-run".
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\sens_sweep.py
+Run:  python out\_figcheck\sens_sweep.py
 """
 import sys, json, pathlib
 

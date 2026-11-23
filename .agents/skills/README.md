@@ -1,39 +1,68 @@
-# 论文写作 skill 套件（项目级 · 数学建模工作区）
+# 技能树
 
-放在 `E:\数学建模\.agents\skills\` 下，与既有的 `mathmodeling` skill 同级；本项目 agent 自动发现。也可整目录复制到别的项目（`.dsh/skills/`、`.claude/skills/`、`.cursor/skills/`）直接复用。
-源目录：`E:\论文复现\.dsh\skills\`。四个 skill 目录逐字一致（18 个文件 sha256 全等）；本 README 在拷贝后做了本地化（改了路径与分工说明）。
+> 六个技能，覆盖「起题 → 建模 → 写稿 → 质检 → 投稿体检」。全部是本机 DSH（DeepSeek Harness）的技能，`skill <name>` 加载，或直接读 `SKILL.md`。
 
-## 与 `mathmodeling` 的分工
+| 技能 | 大小 | 解决什么 |
+| --- | --- | --- |
+| `mathmodeling/` | 0.78 MB | **主技能**。八步二十门流水线、75 条硬规则、执行手册、排障、语料检索、18 人建稿队 + 13 人评审队 |
+| `paper-kit/` | 1.46 MB | 42 个论文质检脚本：投稿格式、写作规则、取 BibTeX、数字溯源、图表视觉审查 |
+| `paper-language-pass/` | — | 最小干预润色、压页数、逻辑红线、去 AI 味 |
+| `paper-figures-captions/` | — | 架构图提示词、图型选择、caption 写法 |
+| `paper-results-review/` | — | 实验数据写成论证段、审稿人视角问题清单 |
+| `paper-cn2en-draft/` | — | 中文草稿转英文学术段落 |
 
-| 谁 | 管什么 |
-|---|---|
-| `mathmodeling` | 竞赛流程与硬项：读题、建模、求解、数字对账、页数与格式合规、评审小队派单 |
-| 本套件四个 skill | 手上活：中英互译、润色与去 AI 味、图型与图注、结果段与审稿式挑错 |
+## `mathmodeling/` 的结构
 
-两者不重叠：`mathmodeling/writing.md` 定的是**结构**（摘要四段式、数字配额、压页），本套件管的是**句子与图表本身**。写摘要先按 `writing.md` 定骨架，再用 `paper-language-pass` 过语言。
+```
+mathmodeling/
+  SKILL.md          20,660 B —— 入口：该用哪个脚本、该读哪份文档
+  RULES.md          59,567 B —— 75 条硬规则（E19 环境 / M17 建模 / T6 表格 / W12 写作 / V21 验证）
+  WORKFLOW.md       27,566 B —— 八步二十门的完整判据、反模式 P1-a…P6-a
+  RUNBOOK.md        42,075 B —— 排障手册、已知故障绕法、时间预算
+  CORPUS.md         10,984 B —— 语料怎么查、赛制与题型谱系
+  writing.md  modeling.md  THINKING.md  training.md
+  scripts/
+    pipeline.py      八步定义（STEPS）+ 20 道门（GATES）
+    run_all.py       一条命令跑完
+    gauntlet_check.py  16 项交稿前总闸
+    submission_gate.py 交件前最终体检
+    new_paper.py     从 DONOR 骨架起新论文
+    corpus_index.py  语料检索
+    authenticity_check.py  数据核验
+    mmkit/           工具库（见下）
+  squads/main/     18 人建稿队 brief
+  squads/review/   13 人评审队 brief
+  templates/  vendor/  reference/
+```
 
-## 来源与改编说明
+## `mmkit/` 的关键模块
 
-场景划分与「输出契约 + 反乱改阈值」的思路来自 [Leey21/awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing)（★3.6 万）。
+| 模块 | 作用 |
+| --- | --- |
+| `pyexe.py` | **解释器解析**。顺序 = `MM_PY` → `sys.executable` → `<ws>/envs/mathmodel/python.exe` → `.venv` → `PATH`，且必须能 `import numpy, pandas, matplotlib` 才采用。这是"删光本地环境仍能跑"的关键 |
+| `corpus.py` | 语料根解析。`MM_CORPUS_ROOT` → `<ws>/corpus` → 旧的 `AsterLink` 兜底 |
+| `gauntlet.py` | 16 项检查的实现（含页号连续性判据：允许目录页后 `\setcounter{page}{1}`） |
+| `crew.py` / `review_crew.py` | 18 + 13 人 brief 的模板与拼装 |
+| `freshness.py` | 产物与脚本的 mtime 对账 |
+| `provenance.py` | 数字溯源 |
 
-**该仓库没有 LICENSE**（GitHub `/license` 返回 404），因此本目录是**重写改编**，不逐字复制其 prompt 文本：保留的是结构（按论文阶段切分、强制输出契约、原文达标就放行），文案、约束与验收清单是重写的，并修掉了上游的两处缺陷（`中转中-word` 里重复的「3.」编号；76 词黑名单混入的分词残留如 Ador / Bear / Engage / Innovate / Integrate / Originates / Inscription）。
+## `paper-kit/` 最常用的五个
 
-若要对外分发本套件，先确认上游许可；本套件自身许可见项目根目录的 LICENSE（没有就补一个）。
+```powershell
+$T = '.agents\skills\paper-kit\tools\run_tool.py'
+python $T venue_submission_check.py <论文目录>   # 投稿格式（参数是目录，不是 PDF 路径）
+python $T academic_writing_check.py <论文目录>   # 写作规则
+python $T paper_data_check.py <论文目录>         # 数字是否都能溯源
+python $T scholar_fetch.py <DOI 或标题>          # 取 BibTeX
+python $T figure_review.py <figures 目录>        # 图内字号与出栏
+```
 
-## 四个 skill
+## 环境变量（都能覆盖默认值）
 
-| skill | 什么时候触发 | 载体 |
-|---|---|---|
-| `paper-cn2en-draft` | 中文草稿→英文正文；英文 LaTeX→中文速读 | LaTeX / Word |
-| `paper-language-pass` | 润色、±5–15 词微调、逻辑红线检查、去 AI 味 | LaTeX / Word |
-| `paper-figures-captions` | 方法架构图（文生图 prompt）、实验图型选择、图/表标题 | 通用 |
-| `paper-results-review` | Excel/CSV→结果分析段落；PDF→审稿报告与改稿策略 | LaTeX / 通用 |
-
-四个入口互不依赖，可单独拿走一个目录使用。
-
-## 维护纪律
-
-1. 每个 `SKILL.md` 各带一段「输出契约」，措辞必须一致。这是**有意的重复**，为的是每个 skill 可单独迁移；改契约就四处同改。
-2. 每条约束必须对应一条验收项。写不出验收项的约束是口号，删掉它。
-3. skill 里不放具体论文数据、机构名、投稿目标——那是每次调用的输入。
-4. 上游「模型选择」一节不进 skill：那是时间快照（Claude Fable 5 / Gemini-3.7-flash / qwen3.8-max 这类命名随榜单漂移），选型按当期榜单自己定。
+| 变量 | 作用 |
+| --- | --- |
+| `MM_PY` | 指定解释器，跳过自动探测 |
+| `MM_ROOT` | 工作区根 |
+| `MM_CDATA` | 原始数据根（默认 `<ws>/cdata`） |
+| `MM_CORPUS_ROOT` | 语料根（默认 `<ws>/corpus`） |
+| `MM_C_PROBLEM_ROOT` | 题面附件根（默认 `<paper>/problem/…`） |

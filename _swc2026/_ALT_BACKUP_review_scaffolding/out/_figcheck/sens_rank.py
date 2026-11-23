@@ -3,7 +3,7 @@
 where the chosen cell ranks on each metric (including the metric the table does
 not print), and whether min_seg_s / map_drop were ever swept.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\sens_rank.py
+Run:  python out\_figcheck\sens_rank.py
 """
 import sys, json, pathlib
 

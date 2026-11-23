@@ -42,6 +42,18 @@ Two bugs found on the way, kept as comments because they are easy to repeat:
 """
 from __future__ import annotations
 
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 import json
 import sys
 from pathlib import Path
@@ -51,7 +63,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import model as M  # noqa: E402
 
-DATA = Path(r"C:\Users\29900\Downloads\AsterLink\Problem A：Data.xlsx")
+DATA = Path(_corpus_root() + r"\Problem A：Data.xlsx")
 LINES = (3.0, 5.0, 8.0)
 F_LINE = 8.0
 WIN = 25                      # causal window, 0.25 s = 2.0 cycles at 8 Hz (swept: U-shaped)

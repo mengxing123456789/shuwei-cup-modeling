@@ -1,18 +1,20 @@
 """生成两个数学建模小队的 member brief 文件 + MANIFEST.json。
 
 一次性脚本。brief 正文全部来自 2026-11-18 那一轮 APMCM2026_C 的实测结论。
-跑法：E:\Mini\envs\mathmodel\python.exe _build.py
+跑法：python _build.py
 """
 from __future__ import annotations
 
 import json
 import pathlib
+import os
+import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 
 HEAD = (
-    "【工作区】{ws}　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe（裸 python 无第三方库）\n"
-    "【必读】E:\\数学建模\\.agents\\skills\\mathmodeling\\WORKFLOW.md {sec}\n"
+    "【工作区】{ws}　【解释器】python（裸 python 无第三方库）\n"
+    "【必读】<skill>\\WORKFLOW.md {sec}\n"
     "【INPUT】{inp}\n"
     "【OUTPUT】只写一个文件：{out}（UTF-8 无 BOM，首行 BYTES <n>，末行 VERDICT: PASS|FAIL）\n"
     "【不适用】本题不涉及你的职责就写一行 NOT-APPLICABLE: <理由>，不空转、不假装 PASS\n"
@@ -27,7 +29,7 @@ REVIEW = "数学建模评审小队"
 MAIN_BRIEFS: list[tuple[str, str]] = []
 
 MAIN_BRIEFS.append(("题目侦察手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§1（s1 赛题分析）、§5.1（十五道门）",
+    ws="<论文目录>", sec="§1（s1 赛题分析）、§5.1（十五道门）",
     inp="无上游依赖，你是 s1 的起点", out="out/00-problem.md") + """
 【本次任务】把题面拆成可计算的契约：
 1) 逐句抄出「要求你」的句子并标 problem.txt 行号；
@@ -41,7 +43,7 @@ MAIN_BRIEFS.append(("题目侦察手", HEAD.format(
 【交给下一棒】out/00-problem.md → 建模架构手。"""))
 
 MAIN_BRIEFS.append(("建模架构手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§2（s2 建模求解）、§5.1、§11（可复用的十二条）",
+    ws="<论文目录>", sec="§2（s2 建模求解）、§5.1、§11（可复用的十二条）",
     inp="out/00-problem.md。缺了就写 BLOCKED: <文件名> 并停", out="out/01-model.md") + """
 【本次任务】把题面变成可执行的模型骨架：符号表（一符号一义，含单位与量级，**进附录 A，正文只留一句指针**——正文 30 页上限）、假设 A1..An（每条标结构性/可检验 + 违反了会怎样）、目标与约束（写清口径：谁和谁比、分母是什么、阈值沿哪条路径）、三处模型脆弱点。代码落 code/（model_skeleton.py 常量与符号、solve.py 求解），结果落 data/results_q*.json。
 
@@ -54,7 +56,7 @@ MAIN_BRIEFS.append(("建模架构手", HEAD.format(
 【交给下一棒】out/01-model.md + code/model_skeleton.py → 求解与优化手。"""))
 
 MAIN_BRIEFS.append(("数据溯源手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§1（s1）、§5.1（G2 是你的门）",
+    ws="<论文目录>", sec="§1（s1）、§5.1（G2 是你的门）",
     inp="无上游依赖，与 题目侦察手 并行开工", out="data/ledger.json") + """
 【本次任务】为论文里每一个外部数字建台账：每条 source / api / indicator / value / unit / period / fetched_at(UTC) / sha256 / cached；抓取脚本 code/fetch_*.py 必须可重放（重跑得同一 sha256）。抓不到记「未验证」，不许第三方转载顶替。
 
@@ -66,7 +68,7 @@ MAIN_BRIEFS.append(("数据溯源手", HEAD.format(
 【交给下一棒】data/ledger.json → 数值对账手。"""))
 
 MAIN_BRIEFS.append(("求解与优化手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§3（s3 编程实现）、§5.1、§11",
+    ws="<论文目录>", sec="§3（s3 编程实现）、§5.1、§11",
     inp="out/01-model.md", out="out/02-solve.md") + """
 【本次任务】把模型解出来，结果落 data/results_q*.json，性质写 out/02-solve.md。必须报告：
 1) 每次调用耗时（ms），写进 results_timing.json 的 calls[*].median_ms；
@@ -84,7 +86,7 @@ MAIN_BRIEFS.append(("求解与优化手", HEAD.format(
 【交给下一棒】out/02-solve.md → 数值对账手。"""))
 
 MAIN_BRIEFS.append(("代理模型训练手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§3（s3）、RULES.md 的训练条",
+    ws="<论文目录>", sec="§3（s3）、RULES.md 的训练条",
     inp="out/01-model.md", out="out/12-training.md") + """
 【本次任务】只在「精确求解不可行」时才训练。先算必要性：单次求解 ms × 需评估次数。若乘积 < 可接受等待时间，写 NOT-APPLICABLE 并给出那个乘法（2026_C：全链 252 ms × 42 次扰动 = 10.6 s，所以不训练）。
 训练必须留三划分种子、只用训练集标准化、跑 k 折 / 多种子 / 外推三件；GPU 证据必须是训练期每秒采样 nvidia-smi（空闲基线一起报），事后微基准不算。
@@ -92,7 +94,7 @@ MAIN_BRIEFS.append(("代理模型训练手", HEAD.format(
 【红线】不许为了让论文有「深度学习」而训练。评审一眼能看出代理模型与主结论无关，反而扣分。"""))
 
 MAIN_BRIEFS.append(("数值对账手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§3（s3，G5 是你的门）、§5.1",
+    ws="<论文目录>", sec="§3（s3，G5 是你的门）、§5.1",
     inp="data/ledger.json + data/results_*.json", out="out/03-numbers.md") + """
 【本次任务】维护 code/verify_numbers.py：把 main.tex 里每个关键数字与 data/*.json 对账。匹配必须用词边界 (?<![\\d.])needle(?!\\d)，否则 "16" 会匹配到 "2016"。宣称条数须与实际检查条数一致（打 claims=N declared=N checked=N），任何一条失败就非零退出。结果写 out/03-numbers.md。
 
@@ -105,7 +107,7 @@ MAIN_BRIEFS.append(("数值对账手", HEAD.format(
 【交给下一棒】out/03-numbers.md → 图表手、论文撰写手。"""))
 
 MAIN_BRIEFS.append(("图表手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§4（s4 图表，G6/G11 是你的门）、§11 第 5–9 条",
+    ws="<论文目录>", sec="§4（s4 图表，G6/G11 是你的门）、§11 第 5–9 条",
     inp="out/03-numbers.md + data/results_*.json", out="out/08-figures.md") + """
 【本次任务】图写 figures/*.pdf + *.png，生成脚本 code/make_figures.py 必须可重跑（--only figNN 支持单图）。清单写 out/08-figures.md。
 
@@ -117,13 +119,13 @@ MAIN_BRIEFS.append(("图表手", HEAD.format(
 ⑤ **图例不进坐标区**：fig.legend(loc="lower center", bbox_to_anchor=(0.5, 0.015), frameon=False) + bottom=0.30 留两层。
 ⑥ **sharey + 子图 set_yticks([]) 会连主图刻度一起清掉**（21 个参数名全消失且不报错）。要么不 sharey，要么用 tick_params(labelleft=False)。
 ⑦ **hatch 会污染出栏检查**：hatch="///" 生成 tiling pattern，PDF 里 BBox 远超画布，get_bboxlog 数得到。改 linestyle=(0,(2.2,1.4)) + alpha=0.40 虚线描边。
-⑧ **matplotlib 里 "\\\\n" 是反斜杠+n 字面量**，不是换行；跑前必须 $env:PATH 前置 E:\\Mini\\envs\\mathmodel\\Library\\bin，否则进程崩（exit=-1066598273，无 traceback）。
+⑧ **matplotlib 里 "\\\\n" 是反斜杠+n 字面量**，不是换行；跑前必须 $env:PATH 前置 <env>/Library/bin，否则进程崩（exit=-1066598273，无 traceback）。
 
 【图注】只写图上真有的视觉语法。写「hatched cells are idle」而图上没有 hatch，是评审一眼抓到的硬伤。
 【交给下一棒】out/08-figures.md → 论文撰写手。"""))
 
 MAIN_BRIEFS.append(("论文撰写手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§5（s5 论文撰写，G7/G12 是你的门）、templates/PAPER-TEMPLATE.md、writing.md",
+    ws="<论文目录>", sec="§5（s5 论文撰写，G7/G12 是你的门）、templates/PAPER-TEMPLATE.md、writing.md",
     inp="out/01-model.md、out/03-numbers.md、out/08-figures.md", out="out/09-writing.md") + """
 【本次任务】按 templates/PAPER-TEMPLATE.md 的族骨架填 main.tex 与摘要。摘要四段式：Background and Task / Modeling Framework / Results per Question / Validation and Limitation；≥3 个数字、关键词与第二段模型名同序、末段必须有一条具体局限。正文 ≤30 页（G8 的 R-V01 硬判），页数超了只许把归档表搬附录。
 
@@ -139,10 +141,10 @@ MAIN_BRIEFS.append(("论文撰写手", HEAD.format(
 【交给下一棒】out/09-writing.md + main.tex → 格式合规手。"""))
 
 MAIN_BRIEFS.append(("格式合规手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§6（s6 编译合规，G8/G13/G14/G15 是你的门）、§5.1",
+    ws="<论文目录>", sec="§6（s6 编译合规，G8/G13/G14/G15 是你的门）、§5.1",
     inp="out/09-writing.md + main.tex", out="out/03-compliance.md") + """
 【本次任务】逐条跑「不合规就废稿」的硬项，一条命令出结论：
-`E:\\Mini\\envs\\mathmodel\\python.exe E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\gauntlet_check.py <论文目录>`
+`python <skill>\\scripts\\gauntlet_check.py <论文目录>`
 目标 16/16 PASS。再跑投稿体检：`...\\scripts\\submission_gate.py <论文目录> --only venue --main main`，目标「0 项要你处理」。
 
 【九条实测经验】
@@ -159,7 +161,7 @@ MAIN_BRIEFS.append(("格式合规手", HEAD.format(
 【交给下一棒】out/03-compliance.md → 对抗评审手、时间与质检手。"""))
 
 MAIN_BRIEFS.append(("对抗评审手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§7（s7 评审收口）、RUNBOOK.md",
+    ws="<论文目录>", sec="§7（s7 评审收口）、RUNBOOK.md",
     inp="out/09-writing.md、out/03-compliance.md、main.tex、data/*.json", out="out/04-review.md") + """
 【本次任务】扮演不客气的评审，只找能推翻结论的地方。每条给文件行号 + 复算命令。五类靶子：
 1) 口径错配（同一个词被两种算法用过）；
@@ -179,7 +181,7 @@ MAIN_BRIEFS.append(("对抗评审手", HEAD.format(
 【红线】不许写「整体不错，建议加强」这类无靶心的评语。每条必须是「改哪一行、改成什么」。"""))
 
 MAIN_BRIEFS.append(("创新挖掘手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§7（s7）、RULES.md 的创新条",
+    ws="<论文目录>", sec="§7（s7）、RULES.md 的创新条",
     inp="out/01-model.md、out/03-numbers.md", out="out/07-innovation.md") + """
 【本次任务】找出这篇值得拿创新奖的那个点。四类：换表征 / 换约束表达 / 换规模（可扩展性主张）/ 跨学科映射。必须写成一句可检验命题 + 支撑数字 + 与「常规做法」的差别。没有就写「只有组合无机制」并说明缺什么。
 
@@ -188,7 +190,7 @@ MAIN_BRIEFS.append(("创新挖掘手", HEAD.format(
 【红线】不许把「用了某某算法」当创新。评审要看的是「你的结论换个人用常规做法能不能得到」。"""))
 
 MAIN_BRIEFS.append(("时间与质检手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§5.1（十五道门）、§10（基线）",
+    ws="<论文目录>", sec="§5.1（十五道门）、§10（基线）",
     inp="无上游依赖，你是终检起点", out="out/06-gate.md") + """
 【本次任务】倒计时 + 终检，唯一有否决权。算距截止小时数，列「再不做就废稿」的项，跑三闸给 PASS/FAIL：
 1) `gauntlet_check.py <论文目录>` → 目标 16/16；
@@ -204,12 +206,12 @@ MAIN_BRIEFS.append(("时间与质检手", HEAD.format(
 【红线】你是唯一有否决权的人。写 PASS 就要能给出上面三条命令的输出原文。"""))
 
 MAIN_BRIEFS.append(("调度手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§0（七步总览）、§5.1（十五道门）、§10（基线）",
+    ws="<论文目录>", sec="§0（七步总览）、§5.1（十五道门）、§10（基线）",
     inp="无上游依赖，你是全链起点", out="out/11-dispatch.md") + """
 【本次任务】驱动 code 侧那条可断点续跑的流水线，而不是手工排期：
 ```
-$PY = 'E:\\Mini\\envs\\mathmodel\\python.exe'
-$PL = 'E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\pipeline.py'
+$PY = (os.environ.get("MM_PY") or sys.executable)
+$PL = '<skill>\\scripts\\pipeline.py'
 & $PY $PL <论文目录> --status                 # 七步 + 十五门的当前状态
 & $PY $PL <论文目录> --only s3 --skip-dispatch --force s3
 ```
@@ -228,7 +230,7 @@ $PL = 'E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\pipeline.py'
 【红线】不许跳过闸门直接写「已完成」。每步都要有 `[Gx PASS]` 的输出行。"""))
 
 MAIN_BRIEFS.append(("口径审计手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§11 第 1–4 条、§5.1",
+    ws="<论文目录>", sec="§11 第 1–4 条、§5.1",
     inp="main.tex + data/*.json + code/*.py", out="out/05-caliber.md") + """
 【你的唯一职责】抓「同一个词被两种算法用过」。这是 2026_C 那一轮返工量最大的一类问题，占 42 项里的 10 项（K 级）。
 
@@ -244,7 +246,7 @@ MAIN_BRIEFS.append(("口径审计手", HEAD.format(
 【红线】不许改数字，只改措辞或补限定语。改数字要回到 求解与优化手 重跑。"""))
 
 MAIN_BRIEFS.append(("版式与出栏手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§11 第 5–9 条、§5.1（G6/G11/G13 里与版式相关的部分）",
+    ws="<论文目录>", sec="§11 第 5–9 条、§5.1（G6/G11/G13 里与版式相关的部分）",
     inp="figures/*.pdf + main.pdf + main.log", out="out/10-layout.md") + """
 【你的唯一职责】把「读者看不到的字」清零。这类问题的特征是：编译不报错、图看着正常、评审一放大就发现断头句。
 
@@ -258,7 +260,7 @@ MAIN_BRIEFS.append(("版式与出栏手", HEAD.format(
 【红线】不许靠「缩字号」解决宽度问题——先改措辞，再放宽边距，最后才动字号，且不许低于 6.2 pt。"""))
 
 MAIN_BRIEFS.append(("附录与自指手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§11 第 2 条、§5.1（G13/G15）",
+    ws="<论文目录>", sec="§11 第 2 条、§5.1（G13/G15）",
     inp="code/*.py + main.tex + figures/*.seal.tex", out="out/13-appendix.md") + """
 【你的唯一职责】让附录里那些「由产物自己决定的值」永远不会过期。
 
@@ -271,7 +273,7 @@ MAIN_BRIEFS.append(("附录与自指手", HEAD.format(
 【红线】正文里出现任何「脚本 X 字节」「本文 Y 个数字」而它不是生成出来的，就是定时炸弹。"""))
 
 MAIN_BRIEFS.append(("流水线运维手", HEAD.format(
-    ws="E:\\数学建模\\APMCM2026_C", sec="§5.1（十五道门逐条）、§9（已知边界）",
+    ws="<论文目录>", sec="§5.1（十五道门逐条）、§9（已知边界）",
     inp="logs/pipeline_state.json + 三闸输出", out="out/14-ops.md") + """
 【你的唯一职责】守住 pipeline.py 与 submission_gate.py 本身，让它们在新赛题上仍然判得对。
 
@@ -288,14 +290,14 @@ MAIN_BRIEFS.append(("流水线运维手", HEAD.format(
 
 REVIEW_BRIEFS: list[tuple[str, str]] = []
 
-REVIEW_BRIEFS.append(("合规审查员", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("合规审查员", """【工作区】<论文目录>　【解释器】python
 【必读】RULES.md 的 C1–C12 条 + 官方格式规范 16 份；WORKFLOW.md §6、§5.1
 【INPUT】main.tex / main.pdf / main.log / 官方规范原文
 【OUTPUT】只写 review/01-compliance.md（UTF-8 无 BOM，末行 VERDICT: PASS|FAIL）
 【纪律】每条结论引官方原文（文件 + 行号或 URL + 访问日期）；不许凭印象判合规
 
 【本次任务】逐条过 C1–C12，每条给「条款原文 / 本稿状态 / 证据 / 判定」。先跑一条命令拿机器基线：
-`E:\\Mini\\envs\\mathmodel\\python.exe ...\\scripts\\gauntlet_check.py <论文目录>`（16 项），再跑 `...\\scripts\\submission_gate.py <论文目录> --only venue --main main`。
+`python ...\\scripts\\gauntlet_check.py <论文目录>`（16 项），再跑 `...\\scripts\\submission_gate.py <论文目录> --only venue --main main`。
 
 【六条实测经验】
 ① 前置页顺序 control→summary→contents，页眉只有队号+页码。
@@ -307,7 +309,7 @@ REVIEW_BRIEFS.append(("合规审查员", """【工作区】E:\\数学建模\\APM
 
 【红线】不许把「提醒」写成「不合规」。venue 的页数、AI 使用声明、参考文献核验三项是提醒，不拦。"""))
 
-REVIEW_BRIEFS.append(("论文结构审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("论文结构审读", """【工作区】<论文目录>　【解释器】python
 【必读】templates/PAPER-TEMPLATE.md（族骨架）+ RULES.md 的结构条 + WORKFLOW.md §5
 【INPUT】main.tex + out/00-problem.md（题面契约）
 【OUTPUT】只写 review/02-structure.md（末行 VERDICT: PASS|FAIL）
@@ -321,7 +323,7 @@ REVIEW_BRIEFS.append(("论文结构审读", """【工作区】E:\\数学建模\\
 
 【红线】不许以「结构完整」一句带过。要给出「第 X 章第 Y 节缺 Z」。"""))
 
-REVIEW_BRIEFS.append(("摘要与表达审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("摘要与表达审读", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §5 摘要四段式 + writing.md
 【INPUT】main.pdf 的摘要页
 【OUTPUT】只写 review/03-abstract.md（末行 VERDICT: PASS|FAIL）
@@ -338,7 +340,7 @@ REVIEW_BRIEFS.append(("摘要与表达审读", """【工作区】E:\\数学建�
 
 【红线】只报「词数超了」不算审读。要给到「删哪一句、删完剩多少词」。"""))
 
-REVIEW_BRIEFS.append(("题目契合度审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("题目契合度审读", """【工作区】<论文目录>　【解释器】python
 【必读】problem.txt 全文 + out/00-problem.md
 【INPUT】problem.txt + main.tex
 【OUTPUT】只写 review/04-fit.md（末行 VERDICT: PASS|FAIL）
@@ -351,7 +353,7 @@ REVIEW_BRIEFS.append(("题目契合度审读", """【工作区】E:\\数学建�
 
 【红线】2026_C 踩过的坑：把七个功能面积写成「题给」，实际是自设，全文返修。这类必须点名。"""))
 
-REVIEW_BRIEFS.append(("模型与检验审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("模型与检验审读", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §2、§11 第 1–4 条；RULES.md 的模型条
 【INPUT】out/01-model.md、out/02-solve.md、data/results_*.json
 【OUTPUT】只写 review/05-model.md（末行 VERDICT: PASS|FAIL）
@@ -366,7 +368,7 @@ REVIEW_BRIEFS.append(("模型与检验审读", """【工作区】E:\\数学建�
 
 【红线】不许接受「模型合理」这种判语。要么给出反例，要么给出「在 X 读法下成立、在 Y 读法下不成立」。"""))
 
-REVIEW_BRIEFS.append(("数据与代码审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("数据与代码审读", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §3、§5.1（G4/G5/G10/G12/G15）
 【INPUT】code/*.py、data/*.json、data/ledger.json
 【OUTPUT】只写 review/06-code.md（末行 VERDICT: PASS|FAIL）
@@ -380,7 +382,7 @@ REVIEW_BRIEFS.append(("数据与代码审读", """【工作区】E:\\数学建�
 
 【红线】不许把「有脚本」当成「可复现」。要给出重跑命令与实际输出。"""))
 
-REVIEW_BRIEFS.append(("图表审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("图表审读", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §4、§11 第 5–9 条
 【INPUT】figures/*.pdf、figures/*.png、main.pdf
 【OUTPUT】只写 review/07-figures.md（末行 VERDICT: PASS|FAIL）
@@ -396,7 +398,7 @@ REVIEW_BRIEFS.append(("图表审读", """【工作区】E:\\数学建模\\APMCM2
 
 【红线】不许只说「图太少」。要说「哪个结论缺图、该画什么图型」。"""))
 
-REVIEW_BRIEFS.append(("创新性评估", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("创新性评估", """【工作区】<论文目录>　【解释器】python
 【必读】RULES.md 的创新条 + out/07-innovation.md（若已存在）
 【INPUT】out/01-model.md、out/02-solve.md、main.tex
 【OUTPUT】只写 review/08-innovation.md（末行 VERDICT: PASS|FAIL）
@@ -408,7 +410,7 @@ REVIEW_BRIEFS.append(("创新性评估", """【工作区】E:\\数学建模\\APM
 
 【红线】不许把「用了某算法/某库」当创新。评审要看的是：换个人用常规做法，能不能得到同一个结论。"""))
 
-REVIEW_BRIEFS.append(("改进方案总编", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("改进方案总编", """【工作区】<论文目录>　【解释器】python
 【必读】review/ 下全部 12 份报告 + WORKFLOW.md §5.1
 【INPUT】review/01..13 全部报告
 【OUTPUT】只写 review/00-plan.md（末行 VERDICT: PASS|FAIL）
@@ -424,7 +426,7 @@ REVIEW_BRIEFS.append(("改进方案总编", """【工作区】E:\\数学建模\\
 
 【红线】清单里每条都要能被人直接执行。写「加强稳定性分析」是废条；写「在 main.tex:919 后加一段，用 data/results_q5.json 的 rate_sensitivity 五个 delta 值」才是可执行。"""))
 
-REVIEW_BRIEFS.append(("数字对账员", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("数字对账员", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §3（G5/G12）
 【INPUT】main.tex + data/*.json + code/verify_numbers.py
 【OUTPUT】只写 review/09-numbers.md（末行 VERDICT: PASS|FAIL）
@@ -443,7 +445,7 @@ REVIEW_BRIEFS.append(("数字对账员", """【工作区】E:\\数学建模\\APM
 
 【红线】不许只报「failures=0」。要报「有 N 个数根本没被 verify 覆盖」。"""))
 
-REVIEW_BRIEFS.append(("口径冲突审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("口径冲突审读", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §11 第 1–4 条
 【INPUT】main.tex 全文 + data/*.json 全部键
 【OUTPUT】只写 review/10-caliber.md（末行 VERDICT: PASS|FAIL）
@@ -461,7 +463,7 @@ REVIEW_BRIEFS.append(("口径冲突审读", """【工作区】E:\\数学建模\\
 
 【红线】只改措辞与限定语，不许改数字。改数字要退回 求解与优化手 重跑。"""))
 
-REVIEW_BRIEFS.append(("版式与出栏审读", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("版式与出栏审读", """【工作区】<论文目录>　【解释器】python
 【必读】WORKFLOW.md §11 第 5–9 条
 【INPUT】main.pdf、main.log、figures/*.pdf
 【OUTPUT】只写 review/11-layout.md（末行 VERDICT: PASS|FAIL）
@@ -480,7 +482,7 @@ REVIEW_BRIEFS.append(("版式与出栏审读", """【工作区】E:\\数学建�
 
 【红线】不许建议「缩字号」解决宽度问题。先改措辞，再放宽边距，最后才动字号且不低于 6.2 pt。"""))
 
-REVIEW_BRIEFS.append(("修复排序手", """【工作区】E:\\数学建模\\APMCM2026_C　【解释器】E:\\Mini\\envs\\mathmodel\\python.exe
+REVIEW_BRIEFS.append(("修复排序手", """【工作区】<论文目录>　【解释器】python
 【必读】review/00-plan.md（若已存在）+ 其余全部报告
 【INPUT】review/*.md 全部
 【OUTPUT】只写 review/12-order.md（末行 VERDICT: PASS|FAIL）

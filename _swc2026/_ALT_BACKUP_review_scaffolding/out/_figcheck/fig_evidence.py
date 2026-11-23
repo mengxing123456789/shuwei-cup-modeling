@@ -6,7 +6,7 @@ E2  fig1 panel (b): are the three x labels one scale? (0 s, +-0.2 s, "half segme
 E3  fig2: Hanley-McNeil 95% CI for each AUC at n1=51, n0=298 -- the error band the
     figure omits, and whether the two 0.914/0.915 bars are distinguishable at all.
 E4  fig3/fig4: the "(a)" title with no "(b)" panel.
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_evidence.py
+Run:  python out\_figcheck\fig_evidence.py
 """
 import sys, pathlib, math
 import pymupdf as fitz

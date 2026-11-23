@@ -12,7 +12,7 @@ Also verifies that every PDF has a sibling PNG of the expected pixel width.
 
 Run with the mathmodel interpreter, which ships pymupdf:
 
-    & "E:\\Mini\\envs\\mathmodel\\python.exe" -X utf8 code\\check_figures.py
+    & (os.environ.get("MM_PY") or sys.executable) -X utf8 code\\check_figures.py
 """
 
 from __future__ import annotations
@@ -22,6 +22,7 @@ from pathlib import Path
 
 import pymupdf
 from PIL import Image
+import os
 
 W_PT = 416.5
 EDGE_PT = 2.0

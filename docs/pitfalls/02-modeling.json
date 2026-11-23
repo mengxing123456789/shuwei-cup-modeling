@@ -1,0 +1,370 @@
+[
+  {
+    "id": "P-M01",
+    "title": "熵权与TOPSIS的归一化口径必须一致（不是'必须min-max'）",
+    "symptom": "q5_macro.entropy_topsis 两步都 min-max，理想解取自 min-max 后的 V；换向量归一则权重比最大 16.337 倍、首位由 Soybeans 翻成 Mid/low chips；列单调重标定下 min-max 权重变化 0.0、向量归一 max|dw|=0.1555。",
+    "rule": "禁止在同一指数内混用归一化口径；归一化口径必须与正负理想解构造一致并在方法节写明；口径切换须报首位是否翻转与最大权重比。",
+    "check": "assert same_basis(entropy_norm, topsis_norm); assert max_ratio<5 or report_first_place_flip()",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M01b",
+    "title": "价格指数口径（算术vs CES）改变Q3最优政策点",
+    "symptom": "q3.welfare 用 P=x*pD+(1-x)*pI 而份额是 CES；最优点 gap -0.042148（-3.20%），CS 由 +0.481013 翻成 -0.608706（差 1.089720 bn）；换 CES 价后最优 (tau .25,s .44,W 3.744984) 而非 (.16,.36,1.798766)；箱内最大|gap|=0.140192 对应 CS 差 3.6246 bn。",
+    "rule": "禁止用算术价替代与 CES 份额配套的价格指数；口径不同必须同时报两种 CS 与 gap，且不得用算术口径最优点作推荐。",
+    "check": "X_obs...; assert abs(p_arith(x,pD,pI)-p_ces(x,pD,pI,s))/p_ces(x,pD,pI,s) < 1e-3",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M02",
+    "title": "预测年越界时冻结min-max把有序信息压成饱和值",
+    "symptom": "按观测窗 2015-2024 的 min/max 给越界年打分，越上界被截到 0（最差与次差同值，秩被毁）：raw [0.5,8,9,3,7,5] -> frozen [1,0,0,0.6667,0,0.3333] vs extended [1,0.1176,0,0.7059,0.2353,0.4706]；越下界则'更好'被压成'最好'（frozen 1.0 vs extended 0.6061）。",
+    "rule": "预测年超出观测区间时禁止沿用观测窗 min/max，须扩面板重算范数/理想解并声明数值不可与样本内直接比。",
+    "check": "X_all=np.vstack([X_obs,X_fc]); assert (X_all.min(0)==X_obs.min(0)).all() and (X_all.max(0)==X_obs.max(0)).all(), 'predicted year out of window'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M03",
+    "title": "加权和 != CES 数量指数（本例 CES 聚合恒等 105.0327）",
+    "symptom": "eps_d=0 使 CES 聚合被钉在 Q0=105.032704（U/Q0=1.000000000 到机器精度），而 total_mmt 随情景 104.4276->112.5941，极差 7.5614 MMT（+7.20%）；tab_q1 的 Total 列正是算术和。",
+    "rule": "禁止用加权和替代 CES 指数报告总量变化；并列时必须两列分标（fixed CES index / arithmetic sum）并用 substitution-not-consumption 限定。",
+    "check": "rho=(sigma-1)/sigma; U=(sum(alpha[o]*q[o]**rho))**1/rho; assert abs(U/Q0-1)<1e-9 and abs(total_mmt-sum(q.values()))<1e-9",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M04",
+    "title": "约束 binding 标志：容差绝对化、量纲耦合，且只查扩容后的上限",
+    "symptom": "halt 情景 Brazil q=100.9825 vs cap2=101.0619，util 99.9214%、slack 0.07941 -> binding=False；对照未扩容物理上限 util=110.0440% 仍报 False；halt/US 因 cap=1e-6 被 1e-3 绝对容差误判 True；其余 pair 最小 slack 1.538，tol 1e-9..1.0 只翻转 1 对；cap2 不随结果返回。",
+    "rule": "binding 必须用相对容差 q>cap*(1-1e-6)，必须同时检查物理上限 cap 与再分配上限 cap2，并把 cap2 随结果返回以便复算。",
+    "check": "binding={o:q[o]>cap2[o]*(1-1e-6)}; over={o:q[o]>cap[o]*(1-1e-6)}; assert (not any(over.values())) or any(binding.values())",
+    "verified": "pass(局部)"
+  },
+  {
+    "id": "P-M06",
+    "title": "消费者成本 Laspeyres vs Paasche：每个正关税都符号翻转",
+    "symptom": "Laspeyres (pI1-pI0)*M0/1000 = 2.6027/4.3379/7.8082/15.4430（tau 10/15/25/47%，与 tab_q2 一致）；Paasche (pI1*M1-pI0*M0)/1000 = -1.5522/-2.6095/-4.7735/-9.7309 -> 全部翻号；|L/P|=1.677/1.662/1.636/1.587；pI 涨 1.28%-7.63% 而 M 只缩 2.0%-11.6%。",
+    "rule": "禁止在同一福利结论里混用 Laspeyres/Paasche；必须写明基准数量加权并报倍数与符号一致性；符号不一致时结论只能是'区间跨越零'。",
+    "check": "L=(pI1-pI0)*M0/1000; P=(pI1*M1-pI0*M0)/1000; assert np.sign(L)==np.sign(P) or 'report both and the factor' in report",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M07",
+    "title": "两套进口基数混用会在零政策处造出虚假福利",
+    "symptom": "M6=7.081579（六来源）vs M_world=7.686277，差 -0.604698 百万辆；重造旧 bug 后 tau=0 的 welfare=+2.395497（虚假增量 +1.672959 bn = gap*pD*10%/1000），另一种混法给出 -14.679456 bn 的假收益；现行代码已统一，tau=0 时 +0.722538。",
+    "rule": "同一福利恒等式内所有进口量必须同一口径；必须在 tau=0 处断言 Delta Welfare == 0 作为基准自洽性测试。",
+    "check": "assert abs(par['M']-par['import_share']*par['sales_m'])<1e-9 or flag_two_bases(); assert abs(dW_at_base_tau)<1e-9",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M08",
+    "title": "零敏感性可能只是采样盒没跨过临界面",
+    "symptom": "m*=0.817671（二分，与 q1_binding_surface.mstar 0.817682 差 1.1e-5），盒下限 0.85 高 3.95% -> 永不 bind；q_Brazil 样本标准差 0.0000；4 输入 Saltelli 中 capmul 固定或 [0.92,1.10] 时 ST=0.0000（和 1.0449），扩到 [0.60,1.10] 后 ST=1.1566（和 1.4435）成为第一大驱动；Sobol 盒与 MC 盒 9/9 输入都不同。",
+    "rule": "报任何 0 敏感性前必须先算临界值 m* 并断言采样盒跨过它；未跨过须标 inert(box never crosses m*)；Sobol 盒与 MC 盒不同须两表分列。",
+    "check": "mstar=bisect(objective,lo,hi); assert box_lo<=mstar<=box_hi, f'ST=0 is a box artefact, m*={mstar:.4f}'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M09",
+    "title": "签名里有但函数体从不读的参数：敏感性恒为 0",
+    "symptom": "solve_auto 的 sigma_in 在函数体出现 0 次；sigma_in=0.5..16 时 imports_m 恒 7.428131564、welfare 恒 +0.826046260（最大差 0.0）；数据里 sigma_import=-0.20778860758275833（se 0.229009，n=60）但代码用 4.0；论文 tab:inert 已标 unread。",
+    "rule": "签名里不被函数体引用的参数必须删除或抛 NotImplementedError；敏感性表必须标 unread 而非 0，且不得计入稳健性论证；校准值与使用值不一致须两处标来源。",
+    "check": "ast 扫描函数体：unused=[p for p in params if p not in ast.dump(body)]; assert not unused",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M10",
+    "title": "网格搜索最优点落在边界必须报边界并向外扩一次",
+    "symptom": "Q3 mid 段最优 tau=0.25 恰在上界，扩到 0.60 后最优 tau=0.60/W 2.566726（+16.8%）且仍贴边；Q1 frontier 8/42 个 sigma 的 tau*=1.0，真跑 solver 扩到 tau=2 得 sigma=2.40 -> tau*=1.65/rev 5.2971（+6.5%）、2.68 -> 1.38、3.10 -> 1.13、3.38 -> 1.015；Q3 security_floor 与 lam_scale>=1.2 的 frontier 全部 tau=0.25。",
+    "rule": "最优点落在网格边界必须报'边界解'并写明搜索上界，且向外扩网格一次再报；扩后仍贴边只能写'在[lo,hi]内单调，最优在边界'。",
+    "check": "assert lo<best<hi, 'boundary solution: extend grid before reporting'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M11",
+    "title": "蒙特卡洛抽样区间必须以校准值为中心",
+    "symptom": "Q3 lambda 乘子 U(0,1) 均值 0.5003（-49.97%）、U(0.5,2) 均值 1.2504（+25.04%）、U(0.9,1.1) 均值 1.0；真模型 400 次 MC 的 W 均值 0.6146 / 2.9401 / 1.8188（4.8 倍）且 tau 贴边比例 0.000/0.547/0.095；其余乘子偏置：sm U(2,5) 3.50(+16.67%)、eps U(2,4.5) 3.25(+8.33%)、g U(.01,.06) 均值 .035(-44.69% 且校准值 .06328 在箱外)、persist U(.6,1) 均值 .80(校准值 1.0 在盒边)。",
+    "rule": "乘子型参数必须绕校准值 1.0 居中（中位数=校准值），端点对称或对数对称，抽样后断言 |mean-1|<0.05；物理量参数区间必须含校准值且不得把校准值放在端点。",
+    "check": "d=rng.uniform(0.9,1.1,4000); assert abs(d.mean()-1)<0.05; assert lo<calibrated<hi",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M12",
+    "title": "确定性点估计落在自己MC区间之外：两种口径，必须分开写",
+    "symptom": "Q4 Persist 411.8948 vs MC [27.8894,353.6175]，超 p95 58.2773 bn，根因 g=0.06328 高于 MC 自身 g 上界 0.06（+5.47%），压到 0.06 仍 408.0445；Q1 q_US 15.7889 vs [15.8832,18.8924]，1200 次重跑显示点位于 3.5 分位、仅 3.5% 抽样低于它，根因 pass=1.0 在 U(0.6,1.0) 上端点；Partial 318.7192 / Full 201.8809 在区间内。",
+    "rule": "点估计与 MC 区间必须分口径标注（确定性中心参数 vs 参数不确定性分位带），禁止混为'估计与误差'；必须断言点估计每个参数落在自己 MC 盒内且不在盒边，否则给出根因。",
+    "check": "assert all(box_lo[k]<point[k]<box_hi[k] for k in box); print(frac_below=np.mean(mc<pt))",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M13",
+    "title": "Sobol 指数轴序：S1[input][output]，转置读会得到>1的份额",
+    "symptom": "q1_sobol.py 的 s1/st 形状 (9,11)=[input][output] 且原样存盘；正确读法 q_US 列和 1.0612（11 个输出列和 1.0601~1.1491，total_mmt 0.6110）；按 [output][input] 读则行和 tau1=10.1705、其余约 0.38 -> 物理不可能。",
+    "rule": "存盘前必须断言 ST 按输入求和≈1；按输出求和>1 即轴序反了或数据被转置；total_* 输出的低和必须单独解释为交互项而非遗漏参数。",
+    "check": "colsum=ST.sum(0); rowsum=ST.sum(1); assert np.all((colsum>0.9)&(colsum<1.2)); assert not np.any(rowsum>1.5)",
+    "verified": "fail"
+  },
+  {
+    "id": "P-M14",
+    "title": "代理模型的高R2是插值必然，不构成验证",
+    "symptom": "选型只用 val（10 组 mean_val_r2 0.9999562-0.9999844）；final VAL r2 0.999988653 vs TEST 0.999991179（test 更高 +2.525e-06，无泄漏）；CV 5 折 best_epoch 55-59/预算 60 全部贴顶（误差下界）；train 尖峰仅 ep47/ep48、最大偏离 316.6x；唯一非平凡误差是外推 inside 0.9999889 vs outside 0.9993192（worst v_US 0.998814，n_outside 2640）；final best_epoch 187/200。",
+    "rule": "代理模型报告必须给箱外外推最差输出误差，禁止只报均值 R2；CV 的 best_epoch 贴预算上限时必须标'误差下界（未收敛）'。",
+    "check": "assert cv_best_epoch.max()<epochs_budget-2, 'CV ceilinged'; assert r2_out<r2_in and worst_out<r2_out",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M15",
+    "title": "情景冲击的基准期必须从数据取，禁止字面量",
+    "symptom": "q5_macro.d_shock=100*(e-0.025) 写死 0.025，而模型自身 e24=0.02396861，偏 0.1031 pp；d_shock 用 0.025 -> +4.4156 pp，用 e24 -> +4.5188 pp；经 theta=0.12 首季通胀低估 0.0124 pp、14 季峰值 4.4172 vs 4.4499（-0.0327 pp）、均值 GDP 1.2535 vs 1.2410。",
+    "rule": "情景冲击的基准期必须从数据取（e24），禁止字面量；若保留字面量必须在代码与论文同时标注'与实测 e24 差 0.1031 pp'。",
+    "check": "e0=d[year==base].e_rate.mean(); assert abs(e0-E0_LITERAL)<5e-4, f'literal {E0_LITERAL} vs data {e0}'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M16",
+    "title": "数据台账：25/54 个源无字节可复核",
+    "symptom": "ledger.json 54 sources 的 sha256 全部非空且互异，但按 sha256(url)[:20]+'.bin' 匹配 data/cache 只得 29/54（缺失 46.3%）；命中的 29 个文件 sha256 全部 MATCH（0 mismatch）；ledger 的 cached 字段 54 个全为 False（其中 29 个其实在盘上）；cache 里 123 个文件不被任何 ledger url 引用；fetched_at 全部落在 2026-11-10T10 这一小时。",
+    "rule": "可复现必须落地为 源->缓存->sha256->结果 的闭环断言；无字节的源必须在 ledger 标 cached:false 并在论文写明'不可独立复核'；cached 字段必须由文件存在性生成，不得手写。",
+    "check": "ok=[s for s in led if cache_path(s['url']).exists()]; assert len(ok)==len(led), f'{len(led)-len(ok)} sources have no cached bytes'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M20",
+    "title": "Q3 的 CS 符号由价格指数口径决定",
+    "symptom": "同一最优点上算术价 CS=+0.481013、CES 价 CS=-0.608706，符号翻转，差 1.089720 bn（3.24% of V）；可行箱内价差最大 0.140192 对应 CS 差 3.6246 bn。",
+    "rule": "CS 的符号必须与'价格指数是算术还是 CES'同句给出，禁止单独引用 CS 符号做福利判断。",
+    "check": "assert sign(cs_arith)!=sign(cs_ces) implies report_both is True",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M29",
+    "title": "tab_q2 的算术闭合：所谓'表内相加矛盾'是口径误读",
+    "symptom": "按增量列 -consumer_cost + tariff_rev_increment + producer_gain 与 welfare_bn 的残差六行全 0.0000（含 Free trade 行 -0.9200 是把 LEVEL 列相加的结果）。",
+    "rule": "表里同时存在 LEVEL 与 Delta 两套列时表头必须分标，caption 必须给'如何相加才等于 Delta Welfare'的公式。",
+    "check": "for r in rows: assert abs(-r['consumer_cost']+r['tariff_rev_increment']+r['producer_gain']-r['welfare_bn'])<1e-6",
+    "verified": "fail"
+  },
+  {
+    "id": "P-M27",
+    "title": "Q1 的 tau0 被论文一处说成 inert，实处会动 2.568 MMT",
+    "symptom": "tau0=0.00/0.10/0.25/0.50 -> total 107.511229/106.815574/105.937877/104.942751（极差 2.568 MMT），US 9.139383/11.674580/15.788930/23.004864，Delta tau=+0.470000/+0.176000/-0.020000；对照 diversion 0->1 与 capBR 0.85->1.15 的 swing 恰为 0.000e+00（这两项标 inert 是正确的）。",
+    "rule": "禁止在没有一次性扫描证据时把参数称作 cancels/inert；正文与 tab:inert 的参数处置必须同源同值。",
+    "check": "vals=[solve(tau0=t)['total_mmt'] for t in (0,.1,.25,.5)]; assert max(vals)-min(vals)<1e-6*mean(vals), 'tau0 moves'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M31",
+    "title": "Q1 的 MC 盒不以点估计为中心",
+    "symptom": "sigma_used=6.5 而 MC 抽 U(2.4,8.0)（中心 5.20）：距点估计 +1.30(+25.0%)、距 IV 估计 2.7992 为 -2.4008；MC q_US 17.4431[15.9050,18.9197] 与点 15.7889 相比点低 9.48% 且在区间外。",
+    "rule": "MC 盒必须绕校准值居中；若刻意用偏离中心的区间表达不确定性，正文必须写'本区间不以点估计为中心，点估计位于第 X 分位'。",
+    "check": "centre=(lo+hi)/2; assert abs(point-centre)<0.1*point or document_percentile(point)",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M37",
+    "title": "Q2 的'share'一词对应两个分母",
+    "symptom": "重跑模型得 X 份额 0.2813/0.2700/0.2391/0.2207/0.1887/0.1359、L 份额 0.6188/0.6300/0.6613/0.6803/0.7142/0.7731（与 results_q2.mode_share 逐位一致）；正文 27.0%->22.1% 是'日本品牌在美销量中出口占比'，tab_q2 的 28.1->13.6 是'日本占美国进口份额'。",
+    "rule": "任何 share 列必须写清分母，正文与表若用不同分母必须在 caption 交叉引用。",
+    "check": "assert abs(X+L+M-1)<1e-9; assert 'of ...' denominator label present in table header",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M39",
+    "title": "Q4 Laffer 峰对泄漏参数与网格上限都敏感",
+    "symptom": "kappa 0->0.5 使 e* 在 eps 2.0/2.5/3.0 时由 1.0000/0.6668/0.4999 降到 0.4999/0.4174/0.3542（-50.0%/-37.4%/-29.1%）；用模型自身 OLS 估计 eps=0.6795 时 e*=1.0000 即网格上界（曲线仍在上升）；报告值 laffer(eps=3.0) 为 e*=0.499875、R_max=523.701618、R_at_2024=78.91702。",
+    "rule": "Laffer 峰必须同时报 (eps, kappa, 网格上界) 三元组；e* 触上界必须标边界解并扩网格；不得用 4 位小数报由未标定参数决定的峰位。",
+    "check": "r=laffer(...); assert r['e_star']<0.9999, 'grid edge'; print(eps,kappa,grid_hi,r['e_star'],r['R_max'])",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M40",
+    "title": "Q4 的弹性是估计值 0.68 但用了 3.0，敏感度未报",
+    "symptom": "elasticity 记录 epsilon_ols 0.6795/se 0.8469/r2 0.9821/n 118/epsilon_used 3.0（note: OLS is imprecise; calibrated central value 3.0 used）；同一公式 2025 收入从 eps .68 的 2314.5 到 eps 4.5 的 13136.3（5.7 倍）。",
+    "rule": "使用校准值而非估计值时，必须同时报估计值、标准误和切换造成的结论敏感度；不得用估计值的标准误给校准值做区间。",
+    "check": "assert 'epsilon_used' in est and 'sensitivity_to_eps' in out",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M41",
+    "title": "Q4 的 MAPE 在进口上，不在收入上",
+    "symptom": "2024 imports 3292.515 bn/duties 78.917 bn -> e=0.023969；2025 Jan-Sep imports 2630.511/duties 174.042 -> e=0.066163（9 个月，年化 3507.35）；revenue(e25,e24,M24,3.0)=192.9885 bn；报告的 model_predicted_jansep=152.2227、mape_imports=0.117302。",
+    "rule": "验证指标必须与被主张的量一致；若验证进口而主张收入，正文必须分句写两个对象的证据强度。",
+    "check": "assert validation_object=='imports' and claim_object=='revenue' implies two_sentences",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M42",
+    "title": "Q4 的累计净增益大小由名义增长假设主导",
+    "symptom": "Persist 逐年 net +128.965/+137.126/+145.803 -> 累计 411.8948；g=0 时 342.2146、g=0.06 时 408.0445、'全部按 2024 税率'（无政策）反而 500.8771（比有政策高 88.98 bn）。",
+    "rule": "报累计净增益必须给无政策反事实的绝对值对照并说明对 g 与基数的依赖，数字不得单独出现。",
+    "check": "assert 'counterfactual_no_policy' in out and 'g=0' in out['sensitivity']",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M43",
+    "title": "Q3 补贴项漏乘加成率 mu：福利高估 83.7% of W",
+    "symptom": "代码 sub=s*(1+delta)*qD 漏 mu，而 ps=(mu-1)*(1+delta)*(1-s)*qD 含 mu；high 段补贴 6.0223->7.5279（+25.0%），W 高估 1.5056 bn（=83.7% of 1.7988）；乘子 k=1.10/1.25/1.50/2.00 时最优 (tau,s,W) 依次 (.12,.32,1.2888)/(.09,.26,0.7904)/(.07,.18,0.3534)/(.05,.05,0.0818)；修正后 mid/low 最优 s 全部顶到 0.50。",
+    "rule": "成本项与收益项必须用同一价格层级；补贴/税收单位价值必须等于它所作用的那个价格（此处本地价含 mu）；福利为正的推荐政策必须在修正记账后仍为正才算结论。",
+    "check": "assert abs(sub-s*pD*qD)<1e-9 and abs(ps-(mu-1)*pD*qD)<1e-9",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M44",
+    "title": "补贴记账修正后 Q3 三段最优政策全部改变",
+    "symptom": "k=1.25 时 high (tau .09,s .26,W .7904)、mid (tau .25,s .50,W 2.4865)、low (tau .25,s .50,W 4.9670)；shipped 点重估 W 分别降到 0.2932/1.3929/2.8586。",
+    "rule": "推荐值必须附记账口径乘子 k 的扫描表；k 变化导致符号变化时结论只能写'符号不稳定'。",
+    "check": "print_k_table(k=[1.0,1.1,1.25,1.5,2.0]); assert sign_stable(W) or 'sign unstable' in conclusion",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M45",
+    "title": "补贴单位成本 k 的连续扫描：k>=1.5 时推荐政策福利转负",
+    "symptom": "k=1.00/1.10/1.25/1.50/2.00 -> (tau,s,W)=(.16,.36,1.7988)/(.12,.32,1.2888)/(.09,.26,0.7904)/(.07,.18,0.3534)/(.05,.05,0.0818)；在 shipped 最优点重估 W 依次 1.7988/1.1965/0.2932/-1.2124/-4.2235。",
+    "rule": "同一 P-M43 红线，且必须报 k 的临界值（本例 k≈1.4 处 W 过零）。",
+    "check": "assert 'k_critical_zero' in out",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M46",
+    "title": "Q3 安全权重 lambda 决定'推荐关税'，而 lambda 不可观测",
+    "symptom": "frontier lam_scale 0.9/1.0/1.1 -> tau .13/.16/.21，lam_scale>=1.2 起 tau 全部 0.25（网格上界）；security_floor_optimum tau .25/s .40/x .5012/W 1.6393 贴上界；对 high 段把 tau 扩到 0.60 后最优点仍是 (.16,.36)/1.7988，即上限对该段不约束。",
+    "rule": "把国家安全溢价作为可调权重 lambda 时，必须报'lambda 在何值处改变推荐政策'并声明推荐值是 lambda 的函数而非政策结论。",
+    "check": "taus=[opt(l)['tau'] for l in np.linspace(0.5,2,31)]; assert taus[0]!=taus[-1] and 'lambda_threshold' in out",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M48",
+    "title": "Q1 点估计在自身分布的 3.5 分位",
+    "symptom": "div 0.0/0.3/0.6/0.9 与 capmul 0.92/1.00/1.10 对 q_US 完全无影响（恒 15.7889、total 恒 105.9379）；pass 1.0->0.6 使 q_US 15.7889->18.0635；sigma 2.4->18.2378、8.0->15.3100；1200 次重跑显示点估计是自身分布的 3.5 分位。",
+    "rule": "点估计若落在自分布的下/上 5%，必须标注它对应参数取值的端点位置并说明为何仍选它。",
+    "check": "assert 0.05<np.mean(mc<pt)<0.95 or document_endpoint_reason()",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M49",
+    "title": "47% 关税下 capacity 与 diversion 真的不动（正例，防误报）",
+    "symptom": "capmul 固定 1.00 或 [0.92,1.10] 时 Saltelli ST=sigma .4085/pass .6364/div .0000/cap .0000（和 1.0449）；该情景 q_Brazil 81.09 vs cap 91.77（util 88.4%）确实不 bind，故零指数不是假象。",
+    "rule": "报'某参数不影响结果'前必须先证明该约束在该情景下确实不 bind，否则按 P-M08 判为采样盒假象。",
+    "check": "assert util<0.99 or 'bound by construction' in note, 'zero sensitivity must be justified by slack'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M50",
+    "title": "Q2 的 tipping 13.6% 是 phi=0.8 的数",
+    "symptom": "tipping 随 phi：0.6->0.181159、0.7->0.155280、0.8->0.135870、0.9->0.120773、1.0->0.108696；换 sigma_top/sigma_mode=4.0/4.0 结果不变（只依赖 g_X=g_L 的闭式）。",
+    "rule": "报告临界关税必须绑定 pass-through 值并给 phi 扫描，单值出现即不可复核。",
+    "check": "assert 'phi' in tipping_claim and len(phi_sweep)>=3",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M51",
+    "title": "Q2 的'1% 单位成本支持'是出口成本 cX 的 1%",
+    "symptom": "cX=25032.479 USD/unit，s=0.01 -> 250.325 USD/unit，仅为本地产销成本（cL*mu=31666.086）的 0.79%；NTR 行 tipping 0.1359/0.1250/0.1141/0.1033、welfare -0.3207/-0.3965/-0.4722/-0.5479 与论文一致，s=0 行与 Deal 行逐位一致。",
+    "rule": "补贴口径必须写明占哪个成本基准，百分比不得裸写。",
+    "check": "assert 'of the export cost' in label or 'of local cost' in label",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M52",
+    "title": "论文对训练曲线的描述与已修代码不符",
+    "symptom": "train 尖峰只在 ep47(0.07015)/ep48(0.00266) 两处、最大偏离 316.6x；CosineAnnealingLR(T_max=epochs) 的 lr 单调下降（max diff -1.234e-07，ep120 6.91e-4 -> ep187 2.1e-5 -> ep199 0），与论文'learning rate non-monotone after epoch 120'不符（该描述对应旧的 T_max=60）。",
+    "rule": "正文对超参行为的描述必须与当前代码一致；改了 T_max 必须同步删改该段。",
+    "check": "assert (np.diff(lr)<=0).all() == ('non-monotone' not in paper_text)",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M53",
+    "title": "Q3 的段规模是定义不是校准",
+    "symptom": "三段 V==imports/(1-x0) 比值 1.000000（high 30.25/0.9=33.611、mid 9.753/0.75=13.004、low 23.3202/0.82=28.4393）。",
+    "rule": "把'总量 ∝ 1/(1-x0)'这类定义式当校准值引用是重复计数；禁止把 V 与 imports 当两个独立数据点。",
+    "check": "assert abs(seg['V']-seg['imports']/(1-seg['x0']))<1e-9",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M54",
+    "title": "芯片三段与整个 HS 8542 是两个分母（H1）",
+    "symptom": "三段和 63.3233 vs total_chip_import_bn 40.386451682，比值 1.5679（+56.79%）；两数都与论文逐字一致，论文正文已写明'sum to $63.32 bn across the two headings and not to the $40.39 bn of 8542 alone'。",
+    "rule": "同一节出现两个'芯片进口'总量必须显式给分母标签，禁止把两数比值当增长率。",
+    "check": "assert abs(sum(segs)-63.3233)<1e-3 and abs(total-40.3865)<1e-3; assert denominator_label_present",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M55",
+    "title": "网格边界主导时'平均最优'是截尾变量的均值",
+    "symptom": "high 段 MC 的 boundary_share=0.571、p95 tau=0.25，报出的 tau mean 0.1945 是 min(tau*,0.25) 的均值（真值>=0.1945）；welfare mean 3.1096[0.6424,6.1082]，点估计 1.7988 在区间内。",
+    "rule": "抽样落边界时必须报 boundary_share，且'均值'必须标为截尾均值，不得当作无约束最优。",
+    "check": "bs=np.mean(tau>=tau_ceiling-1e-9); assert bs<0.05 or 'truncated mean' in label",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M56",
+    "title": "一次扫描复现 tab:inert 的 Q1 行",
+    "symptom": "sigma 2.4->8.0 swing/ref 1.854e-01、pass .6->1.0 1.441e-01、div 0->1 0.000e+00、capBR .85->1.15 0.000e+00，与论文 tab:inert 的 moves/inert 判定一致。",
+    "rule": "tab:inert 这类表必须由可复跑脚本生成并落盘，不得手写数字。",
+    "check": "assert generated_by_script(table_path)",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M57",
+    "title": "Sobol 设计盒 != MC 抽样盒（9/9 输入都不同）",
+    "symptom": "sigma [2,8] vs [2.4,8]；pass [0.5,1.0] vs [0.6,1.0]；div [0.2,1.0] vs [0.3,0.9]；tau0 [0.2,0.3] vs 0.25 固定；tau1 [0.03,0.6] vs 0.47 固定；四个 cap [0.85,1.15] vs [0.92,1.10]。",
+    "rule": "禁止用'MC 的盒'描述 Sobol/设计的盒（tab_sobol caption 现文），两套盒必须两处列出。",
+    "check": "assert all(box_design[k]==box_mc[k] for k in box) or 'design box != MC box' in caption",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M58",
+    "title": "CV 的 best_epoch 全部贴预算上限",
+    "symptom": "5 折 best_epoch 55/59/56/58/59（预算 60）、r2 极差 2.452e-05 -> CV 给出的是误差下界而非收敛值。",
+    "rule": "CV 训练预算必须从 best_epoch 反推（>=2x 最长 fold 的 best_epoch）；贴顶的 CV 只能标'误差下界'。",
+    "check": "assert max(best_epochs)<budget-2, 'CV ceilinged: error is a lower bound'",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M59",
+    "title": "固定成本比例：代码与论文一致（H17 判假）",
+    "symptom": "代码 fX=0.01cX/fL=0.020cX/fM=0.015cX -> 相对 cX 1.00/2.00/1.50%、相对各自模式成本 1.00/1.82/1.44%，与论文'1.0%, 2.0%, 1.5% of the export cost'及 fL>fM>fX 的顺序一致。",
+    "rule": "百分比必须写基数（of the export cost）。",
+    "check": "assert (fX,fL,fM)==(0.01,0.02,0.015)*cX and order fL>fM>fX",
+    "verified": "fail"
+  },
+  {
+    "id": "P-M60",
+    "title": "结果字典缺 cap2，无法从返回值复算 binding",
+    "symptom": "5 条恒等式全部通过（total=sum(qty) 0.00e+00、value=qty*price/1000 0.00e+00、avg_price 0.00e+00、CES 聚合=Q0 4.44e-16），但'q<=cap2 且 flag 一致'无法写，因为 solve_equilibrium 不返回 cap2。",
+    "rule": "凡进入 flag 判定的中间量（cap、cap2、slack）必须随结果返回，使 flag 可被外部复算。",
+    "check": "assert {'cap','cap2','slack'}<=set(result.keys())",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M61",
+    "title": "Q5 的 MC 乘子中心化是正确的（正例）",
+    "symptom": "theta~N(0.12,0.04) 均值 0.1186、P(<0)=0.0020；gamma~N(-0.06,0.02) 均值 -0.0594；若改 U(0,1) 会把均值砍到 0.5（偏 -38%，同 P-M11）。",
+    "rule": "用正态绕校准值抽样是正确做法，必须保持；禁止改成 U(0,1)。",
+    "check": "assert abs(mean(theta_draws)-0.12)<0.05*0.12",
+    "verified": "fail"
+  },
+  {
+    "id": "P-M62",
+    "title": "Q5 的点估计与 MC 区间口径分离（正例）",
+    "symptom": "Partial|severe 平均 inflation 3.8106 vs MC [3.3057,4.3270]、gdp 1.4237 vs [1.2216,1.6111]、u 4.3881 vs [4.2944,4.4892]，三项全在区间内。",
+    "rule": "见 P-M12：点估计与 MC 必须分口径标注；本项目只有 Q5 做对，Q1/Q4 需补说明。",
+    "check": "assert all(lo<=pt<=hi for (lo,hi,pt) in q5_triples)",
+    "verified": "fail"
+  },
+  {
+    "id": "P-M63",
+    "title": "全项目'点估计 in MC'对照表",
+    "symptom": "Q1 q_US 15.7889 vs [15.9050,18.9197] 在外；Q4 Persist 411.8947 vs [27.8894,353.6175] 在外；Q2 Japan -0.3207、Q3 welfare 1.7988、Q3 tau 0.16、Q4 Partial 318.7192、Q4 Full 201.8809、Q5 三项均在区间内（8/10 在内）。",
+    "rule": "该表应作为交付物的一部分，每轮模型改动后重跑；出现'否'必须给根因（Q1=参数在盒端点，Q4=g 在盒外）。",
+    "check": "print_table(q1,q2,q3,q4,q5); assert all_in or rootcause_recorded",
+    "verified": "pass"
+  },
+  {
+    "id": "P-M64",
+    "title": "场景表是生成物（可复现性正例）",
+    "symptom": "tau0=tau1=0.25 重跑得 qty US 22.134149/Brazil 74.647380/Arg 4.101921/ROW 4.149254、value 12.040339/36.455785/2.082480/2.147491、total 105.0327043769999，与 data/results_q1.json 的 Baseline 行逐位一致。",
+    "rule": "任何复现工作的第一步都应是重跑基准态并逐位比对，通过后才讨论别的。",
+    "check": "assert all(abs(a-b)<1e-9 for a,b in zip(recomputed,file_values))",
+    "verified": "pass"
+  }
+]

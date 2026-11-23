@@ -10,7 +10,37 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(r"E:\数学建模\_swc2026")
+def _att_dir():
+    """任务附件目录：环境变量优先，其次仓库内 problem/ 副本。"""
+    import os as _os
+    env = _os.environ.get("SWC_ATT_DIR") or _os.environ.get("MM_C_PROBLEM_ROOT")
+    if env and _os.path.isdir(env):
+        return _os.path.abspath(env)
+    tail = ("problem", "Restocking_Problem_and_Data_EN", "Restocking_Tasks_and_Constraints")
+    here = _os.path.dirname(_os.path.abspath(__file__))
+    for _ in range(8):
+        # 同级 problem/（论文工程内）
+        cand = _os.path.join(here, *tail)
+        if _os.path.isdir(cand):
+            return cand
+        # 下一级的 */problem/（audit/ 与 SWC2026_C/ 是兄弟目录的情形）
+        try:
+            for sub in sorted(_os.listdir(here)):
+                cand = _os.path.join(here, sub, *tail)
+                if _os.path.isdir(cand):
+                    return cand
+        except OSError:
+            pass
+        nd = _os.path.dirname(here)
+        if nd == here:
+            break
+        here = nd
+    raise FileNotFoundError(
+        "task attachment directory not found; set SWC_ATT_DIR to the folder holding "
+        "Restocking_Tasks_and_Constraints")
+
+
+ROOT = Path(__file__).resolve().parents[1]      # _swc2026（从 __file__ 推，不写死盘符）
 C = ROOT / "SWC2026_C"
 AUD = ROOT / "audit"
 
@@ -232,11 +262,7 @@ def main() -> int:
         )
 
     # ---------- data package ----------
-    ATT = Path(
-        r"C:\Users\29900\Downloads\AsterLink\C_Problem_Data\C_Problem_Data"
-        r"\Restocking_Problem_and_Data_EN\Restocking_Problem_and_Data_EN"
-        r"\Restocking_Tasks_and_Constraints"
-    )
+    ATT = Path(_att_dir())
     idx = (ATT / "source_segment_index.csv").read_text(encoding="utf-8-sig")
     rows = idx.splitlines()[1:]
     check("source_segment_index 行数", len(rows) == 349, f"{len(rows)} data rows", 349, len(rows))

@@ -2,7 +2,7 @@
 """Check whether the sensitivity table's numbers have product keys, and whether
 merge threshold / drop fraction were ever swept. Also list verify_numbers claim names.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\sens_keys.py
+Run:  python out\_figcheck\sens_keys.py
 """
 import sys, json, re, pathlib
 

@@ -7,6 +7,18 @@ would be needed to land on 211.253 with a body-only mass.
 """
 from __future__ import annotations
 
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 import json
 import sys
 from pathlib import Path
@@ -17,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import model as M                                          # noqa: E402
 
 DATA = Path(__file__).resolve().parents[1] / "data"
-XLSX = Path(r"C:\Users\29900\Downloads\AsterLink\Problem A：Data.xlsx")
+XLSX = Path(_corpus_root() + r"\Problem A：Data.xlsx")
 
 
 def indices(mass: float, c: float) -> dict:

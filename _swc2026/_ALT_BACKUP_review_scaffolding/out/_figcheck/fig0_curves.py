@@ -2,7 +2,7 @@
 """fig0 part 2: the 48 curves. Are they arrowheads, the diagonal connectors, or the
 caption's two cross-question link arrows? Answer by listing every curve's bbox.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig0_curves.py
+Run:  python out\_figcheck\fig0_curves.py
 """
 import sys, pathlib
 import pymupdf as fitz

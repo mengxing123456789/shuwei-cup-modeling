@@ -1,0 +1,198 @@
+{
+  "series": "P-W",
+  "doc": "E:\\数学建模\\APMCM-PITFALLS\\03-writing.md",
+  "scope": "APMCM 2025/2026 英文赛道论文撰写、LaTeX 模板、摘要、页数、参考文献、合规",
+  "subject": {
+    "tex": "E:\\数学建模\\APMCM2025_C\\main.tex",
+    "tex_lines": 1872,
+    "cls": "E:\\数学建模\\APMCM2025_C\\apmcmthesis.cls",
+    "cls_bytes": 13838,
+    "pdf": "E:\\数学建模\\APMCM2025_C\\main.pdf",
+    "pdf_pages": 108,
+    "numbered_pages": 105,
+    "body_pages": 30
+  },
+  "toolchain": {
+    "tex": "E:\\MIKTEX\\miktex\\miktex\\bin\\x64\\xelatex.exe",
+    "pdftotext": "E:\\MIKTEX\\miktex\\miktex\\bin\\x64\\pdftotext.exe",
+    "benchmark_python": "D:\\Python\\python.exe (3.13.12, numpy 2.5.1)",
+    "default_python_has_numpy": false
+  },
+  "items": [
+    {
+      "id": "P-W01",
+      "title": "正文页数只能从页眉 Page N of M 取；目录页也含 Appendix A，摘要页无页眉",
+      "symptom": "用 PDF 总页数、或『跳过前 4 页再找 Appendix A』（compare_to_awards.py 的取法）、或『数带页眉的页』报正文页数，同一个 main.pdf 得到 28 / 29 / 30 / 105 四个答案。",
+      "quantified": "实测 main.pdf：PDF 108 页；带页眉编号页 105；正文 = 页眉 Page 1..Page 30（PDF idx 3..32）= 30 页；附录及以后 75 页。compare_to_awards 的 naive 规则给 28（= appx_i - 4），另一种 naive 给 29。目录页（PDF idx 2）含 'Appendix A: Reproducibility . . . 32'，是 naive 规则误命中源；摘要页（idx 0）不含页眉。",
+      "rule": "必须用 pdftotext -layout -enc UTF-8 按 \\f 分页、正则 Page\\s+(\\d+)\\s+of\\s+(\\d+) 取页眉；正文页数 = 第一个同时含页眉与 'Appendix A' 的页上页眉的 N（该页本身仍是正文末页）；必须同时报 numbered_pages / M / body_pages；contiguous 为 False 时数字作废。禁止用 PDF 总页数、禁止减固定前置页、禁止引用 review/03_compliance.md 的 75 页 / Page N of 72（已过期）。",
+      "check": "见 03-writing.md P-W01『检查代码』（pdftotext 分页 + 页眉正则 + Appendix A 交接页取 N）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\w01_body.py",
+      "verified": "PASS",
+      "measured": {"pdf_pages": 108, "numbered_pages": 105, "M": 105, "body_pages": 30, "appendix_and_after": 75, "naive_compare_to_awards": 28, "contiguous": true}
+    },
+    {
+      "id": "P-W02",
+      "title": "参考文献放进附录 ⇒ references 指标读成 0，正文 [n] 一起归零",
+      "symptom": "为压页把 \\begin{thebibliography} 搬到 Appendix A；编译无任何警告，但 award_standard.py 的 references 与正文 [n] 计数双双归零。",
+      "quantified": "最小工程实测（w02_metric.py，8 条文献，只改位置）：书目在正文 references=8 / 正文 [n]=8 / 词 1320 / 正文页 3；书目在附录 references=0 / [n]=0 / 词 989 / 页 2。口径来自 award_standard.py：references = len(re.findall(r'^\\s*\\[\\d{1,2}\\]', text, re.M))，只数正文取窗内行首 [n]。一等奖中位 references = 7.5（p25 5.25 / p75 11.75，引自 refs/official_standard_report.txt）。现行稿：书目在 main.tex:1589、Appendix A 在 :1657、18 条 bibitem、正文 16 处 \\cite、正文取窗行首 [n] 19 处，compare_to_awards 当次 references=9（p62.5）。",
+      "rule": "禁止把 thebibliography 移出正文；它必须位于 Conclusion 之后、Appendix A 之前（与 apmcmthesis.cls:381-399 的 \\section{\\refname} 一致）。附录只放代码/复现步骤/档案表/AI 声明。正文必须有 \\cite 落点。搬动附录结构后必须重跑 compare_to_awards.py 并重写 refs/project_vs_awards.json。",
+      "check": "见 03-writing.md P-W02『检查代码』（定位 bib/appendix 行号 + bibitem 数 + 正文 \\cite 数）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w02.py",
+      "verified": "PASS",
+      "measured": {"bib_line": 1589, "appendix_a_line": 1657, "bib_before_appendix": true, "bibitems": 18, "body_cites": 16}
+    },
+    {
+      "id": "P-W03",
+      "title": "页数卡住不动的真因是孤立 \\newpage/\\clearpage，不是字数",
+      "symptom": "版面底部还有半页空白，页数却卡死；删句子无效，加内容也不涨。",
+      "quantified": "同一 fill=30 正文（w03_newpage.py）：无断页 10 页/10 编号；正文第 1 节后 1 个 \\newpage → 11/11；1 个 \\clearpage → 11/11；字数 ×3（fill 90）→ 28 页/27 编号。即一个孤立断页 = 恰好 +1 页，与字数无关；字数 ×3 只 +17 页（线性）。假阴性教训：断页插在最后一节之后（紧贴 thebibliography）测得 Δ=0，必须插正文中间。现行稿 3 处硬断页：main.tex:117 \\newpage（\\end{abstract}→\\tableofcontents）、main.tex:120 \\newpage（\\tableofcontents→\\pagestyle{mainmatterstyle}）、main.tex:1820 \\clearpage（→\\section*{Appendix E: Source code}），全部 structural。",
+      "rule": "页数异常先扫 \\newpage/\\clearpage/\\pagebreak，再谈字数。只允许结构断页（摘要→目录、目录→正文、附录切换）；其余即孤立断页，禁止。改断页后必须编译两遍并重跑 P-W01。",
+      "check": "见 03-writing.md P-W03『检查代码』（neighbours + STRUCT_PAIRS 判定 structural/orphan）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w03.py",
+      "verified": "PASS",
+      "measured": {"breaks": 3, "orphans": 0, "structural_lines": [117, 120, 1820]}
+    },
+    {
+      "id": "P-W04",
+      "title": "[htbp]→[H] 省不了页，规模化后反而 +1 页；且只扫 main.tex 会漏掉全部 [H]",
+      "symptom": "『用 float 包的 [H] 钉死图表就能压页』；以及只扫 main.tex 得出 H_count=0 的假结论。",
+      "quantified": "实测 w04_06.py：6 图+6 表 4 节时 htbp=H=t=p=8 页（完全等价）；24 张 8 行表时 htbp=12、H=13（H 多 1 页）；3 张 120 行表时 htbp=13、H=14。现行稿全量扫描（main.tex + tables/*.tex）：floats 33，htbp 16，H 17；17 个 H 全在 tables/tab_*.tex 第 1 行（tab_audit, tab_binding, tab_data, tab_decision, tab_lafferfam, tab_lambda, tab_lp, tab_q1, tab_q1bt, tab_q2, tab_q3, tab_q4, tab_q5, tab_reshore, tab_sigmarob, tab_sobol, tab_surro），main.tex 内 H = 0。",
+      "rule": "禁止为压页把 [htbp] 全局换成 [H]。统计浮动体位置说明符必须同时扫 main.tex 与其 \\input 子文件。允许 [H] 的唯一理由是该图表必须与某段同页，改一张必须重量页数。大表优先 longtable 或拆表。",
+      "check": "见 03-writing.md P-W04『检查代码』（遍历 main.tex + tables/*.tex，统计 spec 分布与 H 来源文件）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w04.py",
+      "verified": "PARTIAL",
+      "measured": {"floats": 33, "specs": {"htbp": 16, "H": 17}, "H_files": 17, "H_in_main_tex": 0}
+    },
+    {
+      "id": "P-W05",
+      "title": "全局把 \\\\ 替换成 \\ ⇒ 首个错误是 ! Misplaced \\noalign.，不是 Extra alignment tab",
+      "symptom": "用编辑器/脚本统一行终止符，把一个 \\ 吃掉；表格内容成片消失，日志里报的却是一个看起来像对齐问题的错误名。",
+      "quantified": "实测 w04_06.py（同一张 3 列表）：正确 a & b & c \\\\ \\midrule → 成功、0 错、3 页；全局替换后 a & b & c \\ \\midrule → ! Misplaced \\noalign. @ l.44，PDF 只剩 1 页（内容全丢）。任务书预期的 ! Extra alignment tab has been changed to \\cr 在该场景不出现；那个错误属于 P-W06 的『单元格多于列声明』方向。认错错误名会按错误原因去调列声明，越修越乱。",
+      "rule": "禁止对 .tex 做 \\\\→\\ 或 \\→\\\\ 的全局替换；改表必须逐文件校验。每行末尾恰好一个 \\\\，可选参数 \\\\[2pt] 保留方括号。日志见 Misplaced \\noalign ⇒ 先数行终止符；见 Extra alignment tab ⇒ 查列声明（P-W06）。表格文件必须参与编译验证。",
+      "check": "见 03-writing.md P-W05『检查代码』（检测行尾单个 \\ 的截断行）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w05_w06.py",
+      "verified": "PASS",
+      "measured": {"truncated_rows": 0, "ok": true}
+    },
+    {
+      "id": "P-W06",
+      "title": "列声明与单元格数不一致：多给单元格致命，少给能编过且静默",
+      "symptom": "\\begin{tabular}{lrrrrr}（声明 6 列）与表头 & 数（5 单元格）不一致——真发生过一次报错。",
+      "quantified": "实测 w04_06.py：{lrr} 声明 3 列 / 每行 5 单元格 → 编译失败 ! Extra alignment tab has been changed to \\cr. @ l.44 a & b & c &，后续内容全丢；{lrrrrr} 声明 6 列 / 每行 5 单元格 → errors=[]，编译成功 3 页，表格正常印出但第 6 列留空（静默形态）。真稿报错的真实方向是『单元格多于列声明』。现行稿 18 张 tabular 全部配平（main.tex 2 张手写 + tables/*.tex 16 张，例 lll/3-3、lrrrr/5-5、lcccc/5-5、lr/2-2）。",
+      "rule": "每个 tabular 的列声明数必须等于该表所有行中 & 数最大值 + 1。\\multicolumn{n}{..} 计 n 个单元格。编译通过不算通过：必须用 PDF 文本核对每列是否有内容。建表顺序先定单元格数再写 colspec。",
+      "check": "见 03-writing.md P-W06『检查代码』（colspec_n + 逐行 & 计数，标出 fatal/silent 两类）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w05_w06.py",
+      "verified": "PASS",
+      "measured": {"tables_checked": 18, "mismatch": 0, "ok": true}
+    },
+    {
+      "id": "P-W07",
+      "title": "正文页数基线：30 页 + 75 页附录、11928 词、397.6 词每页、23 页带浮动体",
+      "symptom": "review/03_compliance.md 的 75 页 / Page N of 72 已过期；main.pdf 现在 108 页；密度口径混用导致同一稿有 398.6 与 397.6 两个数。",
+      "quantified": "实测：PDF 108 页、带页眉编号页 105、正文 30 页（页眉 Page 1..30）、附录及以后 75 页、正文词数 11928、密度 397.6 词/页（11928/30）、含 ≥1 浮动体提及的正文页 23/30、含 ≥2 个不同浮动体标签的正文页 15/30（第 4,5,8,9,10,11,12,13,15,16,18,22,24,26,27 页）、正文页出现的不同 Figure/Table 标签 32 个。对照口径：w07_budget.py 用 compare_to_awards 的 naive 窗口给 28 页 / 11162 词 / 398.6 词每页 / 18 页带浮动体 / 9 页带 ≥2，属 28 页窗口，不可与 30 页并列。规则原文（refs/spec.txt）：\"The main body of the solution paper should be controlled within 30 pages, the appendix is no limit.\"",
+      "rule": "正文页数只按 P-W01 报；禁止引用 03_compliance.md 的 75/72。30 页是控制线（should be controlled within），本稿正好压线，任何新增正文必须同时给出等量压页方案。报密度必须写清分母口径（30 页窗口或 naive 28 页窗口），两者不得混用。加图表前先看浮动体密度两项。",
+      "check": "见 03-writing.md P-W07『检查代码』（pdf 分页 + 页眉定位 Page 1 + 30 页窗口词数与浮动体统计）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w07_floats.py 与 chk_w07_snippet.py",
+      "verified": "PASS",
+      "measured": {"pdf_pages": 108, "numbered_pages": 105, "body_pages": 30, "body_words": 11928, "words_per_page": 397.6, "pages_with_float": 23, "pages_with_2plus": 15, "distinct_float_labels": 32}
+    },
+    {
+      "id": "P-W08",
+      "title": "附录不限页数：搬档案表是唯一可持续的正文压缩手段，但收益离散（约 1 页/轮）",
+      "symptom": "『把大表搬进 Appendix C 就能省页』——不知道省多少，也不知道 PDF 总页是否真的下降。",
+      "quantified": "实测 w08_appx.py（正文 4 节 + 每张 120 行 × 6 列档案表）：1 张表在正文 8 编号页 → 在附录 7 页（省 1），PDF 总页 8/8 不变；3 张表 10 → 9（省 1），PDF 总页 10/10 不变。即搬 3 张表也只省 1 页，附录里仍占页。另 45 行表在正文日志报 LaTeX Warning: Float too large for page by 213.2968pt，表仍印出、页数不变（见 P-W13）。现行稿：正文 6 张 \\input（tab_q1@494, tab_decision@933, tab_q2@1085, tab_q3@1217, tab_lambda@1249, tab_q4@1360），附录 C 已有 11 张（tab_surro@1769, tab_audit@1771, tab_q5@1773, tab_sobol@1774, tab_binding@1776, tab_sigmarob@1783, tab_lp@1785, tab_data@1787, tab_reshore@1789, tab_q1bt@1791, tab_lafferfam@1793），无重复引用；5 个附录节 A(1657)/B(1687)/C(1740)/D(1795)/E(1821)。注意 award_standard.py 的 tables 数的是正文页里 Table N 编号去重数（正文出现 1..18 共 18 个），搬表压页但不压该指标——要压指标必须减少正文附录表的文字指名。",
+      "rule": "压正文优先搬档案性内容（完整数据表、逐条参数、参数扫描明细、复现日志），不删论证。正文留 3–5 行摘要表 + See Appendix C for the full table。预算按每轮 1 页，禁止期待省多页。禁止用搬附录消灭页尾半页空白（那是 P-W12）。搬完必须重量 P-W01 页数 + P-W02 references + P-W07 密度。附录节标题必须用 \\section*{Appendix X: 名称} + \\addcontentsline。",
+      "check": "见 03-writing.md P-W08『检查代码』（按 \\section*{Appendix A 切分并解析 \\input{\\\\?tables/...}）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w08_snippet.py",
+      "verified": "PASS",
+      "measured": {"appendix_sections": 5, "tables_in_body": 6, "tables_in_appendix": 11, "enlargethispage": ["2.5\\baselineskip"]}
+    },
+    {
+      "id": "P-W09",
+      "title": "摘要四段粗体标签顺序固定，但第三段实测是 Framework. 不是 Model.",
+      "symptom": "检查脚本把段首标签硬编码成 Task./Model./Results./Validation.，把合规稿判成不合规（假阴性）。",
+      "quantified": "实测 w09_moves.py 解析 main.pdf 第 1 页：labels = [Task, Framework, Results, Validation]，in_order_by_position = true，n_labels = 4。源码 main.tex:63-115 四个段首 \\textbf{...}，main.tex:112-114 \\keywords{...} 共 8 个关键词用 \\quad 分隔。硬编码 Model. 的检查器 → 本稿被判 FAIL；只校验四个标签 + 顺序 + 首 Task + 末 Validation → PASS。",
+      "rule": "摘要必须恰好 4 段，段首粗体标签，顺序 Task. → 方法标签 → Results. → Validation.。方法标签允许 Model./Method./Framework. 三选一，本稿用 Framework.，不得为凑检查器改内容。检查器禁止硬编码第三段字面量，必须校验数量=4、位置单调递增、首=Task、末=Validation。摘要必须独立成页（apmcmthesis.cls:342-358 自带 \\newpage），关键词紧跟第四段。",
+      "check": "见 03-writing.md P-W09『检查代码』（pdftotext 取第 1 页 Task. 到 Keywords: 区间，按位置排序校验）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\w09_moves.py",
+      "verified": "PASS",
+      "measured": {"labels": ["Task", "Framework", "Results", "Validation"], "n": 4, "ordered": true, "ok": true}
+    },
+    {
+      "id": "P-W10",
+      "title": "摘要数字密度两个口径差 4 倍，必须写清是哪一种",
+      "symptom": "award_standard.py 只数小数，abstract_structure.json 数所有数字；同一摘要可差 4 倍。旧 03_compliance.md 判的『44 个 / 15.4 不符合官方标准』是旧稿第三种口径。",
+      "quantified": "实测 main.pdf 第 1 页摘要区（505 词）：小数去重 5 / 0.99 每百词（一等奖中位 2.5 / 0.73，p25-p75 = 0–8 / 0–2.49，引自 refs/official_standard_report.txt）；全数字去重 19 / 3.76 每百词（16 篇中位 12 / 3.3，范围 3–48 / 0.5–13.8，引自 APMCM2026\\refs\\abstract_structure_report.txt）；百分号 token 9 / 1.78（min/median/max = 0/1/20）。本稿小数口径 p62.5 / p56.2，落在 p25-p75 内。abstract_words = 505（p87.5，中位 374.5，p75 431.75）——已超 p75。旧稿 44 个 / 15.4 在新稿上已不成立。",
+      "rule": "报摘要数字密度必须带口径名（小数去重/100词 或 全数字去重/100词），禁止混用。对标一等奖用同名口径中位：小数目标 2.5（上界 8），全数字目标 12（上界 48）。摘要须含结果数字 + 区间 + 验证数字三类，但每百词全数字 ≤13.8、小数 ≤8。abstract_words 目标 374.5，本稿 505 超 p75，摘要再长要砍词而非加数字。",
+      "check": "见 03-writing.md P-W10『检查代码』（同一摘要文本双口径计数 + 区间判定 + words_above_p75）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\w10_abs.py",
+      "verified": "PASS",
+      "measured": {"words": 505, "distinct_decimals": 5, "decimals_per_100w": 0.99, "distinct_all_numbers": 19, "all_per_100w": 3.76, "in_decimal_band": true, "in_all_band": true, "words_above_p75": true}
+    },
+    {
+      "id": "P-W11",
+      "title": "Page N of M 的 M 会滞后一版：单遍编译能印出 Page 10 of 9",
+      "symptom": "往附录追加内容后只编一遍，摘要页印 Page 1 of 9，正文页眉已到 Page 10 of 9。",
+      "quantified": "实测 w11b_counter.py（正文 4 节 + 3 张 120 行表）：表在正文 → pdf_pages 10、with_header 10、max_N 10、M {10}、N>M false；表在附录单遍编译 → max_N 10、M {9}、N>M true（真实 PDF 出现 Page 10 of 9）。现行稿 108 页 / 105 编号 / max_N 105 / M [105] / contiguous true / consistent true。",
+      "rule": "必须 xelatex 跑 2 遍以上才能取页数；只编一遍的页数报告作废。报页数必须同时给 max N 与 M；两者不等 = 页数不可信，先重编译。禁止把摘要页的 M 当正文页数依据。contiguous 为 False 同样视为不可信，查 P-W03 的孤立断页。",
+      "check": "见 03-writing.md P-W11『检查代码』（收集所有 Page N of M 对，比较 max_N 与 M 集合及连续性）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\w11b_counter.py",
+      "verified": "PASS",
+      "measured": {"pdf_pages": 108, "with_header": 105, "max_N": 105, "M": [105], "contiguous": true, "consistent": true}
+    },
+    {
+      "id": "P-W12",
+      "title": "\\enlargethispage{2.5\\baselineskip} 能吃掉半页空白，但只在末页溢出 ≤2.5 行时有效",
+      "symptom": "想不动模板吃掉末页半页空白；放错位置或 n 太大会测出 Δ=0 或失效。",
+      "quantified": "实测 w15f.py（正文 4 节 × 12 段，末节顶部注入 2.5\\baselineskip，pad = 追加段数）：pad 0–3 → 6/6 页 Δ0；pad 4 → 7→6 省 1；pad 5–8 → 7/7 Δ0。w15_etp.py 每节注入 n = 1.0 / 2.5 / 5.0 / 10.0 → 11 → 10 / 10 / 10 / 9（1.0 就够吃 1 页，2.5 与 1.0 同效，10.0 才再省 1 页，有饱和）。参数标定：apmcmthesis.cls:53 \\renewcommand*{\\baselinestretch}{1.38}，12pt ⇒ 1 baselineskip ≈ 19.9pt，2.5 ≈ 49.7pt ≈ 2.5 行。假阴性：放在 \\end{document} 前（w15c.py）或正文最末节之后 Δ 恒为 0。现行稿 main.tex:1742 用 2.5\\baselineskip，位置在 Appendix C 起首——手法对，对正文 30 页无贡献。",
+      "rule": "吃页尾空白必须用 \\enlargethispage{n\\baselineskip}，n ∈ [1.0, 2.5]；超过 5 无增益且有顶穿页脚风险。命令必须放在即将溢出那一页的页首（一般是该页第一段起点）；放在 \\end{document} 前或章节尾 = 无效。禁止用 \\vspace*{-x}、改 \\textheight、改 \\baselinestretch 做同类操作。用了必须重量 P-W01 页数并确认无新 Overfull \\vbox。",
+      "check": "见 03-writing.md P-W12『检查代码』（提取 \\enlargethispage 参数与行号，判 1.0–2.5 带内，并扫 log 的 Overfull/Float too large）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\w15f.py",
+      "verified": "PARTIAL",
+      "measured": {"hits": [[1742, "2.5\\baselineskip"]], "in_band": true, "overfull_vbox": 0, "float_too_large": 0}
+    },
+    {
+      "id": "P-W13",
+      "title": "Float too large for page 会静默溢出：页数不变但排版已破",
+      "symptom": "45 行 6 列表塞进 [htbp]，日志有警告，PDF 页数不变，于是以为省了页。",
+      "quantified": "实测 w04_06.py / w08_appx.py：45 行表 → LaTeX Warning: Float too large for page by 213.2968pt，PDF 仍 4 页、表仍印出（x10 1 2 3 4 可检索）；18 行表无警告。溢出 213.2968pt ≈ 30% 正文高（cls 正文高 = 297 − 2×25.4 = 246.2mm ≈ 698pt）。现行稿 main.log：Float too large 0 处，Overfull \\vbox 0 处。",
+      "rule": "单张浮动表必须能在 \\textheight 内放下；放不下必须拆表或改 longtable。日志出现 Float too large 禁止当作通过。检查器必须扫 log 的 Float too large 与 Overfull \\vbox，两者都必须为 0。",
+      "check": "见 03-writing.md P-W13『检查代码』（扫 .log 两个关键字并给样例行）",
+      "verified": "PASS",
+      "measured": {"float_too_large": 0, "overfull_vbox": 0, "ok": true}
+    },
+    {
+      "id": "P-W14",
+      "title": "附录里的 \\cite 与手写 [18] 重复，PDF 印出两次编号",
+      "symptom": "AI 声明写成 '... as required by the regulation: \\cite{ai}, listed as entry [18] with its type [EB/OL].'",
+      "quantified": "PDF 渲染为 'regulation: [18], listed as entry [18] with its type [EB/OL].'——同一编号出现两次。全稿仅此一处：chk_w02_w14.py 输出 cite+bracket lines: 1 [(1693, 'regulation: \\\\cite{ai}, listed as entry [18] with its type [EB/OL].')]。该 \\cite 同时是附录里唯一的引注，一旦按 P-W02 把书目搬附录即成孤例。",
+      "rule": "一处引用只写一次，禁止 \\cite{x} 与手写 [n] 并列。附录引注必须指向正文已出现过的文献；附录禁止引入正文未引用文献。正确写法：'as required by the regulation (Reference [18], type [EB/OL]).'（去掉 \\cite{ai}）或 '... \\cite{ai} (type [EB/OL]).'（去掉手写编号）。",
+      "check": "见 03-writing.md P-W14『检查代码』（逐行找同时含 \\cite 与 [n] 的行）",
+      "verified": "FAIL",
+      "measured": {"cite_plus_literal": 1, "line": 1693}
+    },
+    {
+      "id": "P-W15",
+      "title": "compare_to_awards.py 的三个口径陷阱：numpy 缺失、只数小数、提及≠布尔；三项越界已确认",
+      "symptom": "直接 python code\\compare_to_awards.py 会崩；直接引用 has_* 会读成布尔；结果 json 结构是 percentiles 列表而非 comparison 字典。",
+      "quantified": "实测：默认 python（3.14.6）报 ModuleNotFoundError: No module named 'numpy'，必须 D:\\Python\\python.exe（3.13.12 + numpy 2.5.1）。has_* 是提及次数（正则计数），has_neural=7/16 应读作『7 篇提到』。abstract_numbers / distinct_numbers 只数小数（同 P-W10）。当次输出（已写回 refs/project_vs_awards.json）：words 12340 (p87.5)、abstract_words 505 (p87.5)、abstract_numbers 5 (p62.5)、abstract_density 0.99 (p56.2)、distinct_numbers 455 (p93.8)、pct_mentions 263 (p100)、density_per_100w 3.69 (p87.5)、sections 5 (p75)、subsections 0 (p43.8)、figures 14 (p50)、tables 18 (p100)、equations 19 (p56.2)、references 9 (p62.5)；越界三项 distinct_numbers 455 vs 中位 75、pct_mentions 263 vs 16、tables 18 vs 4。一等奖 16 篇中位（refs/official_standard_report.txt）：words 8228、figures 14.5、tables 4、equations 17、references 7.5。",
+      "rule": "必须用 D:\\Python\\python.exe 运行，跑完必须重写 refs/project_vs_awards.json 且只引当次数字。引 has_* 一律写『提及数 n/16』。中位数禁止手抄，引用须写来源文件与 min–max 区间。三项越界是当前最该动的：tables 18（p100）→ 按 P-W08 继续搬；distinct_numbers 455 / pct_mentions 263 → 删正文重复数字列举。figures 14（p50）与 equations 19（p56.2）都在带内，不要为好看加图表。",
+      "check": "见 03-writing.md P-W15『检查代码』（subprocess 调用 D:\\Python\\python.exe，读 percentiles 列表筛 pct_rank 越界）；可复跑脚本 E:\\数学建模\\.tmp_scratch\\ex1\\chk_w15_snippet.py",
+      "verified": "FAIL",
+      "measured": {"exit": 0, "benchmark_n": 16, "outside_band": [{"metric": "distinct_numbers", "project": 455.0, "median": 75.0, "pct_rank": 93.8}, {"metric": "pct_mentions", "project": 263.0, "median": 16.0, "pct_rank": 100.0}, {"metric": "tables", "project": 18.0, "median": 4.0, "pct_rank": 100.0}]}
+    }
+  ],
+  "summary": {
+    "total": 15,
+    "pass": 10,
+    "partial": 2,
+    "fail": 2,
+    "fail_items": ["P-W14 (main.tex:1693 \\cite 与手写 [18] 重复)", "P-W15 (内容指标三处越界，非格式)"],
+    "partial_items": ["P-W04 (17 张表用 [H])", "P-W12 (\\enlargethispage 位置在 Appendix C，对正文无效)"]
+  },
+  "sources": {
+    "award_medians": "E:\\数学建模\\APMCM2025_C\\refs\\official_standard_report.txt",
+    "award_raw": "E:\\数学建模\\APMCM2025_C\\refs\\official_standard.json",
+    "abstract_structure": ["E:\\数学建模\\APMCM2026\\refs\\abstract_structure.json", "E:\\数学建模\\APMCM2026\\refs\\abstract_structure_report.txt"],
+    "measure_impl": ["E:\\数学建模\\APMCM2025_C\\code\\award_standard.py", "E:\\数学建模\\APMCM2025_C\\code\\compare_to_awards.py"],
+    "rules": "E:\\数学建模\\APMCM2025_C\\refs\\spec.txt",
+    "stale": "E:\\数学建模\\APMCM2025_C\\review\\03_compliance.md (75 页 / Page N of 72，已过期，不得引用数字)",
+    "cls_lines": "E:\\数学建模\\APMCM2025_C\\apmcmthesis.cls:52-53 (geometry, baselinestretch 1.38), :137-151 (fancyhdr), :342-367 (abstract/keywords), :381-399 (thebibliography)"
+  },
+  "tooling_pitfalls": [
+    "PowerShell 无 heredoc：探针必须落 .py 文件",
+    "默认 python 3.14.6 无 numpy：用 D:\\Python\\python.exe",
+    "GBK 输出编码：先 $env:PYTHONIOENCODING=\"utf-8\"",
+    "cd 不跨 pwsh 调用：每条命令自带 cd 或 workdir",
+    "只复制 apmcmthesis.cls 会报 File 'apmcmthesis.cfg' not found（cls:420 需要 cfg）",
+    "断页/\\enlargethispage 插错位置会得到 Δ=0 的假阴性"
+  ]
+}

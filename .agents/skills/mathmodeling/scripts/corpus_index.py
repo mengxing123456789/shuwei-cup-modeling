@@ -1,6 +1,6 @@
 """语料索引 CLI：建索引、查近邻、按年份题号枚举。
 
-    python E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\corpus_index.py --build
+    python <skill>\\scripts\\corpus_index.py --build
     python ... --query "主动减振 离心作动器" --top 5
     python ... --query-file problem/problem.txt          # 拿新题面当查询词（最常用）
     python ... --year 2023 --problem B --kind paper --list

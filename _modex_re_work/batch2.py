@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import subprocess, sys, os
-PY = r'E:\Mini\envs\mathmodel\python.exe'
+PY = r'python'
 EX = r'E:\数学建模\_modex_re_work\extract_strings.py'
 BASE = r'C:\modex-mh-agent\resources\app\backend\services'
 OUT = r'E:\数学建模\_modex_re_work\strings'

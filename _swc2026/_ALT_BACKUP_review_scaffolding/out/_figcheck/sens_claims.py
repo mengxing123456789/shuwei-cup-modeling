@@ -8,7 +8,7 @@
 (3) main.tex:150 "the record-level scores have a within-record AUC of exactly
     0.500 by construction"  -> are all record-level scores exactly 0.500?
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\sens_claims.py
+Run:  python out\_figcheck\sens_claims.py
 """
 import sys, json, pathlib
 

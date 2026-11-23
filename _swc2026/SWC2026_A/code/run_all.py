@@ -3,7 +3,7 @@
 """一键复跑全部建模计算与图表。
 
 用法（在任意目录）：
-    E:\\Mini\\envs\\mathmodel\\python.exe code\\run_all.py
+    python code\\run_all.py
 
 链条：p3（附件C 产能）→ p1（机理/无量纲）→ p2_shape（P2 形状判别）→ p4（经济/优化）
       → p5（Sobol）→ verify_env（环境对账）→ figs（7 张图）→ make_tables（03-numbers.md）

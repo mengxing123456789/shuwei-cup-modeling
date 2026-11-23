@@ -17,9 +17,9 @@ Design contract
 
 Run with the plotting interpreter (the mathmodel env crashes in savefig):
 
-    & "E:\\Mini\\python.exe" -X utf8 code\\make_figures.py
-    & "E:\\Mini\\python.exe" -X utf8 code\\make_figures.py --only fig05
-    & "E:\\Mini\\python.exe" -X utf8 code\\make_figures.py --only fig04,fig05
+    & "python" -X utf8 code\\make_figures.py
+    & "python" -X utf8 code\\make_figures.py --only fig05
+    & "python" -X utf8 code\\make_figures.py --only fig04,fig05
 """
 
 from __future__ import annotations

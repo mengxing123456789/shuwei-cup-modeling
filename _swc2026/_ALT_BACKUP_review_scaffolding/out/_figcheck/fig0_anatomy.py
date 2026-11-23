@@ -3,7 +3,7 @@
 filled quads/curves, and test whether the caption's two "cross-question links" are
 drawn as arrows or only written as a footnote line of text.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig0_anatomy.py
+Run:  python out\_figcheck\fig0_anatomy.py
 """
 import sys, pathlib, collections
 import pymupdf as fitz

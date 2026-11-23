@@ -5,6 +5,7 @@ Line numbers refer to the 381-line version read at 18:04.
 Replacements are applied bottom-up so earlier indices stay valid.
 """
 import sys, io, pathlib
+import os
 
 sys.stdout.reconfigure(encoding='utf-8')
 P = pathlib.Path(r'E:\数学建模\_swc2026\SWC2026_C_ALT_BACKUP\review\07-figures.md')
@@ -170,7 +171,7 @@ put(32, 54, """### 0.2 gauntlet_check.py — R 系列 16 项
 
 ```
 > cd E:\\数学建模\\_swc2026\\SWC2026_C_ALT_BACKUP
-> & "E:\\Mini\\envs\\mathmodel\\python.exe" "E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\gauntlet_check.py" .
+> & (os.environ.get("MM_PY") or sys.executable) "<skill>\\scripts\\gauntlet_check.py" .
 
 [band] benchmark: ...\\refs\\official_standard.json  n=48  median sections=8.5
 [PASS] paper resolved                      E:\\数学建模\\_swc2026\\SWC2026_C_ALT_BACKUP
@@ -198,7 +199,7 @@ put(32, 54, """### 0.2 gauntlet_check.py — R 系列 16 项
 # ---------------------------------------------------------------- §0.1 verbatim
 put(14, 30, """```
 > cd E:\\数学建模\\_swc2026\\SWC2026_C_ALT_BACKUP
-> & "E:\\Mini\\envs\\mathmodel\\python.exe" "E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\review_check.py" .
+> & (os.environ.get("MM_PY") or sys.executable) "<skill>\\scripts\\review_check.py" .
 
 paper: .
 pdf: main.pdf   pages: 74

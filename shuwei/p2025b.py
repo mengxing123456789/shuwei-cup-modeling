@@ -1,7 +1,20 @@
+
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 ﻿import zipfile,io,re,sys
 from pypdf import PdfReader
 sys.stdout.reconfigure(encoding='utf-8',errors='ignore')
-zp=r'C:\Users\29900\Downloads\AsterLink\2025年数维杯秋季赛优秀论文.zip'
+zp=_corpus_root() + r'\2025年数维杯秋季赛优秀论文.zip'
 z=zipfile.ZipFile(zp)
 targets={
  'B':'2025年数维杯秋季赛优秀论文/B题/BSHUWEICUP2549191/BSHUWEICUP2549191.pdf',

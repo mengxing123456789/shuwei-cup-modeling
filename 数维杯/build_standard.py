@@ -3,13 +3,25 @@
 数据源：C:\\Users\\29900\\Downloads\\AsterLink 根目录下的 A/B/C/D<队号>.pdf
 （各年份「数维杯优秀论文」）。每篇都走与主稿完全相同的 measure()，两边可比。
 
-产物：E:\\数学建模\\数维杯\\refs\\official_standard.json
-      E:\\数学建模\\数维杯\\refs\\official_standard_report.txt
+产物：数维杯\\refs\\official_standard.json
+      数维杯\\refs\\official_standard_report.txt
 
 注意：奖级只到「目录名为优秀论文」这一层，没逐队核官网获奖名单，
 所以 n_first_prize_verified 写 0，prize_evidence 里写清楚证据强度。
 """
 from __future__ import annotations
+
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
 
 import io
 import json
@@ -19,7 +31,7 @@ import statistics as st
 import sys
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-sys.path.insert(0, r"E:\数学建模\.agents\skills\mathmodeling\scripts")
+sys.path.insert(0, r"<skill>\scripts")
 from mmkit import award_standard as A  # noqa: E402
 
 try:
@@ -27,7 +39,7 @@ try:
 except ImportError:  # noqa: PLC0415
     import fitz  # type: ignore  # noqa: PLC0415
 
-ROOT = pathlib.Path(r"C:\Users\29900\Downloads\AsterLink")
+ROOT = pathlib.Path(_corpus_root())
 OUT = pathlib.Path(r"E:\数学建模\数维杯\refs")
 KEYS = ["words", "abstract_words", "abstract_numbers", "abstract_density",
         "distinct_numbers", "pct_mentions", "density_per_100w", "sections",

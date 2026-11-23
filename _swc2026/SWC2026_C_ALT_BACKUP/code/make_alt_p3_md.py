@@ -251,9 +251,9 @@ SLACK**（{gap_slk['S1']:+.4f} / {gap_slk['S2']:+.4f} / {gap_slk['S3']:+.4f}，�
 ## 6. 复现
 
 ```
-E:\\Mini\\envs\\mathmodel\\python.exe code\\alt_p3_ccmip.py \\
+python code\\alt_p3_ccmip.py \\
     --seeds 30 --scen 20 --eps 0.5 --lam 0.01 --tl 1.0 --workers 4 --procs 4
-E:\\Mini\\envs\\mathmodel\\python.exe code\\make_alt_p3_md.py
+python code\\make_alt_p3_md.py
 ```
 
 产物：`data/alt_p3.json`（`_meta` / `best_policy` / `variants` / `summary`（含 `*_ci95`）/ `trials`）、

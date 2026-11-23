@@ -25,7 +25,7 @@ PLACEHOLDERS = {"<本题目录>", "<dir>", "<论文目录>", "$P", "$MM", "$PY"}
 
 # 工作区根下的目录：文档里写成 `APMCM-PITFALLS/x.md`、`squads/...` 时按工作区根解析，
 # 写成 `templates/...`、`scripts/...` 时按 skill 目录解析。
-WS_SUBDIRS = ("APMCM-PITFALLS/", "APMCM2025_C/", "APMCM2026/")   # squads/ 已迁进 skill 目录
+WS_SUBDIRS = ("docs/pitfalls/",)   # squads/ 已迁进 skill 目录；亚太杯目录已移出本仓库
 WS = SKILL.parents[2]
 
 
@@ -50,7 +50,7 @@ def _paths_in(doc: str) -> set[str]:
         for piece in re.split(r"[\s,，、()]+", tok):
             if piece in PLACEHOLDERS:
                 continue
-            if piece.startswith(("templates/", "scripts/", "APMCM-PITFALLS/", "squads/")):
+            if piece.startswith(("templates/", "scripts/", "docs/pitfalls/", "squads/")):
                 found.add(piece)
             elif piece.startswith("$MM\\") or piece.startswith("$MM/"):
                 found.add(piece[4:])

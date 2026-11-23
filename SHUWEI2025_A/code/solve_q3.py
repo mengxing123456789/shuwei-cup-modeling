@@ -26,6 +26,18 @@ the full-window index and the index over the controlled span are reported.
 """
 from __future__ import annotations
 
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 import json
 import sys
 from pathlib import Path
@@ -36,7 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import model as M  # noqa: E402
 import solve_q2 as Q  # noqa: E402
 
-DATA = Path(r"C:\Users\29900\Downloads\AsterLink\Problem A：Data.xlsx")
+DATA = Path(_corpus_root() + r"\Problem A：Data.xlsx")
 OUT = Path(__file__).resolve().parents[1] / "data"
 W0 = 2 * np.pi * Q.F_LINE
 WIN = Q.WIN            # 0.25 s = exactly two periods at 8 Hz -> unbiased demodulation

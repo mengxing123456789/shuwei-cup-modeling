@@ -4,7 +4,7 @@
 
 为什么需要这个文件
 ------------------
-本机 `E:\\Mini\\envs\\mathmodel\\python.exe`（numpy 2.4.6）的 OpenBLAS 一碰
+本机 `python`（numpy 2.4.6）的 OpenBLAS 一碰
 gemm/LAPACK 就整进程硬崩 `Windows fatal exception: code 0xc06d007f`，
 `exit code -1066598273`。实测边界（每项独立进程跑，崩了就是崩了）：
 

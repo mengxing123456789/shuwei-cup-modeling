@@ -17,7 +17,7 @@ import argparse, glob, hashlib, json, os, re, subprocess, sys, time
 
 BASE = r"E:\数学建模\_swc2026"
 PROBS = ["A", "B", "C", "D"]
-PY = r"E:\Mini\envs\mathmodel\python.exe"
+PY = r"python"
 
 
 def jload(p):

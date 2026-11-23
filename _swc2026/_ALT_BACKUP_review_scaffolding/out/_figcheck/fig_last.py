@@ -6,7 +6,7 @@ D2  fig2: does the value axis run past the metric's own maximum (1.0)?
 D3  every figure: CJK glyphs (C7 forbids Chinese in the chart) and whether each
     figure states its own units / sample size in the artwork.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_last.py
+Run:  python out\_figcheck\fig_last.py
 """
 import sys, pathlib, re
 import pymupdf as fitz

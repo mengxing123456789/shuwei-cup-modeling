@@ -19,6 +19,8 @@ import sys
 import time
 from pathlib import Path
 
+from . import pyexe as _pyexe
+
 TEAM_ID = "61cec604-e7fa-4468-9a84-40757e4292c6"   # 建稿队（18 人）
 REVIEW_TEAM_ID = "b68d6335-b534-4f4b-aec7-0b2d56b501b8"  # 数学建模评审小队（13 人）
 TEAM_NAME = "数学建模小队"
@@ -125,7 +127,7 @@ PERMISSION = {}
 HOUSE = "\n".join([
     "【工作区】{ws}",
     "【被测论文】{paper}",
-    "【解释器】E:\\Mini\\envs\\mathmodel\\python.exe（带 numpy/pandas/matplotlib/torch；裸 python 无第三方库）",
+    "【解释器】{py}（带 numpy/pandas/matplotlib/torch；裸 python 无第三方库。若路径不存在，设环境变量 MM_PY 指向本机装了这些库的 Python）",
     "【INPUT】先 Read 紧跟本段之后列出的依赖产物。任何一份不存在，只写一行 BLOCKED: <缺哪个文件> 到你的输出文件并停止，不许补做上游的活。",
     "【OUTPUT】你只能写一个文件：下面【你的输出】给出的那个绝对路径。不许改文件名、不许另起名（实测有成员写成 out/final-check.md，巡检判为未交付）。UTF-8 无 BOM；写完 Read 回来确认字节数 > 0，正文首行写 BYTES <n>。",
     "【不适用】本题不涉及你的职责时，写一行 NOT-APPLICABLE: <理由>，不要空转，也不要假装 PASS。",
@@ -383,7 +385,7 @@ def full_brief(name: str, ws: Path, paper: Path, overrides: dict | None = None) 
     task = (overrides or {}).get(name) or TASKS.get(name, name)
     problem_pdf = (overrides or {}).get("__problem_pdf__", str(ws / "problem.pdf"))
     body = task.format(workspace=ws, paper=paper, problem_pdf=problem_pdf)
-    head = HOUSE.format(ws=ws, paper=paper)
+    head = HOUSE.format(ws=ws, paper=paper, py=_pyexe.py())
     return f"{head}\n{dep_line}\n【你的输出】{ws / OUTPUT_OF[name]}\n\n【本次任务】\n{body}"
 
 
@@ -564,7 +566,7 @@ def _resolve(ws: Path, name: str) -> Path:
     """契约文件的实际位置。
 
     2026-11-12（实测）：审读员的 cwd 是**工作区根**，而 `OUTPUT_OF` 写的是
-    `review/0X.md` 这种相对路径，于是 8 份报告全落在 `E:\\数学建模\\review\\`，
+    `review/0X.md` 这种相对路径，于是 8 份报告全落在 `review/`，
     而 `outcome()` 去 `PRACTICE_2018A/review/` 找 → 8/8 全报 `missing`，
     实际上 10:55–11:06 已全部交货。判活路径与契约路径必须同源：先看 ws 根，
     再退回任何一个子目录里的同名产物。

@@ -35,6 +35,18 @@ xlsx 就是一堆 zip + XML。用 zipfile + xml.etree.ElementTree 直读，
 """
 from __future__ import annotations
 
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 import datetime as _dt
 import hashlib
 import json
@@ -62,8 +74,8 @@ PRODUCTS = ("Tar yield", "Water yield", "Char yield", "Syngas yield")
 FETCH_ANCHOR_UTC = "2026-11-19T08:49:16Z"
 UPSTREAM_SOURCE = "2023 ShuWei Cup Problem B official annex (AsterLink)"
 UPSTREAM_ORIGIN = {
-    "I": r"C:\Users\29900\Downloads\AsterLink\Annex I- Pyrolysis Product Yields of Three Pyrolysis Combinations.xlsx",
-    "II": r"C:\Users\29900\Downloads\AsterLink\Annex II-Pyrolysis Gas Yields of Three Pyrolysis Combinations.xlsx",
+    "I": _corpus_root() + r"\Annex I- Pyrolysis Product Yields of Three Pyrolysis Combinations.xlsx",
+    "II": _corpus_root() + r"\Annex II-Pyrolysis Gas Yields of Three Pyrolysis Combinations.xlsx",
 }
 
 # ---------------------------------------------------------------- xlsx 直读
@@ -504,10 +516,10 @@ def build():
         "若需要「我今天又跑了一遍」这种行政时间，写进 logs/，不写进台账（写进来就不可重放）。"
     )
     doc["replay"] = {
-        "build": "E:\\Mini\\envs\\mathmodel\\python.exe code\\fetch_annex.py",
-        "check": "E:\\Mini\\envs\\mathmodel\\python.exe code\\fetch_annex.py --check",
-        "payload": "E:\\Mini\\envs\\mathmodel\\python.exe code\\fetch_annex.py --payload",
-        "cwd": "论文根目录（E:\\数学建模\\PRACTICE_2023B）",
+        "build": "python code\\fetch_annex.py",
+        "check": "python code\\fetch_annex.py --check",
+        "payload": "python code\\fetch_annex.py --payload",
+        "cwd": "论文根目录（the paper directory）",
         "payload_sha256": payload_sha,
         "deterministic": True,
         "deps": "仅 python 标准库（zipfile / xml.etree / hashlib / json）",

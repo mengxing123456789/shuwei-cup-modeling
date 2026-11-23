@@ -4,7 +4,7 @@
 \u672c\u6587\u4ef6\u662f s3 \u68d2\u6b21\u65b0\u589e\u7684**\u53ea\u8bfb\u9a71\u52a8**\uff1a\u4e0d\u4fee\u6539 solve.py / model_skeleton.py / numlib.py\uff0c
 \u53ea\u8c03\u7528\u5b83\u4eec\u5e76\u628a\u56db\u7c7b\u8bc1\u636e\u843d\u76d8\u5230 data/results_*.json\u3002
 
-\u590d\u7b97\uff1a  E:\\Mini\\envs\\mathmodel\\python.exe code\\s3_deliver.py
+\u590d\u7b97\uff1a  python code\\s3_deliver.py
 \u7ea6\u675f\uff1a  \u5168\u7a0b\u7981\u7528 BLAS\uff08A@B / np.dot / np.linalg.*\uff09\uff0c\u7ebf\u6027\u4ee3\u6570\u53ea\u8d70 numlib\u3002
 """
 from __future__ import annotations

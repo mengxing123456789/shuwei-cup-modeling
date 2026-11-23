@@ -1,7 +1,20 @@
+
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 ﻿# -*- coding: utf-8 -*-
 import os, sys
 sys.stdout.reconfigure(encoding='utf-8', errors='ignore')
-p=r'C:\Users\29900\Downloads\AsterLink\README_题面补全说明.md'
+p=_corpus_root() + r'\README_题面补全说明.md'
 t='''# AsterLink 数维杯资料：完整性说明（题面补全版）
 
 整理日期：2026-11-19。本说明只描述**现在这个文件夹里到底有什么、哪些能读、哪些是整理版**。

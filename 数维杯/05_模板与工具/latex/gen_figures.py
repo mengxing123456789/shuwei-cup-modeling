@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """生成论文用图（数据示例，赛时替换为真实结果）。
-运行： & 'E:\\Mini\\envs\\mathmodel\\python.exe' gen_figures.py
+运行： & (os.environ.get("MM_PY") or sys.executable) gen_figures.py
 """
 import os
 import numpy as np
@@ -8,6 +8,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
+import sys
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures")
 os.makedirs(OUT, exist_ok=True)

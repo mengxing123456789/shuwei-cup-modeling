@@ -10,14 +10,31 @@ from typing import Any
 
 import numpy as np
 
+def _att_dir():
+    """任务附件目录：环境变量优先，其次仓库内 problem/ 副本。"""
+    import os as _os
+    env = _os.environ.get("SWC_ATT_DIR") or _os.environ.get("MM_C_PROBLEM_ROOT")
+    if env and _os.path.isdir(env):
+        return _os.path.abspath(env)
+    here = _os.path.dirname(_os.path.abspath(__file__))
+    for _ in range(8):
+        cand = _os.path.join(
+            here, "problem", "Restocking_Problem_and_Data_EN", "Restocking_Tasks_and_Constraints")
+        if _os.path.isdir(cand):
+            return cand
+        nd = _os.path.dirname(here)
+        if nd == here:
+            break
+        here = nd
+    return _os.path.join(
+        _os.path.dirname(_os.path.abspath(__file__)),
+        "problem", "Restocking_Problem_and_Data_EN", "Restocking_Tasks_and_Constraints")
+
+
 PROJECT = Path(__file__).resolve().parents[1]
 DATA = PROJECT / "data"
 CODE = PROJECT / "code"
-DEFAULT_ATT_DIR = Path(
-    r"C:\Users\29900\Downloads\AsterLink\C_Problem_Data\C_Problem_Data"
-    r"\Restocking_Problem_and_Data_EN\Restocking_Problem_and_Data_EN"
-    r"\Restocking_Tasks_and_Constraints"
-)
+DEFAULT_ATT_DIR = Path(_att_dir())
 
 
 def att_dir() -> Path:

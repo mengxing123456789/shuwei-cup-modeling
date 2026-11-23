@@ -1,0 +1,170 @@
+[
+  {
+    "id": "P-E01",
+    "title": "MiKTeX 缺 perl，latexmk 整体不可用",
+    "symptom": "latexmk.exe : latexmk: security risk: running with elevated privileges / Sorry, but latexmk.exe did not succeed for the following reason: / MiKTeX could not find the script engine 'perl' which is required to execute 'latexmk'. (EXIT=1)；Get-Command perl 为空",
+    "rule": "禁止调用 latexmk（任何 -pdf/-xelatex/-pvc 形式）；统一用两次 xelatex -interaction=nonstopmode -halt-on-error -file-line-error 构建",
+    "check": "if (Get-Command perl -ErrorAction SilentlyContinue) { 'UNEXPECTED' } else { 'OK' }; cd E:\\数学建模\\.tmp_scratch\\pit\\tex; latexmk -pdf -interaction=nonstopmode t.tex 2>&1 | Select-String 'script engine|perl'; 'latexmk exit=' + $LASTEXITCODE",
+    "verified": true
+  },
+  {
+    "id": "P-E02",
+    "title": "单遍 xelatex 交叉引用留在 ??，必须两遍",
+    "symptom": "第 1 遍 pdftotext 文本为 'Contents 1  A  see ?? on page ??  1'；第 2 遍为 'Contents 1 A  1  1  A  see 1 on page ??  1'",
+    "rule": "必须连续跑两遍 xelatex；页码/引用核对只读第 2 遍产出的 PDF",
+    "check": "cd E:\\数学建模\\.tmp_scratch\\pit\\tex; Remove-Item tc.aux,tc.toc,tc.pdf -EA SilentlyContinue; xelatex -interaction=nonstopmode -halt-on-error tc.tex > $null 2>&1; $p1=(pdftotext -enc UTF-8 tc.pdf -) -join ' '; xelatex -interaction=nonstopmode -halt-on-error tc.tex > $null 2>&1; $p2=(pdftotext -enc UTF-8 tc.pdf -) -join ' '; \"pass1 has ?? : $($p1 -match '\\?\\?')  pass2 has ?? : $($p2 -match '\\?\\?')  (期望 True / False)\"",
+    "verified": true
+  },
+  {
+    "id": "P-E03",
+    "title": "Stop 偏好下，MiKTeX 的 security-risk stderr 在有重定向时变成致命错误",
+    "symptom": "xelatex.exe : xelatex: security risk: running with elevated privileges / + FullyQualifiedErrorId : NativeCommandError；Stop + 2>&1/2>$null/*> 时脚本终止，而 PDF 已生成、LASTEXITCODE=0",
+    "rule": "禁止在 $ErrorActionPreference='Stop' 下用 *>&1 / 2>&1 / 2>$null 接 xelatex、pdftotext、pdfinfo、latexmk；统一用 Invoke-Native 包装（内部切 Continue，2>&1 | ForEach-Object {\"$_\"}，只认 $LASTEXITCODE），真正的失败看行首 '!'",
+    "check": "$ErrorActionPreference='Stop'; try { & xelatex -interaction=nonstopmode -halt-on-error -output-directory=E:\\数学建模\\.tmp_scratch\\pit\\tex E:\\数学建模\\.tmp_scratch\\pit\\tex\\t.tex 2>&1 | Out-Null; 'UNEXPECTED' } catch { 'OK 复现: ' + $_.Exception.Message }",
+    "verified": true
+  },
+  {
+    "id": "P-E04",
+    "title": "main.log 本身不是 UTF-16；UTF-16 来自 PowerShell 重定向产物",
+    "symptom": "E:\\数学建模\\APMCM2026\\main.log 首 4 字节 54 68 69 73（'This'），无 FF FE BOM，Get-Content 与 ReadAllLines 都是 1393 行；真正 UTF-16LE 的是 PS *> 重定向产物（如 E:\\数学建模\\APMCM2025_C\\data\\q1_run.log 首字节 FF FE 7B 00）",
+    "rule": "禁止用 *> / > 落日志（会得 UTF-16）；读写日志前先看 BOM（FF FE=UTF-16LE、EF BB BF=UTF-8 with BOM）；不得再假设 main.log 是 UTF-16",
+    "check": "$f='E:\\数学建模\\APMCM2026\\main.log'; $b=[IO.File]::ReadAllBytes($f); \"首4字节: $(($b[0..3] | %%{ $_.ToString('X2') }) -join ' ')  UTF16BOM=$($b[0] -eq 0xFF -and $b[1] -eq 0xFE)\"; \"行数: $((Get-Content $f).Count)  (期望 54 68 69 73 / False / 1393)\"",
+    "verified": true
+  },
+  {
+    "id": "P-E05",
+    "title": "[System.IO.File]::ReadAllText('相对路径') 按进程 cwd 解析",
+    "symptom": "MethodInvocationException :: Exception calling \"ReadAllText\" with \"1\" argument(s): \"Could not find a part of the path 'E:\\数学建模\\.tmp_scratch\\pit\\code\\common.py'.\"（PS location 已是 APMCM2025_C，process cwd 仍是 pit）；原生 exe 同病：pdfinfo many.pdf -> I/O Error: Couldn't open file 'many.pdf': No such file or directory.",
+    "rule": ".NET 静态 IO 与原生 exe 的文件参数必须给绝对路径（从 $PSScriptRoot / $env:MM_PAPER 派生）；Set-Location 不改变进程 CWD",
+    "check": "cd E:\\数学建模\\.tmp_scratch\\pit; powershell -NoProfile -Command \"Set-Location 'E:\\数学建模\\APMCM2025_C'; try { [IO.File]::ReadAllText('code\\common.py') | Out-Null; 'UNEXPECTED' } catch { 'OK: ' + `$_.Exception.Message }\"",
+    "verified": true
+  },
+  {
+    "id": "P-E06",
+    "title": "Get-Content 默认按 GBK 解码 UTF-8 中文，行数与码点双错",
+    "symptom": "E:\\数学建模\\APMCM2025_C\\README.md 真值 0x0A 计数 87 行，Get-Content 默认 84 行，-Encoding UTF8 87 行；默认首行为 '# APMCM 2025 C 棰樺畬鏁村缓缓缓缓妯?鈥?U.S. 鈥淩eciprocal Tariffs鈥?'",
+    "rule": "读文本必须显式 -Encoding UTF8 或用 [IO.File]::ReadAllLines(绝对路径)；报行数前先用 0x0A 计数核对口径",
+    "check": "$f='E:\\数学建模\\APMCM2025_C\\README.md'; $nl=@([IO.File]::ReadAllBytes($f) | ? { $_ -eq 0x0A }).Count; $def=@(Get-Content $f).Count; $u8=@(Get-Content $f -Encoding UTF8).Count; if ($def -eq $nl) { \"PASS $def\" } else { \"FAIL default=$def 真值=$nl\" }; \"UTF8=$u8\"",
+    "verified": true
+  },
+  {
+    "id": "P-E07",
+    "title": "裸 python 是 3.14.6，无任何第三方库",
+    "symptom": "python -c \"import numpy\" -> ModuleNotFoundError: No module named 'numpy'（pandas/matplotlib/torch 同）；python 版本 3.14.6；conda run -n mathmodel -> 3.11.18 / numpy 2.4.6 / torch 2.14.1+cu126",
+    "rule": "禁止用裸 python/py 跑本项目数值代码；统一 conda run -n mathmodel python（或 E:\\Mini\\envs\\mathmodel\\python.exe 且先把 ...\\Library\\bin 放到 PATH 最前）",
+    "check": "python -c \"import sys;print(sys.version.split()[0])\"; python -c \"import numpy\" 2>&1 | Select-String 'ModuleNotFoundError'; conda run -n mathmodel python -c \"import sys,numpy,torch;print(sys.version.split()[0],numpy.__version__,torch.__version__)\"",
+    "verified": true
+  },
+  {
+    "id": "P-E08",
+    "title": "Start-Process 被大小写重复的代理环境变量打崩",
+    "symptom": "Start-Process : 已添加项。字典中的关键字:“NO_PROXY”所添加的关键字:“no_proxy” (英文: Item has already been added. Key in dictionary: 'NO_PROXY'  Key being added: 'no_proxy')；FullyQualifiedErrorId=System.ArgumentException；清掉三对副本后正常 exit=0",
+    "rule": "优先 & $exe @args / cmd /c，不要用 Start-Process 起子进程；必须用时先 Remove-Item Env:no_proxy/https_proxy/http_proxy（每进程都要做）；传参一律 -ArgumentList，-Args 只是它的别名",
+    "check": "$d=[Environment]::GetEnvironmentVariables('Process').Keys | %%{ [pscustomobject]@{L=$_.ToLowerInvariant();O=$_} } | Group-Object L | ? { $_.Count -gt 1 }; ($d | %%{ ($_.Group.O) -join '/' }) -join '; '; try { Start-Process powershell -ArgumentList '-NoProfile','-Command','exit 0' -Wait -PassThru -NoNewWindow -EA Stop | Out-Null; 'UNEXPECTED' } catch { 'OK: ' + $_.Exception.Message }",
+    "verified": true
+  },
+  {
+    "id": "P-E09",
+    "title": "本机没有 dl conda env；dl 只是 env.ps1 的 profile 名",
+    "symptom": "conda env list 只有 base/deep_learning_3.8/label-studio/labelimg/labelme/mathmodel/ml310/py310，无 dl；而 q1_sobol.py、q1_surrogate_train.py 的 docstring 与 README 训练段写着 'Run under the dl profile' / 'env.ps1 -Profile dl'",
+    "rule": "文档与脚本一律写 conda run -n mathmodel；'dl 档' 只作为 env.ps1 -Profile dl 的 profile 名理解，禁止写 conda activate dl / -n dl",
+    "check": "conda env list 2>&1 | Select-String '^\\s*dl\\s'; conda run -n dl python -c \"print(1)\" 2>&1 | Select-String 'Could not find conda environment'; Select-String -Path E:\\数学建模\\APMCM2026\\env.ps1 -Pattern 'Profile (dl|classic)'",
+    "verified": true
+  },
+  {
+    "id": "P-E10",
+    "title": "numpy matmul 后再 import torch 触发 OMP: Error #15",
+    "symptom": "OMP: Error #15: Initializing libomp.dll, but found libiomp5md.dll already initialized.（exit=3）；Library\\bin 不在 PATH 时 import torch -> OSError: [WinError 127] ... Error loading torch\\lib\\shm.dll",
+    "rule": "先 import torch 再用 numpy，或分进程；必须混跑时设 KMP_DUPLICATE_LIB_OK=TRUE 并用该设置重跑数值对账；OMP_NUM_THREADS=1/MKL_NUM_THREADS=1 不能消除冲突；Library\\bin 必须在 PATH 最前",
+    "check": "Set-Content probe.py \"import numpy as np`na=np.ones((300,300))@np.ones((300,300))`nimport torch`nprint('ok')\" -Encoding UTF8; $env:PYTHONIOENCODING='utf-8'; conda run -n mathmodel python probe.py 2>&1 | Select-String 'OMP: Error #15'; 'exit=' + $LASTEXITCODE",
+    "verified": true
+  },
+  {
+    "id": "P-E11",
+    "title": "$Matches[1] 无匹配时抛 NullArray，且静默保留旧值",
+    "symptom": "无法对 Null 数组进行索引。(FullyQualifiedErrorId=NullArray；英文界面对应 Cannot index into a null array.)；且 $Matches 跨语句保留：先匹配 12 后失配仍读到 12",
+    "rule": "禁用 $Matches[n]；统一 $m=[regex]::Match($text,'^Pages:\\s+(\\d+)','Multiline')，先判 $m.Success 再取 $m.Groups[1].Value",
+    "check": "$ErrorActionPreference='Continue'; try { $s='no page info here'; if ($s -match '^Pages:\\s+(\\d+)') {} else { $Matches[1] } } catch { 'OK: ' + $_.Exception.Message + ' | ' + $_.FullyQualifiedErrorId }; $m=[regex]::Match('no page info here','^Pages:\\s+(\\d+)','Multiline'); \"safe success=$($m.Success) value=[$($m.Groups[1].Value)]\"",
+    "verified": true
+  },
+  {
+    "id": "P-E12",
+    "title": "用 PowerShell 字符串操作改 .py 会写出 BOM+CRLF 并把中文解坏",
+    "symptom": "(Get-Content f -Raw) -replace ... | Set-Content f -Encoding UTF8 后：首字节 EF BB BF、CRLF 出现、中文变 '娑擃厽鏋冨鏋冨▔銊╁櫞'；ast.parse -> SyntaxError: invalid non-printable character U+FEFF",
+    "rule": "禁止用 PowerShell 字符串管线改 .py；统一用 python（read_text(encoding='utf-8') -> replace -> write_text(encoding='utf-8', newline='')），改完必须跑字节体检（无 BOM/无 CRLF/ast.parse 通过）",
+    "check": "conda run -n mathmodel python -c \"from pathlib import Path;import ast;b=Path('X.py').read_bytes();bad=[];bad.append('BOM') if b[:3]==b'\\xef\\xbb\\xbf' else None;bad.append('CRLF') if b'\\r\\n' in b else None;ast.parse(b.decode('utf-8'));print('FAIL '+','.join(bad) if bad else 'PASS clean utf-8 LF')\"",
+    "verified": true
+  },
+  {
+    "id": "P-E13",
+    "title": "matplotlib 文本里写 \\% 会渲出字面反斜杠",
+    "symptom": "ax.set_title(r\"Labor share 62\\% of GDP\") 与 ax.text(..., r\"A 5\\% B\") 出的 PNG 显示 '62\\%'、'5\\%'；改 62%/5% 后正常（对照图 mpl_backslash.png / mpl_plain.png）",
+    "rule": "图内文字只写 %，不写 \\%；同一字符串不得既进图又进 .tex，必须拆两份；真要 LaTeX 渲染需 rcParams['text.usetex']=True 并把整串放进 $...$",
+    "check": "python - <<'EOF'\nimport matplotlib; matplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nfig,ax=plt.subplots(figsize=(3,2)); ax.set_title(r\"Labor share 62\\% of GDP\"); ax.text(.5,.5,r\"A 5\\% B\"); fig.savefig('pct_bad.png',dpi=80)\nfig,ax=plt.subplots(figsize=(3,2)); ax.set_title('Labor share 62% of GDP'); ax.text(.5,.5,'A 5% B'); fig.savefig('pct_ok.png',dpi=80)\nEOF\n# 看图：pct_bad.png 出现反斜杠即坑存在",
+    "verified": true
+  },
+  {
+    "id": "P-E14",
+    "title": "f-string 里写 LaTeX 千分位 {v{,}000} 是语法错误",
+    "symptom": "SyntaxError: f-string: invalid syntax（定位在 (v{,}000) 的 ^ 处）；普通字符串 'capacity 64{,}000 units' 合法；f'{64000:,}' -> 64,000",
+    "rule": "要生成 LaTeX 的 {,} 千分位时不用 f-string（改用普通字符串或 {{,}}）；Python 侧千分位用 f\"{v:,}\"；生成 .tex 后必须 xelatex 实跑验证",
+    "check": "Set-Content fs_bad.py \"v=64`ns=f'capacity {v{,}000} units'`nprint(s)\" -Encoding UTF8; $env:PYTHONIOENCODING='utf-8'; conda run -n mathmodel python fs_bad.py 2>&1 | Select-String 'SyntaxError'; conda run -n mathmodel python -c \"print(f'{64000:,}')\"",
+    "verified": true
+  },
+  {
+    "id": "P-E15",
+    "title": "pdftoppm 输出按总页数零填充（p-01.png）",
+    "symptom": "12 页 PDF -> p-01.png…p-12.png；单页 PDF -> single-1.png（不填充）；-f 5 -l 5 只出第 5 页仍为 one-05.png",
+    "rule": "禁止硬编码 p-1.png；用通配+排序，或按 pdfinfo 总页数格式化补零（≥10 页补 2 位，≥100 页补 3 位）",
+    "check": "cd E:\\数学建模\\.tmp_scratch\\pit\\tex; pdftoppm -png -r 30 many.pdf p 2>$null; (Get-ChildItem p-*.png | Select-Object -First 2 -ExpandProperty Name) -join ','; pdftoppm -png -r 30 t.pdf single 2>$null; (Get-ChildItem single*.png -ExpandProperty Name) -join ','",
+    "verified": true
+  },
+  {
+    "id": "P-E16",
+    "title": "WMI AdapterRAM 32 位截断，8188 MiB 读成 4095 MiB",
+    "symptom": "(Get-CimInstance Win32_VideoController).AdapterRAM 对 RTX 4060 Laptop 返回 4293918720（=2^32−1048576，折 4095 MiB）；nvidia-smi memory.total = 8188 MiB；WMI DriverVersion 32.0.16.1062 vs nvidia-smi 610.62",
+    "rule": "显存/型号/驱动只认 nvidia-smi --query-gpu=name,memory.total,driver_version；注册表用 HardwareInformation.qwMemorySize（本机 8585740288=8188 MiB）；禁止引用 AdapterRAM 当显存",
+    "check": "$w=(Get-CimInstance Win32_VideoController | ? { $_.Name -match 'NVIDIA' }).AdapterRAM; $s=(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits) -join ''; \"WMI=$w ($([math]::Round($w/1MB,0)) MiB) smi=$s MiB 截断=$($w -lt [math]::Pow(2,32))\"",
+    "verified": true
+  },
+  {
+    "id": "P-E17",
+    "title": "xelatex -log-directory 目标目录存在也失败",
+    "symptom": "Sorry, but xelatex did not succeed. / The log file hopefully contains the information to get MiKTeX going again: / C:\\Users\\29900\\AppData\\Local\\MiKTeX\\miktex\\log\\xelatex.log（EXIT=1，目标目录 lg 存在但只生成 out.txt，无 t.log）",
+    "rule": "禁用 -log-directory；日志留在工作目录，清理用 Remove-Item <job>.log；需隔离就先编译后复制",
+    "check": "cd E:\\数学建模\\.tmp_scratch\\pit\\tex; New-Item -ItemType Directory -Force .\\lg | Out-Null; xelatex -interaction=nonstopmode -log-directory=lg -halt-on-error t.tex > lg\\out.txt 2>&1; \"exit=$LASTEXITCODE files=$((Get-ChildItem .\\lg).Name -join ',')\"; (Get-Content .\\lg\\out.txt -Raw) -match 'did not succeed'",
+    "verified": true
+  },
+  {
+    "id": "P-E18",
+    "title": "页数口径：\\f 计数已等于 pdfinfo 页数，再 +1 会多一页",
+    "symptom": "main.pdf：pdfinfo Pages=108，pdftotext 输出 \\f 个数=108，末尾字符即 \\f；按 '\\f 之后再 +1' 得 109（多一页）",
+    "rule": "页数优先用 pdfinfo + [regex]::Match($out,'^Pages:\\s+(\\d+)','Multiline').Groups[1].Value；行所在页 = 该行之前 \\f 数 + 1，禁止再给总页数 +1；\\f 总数应与 Pages 相等，否则判定文本提取失败",
+    "check": "cd E:\\数学建模\\APMCM2025_C; $p=[regex]::Match((pdfinfo main.pdf 2>$null) -join \"`n\",'^Pages:\\s+(\\d+)','Multiline').Groups[1].Value; $t=(pdftotext -enc UTF-8 main.pdf - 2>$null) -join ''; $ff=([regex]::Matches($t,\"`f\")).Count; \"pages=$p ff=$ff ff+1=$($ff+1)\"",
+    "verified": true
+  },
+  {
+    "id": "P-E19",
+    "title": "编译日志重定向到同名 <job>.log 会让 xelatex 写不出日志",
+    "symptom": "! I can't write on file `many.log'. / (Press Enter to retry, or Control-C to exit; default file extension is `.log') / Please type another transcript file name / ! Emergency stop / No pages of output.（EXIT=1）；改重定向到 many.out 后 EXIT=0 且 'Output written on many.pdf (12 pages).'",
+    "rule": "禁止把编译输出重定向到与被编译文档同 basename 的 <job>.log；日志名用 <job>.out 或内存捕获（Invoke-Native）",
+    "check": "cd E:\\数学建模\\.tmp_scratch\\pit\\tex; Remove-Item many.log -EA SilentlyContinue; cmd /c \"xelatex -interaction=nonstopmode -halt-on-error many.tex > many.log 2>&1\"; 'clash exit=' + $LASTEXITCODE; (Get-Content many.log -Raw -Encoding UTF8) -match \\\"I can't write on file\\\"",
+    "verified": true
+  },
+  {
+    "id": "P-E20",
+    "title": "conda run 在 GBK 控制台下转发 U+FFFD 时自己崩",
+    "symptom": "UnicodeEncodeError: 'gbk' codec can't encode character '\\ufffd' in position 4: illegal multibyte sequence（EXIT=1，脚本本身成功执行；崩点为 conda\\cli\\main_run.py:141 的 print(response.stdout)）",
+    "rule": "跑 conda run 必须先设 PYTHONIOENCODING=utf-8；含 Windows 错误信息/乱码/U+FFFD 的输出先重定向到文件再按 UTF-8 读",
+    "check": "Set-Content emit.py \"print('ok-'+chr(0xFFFD)+'-end')\" -Encoding UTF8; conda run -n mathmodel python emit.py > f.txt 2>&1; 'exit=' + $LASTEXITCODE + ' hasErr=' + ((Get-Content f.txt -Raw -Encoding UTF8) -match 'UnicodeEncodeError')",
+    "verified": true
+  },
+  {
+    "id": "P-E21",
+    "title": "PS 5.1 读不带 BOM 的 UTF-8 .ps1，中文路径/中文串全烂",
+    "symptom": "powershell.exe : Get-Content : Cannot find path 'E:\\鏁板﹀缓妯\\.tmp_scratch\\pit\\py_way2.py' because it does not exist.（同一 .ps1 改存 UTF-8 with BOM 后正常）；中文串无 BOM 输出 '涓枃OK'，带 BOM 输出 '中文OK'",
+    "rule": "所有 .ps1 一律存成 UTF-8 with BOM（[IO.File]::WriteAllText($p,$t,New-Object Text.UTF8Encoding($true))）；脚本内优先用 $PSScriptRoot 派生路径，不写中文绝对路径",
+    "check": "$b=\"Get-Content 'E:\\数学建模\\.tmp_scratch\\pit\\py_way2.py' -Raw\"; [IO.File]::WriteAllText(\"$env:TEMP\\nobom.ps1\",$b,(New-Object Text.UTF8Encoding($false))); [IO.File]::WriteAllText(\"$env:TEMP\\bom.ps1\",$b,(New-Object Text.UTF8Encoding($true))); powershell -NoProfile -File \"$env:TEMP\\nobom.ps1\" 2>&1 | Select-String 'does not exist'",
+    "verified": true
+  }
+]

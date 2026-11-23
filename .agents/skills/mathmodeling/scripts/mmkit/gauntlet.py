@@ -211,8 +211,19 @@ def check_compliance(paper: Paper | None = None) -> Compliance:
             _pos_marks.append((_i + 1, int(_m.group(1))))
     _phys = {num for _phys_i, num in _pos_marks}
     if _pos_marks and len(_phys) == len(_pos_marks):
-        c._numbers_are_contiguous = len(totals) == 1 and all(
-            num == phys_i for phys_i, num in _pos_marks
+        # 判据是「不跳号、不重号」，不是「分子等于物理页号」。
+        # 官方 swmcm 模板（demo.tex）在目录页之后 `\setcounter{page}{1}`，
+        # 于是物理第 3 页写的是 "Page 1 of 27" —— 偏移恒定即为合规。
+        # 旧实现要求 num == phys_i，把这种完全合规的版式判成 FAIL
+        # （2026-11-23 本机实测 PRACTICE_2023B 物理 3→Page 1、SHUWEI2025_A 同样）。
+        # 因此改为：偏移（物理页 − 印刷页）全篇一致，且印刷页号本身从 1 连续。
+        _offsets = {phys_i - num for phys_i, num in _pos_marks}
+        _nums = sorted(num for _phys_i, num in _pos_marks)
+        c._numbers_are_contiguous = (
+            len(totals) == 1
+            and len(_offsets) == 1
+            and _nums == list(range(_nums[0], _nums[0] + len(_nums)))
+            and _nums[0] <= 3          # 前置页最多 2 页不带页眉（摘要页 + 目录页）
         )
     else:
         c._numbers_are_contiguous = (

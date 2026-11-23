@@ -4,7 +4,7 @@
 首/中/末三帧解码抽检，并与对应数值表/帧索引行数对齐。非视频文件逐一 SHA-256
 对照解压副本，CSV 全量解析、JSON 全量解析、Parquet 读 schema 与行数。
 
-复现：E:\Mini\envs\mathmodel\python.exe code\audit_all_data.py
+复现：python code\audit_all_data.py
 """
 
 from __future__ import annotations

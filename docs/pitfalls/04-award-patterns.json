@@ -1,0 +1,1028 @@
+{
+ "meta": {
+  "corpus_dir": "E:/数学建模/APMCM2025_C/refs/award_text/",
+  "n_papers": 16,
+  "n_excluded_unverified_chinese": 6,
+  "excluded": [
+   "2024A题02838.txt",
+   "2024A题03112.txt",
+   "2024B题00536.txt",
+   "2024B题02462.txt",
+   "2024C题00023.txt",
+   "2024C题02422.txt"
+  ],
+  "counting_method": "body = '\\n'.join(l for l in s.split('\\n') if l.count('.') < 8) 后正则计数（滤目录行）；脚本 E:/数学建模/APMCM-PITFALLS/_work/scan.py",
+  "abstract_words_range": [
+   228,
+   578
+  ],
+  "abstract_numbers_zero_papers": [
+   "2208815",
+   "2213503",
+   "2309364",
+   "2303763",
+   "24200438",
+   "24200658"
+  ],
+  "teams": {
+   "A": [
+    "apmcm2208815",
+    "apmcm2309364",
+    "apmcm24200438",
+    "apmcm25302425"
+   ],
+   "B": [
+    "apmcm2205838",
+    "apmcm2307379",
+    "apmcm24200636",
+    "apmcm25304268"
+   ],
+   "C": [
+    "apmcm2203180",
+    "apmcm2303763",
+    "apmcm24200658",
+    "apmcm25301412"
+   ],
+   "D": [
+    "apmcm2201058",
+    "apmcm24207218",
+    "apmcm25310840"
+   ],
+   "E": [
+    "apmcm2213503"
+   ]
+  },
+  "file_map": {
+   "apmcm2208815": "2022年A题优秀论文.txt",
+   "apmcm2205838": "2022年B题优秀论文.txt",
+   "apmcm2203180": "2022年C题优秀论文.txt",
+   "apmcm2201058": "2022年D题优秀论文.txt",
+   "apmcm2213503": "2022年E题优秀论文.txt",
+   "apmcm2309364": "2023年A题优秀论文.txt",
+   "apmcm2307379": "2023年B题优秀论文.txt",
+   "apmcm2303763": "2023年C题优秀论文.txt",
+   "apmcm24200438": "2024年A题优秀论文.txt",
+   "apmcm24200636": "2024年B题优秀论文.txt",
+   "apmcm24200658": "2024年C题优秀论文.txt",
+   "apmcm24207218": "2024年D题优秀论文.txt",
+   "apmcm25302425": "2025年A题优秀论文.txt",
+   "apmcm25304268": "2025年B题优秀论文.txt",
+   "apmcm25301412": "2025年C题优秀论文.txt",
+   "apmcm25310840": "2025年D题优秀论文.txt"
+  }
+ },
+ "skeletons": [
+  {
+   "problem_class": "A",
+   "class_semantics": "图像/几何/工程：视觉 -> 几何量 -> 工程结论",
+   "members": [
+    "apmcm2208815",
+    "apmcm2309364",
+    "apmcm24200438",
+    "apmcm25302425"
+   ],
+   "n_total": 4,
+   "sequence": "1 Introduction -> 2 Problem Analysis -> 3 Assumptions (and Justifications) -> 4 Notations/Symbol Description -> 5..N Model Establishment and Solution (each question one chapter: X.1 preprocessing/Model Preparation -> X.2 modelling -> X.3 solution and results -> X.4 Test/Sensitivity or Analysis of the Result) -> N+1 Model Test (standalone Sensitivity + Robustness) -> N+2 Strengths and Weaknesses / Merit-Shortcoming-Improvement -> N+3 References -> N+4 Appendix",
+   "freq": {
+    "variant_alpha_逐问四件套": "3/4",
+    "单列 Model Test 章": "2/4",
+    "II_analysis 独立章": "3/4",
+    "假设与符号各自独立章": "3/4",
+    "问内预处理块": "4/4",
+    "表编号为0(全图)": "2/4"
+   },
+   "freq_cross16": {
+    "II_analysis 独立章": "11/16",
+    "有检验结构(独立章或问内检验)": "13/16",
+    "有独立评价章": "16/16"
+   },
+   "component_notes": {
+    "假设": "24200438 逐条 justify（each of which is properly justified）；25302425 命名假设+数字；2309364 纯编号（3 . 1 Assumption 1）；2208815 无假设章标题",
+    "符号表": "3/4 单列 4 Notations/4 Symbol；24200438 符号随问给",
+    "模型建立": "4/4 问内先预处理后建模（data_in_q: 2309364=2, 24200438=1, 25302425=1, 2208815 写成 5.1.1 Image pre-processing）",
+    "求解/结果": "以图为主：图编号 2309364=34, 24200438=27, 25302425=14, 2208815=4；表编号 2309364 与 24200438 均为 0",
+    "检验": "两派：单列（24200438 5 . 1 Sensitivity Validation / 5 . 2 Robustness；25302425 Motorsafety Validation Model）vs 问内（2208815 每问 Test analysis；2309364 6 . 1 . 3 Comparison of Model Recognition and Sensitivity Analysis）"
+   },
+   "evidence": {
+    "apmcm2208815": [
+     "5.1.1 Image pre-processing",
+     "5.1.4 Test analysis",
+     "5.1.5 Short summary",
+     "Figure1 Model building flow chart"
+    ],
+    "apmcm2309364": [
+     "5 . 1 . 1 Image Data Preprocessing",
+     "6 . 2 Results and 2D Scatter Plot of Geometric Coordinates",
+     "3 . 1 Assumption 1"
+    ],
+    "apmcm24200438": [
+     "Question 1: Classify the Degradation Types of the Attached Image",
+     "Sensitivity Validation of Problem 2",
+     "each of which is properly justified"
+    ],
+    "apmcm25302425": [
+     "5.1.1 Model Preparation",
+     "Linkstructure Assumption"
+    ]
+   }
+  },
+  {
+   "problem_class": "B",
+   "class_semantics": "物理/优化：连续场 -> 代理 -> 多目标",
+   "members": [
+    "apmcm2205838",
+    "apmcm2307379",
+    "apmcm24200636",
+    "apmcm25304268"
+   ],
+   "n_total": 4,
+   "sequence": "1 Introduction -> 2 Problem Analysis/Restatements and Analyses -> 3 Model Assumptions -> 4 Symbol Description -> 5..N Model Establishment and Solution (each question one chapter: X.1 data/boundary preprocessing -> X.2 governing equations (NS/advection-diffusion/radiative transfer/CFD) -> X.3 solve (simulation/optimiser) -> X.4 results and verification (Rationality Verification / inspection and analysis)) -> N+1 Evaluation (Advantages/Disadvantages or Pros and Cons) -> N+2 Generalization/Future work -> References -> Appendix",
+   "freq": {
+    "variant_beta_机理章加问内五件套": "4/4",
+    "II_analysis 独立章": "3/4",
+    "问内检验块": "2/4",
+    "test_sec=0 完全无检验结构": "2/4",
+    "Pareto 前沿": "3/4"
+   },
+   "freq_cross16": {
+    "test_sec=0": "2/16，且两篇都在 B 组"
+   },
+   "component_notes": {
+    "假设": "4/4 写物理量/边界条件；25304268 写成数据范围（Wavelength Range: The spectral calculations cover the range from 0.3 μm to 55.56 μm）；2205838 纯编号无理由",
+    "符号表": "4/4 有；2205838 仅 6 个量；24200636 按 量-单位-含义 排（S Surface area of humidifier Square meters (square meters)）",
+    "模型建立": "4/4 先控制方程再离散/仿真；公式密度高（24200636 eq=46, 25304268 eq=43，对比 A 组 24200438 eq=1）",
+    "求解/结果": "CFD 场图/云图为主（2307379 图 24 个；24200636 图 14 个）",
+    "检验": "2205838/2307379 test_sec=0；24200636 问内 6.2.4 inspection and analysis；25304268 5.1.4 Model Rationality Verification"
+   },
+   "evidence": {
+    "apmcm2205838": [
+     "4 . 1 Physical basis of the model",
+     "5 . 1 Advantages of the model",
+     "5 . 2 Disadvantages of the model"
+    ],
+    "apmcm2307379": [
+     "3 . 2 Assumptions",
+     "4 . 4 . 2.1 Innovative points",
+     "5 . 2 Cons"
+    ],
+    "apmcm24200636": [
+     "6.1.1 Establishment of air circulation equation",
+     "6.2.4 inspection and analysis",
+     "7 evaluation and generalization of the model"
+    ],
+    "apmcm25304268": [
+     "5 . 1 . 4 Model Rationality Verification",
+     "Wavelength Range: The spectral calculations"
+    ]
+   }
+  },
+  {
+   "problem_class": "C",
+   "class_semantics": "数据/统计：外部数据 -> 拟合/预测/因果 -> 政策",
+   "members": [
+    "apmcm2203180",
+    "apmcm2303763",
+    "apmcm24200658",
+    "apmcm25301412"
+   ],
+   "n_total": 4,
+   "sequence": "1 Introduction (1.1 Background / 1.2 Question Restatement / 1.3 Our Approach) -> 2 Assumptions (and Justifications) -> 3 Notations -> 4 Data Description/Data Preprocessing (4.1 Collection / 4.2 Cleaning) -> 5..8 each question one chapter (Data analysis -> Model -> Results) -> N+1 Sensitivity Analysis and Error Analysis (standalone) or in-question x.3 Robustness -> N+2 Conclusions (per question)/Policy Recommendations -> N+3 Strengths/Weaknesses/Future -> References -> Appendix",
+   "freq": {
+    "variant_gamma_数据章前置加问内三段": "4/4",
+    "独立数据描述或预处理章": "3/4",
+    "单列 Sensitivity and Error Analysis 章": "2/4",
+    "问内 Robustness 段": "2/4",
+    "标题为 Assumptions and Justifications": "3/4",
+    "政策建议式结论": "2/4",
+    "Open Letter 小问": "1/4"
+   },
+   "freq_cross16": {
+    "data_in_q 计数": "2303763=8, 24200658=5, 25301412=5, 2203180=3；A 组同期 1-2，B 组 0-4，D 组 0-7"
+   },
+   "component_notes": {
+    "假设": "3/4 用 Assumptions and Justifications，但 justify 质量跨度最大：2303763 无量化 vs 25301412 经济学通用式（Rational Behavior Assumption ... Ceteris Paribus）",
+    "符号表": "4/4 单列且在假设之后（2203180 3 Notations；2303763 3 Notations）",
+    "模型建立": "问内必先 Data analysis/Data Insight 再建模（24200658 5.1 Data analysis；25301412 4 . 1 Data Insight and Status Analysis）",
+    "求解/结果": "表+预测曲线：表编号 2203180=9（组内最多）；图 24200658=26",
+    "检验": "单列（2203180 6. Sensitivity Analysis；2303763 10. Sensitivity Analysis and Error Analysis）vs 问内（25301412 4 . 3 Robustness Analysis and Conclusion）；24200658 test_inside=0"
+   },
+   "evidence": {
+    "apmcm2203180": [
+     "5.1 Models and Solutions for Problem1",
+     "6. Sensitivity Analysis"
+    ],
+    "apmcm2303763": [
+     "4 . 1 . 1 Data Collection and Pre-processing",
+     "10. Sensitivity Analysis and Error Analysis",
+     "9. An Open Letter"
+    ],
+    "apmcm24200658": [
+     "5.1 Data analysis",
+     "5.3.3 Hybrid predictive models"
+    ],
+    "apmcm25301412": [
+     "4 . 1 Data Insight and Status Analysis",
+     "4 . 3 Robustness Analysis and Conclusion",
+     "9 . 2 Policy Recommendations"
+    ]
+   }
+  },
+  {
+   "problem_class": "D",
+   "class_semantics": "前沿/组合：机理 + 整数规划/量子/降规模",
+   "members": [
+    "apmcm2201058",
+    "apmcm24207218",
+    "apmcm25310840"
+   ],
+   "n_total": 3,
+   "sequence": "1 Problem Restatement/Background (1.3 Our Work) -> 2 Problem Analysis (2.1-2.4) -> 3 Symbol Legend -> 4 Basic Assumptions -> 5..N one model per chapter (classic -> extended -> scale-reduced; X.1 Objective Function/Modeling Principles -> X.2 constraints or mechanism -> X.3 Solution -> X.4 Validation) -> N+1 Advantages and Limitations / Model Limitations -> N+2 Appendix (code/parameter tables)",
+   "freq": {
+    "variant_delta_一模型一章": "2/3",
+    "罗马数字 I-IX 变体": "1/3",
+    "按模型或物理分组假设": "3/3",
+    "优缺点或局限章": "3/3"
+   },
+   "component_notes": {
+    "假设": "3/3 按模型或物理分组：2201058 物理量（Natural convection of liquid PCM conforms to the Boussinesq assumption）；24207218 按模型 A/B/C 分块；25310840 绑算法（Assumption 1: Power system load data exhibits clusterability ... via the K-means algorithm）",
+    "符号表": "2/3 单列（24207218 IV；25310840 3 Symbol Legend）；2201058 用 3 Symbol description",
+    "模型建立": "公式密度最高：25310840 eq=56（全 16 篇最高）、2201058 eq=31；24207218 eq=0（全表驱动，表编号 8）",
+    "求解/结果": "表为主：25310840 表编号 10、24207218 表 8；2201058 图 25（CFD 云图）",
+    "检验": "3/3 都有但形态不同：24207218 1. Sensitivity Analysis + 2. Error Analysis 双列；25310840 与经典 MILP 对账；2201058 双模型互证（拓扑优化 vs 分形优化）"
+   },
+   "evidence": {
+    "apmcm2201058": [
+     "4.1.1 Governing equations",
+     "Murray’s law and branch generation",
+     "Recommendation letter"
+    ],
+    "apmcm24207218": [
+     "A. First Model Analysis",
+     "A. First Problem Model Establishment and Solution",
+     "2.AR Model Related Assumptions"
+    ],
+    "apmcm25310840": [
+     "Classical UC Model Results for 24 Time Periods",
+     "5 . 1 . 1 Objective Function Construction",
+     "9 . 2 Model Limitations"
+    ]
+   }
+  },
+  {
+   "problem_class": "E",
+   "class_semantics": "聚类/时序：权重 + 时序 + 聚类（n=1，仅作模板）",
+   "members": [
+    "apmcm2213503"
+   ],
+   "n_total": 1,
+   "sequence": "1 Introduction -> 2 Analysis of Question (2.1-2.4) -> 3 General Assumptions and Notations -> 4 Model and Solution (4.1 Data Collection -> 4.2 Problem Solving -> 4.2.1..The Solution of Problem a..e) -> 5 time-series model chapter (5.1.1 model / 5.1.2 Stationarity Test / 5.1.3 White Noise Test / 5.1.4 Model Estimation and Test) -> 6 mechanism chapter -> 8 Model Evaluation and Further Discussion (Strengths/Weaknesses/Further Discussion) -> References",
+   "freq": {
+    "note": "n=1，不做频率外推",
+    "时序四步检验独立子块": "1/1",
+    "letter 型小问": "1/1"
+   },
+   "component_notes": {
+    "假设": "General Assumptions and Notations 合成一章（第 3 章）",
+    "符号表": "与假设同章",
+    "模型建立": "时序四步：5.1.1 模型 -> 5.1.2 Stationarity Test -> 5.1.3 White Noise Test -> 5.1.4 Model Estimation and Test",
+    "求解/结果": "CRITIC 权重条形图（F5 CRITIC score bar chart）+ DBSCAN 聚类（F15 DBSCAN clustering algorithm flowchart）",
+    "检验": "8.2 Weaknesses 仅定性，无数字"
+   },
+   "evidence": {
+    "apmcm2213503": [
+     "2 Analysis of Question",
+     "4.2.5 The Solution of Problem e",
+     "5.1.2 Stationarity Test",
+     "5.1.3 White Noise Test",
+     "8.2 Weaknesses"
+    ]
+   }
+  }
+ ],
+ "abstract_slots": [
+  {
+   "slot": 1,
+   "name": "Background and Task",
+   "pattern": "领域 + 时间/规模 + 矛盾现象 -> 逐问动词清单 -> 本文建立 N 个模型",
+   "required": [
+    "现象",
+    "任务清单(逐问动词)",
+    "模型总数"
+   ],
+   "evidence_style": {
+    "apmcm2201058": "heat transfer fins, CFD, topology optimization, fractal geometry",
+    "apmcm24207218": "MovieLens Dataset",
+    "apmcm25301412": "1 . 3 Our Approach"
+   },
+   "metric_rule": "absW 228-578 词（16 篇实测区间），本段占 15-25%"
+  },
+  {
+   "slot": 2,
+   "name": "Modeling Framework",
+   "pattern": "每问一个具名模型 + 模型间依赖词(based on/building on/extending) + 可选框架缩写",
+   "required": [
+    "逐问具名模型",
+    "模型间依赖关系",
+    "关键词与之同序"
+   ],
+   "evidence_style": {
+    "apmcm25301412": "Our SMDEF framework (integrating cross-layer quantitative models)",
+    "apmcm24207218": "Quadratic Unconstrained Binary Optimization",
+    "apmcm2203180": "This paper combines the knowledge of relevant statistics"
+   },
+   "metric_rule": "关键词行必须与本段模型名同序（16/16 成立）"
+  },
+  {
+   "slot": 3,
+   "name": "Results per Question",
+   "pattern": "逐问一句，每句 量=数字+单位（区间/误差）+ 相对基准的百分比",
+   "required": [
+    "数字+单位",
+    "区间或基准",
+    "与问题编号一一对齐"
+   ],
+   "evidence_style": {
+    "apmcm24207218": "10598.776 with 95% confidence interval [10004.46, 11193.10]",
+    "apmcm25301412": "Tariff Tipping Point of 11.1%",
+    "apmcm25310840": "less than 2.5% from classical MILP solutions"
+   },
+   "metric_rule": "abstract_numbers >= 3，density >= 1.0；对标 2201058=38/11.48、25304268=11/3.45（7/16 篇为 0 数字，属例外不属标准）"
+  },
+  {
+   "slot": 4,
+   "name": "Validation and Limitation",
+   "pattern": "敏感性+-幅度 + 与对照模型偏差 + 样本外检验 -> 适用边界 -> 一条具体局限",
+   "required": [
+    "至少 2 种验证手段",
+    "至少 1 个验证数字",
+    "1 条可指名的局限"
+   ],
+   "evidence_style": {
+    "apmcm24200438": "each sensitivity of parameter is below 5%",
+    "apmcm25310840": "less than 2.5% from classical MILP solutions",
+    "apmcm2213503": "As the degree of information disclosure has certain limitations"
+   },
+   "metric_rule": "正文对应检验计数 test_sec + test_inside >= 1 且带数字"
+  }
+ ],
+ "abstract_examples": [
+  {
+   "problem_class": "D",
+   "flavour": "机理+优化（对标 apmcm2201058 形态）",
+   "fill": "\\textbf{Background and Task} 结晶器保护渣的 <<膜厚/结晶温度>> 决定铸坯质量，现场只能观测 <<图像/温度场>>；题目要求 (i) 从图像反演 <<几何/物性>>、(ii) 预测 <<相变时间>>、(iii) 在 <<角度/结构>> 上优化。本文建立 <<3>> 个模型，共用同一套 <<像素判别/焓-孔隙率>> 表征。\\textbf{Modeling Framework} Q1 以 <<像素判别+Tamura 纹理>> 建立特征-物性方程；Q2 用 <<焓-孔隙率 CFD>> 求 <<温度分布/液相分数>>；Q3 把 <<翅片形状>> 换成 <<Murray 定律生成的分形树>> 并与 <<SIMP 拓扑优化>> 对比。\\textbf{Results per Question} Q1 误差 <<+-X%>>；Q2 初始相变时间 <<47.6->17.2 min>>，最优 <<间隔角 24 度>> 时最短 <<17.2 min>>、最大液相分数 <<12.3%>>；Q3 拓扑优化较矩形/三角翅片提升 <<18.84%/28.17%>>、分形提升 <<14.01%/24.25%>>。\\textbf{Validation and Limitation} 以 <<双模型互证+网格无关性>> 验证，<<角度/网格>> +-<<10%>> 时目标量变化 <<小于 5%>>；局限是 <<未计接触热阻/三维效应>>。"
+  },
+  {
+   "problem_class": "C",
+   "flavour": "预测型（对标 apmcm24207218 / apmcm2203180 形态）",
+   "fill": "\\textbf{Background and Task} <<行业>> 在 <<年份>> 出现 <<需求缺口>>；题目要求预测 <<指标>>、判定 <<分类>>、给出 <<推荐>>。本文以 <<数据集（n=…）>> 建立 <<4>> 个模型。\\textbf{Modeling Framework} Q1 用 <<AR(2)>> 捕捉短期自相关；Q2 在 <<两阶段 SVM>> 中加 <<罚项>> 抑制类别不平衡；Q3 用 <<NCF>> 处理稀疏交互；Q4 把三者统一改写为 <<QUBO>>。\\textbf{Results per Question} Q1 预测 <<10 月需求 10598.776>>，95% 区间 <<[10004.46, 11193.10]>>；Q2 准确率 <<93.80%>>，较基线提升 <<5%>>；Q3 的 MSE 下降 <<74.24%>>、RMSE 改善 <<49.25%>>。\\textbf{Validation and Limitation} 用 <<留出样本外检验+混淆矩阵+参数敏感性>> 验证：<<-1 类>> 12 个样本全对、<<1 类>> 8 个仅 1 个误分；局限是 <<QUBO 受 600 qubit 约束、需谨慎离散化>>。"
+  },
+  {
+   "problem_class": "C/D",
+   "flavour": "政策+大规模优化（对标 apmcm25301412 / apmcm25310840 形态）",
+   "fill": "\\textbf{Background and Task} <<关税/机组组合>> 在 <<情景>> 下引发 <<成本上升/供能不足>>；题目要求评估 <<Q1 现状>>、模拟 <<Q2 冲击>>、求解 <<Q3 最优税率/调度>>、讨论 <<Q4 长期风险>>。本文提出 <<SMDEF>> 统合 <<微观/宏观>> 两层。\\textbf{Modeling Framework} Q1 用 <<约束 Armington>> 校准替代弹性；Q2 用 <<动态 Stackelberg 博弈>>；Q3 以税率作上层、市场均衡作下层构成 <<双层规划>> 并用 <<Laffer 曲线>> 求极值；Q4 用 <<QUBO 罚函数+K-means 时段降规模>> 压到 <<520 bit>>。\\textbf{Results per Question} Q1 出口 <<64.1%>> 萎缩、某国 <<245%>> 出口激增；Q2 临界点 <<11.1%>>；Q3 Laffer 最优 <<约 30%>>；Q4 降维 <<48%>>、<<9.1 s>> 求解、偏差 <<小于 2.5%>>。\\textbf{Validation and Limitation} 通过 <<参数敏感性 + 与经典 MILP 对账 + 稳健性情景>> 验证；局限是 <<量子位规模约束、部分参数依赖外部估算>>。"
+  }
+ ],
+ "decision_trees": [
+  {
+   "problem_class": "A",
+   "root": "题面出现 识别/计数/测量/增强/轨迹",
+   "nodes": [
+    {
+     "id": "A1",
+     "branch": "有标注数据 -> 先建几何/物理判据基线(Hough/颜色空间/阈值)，再上深度网络做对照",
+     "evidence": {
+      "team": "apmcm2309364",
+      "quote": "color space and binarized it"
+     }
+    },
+    {
+     "id": "A2",
+     "branch": "无标注数据 -> 走物理退化模型(JS散度/Laplacian/FbRF)，用无参考质量代理做检验",
+     "evidence": {
+      "team": "apmcm24200438",
+      "quote": "Noise Adversarial Preprocessing (NAP)"
+     }
+    },
+    {
+     "id": "A3",
+     "branch": "输出量与图像量量纲不一致(2D面积->3D质量) -> 补图像->物理量映射假设与修正项",
+     "evidence": {
+      "team": "apmcm2309364",
+      "quote": "we invented a brightness-estimation method ourselves"
+     }
+    },
+    {
+     "id": "A4",
+     "branch": "含机构/关节 -> DH 参数 -> 逆解 -> 五次多项式轨迹 -> 能耗目标+关节约束(SQP)",
+     "evidence": {
+      "team": "apmcm25302425",
+      "quote": "Prediction Model for Endpoint Coordinates Based on the DH Model"
+     }
+    }
+   ],
+   "baseline_rule": "A 组 4/4 问内先预处理后建模；4/4 结果以图交付，2/4 全篇零表格"
+  },
+  {
+   "problem_class": "B",
+   "root": "题面出现 场/流动/传热/辐射/结构优化",
+   "nodes": [
+    {
+     "id": "B1",
+     "branch": "需要高保真场 -> 先定控制方程(NS/对流扩散/Fick/TMM) -> 定离散(CFD网格/分层传输矩阵) -> 网格无关性必做",
+     "evidence": {
+      "team": "apmcm2201058",
+      "quote": "4.1.1 Governing equations"
+     }
+    },
+    {
+     "id": "B2",
+     "branch": "决策变量是形状 -> 拓扑优化(SIMP/变密度) 或 分形生成(Murray)，两者对比",
+     "evidence": {
+      "team": "apmcm2201058",
+      "quote": "topology optimization can promote 18.84%"
+     }
+    },
+    {
+     "id": "B3",
+     "branch": "决策变量是参数 -> GA/梯度下降/BFGS，先粗后细",
+     "evidence": {
+      "team": "apmcm2205838",
+      "quote": "4 . 3 . 1 Introduction"
+     }
+    },
+    {
+     "id": "B4",
+     "branch": "多目标 -> Pareto 前沿 + 标拐点 + 说明权重/罚系数如何扫出前沿",
+     "evidence": {
+      "team": "apmcm25304268",
+      "quote": "Pareto frontier showing the trade-off"
+     }
+    }
+   ],
+   "baseline_rule": "B 组 test_sec=0 的 2/4 是反面样本；对齐 24200636(28)/25304268(22) 的检验强度"
+  },
+  {
+   "problem_class": "C",
+   "root": "题面问 预测/评估/因果/政策",
+   "nodes": [
+    {
+     "id": "C1",
+     "branch": "数据可得性：官方数据源优先；无官方 -> 写明估算并给区间",
+     "evidence": {
+      "team": "apmcm25301412",
+      "quote": "Parameter Calibration and Justification"
+     }
+    },
+    {
+     "id": "C2",
+     "branch": "清洗与口径：单列 Data Collection and Pre-processing，交代缺失/异常/口径",
+     "evidence": {
+      "team": "apmcm2303763",
+      "quote": "4 . 1 . 1 Data Collection and Pre-processing"
+     }
+    },
+    {
+     "id": "C3",
+     "branch": "时序四步：平稳性 -> 白噪声 -> 定阶估计 -> 残差检验",
+     "evidence": {
+      "team": "apmcm2213503",
+      "quote": "5.1.2 Stationarity Test"
+     }
+    },
+    {
+     "id": "C4",
+     "branch": "结构断点：政策有明确生效年 -> 先 DID/断点再谈预测",
+     "evidence": {
+      "team": "apmcm2303763",
+      "quote": "DID"
+     }
+    },
+    {
+     "id": "C5",
+     "branch": "选型由简到繁：基准(多元回归) -> ARIMA -> 树模型 -> 混合(GA-BP) -> 结构模型(博弈/CGE)，并证明复杂的更好",
+     "evidence": {
+      "team": "apmcm2203180",
+      "quote": "Random Forest"
+     }
+    },
+    {
+     "id": "C6",
+     "branch": "留出样本外检验 + 单列误差/敏感性分析",
+     "evidence": {
+      "team": "apmcm2303763",
+      "quote": "10. Sensitivity Analysis and Error Analysis"
+     }
+    }
+   ],
+   "baseline_rule": "C 组 data_in_q 3-8 次/篇；检验单列 2/4、问内 2/4"
+  },
+  {
+   "problem_class": "D",
+   "root": "题面出现 大规模/组合优化/量子/多设备协同",
+   "nodes": [
+    {
+     "id": "D1",
+     "branch": "先做经典可解版(MILP/MIP+商用求解器)，报求解时间与最优性 gap",
+     "evidence": {
+      "team": "apmcm25310840",
+      "quote": "Classical UC Model Results for 24 Time Periods"
+     }
+    },
+    {
+     "id": "D2",
+     "branch": "逐层加现实约束(网络/安全/N-1/热备)，每层报成本与时间增量",
+     "evidence": {
+      "team": "apmcm25310840",
+      "quote": "Incorporating Network and Security Constraints"
+     }
+    },
+    {
+     "id": "D3",
+     "branch": "前沿形式(QUBO/量子)只作再表达，必须与经典解对账: 偏差%、比特数、秒数",
+     "evidence": {
+      "team": "apmcm24207218",
+      "quote": "Quadratic Unconstrained Binary Optimization"
+     }
+    },
+    {
+     "id": "D4",
+     "branch": "规模降不下来 -> 降规模，并把降规模前提写成可检验假设",
+     "evidence": {
+      "team": "apmcm25310840",
+      "quote": "exhibits clusterability"
+     }
+    },
+    {
+     "id": "D5",
+     "branch": "机理模型管可行域、优化管最优解，二者分别验证",
+     "evidence": {
+      "team": "apmcm2201058",
+      "quote": "6.3.1 Murray"
+     }
+    }
+   ],
+   "baseline_rule": "D 组公式密度最高(25310840 eq=56)，表为主(25310840 表10、24207218 表8)"
+  },
+  {
+   "problem_class": "E",
+   "root": "题面问 评估/排序/预测/分组（n=1 模板）",
+   "nodes": [
+    {
+     "id": "E1",
+     "branch": "多指标赋权 CRITIC/AHP，并出权重条形图",
+     "evidence": {
+      "team": "apmcm2213503",
+      "quote": "CRITIC score bar chart"
+     }
+    },
+    {
+     "id": "E2",
+     "branch": "时序：ADF -> 白噪声 -> ARIMA 定阶 -> 残差+置信区间",
+     "evidence": {
+      "team": "apmcm2213503",
+      "quote": "Stationarity Test"
+     }
+    },
+    {
+     "id": "E3",
+     "branch": "分组：DBSCAN(无预设簇数)，报 eps/minPts 敏感性",
+     "evidence": {
+      "team": "apmcm2213503",
+      "quote": "DBSCAN clustering algorithm flowchart"
+     }
+    },
+    {
+     "id": "E4",
+     "branch": "小问若是 非技术文章/公开信，单独成章并引用前问的定量结论",
+     "evidence": {
+      "team": "apmcm2213503",
+      "quote": "submitted a non-technical article to the United Nations"
+     }
+    }
+   ],
+   "baseline_rule": "E 类样本仅 1 篇，仅作模板，不作频率断言"
+  }
+ ],
+ "innovations": [
+  {
+   "type": "换表征",
+   "team": "apmcm2309364",
+   "problem": "2023A Q4",
+   "file": "2023年A题优秀论文.txt",
+   "one_line": "用图像亮度反推物距，替掉只按 2D 面积算质量的失真空假设",
+   "quote": "we invented a brightness-estimation method ourselves to make the calculated apple quality",
+   "real": true
+  },
+  {
+   "type": "换表征",
+   "team": "apmcm2309364",
+   "problem": "2023A Q1",
+   "file": "2023年A题优秀论文.txt",
+   "one_line": "以重叠比与阈值替代逐圆独立判定，解决重叠圆重复计数",
+   "quote": "Flowchart of the Optimization Model for Eliminating Duplicate Circles",
+   "real": true
+  },
+  {
+   "type": "换表征",
+   "team": "apmcm24200438",
+   "problem": "2024A Q1",
+   "file": "2024年A题优秀论文.txt",
+   "one_line": "按上中下四分位分四组做噪声对抗预处理 NAP，替掉简单去噪",
+   "quote": "we preprocessed the attachment 1 dataset with an innovate statistical",
+   "real": true
+  },
+  {
+   "type": "换表征",
+   "team": "apmcm24207218",
+   "problem": "2024D Q1-Q4",
+   "file": "2024年D题优秀论文.txt",
+   "one_line": "把 AR(2)、两阶段 SVM、NCF 三个经典模型统一改写为 QUBO 二次型",
+   "quote": "Quadratic Unconstrained Binary Optimization",
+   "real": true
+  },
+  {
+   "type": "换约束表达",
+   "team": "apmcm2307379",
+   "problem": "2023B Q4",
+   "file": "2023年B题优秀论文.txt",
+   "one_line": "引入 length magnification 因子，把风机方向与风量折成单一放大系数再交给 GA",
+   "quote": "length magnification, to strength its power in the specific direction",
+   "real": true
+  },
+  {
+   "type": "换约束表达",
+   "team": "apmcm25310840",
+   "problem": "2025D Q4",
+   "file": "2025年D题优秀论文.txt",
+   "one_line": "K-means 时段聚类+机组聚合+分布因子筛选把 UC 压到 520 bit，并把降规模前提写成可检验假设",
+   "quote": "dimensionality reduction of 48%, yielding a compact model of only 520 bits",
+   "real": true
+  },
+  {
+   "type": "换规模",
+   "team": "apmcm25310840",
+   "problem": "2025D Q1-Q4",
+   "file": "2025年D题优秀论文.txt",
+   "one_line": "同一问题四层规模阶梯（经典MILP -> 网络安全MILP -> QUBO -> 降规模），每层与经典解对账",
+   "quote": "less than 2.5% from classical MILP solutions",
+   "real": true
+  },
+  {
+   "type": "跨学科映射",
+   "team": "apmcm2201058",
+   "problem": "2022D Q3",
+   "file": "2022年D题优秀论文.txt",
+   "one_line": "把生理学 Murray 定律搬到翅片分形树生成，与 SIMP 拓扑优化并列对比",
+   "quote": "Murray’s law and branch generation",
+   "real": true
+  },
+  {
+   "type": "跨学科映射",
+   "team": "apmcm25301412",
+   "problem": "2025C Q3-Q4",
+   "file": "2025年C题优秀论文.txt",
+   "one_line": "用财政学 Laffer 曲线给对等关税找最优点，并用 Stackelberg 双层结构表述",
+   "quote": "Laffer Curve effect, pinpointing the Optimal Tariff Rate at ≈30%",
+   "real": true
+  },
+  {
+   "type": "跨学科映射(框架级)",
+   "team": "apmcm25301412",
+   "problem": "2025C 全篇",
+   "file": "2025年C题优秀论文.txt",
+   "one_line": "自造 SMDEF 总框架统合微观/宏观层，把各问结果挂到同一因果链",
+   "quote": "Our SMDEF framework (integrating cross-layer quantitative models) confirms",
+   "real": true
+  },
+  {
+   "type": "弱创新(数据自证)",
+   "team": "apmcm25302425",
+   "problem": "2025A Q1-Q3",
+   "file": "2025年A题优秀论文.txt",
+   "one_line": "三问降幅均为 33.3%、时标因子恒 1.500，多关节协同优化在数值上等价于整体降速 1/1.5",
+   "quote": "33.3% energy reduction with optimal timescale factors of 1",
+   "real": false
+  }
+ ],
+ "method_combinations": [
+  {
+   "team": "apmcm2205838",
+   "problem": "2022B",
+   "file": "2022年B题优秀论文.txt",
+   "composition": "k-eps CFD + RWIND 风洞 + Pareto + MOPSO",
+   "reason": "四件均为成熟工具；正文无创新语义，仅 5.1/5.2 优缺点"
+  },
+  {
+   "team": "apmcm2203180",
+   "problem": "2022C",
+   "file": "2022年C题优秀论文.txt",
+   "composition": "t 检验 + 多元回归 + ARIMA + 随机森林 + GA-BP",
+   "reason": "摘要把五个模型并列成清单，无 为何叠加 的机制论证"
+  },
+  {
+   "team": "apmcm2303763",
+   "problem": "2023C",
+   "file": "2023年C题优秀论文.txt",
+   "composition": "多元回归 + ARIMA + Lotka-Volterra + DID",
+   "reason": "无创新语义；Lotka-Volterra 仅作隐喻类比"
+  },
+  {
+   "team": "apmcm24200658",
+   "problem": "2024C",
+   "file": "2024年C题优秀论文.txt",
+   "composition": "时序 + 面板/VAR + Holt-Winters + 静态/动态博弈",
+   "reason": "无创新语义；各问一模型，博弈与预测未互证"
+  },
+  {
+   "team": "apmcm25304268",
+   "problem": "2025B",
+   "file": "2025年B题优秀论文.txt",
+   "composition": "TMM + GRA + DE + MG-EMT + LCA",
+   "reason": "关键词行即方法清单，无自创因子"
+  },
+  {
+   "team": "apmcm2213503",
+   "problem": "2022E",
+   "file": "2022年E题优秀论文.txt",
+   "composition": "CRITIC + ADF + ARIMA + DBSCAN",
+   "reason": "无创新语义；标准的权重-时序-聚类三件套"
+  },
+  {
+   "team": "apmcm2208815",
+   "problem": "2022A",
+   "file": "2022年A题优秀论文.txt",
+   "composition": "像素判别 + Tamura 纹理 + 多项式回归",
+   "reason": "无创新语义；纯管线拼接，保护渣机理未转成新判据"
+  },
+  {
+   "team": "apmcm24200636",
+   "problem": "2024B",
+   "file": "2024年B题优秀论文.txt",
+   "composition": "NS/对流扩散/Fick + 梯度下降 + BFGS + Pareto",
+   "reason": "无创新语义；eq=46 但优化器全为通用算法"
+  }
+ ],
+ "figures": [
+  {
+   "paradigm": "情景对比分组柱",
+   "use_when": "同一指标在 2-4 个情景(政策/方案/季节)下并排，且有共同基准线",
+   "misuse": "组数>5 应改分面；无基准线时读者无法判优劣",
+   "sources": [
+    {
+     "team": "apmcm25302425",
+     "file": "2025年A题优秀论文.txt",
+     "caption": "subplot (a)shows original plan 14.00 J, optimized plan 9.33 J"
+    },
+    {
+     "team": "apmcm2205838",
+     "file": "2022年B题优秀论文.txt",
+     "caption": "Figure 1 (a) 式的 (left)/(right)/(a)/(b) 子图标注 21 次"
+    }
+   ]
+  },
+  {
+   "paradigm": "敏感性龙卷风/秩漂移",
+   "use_when": "参数>=4 个、需排序影响力；龙卷风给 +-幅度，秩漂移给排序变化",
+   "misuse": "只画折线扫参而不标可行区间，把发散段画进同一轴",
+   "sources": [
+    {
+     "team": "apmcm25304268",
+     "file": "2025年B题优秀论文.txt",
+     "caption": "Figure 12 Sensitivity analysis of GRA score versus PDMS thickness"
+    },
+    {
+     "team": "apmcm24200438",
+     "file": "2024年A题优秀论文.txt",
+     "caption": "Figure 26 Sensitivity Validation of Problem 2"
+    }
+   ]
+  },
+  {
+   "paradigm": "Laffer/前沿曲线(含 Pareto 前沿)",
+   "use_when": "存在单一控制变量与先升后降的最优，或两目标权衡",
+   "misuse": "只跑 3 个离散点却画成光滑曲线；不标拐点/最优坐标",
+   "sources": [
+    {
+     "team": "apmcm25301412",
+     "file": "2025年C题优秀论文.txt",
+     "caption": "Laffer Curve Optimization"
+    },
+    {
+     "team": "apmcm25304268",
+     "file": "2025年B题优秀论文.txt",
+     "caption": "Figure 7 Pareto frontier showing the trade-off between performance score and total cost"
+    },
+    {
+     "team": "apmcm2205838",
+     "file": "2022年B题优秀论文.txt",
+     "caption": "Pareto 命中 24 次（Pareto search method）"
+    }
+   ]
+  },
+  {
+   "paradigm": "雷达图",
+   "use_when": "3-6 维度、<=4 对象、量纲已归一(如 0-10 分)",
+   "misuse": "维度>8 或对象>5 逐轴不可读；在雷达图上比面积当总分",
+   "sources": [
+    {
+     "team": "apmcm25301412",
+     "file": "2025年C题优秀论文.txt",
+     "caption": "Radar Chart: Tariff Policy"
+    },
+    {
+     "team": "apmcm25301412",
+     "file": "2025年C题优秀论文.txt",
+     "caption": "Pragmatic: Largest total area"
+    }
+   ],
+   "note": "全 16 篇仅此 1 篇出现 Radar"
+  },
+  {
+   "paradigm": "热力图(相关矩阵/二维参数图)",
+   "use_when": "矩阵型关系(特征x特征、波长x厚度、时段x机组)",
+   "misuse": "彩虹色映射且无色标单位；样本少时把 0.1 的差异画成强色块",
+   "sources": [
+    {
+     "team": "apmcm24200658",
+     "file": "2024年C题优秀论文.txt",
+     "caption": "Heat map of the correlation between features and target variables"
+    },
+    {
+     "team": "apmcm25304268",
+     "file": "2025年B题优秀论文.txt",
+     "caption": "Two-dimensional colormap of emissivity as a function of wavelength and PDMS"
+    },
+    {
+     "team": "apmcm25301412",
+     "file": "2025年C题优秀论文.txt",
+     "caption": "Heatmap of Argentina"
+    }
+   ]
+  },
+  {
+   "paradigm": "流程图(技术路线/算法流程)",
+   "use_when": "交代多问如何串联(首屏 roadmap)，或每个算法前一张",
+   "misuse": "菱形无出口判据；流程图与正文步骤不一致",
+   "sources": [
+    {
+     "team": "apmcm2208815",
+     "file": "2022年A题优秀论文.txt",
+     "caption": "Figure1 Model building flow chart"
+    },
+    {
+     "team": "apmcm2213503",
+     "file": "2022年E题优秀论文.txt",
+     "caption": "DBSCAN clustering algorithm flowchart"
+    },
+    {
+     "team": "apmcm25310840",
+     "file": "2025年D题优秀论文.txt",
+     "caption": "Technical Roadmap for Power System Unit Commitment Optimization"
+    },
+    {
+     "team": "apmcm24200636",
+     "file": "2024年B题优秀论文.txt",
+     "caption": "Figure 1Our Wrok"
+    }
+   ]
+  }
+ ],
+ "antipatterns": [
+  {
+   "code": "P1-a",
+   "category": "摘要纯方法清单",
+   "team": "apmcm2203180",
+   "file": "2022年C题优秀论文.txt",
+   "quote": "This paper combines the knowledge of relevant statistics, based on various methods such as",
+   "fix": "每段以结论数字收口，方法名放第 2 段并给依赖关系"
+  },
+  {
+   "code": "P1-b",
+   "category": "摘要纯数据堆砌",
+   "team": "apmcm2201058",
+   "file": "2022年D题优秀论文.txt",
+   "quote": "47.6min, 39.2min, 31.4min, 25.2min",
+   "fix": "数字必须配基准/极值与为什么重要的一句"
+  },
+  {
+   "code": "P1-c",
+   "category": "摘要结尾零信息",
+   "team": "apmcm2307379",
+   "file": "2023年B题优秀论文.txt",
+   "quote": "In summary, our research not only established an effective model to simulate the",
+   "fix": "结尾段改为验证数字+具体局限"
+  },
+  {
+   "code": "P2-a",
+   "category": "没有验证(自我肯定代替检验)",
+   "team": "apmcm2205838",
+   "file": "2022年B题优秀论文.txt",
+   "quote": "The consideration of the model is very comprehensive, the simulation results are reasonable",
+   "fix": "给出敏感性 +-幅度或实测误差百分比，检验计数至少 1"
+  },
+  {
+   "code": "P2-b",
+   "category": "检验章缺失(缺点不指名)",
+   "team": "apmcm2307379",
+   "file": "2023年B题优秀论文.txt",
+   "quote": "Despite achievements, some deficiency should not be ignored",
+   "fix": "缺点必须指名到变量/情景，并给量级"
+  },
+  {
+   "code": "P3-a",
+   "category": "假设无 justifying",
+   "team": "apmcm2303763",
+   "file": "2023年C题优秀论文.txt",
+   "quote": "Assuming that the data obtained from the search has a certain degree of credibility",
+   "fix": "把数据可信改成可检验的清洗流程与误差界"
+  },
+  {
+   "code": "P3-b",
+   "category": "假设纯编号无理由",
+   "team": "apmcm2205838",
+   "file": "2022年B题优秀论文.txt",
+   "quote": "High-speed rail is straight",
+   "fix": "补为何可直化的量级论证（曲率半径/线路长度）"
+  },
+  {
+   "code": "P4-a",
+   "category": "缺点空转",
+   "team": "apmcm2205838",
+   "file": "2022年B题优秀论文.txt",
+   "quote": "There is a certain amount of error",
+   "fix": "写误差来源与量级，并与正文数字对齐"
+  },
+  {
+   "code": "P4-b",
+   "category": "结论强于证据/排版崩坏",
+   "team": "apmcm24207218",
+   "file": "2024年D题优秀论文.txt",
+   "quote": "The confusion matrix analysis reveals the model's precise classification capabilities",
+   "fix": "修正矩阵排版，把 93.80% 与 12/0/1/7 对齐陈述"
+  },
+  {
+   "code": "P4-c",
+   "category": "薄弱项只定性",
+   "team": "apmcm2213503",
+   "file": "2022年E题优秀论文.txt",
+   "quote": "As the degree of information disclosure has certain limitations",
+   "fix": "给出信息缺失对预测的具体影响百分比"
+  },
+  {
+   "code": "P5-a",
+   "category": "图号/章号/拼写崩坏",
+   "team": "apmcm24200636",
+   "file": "2024年B题优秀论文.txt",
+   "quote": "Figure 1Our Wrok",
+   "fix": "提交前跑一遍图号-章号交叉检查"
+  },
+  {
+   "code": "P5-b",
+   "category": "编号回退",
+   "team": "apmcm2201058",
+   "file": "2022年D题优秀论文.txt",
+   "quote": "7.1 Strength",
+   "fix": "统一编号体系，禁用目录外的手工编号"
+  },
+  {
+   "code": "P5-c",
+   "category": "标题拼写错误",
+   "team": "apmcm2203180",
+   "file": "2022年C题优秀论文.txt",
+   "quote": "Model Evalustion and Further Discussion",
+   "fix": "拼写检查纳入提交清单"
+  },
+  {
+   "code": "P5-d",
+   "category": "标题/正文断词",
+   "team": "apmcm25302425",
+   "file": "2025年A题优秀论文.txt",
+   "quote": "Analysis andsolving of Question One",
+   "fix": "断词检查；假设条与符号表统一空格"
+  },
+  {
+   "code": "P6-a",
+   "category": "符号表单位重复/断裂",
+   "team": "apmcm24200636",
+   "file": "2024年B题优秀论文.txt",
+   "quote": "Surface area of humidifier Square meters (square meters)",
+   "fix": "符号表三列：符号-含义-单位，单位只写一次"
+  },
+  {
+   "code": "P6-b",
+   "category": "假设用项目符号导致无法交叉引用",
+   "team": "apmcm25304268",
+   "file": "2025年B题优秀论文.txt",
+   "quote": "Wavelength Range: The spectral calculations",
+   "fix": "假设改编号并加 label"
+  },
+  {
+   "code": "P7-a",
+   "category": "letter 型小问脱离模型数字",
+   "team": "apmcm2213503",
+   "file": "2022年E题优秀论文.txt",
+   "quote": "submitted a non-technical article to the United Nations",
+   "fix": "公开信必须引用前问的定量结论（对标 2303763 的 Open Letter 章）"
+  }
+ ]
+}

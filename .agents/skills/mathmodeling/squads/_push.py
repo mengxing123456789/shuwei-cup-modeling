@@ -36,7 +36,7 @@ SQUADS = [
             "附录与自指（由产物决定的值不许手写）→ 格式合规（C1–C12）→ 对抗评审 / 创新挖掘 → "
             "时间与质检 → 流水线运维（守 pipeline.py 与二十道门本身）→ 调度。"
             "每份 brief 都带可复算命令、法定产物路径与一句红线；"
-            "跑的是 E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts\\pipeline.py 的 s1–s7 与 G1–G20，"
+            "跑的是 <skill>\\scripts\\pipeline.py 的 s1–s7 与 G1–G20，"
             "判据全部可机器复核，不靠「看起来对」。"
         ),
         "members": [

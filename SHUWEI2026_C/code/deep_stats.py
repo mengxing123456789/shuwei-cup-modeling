@@ -1,7 +1,7 @@
 """把 data_profile.json 汇总成报告用的表：质量、手部几何、区间。
 
 只读 data/data_profile.json，不重读原始 CSV（那一步在 profile_data.py）。
-复现：E:\Mini\envs\mathmodel\python.exe code\deep_stats.py
+复现：python code\deep_stats.py
 """
 
 import json

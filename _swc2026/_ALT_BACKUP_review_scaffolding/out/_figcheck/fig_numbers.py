@@ -9,7 +9,7 @@ C5  error-bar primitives            -> are the thin segments data whiskers or ax
 C6  fig5 dashed line                -> which points does it actually join?
 C7  sample sizes behind fig4/fig5   -> 221 vs 300 windows
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_numbers.py
+Run:  python out\_figcheck\fig_numbers.py
 """
 import sys, pathlib, json
 import pymupdf as fitz

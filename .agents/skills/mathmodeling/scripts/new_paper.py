@@ -2,7 +2,7 @@
 """新建一篇论文骨架：把 templates/PAPER-TEMPLATE.md 的章序列落成可编译的 main.tex。
 
 用法：
-    E:\\Mini\\envs\\mathmodel\\python.exe scripts\\new_paper.py <目录> [--type A|B|C|D|E]
+    python scripts\\new_paper.py <目录> [--type A|B|C|D|E]
 
 生成：
     <目录>/main.tex            章序列已排好，填空项是 <<…>>
@@ -25,8 +25,31 @@ import sys
 from pathlib import Path
 
 SKILL = Path(__file__).resolve().parents[1]
-WS = SKILL.parents[2]          # E:\数学建模
-DONOR = WS / "APMCM2025_C"     # 已编译通过的真实论文，复用它的 cls 与 refs
+WS = SKILL.parents[2]          # 工作区根（从 __file__ 推，不写死盘符）
+
+# 已编译通过的真实论文，复用它的 cls 与 refs/official_standard.json。
+# 为什么是候选表而不是单一常量：亚太杯目录已移出本仓库（E:\数学建模_apmcm），
+# 旧值 WS/"APMCM2025_C" 会直接失效，骨架于是拿不到 official_standard.json，
+# 基准带整段静默为空（test_no_award_texts_copied 抓到的就是这个）。
+DONOR_CANDIDATES = (
+    WS / "PRACTICE_2023B",     # 2023 数维杯 B 题，含 apmcmthesis.cls + 基准带
+    WS / "SHUWEI2025_A",       # 2025 数维杯 A 题，同样齐全
+)
+
+
+def apmcm_donor() -> Path | None:
+    """返回同时含 apmcmthesis.cls 与 refs/official_standard.json 的目录。"""
+    for d in DONOR_CANDIDATES:
+        if (d / "apmcmthesis.cls").exists() and (d / "refs" / "official_standard.json").exists():
+            return d
+    for p in WS.glob("*/apmcmthesis.cls"):
+        cand = p.parent
+        if (cand / "refs" / "official_standard.json").exists():
+            return cand
+    return None
+
+
+DONOR = apmcm_donor() or (WS / "PRACTICE_2023B")
 
 # 数维杯（swmcmthesis）官方模板：不复制到技能里，直接从赛前下载的目录取，
 # 这样官方更新模板时不用改代码。找不到就只在生成时告警，不阻断。

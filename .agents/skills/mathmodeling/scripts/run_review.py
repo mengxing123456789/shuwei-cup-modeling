@@ -24,10 +24,11 @@ SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
 from mmkit import crew, paths, review_crew as RC  # noqa: E402
+from mmkit import pyexe  # noqa: E402
 
-WS = Path(r"E:\数学建模")
+WS = Path(crew.workspace_root()) if hasattr(crew, "workspace_root") else SCRIPTS.parents[3]
 PY_NUMPY = Path(sys.executable)                                   # 跑本脚本的解释器；不再写死 D:\Python
-PY_MUPDF = Path(r"E:\Mini\envs\mathmodel\python.exe")           # pymupdf/openpyxl
+PY_MUPDF = Path(pyexe.mupdf_py())                                 # 能 import pymupdf 的那个；不写死盘符
 
 # 派单前要跑的机器判据：(标签, 解释器, 参数)。
 # 脚本一律用**绝对路径**：cwd 是论文目录，相对路径会 exit=2 "can't open file"（实测踩过，

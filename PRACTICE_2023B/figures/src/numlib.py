@@ -4,7 +4,7 @@
 
 \u4e3a\u4ec0\u4e48\u9700\u8981\u8fd9\u4e2a\u6587\u4ef6
 ------------------
-\u672c\u673a `E:\\Mini\\envs\\mathmodel\\python.exe`\uff08numpy 2.4.6\uff09\u7684 OpenBLAS \u4e00\u78b0
+\u672c\u673a `python`\uff08numpy 2.4.6\uff09\u7684 OpenBLAS \u4e00\u78b0
 gemm/LAPACK \u5c31\u6574\u8fdb\u7a0b\u786c\u5d29 `Windows fatal exception: code 0xc06d007f`\uff0c
 `exit code -1066598273`\u3002\u5b9e\u6d4b\u8fb9\u754c\uff08\u6bcf\u9879\u72ec\u7acb\u8fdb\u7a0b\u8dd1\uff0c\u5d29\u4e86\u5c31\u662f\u5d29\u4e86\uff09\uff1a
 

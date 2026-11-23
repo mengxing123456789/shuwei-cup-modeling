@@ -5,7 +5,7 @@ micro F1 = 2*TP / (n_pred + n_true), with n_true = 280 fixed and n_pred differin
 between the two detectors (399 vs 276). So the same F1 means different things for
 the two methods. Recover TP, then precision and recall, for all four tolerances.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig1_pr.py
+Run:  python out\_figcheck\fig1_pr.py
 """
 import sys, json, pathlib
 import pymupdf as fitz

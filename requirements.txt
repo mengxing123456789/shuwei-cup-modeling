@@ -1,0 +1,28 @@
+# 依赖
+# 目标环境：Python 3.11（本机实测 3.11.18）
+# 安装：python -m pip install -r requirements.txt
+#
+# 只有 A 路（复现 C 题论文）与 B 路（起新题）的核心命令需要前六行；
+# 其余是特定脚本的可选依赖。
+
+numpy>=2.0,<3
+pandas>=2.0,<4
+scipy>=1.11,<2
+scikit-learn>=1.3,<2
+matplotlib>=3.8,<4
+PyMuPDF>=1.24          # 写 PDF 书签、图表字号检查
+
+# 深度学习（P1 分割 / P1-b 检测器 / P2 分位 GRU / P3 无模型基线）
+torch>=2.0             # CPU 版即可跑通；GPU 更快
+
+# 数据与文档
+openpyxl>=3.1          # 读 xlsx 附件
+python-docx>=1.1       # 读 docx 题面 / 写 DOCX 版论文
+pypdf>=4.0             # PDF 页数与文本层检查
+pypdfium2>=4.0         # PDFium 渲染（校书签用）
+lightgbm>=4.0          # P1 可靠性检测器（up2_p1b_v2.py）
+
+# 外部工具（不在 pip 里，需自行安装）
+#   MiKTeX / TeX Live  —— xelatex 编译论文
+#   7-Zip 或 NanaZip   —— 解带中文成员名的压缩包
+#   ffmpeg             —— 只有 v2_video_extract.py 需要（视频特征提取）

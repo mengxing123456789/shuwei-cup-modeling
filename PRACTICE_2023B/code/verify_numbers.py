@@ -28,7 +28,7 @@
 stdout 同时打 `N claims` 与 `claims=N declared=N checked=N failures=N verdict=...`
 两种口径（WORKFLOW.md:347 要求两种都打）。
 
-运行：E:\\Mini\\envs\\mathmodel\\python.exe code\\verify_numbers.py
+运行：python code\\verify_numbers.py
 """
 from __future__ import annotations
 
@@ -38,6 +38,7 @@ import math
 import re
 import sys
 from pathlib import Path
+import os
 
 CODE = Path(__file__).resolve().parent
 ROOT = CODE.parent
@@ -942,8 +943,8 @@ def build_report(n_bytes, items, tex_stats, argv, exit_code, code_sizes,
 
     L += ["", "## 5 复算命令", "",
           "```powershell",
-          "cd E:\\数学建模\\PRACTICE_2023B",
-          "& 'E:\\Mini\\envs\\mathmodel\\python.exe' code\\verify_numbers.py",
+          "cd the paper directory",
+          "& (os.environ.get("MM_PY") or sys.executable) code\\verify_numbers.py",
           "```", "",
           "本脚本只读 data/*.json 与 main.tex，不改任何上游文件；"
           "唯一写入的是本报告自身（首行 `BYTES <n>` 用 write_bytes 迭代到不动点）。"]

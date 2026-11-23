@@ -1,7 +1,20 @@
+
+def _corpus_root():
+    """语料根：MM_CORPUS_ROOT > 向上找含 corpus/problems 的一级 > 旧 AsterLink 兜底。"""
+    import os as _os
+    from pathlib import Path as _P
+    env = _os.environ.get("MM_CORPUS_ROOT")
+    if env:
+        return env
+    for _probe in _P(__file__).resolve().parents:
+        if (_probe / "corpus" / "problems").is_dir():
+            return str(_probe / "corpus")
+    return r"C:\Users\29900\Downloads\AsterLink"
+
 ﻿# -*- coding: utf-8 -*-
 import os, sys, glob, shutil
 sys.stdout.reconfigure(encoding='utf-8', errors='ignore')
-base=r'C:\Users\29900\Downloads\AsterLink'
+base=_corpus_root()
 d25=os.path.join(base,'2025年数维杯秋季赛题目')
 d23=os.path.join(base,'2023第九届数维杯国际赛题目（整理版）')
 W=lambda p,t: (open(p,'w',encoding='utf-8').write(t), print('written',p,len(t)))

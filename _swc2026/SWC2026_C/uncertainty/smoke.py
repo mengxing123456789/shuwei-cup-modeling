@@ -20,6 +20,8 @@ from .jsonio import DATA, att_dir, write_json
 from .predictive import DurationPredictor, PositionPredictor
 from .reliability import ReliabilityModel
 from .types import FrameWindow, PredictiveRequest, StepReport
+import os
+import sys
 
 UNIT_ID = "U_41540a43a2a7"   # validation, family A, sample E015, duration 3.0 s
 SAMPLE = "E015"
@@ -203,7 +205,7 @@ def run(data_dir: str | Path | None = None) -> dict[str, Any]:
         "meta": {
             "track": "U / unified uncertainty chain",
             "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-            "interpreter": "E:\\Mini\\envs\\mathmodel\\python.exe",
+            "interpreter": (os.environ.get("MM_PY") or sys.executable),
             "sources_read_only": [
                 "data/panel.npz",
                 "data/state.npz",

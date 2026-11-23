@@ -37,8 +37,8 @@
 
 ## 用法
 
-    $PY = 'E:\Mini\envs\mathmodel\python.exe'
-    $S  = 'E:\数学建模\.agents\skills\mathmodeling\scripts\pipeline.py'
+    $PY = 'python'
+    $S  = '<skill>\scripts\pipeline.py'
 
     & $PY $S <论文目录> --status              # 看做到哪一步、每道门什么结果
     & $PY $S <论文目录> --dry                 # 只打印计划，不派单
@@ -64,10 +64,11 @@ SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
 from mmkit import crew, paths  # noqa: E402
+from mmkit import pyexe  # noqa: E402
 from mmkit import review_crew as RC  # noqa: E402
 import submission_gate as SG  # noqa: E402  （G10–G15 的实现在那里，这里只做编排）
 
-PY = Path(r"E:\Mini\envs\mathmodel\python.exe")
+PY = Path(pyexe.py())
 STATE_NAME = "logs/pipeline_state.json"
 
 # 状态文件带上"这些键属于哪一版步骤表"。2026-11-18 把 7 步扩成 8 步时，s4 从"图表"变成

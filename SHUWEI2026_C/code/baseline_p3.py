@@ -9,7 +9,7 @@
   censored/overrun/idle/invalid 以及全部 common metrics。
 
 产物：data/results_baseline_p3.json、data/baseline_p3_trials.csv。
-复现：E:\Mini\envs\mathmodel\python.exe code\baseline_p3.py
+复现：python code\baseline_p3.py
 """
 
 from __future__ import annotations

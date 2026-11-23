@@ -9,7 +9,7 @@ T2  fig2: is the x scale linear in the metric (so bar LENGTH encodes the value),
     and what does the nested bar's AREA encode instead?
     Measured from every filled rect in the figure.
 
-Run:  E:\Mini\envs\mathmodel\python.exe out\_figcheck\fig_axes.py
+Run:  python out\_figcheck\fig_axes.py
 """
 import sys, pathlib
 import pymupdf as fitz

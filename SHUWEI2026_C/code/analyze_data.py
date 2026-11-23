@@ -4,7 +4,7 @@
 用来回答"这份数据能支撑什么模型、样本量够不够、哪一层必须人工构造"。
 
 产物 data/analysis.json + data/analysis_hand_runs.csv。
-复现：E:\\Mini\\envs\\mathmodel\\python.exe code\\analyze_data.py
+复现：python code\\analyze_data.py
 """
 
 from __future__ import annotations

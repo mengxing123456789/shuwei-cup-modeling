@@ -1,7 +1,7 @@
 """每条规定一条测试。断言的是"这条规则真的能拦住违规"，不是"这条规则存在"。
 
 跑法：
-    E:\\Mini\\envs\\mathmodel\\python.exe -m unittest discover -s <skill>/scripts/tests -v
+    python -m unittest discover -s <skill>/scripts/tests -v
 需要 MM_PAPER 指向一篇已编译的论文（默认取工作区里最新含 main.tex 的目录）。
 """
 from __future__ import annotations

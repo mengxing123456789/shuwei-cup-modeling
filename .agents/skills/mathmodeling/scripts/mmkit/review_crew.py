@@ -15,6 +15,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from . import pyexe as _pyexe
+from . import corpus as _corpus
+
 TEAM_NAME = "数学建模评审小队"
 
 # 队伍简介（UI 卡片上显示；空着会像"这支队伍啥也没有"）。依据是可核的原件，不是经验：
@@ -100,12 +103,11 @@ WAVES = [
 HOUSE = "\n".join([
     "【工作区】{ws}",
     "【被测论文】{paper}",
-    "【解释器】E:\\Mini\\envs\\mathmodel\\python.exe（带 numpy/pandas/matplotlib/torch）",
-    "【官方依据】全部在 E:\\数学建模\\APMCM-PROBLEMS\\："
-    "_official_criteria.json（12 条判据，每条带 file:line 或 2026 扫描件页号转录）、"
-    "_official_evidence.json（35 份真题的 8 个关注点，233 条引文已逐条回原文核对）、"
-    "_award_pdfs.json / _award_text\\（22 篇一等奖原件与抽取文本）。"
-    "引用判据必须写 C1..C12 编号；引用真题必须写文件名 + 行号。",
+    "【解释器】{py}（带 numpy/pandas/matplotlib/torch；若路径不存在，设 MM_PY）",
+    "【官方依据】{corpus}：problems/<年份>/（2019–2025 历年真题与附件）、"
+    "awards/<年份>/（2019–2025 一等奖 PDF）、rules/（官方格式规范与承诺书）、"
+    "_PROVENANCE.md（每份文件的 sha256 与核验判据）。"
+    "引用真题必须写文件名 + 行号；引用获奖稿必须写文件名 + 页码。",
     "【禁止】不许凭印象说\"一等奖都这样\"——要说\"C5 在 7 份官方规范里命中 9 处\"这种可核形式；"
     "没有出处的判断标注 [判断] 并说明你的理由链。",
     "【OUTPUT】只写下面【你的输出】给出的那一个文件；UTF-8 无 BOM；首行 BYTES <n>；"
@@ -113,7 +115,7 @@ HOUSE = "\n".join([
     "【先跑机器口径再读文】动手看正文之前，先跑这三条，把输出贴进报告开头（它们能替你抓掉"
     "一半的\"我以为\"）：①`review_check.py <论文目录>`（12 条官方硬项）；"
     "②`gauntlet_check.py <论文目录>`（R 系列 16 项，含基准带与页面编号连续性）；"
-    "③`E:\\Mini\\envs\\mathmodel\\python.exe -m mmkit.figfont <main.pdf>`（图内有效字号）。"
+    "③`python -m mmkit.figfont <main.pdf>`（图内有效字号）。"
     "三条都过还剩下的问题才是要你读出来的问题。",
     "【先确认被测件与数据层同代】比较 main.pdf 与 data/*.json、tables/*.tex、figures/*.pdf 的 mtime；"
     "若数据层更新，就在报告开头写\"被测件落后 N 小时，以下数字可能已被重跑覆盖\"，"
@@ -132,8 +134,8 @@ HOUSE = "\n".join([
     "【不适用】本题不涉及你的职责时写 NOT-APPLICABLE: <理由>。",
 ])
 
-RC = r"E:\数学建模\.agents\skills\mathmodeling\scripts\review_check.py"
-PY = r"E:\Mini\envs\mathmodel\python.exe"
+RC = str(Path(__file__).resolve().parent.parent / "review_check.py")
+PY = _pyexe.py()
 
 TASKS = {
     "合规审查员": (
@@ -156,7 +158,7 @@ TASKS = {
     "摘要与表达审读": (
         "摘要按 16 篇英文一等奖的实测基准判（median 363.5 词、p25 327、p75 449、"
         "数字 median 11.5、最少 2、零数字 0/16）：先跑\n"
-        f"  {PY} -c \"import sys;sys.path.insert(0,r'E:\\数学建模\\.agents\\skills\\mathmodeling\\scripts');"
+        f"  {PY} -c \"import sys;sys.path.insert(0,r'<skill>\\scripts');"
         "from mmkit import review_bench as R;print(R.abstract_stats(r'<被测PDF>'))\"\n"
         "再逐段判四槽位（Background and Task / Modeling Framework / Results per Question / "
         "Validation and Limitation）；指出哪一段是\"纯方法清单\"或\"纯数据堆砌\"（一字奖里的 P1-a/P1-b 反例）。"
@@ -262,19 +264,22 @@ TASKS = {
 
 
 def _fill(text: str, ws: Path, paper: Path) -> str:
-    """只替换 {ws}/{paper} 两个字面量，不走 str.format。
+    """只替换 {ws}/{paper}/{py}/{corpus} 四个字面量，不走 str.format。
 
     为什么不 format：任务正文里全是 LaTeX 与 Python 代码，`\\setlength{\\tabcolsep}`、
     `{page}`、`{n}` 这类花括号会被当成占位符并抛 KeyError（实测 'page'）。
     """
-    return text.replace("{ws}", str(ws)).replace("{paper}", str(paper))
+    return (text.replace("{ws}", str(ws))
+                .replace("{paper}", str(paper))
+                .replace("{py}", PY)
+                .replace("{corpus}", str(_corpus.corpus_root())))
 
 
 def full_briefs(ws: Path, paper: Path) -> dict[str, str]:
     """生成 13 人完整 brief（供 crew.push_briefs 用）。
 
     输出路径一律挂在 **paper** 下，不挂 ws：2018A 第一轮把 `ws`（工作区根）当输出根，
-    8 份报告全落在 `E:\\数学建模\\review\\` 而不是论文目录里，`outcome()` 于是报 8/8 missing。
+    8 份报告全落在 `review/` 而不是论文目录里，`outcome()` 于是报 8/8 missing。
     协调器传什么根，审读员就写哪儿 —— 所以根要在这里定死，不靠调用方自觉。
     """
     out = {}

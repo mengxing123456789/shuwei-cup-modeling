@@ -29,7 +29,7 @@
 (c) 每组合只有 5–9 个档位且无重复实验 → 「±10% 扰动重算」等于凭空造数据。
     敏感性一律用 5% 噪声蒙特卡洛 + 留一交叉验证。
 
-运行：E:\\Mini\\envs\\mathmodel\\python.exe code\\solve.py
+运行：python code\\solve.py
 """
 from __future__ import annotations
 
