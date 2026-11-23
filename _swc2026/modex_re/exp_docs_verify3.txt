@@ -1,0 +1,99 @@
+======================================================================
+_append_materials_check
+SIG: (workspace: 'Path', template: 'str', params: 'dict | None', workflow_id: 'str | None' = None) -> 'list[str]'
+DOC:
+把材料核对（附件缺失、赛事/语言/题号与模板不一致）写进 CLAUDE.md，并推给用户。
+
+放在转录与图片描述之后算：扫描件 PDF 只有识别结果里才有题面文字。只提示、不拦截；
+任何异常都不影响工作流。
+======================================================================
+_failed_problem_results
+SIG: (workspace: 'Path') -> 'List[str]'
+DOC:
+Per-problem result files that themselves say the solve did not succeed.
+
+Only the file's own top-level declaration counts — status failed/error, a
+traceback or exception text, an error *message* string — or a file with no
+results at all.  Values inside the results are never interpreted: a numeric
+``error`` metric, ``infeasible`` or a time-limit status can be legitimate.
+======================================================================
+_step_data_problem
+SIG: (workspace: 'Path', skill_name: 'str', template: 'str', params: 'dict') -> 'str'
+DOC:
+Single-step delivery must not skip deterministic data errors.
+
+Missing model self-attestation alone is not a broken artifact. Only an
+explicit fatal, or inability to perform the required check, blocks here.
+======================================================================
+_check_step_companions
+SIG: (workspace: 'Path', skill_name: 'str') -> 'tuple'
+DOC:
+检查二级文件是否齐全. 返回 (ok: bool, missing: List[str]).
+
+每个文件要求:
+    - 文件存在
+    - 文件大小 > 50 字节 (防空文件占位)
+======================================================================
+_post_edit_issues
+SIG: (workspace, skill_name, primary, template, params, changed, *, progress, cancelled)
+DOC:
+Same current-output gates after required or optional edits in both entries.
+======================================================================
+_compute_health_blocks
+SIG: (skill_name: 'str', health_ok: 'bool') -> 'bool'
+DOC:
+Edits alone never substitute for mandatory computation outputs.
+======================================================================
+_complete_step_without_model
+SIG: (db, workflow_id, step, step_id, skill_name, workspace, summary: 'str', review_since=None, planned=()) -> 'list'
+DOC:
+不调用模型就把本步标为完成（连续继续到上限后，重新检查通过）。返回本步产出文件清单。
+planned：这一步计划的产物（模板里的 output_files），老清单里的 user_data/ 只认这些。
+======================================================================
+_continue_limit_message
+SIG: (count: 'int', why: 'str') -> 'str'
+DOC:
+<none>
+======================================================================
+_recovery_failure_message
+SIG: (reason: 'str', attempts: 'int', quality: 'bool', stalled: 'bool') -> 'str'
+DOC:
+<none>
+======================================================================
+_figure_source_problems
+SIG: (workspace: 'Path') -> 'List[str]'
+DOC:
+Machine-readable figure→data bindings must point at data that exists.
+
+``figures/FIGURE_SOURCES.json`` = {"fig_cost": ["problem_1_results.json::cost_curve", ...]}.
+Optional: without the file nothing is checked.  With it, a binding to a missing
+file or a field path that does not resolve is the figure step's own false claim.
+======================================================================
+_registered_figure_skips
+SIG: (workspace: 'Path', planned: 'List[str]') -> 'Tuple[set, str]'
+DOC:
+Planned data figures the figure step reported as undrawable, with evidence.
+
+The manifest is fixed before computation, so a planned figure can turn out to have
+no data.  Without a sanctioned outlet the only way through the reconciliation was
+to fabricate the figure.  A skip counts only when ``figures/FIGURE_SKIPPED.json``
+names it with a reason *and* the missing data, and ``UPSTREAM_ISSUES.md`` mentions
+it (the user and the writer see it).  At most half of the planned figures (at least
+one) may be skipped; beyond that the upstream data problem must be fixed first.
+Returns (accepted names, problem message or "").
+======================================================================
+_registered_diagram_skips
+SIG: (workspace: 'Path', planned: 'List[str]') -> 'Tuple[set, str]'
+DOC:
+Planned architecture/TikZ figures registered as no longer needed.
+
+When the modeling step demotes the method a planned diagram illustrates (e.g. to a
+cross-check the paper does not develop), the diagram step may register it in the same
+FIGURE_SKIPPED.json + UPSTREAM_ISSUES.md registry instead of drawing it.  The technical
+roadmap is always required, so it can never be skipped.
+======================================================================
+_plan_says_no_figures
+SIG: (workspace: 'Path') -> 'bool'
+DOC:
+检查 PAPER_PLAN.md / PROBLEM_ANALYSIS.md / TOPIC_PLAN.md 是否声明本论文无图表
+(纯文字综述/思辨论文场景)。

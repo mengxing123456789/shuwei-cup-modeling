@@ -1,0 +1,148 @@
+{
+ "version": "p3-v2",
+ "written_at": "2026-11-21T11:14:16",
+ "purpose": "upgrade the P3 stochastic restocking dispatcher relative to the frozen slack policy (code/up_p3_vectorized.py SEL=slack, RULE=slack, q=0.60, gate=0.50, late_tol=12, no review)",
+ "split": {
+  "train": [
+   2026111700,
+   2026111701,
+   2026111702,
+   2026111703,
+   2026111704,
+   2026111705,
+   2026111706,
+   2026111707,
+   2026111708,
+   2026111709,
+   2026111710,
+   2026111711,
+   2026111712,
+   2026111713,
+   2026111714
+  ],
+  "val": [
+   2026111715,
+   2026111716,
+   2026111717,
+   2026111718,
+   2026111719,
+   2026111720,
+   2026111721,
+   2026111722,
+   2026111723,
+   2026111724
+  ],
+  "test": [
+   2026111725,
+   2026111726,
+   2026111727,
+   2026111728,
+   2026111729
+  ],
+  "note": "seeds 2026111725..2026111729 are evaluated exactly once, after the policies are frozen on train/val; no test seed enters any search, early stopping, or hyper-parameter choice"
+ },
+ "baseline": {
+  "name": "slack_old",
+  "SEL": 1,
+  "RULE": "slack",
+  "q_hi": 0.6,
+  "gate": 0.5,
+  "late_tol": 12.0,
+  "REVIEW": false,
+  "note": "bit-identical to code/p3_improved_verify.simulate(case, seed, 'slack_old') on all 30 official seeds"
+ },
+ "cases": [
+  "S2",
+  "S3"
+ ],
+ "mappings": [
+  {
+   "alpha": 1.0,
+   "beta": 0.5
+  },
+  {
+   "alpha": 0.75,
+   "beta": 0.5
+  },
+  {
+   "alpha": 1.5,
+   "beta": 0.5
+  },
+  {
+   "alpha": 1.0,
+   "beta": 0.0
+  },
+  {
+   "alpha": 1.0,
+   "beta": 1.0
+  }
+ ],
+ "metric": {
+  "primary": "weighted_on_time_rate",
+  "secondary": [
+   "weighted_completion_rate",
+   "weighted_tardiness_s",
+   "cost",
+   "n_reviews"
+  ]
+ },
+ "strategy_classes": [
+  "A: parametric rule search (slack coefficient, reserve quantile, EDF/ATC mix, review hurdle, blocking weight) -- joint random grid, selection on train mean, shortlist re-ranked on val",
+  "B: learned linear policy over online context features (queue pressure, remaining budget fraction, mean predictive slack, fraction of feasible set already late) -> reserve multiplier and selector mix; trained with the cross-entropy method on train seeds, early stopping on val seeds (no gradients on test)",
+  "C: distributionally robust reservation over the five official (alpha,beta) mappings: min-max (worst mapping) and CVaR(0.2) objectives on train, val check"
+ ],
+ "selection": {
+  "rule": "for each case independently: candidates ranked by mean train weighted on-time rate over the 5 mappings; the top 5 per class are re-ranked by mean val rate over the 5 mappings; the single best val candidate per case is frozen. If no class reaches +1.5pp on val, the best val candidate overall is frozen anyway and the report states the shortfall.",
+  "no_test_tuning": true
+ },
+ "gate": {
+  "statistic": "blocked paired difference vs slack_old. Blocks = 2 cases x 5 official mappings (10 blocks, fixed conditions); each block has the 5 test seeds as replicates. Delta_bar = mean of the 10 block means; SE from the pooled within-block variance (each block's s^2/5), 95% t interval with Welch-Satterthwaite df.",
+  "g1_delta_ge_0p015": true,
+  "g2_ci_lower_gt_0": true,
+  "g3_both_cases_positive": true,
+  "g4_no_mapping_regression_beyond_0p005": true,
+  "g5_completion_no_regression": 0.01,
+  "g6_cost_inflation_max": 0.05,
+  "passes": "G1 and G2 and G3 and G4 and G5 and G6",
+  "secondary_reported": [
+   "strict cluster-by-seed interval (5 seed-level means, df=4) -- conservative",
+   "naive 50-pair interval -- optimistic, reported only as a bound",
+   "sign test over the 50 (case,mapping,seed) pairs"
+  ],
+  "note": "the blocked analysis is a randomised-block design: mapping and case are fixed conditions, seeds are replicates. The strict seed-clustered interval is reported alongside and is not used for the pass decision."
+ },
+ "reference_arms": {
+  "v1_improved": {
+   "S2": {
+    "SEL": 0,
+    "RULE": "abs",
+    "q_hi": 0.5,
+    "gate": 0.6,
+    "late_tol": 12.0
+   },
+   "S3": {
+    "SEL": 0,
+    "RULE": "abs",
+    "q_hi": 0.6,
+    "gate": 0.5,
+    "late_tol": 20.0
+   },
+   "note": "data/p3_improved_verify.json selected policy, 30-seed mean +5.85pp; reported as the incumbent v1 arm"
+  },
+  "edf": {
+   "SEL": 0,
+   "RULE": "abs",
+   "q_hi": 0.3,
+   "gate": 1.01,
+   "late_tol": 1000000.0,
+   "note": "EDF-dominated reference, not a target"
+  }
+ },
+ "budgets": {
+  "cpu_minutes": 40,
+  "gpu_minutes": 0,
+  "note": "vectorised replay only; no neural training on GPU"
+ },
+ "cost_definition": "cost = sum over dispatches of (2 + 0.1*b + 0.2*D) plus 1.0 per paid re-observation; budget B per case per trial",
+ "review_definition": "paid prefix re-observation 0.2 -> 0.6 -> 1.0 s, 1.0 s and 1.0 cost unit each, at most K per trial and 2 per job, taken when the expected weighted lateness-probability gain exceeds the hurdle"
+}

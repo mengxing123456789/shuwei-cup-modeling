@@ -1,0 +1,2434 @@
+[
+ {
+  "module": "backend.routers.checkpoints",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\routers\\checkpoints.cp311-win_amd64.pyd",
+  "doc": "Human checkpoint status and identity-bound decisions; never restart a task implicitly.",
+  "attrs": [
+   {
+    "name": "APIRouter",
+    "type": "type",
+    "doc": "`APIRouter` class, used to group *path operations*, for example to structure\nan app in multiple files. It would then be included in the `FastAPI` app, or\nin another `APIRouter` (ultimately included in the app).\n\nRead more about it in the\n[FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\n\n## Example\n\n```python\nfrom fastapi import APIRouter, FastAPI\n\napp = FastAPI()\nrouter = APIRouter()\n\n\n@router.get(\"/users/\", tags=[\"users\"])\nasync def read_users():\n    return [{\"username\": \"Rick\"}, {\"username\": \"Morty\"}]\n\n\napp.include_router(router)\n```",
+    "sig": "(*, prefix: typing.Annotated[str, Doc('An optional path prefix for the router.')] = '', tags: Annotated[Optional[List[Union[str, enum.Enum]]], Doc('\\n                A list of tags to be applied to all the *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                ')] = None, dependencies: Annotated[Optional[Sequence[fastapi.params.Depends]], Doc('\\n                A list of dependencies (using `Depends()`) to be applied to all the\\n                *path operations* in this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                ')] = None, default_response_class: Annotated[Type[starlette.responses.Response], Doc('\\n                The default response class to be used.\\n\\n                Read more in the\\n                [FastAPI docs for Custom Response - HTML, Stream, File, others](https://fastapi.tiangolo.com/advanced/custom-response/#default-response-class).\\n                ')] = <fastapi.datastructures.DefaultPlaceholder object at 0x000002608CEC3E10>, responses: Annotated[Optional[Dict[Union[int, str], Dict[str, Any]]], Doc('\\n                Additional responses to be shown in OpenAPI.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Additional Responses in OpenAPI](https://fastapi.tiangolo.com/advanced/additional-responses/).\\n\\n                And in the\\n                [FastAPI docs for Bigger Applications](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                ')] = None, callbacks: Annotated[Optional[List[starlette.routing.BaseRoute]], Doc('\\n                OpenAPI callbacks that should apply to all *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for OpenAPI Callbacks](https://fastapi.tiangolo.com/advanced/openapi-callbacks/).\\n                ')] = None, routes: Annotated[Optional[List[starlette.routing.BaseRoute]], Doc(\"\\n                **Note**: you probably shouldn't use this parameter, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                ---\\n\\n                A list of routes to serve incoming HTTP and WebSocket requests.\\n                \"), <typing_extensions.deprecated object at 0x000002608CED0210>] = None, redirect_slashes: typing.Annotated[bool, Doc(\"\\n                Whether to detect and redirect slashes in URLs when the client doesn't\\n                use the same format.\\n                \")] = True, default: Annotated[Optional[Callable[[MutableMapping[str, Any], Callable[[], Awaitable[MutableMapping[str, Any]]], Callable[[MutableMapping[str, Any]], Awaitable[NoneType]]], Awaitable[NoneType]]], Doc('\\n                Default function handler for this router. Used to handle\\n                404 Not Found errors.\\n                ')] = None, dependency_overrides_provider: Annotated[Optional[Any], Doc(\"\\n                Only used internally by FastAPI to handle dependency overrides.\\n\\n                You shouldn't need to use it. It normally points to the `FastAPI` app\\n                object.\\n                \")] = None, route_class: Annotated[Type[fastapi.routing.APIRoute], Doc('\\n                Custom route (*path operation*) class to be used by this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Custom Request and APIRoute class](https://fastapi.tiangolo.com/how-to/custom-request-and-route/#custom-apiroute-class-in-a-router).\\n                ')] = <class 'fastapi.routing.APIRoute'>, on_startup: Annotated[Optional[Sequence[Callable[[], Any]]], Doc('\\n                A list of startup event handler functions.\\n\\n                You should instead use the `lifespan` handlers.\\n\\n                Read more in the [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, on_shutdown: Annotated[Optional[Sequence[Callable[[], Any]]], Doc('\\n                A list of shutdown event handler functions.\\n\\n                You should instead use the `lifespan` handlers.\\n\\n                Read more in the\\n                [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, lifespan: Annotated[Union[Callable[[Any], AsyncContextManager[NoneType]], Callable[[Any], AsyncContextManager[Mapping[str, Any]]], NoneType], Doc('\\n                A `Lifespan` context manager handler. This replaces `startup` and\\n                `shutdown` functions with a single context manager.\\n\\n                Read more in the\\n                [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, deprecated: Annotated[Optional[bool], Doc('\\n                Mark all *path operations* in this router as deprecated.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                ')] = None, include_in_schema: typing.Annotated[bool, Doc('\\n                To include (or not) all the *path operations* in this router in the\\n                generated OpenAPI.\\n\\n                This affects the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Query Parameters and String Validations](https://fastapi.tiangolo.com/tutorial/query-params-str-validations/#exclude-from-openapi).\\n                ')] = True, generate_unique_id_function: Annotated[Callable[[fastapi.routing.APIRoute], str], Doc('\\n                Customize the function used to generate unique IDs for the *path\\n                operations* shown in the generated OpenAPI.\\n\\n                This is particularly useful when automatically generating clients or\\n                SDKs for your API.\\n\\n                Read more about it in the\\n                [FastAPI docs about how to Generate Clients](https://fastapi.tiangolo.com/advanced/generate-clients/#custom-generate-unique-id-function).\\n                ')] = <fastapi.datastructures.DefaultPlaceholder object at 0x000002608CEC3D90>) -> None",
+    "defaults": "None",
+    "module_of": "fastapi.routing"
+   },
+   {
+    "name": "BaseModel",
+    "type": "ModelMetaclass",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Models](../concepts/models.md)\n\nA base class for creating Pydantic models.\n\nAttributes:\n    __class_vars__: The names of the class variables defined on the model.\n    __private_attributes__: Metadata about the private attributes of the model.\n    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.\n\n    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.\n    __pydantic_core_schema__: The core schema of the model.\n    __pydantic_custom_init__: Whether the model has a custom `__init__` function.\n    __pydantic_decorators__: Metadata containing the decorators defined on the model.\n        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.\n    __pydantic_generic_metadata__: A dictionary containing metadata about generic Pydantic models.\n        The `origin` and `args` items map to the [`__origin__`][genericalias.__origin__]\n        and [`__args__`][genericalias.__args__] attributes of [generic aliases][types-genericalias],\n        and the `parameter` item maps to the `__parameter__` attribute of generic classes.\n    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.\n    __pydantic_post_init__: The name of the post-init method for the model, if defined.\n    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].\n    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.\n    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.\n\n    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.\n    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.\n\n    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]\n        is set to `'allow'`.\n    __pydantic_fields_set__: The names of fields explicitly set during instantiation.\n    __pydantic_private__: Values of private attributes set on the model instance.",
+    "sig": "(**data: 'Any') -> 'None'",
+    "defaults": "None",
+    "module_of": "pydantic.main"
+   },
+   {
+    "name": "CheckpointResponse",
+    "type": "ModelMetaclass",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Models](../concepts/models.md)\n\nA base class for creating Pydantic models.\n\nAttributes:\n    __class_vars__: The names of the class variables defined on the model.\n    __private_attributes__: Metadata about the private attributes of the model.\n    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.\n\n    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.\n    __pydantic_core_schema__: The core schema of the model.\n    __pydantic_custom_init__: Whether the model has a custom `__init__` function.\n    __pydantic_decorators__: Metadata containing the decorators defined on the model.\n        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.\n    __pydantic_generic_metadata__: A dictionary containing metadata about generic Pydantic models.\n        The `origin` and `args` items map to the [`__origin__`][genericalias.__origin__]\n        and [`__args__`][genericalias.__args__] attributes of [generic aliases][types-genericalias],\n        and the `parameter` item maps to the `__parameter__` attribute of generic classes.\n    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.\n    __pydantic_post_init__: The name of the post-init method for the model, if defined.\n    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].\n    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.\n    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.\n\n    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.\n    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.\n\n    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]\n        is set to `'allow'`.\n    __pydantic_fields_set__: The names of fields explicitly set during instantiation.\n    __pydantic_private__: Values of private attributes set on the model instance.",
+    "sig": "(*, action: Literal['approve', 'select', 'feedback', 'stop'], checkpoint_id: Annotated[Optional[str], MaxLen(max_length=64)] = None, data: Dict = {}) -> None",
+    "defaults": "None",
+    "module_of": "models.schemas"
+   },
+   {
+    "name": "Field",
+    "type": "function",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Fields](../concepts/fields.md)\n\nCreate a field for objects that can be configured.\n\nUsed to provide extra information about a field, either for the model schema or complex validation. Some arguments\napply only to number fields (`int`, `float`, `Decimal`) and some apply only to `str`.\n\nNote:\n    - Any `_Unset` objects will be replaced by the corresponding value defined in the `_DefaultValues` dictionary. If a key for the `_Unset` object is not found in the `_DefaultValues` dictionary, it will default to `None`\n\nArgs:\n    default: Default value if the field is not set.\n    default_factory: A callable to generate the default value. The callable can either take 0 arguments\n        (in which case it is called as is) or a single argument containing the already validated data.\n    alias: The name to use for the attribute when validating or serializing by alias.\n        This is often used for things like converting between snake and camel case.\n    alias_priority: Priority of the alias. This affects whether an alias generator is used.\n    validation_alias: Like `alias`, but only affects validation, not serialization.\n    serialization_alias: Like `alias`, but only affects serialization, not validation.\n    title: Human-readable title.\n    field_title_generator: A callable that takes a field name and returns title for it.\n    description: Human-readable description.\n    examples: Example values for this field.\n    exclude: Whether to exclude the field from the model serialization.\n    exclude_if: A callable that determines whether to exclude a field during serialization based on its value.\n    discriminator: Field name or Discriminator for discriminating the type in a tagged union.\n    deprecated: A deprecation message, an instance of `warnings.deprecated` or the `typing_extensions.deprecated` backport,\n        or a boolean. If `True`, a default deprecation message will be emitted when accessing the field.\n    json_schema_extra: A dict or callable to provide extra JSON schema properties.\n    frozen: Whether the field is frozen. If true, attempts to change the value on an instance will raise an error.\n    validate_default: If `True`, apply validation to the default value every time you create an instance.\n        Otherwise, for performance reasons, the default value of the field is trusted and not validated.\n    repr: A boolean indicating whether to include the field in the `__repr__` output.\n    init: Whether the field should be included in the constructor of the dataclass.\n        (Only applies to dataclasses.)\n    init_var: Whether the field should _only_ be included in the constructor of the dataclass.\n        (Only applies to dataclasses.)\n    kw_only: Whether the field should be a keyword-only argument in the constructor of the dataclass.\n        (Only applies to dataclasses.)\n    coerce_numbers_to_str: Whether to enable coercion of any `Number` type to `str` (not applicable in `strict` mode).\n    strict: If `True`, strict validation is applied to the field.\n        See [Strict Mode](../concepts/strict_mode.md) for details.\n    gt: Greater than. If set, value must be greater than this. Only applicable to numbers.\n    ge: Greater than or equal. If set, value must be greater than or equal to this. Only applicable to numbers.\n    lt: Less than. If set, value must be less than this. Only applicable to numbers.\n    le: Less than or equal. If set, value must be less than or equal to this. Only applicable to numbers.\n    multiple_of: Value must be a multiple of this. Only applicable to numbers.\n    min_length: Minimum length for iterables.\n    max_length: Maximum length for iterables.\n    pattern: Pattern for strings (a regular expression).\n    allow_inf_nan: Allow `inf`, `-inf`, `nan`. Only applicable to float and [`Decimal`][decimal.Decimal] numbers.\n    max_digits: Maximum number of allow digits for strings.\n    decimal_places: Maximum number of decimal places allowed for numbers.\n    union_mode: The strategy to apply when validating a union. Can be `smart` (the default), or `left_to_right`.\n        See [Union Mode](../concepts/unions.md#union-modes) for details.\n    fail_fast: If `True`, validation will stop on the first error. If `False`, all validation errors will be collected.\n        This option can be applied only to iterable types (list, tuple, set, and frozenset).\n    extra: (Deprecated) Extra fields that will be included in the JSON schema.\n\n        !!! warning Deprecated\n            The `extra` kwargs is deprecated. Use `json_schema_extra` instead.\n\nReturns:\n    A new [`FieldInfo`][pydantic.fields.FieldInfo]. The return annotation is `Any` so `Field` can be used on\n        type-annotated fields without causing a type error.",
+    "sig": "(default: 'Any' = PydanticUndefined, *, default_factory: 'Callable[[], Any] | Callable[[dict[str, Any]], Any] | None' = PydanticUndefined, alias: 'str | None' = PydanticUndefined, alias_priority: 'int | None' = PydanticUndefined, validation_alias: 'str | AliasPath | AliasChoices | None' = PydanticUndefined, serialization_alias: 'str | None' = PydanticUndefined, title: 'str | None' = PydanticUndefined, field_title_generator: 'Callable[[str, FieldInfo], str] | None' = PydanticUndefined, description: 'str | None' = PydanticUndefined, examples: 'list[Any] | None' = PydanticUndefined, exclude: 'bool | None' = PydanticUndefined, exclude_if: 'Callable[[Any], bool] | None' = PydanticUndefined, discriminator: 'str | types.Discriminator | None' = PydanticUndefined, deprecated: 'Deprecated | str | bool | None' = PydanticUndefined, json_schema_extra: 'JsonDict | Callable[[JsonDict], None] | None' = PydanticUndefined, frozen: 'bool | None' = PydanticUndefined, validate_default: 'bool | None' = PydanticUndefined, repr: 'bool' = PydanticUndefined, init: 'bool | None' = PydanticUndefined, init_var: 'bool | None' = PydanticUndefined, kw_only: 'bool | None' = PydanticUndefined, pattern: 'str | re.Pattern[str] | None' = PydanticUndefined, strict: 'bool | None' = PydanticUndefined, coerce_numbers_to_str: 'bool | None' = PydanticUndefined, gt: 'annotated_types.SupportsGt | None' = PydanticUndefined, ge: 'annotated_types.SupportsGe | None' = PydanticUndefined, lt: 'annotated_types.SupportsLt | None' = PydanticUndefined, le: 'annotated_types.SupportsLe | None' = PydanticUndefined, multiple_of: 'float | None' = PydanticUndefined, allow_inf_nan: 'bool | None' = PydanticUndefined, max_digits: 'int | None' = PydanticUndefined, decimal_places: 'int | None' = PydanticUndefined, min_length: 'int | None' = PydanticUndefined, max_length: 'int | None' = PydanticUndefined, union_mode: \"Literal['smart', 'left_to_right']\" = PydanticUndefined, fail_fast: 'bool | None' = PydanticUndefined, **extra: 'Unpack[_EmptyKwargs]') -> 'Any'",
+    "defaults": "(PydanticUndefined,)",
+    "module_of": "pydantic.fields"
+   },
+   {
+    "name": "HTTPException",
+    "type": "type",
+    "doc": "An HTTP exception you can raise in your own code to show errors to the client.\n\nThis is for client errors, invalid authentication, invalid data, etc. Not for server\nerrors in your code.\n\nRead more about it in the\n[FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).\n\n## Example\n\n```python\nfrom fastapi import FastAPI, HTTPException\n\napp = FastAPI()\n\nitems = {\"foo\": \"The Foo Wrestlers\"}\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str):\n    if item_id not in items:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    return {\"item\": items[item_id]}\n```",
+    "sig": "(status_code: typing.Annotated[int, Doc('\\n                HTTP status code to send to the client.\\n                ')], detail: Annotated[Any, Doc('\\n                Any data to be sent to the client in the `detail` key of the JSON\\n                response.\\n                ')] = None, headers: Annotated[Optional[Dict[str, str]], Doc('\\n                Any headers to send to the client in the response.\\n                ')] = None) -> None",
+    "defaults": "None",
+    "module_of": "fastapi.exceptions"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "PlanDraft",
+    "type": "ModelMetaclass",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Models](../concepts/models.md)\n\nA base class for creating Pydantic models.\n\nAttributes:\n    __class_vars__: The names of the class variables defined on the model.\n    __private_attributes__: Metadata about the private attributes of the model.\n    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.\n\n    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.\n    __pydantic_core_schema__: The core schema of the model.\n    __pydantic_custom_init__: Whether the model has a custom `__init__` function.\n    __pydantic_decorators__: Metadata containing the decorators defined on the model.\n        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.\n    __pydantic_generic_metadata__: A dictionary containing metadata about generic Pydantic models.\n        The `origin` and `args` items map to the [`__origin__`][genericalias.__origin__]\n        and [`__args__`][genericalias.__args__] attributes of [generic aliases][types-genericalias],\n        and the `parameter` item maps to the `__parameter__` attribute of generic classes.\n    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.\n    __pydantic_post_init__: The name of the post-init method for the model, if defined.\n    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].\n    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.\n    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.\n\n    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.\n    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.\n\n    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]\n        is set to `'allow'`.\n    __pydantic_fields_set__: The names of fields explicitly set during instantiation.\n    __pydantic_private__: Values of private attributes set on the model instance.",
+    "sig": "(*, checkpoint_id: typing.Annotated[str, MinLen(min_length=1), MaxLen(max_length=64)], content: typing.Annotated[str, MaxLen(max_length=2000000)]) -> None",
+    "defaults": "None",
+    "module_of": "checkpoints"
+   },
+   {
+    "name": "checkpoint_runtime",
+    "type": "module"
+   },
+   {
+    "name": "get_current_checkpoint",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoints"
+   },
+   {
+    "name": "get_db",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'aiosqlite.Connection'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "resolve",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', body: 'CheckpointResponse') -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoints"
+   },
+   {
+    "name": "router",
+    "type": "APIRouter",
+    "doc": "`APIRouter` class, used to group *path operations*, for example to structure\nan app in multiple files. It would then be included in the `FastAPI` app, or\nin another `APIRouter` (ultimately included in the app).\n\nRead more about it in the\n[FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\n\n## Example\n\n```python\nfrom fastapi import APIRouter, FastAPI\n\napp = FastAPI()\nrouter = APIRouter()\n\n\n@router.get(\"/users/\", tags=[\"users\"])\nasync def read_users():\n    return [{\"username\": \"Rick\"}, {\"username\": \"Morty\"}]\n\n\napp.include_router(router)\n```",
+    "sig": "(scope: 'Scope', receive: 'Receive', send: 'Send') -> 'None'",
+    "defaults": "None",
+    "module_of": "fastapi.routing"
+   },
+   {
+    "name": "save_plan",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', body: 'PlanDraft') -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoints"
+   }
+  ]
+ },
+ {
+  "module": "backend.routers.artifact_context",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\routers\\artifact_context.cp311-win_amd64.pyd",
+  "doc": "Read-only artifact context used by the collaborative workbench UI.",
+  "attrs": [
+   {
+    "name": "APIRouter",
+    "type": "type",
+    "doc": "`APIRouter` class, used to group *path operations*, for example to structure\nan app in multiple files. It would then be included in the `FastAPI` app, or\nin another `APIRouter` (ultimately included in the app).\n\nRead more about it in the\n[FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\n\n## Example\n\n```python\nfrom fastapi import APIRouter, FastAPI\n\napp = FastAPI()\nrouter = APIRouter()\n\n\n@router.get(\"/users/\", tags=[\"users\"])\nasync def read_users():\n    return [{\"username\": \"Rick\"}, {\"username\": \"Morty\"}]\n\n\napp.include_router(router)\n```",
+    "sig": "(*, prefix: typing.Annotated[str, Doc('An optional path prefix for the router.')] = '', tags: Annotated[Optional[List[Union[str, enum.Enum]]], Doc('\\n                A list of tags to be applied to all the *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                ')] = None, dependencies: Annotated[Optional[Sequence[fastapi.params.Depends]], Doc('\\n                A list of dependencies (using `Depends()`) to be applied to all the\\n                *path operations* in this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                ')] = None, default_response_class: Annotated[Type[starlette.responses.Response], Doc('\\n                The default response class to be used.\\n\\n                Read more in the\\n                [FastAPI docs for Custom Response - HTML, Stream, File, others](https://fastapi.tiangolo.com/advanced/custom-response/#default-response-class).\\n                ')] = <fastapi.datastructures.DefaultPlaceholder object at 0x000002608CEC3E10>, responses: Annotated[Optional[Dict[Union[int, str], Dict[str, Any]]], Doc('\\n                Additional responses to be shown in OpenAPI.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Additional Responses in OpenAPI](https://fastapi.tiangolo.com/advanced/additional-responses/).\\n\\n                And in the\\n                [FastAPI docs for Bigger Applications](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                ')] = None, callbacks: Annotated[Optional[List[starlette.routing.BaseRoute]], Doc('\\n                OpenAPI callbacks that should apply to all *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for OpenAPI Callbacks](https://fastapi.tiangolo.com/advanced/openapi-callbacks/).\\n                ')] = None, routes: Annotated[Optional[List[starlette.routing.BaseRoute]], Doc(\"\\n                **Note**: you probably shouldn't use this parameter, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                ---\\n\\n                A list of routes to serve incoming HTTP and WebSocket requests.\\n                \"), <typing_extensions.deprecated object at 0x000002608CED0210>] = None, redirect_slashes: typing.Annotated[bool, Doc(\"\\n                Whether to detect and redirect slashes in URLs when the client doesn't\\n                use the same format.\\n                \")] = True, default: Annotated[Optional[Callable[[MutableMapping[str, Any], Callable[[], Awaitable[MutableMapping[str, Any]]], Callable[[MutableMapping[str, Any]], Awaitable[NoneType]]], Awaitable[NoneType]]], Doc('\\n                Default function handler for this router. Used to handle\\n                404 Not Found errors.\\n                ')] = None, dependency_overrides_provider: Annotated[Optional[Any], Doc(\"\\n                Only used internally by FastAPI to handle dependency overrides.\\n\\n                You shouldn't need to use it. It normally points to the `FastAPI` app\\n                object.\\n                \")] = None, route_class: Annotated[Type[fastapi.routing.APIRoute], Doc('\\n                Custom route (*path operation*) class to be used by this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Custom Request and APIRoute class](https://fastapi.tiangolo.com/how-to/custom-request-and-route/#custom-apiroute-class-in-a-router).\\n                ')] = <class 'fastapi.routing.APIRoute'>, on_startup: Annotated[Optional[Sequence[Callable[[], Any]]], Doc('\\n                A list of startup event handler functions.\\n\\n                You should instead use the `lifespan` handlers.\\n\\n                Read more in the [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, on_shutdown: Annotated[Optional[Sequence[Callable[[], Any]]], Doc('\\n                A list of shutdown event handler functions.\\n\\n                You should instead use the `lifespan` handlers.\\n\\n                Read more in the\\n                [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, lifespan: Annotated[Union[Callable[[Any], AsyncContextManager[NoneType]], Callable[[Any], AsyncContextManager[Mapping[str, Any]]], NoneType], Doc('\\n                A `Lifespan` context manager handler. This replaces `startup` and\\n                `shutdown` functions with a single context manager.\\n\\n                Read more in the\\n                [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, deprecated: Annotated[Optional[bool], Doc('\\n                Mark all *path operations* in this router as deprecated.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                ')] = None, include_in_schema: typing.Annotated[bool, Doc('\\n                To include (or not) all the *path operations* in this router in the\\n                generated OpenAPI.\\n\\n                This affects the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Query Parameters and String Validations](https://fastapi.tiangolo.com/tutorial/query-params-str-validations/#exclude-from-openapi).\\n                ')] = True, generate_unique_id_function: Annotated[Callable[[fastapi.routing.APIRoute], str], Doc('\\n                Customize the function used to generate unique IDs for the *path\\n                operations* shown in the generated OpenAPI.\\n\\n                This is particularly useful when automatically generating clients or\\n                SDKs for your API.\\n\\n                Read more about it in the\\n                [FastAPI docs about how to Generate Clients](https://fastapi.tiangolo.com/advanced/generate-clients/#custom-generate-unique-id-function).\\n                ')] = <fastapi.datastructures.DefaultPlaceholder object at 0x000002608CEC3D90>) -> None",
+    "defaults": "None",
+    "module_of": "fastapi.routing"
+   },
+   {
+    "name": "HTTPException",
+    "type": "type",
+    "doc": "An HTTP exception you can raise in your own code to show errors to the client.\n\nThis is for client errors, invalid authentication, invalid data, etc. Not for server\nerrors in your code.\n\nRead more about it in the\n[FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).\n\n## Example\n\n```python\nfrom fastapi import FastAPI, HTTPException\n\napp = FastAPI()\n\nitems = {\"foo\": \"The Foo Wrestlers\"}\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str):\n    if item_id not in items:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    return {\"item\": items[item_id]}\n```",
+    "sig": "(status_code: typing.Annotated[int, Doc('\\n                HTTP status code to send to the client.\\n                ')], detail: Annotated[Any, Doc('\\n                Any data to be sent to the client in the `detail` key of the JSON\\n                response.\\n                ')] = None, headers: Annotated[Optional[Dict[str, str]], Doc('\\n                Any headers to send to the client in the response.\\n                ')] = None) -> None",
+    "defaults": "None",
+    "module_of": "fastapi.exceptions"
+   },
+   {
+    "name": "WORKSPACES_DIR",
+    "type": "WindowsPath"
+   },
+   {
+    "name": "_workflow",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_context"
+   },
+   {
+    "name": "artifact_graph",
+    "type": "module"
+   },
+   {
+    "name": "dispatch_policy",
+    "type": "module"
+   },
+   {
+    "name": "get_artifact_context",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', artifact_path: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_context"
+   },
+   {
+    "name": "get_db",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'aiosqlite.Connection'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "in_project_page",
+    "type": "cython_function_or_method",
+    "doc": "只在项目页推进的项目（旧流程、没开新对话模式的市调，见 dispatch_policy.project_page_only）：文件页不给\"带到对话里改\"。",
+    "sig": "(template: 'str', params: 'dict') -> 'bool'",
+    "defaults": "None",
+    "module_of": "artifact_context"
+   },
+   {
+    "name": "json",
+    "type": "module"
+   },
+   {
+    "name": "router",
+    "type": "APIRouter",
+    "doc": "`APIRouter` class, used to group *path operations*, for example to structure\nan app in multiple files. It would then be included in the `FastAPI` app, or\nin another `APIRouter` (ultimately included in the app).\n\nRead more about it in the\n[FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\n\n## Example\n\n```python\nfrom fastapi import APIRouter, FastAPI\n\napp = FastAPI()\nrouter = APIRouter()\n\n\n@router.get(\"/users/\", tags=[\"users\"])\nasync def read_users():\n    return [{\"username\": \"Rick\"}, {\"username\": \"Morty\"}]\n\n\napp.include_router(router)\n```",
+    "sig": "(scope: 'Scope', receive: 'Receive', send: 'Send') -> 'None'",
+    "defaults": "None",
+    "module_of": "fastapi.routing"
+   }
+  ]
+ },
+ {
+  "module": "backend.services.checkpoint_runtime",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\checkpoint_runtime.cp311-win_amd64.pyd",
+  "doc": "One server-owned clock and one decision per human checkpoint round.\n\nNo model calls. Runtime identities deliberately expire on process restart: an\nold browser must never approve a recovered/new round with its previous token.\n",
+  "attrs": [
+   {
+    "name": "CHECKPOINT_TIMEOUT_SECONDS",
+    "type": "int",
+    "value": "1800"
+   },
+   {
+    "name": "Checkpoint",
+    "type": "type",
+    "doc": "Checkpoint(workflow_id: 'str', payload: 'dict', timeout: 'float' = 1800, checkpoint_id: 'str' = <factory>, started_at: 'float' = <factory>, started_monotonic: 'float' = <factory>, event: 'asyncio.Event' = <factory>, response: 'dict | None' = None, on_timeout: 'str' = 'approve')",
+    "sig": "(workflow_id: 'str', payload: 'dict', timeout: 'float' = 1800, checkpoint_id: 'str' = <factory>, started_at: 'float' = <factory>, started_monotonic: 'float' = <factory>, event: 'asyncio.Event' = <factory>, response: 'dict | None' = None, on_timeout: 'str' = 'approve') -> None",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "CheckpointConflict",
+    "type": "type",
+    "doc": "Inappropriate argument value (of correct type).",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "CheckpointTimeoutPaused",
+    "type": "type",
+    "doc": "检查点等满时限、按设定改为暂停：步骤保持“等待确认”，用户回来点继续会重新进入检查点。",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "OrderedDict",
+    "type": "type",
+    "doc": "Dictionary that remembers insertion order",
+    "defaults": "None",
+    "module_of": "collections"
+   },
+   {
+    "name": "TIMEOUT_ACTIONS",
+    "type": "tuple",
+    "value": "('approve', 'pause')"
+   },
+   {
+    "name": "_active",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_finish",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(session: 'Checkpoint', response: 'dict') -> 'None'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "_finished",
+    "type": "OrderedDict",
+    "value": "OrderedDict()"
+   },
+   {
+    "name": "asyncio",
+    "type": "module"
+   },
+   {
+    "name": "close",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(session: 'Checkpoint') -> 'None'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "current",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str') -> 'dict | None'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "dataclass",
+    "type": "function",
+    "doc": null,
+    "sig": "(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)",
+    "defaults": "(None,)",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "datetime",
+    "type": "type",
+    "doc": "datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])\n\nThe year, month and day arguments are required. tzinfo may be None, or an\ninstance of a tzinfo subclass. The remaining arguments may be ints.",
+    "defaults": "None",
+    "module_of": "datetime"
+   },
+   {
+    "name": "field",
+    "type": "function",
+    "doc": null,
+    "sig": "(*, default=<dataclasses._MISSING_TYPE object at 0x000002608BE14950>, default_factory=<dataclasses._MISSING_TYPE object at 0x000002608BE14950>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x000002608BE14950>)",
+    "defaults": "None",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "math",
+    "type": "module"
+   },
+   {
+    "name": "require_live",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str', checkpoint_id: 'str | None') -> 'Checkpoint'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "resolve",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str', checkpoint_id: 'str | None', response: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "start",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str', payload: 'dict', timeout: 'float' = 1800, on_timeout: 'str' = 'approve') -> 'Checkpoint'",
+    "defaults": "(1800, 'approve')",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "time",
+    "type": "module"
+   },
+   {
+    "name": "timezone",
+    "type": "type",
+    "doc": "Fixed offset from UTC implementation of tzinfo.",
+    "defaults": "None",
+    "module_of": "datetime"
+   },
+   {
+    "name": "uuid",
+    "type": "module"
+   },
+   {
+    "name": "wait",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(session: 'Checkpoint', *, release: 'bool' = True) -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   }
+  ]
+ },
+ {
+  "module": "backend.routers.workflows",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\routers\\workflows.cp311-win_amd64.pyd",
+  "doc": "工作流 CRUD + 启动/停止 + 导入/导出",
+  "attrs": [
+   {
+    "name": "APIRouter",
+    "type": "type",
+    "doc": "`APIRouter` class, used to group *path operations*, for example to structure\nan app in multiple files. It would then be included in the `FastAPI` app, or\nin another `APIRouter` (ultimately included in the app).\n\nRead more about it in the\n[FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\n\n## Example\n\n```python\nfrom fastapi import APIRouter, FastAPI\n\napp = FastAPI()\nrouter = APIRouter()\n\n\n@router.get(\"/users/\", tags=[\"users\"])\nasync def read_users():\n    return [{\"username\": \"Rick\"}, {\"username\": \"Morty\"}]\n\n\napp.include_router(router)\n```",
+    "sig": "(*, prefix: typing.Annotated[str, Doc('An optional path prefix for the router.')] = '', tags: Annotated[Optional[List[Union[str, enum.Enum]]], Doc('\\n                A list of tags to be applied to all the *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                ')] = None, dependencies: Annotated[Optional[Sequence[fastapi.params.Depends]], Doc('\\n                A list of dependencies (using `Depends()`) to be applied to all the\\n                *path operations* in this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                ')] = None, default_response_class: Annotated[Type[starlette.responses.Response], Doc('\\n                The default response class to be used.\\n\\n                Read more in the\\n                [FastAPI docs for Custom Response - HTML, Stream, File, others](https://fastapi.tiangolo.com/advanced/custom-response/#default-response-class).\\n                ')] = <fastapi.datastructures.DefaultPlaceholder object at 0x000002608CEC3E10>, responses: Annotated[Optional[Dict[Union[int, str], Dict[str, Any]]], Doc('\\n                Additional responses to be shown in OpenAPI.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Additional Responses in OpenAPI](https://fastapi.tiangolo.com/advanced/additional-responses/).\\n\\n                And in the\\n                [FastAPI docs for Bigger Applications](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                ')] = None, callbacks: Annotated[Optional[List[starlette.routing.BaseRoute]], Doc('\\n                OpenAPI callbacks that should apply to all *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for OpenAPI Callbacks](https://fastapi.tiangolo.com/advanced/openapi-callbacks/).\\n                ')] = None, routes: Annotated[Optional[List[starlette.routing.BaseRoute]], Doc(\"\\n                **Note**: you probably shouldn't use this parameter, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                ---\\n\\n                A list of routes to serve incoming HTTP and WebSocket requests.\\n                \"), <typing_extensions.deprecated object at 0x000002608CED0210>] = None, redirect_slashes: typing.Annotated[bool, Doc(\"\\n                Whether to detect and redirect slashes in URLs when the client doesn't\\n                use the same format.\\n                \")] = True, default: Annotated[Optional[Callable[[MutableMapping[str, Any], Callable[[], Awaitable[MutableMapping[str, Any]]], Callable[[MutableMapping[str, Any]], Awaitable[NoneType]]], Awaitable[NoneType]]], Doc('\\n                Default function handler for this router. Used to handle\\n                404 Not Found errors.\\n                ')] = None, dependency_overrides_provider: Annotated[Optional[Any], Doc(\"\\n                Only used internally by FastAPI to handle dependency overrides.\\n\\n                You shouldn't need to use it. It normally points to the `FastAPI` app\\n                object.\\n                \")] = None, route_class: Annotated[Type[fastapi.routing.APIRoute], Doc('\\n                Custom route (*path operation*) class to be used by this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Custom Request and APIRoute class](https://fastapi.tiangolo.com/how-to/custom-request-and-route/#custom-apiroute-class-in-a-router).\\n                ')] = <class 'fastapi.routing.APIRoute'>, on_startup: Annotated[Optional[Sequence[Callable[[], Any]]], Doc('\\n                A list of startup event handler functions.\\n\\n                You should instead use the `lifespan` handlers.\\n\\n                Read more in the [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, on_shutdown: Annotated[Optional[Sequence[Callable[[], Any]]], Doc('\\n                A list of shutdown event handler functions.\\n\\n                You should instead use the `lifespan` handlers.\\n\\n                Read more in the\\n                [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, lifespan: Annotated[Union[Callable[[Any], AsyncContextManager[NoneType]], Callable[[Any], AsyncContextManager[Mapping[str, Any]]], NoneType], Doc('\\n                A `Lifespan` context manager handler. This replaces `startup` and\\n                `shutdown` functions with a single context manager.\\n\\n                Read more in the\\n                [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\\n                ')] = None, deprecated: Annotated[Optional[bool], Doc('\\n                Mark all *path operations* in this router as deprecated.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                ')] = None, include_in_schema: typing.Annotated[bool, Doc('\\n                To include (or not) all the *path operations* in this router in the\\n                generated OpenAPI.\\n\\n                This affects the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Query Parameters and String Validations](https://fastapi.tiangolo.com/tutorial/query-params-str-validations/#exclude-from-openapi).\\n                ')] = True, generate_unique_id_function: Annotated[Callable[[fastapi.routing.APIRoute], str], Doc('\\n                Customize the function used to generate unique IDs for the *path\\n                operations* shown in the generated OpenAPI.\\n\\n                This is particularly useful when automatically generating clients or\\n                SDKs for your API.\\n\\n                Read more about it in the\\n                [FastAPI docs about how to Generate Clients](https://fastapi.tiangolo.com/advanced/generate-clients/#custom-generate-unique-id-function).\\n                ')] = <fastapi.datastructures.DefaultPlaceholder object at 0x000002608CEC3D90>) -> None",
+    "defaults": "None",
+    "module_of": "fastapi.routing"
+   },
+   {
+    "name": "Annotated",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "Body",
+    "type": "function",
+    "doc": null,
+    "sig": "(default: Annotated[Any, Doc('\\n            Default value if the parameter field is not set.\\n            ')] = PydanticUndefined, *, default_factory: Annotated[Optional[Callable[[], Any]], Doc(\"\\n            A callable to generate the default value.\\n\\n            This doesn't affect `Path` parameters as the value is always required.\\n            The parameter is available only for compatibility.\\n            \")] = PydanticUndefined, embed: Annotated[Optional[bool], Doc('\\n            When `embed` is `True`, the parameter will be expected in a JSON body as a\\n            key instead of being the JSON body itself.\\n\\n            This happens automatically when more than one `Body` parameter is declared.\\n\\n            Read more about it in the\\n            [FastAPI docs for Body - Multiple Parameters](https://fastapi.tiangolo.com/tutorial/body-multiple-params/#embed-a-single-body-parameter).\\n            ')] = None, media_type: typing.Annotated[str, Doc(\"\\n            The media type of this parameter field. Changing it would affect the\\n            generated OpenAPI, but currently it doesn't affect the parsing of the data.\\n            \")] = 'application/json', alias: Annotated[Optional[str], Doc(\"\\n            An alternative name for the parameter field.\\n\\n            This will be used to extract the data and for the generated OpenAPI.\\n            It is particularly useful when you can't use the name you want because it\\n            is a Python reserved keyword or similar.\\n            \")] = None, alias_priority: Annotated[Optional[int], Doc('\\n            Priority of the alias. This affects whether an alias generator is used.\\n            ')] = PydanticUndefined, validation_alias: Annotated[Optional[str], Doc(\"\\n            'Whitelist' validation step. The parameter field will be the single one\\n            allowed by the alias or set of aliases defined.\\n            \")] = None, serialization_alias: Annotated[Optional[str], Doc(\"\\n            'Blacklist' validation step. The vanilla parameter field will be the\\n            single one of the alias' or set of aliases' fields and all the other\\n            fields will be ignored at serialization time.\\n            \")] = None, title: Annotated[Optional[str], Doc('\\n            Human-readable title.\\n            ')] = None, description: Annotated[Optional[str], Doc('\\n            Human-readable description.\\n            ')] = None, gt: Annotated[Optional[float], Doc('\\n            Greater than. If set, value must be greater than this. Only applicable to\\n            numbers.\\n            ')] = None, ge: Annotated[Optional[float], Doc('\\n            Greater than or equal. If set, value must be greater than or equal to\\n            this. Only applicable to numbers.\\n            ')] = None, lt: Annotated[Optional[float], Doc('\\n            Less than. If set, value must be less than this. Only applicable to numbers.\\n            ')] = None, le: Annotated[Optional[float], Doc('\\n            Less than or equal. If set, value must be less than or equal to this.\\n            Only applicable to numbers.\\n            ')] = None, min_length: Annotated[Optional[int], Doc('\\n            Minimum length for strings.\\n            ')] = None, max_length: Annotated[Optional[int], Doc('\\n            Maximum length for strings.\\n            ')] = None, pattern: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            ')] = None, regex: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            '), <typing_extensions.deprecated object at 0x000002608CE425D0>] = None, discriminator: Annotated[Optional[str], Doc('\\n            Parameter field name for discriminating the type in a tagged union.\\n            ')] = None, strict: Annotated[Optional[bool], Doc('\\n            If `True`, strict validation is applied to the field.\\n            ')] = PydanticUndefined, multiple_of: Annotated[Optional[float], Doc('\\n            Value must be a multiple of this. Only applicable to numbers.\\n            ')] = PydanticUndefined, allow_inf_nan: Annotated[Optional[bool], Doc('\\n            Allow `inf`, `-inf`, `nan`. Only applicable to numbers.\\n            ')] = PydanticUndefined, max_digits: Annotated[Optional[int], Doc('\\n            Maximum number of allow digits for strings.\\n            ')] = PydanticUndefined, decimal_places: Annotated[Optional[int], Doc('\\n            Maximum number of decimal places allowed for numbers.\\n            ')] = PydanticUndefined, examples: Annotated[Optional[List[Any]], Doc('\\n            Example values for this field.\\n            ')] = None, example: Annotated[Optional[Any], <typing_extensions.deprecated object at 0x000002608CE42610>] = PydanticUndefined, openapi_examples: Annotated[Optional[Dict[str, fastapi.openapi.models.Example]], Doc(\"\\n            OpenAPI-specific examples.\\n\\n            It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n            Swagger UI (that provides the `/docs` interface) has better support for the\\n            OpenAPI-specific examples than the JSON Schema `examples`, that's the main\\n            use case for this.\\n\\n            Read more about it in the\\n            [FastAPI docs for Declare Request Example Data](https://fastapi.tiangolo.com/tutorial/schema-extra-example/#using-the-openapi_examples-parameter).\\n            \")] = None, deprecated: Annotated[Union[typing_extensions.deprecated, str, bool, NoneType], Doc('\\n            Mark this parameter field as deprecated.\\n\\n            It will affect the generated OpenAPI (e.g. visible at `/docs`).\\n            ')] = None, include_in_schema: typing.Annotated[bool, Doc(\"\\n            To include (or not) this parameter field in the generated OpenAPI.\\n            You probably don't need it, but it's available.\\n\\n            This affects the generated OpenAPI (e.g. visible at `/docs`).\\n            \")] = True, json_schema_extra: Annotated[Optional[Dict[str, Any]], Doc('\\n            Any additional JSON schema data.\\n            ')] = None, **extra: Annotated[Any, Doc('\\n            Include extra fields used by the JSON Schema.\\n            '), <typing_extensions.deprecated object at 0x000002608CE42750>]) -> Any",
+    "defaults": "(PydanticUndefined,)",
+    "module_of": "fastapi.param_functions"
+   },
+   {
+    "name": "DETAIL_PDF_NAME",
+    "type": "str",
+    "value": "'AI工具使用详情.pdf'"
+   },
+   {
+    "name": "EXPORT_EXEMPT_PARTS",
+    "type": "frozenset",
+    "value": "frozenset({'_tmp'})"
+   },
+   {
+    "name": "File",
+    "type": "function",
+    "doc": null,
+    "sig": "(default: Annotated[Any, Doc('\\n            Default value if the parameter field is not set.\\n            ')] = PydanticUndefined, *, default_factory: Annotated[Optional[Callable[[], Any]], Doc(\"\\n            A callable to generate the default value.\\n\\n            This doesn't affect `Path` parameters as the value is always required.\\n            The parameter is available only for compatibility.\\n            \")] = PydanticUndefined, media_type: typing.Annotated[str, Doc(\"\\n            The media type of this parameter field. Changing it would affect the\\n            generated OpenAPI, but currently it doesn't affect the parsing of the data.\\n            \")] = 'multipart/form-data', alias: Annotated[Optional[str], Doc(\"\\n            An alternative name for the parameter field.\\n\\n            This will be used to extract the data and for the generated OpenAPI.\\n            It is particularly useful when you can't use the name you want because it\\n            is a Python reserved keyword or similar.\\n            \")] = None, alias_priority: Annotated[Optional[int], Doc('\\n            Priority of the alias. This affects whether an alias generator is used.\\n            ')] = PydanticUndefined, validation_alias: Annotated[Optional[str], Doc(\"\\n            'Whitelist' validation step. The parameter field will be the single one\\n            allowed by the alias or set of aliases defined.\\n            \")] = None, serialization_alias: Annotated[Optional[str], Doc(\"\\n            'Blacklist' validation step. The vanilla parameter field will be the\\n            single one of the alias' or set of aliases' fields and all the other\\n            fields will be ignored at serialization time.\\n            \")] = None, title: Annotated[Optional[str], Doc('\\n            Human-readable title.\\n            ')] = None, description: Annotated[Optional[str], Doc('\\n            Human-readable description.\\n            ')] = None, gt: Annotated[Optional[float], Doc('\\n            Greater than. If set, value must be greater than this. Only applicable to\\n            numbers.\\n            ')] = None, ge: Annotated[Optional[float], Doc('\\n            Greater than or equal. If set, value must be greater than or equal to\\n            this. Only applicable to numbers.\\n            ')] = None, lt: Annotated[Optional[float], Doc('\\n            Less than. If set, value must be less than this. Only applicable to numbers.\\n            ')] = None, le: Annotated[Optional[float], Doc('\\n            Less than or equal. If set, value must be less than or equal to this.\\n            Only applicable to numbers.\\n            ')] = None, min_length: Annotated[Optional[int], Doc('\\n            Minimum length for strings.\\n            ')] = None, max_length: Annotated[Optional[int], Doc('\\n            Maximum length for strings.\\n            ')] = None, pattern: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            ')] = None, regex: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            '), <typing_extensions.deprecated object at 0x000002608CE42A10>] = None, discriminator: Annotated[Optional[str], Doc('\\n            Parameter field name for discriminating the type in a tagged union.\\n            ')] = None, strict: Annotated[Optional[bool], Doc('\\n            If `True`, strict validation is applied to the field.\\n            ')] = PydanticUndefined, multiple_of: Annotated[Optional[float], Doc('\\n            Value must be a multiple of this. Only applicable to numbers.\\n            ')] = PydanticUndefined, allow_inf_nan: Annotated[Optional[bool], Doc('\\n            Allow `inf`, `-inf`, `nan`. Only applicable to numbers.\\n            ')] = PydanticUndefined, max_digits: Annotated[Optional[int], Doc('\\n            Maximum number of allow digits for strings.\\n            ')] = PydanticUndefined, decimal_places: Annotated[Optional[int], Doc('\\n            Maximum number of decimal places allowed for numbers.\\n            ')] = PydanticUndefined, examples: Annotated[Optional[List[Any]], Doc('\\n            Example values for this field.\\n            ')] = None, example: Annotated[Optional[Any], <typing_extensions.deprecated object at 0x000002608CE42A50>] = PydanticUndefined, openapi_examples: Annotated[Optional[Dict[str, fastapi.openapi.models.Example]], Doc(\"\\n            OpenAPI-specific examples.\\n\\n            It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n            Swagger UI (that provides the `/docs` interface) has better support for the\\n            OpenAPI-specific examples than the JSON Schema `examples`, that's the main\\n            use case for this.\\n\\n            Read more about it in the\\n            [FastAPI docs for Declare Request Example Data](https://fastapi.tiangolo.com/tutorial/schema-extra-example/#using-the-openapi_examples-parameter).\\n            \")] = None, deprecated: Annotated[Union[typing_extensions.deprecated, str, bool, NoneType], Doc('\\n            Mark this parameter field as deprecated.\\n\\n            It will affect the generated OpenAPI (e.g. visible at `/docs`).\\n            ')] = None, include_in_schema: typing.Annotated[bool, Doc(\"\\n            To include (or not) this parameter field in the generated OpenAPI.\\n            You probably don't need it, but it's available.\\n\\n            This affects the generated OpenAPI (e.g. visible at `/docs`).\\n            \")] = True, json_schema_extra: Annotated[Optional[Dict[str, Any]], Doc('\\n            Any additional JSON schema data.\\n            ')] = None, **extra: Annotated[Any, Doc('\\n            Include extra fields used by the JSON Schema.\\n            '), <typing_extensions.deprecated object at 0x000002608CE42BD0>]) -> Any",
+    "defaults": "(PydanticUndefined,)",
+    "module_of": "fastapi.param_functions"
+   },
+   {
+    "name": "FileResponse",
+    "type": "type",
+    "doc": null,
+    "sig": "(path: 'str | os.PathLike[str]', status_code: 'int' = 200, headers: 'typing.Mapping[str, str] | None' = None, media_type: 'str | None' = None, background: 'BackgroundTask | None' = None, filename: 'str | None' = None, stat_result: 'os.stat_result | None' = None, method: 'str | None' = None, content_disposition_type: 'str' = 'attachment') -> 'None'",
+    "defaults": "None",
+    "module_of": "starlette.responses"
+   },
+   {
+    "name": "Form",
+    "type": "function",
+    "doc": null,
+    "sig": "(default: Annotated[Any, Doc('\\n            Default value if the parameter field is not set.\\n            ')] = PydanticUndefined, *, default_factory: Annotated[Optional[Callable[[], Any]], Doc(\"\\n            A callable to generate the default value.\\n\\n            This doesn't affect `Path` parameters as the value is always required.\\n            The parameter is available only for compatibility.\\n            \")] = PydanticUndefined, media_type: typing.Annotated[str, Doc(\"\\n            The media type of this parameter field. Changing it would affect the\\n            generated OpenAPI, but currently it doesn't affect the parsing of the data.\\n            \")] = 'application/x-www-form-urlencoded', alias: Annotated[Optional[str], Doc(\"\\n            An alternative name for the parameter field.\\n\\n            This will be used to extract the data and for the generated OpenAPI.\\n            It is particularly useful when you can't use the name you want because it\\n            is a Python reserved keyword or similar.\\n            \")] = None, alias_priority: Annotated[Optional[int], Doc('\\n            Priority of the alias. This affects whether an alias generator is used.\\n            ')] = PydanticUndefined, validation_alias: Annotated[Optional[str], Doc(\"\\n            'Whitelist' validation step. The parameter field will be the single one\\n            allowed by the alias or set of aliases defined.\\n            \")] = None, serialization_alias: Annotated[Optional[str], Doc(\"\\n            'Blacklist' validation step. The vanilla parameter field will be the\\n            single one of the alias' or set of aliases' fields and all the other\\n            fields will be ignored at serialization time.\\n            \")] = None, title: Annotated[Optional[str], Doc('\\n            Human-readable title.\\n            ')] = None, description: Annotated[Optional[str], Doc('\\n            Human-readable description.\\n            ')] = None, gt: Annotated[Optional[float], Doc('\\n            Greater than. If set, value must be greater than this. Only applicable to\\n            numbers.\\n            ')] = None, ge: Annotated[Optional[float], Doc('\\n            Greater than or equal. If set, value must be greater than or equal to\\n            this. Only applicable to numbers.\\n            ')] = None, lt: Annotated[Optional[float], Doc('\\n            Less than. If set, value must be less than this. Only applicable to numbers.\\n            ')] = None, le: Annotated[Optional[float], Doc('\\n            Less than or equal. If set, value must be less than or equal to this.\\n            Only applicable to numbers.\\n            ')] = None, min_length: Annotated[Optional[int], Doc('\\n            Minimum length for strings.\\n            ')] = None, max_length: Annotated[Optional[int], Doc('\\n            Maximum length for strings.\\n            ')] = None, pattern: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            ')] = None, regex: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            '), <typing_extensions.deprecated object at 0x000002608CE427D0>] = None, discriminator: Annotated[Optional[str], Doc('\\n            Parameter field name for discriminating the type in a tagged union.\\n            ')] = None, strict: Annotated[Optional[bool], Doc('\\n            If `True`, strict validation is applied to the field.\\n            ')] = PydanticUndefined, multiple_of: Annotated[Optional[float], Doc('\\n            Value must be a multiple of this. Only applicable to numbers.\\n            ')] = PydanticUndefined, allow_inf_nan: Annotated[Optional[bool], Doc('\\n            Allow `inf`, `-inf`, `nan`. Only applicable to numbers.\\n            ')] = PydanticUndefined, max_digits: Annotated[Optional[int], Doc('\\n            Maximum number of allow digits for strings.\\n            ')] = PydanticUndefined, decimal_places: Annotated[Optional[int], Doc('\\n            Maximum number of decimal places allowed for numbers.\\n            ')] = PydanticUndefined, examples: Annotated[Optional[List[Any]], Doc('\\n            Example values for this field.\\n            ')] = None, example: Annotated[Optional[Any], <typing_extensions.deprecated object at 0x000002608CE42810>] = PydanticUndefined, openapi_examples: Annotated[Optional[Dict[str, fastapi.openapi.models.Example]], Doc(\"\\n            OpenAPI-specific examples.\\n\\n            It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n            Swagger UI (that provides the `/docs` interface) has better support for the\\n            OpenAPI-specific examples than the JSON Schema `examples`, that's the main\\n            use case for this.\\n\\n            Read more about it in the\\n            [FastAPI docs for Declare Request Example Data](https://fastapi.tiangolo.com/tutorial/schema-extra-example/#using-the-openapi_examples-parameter).\\n            \")] = None, deprecated: Annotated[Union[typing_extensions.deprecated, str, bool, NoneType], Doc('\\n            Mark this parameter field as deprecated.\\n\\n            It will affect the generated OpenAPI (e.g. visible at `/docs`).\\n            ')] = None, include_in_schema: typing.Annotated[bool, Doc(\"\\n            To include (or not) this parameter field in the generated OpenAPI.\\n            You probably don't need it, but it's available.\\n\\n            This affects the generated OpenAPI (e.g. visible at `/docs`).\\n            \")] = True, json_schema_extra: Annotated[Optional[Dict[str, Any]], Doc('\\n            Any additional JSON schema data.\\n            ')] = None, **extra: Annotated[Any, Doc('\\n            Include extra fields used by the JSON Schema.\\n            '), <typing_extensions.deprecated object at 0x000002608CE42990>]) -> Any",
+    "defaults": "(PydanticUndefined,)",
+    "module_of": "fastapi.param_functions"
+   },
+   {
+    "name": "HTTPException",
+    "type": "type",
+    "doc": "An HTTP exception you can raise in your own code to show errors to the client.\n\nThis is for client errors, invalid authentication, invalid data, etc. Not for server\nerrors in your code.\n\nRead more about it in the\n[FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).\n\n## Example\n\n```python\nfrom fastapi import FastAPI, HTTPException\n\napp = FastAPI()\n\nitems = {\"foo\": \"The Foo Wrestlers\"}\n\n\n@app.get(\"/items/{item_id}\")\nasync def read_item(item_id: str):\n    if item_id not in items:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    return {\"item\": items[item_id]}\n```",
+    "sig": "(status_code: typing.Annotated[int, Doc('\\n                HTTP status code to send to the client.\\n                ')], detail: Annotated[Any, Doc('\\n                Any data to be sent to the client in the `detail` key of the JSON\\n                response.\\n                ')] = None, headers: Annotated[Optional[Dict[str, str]], Doc('\\n                Any headers to send to the client in the response.\\n                ')] = None) -> None",
+    "defaults": "None",
+    "module_of": "fastapi.exceptions"
+   },
+   {
+    "name": "Optional",
+    "type": "_SpecialForm",
+    "doc": null,
+    "sig": "(*args, **kwds)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "Query",
+    "type": "function",
+    "doc": null,
+    "sig": "(default: Annotated[Any, Doc('\\n            Default value if the parameter field is not set.\\n            ')] = PydanticUndefined, *, default_factory: Annotated[Optional[Callable[[], Any]], Doc(\"\\n            A callable to generate the default value.\\n\\n            This doesn't affect `Path` parameters as the value is always required.\\n            The parameter is available only for compatibility.\\n            \")] = PydanticUndefined, alias: Annotated[Optional[str], Doc(\"\\n            An alternative name for the parameter field.\\n\\n            This will be used to extract the data and for the generated OpenAPI.\\n            It is particularly useful when you can't use the name you want because it\\n            is a Python reserved keyword or similar.\\n            \")] = None, alias_priority: Annotated[Optional[int], Doc('\\n            Priority of the alias. This affects whether an alias generator is used.\\n            ')] = PydanticUndefined, validation_alias: Annotated[Optional[str], Doc(\"\\n            'Whitelist' validation step. The parameter field will be the single one\\n            allowed by the alias or set of aliases defined.\\n            \")] = None, serialization_alias: Annotated[Optional[str], Doc(\"\\n            'Blacklist' validation step. The vanilla parameter field will be the\\n            single one of the alias' or set of aliases' fields and all the other\\n            fields will be ignored at serialization time.\\n            \")] = None, title: Annotated[Optional[str], Doc('\\n            Human-readable title.\\n            ')] = None, description: Annotated[Optional[str], Doc('\\n            Human-readable description.\\n            ')] = None, gt: Annotated[Optional[float], Doc('\\n            Greater than. If set, value must be greater than this. Only applicable to\\n            numbers.\\n            ')] = None, ge: Annotated[Optional[float], Doc('\\n            Greater than or equal. If set, value must be greater than or equal to\\n            this. Only applicable to numbers.\\n            ')] = None, lt: Annotated[Optional[float], Doc('\\n            Less than. If set, value must be less than this. Only applicable to numbers.\\n            ')] = None, le: Annotated[Optional[float], Doc('\\n            Less than or equal. If set, value must be less than or equal to this.\\n            Only applicable to numbers.\\n            ')] = None, min_length: Annotated[Optional[int], Doc('\\n            Minimum length for strings.\\n            ')] = None, max_length: Annotated[Optional[int], Doc('\\n            Maximum length for strings.\\n            ')] = None, pattern: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            ')] = None, regex: Annotated[Optional[str], Doc('\\n            RegEx pattern for strings.\\n            '), <typing_extensions.deprecated object at 0x000002608CE41C50>] = None, discriminator: Annotated[Optional[str], Doc('\\n            Parameter field name for discriminating the type in a tagged union.\\n            ')] = None, strict: Annotated[Optional[bool], Doc('\\n            If `True`, strict validation is applied to the field.\\n            ')] = PydanticUndefined, multiple_of: Annotated[Optional[float], Doc('\\n            Value must be a multiple of this. Only applicable to numbers.\\n            ')] = PydanticUndefined, allow_inf_nan: Annotated[Optional[bool], Doc('\\n            Allow `inf`, `-inf`, `nan`. Only applicable to numbers.\\n            ')] = PydanticUndefined, max_digits: Annotated[Optional[int], Doc('\\n            Maximum number of allow digits for strings.\\n            ')] = PydanticUndefined, decimal_places: Annotated[Optional[int], Doc('\\n            Maximum number of decimal places allowed for numbers.\\n            ')] = PydanticUndefined, examples: Annotated[Optional[List[Any]], Doc('\\n            Example values for this field.\\n            ')] = None, example: Annotated[Optional[Any], <typing_extensions.deprecated object at 0x000002608CE41C90>] = PydanticUndefined, openapi_examples: Annotated[Optional[Dict[str, fastapi.openapi.models.Example]], Doc(\"\\n            OpenAPI-specific examples.\\n\\n            It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n            Swagger UI (that provides the `/docs` interface) has better support for the\\n            OpenAPI-specific examples than the JSON Schema `examples`, that's the main\\n            use case for this.\\n\\n            Read more about it in the\\n            [FastAPI docs for Declare Request Example Data](https://fastapi.tiangolo.com/tutorial/schema-extra-example/#using-the-openapi_examples-parameter).\\n            \")] = None, deprecated: Annotated[Union[typing_extensions.deprecated, str, bool, NoneType], Doc('\\n            Mark this parameter field as deprecated.\\n\\n            It will affect the generated OpenAPI (e.g. visible at `/docs`).\\n            ')] = None, include_in_schema: typing.Annotated[bool, Doc(\"\\n            To include (or not) this parameter field in the generated OpenAPI.\\n            You probably don't need it, but it's available.\\n\\n            This affects the generated OpenAPI (e.g. visible at `/docs`).\\n            \")] = True, json_schema_extra: Annotated[Optional[Dict[str, Any]], Doc('\\n            Any additional JSON schema data.\\n            ')] = None, **extra: Annotated[Any, Doc('\\n            Include extra fields used by the JSON Schema.\\n            '), <typing_extensions.deprecated object at 0x000002608CE41D90>]) -> Any",
+    "defaults": "(PydanticUndefined,)",
+    "module_of": "fastapi.param_functions"
+   },
+   {
+    "name": "Response",
+    "type": "type",
+    "doc": null,
+    "sig": "(content: 'typing.Any' = None, status_code: 'int' = 200, headers: 'typing.Mapping[str, str] | None' = None, media_type: 'str | None' = None, background: 'BackgroundTask | None' = None) -> 'None'",
+    "defaults": "None",
+    "module_of": "starlette.responses"
+   },
+   {
+    "name": "TEMPLATES",
+    "type": "dict",
+    "value": "{'idea_discovery': TemplateDef(pipeline_skill='idea-discovery', display_name='Idea 发现', sub_steps=[StepDef(skill_name='research-lit', display_name='文献调研', output_files=['literature_review.md', 'references.bib'], primary_output='literature_review.md', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='idea-creator', display_name='Idea 生成', output_files=['IDEA_REPORT.md'], primary_output='IDEA_REPORT.md', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='novelty-check', display_name='新颖性验证', output_files=['novelty_check_report.md'], primary_output='novelty_check_report.md', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='research-review', display_name='外部评审', output_files=['review_report.md'], primary_output='review_report.md', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='research-refine-pipeline', display_name='方法精炼+实验规划', output_files=['refine-logs/FINAL_PROPOSAL.md', 'refine-logs/EXPERIMENT_PLAN.md'], primary_output='refine-logs/FINAL_PROPOSAL.md', has_checkpoint=False, checkpoint_type=None)], legacy_steps=[]), 'experiment_bridge': TemplateDef(pipeline_skill='experiment-bridge', display_name='实验桥接', sub_steps=[StepDef(skill_name='experiment-bridge', display_name='实验实现+部署+出图', output_files=['experiment_results.md', 'figures/latex_includes.tex', 'figures/experiment_data.json'], primary_output='figures/', has_checkpoint=False, checkpoint_type=None)], legacy_steps=[]), 'auto_review': TemplateDef(pipeline_skill='auto-review-loop', display_name='自动审稿循环', sub_steps=[StepDef(skill_name='auto-review-loop', display_name='自动审稿循环', output_files=['NARRATIVE_REPORT.md', 'AUTO_REVIEW.md'], primary_output='NARRATIVE_REPORT.md', has_checkpoint=False, checkpoint_type=None)], legacy_steps=[]), 'paper_writing': TemplateDef(pipeline_skill='paper-writing', display_name='论文写作', sub_steps=[StepDef(skill_name='paper-plan', display_name='论文大纲', output_files=['PAPER_PLAN.md'], primary_output='PAPER_PLAN.md', has_checkpoint=True, checkpoint_type='approve'), StepDef(skill_name='paper-analysis', display_name='数据分析与建模', output_files=['RESULTS.md', 'figures/all_results.json', 'code/main.py'], primary_output='RESULTS.md', has_checkpoint=True, checkpoint_type='approve'), StepDef(skill_name='paper-figure', display_name='图表生成', output_files=['figures/latex_includes.tex'], primary_output='figures/', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='paper-figure-drawio', display_name='流程与架构图绘制', output_files=['figures/latex_includes.tex'], primary_output='figures/', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='paper-write', display_name='LaTeX 写作', output_files=['paper/main.tex', 'paper/references.bib'], primary_output='paper/main.tex', has_checkpoint=False, checkpoint_type=None), StepDef(skill_name='paper-compile', display_name='编译 PDF', output_files=['paper/main.pdf'], primary_output='paper/main.pdf', has_checkpoint=False, checkpoint_type=None)], legacy_steps=[]), 'paper_writing_zh"
+   },
+   {
+    "name": "UploadFile",
+    "type": "type",
+    "doc": "A file uploaded in a request.\n\nDefine it as a *path operation function* (or dependency) parameter.\n\nIf you are using a regular `def` function, you can use the `upload_file.file`\nattribute to access the raw standard Python file (blocking, not async), useful and\nneeded for non-async code.\n\nRead more about it in the\n[FastAPI docs for Request Files](https://fastapi.tiangolo.com/tutorial/request-files/).\n\n## Example\n\n```python\nfrom typing import Annotated\n\nfrom fastapi import FastAPI, File, UploadFile\n\napp = FastAPI()\n\n\n@app.post(\"/files/\")\nasync def create_file(file: Annotated[bytes, File()]):\n    return {\"file_size\": len(file)}\n\n\n@app.post(\"/uploadfile/\")\nasync def create_upload_file(file: UploadFile):\n    return {\"filename\": file.filename}\n```",
+    "sig": "(file: 'typing.BinaryIO', *, size: 'int | None' = None, filename: 'str | None' = None, headers: 'Headers | None' = None) -> 'None'",
+    "defaults": "None",
+    "module_of": "fastapi.datastructures"
+   },
+   {
+    "name": "WORKSPACES_DIR",
+    "type": "WindowsPath"
+   },
+   {
+    "name": "WorkflowCreate",
+    "type": "ModelMetaclass",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Models](../concepts/models.md)\n\nA base class for creating Pydantic models.\n\nAttributes:\n    __class_vars__: The names of the class variables defined on the model.\n    __private_attributes__: Metadata about the private attributes of the model.\n    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.\n\n    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.\n    __pydantic_core_schema__: The core schema of the model.\n    __pydantic_custom_init__: Whether the model has a custom `__init__` function.\n    __pydantic_decorators__: Metadata containing the decorators defined on the model.\n        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.\n    __pydantic_generic_metadata__: A dictionary containing metadata about generic Pydantic models.\n        The `origin` and `args` items map to the [`__origin__`][genericalias.__origin__]\n        and [`__args__`][genericalias.__args__] attributes of [generic aliases][types-genericalias],\n        and the `parameter` item maps to the `__parameter__` attribute of generic classes.\n    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.\n    __pydantic_post_init__: The name of the post-init method for the model, if defined.\n    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].\n    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.\n    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.\n\n    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.\n    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.\n\n    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]\n        is set to `'allow'`.\n    __pydantic_fields_set__: The names of fields explicitly set during instantiation.\n    __pydantic_private__: Values of private attributes set on the model instance.",
+    "sig": "(*, template: models.schemas.TemplateType, title: typing.Annotated[str, MinLen(min_length=1)], params: Dict = <factory>, enable_checkpoints: bool = False) -> None",
+    "defaults": "None",
+    "module_of": "models.schemas"
+   },
+   {
+    "name": "_BOOTSTRAP_MARK",
+    "type": "str",
+    "value": "'# __mh_autobootstrap_syspath__'"
+   },
+   {
+    "name": "_BOOTSTRAP_RE",
+    "type": "Pattern"
+   },
+   {
+    "name": "_BaseModel",
+    "type": "ModelMetaclass",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Models](../concepts/models.md)\n\nA base class for creating Pydantic models.\n\nAttributes:\n    __class_vars__: The names of the class variables defined on the model.\n    __private_attributes__: Metadata about the private attributes of the model.\n    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.\n\n    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.\n    __pydantic_core_schema__: The core schema of the model.\n    __pydantic_custom_init__: Whether the model has a custom `__init__` function.\n    __pydantic_decorators__: Metadata containing the decorators defined on the model.\n        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.\n    __pydantic_generic_metadata__: A dictionary containing metadata about generic Pydantic models.\n        The `origin` and `args` items map to the [`__origin__`][genericalias.__origin__]\n        and [`__args__`][genericalias.__args__] attributes of [generic aliases][types-genericalias],\n        and the `parameter` item maps to the `__parameter__` attribute of generic classes.\n    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.\n    __pydantic_post_init__: The name of the post-init method for the model, if defined.\n    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].\n    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.\n    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.\n\n    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.\n    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.\n\n    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]\n        is set to `'allow'`.\n    __pydantic_fields_set__: The names of fields explicitly set during instantiation.\n    __pydantic_private__: Values of private attributes set on the model instance.",
+    "sig": "(**data: 'Any') -> 'None'",
+    "defaults": "None",
+    "module_of": "pydantic.main"
+   },
+   {
+    "name": "_BatchExportRequest",
+    "type": "ModelMetaclass",
+    "doc": "!!! abstract \"Usage Documentation\"\n    [Models](../concepts/models.md)\n\nA base class for creating Pydantic models.\n\nAttributes:\n    __class_vars__: The names of the class variables defined on the model.\n    __private_attributes__: Metadata about the private attributes of the model.\n    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.\n\n    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.\n    __pydantic_core_schema__: The core schema of the model.\n    __pydantic_custom_init__: Whether the model has a custom `__init__` function.\n    __pydantic_decorators__: Metadata containing the decorators defined on the model.\n        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.\n    __pydantic_generic_metadata__: A dictionary containing metadata about generic Pydantic models.\n        The `origin` and `args` items map to the [`__origin__`][genericalias.__origin__]\n        and [`__args__`][genericalias.__args__] attributes of [generic aliases][types-genericalias],\n        and the `parameter` item maps to the `__parameter__` attribute of generic classes.\n    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.\n    __pydantic_post_init__: The name of the post-init method for the model, if defined.\n    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].\n    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.\n    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.\n\n    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.\n    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.\n\n    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]\n        is set to `'allow'`.\n    __pydantic_fields_set__: The names of fields explicitly set during instantiation.\n    __pydantic_private__: Values of private attributes set on the model instance.",
+    "sig": "(*, ids: list[str]) -> None",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_CLEAN_KEEP_TOP_DIRS",
+    "type": "set"
+   },
+   {
+    "name": "_CLEAN_KEEP_TOP_FILES",
+    "type": "set"
+   },
+   {
+    "name": "_CLEAN_README",
+    "type": "str",
+    "value": "'# 参赛提交材料说明\\n\\n本压缩包为「参赛提交版」，只含提交必要文件：\\n- paper/    论文成品（main.pdf / Word）与 LaTeX 源码（main.tex、sections/、references.bib）\\n- code/     求解代码（*.py），依赖见 requirements.txt\\n- figures/  图表成品（PDF/PNG）与生成脚本\\n- user_data/ 代码所需的输入数据（赛题原文档不含在内）\\n- RESULTS.md 关键结果汇总\\n- AI工具使用详情.pdf 独立 AI 使用支撑材料（工作区已生成时随包保留）\\n\\n## 如何运行代码\\n代码为多文件、互相 import，且大多用相对路径（如 code/xxx.py、figures/、_tmp/）。\\n请【在本 workspace 根目录】（即本 README 所在目录）运行，不要 cd 进 code/：\\n    pip install -r code/requirements.txt   # 依赖清单在 code/ 下（如无则忽略）\\n    python code/main.py                     # 入口脚本，按序跑完全部分析\\n提示：图表成品脚本（figures/gen_fig_*.py）可直接跑，用的是随包自带的结果数据；\\n      重跑 code/main.py 会重新生成中间结果并覆盖它们。\\n\\n注意：\\n- 精简版不含运行时中间产物（_tmp/ 等），代码会在运行时自动重建；若某脚本报\\n  “找不到 _tmp / non-existent directory”，先在根目录手动建一个：mkdir _tmp\\n- 若要完整复现全部中间数据与产物，请用「导出全部」版本。\\n'"
+   },
+   {
+    "name": "_CLEAN_README_PAPER",
+    "type": "str",
+    "value": "'# 论文成品说明\\n\\n本压缩包为「成品」版，只含论文成品和复现结果所需的文件：\\n- paper/    论文成品（Word / PDF）与源稿（main.md 或 main.tex）\\n- code/     分析代码（*.py），依赖见 requirements.txt\\n- figures/  图表成品（PDF/PNG）与生成脚本\\n- user_data/ 代码所需的输入数据（你上传的数据和材料；PDF 原文不含在内）\\n- RESULTS.md 关键结果汇总\\n\\n## 如何运行代码\\n代码为多文件、互相 import，且大多用相对路径（如 code/xxx.py、figures/、_tmp/）。\\n请【在本压缩包根目录】（即本 README 所在目录）运行，不要 cd 进 code/：\\n    pip install -r code/requirements.txt   # 依赖清单在 code/ 下（如无则忽略）\\n    python code/main.py                     # 入口脚本，按序跑完全部分析\\n提示：图表成品脚本（figures/gen_fig_*.py）可直接跑，用的是随包自带的结果数据；\\n      重跑 code/main.py 会重新生成中间结果并覆盖它们。\\n\\n注意：\\n- 成品版不含运行时中间产物（_tmp/ 等），代码会在运行时自动重建；若某脚本报\\n  “找不到 _tmp / non-existent directory”，先在根目录手动建一个：mkdir _tmp\\n- 若要完整复现全部中间数据与产物，请用「导出全部」版本。\\n'"
+   },
+   {
+    "name": "_EXPORT_SKIP_DIRS",
+    "type": "set"
+   },
+   {
+    "name": "_EXPORT_SKIP_EXTS",
+    "type": "set"
+   },
+   {
+    "name": "_EXPORT_SKIP_NAMES",
+    "type": "set"
+   },
+   {
+    "name": "_FULL_README",
+    "type": "str",
+    "value": "'# 导出说明（全部内容）\\n\\n本压缩包为「导出全部」版，含工作区完整内容（论文/代码/图表/数据/中间产物 _tmp/ 等）。\\n\\n## 如何运行代码\\n代码多为相对路径引用（code/xxx.py、figures/、_tmp/），请【在 workspace/ 目录下】运行，\\n不要 cd 进 code/：\\n    cd workspace\\n    pip install -r code/requirements.txt   # 依赖清单在 code/ 下（如无则忽略）\\n    python code/main.py                     # 入口脚本\\n\\n包含可导出的 _tmp/ 中间数据；外部复现还需安装依赖并核对输入是否齐全，\\n重跑 main.py 可能覆盖重建中间结果。\\n'"
+   },
+   {
+    "name": "_HEARTBEAT_MAX_RESUME",
+    "type": "int",
+    "value": "3"
+   },
+   {
+    "name": "_IMPORT_MAX_UPLOAD",
+    "type": "int",
+    "value": "2147483648"
+   },
+   {
+    "name": "_ImportTooLarge",
+    "type": "type",
+    "doc": "解压总量/文件数超过上限（疑似解压炸弹），整次导入到此为止。",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_MODELING_GATE_FAILURE_MARKERS",
+    "type": "tuple",
+    "value": "('数学建模成文', '论文问题导航不完整', '论文模型表达检查未通过', '建模证据')"
+   },
+   {
+    "name": "_NON_MODELING_FAILURE_MARKERS",
+    "type": "tuple",
+    "value": "('论文提交规范未通过', '同时发现：', '必需的二级文件缺失', '正文页数', '完全为空', '文件不存在', '文件过小')"
+   },
+   {
+    "name": "_PAPER_WRITER_SKILLS",
+    "type": "frozenset",
+    "value": "frozenset({'comp-paper-zh', 'comp-paper-zh-docx', 'comp-paper-en', 'comp-paper-en-docx'})"
+   },
+   {
+    "name": "_SURVEY_SUBMISSION",
+    "type": "tuple",
+    "value": "(('paper/main.docx', '调查报告正文.docx'), ('paper/main.pdf', '调查报告正文.pdf'), ('paper/appendix.docx', '附录.docx'), ('paper/appendix.pdf', '附录.pdf'))"
+   },
+   {
+    "name": "_assert_no_orphan_cli",
+    "type": "cython_function_or_method",
+    "doc": "手动「继续 / 从失败处继续 / 恢复」之前，确认上一轮的 CLI 真的不在了。\n\n⛔ 为什么非有不可：自动续跑那条路（main.py lifespan）发现还有活着的孤儿 CLI\n   时会跳过，把工作流留在暂停态 —— 可用户看到的就是一个暂停的工作流，点一下\n   「继续」照样能把第二个 claude 拉起来，两个进程写同一个工作区，产物互相覆盖、\n   额度花两份。自动那条路挡住了，手动这条路必须挡同样的东西。\n\n先按**这个工作流**的名下再回收一次（严格身份核验，绝不碰别的工作流、也不碰\n本进程正在跑的进程）；仍然收不掉就拒绝，并把原因原样交给前端展示。\n\n⛔ 放进线程跑：回收要等 taskkill 确认（每个 pid 最多 10 秒），取创建时间还可能\n   退到 PowerShell。直接在事件循环里跑，这几秒会把整个后端（含 WebSocket 心跳）\n   一起冻住 —— 用户看到的就是「点了继续，整个界面卡住了」。",
+    "sig": "(wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_assert_workspace_free",
+    "type": "cython_function_or_method",
+    "doc": "启动全自动之前调。⛔ 必须在启动锁内调，否则两个请求会在 await 间隙同时通过。",
+    "sig": "(wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_attach_active_at",
+    "type": "cython_function_or_method",
+    "doc": "左栏按“最后一次动静”分组排序（10-17 用户：“项目的时间归类不太正确”）：项目这一行的改动时间和对话里最后一条\n消息取晚的那个——在对话里说话不改 updated_at。只加在返回的副本上，不改库。",
+    "sig": "(db, workflows: 'list[dict]') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_attach_chat_runtime",
+    "type": "cython_function_or_method",
+    "doc": "给列表响应叠加协同模式的瞬时运行态，但绝不改写主工作流表。\n\n``workflows.status`` 是全自动引擎和心跳恢复的状态源。协同任务若把它\n持久化为 running，心跳会把对话任务误认成全自动流水线并重复拉起。\n因此这里只在 GET 列表的返回副本上叠加 ``runtime_activity``，让首页\n能如实显示“协同排队/执行中”，同时保留两套执行器的隔离。\n\n活跃任务通常很少，直接利用 chat_messages(status) 索引读取全部活跃行，\n避免首页有上千个工作流时拼出超过 SQLite 参数上限的 IN 查询。",
+    "sig": "(db, workflows: 'list[dict]') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_attach_progress",
+    "type": "cython_function_or_method",
+    "doc": "给列表响应叠加每个项目的进度（项目卡片上\"第几步 / 共几步、现在在哪一步\"）。\n\n一次读出所有步骤的名字和状态再按项目汇总，不按项目逐个查；只读，不改主表。",
+    "sig": "(db, workflows: 'list[dict]') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_attach_step_labels",
+    "type": "cython_function_or_method",
+    "doc": "首页列表：当前步骤写中文名（曾直接写 survey-design 这类内部名）；市调新流程再写一句现在等团队做什么\n（survey_hint：badge 换掉笼统的“已暂停”）。只改响应副本，读不到就照旧返回。",
+    "sig": "(db, workflows: 'list[dict]') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_build_export_zip",
+    "type": "cython_function_or_method",
+    "doc": "构建导出 zip 文件（同步，在线程池中调用）。clean=True 为参赛精简版。",
+    "sig": "(zip_path: 'str', wf_id: 'str', workspace: 'Optional[Path]', manifest: 'dict', clean: 'bool' = False)",
+    "defaults": "(False,)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_build_survey_submission_zip",
+    "type": "cython_function_or_method",
+    "doc": "市调大赛参赛版（同步，在线程池中调用）。一份报告文件都没有时报错，不给空包。\n用模拟答卷出的练习稿（数据由程序生成）不给打包（2026-10-21）。",
+    "sig": "(zip_path: 'str', workspace: 'Optional[Path]') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_chat_busy",
+    "type": "cython_function_or_method",
+    "doc": "对话模式是否正占着这个工作区。\n\n⛔ 为什么不能只查 _tasks：对话执行不走 run_workflow，不注册进 _tasks。\n⛔ 为什么不能只查 claude_runner.is_running(wf_id)：那是前缀匹配 `{wf_id}_`，\n   而对话进程键故意是 `chat-{wf_id}-{run_id}`（不带主 wf_id 前缀，\n   否则 cancel(wf_id) 会顺手杀掉对话任务）→ 前缀匹配查不到它。\n   所以必须问队列自己。",
+    "sig": "(wf_id: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_clean_export_is_contest",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(manifest: 'dict') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_cleanup_workspace",
+    "type": "cython_function_or_method",
+    "doc": "后台异步删除工作区目录，不阻塞主流程",
+    "sig": "(workspace_dir: 'str', wf_id: 'str')",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_conversation_running_guard",
+    "type": "cython_function_or_method",
+    "doc": "A5：对话模式的项目在跑步骤时，\"重新运行 / 重跑这一步\"不能直接把它取消（已花的额度作废，\n对话里的运行块也对不上）。从对话页\"项目详情\"进来点到的就是这两个按钮：先在对话里停下，或等它跑完。\n⛔ 必须在取消正在跑的 task 之前调。全自动项目保持原来的\"取消并重来\"。",
+    "sig": "(wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_delete_lock",
+    "type": "Lock"
+   },
+   {
+    "name": "_do_delete",
+    "type": "cython_function_or_method",
+    "doc": "删除工作流：先删数据库（立刻生效），再后台异步删文件",
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_extract_import_workspace",
+    "type": "cython_function_or_method",
+    "doc": "把一个工作流的 workspace/ 成员流式解压进 new_ws，返回 (文件数, 跳过的成员, 其中危险的成员)。\n\n在线程里跑，不卡事件循环。budget 是整次导入共用的 {\"bytes\", \"files\"} 计数：和上传解压\n（services/archive_import）同一套上限。以前这条路不限解压总量（1 KB 能解出 1 MB 的全零成员，\n2 GB 的包就能写满磁盘），可执行文件和脚本（.exe/.ps1/.lnk…）也照样落进工作区。",
+    "sig": "(zip_path: 'str', ws_prefix: 'str', new_ws: 'Path', budget: 'dict') -> 'tuple[int, list, list]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_get_start_lock",
+    "type": "cython_function_or_method",
+    "doc": "获取（或懒创建）某工作流的启动锁。同一 wf_id 始终返回同一把锁。",
+    "sig": "(wf_id: 'str') -> 'asyncio.Lock'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_heartbeat_check",
+    "type": "cython_function_or_method",
+    "doc": "定期检查：如果数据库里工作流是 running 但没有对应的 task，自动修复。",
+    "sig": "()",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_heartbeat_task",
+    "type": "NoneType"
+   },
+   {
+    "name": "_is_problem_source",
+    "type": "cython_function_or_method",
+    "doc": "user_data 里的赛题原文（评委已有、非提交物）：赛题 PDF、提取文本、A/B/C 题文档。\n仅对 user_data/ 下的文件判定。",
+    "sig": "(rel: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_mark_unexpected_task_exit",
+    "type": "cython_function_or_method",
+    "doc": "Turn a task that returned without a terminal DB state into a diagnosis.\n\nA rare exception can happen outside ``run_workflow``'s internal try block\n(decorator binding, cancellation during startup, or a backend hot-reload).\nPreviously that left ``workflows.status='running'`` with no task; the\nheartbeat then entered the whole authorization-preparation path again every\nminute.  Marking the row failed is safer than silently replaying a paid or\nfile-mutating step.  Normal completed/paused/failed tasks are untouched.",
+    "sig": "(wf_id: 'str', task: 'asyncio.Task') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_register_workflow_task",
+    "type": "cython_function_or_method",
+    "doc": "Register a workflow task and guard the task→DB lifecycle boundary.",
+    "sig": "(wf_id: 'str', coro, *, name: 'str | None' = None) -> 'asyncio.Task'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_rerun_step_impl",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', skill_name: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_reset_interrupted_steps",
+    "type": "cython_function_or_method",
+    "doc": "Retry unfinished work, never infer success from a later completed step.\n\nPreserve an interrupted running step's start marker so the engine can\ninspect its own artifacts before deciding whether another model call is\nnecessary. A failed step must pass its normal repair/acceptance path.\nSuccessful and checkpoint-waiting steps are not rewritten. The caller\nowns the transaction and per-workflow launch lock.",
+    "sig": "(db, wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_restart_impl",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_resume_counts",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_resume_impl",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', *, strategy: 'Optional[str]' = None) -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_revalidate_failed_paper_writer",
+    "type": "cython_function_or_method",
+    "doc": "Recognise a stale, modeling-gate-only writer failure without an AI call.\n\nThis is intentionally narrow.  It never promotes compilation failures,\nmissing/undersized artifacts, submission-contract failures, or a failure\nthat still reproduces under the current deterministic gate.  The purpose\nis to avoid replaying an expensive paper-writing step after a gate bug has\nbeen fixed while leaving every other recovery path unchanged.",
+    "sig": "(workspace: 'Path', skill_name: 'str', error_message: 'str | None') -> 'tuple[bool, str]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_should_include_file",
+    "type": "cython_function_or_method",
+    "doc": "判断文件是否应该包含在导出 zip 中。",
+    "sig": "(rel: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_should_include_file_clean",
+    "type": "cython_function_or_method",
+    "doc": "精简导出：白名单式判断。先过通用规则（跳隐藏/缓存/日志等），再只放白名单顶层。",
+    "sig": "(rel: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_stage_cli_resume_choice",
+    "type": "cython_function_or_method",
+    "doc": "Persist one explicit resume choice on the current unfinished step.",
+    "sig": "(db, wf_id: 'str', strategy: 'Optional[str]') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_start_impl",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_start_locks",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_stop_conversation_runtime",
+    "type": "cython_function_or_method",
+    "doc": "删工作流前，停掉不归全自动任务槽管的执行：协同队列与任务进程、主会话、编辑器任务。\n\nclaude_runner.cancel(wf_id) 只认 `{wf_id}` 与 `{wf_id}_*`；协同任务的进程键是\n`chat-{wf_id}-{run}`、编辑器是 `editor_{wf_id}`（故意分开，停全自动时才不会误杀），\n所以要逐个停。⛔ 每一步失败只记日志：删除本身不能被它们挡住。",
+    "sig": "(wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_strip_bootstrap",
+    "type": "cython_function_or_method",
+    "doc": "从 py 源码剔除引擎注入的自举头块（幂等；无标记则原样返回）。",
+    "sig": "(text: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_survey_rerun_guard",
+    "type": "cython_function_or_method",
+    "doc": "市调新流程：团队做过决定（选定题目、问卷定稿、确认数据）之后，整条“重新运行”和会改写问卷/研究设计的单步重跑\n后端直接拒绝（曾只靠界面，“重新运行”一点就把前几步重新付费、改写定稿问卷）。⛔ 必须在取消正在跑的 task 之前调：\n被拒的请求不能顺手把正在跑的步骤停掉。",
+    "sig": "(wf_id: 'str', skill_name: 'str | None' = None) -> 'None'",
+    "defaults": "(None,)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_survey_start_guard",
+    "type": "cython_function_or_method",
+    "doc": "市调“问卷和数据都有”：导入清洗还没做完时，点“开始/继续”先看一眼上传的问卷和答卷（只读文件，不调用模型）。\n缺问卷、缺答卷、答卷全都用不了时直接说清楚、不开跑——曾照样开跑，付费跑完研究设计和问卷整理两步才在导入前停下。",
+    "sig": "(wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_survey_submission_readme",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(missing: 'list[str]', max_pages) -> 'str'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "_tasks",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_try_continue_columns",
+    "type": "cython_function_or_method",
+    "doc": "第一档 B2 新增的三列（交接原因 / 主产物回执 / 付费继续次数），以及对话模式的 run_scope。\n\n生产库启动时已迁移；只有未迁移的旧表结构（测试夹具）会缺列，那时静默跳过。",
+    "sig": "(db, sql: 'str', args: 'tuple') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "asyncio",
+    "type": "module"
+   },
+   {
+    "name": "check_paper_modeling_quality",
+    "type": "cython_function_or_method",
+    "doc": "数模论文的建模深度对照（目标/约束/公式保真）。\n\n统计建模只要求“自圆其说”，这套“算对类”检查不跑：如实返回“不适用（统计建模）”，\n不写“通过”。其他赛事行为不变。",
+    "sig": "(workspace: 'Path', skill_name: 'str', *, write_report: 'bool' = True)",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "claim_auto_resume",
+    "type": "cython_function_or_method",
+    "doc": "Atomically claim one automatic workflow restart.\n\nThe caller must use a fresh connection.  ``BEGIN IMMEDIATE`` serializes\nheartbeat/startup workers even when a stale deployment accidentally leaves\ntwo backend processes pointing at the same SQLite database.  Only a worker\nthat successfully increments the durable counter may create a new task.\n``allow_paused`` is reserved for the startup snapshot produced by\n``init_db``; a normal heartbeat may only claim a currently-running row.",
+    "sig": "(db: 'aiosqlite.Connection', wf_id: 'str', *, max_attempts: 'int' = 3, allow_paused: 'bool' = False) -> 'dict'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "claude_runner",
+    "type": "ClaudeRunner"
+   },
+   {
+    "name": "clean_custom_name",
+    "type": "cython_function_or_method",
+    "doc": "用户起的项目名：去掉控制字符、合并空白、最长 CUSTOM_NAME_MAX 个字；空的返回 None（= 没另起名，显示题目）。",
+    "sig": "(raw) -> 'Optional[str]'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "clear_pause_request",
+    "type": "cython_function_or_method",
+    "doc": "清除暂停标记。⛔ 所有启动路径（start/resume/restart/rerun/心跳复活/重启恢复/\n检查点续跑）都必须调用，否则工作流会在下一步立刻自杀、再也起不来。",
+    "sig": "(workflow_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "create",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(body: 'WorkflowCreate') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "create_new_workflow",
+    "type": "cython_function_or_method",
+    "doc": "建项目。workflow_id 给了就是把首页对话建的草稿定型（services/project_intake.confirm）：\n在同一个项目号、同一个工作区上补齐参数、CLAUDE.md 和步骤，对话记录不用搬家；\nbefore_commit(db) 在同一个事务里、提交之前调用（草稿那边借它写赛题标记、记\"已定型\"）。",
+    "sig": "(template: 'str', title: 'str', params: 'dict', enable_checkpoints: 'bool' = False, *, workflow_id: 'str | None' = None, before_commit=None) -> 'str'",
+    "defaults": "(False,)",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "datetime",
+    "type": "type",
+    "doc": "datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])\n\nThe year, month and day arguments are required. tzinfo may be None, or an\ninstance of a tzinfo subclass. The remaining arguments may be ints.",
+    "defaults": "None",
+    "module_of": "datetime"
+   },
+   {
+    "name": "delete",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "export_batch",
+    "type": "cython_function_or_method",
+    "doc": "批量导出多个工作流为单个 zip。",
+    "sig": "(body: '_BatchExportRequest')",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "export_one",
+    "type": "cython_function_or_method",
+    "doc": "导出单个工作流为 zip。\nmode=full（默认）：全量导出（DB 元数据 + 全部工作区文件），行为同旧版。\nmode=clean：参赛精简版（只 paper/code/figures/结果，剔工具产物与自举头 + README）。",
+    "sig": "(wf_id: 'str', mode: 'str' = 'full')",
+    "defaults": "('full',)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "export_workflow_data",
+    "type": "cython_function_or_method",
+    "doc": "导出工作流的完整 DB 数据（workflow + steps + logs），返回 dict 或 None。",
+    "sig": "(wf_id: 'str') -> 'Optional[Dict]'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "get_db",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'aiosqlite.Connection'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "get_logs",
+    "type": "cython_function_or_method",
+    "doc": "从数据库读取历史日志（WebSocket 断开后的兜底）",
+    "sig": "(wf_id: 'str', limit: 'int' = 500, compact: 'bool' = False) -> 'list[dict]'",
+    "defaults": "(500, False)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "get_one",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "import_workflow_data",
+    "type": "cython_function_or_method",
+    "doc": "从导出的 manifest 数据导入工作流到 DB。",
+    "sig": "(data: 'Dict', new_id: 'str', workspace_dir: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "import_workflows",
+    "type": "cython_function_or_method",
+    "doc": "从 zip 文件导入工作流。支持单个和批量导出的 zip。",
+    "sig": "(file: 'Annotated[UploadFile, File(...)]')",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "inspect_template",
+    "type": "cython_function_or_method",
+    "doc": "新建页“格式模板”预检（建任务之前）：认主文件、编译方式、栏数，试编译一次，告诉用户缺什么。\n\n文件只在临时目录里过一遍就删，不进任何工作区；认不出唯一主文件时返回候选，由用户在页面上选（不猜），\n选好后带 ``main`` 再调一次。``prefer=word`` 时优先认 Word 模板（Word 输出）。不调用模型。",
+    "sig": "(files: 'Annotated[list[UploadFile], File(...)]', main: 'Annotated[Optional[str], Form()]' = None, prefer: 'Annotated[Optional[str], Form()]' = None) -> 'dict'",
+    "defaults": "(None, None)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "is_pause_requested",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "is_private_part",
+    "type": "cython_function_or_method",
+    "doc": "Is this ONE path component a protected/control name?\n\n``depth``: where the component sits (0 = project root).  Unknown (None) keeps the\nconservative rule; below the root, ``skills`` / ``capsules`` are ordinary user folders.\n\nEvery filter that used to write ``part.casefold() in PRIVATE_PARTS`` must\ncall this instead, otherwise a suffix rule added here silently applies on\nsome paths and not on others -- which is how a private name ends up\nreadable through one route and blocked on another.",
+    "sig": "(part: 'str', *, depth: 'Optional[int]' = None) -> 'bool'",
+    "defaults": "None",
+    "module_of": "public_artifact_access"
+   },
+   {
+    "name": "is_rebuildable_part",
+    "type": "cython_function_or_method",
+    "doc": "Is this component Modex-owned runtime / a cache we simply rebuild?",
+    "sig": "(part: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "public_artifact_access"
+   },
+   {
+    "name": "json",
+    "type": "module"
+   },
+   {
+    "name": "list_all",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "list_workflows",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(db: 'aiosqlite.Connection') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "log",
+    "type": "Logger"
+   },
+   {
+    "name": "logging",
+    "type": "module"
+   },
+   {
+    "name": "pause",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "project_cover",
+    "type": "cython_function_or_method",
+    "doc": "项目卡片的封面缩略图（PNG）：论文 PDF 第一页，没有论文就用最新的一张图；都没有回 404，前端显示类型字标。",
+    "sig": "(wf_id: 'str', w: 'Annotated[int, Query(ge=120, le=960)]' = 480)",
+    "defaults": "(480,)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "public_artifact_path",
+    "type": "cython_function_or_method",
+    "doc": "Authorize public reads AND writes, including not-yet-created files.\n\nThis is an HTTP/application boundary, not isolation from a local process\nable to mutate the workspace concurrently. Internal tools use their own\nexplicitly scoped access; UI filters must never replace this check.\n\n``exempt_parts`` waives the private-name rule for the listed components\nONLY -- every other component is still judged, and traversal, symlink and\nWindows-name checks are never waived.  The single caller is the workflow\nimporter, with ``EXPORT_EXEMPT_PARTS``; do not widen it without saying why\nthe name cannot make a local tool execute something.",
+    "sig": "(workspace: 'Path', relative_path: 'str', *, exempt_parts: 'frozenset' = frozenset()) -> 'Path'",
+    "defaults": "None",
+    "module_of": "public_artifact_access"
+   },
+   {
+    "name": "re",
+    "type": "module"
+   },
+   {
+    "name": "redo_applies",
+    "type": "cython_function_or_method",
+    "doc": "真做完过的步骤（不是用户跳过的伪完成，口径同 run_workflow 里的 _is_user_skip）：重跑它按“重做”处理。",
+    "sig": "(status, error_message) -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "redo_mark",
+    "type": "cython_function_or_method",
+    "doc": "写进交接原因的重做记号；why 只给人看（日志、排查），不交给模型。",
+    "sig": "(why: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "rename_workflow",
+    "type": "cython_function_or_method",
+    "doc": "给项目起个自己的名字（10-20 内测反馈“希望能给任务增加自命名环节，以免任务多以后不方便找”）。\n\n只改显示用的 custom_name：title 仍是研究方向 / 题目（写进 CLAUDE.md、每一步按它做），不跟着改。\n空的 = 不另起名，照旧显示题目。草稿也是项目表里的一行，同一个接口。不改 updated_at：改名不算项目有进展，左栏顺序不跳。",
+    "sig": "(wf_id: 'str', name: 'Annotated[str, Body(embed=True, max_length=200)]' = '') -> 'dict'",
+    "defaults": "('',)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "request_pause",
+    "type": "cython_function_or_method",
+    "doc": "标记用户要求暂停。pause 接口调用，步骤循环每步开头检查。",
+    "sig": "(workflow_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "rerun_step",
+    "type": "cython_function_or_method",
+    "doc": "重新执行工作流中的单个步骤。",
+    "sig": "(wf_id: 'str', skill_name: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "reset_auto_resume_state",
+    "type": "cython_function_or_method",
+    "doc": "Reset durable automatic-recovery guard after an explicit user action.\n\nThis is deliberately a separate helper so callers can keep the reset in\nthe same transaction that stages ``status='running'``.  If an older test\nfixture has no migration columns, leave its behavior unchanged; production\ndatabases are migrated by :func:`init_db` before any workflow can start.",
+    "sig": "(db: 'aiosqlite.Connection', wf_id: 'str') -> 'None'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "restart",
+    "type": "cython_function_or_method",
+    "doc": "完全重置工作流，重新从头执行所有步骤。",
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "resume",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', body: 'Optional[dict]' = Body(None)) -> 'dict'",
+    "defaults": "(Body(None),)",
+    "module_of": "workflows"
+   },
+   {
+    "name": "router",
+    "type": "APIRouter",
+    "doc": "`APIRouter` class, used to group *path operations*, for example to structure\nan app in multiple files. It would then be included in the `FastAPI` app, or\nin another `APIRouter` (ultimately included in the app).\n\nRead more about it in the\n[FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\n\n## Example\n\n```python\nfrom fastapi import APIRouter, FastAPI\n\napp = FastAPI()\nrouter = APIRouter()\n\n\n@router.get(\"/users/\", tags=[\"users\"])\nasync def read_users():\n    return [{\"username\": \"Rick\"}, {\"username\": \"Morty\"}]\n\n\napp.include_router(router)\n```",
+    "sig": "(scope: 'Scope', receive: 'Receive', send: 'Send') -> 'None'",
+    "defaults": "None",
+    "module_of": "fastapi.routing"
+   },
+   {
+    "name": "run_single_step",
+    "type": "cython_function_or_method",
+    "doc": "单独执行工作流中的单个步骤。",
+    "sig": "(workflow_id: str, skill_name: str)",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "run_workflow",
+    "type": "cython_function_or_method",
+    "doc": "逐步执行子步骤。支持从暂停处恢复（跳过已完成步骤）。",
+    "sig": "(workflow_id: str, *, _only_native_skill: str | None = None)",
+    "defaults": "None",
+    "module_of": "workflow_engine"
+   },
+   {
+    "name": "set_account_step_model",
+    "type": "cython_function_or_method",
+    "doc": "Save a server-listed account model without restarting or spending credits.",
+    "sig": "(wf_id: 'str', skill_name: 'str', body: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "set_step_effort",
+    "type": "cython_function_or_method",
+    "doc": "修改工作流某步骤的思考强度（写 params.step_efforts），可选自动重跑本步。\n\nbody: { effort: str（low/medium/high/xhigh/max；空串=删除该步覆盖，回退全局）, rerun: bool }\n\n与 set_step_model 完全同构（同一把启动锁、同样的清键逻辑、同样的 running 自动重跑）。\n⛔ 值必须过 effort.sanitize：CLI 对非法 --effort 直接报错退出，脏值落库\n   会让该步骤之后每次启动都失败。非法值一律当\"清除该步覆盖\"处理。",
+    "sig": "(wf_id: 'str', skill_name: 'str', body: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "set_step_model",
+    "type": "cython_function_or_method",
+    "doc": "修改工作流某步骤用的模型预设（写 params.step_models），可选自动重跑本步。\n\nbody: { preset_id: str（空串=删除该步覆盖，回退全局）, rerun: bool }\n- 更新 params 后：pending/未跑的步骤下次跑自然生效；\n- rerun=true 或该步当前 running → 复用单步重跑（取消旧进程 + run_single_step），立即换模型生效。",
+    "sig": "(wf_id: 'str', skill_name: 'str', body: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "shutil",
+    "type": "module"
+   },
+   {
+    "name": "sqlite3",
+    "type": "module"
+   },
+   {
+    "name": "start",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "start_heartbeat",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "()",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "submit_checkpoint",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', body: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "tempfile",
+    "type": "module"
+   },
+   {
+    "name": "update_workflow",
+    "type": "cython_function_or_method",
+    "doc": "更新工作流字段，带重试逻辑应对并发锁竞争。",
+    "sig": "(db: 'aiosqlite.Connection', wf_id: 'str', **fields) -> 'None'",
+    "defaults": "None",
+    "module_of": "state_store"
+   },
+   {
+    "name": "uuid",
+    "type": "module"
+   },
+   {
+    "name": "venue_families",
+    "type": "cython_function_or_method",
+    "doc": "新建页“投稿格式”面板用的格式清单（只读；注册表坏了时整块面板隐藏，不影响建别的工作流）。",
+    "sig": "() -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflows"
+   },
+   {
+    "name": "zipfile",
+    "type": "module"
+   }
+  ]
+ },
+ {
+  "module": "backend.services.workflow_intake",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\workflow_intake.cp311-win_amd64.pyd",
+  "doc": "对话建项目的参数规格：每种项目类型有哪些设置、默认值、取值范围、谁能定。\n\n⛔ 唯一的参照物是新建表单 web/frontend/src/pages/NewWorkflow.tsx 的提交逻辑（handleSubmit\n   里组装 params 的那一段，以及各项的初始值和联动）。`build()` 对同样的选择必须生成和表单\n   一模一样的 template / title / params —— 由对拍测试守住：前端测试让表单真提交一遍，结果存成\n   tests/data/intake_form_goldens.json，后端测试要求 build() 逐键一致。改了表单的规则，那边\n   的测试先报；改了这里，这边的测试报。两边都改完才能过。\n\n这里的\"选择\"（choices）就是表单上用户能动的那些状态，换成了语义名字；没给的取表单初始值。\n谁能定：\n  · AI 能填大部分（读完材料后填项目类型、题号、格式……），用户在设置卡上随时改；\n  · 有些只能用户本人定（在对话里说、或在右栏「设置」里选），AI 自己填了不收（user_only）；\n    国赛 AI 工具使用声明写论文前定就行：缺它不挡建项目（later），写论文前调度层和引擎会拦：AI 使用声明是用户的事实（K9）、\n    盲评词、市调届次/组别/赛道（K11）、会多花额度的开关和模型（用户 10-11 定：默认和表单一样，\n    只能用户改）；\n  · 有些虽有默认值，也必须用户亲手点一次才算数（explicit）：国赛 AI 使用声明、市调三项。\n学术写作的写作档案（研究类型、学科、学位层次……，论证逻辑与文理分型第 6 期）和新建页的写作档案面板同一份选项\n（web/frontend/src/utils/academicProfile.ts，测试核对两边一致）；\"让 AI 判断\"这类默认值不提交，写作时 AI 在大纲里判断。\n投稿格式给随软件提供模板的那几种；要用官方模板的（Springer Nature、Wiley……）先在「格式模板」里选好官方 LaTeX 模板。\n格式模板、要求文档从已上传的材料里选（services/chat_template.py：识别在暂存区做，设置存进库才换上）。\n",
+  "attrs": [
+   {
+    "name": "Any",
+    "type": "_AnyMeta",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "COMP_TEMPLATES",
+    "type": "dict",
+    "value": "{'comp_tianfu': ('天府杯', 'zh', 30), 'comp_certcup': ('认证杯', 'zh', 35), 'comp_mathorcup': ('MathorCup', 'zh', 30), 'comp_teddy': ('泰迪杯', 'zh', 40), 'comp_huadong': ('华东杯', 'zh', 30), 'comp_huazhong': ('华中杯', 'zh', 30), 'comp_wuyi': ('五一杯', 'zh', 30), 'comp_zhongqing': ('中青杯', 'zh', 30), 'comp_yangtze': ('长三角', 'zh', 30), 'comp_stats': ('统计建模大赛', 'zh', 30), 'comp_shuwei': ('数维杯', 'zh', 30), 'comp_diangong': ('电工杯', 'zh', 30), 'comp_liaoning': ('辽宁省/东三省', 'zh', 30), 'comp_apmcm_zh': ('亚太赛中文 (APMCM)', 'zh', 25), 'comp_shenzhen': ('深圳杯', 'zh', 30), 'comp_huashu': ('华数杯', 'zh', 30), 'comp_cumcm': ('国赛 (CUMCM)', 'zh', 30), 'comp_huawei': ('华为杯', 'zh', 50), 'comp_mathorcup_bigdata': ('MathorCup 大数据', 'zh', 30), 'comp_mcm': ('美赛 (MCM/ICM)', 'en', 25), 'comp_shuwei_en': ('数维杯国际赛', 'en', 25), 'comp_apmcm': ('亚太 (APMCM)', 'en', 25), 'comp_certcup_en': ('小美赛 (认证杯国际)', 'en', 25)}"
+   },
+   {
+    "name": "CONFLICT_STRATEGIES",
+    "type": "dict",
+    "value": "{'use_user_results': '以我给的结果和数据为准', 'use_user_figures': '以我给的图为准', 'use_problem_requirement': '以题目要求为准，全部重做', 'keep_both': '各自保留，论文里说明差异'}"
+   },
+   {
+    "name": "COURSE_DOMAINS",
+    "type": "dict",
+    "value": "{'cs': '计算机科学', 'humanities': '人文社科', 'economics': '经济管理', 'engineering': '工程技术'}"
+   },
+   {
+    "name": "COURSE_SUBJECT_OPTIONS",
+    "type": "tuple",
+    "value": "(('auto', '按课程名称和老师要求自动判断（推荐）'), ('cs', '计算机科学（如编程、数据结构、人工智能）'), ('humanities', '人文社科（如思政、文学、心理学、教育学）'), ('economics', '经济管理（如经济学、会计、市场营销）'), ('engineering', '工程技术（如机械、电气、土木、化工）'))"
+   },
+   {
+    "name": "Context",
+    "type": "type",
+    "doc": "校验和生成要用到的外部事实。",
+    "sig": "(access_mode: 'str' = 'key', files: 'frozenset' = frozenset(), presets: 'frozenset' = frozenset(), template_views: 'dict' = <factory>) -> None",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "DEGREE_LEVEL_OPTIONS",
+    "type": "tuple",
+    "value": "(('bachelor', '本科'), ('master', '硕士'), ('doctor', '博士'))"
+   },
+   {
+    "name": "DEGREE_TYPE_OPTIONS",
+    "type": "tuple",
+    "value": "(('academic', '学术学位（学硕、学博）'), ('professional', '专业学位（专硕、专博，如工程、MBA、MPA、教育、法律硕士）'))"
+   },
+   {
+    "name": "EFFORT_LEVELS",
+    "type": "tuple",
+    "value": "('low', 'medium', 'high', 'xhigh', 'max')"
+   },
+   {
+    "name": "FORMAT_FAMILIES",
+    "type": "frozenset",
+    "value": "frozenset({'review', 'thesis', 'course', 'stats', 'pfa', 'humanities', 'paper', 'comp', 'auto_review'})"
+   },
+   {
+    "name": "Field",
+    "type": "type",
+    "doc": "Field(name: 'str', label: 'str', kind: 'str', default: 'Any' = None, options: 'tuple' = (), lo: 'int | None' = None, hi: 'int | None' = None, max_len: 'int' = 0, user_only: 'bool' = False, explicit: 'bool' = False, paid: 'bool' = False, note: 'str' = '', ai_ok: 'tuple' = ())",
+    "sig": "(name: 'str', label: 'str', kind: 'str', default: 'Any' = None, options: 'tuple' = (), lo: 'int | None' = None, hi: 'int | None' = None, max_len: 'int' = 0, user_only: 'bool' = False, explicit: 'bool' = False, paid: 'bool' = False, note: 'str' = '', ai_ok: 'tuple' = ()) -> None",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "HUMANITIES_DOMAINS",
+    "type": "dict",
+    "value": "{'literature': '文学 / 比较文学', 'history': '历史学', 'philosophy': '哲学', 'sociology': '社会学', 'communication': '传播学 / 新闻学', 'cultural_studies': '文化研究', 'education': '教育学', 'law': '法学', 'art': '艺术学 / 美学', 'politics': '政治学 / 公共管理'}"
+   },
+   {
+    "name": "HUMANITIES_LEVEL_OPTIONS",
+    "type": "tuple",
+    "value": "(('course', '课程论文'), ('bachelor', '本科毕业论文'), ('master', '硕士学位论文'), ('journal', '期刊论文'))"
+   },
+   {
+    "name": "HUMANITIES_RESEARCH_TYPE_OPTIONS",
+    "type": "tuple",
+    "value": "(('', '按学科默认（推荐）'), ('theoretical', '文本、史料或理论分析'), ('qualitative', '访谈、田野或案例'), ('survey', '问卷调查'), ('mixed', '混合'))"
+   },
+   {
+    "name": "IntakeError",
+    "type": "type",
+    "doc": "选择不合法。message 是给人看的中文；field 指出是哪一项。",
+    "sig": "(code: 'str', message: 'str', field: 'str' = '')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "LONG_LIMIT",
+    "type": "int",
+    "value": "20000"
+   },
+   {
+    "name": "MATHORCUP_PFA_WORD_NOTE",
+    "type": "str",
+    "value": "'MathorCup 官方要求第二页为目录页、正文从第 1 页编页码（不符合会取消评奖资格）：Word 版不会自动生成，交之前要在 Word 里自己插入目录并调整页码；选 PDF 则自动排好。'"
+   },
+   {
+    "name": "MATHORCUP_TEMPLATES",
+    "type": "tuple",
+    "value": "('comp_mathorcup', 'comp_mathorcup_bigdata')"
+   },
+   {
+    "name": "MATHORCUP_WORD_NOTE",
+    "type": "str",
+    "value": "'MathorCup 官方只收 PDF：选 Word 时导出后按官方格式排好（首页信息表、第二页目录、正文从第 1 页编页码），本机装了 Microsoft Word 会同时导出同内容的 PDF；没装的话，交之前用 Word 或 WPS 打开、更新目录后另存为 PDF。'"
+   },
+   {
+    "name": "OTHER_TEMPLATES",
+    "type": "dict",
+    "value": "{'idea_discovery': 'Idea 发现', 'experiment_bridge': '实验桥接', 'auto_review': '自动审稿循环', 'full_pipeline': '全流程', 'paper_writing_zh': '论文写作（中文）', 'paper_writing': '论文写作（英文）', 'nature_writing': 'Nature 顶刊论文', 'humanities_paper': '人文社科论文', 'thesis_proposal': '开题报告', 'literature_review': '文献综述', 'course_paper': '课程论文', 'course_report': '课程报告', 'paper_from_assets': '从已有资料写论文', 'grad_project': '一句话生成项目', 'copyright_material': '软著申请资料', 'patent_disclosure': '专利技术交底书', 'survey_market': '市调大赛'}"
+   },
+   {
+    "name": "OUTLINE_TEMPLATES",
+    "type": "tuple",
+    "value": "('paper_writing', 'paper_writing_zh', 'full_pipeline', 'nature_writing')"
+   },
+   {
+    "name": "Optional",
+    "type": "_SpecialForm",
+    "doc": null,
+    "sig": "(*args, **kwds)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "PAPER_FAMILY",
+    "type": "tuple",
+    "value": "('paper_writing', 'paper_writing_zh', 'full_pipeline', 'nature_writing')"
+   },
+   {
+    "name": "PAPER_TYPES",
+    "type": "dict",
+    "value": "{'bachelor': ('本科毕业论文', 25), 'master': ('硕士学位论文', 55), 'journal': ('期刊论文', 15)}"
+   },
+   {
+    "name": "PARTIAL_DISCLOSURE_PARAM",
+    "type": "str",
+    "value": "'_ai_disclosure_partial'"
+   },
+   {
+    "name": "PFA_CONTESTS",
+    "type": "tuple",
+    "value": "('comp_tianfu', 'comp_certcup', 'comp_mathorcup', 'comp_teddy', 'comp_huadong', 'comp_huazhong', 'comp_wuyi', 'comp_zhongqing', 'comp_yangtze', 'comp_shuwei', 'comp_diangong', 'comp_liaoning', 'comp_apmcm_zh', 'comp_shenzhen', 'comp_huashu', 'comp_cumcm', 'comp_huawei', 'comp_mcm', 'comp_shuwei_en', 'comp_apmcm', 'comp_certcup_en')"
+   },
+   {
+    "name": "PFA_TARGETS",
+    "type": "dict",
+    "value": "{'academic_zh': '学术论文（中文）', 'academic_en': '学术论文（英文）', 'competition': '竞赛论文（数模/认证杯等）', 'course': '课程论文 / 课程报告', 'nature': 'Nature / SCI 期刊风格'}"
+   },
+   {
+    "name": "PROFILE_PARAM_KEYS",
+    "type": "tuple",
+    "value": "('research_type', 'stop_after_plan', 'humanities_level', 'degree_level', 'degree_type', 'proposal_field', 'project_source', 'proposal_timeline', 'report_kind')"
+   },
+   {
+    "name": "PROJECT_SOURCE_MAX",
+    "type": "int",
+    "value": "200"
+   },
+   {
+    "name": "PROPOSAL_FIELD_OPTIONS",
+    "type": "tuple",
+    "value": "(('auto', '让 AI 按题目判断（推荐）'), ('stem', '理工农医（理学、工学、农学、医学，如计算机、电子、机械、土木）'), ('economics', '经济学、管理学（如金融、会计、工商管理、市场营销）'), ('education', '教育学（如学前教育、教育技术、学科教学）'), ('sociology', '社会学（如社会工作、人口学）'), ('communication', '新闻传播学（如新闻、广告、网络与新媒体）'), ('politics', '政治学、公共管理（如行政管理、国际关系）'), ('law', '法学'), ('literature', '文学、语言学（如汉语言文学、外语、翻译）'), ('history', '历史学'), ('philosophy', '哲学'), ('art', '艺术学（如音乐、美术、设计、影视）'), ('cultural_studies', '文化研究'))"
+   },
+   {
+    "name": "PROPOSAL_TIMELINE_MAX",
+    "type": "int",
+    "value": "120"
+   },
+   {
+    "name": "PurePosixPath",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "REPORT_KIND_OPTIONS",
+    "type": "tuple",
+    "value": "(('auto', '按老师要求自动判断（推荐）'), ('project', '项目或设计类'), ('experiment', '实验类'), ('survey', '调研类'), ('reading', '读书或文献报告类'))"
+   },
+   {
+    "name": "RESEARCH_TYPE_OPTIONS",
+    "type": "tuple",
+    "value": "(('auto', '让 AI 判断（推荐）'), ('experimental', '做实验：有实测数据、对照组'), ('computational', '写算法或模型：用基准数据比较效果'), ('simulation', '工程仿真：有限元、数值模拟'), ('clinical', '医学临床：病例、受试者、诊疗效果'), ('econometric', '用数据做回归：经管实证、政策效应'), ('survey', '发问卷：量表、问卷数据'), ('qualitative', '做访谈、案例或田野调查'), ('theoretical', '理论思辨或文本分析：没有经验数据'), ('mixed', '混合：两类方法都承担主要证据'))"
+   },
+   {
+    "name": "REVIEW_RATIOS",
+    "type": "dict",
+    "value": "{'1:1': '中英各半', '2:1': '中文为主', '1:2': '英文为主', '1:0': '只要中文', '0:1': '只要英文'}"
+   },
+   {
+    "name": "SOURCE_AI",
+    "type": "str",
+    "value": "'ai'"
+   },
+   {
+    "name": "SOURCE_DEFAULT",
+    "type": "str",
+    "value": "'default'"
+   },
+   {
+    "name": "SOURCE_USER",
+    "type": "str",
+    "value": "'user'"
+   },
+   {
+    "name": "SURVEY_GROUPS",
+    "type": "dict",
+    "value": "{'undergraduate': '本科组', 'graduate': '研究生组', 'vocational': '专科组', 'international': '在华留学生组'}"
+   },
+   {
+    "name": "TEXT_LIMIT",
+    "type": "int",
+    "value": "4000"
+   },
+   {
+    "name": "USER_ONLY_SKIP",
+    "type": "str",
+    "value": "'user_only_field'"
+   },
+   {
+    "name": "VENUES",
+    "type": "dict",
+    "value": "{'ICLR': 9, 'NeurIPS': 9, 'ICML': 8}"
+   },
+   {
+    "name": "_AI_FIGURE_LOOK",
+    "type": "tuple",
+    "value": "(('rich', '丰满插画（推荐）'), ('clean', '简洁线稿'))"
+   },
+   {
+    "name": "_ASK_VARIANT",
+    "type": "dict",
+    "value": "{'亚太': ('comp_apmcm_zh', 'comp_apmcm'), '亚太赛': ('comp_apmcm_zh', 'comp_apmcm'), '亚太杯': ('comp_apmcm_zh', 'comp_apmcm'), 'apmcm': ('comp_apmcm_zh', 'comp_apmcm'), '亚太数学建模': ('comp_apmcm_zh', 'comp_apmcm'), '亚太地区大学生数学建模竞赛': ('comp_apmcm_zh', 'comp_apmcm')}"
+   },
+   {
+    "name": "_CFP_URL",
+    "type": "Pattern"
+   },
+   {
+    "name": "_DEGREE_WORDS",
+    "type": "dict",
+    "value": "{'undergraduate': 'bachelor', 'undergrad': 'bachelor', 'bachelors': 'bachelor', '学士': 'bachelor', '研究生': 'master', 'graduate': 'master', 'phd': 'doctor', 'doctoral': 'doctor', 'doctorate': 'doctor'}"
+   },
+   {
+    "name": "_DIAGRAM_STYLE",
+    "type": "tuple",
+    "value": "(('mono', '黑白'), ('plain', '素雅'), ('modern', '现代'), ('random', '随机跟随本篇'))"
+   },
+   {
+    "name": "_DISCLOSURE_NOTE_OPTIONAL",
+    "type": "str",
+    "value": "'按赛事规则需要时再开；只按你本人说的记'"
+   },
+   {
+    "name": "_DISCLOSURE_NOTE_REQUIRED",
+    "type": "str",
+    "value": "'国赛必须如实声明这次用没用 AI 工具，写论文前定好就行：在对话里告诉 AI，或者在这里选；只按你本人说的记'"
+   },
+   {
+    "name": "_DISCLOSURE_WORDS",
+    "type": "dict",
+    "value": "{'none': 'none', '没有使用': 'none', '没使用': 'none', '没有用': 'none', '没用': 'none', '未使用': 'none', '无': 'none', 'off': 'off', '不声明': 'off'}"
+   },
+   {
+    "name": "_EFFORT_WORDS",
+    "type": "dict",
+    "value": "{'低': 'low', '较低': 'low', '中': 'medium', '中等': 'medium', '适中': 'medium', '高': 'high', '较高': 'high', '很高': 'xhigh', '超高': 'xhigh', '更高': 'xhigh', '最高': 'max', '极高': 'max', '拉满': 'max', '最大': 'max', '默认': '', '跟随': '', '跟随设置页': '', '不设': '', '不指定': ''}"
+   },
+   {
+    "name": "_ENGINE",
+    "type": "tuple",
+    "value": "(('html', 'HTML（自动排版，更美观）'), ('drawio', 'draw.io（可在编辑器里拖拽修改）'))"
+   },
+   {
+    "name": "_FALSE_WORDS",
+    "type": "frozenset",
+    "value": "frozenset({'0', '关掉', '不需要', '不用', '否', '关', 'no', '不', '关闭', '禁用', '不要', '不是', 'n', 'false', 'off'})"
+   },
+   {
+    "name": "_FAMILY_FIELDS",
+    "type": "dict",
+    "value": "{'comp': <cyfunction _comp_fields at 0x000002608D844040>, 'stats': <cyfunction _comp_fields at 0x000002608D844040>, 'paper': <cyfunction _paper_fields at 0x000002608D844100>, 'humanities': <cyfunction _academic_fields at 0x000002608D844640>, 'thesis': <cyfunction _academic_fields at 0x000002608D844640>, 'review': <cyfunction _academic_fields at 0x000002608D844640>, 'course': <cyfunction _academic_fields at 0x000002608D844640>, 'research': <cyfunction _research_fields at 0x000002608D844E80>, 'auto_review': <cyfunction _research_fields at 0x000002608D844E80>, 'pfa': <cyfunction _pfa_fields at 0x000002608D845300>, 'dev': <cyfunction _dev_fields at 0x000002608D845240>, 'copyright': <cyfunction _ip_fields at 0x000002608D8453C0>, 'patent': <cyfunction _ip_fields at 0x000002608D8453C0>, 'survey': <cyfunction _survey_fields at 0x000002608D845480>}"
+   },
+   {
+    "name": "_FORMAT_MATHORCUP",
+    "type": "tuple",
+    "value": "(('pdf', 'PDF（按官方格式：第二页目录、正文从第 1 页编页码；LaTeX 排版，软件自带）'), ('docx', 'Word（.docx，按官方格式排好首页信息表、第二页目录和正文页码；本机有 Word 时同时导出 PDF）'))"
+   },
+   {
+    "name": "_FORMAT_PDF_DOCX",
+    "type": "tuple",
+    "value": "(('pdf', 'PDF（LaTeX 排版，软件自带，不用另装）'), ('docx', 'Word（.docx，没有封面和承诺书）'))"
+   },
+   {
+    "name": "_FORMAT_TEXT_TEMPLATES",
+    "type": "frozenset",
+    "value": "frozenset({'humanities_paper', 'thesis_proposal', 'course_paper', 'course_report', 'literature_review'})"
+   },
+   {
+    "name": "_FORMAT_TEXT_WHEN_WORD",
+    "type": "dict",
+    "value": "{'paper': 'output_format', 'pfa': 'output_format', 'auto_review': 'output_format', 'stats': 'output_format', 'dev': 'report_format'}"
+   },
+   {
+    "name": "_GENERIC_TEMPLATE_WORDS",
+    "type": "frozenset",
+    "value": "frozenset({'review', 'discovery', 'assets', 'nature', 'thesis', 'writing', 'course', 'pipeline', 'experiment', 'proposal', 'material', 'report', 'project', 'paper', 'bridge'})"
+   },
+   {
+    "name": "_LABEL_NOTE",
+    "type": "Pattern"
+   },
+   {
+    "name": "_LANGUAGE_SUFFIX",
+    "type": "Pattern"
+   },
+   {
+    "name": "_LOOSE_STRIP",
+    "type": "Pattern"
+   },
+   {
+    "name": "_MENTION_CUES",
+    "type": "dict",
+    "value": "{'model_preset_id': ('模型', 'model', '预设'), 'account_models': ('模型', 'model'), 'step_models': ('模型', 'model'), 'effort': ('思考强度', '强度', '思考', 'effort', 'thinking', '想深', '多想', '少想'), 'step_efforts': ('思考强度', '强度', '思考', 'effort', 'thinking', '想深', '多想', '少想'), 'context_limit': ('上下文', 'context'), 'validation_mode': ('校验', '严格', '快速模式', '省额度', '验证'), 'data_fig_vision': ('质检', '看图', '视觉', '检查图', '数据图'), 'diagram_vision': ('质检', '看图', '视觉', '检查图', '流程图'), 'ai_disclosure': ('声明', '使用ai', '用ai', '用了ai', '用过ai', '没用ai', 'ai工具', 'ai使用', 'ai辅助', '人工智能', '大模型'), 'survey_stage': ('已经有问卷', '问卷已经', '问卷做好', '问卷设计好', '问卷写好', '已经有数据', '数据已经', '已经收', '收回来', '回收了', '收了', '从零开始', '还没开始')}"
+   },
+   {
+    "name": "_MODELISH",
+    "type": "Pattern"
+   },
+   {
+    "name": "_NAME_ALIASES",
+    "type": "dict",
+    "value": "{'output_format': ('输出格式', '导出格式', '论文格式', '格式', 'format', 'output'), 'custom_requirements': ('额外要求', '自定义要求', '补充要求', '其他要求', '要求', 'extra_requirements', 'requirements', 'extra', 'custom'), 'max_pages': ('页数', '页数上限', '页数参考', 'pages', 'page_limit', 'max_page'), 'problem_id': ('题号', 'problem'), 'problem_scope': ('只做哪几问', '做哪几问', '问题范围', '范围', 'scope'), 'problem_text': ('赛题文字', '题目文字', '题面'), 'problem_file': ('赛题文件', '题目文件', '赛题'), 'min_figures': ('最少图数', '至少几张图', '图片数量', '最少图片数', 'min_figure', 'figures'), 'min_tables': ('最少表数', '至少几个表', '表格数量', '最少表格数', 'min_table', 'tables'), 'min_models': ('最少模型数', '至少几个模型', '模型数量', 'min_model', 'models'), 'outline_file': ('大纲', '大纲文件', '大纲草稿', '提纲', 'outline', 'paper_plan'), 'template_source': ('模板文件', 'Word 模板', 'Word模板', 'word 模板', '学校模板', '论文模板', '格式模板', '排版模板', 'LaTeX 模板', 'latex 模板', 'template_file', 'word_template', 'docx_template', 'template_docx', 'template_path'), 'figure_style': ('图表风格', '图风格'), 'validation_mode': ('校验强度', '校验模式', '校验', 'validation'), 'ai_disclosure': ('AI 工具使用声明', 'AI 使用声明', 'AI 声明', '声明', 'disclosure'), 'model_preset_id': ('模型预设', '模型', 'model', 'preset'), 'account_models': ('模型', 'model', '模型预设', 'model_preset_id', 'preset'), 'effort': ('思考强度', '强度', 'thinking', 'thinking_effort'), 'step_models': ('每步模型',), 'step_efforts': ('每步思考强度', '每步强度'), 'title': ('题目', '标题', '论文题目', '研究方向', 'topic', 'research_topic', 'paper_title', 'theme', '主题', '选题', '课题', '研究课题', '论文标题'), 'custom_title': ('自拟题目', '题目', '标题', '论文题目', 'title', 'topic', 'paper_title'), 'software_name': ('软件全称', '软件名称', '软件名', '系统名称', 'name', 'title', 'software', 'software_title', 'app_name', 'product_name'), 'case_name': ('案件名称', '专利名称', '发明名称', 'name', 'title', 'patent_name', 'invention_name'), 'paper_type': ('论文类型', '学位', '学位论文', '论文种类', 'degree', 'paper_kind', 'thesis_type'), 'column_layout': ('栏数', '分栏', '单双栏', 'columns', 'column'), 'venue': ('目标会议', '会议', 'venue', 'TARGET_VENUE', 'target_venue', 'conference'), 'word_count_target': ('字数', '目标字数', '字数要求', '篇幅', 'word_count', 'words', 'word_target', 'length'), 'subject_domain': ('学科', '学科领域', '专业', '领域', 'subject', 'domain', 'discipline', 'field'), 'target_paper_count': ('篇数', '参考文献篇数', '文献篇数', '文献数量', '参考文献数量', 'paper_count', 'references', 'ref_count'), 'cn_en_ratio': ('中英文比例', '中英比例', '语言比例', 'ratio', 'language_ratio'), 'degree_level': ('学位层次', '学位', '层次', '学历', 'degree', 'level', 'degree_type', 'paper_type'), 'research_type': ('研究方法', '研究类型', '研究方式', 'research_method', 'method_type'), 'target_valid_n': ('样本量', '有效样本量', '目标样本量', 'sample_size')}"
+   },
+   {
+    "name": "_NUMBER_UNIT",
+    "type": "Pattern"
+   },
+   {
+    "name": "_OUTLINE_SUFFIXES",
+    "type": "tuple",
+    "value": "('.md', '.markdown', '.txt')"
+   },
+   {
+    "name": "_PRESET_DEFAULT_WORDS",
+    "type": "frozenset",
+    "value": "frozenset({'不指定', 'default', '跟随设置页', '默认', '跟随'})"
+   },
+   {
+    "name": "_PROBLEM_FILE_FORBIDDEN",
+    "type": "dict",
+    "value": "{'.doc': '旧版 Word（.doc）不能作赛题文件，请另存为 .docx 或 PDF 后重新上传', '.zip': '压缩包不能作赛题文件，请选包里的赛题文档', '.rar': '压缩包不能作赛题文件', '.7z': '压缩包不能作赛题文件', '.tar': '压缩包不能作赛题文件', '.gz': '压缩包不能作赛题文件', '.tgz': '压缩包不能作赛题文件', '.bz2': '压缩包不能作赛题文件', '.xz': '压缩包不能作赛题文件', '.tbz2': '压缩包不能作赛题文件', '.txz': '压缩包不能作赛题文件'}"
+   },
+   {
+    "name": "_PROBLEM_LETTER",
+    "type": "Pattern"
+   },
+   {
+    "name": "_REQUIREMENT_TEMPLATES",
+    "type": "frozenset",
+    "value": "frozenset({'humanities_paper', 'thesis_proposal', 'literature_review'})"
+   },
+   {
+    "name": "_RESETS",
+    "type": "dict",
+    "value": "{'paper_type': ('max_pages', 'column_layout'), 'venue': ('max_pages', 'venue_family', 'review_mode', 'venue_paper_size', 'venue_citation'), 'template_source': ('template_main',)}"
+   },
+   {
+    "name": "_SKIP_KINDS",
+    "type": "tuple",
+    "value": "('select', 'toggle', 'number', 'text', 'textarea')"
+   },
+   {
+    "name": "_STAGE_WORDS",
+    "type": "dict",
+    "value": "{'has_questionnaire': ('问卷',), 'has_data': ('数据', '答卷', '回收', '收回', '收了', '样本')}"
+   },
+   {
+    "name": "_STEP_NAME",
+    "type": "Pattern"
+   },
+   {
+    "name": "_SURVEY_DATA",
+    "type": "Pattern"
+   },
+   {
+    "name": "_SURVEY_DIAGRAM_STYLE",
+    "type": "tuple",
+    "value": "(('house', '与数据图一致'), ('mono', '黑白'), ('plain', '素雅'), ('modern', '现代'))"
+   },
+   {
+    "name": "_TEMPLATE_ALIASES",
+    "type": "dict",
+    "value": "{'comp_cumcm': ('数学建模国赛', '数模国赛', '国赛数模', '全国大学生数学建模竞赛', '高教社杯', '全国赛'), 'comp_mcm': ('美赛', '美国大学生数学建模竞赛'), 'comp_huawei': ('研究生数学建模', '研究生数学建模竞赛', '研赛', '华为杯研究生数学建模'), 'comp_stats': ('统计建模', '统计建模比赛', '统计建模竞赛'), 'comp_mathorcup': ('妈妈杯',), 'comp_mathorcup_bigdata': ('MathorCup 大数据竞赛', 'MathorCup 大数据挑战赛', '妈妈杯大数据', '大数据', '大数据赛', '大数据竞赛', '大数据挑战赛'), 'comp_liaoning': ('辽宁省', '东三省', '辽宁省数学建模', '东三省数学建模'), 'auto_review': ('自动审稿', '审稿'), 'paper_writing_zh': ('毕业论文', '学位论文', '本科毕业论文', '硕士毕业论文', '本科论文', '硕士论文', '中文论文', '中文期刊论文', '中文期刊', '核心期刊论文'), 'paper_writing': ('英文论文', '英文期刊论文', '英文会议论文', 'SCI 论文', 'SCI论文'), 'comp_certcup_en': ('小美赛', '认证杯国际赛'), 'survey_market': ('市调', '市调赛', '正大杯', '市场调查大赛', '市场调查与分析大赛'), 'thesis_proposal': ('开题',), 'literature_review': ('综述',), 'grad_project': ('毕业设计', '毕设', '软件开发', '软件项目', '开发项目', '一句话生成'), 'copyright_material': ('软著', '软件著作权', '软著申请', '软著材料'), 'patent_disclosure': ('专利', '专利交底书', '技术交底书'), 'paper_from_assets': ('已有资料写论文', '从资料写论文'), 'humanities_paper': ('人文社科', '文科论文'), 'nature_writing': ('Nature 论文', '顶刊论文')}"
+   },
+   {
+    "name": "_TRUE_WORDS",
+    "type": "frozenset",
+    "value": "frozenset({'启用', 'on', '开', 'true', '好', 'y', '打开', '是', '是的', 'yes', '要', '需要', '开启', '1', '对'})"
+   },
+   {
+    "name": "_VENUE_FIELDS",
+    "type": "tuple",
+    "value": "('venue_family', 'review_mode', 'venue_paper_size', 'venue_citation', 'venue_name', 'cfp_url', 'cfp_text')"
+   },
+   {
+    "name": "_VENUE_OPTION_FIELDS",
+    "type": "tuple",
+    "value": "('review_mode', 'venue_paper_size', 'venue_citation')"
+   },
+   {
+    "name": "_VENUE_TEMPLATES",
+    "type": "frozenset",
+    "value": "frozenset({'full_pipeline', 'paper_writing_zh', 'paper_writing'})"
+   },
+   {
+    "name": "_academic_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_check_values",
+    "type": "cython_function_or_method",
+    "doc": "逐项核值并换成规范值；写错的一次说全（对话建项目实测 10-13：研究类型、学科各错一回，AI 白调两次 draft_project）。",
+    "sig": "(template: 'str', fmap: 'dict', pending: 'dict', ctx: 'Context') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_chosen_venue",
+    "type": "cython_function_or_method",
+    "doc": "当前选中的、对这篇论文有效的投稿格式（语言对得上；中文只对期刊论文）；没选或无效返回 None。",
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'Optional[dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_clean_disclosure",
+    "type": "cython_function_or_method",
+    "doc": "卡片上的 AI 使用声明：{mode: off|none|used, records: [...], confirmed: bool}。\n\n这里只做形状校验，记录本身是否合规在 missing() 里用 ai_disclosure.normalize_ai_disclosure\n按严格规则核（填到一半也能存，只是不能建）。",
+    "sig": "(raw: 'Any')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_clean_format_path",
+    "type": "cython_function_or_method",
+    "doc": "格式模板、要求文档：已上传的材料里、类型对得上的一个文件（压缩包能选，旧版 .doc 不能）。",
+    "sig": "(f: 'Field', raw: 'Any', ctx: 'Context') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_clean_path",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(raw: 'Any', ctx: 'Context', field_name: 'str', label_text: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_clean_step_map",
+    "type": "cython_function_or_method",
+    "doc": "每步模型 / 每步思考强度：{步骤名: 预设 id / 思考强度}。值为空的步骤去掉（= 用整体设置）。\n这里只核形状和值；步骤名是不是这个项目的步骤，由知道步骤的调用方核（建项目按预览的步骤，改设置按项目的步骤）。",
+    "sig": "(f: 'Field', raw: 'Any', ctx: 'Context')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_coerce",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(f: 'Field', raw: 'Any', ctx: 'Context')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_coerce_for",
+    "type": "cython_function_or_method",
+    "doc": "_coerce，选项值写的正好是另一类项目时多说一句（10-17 实测：论文类型写成 literature_review——文献综述是单独一类）。",
+    "sig": "(template: 'str', f: 'Field', raw: 'Any', ctx: 'Context')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_column_default",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_comp_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_dev_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_diagram_default",
+    "type": "cython_function_or_method",
+    "doc": "流程图配色默认：美赛随机跟随本篇（用户 2026-10-08），市调与数据图一致（2026-10-16），其余纯黑白（和表单 NewWorkflow.tsx 一致）。",
+    "sig": "(template: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_disclosure_into",
+    "type": "cython_function_or_method",
+    "doc": "AI 工具使用声明写进参数：开了就按“使用了 / 没有使用”写；国赛（required）还没选的记成待定——\n写论文 / 编译前调度层和引擎会拦（services/ai_disclosure.PENDING_PARAM）。",
+    "sig": "(params: 'dict', disc: 'Any', required: 'bool') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_field_map",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', choices: 'dict', ctx: 'Context') -> 'dict[str, Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_format_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_ip_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_known",
+    "type": "cython_function_or_method",
+    "doc": "按选项查表；还没核对过、不在表里的值（写错的、写成列表的）先按默认。",
+    "sig": "(table: 'dict', value: 'Any', default: 'str')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_latex_template_ready",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_loose_key",
+    "type": "cython_function_or_method",
+    "doc": "比对用：去掉空白、标点、括号，不分大小写。",
+    "sig": "(text: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_loose_option",
+    "type": "cython_function_or_method",
+    "doc": "选项写了别的写法（大小写不同、写了中文名、带了“格式 / 模式”这类字）→ 选项值；对不上、对上不止一个 → None。",
+    "sig": "(f: 'Field', raw: 'str')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_loose_preset",
+    "type": "cython_function_or_method",
+    "doc": "模型预设写了名字或模型名（“5.5”“sonnet”）→ 预设 id；对不上、对上不止一个 → 原样。",
+    "sig": "(raw: 'Any', ctx: 'Context', presets) -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_loose_step",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(key: 'Any', steps) -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_loose_value",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(f: 'Field', raw: 'Any', ctx: 'Context', presets, steps) -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_model_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_norm_material",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(raw: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_one_line",
+    "type": "cython_function_or_method",
+    "doc": "和表单的 oneLine 一样：空白并成一个空格、去掉首尾，截到上限。",
+    "sig": "(text: 'Any', limit: 'int') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_paper_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_paper_pages_default",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'int'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_pfa_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_preset_model",
+    "type": "cython_function_or_method",
+    "doc": "预设用的模型名：两处给的键不一样（project_intake.preset_options 是 model，表里是 model_id）。",
+    "sig": "(preset: 'dict') -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_profile_fields",
+    "type": "cython_function_or_method",
+    "doc": "写作档案（和新建页 utils/academicProfile.ts 的 profileFields 一致）；综述、竞赛论文等没有。",
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_profile_params",
+    "type": "cython_function_or_method",
+    "doc": "写作档案的参数（和表单 academicProfileParams 一致）：\"让 AI 判断 / 自动判断 / 按学科默认\"、学术学位、\n空着的课题来源和时间不提交（后端 services/writing_profile.normalize_params 再归一化一次）。",
+    "sig": "(template: 'str', choices: 'dict', ctx: 'Context') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_research_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_review_fields",
+    "type": "cython_function_or_method",
+    "doc": "投稿前模拟评审（用户 2026-10-13）：论文类项目才有。默认按论文类型：期刊、会议、学位论文、Nature、全流程开，\n课程论文、课程报告、综述、开题关。只评不改稿，会多花额度：只有用户本人能定。",
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_review_probe",
+    "type": "cython_function_or_method",
+    "doc": "模拟评审按论文类型选评审表、定默认开关：从卡片的选择里取它要看的几项（和项目参数同名）。",
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_spoken",
+    "type": "cython_function_or_method",
+    "doc": "这些设置各有哪些叫法：{叫法（比对用的写法）: {设置名}}。",
+    "sig": "(fmap: 'dict') -> 'dict[str, set]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_state_slot",
+    "type": "cython_function_or_method",
+    "doc": "一项选择对应表单里的哪个状态变量。表单换类型时状态原样保留，但不同面板用的是不同变量\n（比如人文论文的格式、自动审稿的语言都有自己的一份）：只有落在同一个变量上的才带过去。",
+    "sig": "(fam: 'str', key: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_static_default",
+    "type": "cython_function_or_method",
+    "doc": "不经 fields() 求默认值（fields() 自己的联动要用，不能递归调它）。",
+    "sig": "(template: 'str', name: 'str', ch: 'dict', ctx: 'Context')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_survey_fields",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_switch_template",
+    "type": "cython_function_or_method",
+    "doc": "换项目类型：落在表单同一个状态变量上、新类型里也有、取值仍合法的选择带过去，其余丢掉。\n\n表单换类型时会重设的，这里也重设：\n  · 换赛事 → 页数参考回到新赛事的默认；\n  · 通用论文换语言（= 换中英模板）→ 页数按论文类型 / 会议重新算。\n意思不同的不带：比如课程论文的题目不会变成竞赛的赛题文字（K10）。",
+    "sig": "(old: 'str', new: 'str', choices: 'dict', sources: 'dict', ctx: 'Context') -> 'tuple[dict, dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_template_by_words",
+    "type": "cython_function_or_method",
+    "doc": "内部名写错几个字（“ip_software_copyright”“patent_application”“cumcm_2026”）：按英文词认，带的词最多的类型\n只有一个才算（10-17 实测：draft_project 写了 ip_software_copyright，说明里明明列着 copyright_material）。",
+    "sig": "(raw: 'str') -> 'str | None'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_value",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', ch: 'dict', name: 'str', ctx: 'Context')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_venue_available",
+    "type": "cython_function_or_method",
+    "doc": "这个投稿格式现在能不能选：随软件提供模板的随时能选；要用官方模板的，卡上要先选好一份能用的 LaTeX 模板。",
+    "sig": "(fam: 'dict', template: 'str', ch: 'dict', ctx: 'Context') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_venue_catalog",
+    "type": "_lru_cache_wrapper",
+    "doc": "投稿格式清单（只读一次）；读不到时空（新建页的面板这时也不显示）。",
+    "sig": "() -> 'tuple'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_venue_fields",
+    "type": "cython_function_or_method",
+    "doc": "投稿格式和它的选项（和新建页 VenueFormatPanel 一致：审稿方式、纸张、引用格式多于一种才让选）。",
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_venue_labels",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_venue_params",
+    "type": "cython_function_or_method",
+    "doc": "投稿格式的参数（和表单 utils/venueFormat.ts 的 venueParams 一致）：取值都来自清单，选的不合法就用格式默认。",
+    "sig": "(fam: 'dict', v) -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_venue_resets",
+    "type": "cython_function_or_method",
+    "doc": "投稿格式的联动（NewWorkflow.tsx handleLangChange / handlePaperTypeChange、VenueFormatPanel 的 pick）：\n· 全流程切中英文、论文类型改成非期刊：投稿格式整个清掉（EMPTY_VENUE）；切语言不动页数；\n· 换投稿格式：审稿方式、纸张、引用格式回到新格式的默认；新格式有参考篇幅就用它，没有就页数不动。",
+    "sig": "(template: 'str', choices: 'dict', sources: 'dict', pending: 'dict', ctx: 'Context') -> 'None'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "_without_language_suffix",
+    "type": "cython_function_or_method",
+    "doc": "内部名多带了语言后缀（10-17 实测：thesis_proposal_zh、course_paper_zh）：去掉后缀再认。_cn / _chinese 先试中文版\n（comp_apmcm_cn → comp_apmcm_zh），_en / _english 先试英文版。",
+    "sig": "(raw: 'str') -> 'str | None'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "all_templates",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'list[str]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "apply_changes",
+    "type": "cython_function_or_method",
+    "doc": "把一组改动（AI 的 draft_project，或用户在卡片上的修改）合进当前选择。\n\n返回新的 (template, choices, sources)。任何一项不合法就整组拒绝（IntakeError），不留半截。",
+    "sig": "(template: 'str', choices: 'dict', sources: 'dict', changes: 'dict', *, by: 'str', ctx: 'Context') -> 'tuple[str, dict, dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "build",
+    "type": "cython_function_or_method",
+    "doc": "返回 (title, params)。只在 missing() 为空时调用；对话入口：chat_mode + _toolset=dispatch。",
+    "sig": "(template: 'str', choices: 'dict', ctx: 'Context') -> 'tuple[str, dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "canonical_names",
+    "type": "cython_function_or_method",
+    "doc": "一组设置名（可能写了中文名、别的叫法）→ {写的: 标准名}。本来就是标准名的、认不出的不在里面。\nuser_quotes 的键用（AI 常常设置名写对了、原话那边写的是中文名，或者反过来）。",
+    "sig": "(template: 'str', choices: 'dict', names, ctx: 'Context') -> 'dict'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "card_fields",
+    "type": "cython_function_or_method",
+    "doc": "给前端渲染设置卡：当前适用的每一项（值、来源、选项、说明）。",
+    "sig": "(template: 'str', choices: 'dict', sources: 'dict', ctx: 'Context') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "contest_of",
+    "type": "cython_function_or_method",
+    "doc": "按哪个赛事的规则写：竞赛项目就是它自己，已有资料写论文看选的赛事；都不是返回空串。",
+    "sig": "(template: 'str', values: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "dataclass",
+    "type": "function",
+    "doc": null,
+    "sig": "(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)",
+    "defaults": "(None,)",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "dc_field",
+    "type": "function",
+    "doc": null,
+    "sig": "(*, default=<dataclasses._MISSING_TYPE object at 0x000002608BE14950>, default_factory=<dataclasses._MISSING_TYPE object at 0x000002608BE14950>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x000002608BE14950>)",
+    "defaults": "None",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "difflib",
+    "type": "module"
+   },
+   {
+    "name": "disclosure_problem",
+    "type": "cython_function_or_method",
+    "doc": "用后端已有的严格规则核一遍声明记录；没问题返回空串。",
+    "sig": "(disc: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "effort_word",
+    "type": "cython_function_or_method",
+    "doc": "思考强度的口头说法（“高”“最高”“默认”）→ 标准值；本来就是标准值、认不出的原样。",
+    "sig": "(raw: 'Any') -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "enable_checkpoints",
+    "type": "cython_function_or_method",
+    "doc": "建项目时的审阅点开关，和新建表单一致：进对话的项目不开；市调（走项目页的新流程）表单默认开着，照记\n（新流程本身不用审阅点，由三道关把关，见 workflow_engine 的市调步骤裁剪）。",
+    "sig": "(template: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "english_contest",
+    "type": "cython_function_or_method",
+    "doc": "英文赛事（美赛、亚太英文、小美赛、数维杯国际）：AI 工具使用声明是国赛的中文声明，这几个不出\n（10-15 审查 06-11；新建表单 utils/templateLabels.ts 的 ENGLISH_CONTESTS 是同一份名单）。",
+    "sig": "(template: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "family",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "fields",
+    "type": "cython_function_or_method",
+    "doc": "当前适用的字段（含表单里的显隐联动）。",
+    "sig": "(template: 'str', choices: 'dict', ctx: 'Context') -> 'list[Field]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "format_text_applies",
+    "type": "cython_function_or_method",
+    "doc": "按现在的选择，这个项目有没有「文字格式要求」。ctx 为空时只看 ch 里写明的值（从项目参数读回时用）。",
+    "sig": "(template: 'str', ch: 'dict', ctx: 'Context | None' = None) -> 'bool'",
+    "defaults": "(None,)",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "format_text_hint",
+    "type": "cython_function_or_method",
+    "doc": "AI 写了「文字格式要求」、这个项目（现在）没有这一项时回执里怎么说：别叫它记成决定（导出不读决定）。",
+    "sig": "(template: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "functools",
+    "type": "module"
+   },
+   {
+    "name": "is_template",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "label",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "log",
+    "type": "Logger"
+   },
+   {
+    "name": "logging",
+    "type": "module"
+   },
+   {
+    "name": "loose_step",
+    "type": "cython_function_or_method",
+    "doc": "步骤写了中文名或只对得上一步的简称（“建模”）→ 内部名；对不上、对上不止一步 → 原样。\nsteps：[{name, label}]。每步模型 / 每步强度、积分模式的每步模型共用。",
+    "sig": "(key: 'Any', steps) -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "loose_template",
+    "type": "cython_function_or_method",
+    "doc": "项目类型写了中文名或别的叫法（“国赛”“CUMCM”“comp-cumcm”）→ 类型的内部名；认不出、对上不止一个 → 原样。",
+    "sig": "(raw: 'Any') -> 'Any'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "loosen",
+    "type": "cython_function_or_method",
+    "doc": "AI 写的一组设置（draft_project / change_settings）：设置名、取值写得不标准的，转成标准写法。\n\npresets：设置页里的模型预设 [{id, name, model_id}]；steps：这个项目的步骤 [{name, label}]（每步模型 / 每步强度用）。\n返回 (转好的改动, {原来写的设置名: 标准设置名})。认不出的原样留着。不改传进来的对象。",
+    "sig": "(template: 'str', choices: 'dict', changes: 'Any', ctx: 'Context', *, presets=(), steps=()) -> 'tuple[Any, dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "mathorcup_word_note",
+    "type": "cython_function_or_method",
+    "doc": "MathorCup 选了 Word 时给的那句提醒（新建页、建项目卡、改设置同一句）；不是 MathorCup 或没选 Word 返回空串。",
+    "sig": "(template: 'str', values: 'Any', docx: 'bool') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "mentions",
+    "type": "cython_function_or_method",
+    "doc": "用户的这句话（text）有没有说到 name 这一项：说了它的名字 / 叫法，或者说了要改成的那个值\n（选项的名字、模型预设的名字、模型名——“5.5”这样只说一截的也算）。\nAI 改只有用户能定的项、没带原话时，凭这个看是不是用户自己说的。model_names：要换成的模型还有哪些叫法。",
+    "sig": "(template: 'str', choices: 'dict', name: 'str', text: 'Any', ctx: 'Context', *, value: 'Any' = None, presets=(), model_names=()) -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "missing",
+    "type": "cython_function_or_method",
+    "doc": "建项目前还缺的（会挡住「创建」按钮）。",
+    "sig": "(template: 'str', choices: 'dict', sources: 'dict', ctx: 'Context') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "pfa_contest",
+    "type": "cython_function_or_method",
+    "doc": "已有资料写论文选了竞赛类、又定了是哪个赛事（10-15 审查 05-G9；选择和参数里都是 paper_type_target /\npfa_competition 这两个键）。没定、不是这个类型返回空串。",
+    "sig": "(template: 'str', values: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "problem_letter",
+    "type": "cython_function_or_method",
+    "doc": "题号写成“Problem C”“第C题”“C题”“赛题 C”的统一成一个大写字母；认不出原样返回（10-15 审查 06-14：\n以前项目名成了“Problem C题”，题号和赛题对不上的核对也被跳过）。",
+    "sig": "(raw: 'object') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "re",
+    "type": "module"
+   },
+   {
+    "name": "said_effort",
+    "type": "cython_function_or_method",
+    "doc": "这句话里有没有说到这个思考强度（“max”“最高”“拉满”）。",
+    "sig": "(text: 'Any', level: 'Any') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "said_model",
+    "type": "cython_function_or_method",
+    "doc": "这句话里有没有说到这些模型：整个名字，或名字的一截（“用 5.5 跑”“换成 opus”）。",
+    "sig": "(text: 'Any', names) -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "skippable",
+    "type": "cython_function_or_method",
+    "doc": "AI 给的这一项不对时，能不能跳过它、把别的照记（只给 AI 用：用户在卡片上改的照旧整组拒）。",
+    "sig": "(exc: 'IntakeError', template: 'str', choices: 'dict', ctx: 'Context') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "skipped_text",
+    "type": "cython_function_or_method",
+    "doc": "跳过的项（{项: \"unknown_field\" / \"user_only_field\" / 值不对的说明}）说成一句话。",
+    "sig": "(template: 'str', skipped: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "stage_fits",
+    "type": "cython_function_or_method",
+    "doc": "survey_stage 的原话核对（user_backing 的 fits）：记“已有问卷 / 已有数据”时，这句话没说到问卷 / 数据就不算\n（False），说到了照常看（None）；“从零开始”不另核。",
+    "sig": "(value: 'Any', text: 'Any') -> 'bool | None'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "template_hint",
+    "type": "cython_function_or_method",
+    "doc": "认不出的类型说清楚：中英两版都有的要问用户；别的给最接近的几个和全部类型（AI 下一次就能写对）。",
+    "sig": "(raw: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "template_key",
+    "type": "cython_function_or_method",
+    "doc": "卡上选的格式模板对应哪一次识别（材料路径、选的主文件、Word 还是 LaTeX 优先）；没选是 None。",
+    "sig": "(template: 'str', choices: 'dict') -> 'Optional[str]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "template_options",
+    "type": "cython_function_or_method",
+    "doc": "设置卡上\"项目类型\"的下拉：按表单的分组排。",
+    "sig": "() -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "template_view",
+    "type": "cython_function_or_method",
+    "doc": "卡上选的格式模板的识别结果（还没识别过是 None）。",
+    "sig": "(template: 'str', choices: 'dict', ctx: 'Context') -> 'Optional[dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "tentative_template_key",
+    "type": "cython_function_or_method",
+    "doc": "改动里带了格式模板、主文件、输出格式或项目类型时，先按原话推出要识别哪一份（这样 apply_changes 核\n「模板主文件」的选项时识别结果已经在了；真正的值以 apply_changes 的结果为准，对不上调用方再识别一次）。",
+    "sig": "(template: 'str', choices: 'dict', changes: 'Any', ctx: 'Context') -> 'Optional[str]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "tidy_problem_file_title",
+    "type": "cython_function_or_method",
+    "doc": "赛题文件名当项目名：下划线换空格；开头和题号重复的\"2026年C题\"去掉（标题里已经有\"C题\"）。\n去完什么都不剩就保留原名。新建表单（NewWorkflow.tsx 的 tidyProblemFileTitle）同一规则。",
+    "sig": "(name: 'str', problem_id: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "value",
+    "type": "cython_function_or_method",
+    "doc": "某一项的当前值：给了用给的，没给用默认。",
+    "sig": "(template: 'str', choices: 'dict', name: 'str', ctx: 'Context')",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "venue_family_info",
+    "type": "cython_function_or_method",
+    "doc": "投稿格式的公开信息（id、语言、审稿方式、纸张、引用格式、参考篇幅……）；不认识返回 None。",
+    "sig": "(family_id: 'Any') -> 'Optional[dict]'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   },
+   {
+    "name": "word_output",
+    "type": "cython_function_or_method",
+    "doc": "这张卡上的项目出不出 Word（输出格式没选时按各类型的默认：学术写作出 Word，竞赛、论文出 PDF）。",
+    "sig": "(template: 'str', choices: 'dict') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_intake"
+   }
+  ]
+ }
+]

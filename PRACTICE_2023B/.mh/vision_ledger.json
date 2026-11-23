@@ -1,0 +1,229 @@
+{
+ "version": 1,
+ "entries": {
+  "2:7eb060b878b1598b7ebda4029dced74d52054cce5099056759340e7e8d40faef": {
+   "figure": "fig01_q1_product_yields",
+   "kind": "datafig",
+   "source": "figures/fig01_q1_product_yields.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094805.6980052
+   ],
+   "at": "2026-11-19T13:26:45+00:00",
+   "at_ts": 1795094805.6980052
+  },
+  "2:6dac628519fbe4ef29eb2f86b0565042dfdca586d35983dd73f78e4c7045537b": {
+   "figure": "fig02_q1_span_noise",
+   "kind": "datafig",
+   "source": "figures/fig02_q1_span_noise.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094809.181128
+   ],
+   "at": "2026-11-19T13:26:49+00:00",
+   "at_ts": 1795094809.181128
+  },
+  "2:9dfb56e60c6700aeb0b7b440c5a2b224e4ec640317e12e567ba5dc5b856fb9e9": {
+   "figure": "fig03_q1_ilr_fit",
+   "kind": "datafig",
+   "source": "figures/fig03_q1_ilr_fit.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094816.0751274
+   ],
+   "at": "2026-11-19T13:26:56+00:00",
+   "at_ts": 1795094816.0751274
+  },
+  "2:153b9fbab91542e59ba22262f403a1788446a75e573880cd5e2d3b29c52b821b": {
+   "figure": "fig04_q2_major_abs",
+   "kind": "datafig",
+   "source": "figures/fig04_q2_major_abs.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094822.7013133
+   ],
+   "at": "2026-11-19T13:27:02+00:00",
+   "at_ts": 1795094822.7013133
+  },
+  "2:64d94ae770f454cba648c5828d9ff4b43ee9ed86df6f202a54465ee4816f0783": {
+   "figure": "fig05_q2_major_phi",
+   "kind": "datafig",
+   "source": "figures/fig05_q2_major_phi.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094829.0661578
+   ],
+   "at": "2026-11-19T13:27:09+00:00",
+   "at_ts": 1795094829.0661578
+  },
+  "2:054456859cca2299883db309b4ff91c03b23ab5a5eeb339709ffbca512de01bd": {
+   "figure": "fig06_q2_minor_phi",
+   "kind": "datafig",
+   "source": "figures/fig06_q2_minor_phi.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094834.6826465
+   ],
+   "at": "2026-11-19T13:27:14+00:00",
+   "at_ts": 1795094834.6826465
+  },
+  "2:8f5689fb52c3cd02c0d0ac6825e4bdd9c6ad4cbaf0f6eaba0bbc65873bd70665": {
+   "figure": "fig07_q2_bridge",
+   "kind": "datafig",
+   "source": "figures/fig07_q2_bridge.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094839.2130723
+   ],
+   "at": "2026-11-19T13:27:19+00:00",
+   "at_ts": 1795094839.2130723
+  },
+  "2:83615f5abc0fb78ee40eb8f3ec01fbd2cfbf07396f76e633145547b8d244553b": {
+   "figure": "fig08_q3_product_delta",
+   "kind": "datafig",
+   "source": "figures/fig08_q3_product_delta.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094845.1588335
+   ],
+   "at": "2026-11-19T13:27:25+00:00",
+   "at_ts": 1795094845.1588335
+  },
+  "2:4c7379d23fb901c6878d6b9c8b3c6a44e742724e72925a9a73420113f67b6894": {
+   "figure": "fig09_q3_gas_ratio",
+   "kind": "datafig",
+   "source": "figures/fig09_q3_gas_ratio.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094850.1096828
+   ],
+   "at": "2026-11-19T13:27:30+00:00",
+   "at_ts": 1795094850.1096828
+  },
+  "2:b0c5d1b958edcbda1a39b7566c1afe019975ee0a5222b3b6801ff2b67616d86c": {
+   "figure": "fig10_q4_selectivity",
+   "kind": "datafig",
+   "source": "figures/fig10_q4_selectivity.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094853.827418
+   ],
+   "at": "2026-11-19T13:27:33+00:00",
+   "at_ts": 1795094853.827418
+  },
+  "2:bacb78e28c070a8ab4b3552153406c08815f5b867f0e14880a29d033ba80eba1": {
+   "figure": "fig11_q4_carbon",
+   "kind": "datafig",
+   "source": "figures/fig11_q4_carbon.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094858.7157652
+   ],
+   "at": "2026-11-19T13:27:38+00:00",
+   "at_ts": 1795094858.7157652
+  },
+  "2:6e469136f1c116195399cec02e8c1857feeab25112528752c12917987c80239b": {
+   "figure": "fig12_q4_ridge",
+   "kind": "datafig",
+   "source": "figures/fig12_q4_ridge.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094862.6039348
+   ],
+   "at": "2026-11-19T13:27:42+00:00",
+   "at_ts": 1795094862.6039348
+  },
+  "2:603f947a9a571f2f45a8d5a80b639c379b4666b7f4021697187cfab7478a20ed": {
+   "figure": "fig13_q5_predictions",
+   "kind": "datafig",
+   "source": "figures/fig13_q5_predictions.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094870.8274193
+   ],
+   "at": "2026-11-19T13:27:50+00:00",
+   "at_ts": 1795094870.8274193
+  },
+  "2:3e4f9aaf77f758d60211607efd3c0df98347b90d0798ca6b05953cc00c7df88d": {
+   "figure": "fig14_q5_loo",
+   "kind": "datafig",
+   "source": "figures/fig14_q5_loo.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094875.1708438
+   ],
+   "at": "2026-11-19T13:27:55+00:00",
+   "at_ts": 1795094875.1708438
+  },
+  "2:51bbe37a18ab167f5d62429841a0fbf70284d32a96c044f3853a222f65db8fbc": {
+   "figure": "fig15_q5_support",
+   "kind": "datafig",
+   "source": "figures/fig15_q5_support.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094879.9391673
+   ],
+   "at": "2026-11-19T13:27:59+00:00",
+   "at_ts": 1795094879.9391673
+  },
+  "2:2bb8e304e18d8bac4725132a28d4a431d5abcb5ffd0e734ad3d1b40206d09b9a": {
+   "figure": "fig16_validation",
+   "kind": "datafig",
+   "source": "figures/fig16_validation.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795094884.7850685
+   ],
+   "at": "2026-11-19T13:28:04+00:00",
+   "at_ts": 1795094884.7850685
+  }
+ }
+}

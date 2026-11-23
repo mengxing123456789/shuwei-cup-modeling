@@ -1,0 +1,69 @@
+{
+ "anchors": [
+  {
+   "anchor": "wrist",
+   "p1a_n": 5,
+   "p1a_ari_mean": 0.5278059443282489,
+   "p1a_ari_sd": 0.03128582720930862,
+   "p1a_ari_min": 0.4764599863568379,
+   "p1a_ari_max": 0.5590158723746648,
+   "p1a_bf1_mean": 0.17018350020134992,
+   "p1a_bf1_sd": 0.06825141052261169,
+   "p1a_ari_runs": [
+    0.47646,
+    0.532658,
+    0.544514,
+    0.559016,
+    0.526381
+   ],
+   "p1b_ap": 0.14933155308832577,
+   "p1b_auc": 0.8270846476857222,
+   "p1b_worst": 0.7776610910007129
+  },
+  {
+   "anchor": "palm",
+   "p1a_n": 5,
+   "p1a_ari_mean": 0.5439677182499659,
+   "p1a_ari_sd": 0.035461327355188116,
+   "p1a_ari_min": 0.5092586576855317,
+   "p1a_ari_max": 0.6019604910617165,
+   "p1a_bf1_mean": 0.20517571670231563,
+   "p1a_bf1_sd": 0.03639937056919414,
+   "p1a_ari_runs": [
+    0.526246,
+    0.54933,
+    0.509259,
+    0.60196,
+    0.533044
+   ],
+   "p1b_ap": 0.12356088018750082,
+   "p1b_auc": 0.8075184833076036,
+   "p1b_worst": 0.7393107170017471
+  },
+  {
+   "anchor": "tips",
+   "p1a_n": 5,
+   "p1a_ari_mean": 0.561339745497869,
+   "p1a_ari_sd": 0.02924478568266291,
+   "p1a_ari_min": 0.5188271168193659,
+   "p1a_ari_max": 0.598758595089505,
+   "p1a_bf1_mean": 0.21644971458758655,
+   "p1a_bf1_sd": 0.02151718703316665,
+   "p1a_ari_runs": [
+    0.558756,
+    0.598759,
+    0.574596,
+    0.518827,
+    0.555761
+   ],
+   "p1b_ap": 0.08194817233710425,
+   "p1b_auc": 0.8098921916081082,
+   "p1b_worst": 0.7519334637540408
+  }
+ ],
+ "pooled_within_anchor_sd": 0.03199731341571988,
+ "tips_minus_wrist_pt": 3.3533801169620125,
+ "se_pt": 1.9152339145888166,
+ "verdict": "inside the noise",
+ "note": "Part I is not bit-reproducible: identical inputs (state_anchor_wrist.npz is bit-identical to state.npz) give different results across runs, because the chunked sampler, AdamW and the early-stopping checkpoint are all order- and timing-dependent.  The anchor rows are therefore reported as mean +- sd over repeated runs, and the anchor contrast is compared against that spread."
+}

@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "built_at": "2026-11-22T19:03:37+0800",
+  "records": [
+    {
+      "id": "constraint:common_conditions",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\common_conditions.json",
+      "bytes": 2522,
+      "sha256": "d81d08a08407bc07078ca6e025a80cdcc58643a2e95a94e32076a3e14e6ccd2c",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "constraint:job_families",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\job_families.csv",
+      "bytes": 366,
+      "sha256": "b573938d45780354228f94335260e798070990b7e46780cc2e0f9628154b3066",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "constraint:Problem_3_Requirements",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\Problem_3_Requirements.pdf",
+      "bytes": 109336,
+      "sha256": "9cc9caf7b6d373c527190b646ddd8132f44318b3012bfa3958ae9da07a13381d",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "constraint:record_split",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\record_split.csv",
+      "bytes": 9409,
+      "sha256": "fc1b36dd42d1d60a9fb2a7086d377a678662ca24f76da4cc195491fbea2d68c5",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "constraint:service_zones",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\service_zones.csv",
+      "bytes": 56,
+      "sha256": "9a4740aac55537a0bea32d4198f7dc583dee178353055070557c46b80d14964d",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "constraint:source_segment_index",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\source_segment_index.csv",
+      "bytes": 84411,
+      "sha256": "429f9074d27a36151bc9bcc7638dadc374fc3321bd15632cf59f0889e0c5652d",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "constraint:tasks",
+      "kind": "file",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Restocking_Tasks_and_Constraints\\tasks.csv",
+      "bytes": 1117,
+      "sha256": "0239280895139104feec55b7e8cd8e9903eda7122d0ad9e34d9960de6bf9dbd5",
+      "source": "official release, Restocking_Tasks_and_Constraints",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "problem:statement",
+      "kind": "file",
+      "path": "E:\\数学建模\\数维杯\\2026年第十二届数维杯全国大学生数学建模挑战赛（秋季赛）赛题\\C题\\2026_“ShuWei Cup”C_Problem.pdf",
+      "bytes": 1594034,
+      "sha256": "a1f3e2dcb37bb875ac8084e26e741a2a90a7ebd03f4019c9f2395284ce7e6e0a",
+      "source": "ShuWei Cup 2026 autumn, problem C",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "dataset:EgoDemo",
+      "kind": "dataset_tree",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Raw_Data\\EgoDemo",
+      "files": 297,
+      "bytes": 1916728226,
+      "sha256": "2ba7e06f3bcbf24a5fd5582f6f30d7fb5e780522c2caf95af841169641da5482",
+      "hash_scope": "sorted relative path + byte size, not per-file content",
+      "source": "official release, Raw_Data",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "dataset:EgoPro",
+      "kind": "dataset_tree",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Raw_Data\\EgoPro",
+      "files": 308,
+      "bytes": 2029238984,
+      "sha256": "6791a7e694580c8817ee56c0d8f957ed808ad4ae1d4110a7ca3f2d69cc3eff66",
+      "hash_scope": "sorted relative path + byte size, not per-file content",
+      "source": "official release, Raw_Data",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    },
+    {
+      "id": "dataset:EgoStandard",
+      "kind": "dataset_tree",
+      "path": "C:\\Users\\29900\\Desktop\\Restocking_Problem_and_Data_EN\\Raw_Data\\EgoStandard",
+      "files": 384,
+      "bytes": 2150408653,
+      "sha256": "4a881ffd16fc97a80975b3b7a3178e39cfcfa4b6c78b7b544d76e5896d5bb3c3",
+      "hash_scope": "sorted relative path + byte size, not per-file content",
+      "source": "official release, Raw_Data",
+      "fetched_at": "2026-11-22T19:03:37+0800"
+    }
+  ],
+  "note": "12 records: 7 constraint files + problem statement + 3 dataset trees."
+}

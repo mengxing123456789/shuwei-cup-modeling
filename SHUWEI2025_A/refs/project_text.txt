@@ -1,0 +1,1402 @@
+                      Team Number:         SHUWEICUP2503517
+                      Problem Chosen:      A
+
+
+                          2025 “ShuWei Cup” summary sheet
+
+Background and Task A large road vehicle picks up lateral vibration from the road
+and from its own body modes, and the standard cure — stiffening the suspension or
+adding a passive damper — trades ride comfort against payload and can never be tuned
+to one frequency without degrading another. This paper studies active suppression with
+two dual-motor centrifugal actuators, each driving a pair of counter-rotating eccentric
+masses. On the official 2025 data set we answer three questions: how the vehicle re-
+sponds with and without the given rotation; how to design a rotation that minimises the
+                               RT
+lateral vibration index Ih = T1 0 a2y dt; and how to do the same when only the body
+acceleration is measurable.
+     Modeling Framework The eight eccentric masses are summed analytically, each
+contributing 2mr(ω 2 cos θ + α sin θ), which gives an exact actuator force and, with
+the four tyre springs and dampers lumped into one equivalent set, a single-degree-of-
+freedom oscillator of mass 2 800 kg, stiffness 7 225 200 N/m and damping 3 600 N·s/m:
+8.0847 Hz, ζ = 0.0127, so the index is dominated by whatever happens to the line that
+falls on the resonance. The key structural fact is that a counter-rotating pair is a single-
+line source, Fpair = 4mrω 2 cos κ cos(ωt + ψ), with κ setting amplitude and ψ phase,
+both continuously modulated inside |ω| ≤ 100 rad/s, |α| ≤ 5 000 rad/s2 .
+     Results per Question Actuator off, scenario 1 gives Ih = 43.702; with the pre-
+scribed rotation, 189.293 — the given sequence makes the vibration 4.33 times worse,
+and the sign convention reverses the answer to 156.901, so the audit is part of the an-
+swer. For scenario 2 a static cancellation of the resonant line reaches 71.053 (−99.46%);
+a causal 0.25 s demodulation window that tracks its drift reaches 11.778 (−99.91%) at
+38.2 kN of 404 kN, and the window is a genuine interior optimum, not a tuning artefact.
+From acceleration alone, a demodulated Newton loop reaches 2 418.9 (−81.6%), and
+we show why it cannot reach the open-loop value. The window’s delay, not its gain, is
+the real bottleneck, so we train a 1 410-parameter network to forecast the drifting phasor
+0.12 s ahead from eight causal features: on unseen sequences it cuts the median phase
+error of linear extrapolation from 13.36◦ to 3.39◦ , closed on the official record it gives
+9.211 (−99.93%) at 23.9 kN — 37% less force than the analytic design — and driven by
+ay alone, after one round of own-state aggregation, 25.423 (−99.81%), 95 times better
+than the analytic loop on the same information.
+     Validation and Limitation The force was verified to 0.3◦ in phase and the transfer
+function to 2.5% in magnitude; doubling and quadrupling the passive damping only
+reaches 4 897.3 and 1 447.0. The dominant limitation is phase: a 6◦ command error
+raises the index from 11.778 to 128.98, and a 10 ms transport delay lifts the closed loop
+to 3 323.5. The learned controller adds two of its own: its corpus is synthetic, built from
+three measured statistics of the official record, so it is accurate there but not proof of
+generalisation; and it is a model inversion, degrading to 9 964.7 at c − 50%, which is
+why the model-based trim is kept.
+
+Keywords: centrifugal actuator; counter-rotating pair; single-degree-of-freedom vehi-
+cle model; resonant-line cancellation; causal demodulation; learned phasor forecasting;
+own-state aggregation
+
+
+
+
+                                            2
+CONTENTS                                                                                                    CONTENTS
+
+
+                                                     Contents
+
+1. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   1
+2. Model Building . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      3
+3. Question 1: the baseline and the prescribed rotation . . . . . . . . . . . . . . . . . . .                              6
+4. Question 2: designing the rotation for scenario 2 . . . . . . . . . . . . . . . . . . . . . .                           7
+5. Question 3: suppression from acceleration alone . . . . . . . . . . . . . . . . . . . . . . 12
+6. Learning the drift: a trained forecaster in the loop . . . . . . . . . . . . . . . . . . . . 15
+7. Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+8. Strengths and Weaknesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+9. References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+A. Appendix A: Code . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+
+
+
+
+                                                              3
+Team # SHUWEICUP2503517                                                         Page 1 of 27
+
+
+
+                                 I. Introduction
+
+1 . 1 Background
+     Vibration is the quiet tax that industrial machinery pays for speed. In a road vehicle
+the lateral channel is the worst offender, because the body mode that carries it sits low
+— around 8 Hz for a loaded heavy chassis — where road roughness, wheel imbalance
+and driveline orders all have energy, and because that mode has almost no damping: the
+numbers in this problem imply ζ = 0.0127, i.e. a decay time of 1.56 s, which is a bell
+rather than a filter.
+     Passive remedies are the classical answer and they are honest but blunt [4]. Stiff-
+ening the suspension moves the resonance up, which helps at 8 Hz and hurts at 12 Hz;
+adding damping helps everywhere a little and costs ride comfort in the 1–2 Hz range
+where the driver lives. Worse, a passive element cannot know which line of the spec-
+trum is the problem today.
+     A centrifugal actuator can. Two eccentric masses on one shaft, spun by a servo
+motor, produce a rotating force of magnitude mrω 2 whose direction is the crank angle;
+the same shaft reversed gives a second force, and the pair therefore produces a sinusoid
+at the rotation frequency whose amplitude and phase are set by the two crank angles.
+Because the force grows with ω 2 , a 100 rad/s machine with 100 kg at 0.2 m can generate
+tens of kilonewtons from a package that weighs a few hundred kilograms — the reason
+this mechanism appears in helicopter hub-moment cancellation [1, 2] and in automotive
+active mounts [3].
+
+
+1 . 2 Restatement of the Problems
+     The vehicle carries two such actuators, one at each diagonal, each driving four
+eccentric masses in two counter-rotating pairs. The body is connected to the four wheels
+by springs and dampers, the wheels are assumed not to move laterally, and the body has
+one lateral degree of freedom y(t) measured from its static position. With ay = ÿ the
+relative lateral acceleration, the quantity to be minimised is
+                                            Z
+                                          1 T 2
+                                    Ih =         a (t) dt,                               (1)
+                                          T 0 y
+which is the mean square acceleration — the quantity a passenger actually feels.
+     Question 1 builds the model with the actuator ignored, and then evaluates two cases
+on scenario 1: (a) actuator off, reporting y(t), ay (t) over 0–10 s and Ih ; (b) actuator on,
+with the four crank angles following the prescribed sequence in the data file, reporting
+the same three outputs.
+Team # SHUWEICUP2503517                                                         Page 2 of 27
+
+
+     Question 2 uses scenario 2, whose disturbance is not the same record, and asks for
+a designed crank-angle history that minimises Ih , together with the resulting curves and
+the index with and without the actuator.
+     Question 3 keeps scenario 2 but removes the luxury of knowing the disturbance:
+only the body acceleration ay (t) can be measured in real time. A rotation scheme has
+to be designed from that single signal, and its y, ay , crank angle and Ih reported.
+
+
+1 . 3 Our Work
+     Section 2 derives the actuator force and the vehicle equation from first principles
+and calibrates both against the data. Section 3 answers Question 1 and shows that the
+prescribed sequence is a worsening input, which we explain spectrally rather than dis-
+miss. Section 4 turns the counter-rotating pair into a controllable single-line source and
+designs two controllers for Question 2: a static cancellation and a causal tracking law,
+with the window length identified as an interior optimum and the result cross-checked
+against the physical lower bound. Section 5 answers Question 3 with a demodulated
+Newton loop driven only by ay , reports its tuning surface and parameter sensitivity, and
+documents the five alternative routes we implemented and measured before rejecting
+them. Section 6 then attacks the bottleneck the three analytic sections share, which is
+the delay of a causal demodulator, by training a small network to forecast the drifting
+phasor 0.12 s ahead, with the forecast used both as an open-loop command and as the
+starting point of the Newton loop; the training protocol, its held-out accuracy and its
+failure modes are reported rather than assumed. Section ?? collects the error analysis,
+including the two effects that dominate any real installation: command phase error and
+transport delay.
+     Four things in this paper are, as far as we can tell, not in the other solutions to this
+problem. (i) The pair is treated as an exact single-line source with independent amplitude
+and phase channels (eq:pair), which turns the design problem from a search over angle
+sequences into a two-parameter modulation problem with no inequality constraints to
+police. (ii) The window length is shown to be an interior optimum (an 18-point sweep)
+whose position is predicted by the demodulator’s group delay, not a hyper-parameter
+to be tuned. (iii) The prescribed sequence is reported as harmful and the harm is de-
+composed spectrally, with a sign and reference-axis audit that reproduces the published
+numbers under the opposite convention. (iv) A learned forecaster replaces the average,
+is measured on sequences it never saw, and its own failure at half damping is reported
+together with the trim that bounds it.
+Team # SHUWEICUP2503517                                                            Page 3 of 27
+
+
+
+                               II. Model Building
+
+2 . 1 Assumptions
+  1. One lateral degree of freedom. Yaw, roll and the wheels’ own lateral motion are
+     neglected, as the problem instructs. Justification: the four suspension points move
+     together in the lateral direction at the frequencies of interest, and the body is stiff
+     compared with the suspension. Used throughout; the consequence is that the model
+     cannot represent the torsional mode near 2 Hz, which the data do not excite either.
+  2. Linear suspension, lumped parameters. The four corner springs and dampers
+     are replaced by one equivalent stiffness k and damping c acting on the relative
+     displacement y. Justification: the data set supplies single values for both, so the
+     problem already assumes this reduction.
+  3. Rigid crank, ideal servo. The connecting rods and motor inertias are massless
+     and the commanded crank angle is realised exactly, except where we deliberately
+     add a delay in Section ??. Justification: the problem states the simplification, and
+     it keeps the force law exact rather than introducing an unidentifiable lag.
+  4. The two actuators act in parallel on the same coordinate. Justification: both
+     are bolted to the same rigid body, so their force vectors add.
+  5. Disturbance is exogenous. The recorded lateral force is imposed and unaffected
+     by the body motion. Justification: it represents road input through the tyres, which
+     a 2 800 kg body cannot push back.
+
+
+2 . 2 Notation
+
+2 . 3 The actuator force
+     Take one eccentric block of mass m at crank radius r. In body-fixed coordinates
+its position is (r sin θ, r cos θ), so its lateral acceleration is ÿ + r(−α sin θ − ω 2 cos θ),
+and the lateral force it exerts on the body is the negative of m times that:
+                                                          
+                               f = 2mr ω 2 cos θ + α sin θ .                                (2)
+
+Summing the eight blocks and using the pair structure — within a pair the two blocks
+share |ω| and |α| but turn in opposite senses — the standard counter-rotating arrange-
+ment of active-mount practice [5] — so the two contributions at θ1 = +ωt + φ1 and
+θ2 = −ωt + φ2 collapse to
+                                                          φ1 + φ2            φ1 − φ2
+        Fpair = 4mrω 2 cos κ cos(ωt + ψ),           κ=            ,    ψ=            ,      (3)
+                                                             2                  2
+Team # SHUWEICUP2503517                                                                 Page 4 of 27
+
+
+Table 1      Symbols used in the model. Values in the last column are those of the official data
+             set.
+
+
+  Symbol            Meaning                                             Unit            Value
+
+  m                 mass of one eccentric block                         kg              100
+
+  r                 crank radius of one eccentric block                 m               0.2
+
+  Mb                body mass without actuators                         kg              2 000
+
+  M                 total vibrating mass, Mb + 8m                       kg              2 800
+
+  k                 equivalent lateral stiffness                        N/m             7 225 200
+
+  c                 equivalent lateral damping                          N·s/m           3 600
+
+  θg                crank angle of group g, g = 1, . . . , 4            rad             —
+
+  ωg , α g          its angular velocity and acceleration               rad/s, rad/s2   —
+
+  ωmax , αmax       actuator limits                                     rad/s, rad/s2   100, 5 000
+
+  y, v, ay          body lateral displacement, velocity, acceleration   m, m/s, m/s2    —
+
+  Fd                lateral disturbance force                           N               —
+
+  Fact              force produced by the eight eccentric masses        N               —
+
+  κ, ψ              pair depth and phase, Eq. (3)                       rad             —
+
+  Ih                lateral vibration index, Eq. (1)                    m2 /s3          —
+
+
+with the α terms cancelling in the pair because the two blocks have opposite α and
+opposite sin θ. Equation (3) is the whole design lever of this paper: a counter-rotating
+pair is a single spectral line at the rotation frequency, of amplitude 4mrω 2 cos κ and
+phase ψ, and the amplitude is controllable from zero to 4mrω 2 by moving κ from 90◦
+to 0◦ . At 8 Hz, 4mrω 2 = 202 kN per actuator, so two actuators in phase give 404 kN
+against a disturbance of 16.8 kN — a factor of 24 of authority, which is why the design
+problem is not about authority but about timing.
+       We verified Eq. (3) numerically by commanding three known pairs (κ = 60◦ , ψ =
+0◦ ; κ = 60◦ , ψ = 40◦ ; κ = 75◦ , ψ = −120◦ ): the realised force was 201.35 kN at
+−0.12◦ , 201.57 kN at 40.20◦ and 104.64 kN at −119.75◦ , i.e. the amplitude and phase
+laws hold to within 0.3◦ .
+Team # SHUWEICUP2503517                                                          Page 5 of 27
+
+
+
+2 . 4 The vehicle equation
+     With the eight blocks carried on the body, momentum balance for the lateral coor-
+dinate gives
+                          (M + 8m) ÿ + cẏ + ky = Fd + Fact ,                            (4)
+                          | b {z }
+                               M
+
+where the 8m = 800 kg is not a modelling convenience but the same sum that produced
+Fact : each block contributes its inertia to the left side and its reaction to the right. With
+the parameters of Table 1,
+               p                                                 c
+      ωn =      k/M = 50.7979 rad/s = 8.0847 Hz,             ζ= √   = 0.01266,
+                                                               2 kM
+            1                                                                             (5)
+        τ=     = 1.56 s.
+           ζωn
+The decay time deserves a sentence: a disturbance at the natural frequency rings for
+about six seconds, so the transient of a 10 s record is not a nuisance to be windowed
+away, it is half the answer.
+
+
+2 . 5 Numerical scheme and its verification
+     Equation (4) is integrated with fourth-order Runge–Kutta at a 1 ms step, with the
+two forces linearly interpolated inside each 10 ms sample interval; the index (1) is
+the trapezoidal mean of a2y . Derivatives of a sampled crank angle are taken by cen-
+tral differences followed by a projection of ∆ω onto a symmetric band of half-width
+αmax ∆t, which is the exact discrete constraint the servo imposes; we checked that for
+the prescribed sequence this projection never binds, so the data are themselves admis-
+sible (|ω|max = 39.07 rad/s, |α|max = 2 462 rad/s2 ).
+     Two independent checks were run before any of the results below were trusted.
+First, the free-decay envelope of the simulated response was compared with exp(−ζωn t)
+and the frequency with ωd = 50.7939 rad/s: both agree to the third digit, with the
+envelope rate 0.6413 /s against the analytic 0.6429 /s. Second, the transfer function
+from a unit disturbance to the body acceleration was measured by driving the model
+with a 1 kN sinusoid at 8 Hz for 20 s and reading the last 10 s: the model gives 10.47
+m2 /s per kN at 131.99◦ against the analytic 10.73 at 129.78◦ , i.e. 2.5% in magnitude and
+2.2◦ in phase. The residual is the ringing of the initial transient inside the measurement
+window, and it is the reason the analytic value, not the measured one, is used inside the
+controllers of Sections 4 and 5.
+Team # SHUWEICUP2503517                                                                                                   Page 6 of 27
+
+
+
+III. Question 1: the baseline and the prescribed rotation
+
+3 . 1 Actuator off
+            With Fact = 0 and the scenario-1 record, the response is shown in Figure 2(a). The
+disturbance has root-mean-square 5.97 kN and its spectrum (Figure 1(b)) is concentrated
+on two lines, 5.0 Hz at 7.77 kN and 9.0 Hz at 3.12 kN; neither sits on the resonance,
+and the resulting peak-to-peak displacement is 20.22 mm with yrms = 2.67 mm, peak
+acceleration 49.57 m/s2 and Ih = 43.702.
+                (a) scenario 1 disturbance                                           Hzscenario 2 lines (16.79 kN at 8 Hz)
+                                                       (b) its spectrum: 5.0 and 9.0(c)
+
+
+
+
+                                                                              amplitude / kN
+                                                                                                                  16.79
+           10                                    101           ωn/2π = 8.085 Hz
+                                   |F̂1| / kN
+F1 / kN
+
+
+
+
+                                                                                               10          7.76
+            0                                   10−3
+                                                                                                    3.11
+          −10
+                                                10−7                                           0
+                0           10                         0      10                                     3      5      8
+                      t/s                              frequency / Hz                               frequency / Hz
+
+
+Figure 1 The two disturbances and where the resonance sits. (a) scenario 1: peak-to-peak
+                    22.3 kN, root-mean-square 5.97 kN. (b) its spectrum, dominated by 5.0 and 9.0 Hz,
+                    with the natural frequency 8.085 Hz marked: the two lines bracket the resonance
+                    but neither sits on it. (c) the three lines of scenario 2, the 8 Hz one carrying 16.79
+                    kN.
+
+
+
+
+3 . 2 Actuator on, prescribed angles
+            Feeding the four recorded crank angles through Eq. (2) gives an actuator force of
+peak 109.86 kN and root-mean-square 16.82 kN — against a disturbance of 5.97 kN.
+The result is what that ratio suggests: Ih = 189.293, a factor 4.33 worse than leaving
+the actuator off, with peak acceleration 77.5 m/s2 .
+            This is not an error in the model but a property of the record, and the honest answer
+has to say so, because a paper that silently flips a sign and reports a small number would
+be reporting a different problem. Two convention audits make the statement precise.
+If the four groups are read with the opposite sign (the pair pushing the body the other
+way), the index becomes 156.901; if the two blocks of a pair are read as turning in the
+same sense instead of opposite senses — a reading the data invites, since only angles
+are given — the index becomes 342.712. The three numbers bracket the answer, and
+the qualitative conclusion survives all three: the prescribed sequence adds energy at the
+frequencies where the body is most sensitive.
+            The spectral explanation is direct. Differentiating the recorded angles gives an
+angular-velocity spectrum peaking at 9.0, 5.0 and 3.8 Hz. Since each pair contributes
+Team # SHUWEICUP2503517                                                                              Page 7 of 27
+
+
+4mrω 2 cos κ cos(ωt + ψ), the force inherits those lines with amplitudes scaled by ω 2 , so
+a 39 rad/s rotation puts an order of magnitude more force into the 5 Hz region than the
+disturbance carries there, and it does so in phase with it, which is exactly the condition
+for adding rather than cancelling. Question 2 is therefore not a refinement of Question
+1; it is a different problem, in which the crank angles are the unknown.
+
+               (a) off, 20.22 mm pp                      (b) app: 49.6 / 77.5                (c) 4.33× worse
+          10                                                                                             189.29
+                                                    25       with given angles         200
+
+
+                                     ay / (m/s2)
+                                                             actuator off
+y / mm
+
+
+
+
+           0                                         0
+
+
+
+
+                                                                                  Ih
+                                                                                       100
+                                                   −25                                       43.70
+         −10                                                                            0
+               0                10                       0                   10                off       given
+                          t/s                                     t/s                                    angles
+
+
+Figure 2 Question 1 on scenario 1. (a) body displacement with the actuator off: peak-to-
+               peak 20.22 mm, dominated by the 5 Hz line. (b) lateral acceleration with (grey)
+               and without (black) the prescribed rotation: the prescribed sequence raises the
+               peak from 49.6 to 77.5 m/s2 . (c) the index: 43.702 without the actuator, 189.293
+               with it.
+
+
+
+
+3 . 3 Short summary
+          Question 1 is answered by the pair {43.702, 189.293} with the conventions stated:
+the vehicle with no active element is already comfortable, and the prescribed rotation is
+an aggravating input rather than a control.
+
+
+         IV. Question 2: designing the rotation for scenario 2
+
+4 . 1 What makes this problem hard
+          Scenario 2 is a different disturbance: root-mean-square 13.283 kN, but concen-
+trated on 3.0, 5.0 and above all 8.0 Hz, with the last line carrying 16.788 kN at −80.09◦ .
+An 8 Hz line on a 8.0847 Hz resonance with ζ = 0.0127 is the worst case the struc-
+ture admits: with no actuator the index is 13 148.921, peak acceleration 362.3 m/s2 and
+peak-to-peak displacement 145.2 mm. The transfer function at 8 Hz is amplified by
+1/(2ζ) ≈ 39, which is why a 16.8 kN line outproduces a 25.6 kN peak elsewhere in the
+record.
+Team # SHUWEICUP2503517                                                        Page 8 of 27
+
+
+
+4 . 2 Design A: cancel the resonant line statically
+     The first design uses Eq. (3) at its simplest. Project the disturbance onto integer
+periods of 8 Hz to obtain its phasor, then set κ so that the actuator amplitude equals that
+phasor and ψ so that it is opposite in phase:
+                                              
+                                         A8
+                     κ = arccos                  ,      ψ = ψ8 + π.                     (6)
+                                    2 · 4mrω82
+
+The projection returns 16.788 kN at −80.09◦ ; the realised force is 16.802 kN at 99.92◦ ,
+i.e. a 0.08% amplitude error and 0.01◦ of phase error, at κ = 87.62◦ and |ω| = 50.27
+rad/s with α = 0. The actuator therefore runs at 4.2% of its 404 kN capacity and at half
+its speed limit. The index falls from 13 148.921 to 71.053, a reduction of 99.46%.
+     That number is also a ceiling, and it is worth knowing why. The disturbance is not a
+pure tone: after removing the 8 Hz line the record still carries 3.111 kN at 3 Hz and 7.760
+kN at 5 Hz, and the three-line reconstruction leaves 6.86% root-mean-square residual.
+With ζ = 0.0127 the body filters that residual through a 39-fold peak, so any design
+that only touches one line inherits an index of order 102 . A useful check confirms the
+reading: injecting the design-A force into a record from which the 8 Hz line has been
+deleted raises the index to 13 763.28, so the cancellation is specific to the line it was
+tuned for.
+
+
+4 . 3 Design D: track the line instead of trusting it
+     The line is not stationary. Demodulating the scenario-2 record in consecutive win-
+dows gives an 8 Hz amplitude that varies between 13.36 and 20.27 kN (peak-to-peak
+6.91 kN) and a phase that wanders over 33.41◦ (standard deviation 7.14◦ ). A static κ, ψ
+tuned to the average is therefore always slightly wrong, and slightly wrong at 39-fold
+amplification is expensive. The second design closes that gap with a causal estimator.
+     At each sample t, take the last N samples of Fd (a window of N ∆t seconds),
+project them onto cos ω8 t and sin ω8 t over integer periods, and call the resulting complex
+amplitude Â8 (t). Then set
+                                           !
+                               |Â8 (t)|
+               κ(t) = arccos                   ,     ψ(t) = arg Â8 (t) + π,            (7)
+                             2 · 4mrω82
+
+and drive the two blocks of each pair at θ1,2 = ±ω8 t + κ(t) ± ψ(t). Because the rotation
+frequency is held at ω8 and κ is bounded by construction (cos κ ∈ [0, 1]), the constraints
+|ω| ≤ 100 and |α| ≤ 5 000 are satisfied by design rather than by projection; the realised
+values are 58.2 rad/s and 936.8 rad/s2 , i.e. 58% and 19% of the limits.
+Team # SHUWEICUP2503517                                                                                                Page 9 of 27
+
+
+              The window length is the only free parameter and it is not a nuisance parameter.
+It trades estimator noise against tracking lag, and the measured curve in Figure 3(c) has
+an interior minimum at 0.25 s:
+
+              window (s)         0.15         0.20     0.25    0.30                 0.40       0.50    0.60    0.80        1.00
+
+              Ih                 60.23 16.79 11.778 28.82 53.00 91.69 152.02 301.79 479.55
+
+              |ω|max (rad/s) 89.5             68.6     58.2        —                 —          —      —        —          —
+
+The optimum is explained by the estimator’s own delay: a moving average of N samples
+lags by (N − 1)∆t/2 = 0.12 s at N = 25, which is 0.96 of an 8 Hz period, and a delay
+of a whole period is invisible to a phasor. Shorter windows react faster but admit the 3
+and 5 Hz components into the estimate, longer ones lag the drift. At the optimum the
+design reaches
+
+                                           Ih = 11.778 (99.91% reduction, ×1 116),
+                                                                                                                                  (8)
+                                 |Fact |max = 38.19 kN,
+
+with peak displacement 17.01 mm and peak acceleration 46.6 m/s2 , i.e. the vehicle is
+quieter than it was on the easy scenario-1 record (Ih = 43.702).
+
+                       (a) peak a: 362.3 → 46.6                                          (b) modulation, peak ω = 58.2 rad/s
+                                                               modulation / deg
+ay / (m/s2)
+
+
+
+
+               100                         uncontrolled                                                       κ (depth)
+                                           design D                                                           ψ (phase)
+                   0                                                                 0
+              −100
+                                                                                  −100
+                       0.0     2.5      5.0      7.5    10.0                             0.0     2.5    5.0    7.5    10.0
+                                        t/s                                                            t/s
+
+                       (c) the window is a genuine optimum                               (d) ±6 ∘ costs an order of magnitude
+
+               400
+                                                                                   102
+        Ih
+
+
+
+
+                                                                         Ih
+
+
+
+
+               200
+                                     0.25 s, I=11.8
+
+                   0                                                               101
+                        0.2     0.4      0.6     0.8     1.0                              −10           0             10
+                              causal window / s                                                 phase error / deg
+
+Figure 3 Question 2, scenario 2. (a) lateral acceleration without the actuator (grey, 362.3
+                   m/s2 peak) and with design D (black, 46.6 m/s2 ). (b) the two modulation channels
+                   that carry the design: the depth κ sits near 88◦ (little force is needed) and the
+                   phase ψ follows the disturbance. (c) the window sweep of Eq. (7): an interior
+                   minimum at 0.25 s, Ih = 11.778. (d) phase sensitivity at nominal amplitude: a 6◦
+                   error costs an order of magnitude.
+Team # SHUWEICUP2503517                                                                                   Page 10 of 27
+
+
+
+4 . 4 What the design physically is
+              Design D is a nonlinear damper, and it is instructive to say so in energy terms.
+The mechanical power injected by the actuator is ⟨Fact ẏ⟩ = −115.0 W: it is negative,
+so the actuator removes energy from the body, on average, continuously. It does so by
+synthesising a force proportional and opposite to the velocity of the 8 Hz component
+while leaving the rest of the spectrum alone. That is the precise sense in which it beats a
+passive damper: a passive element has one c for all frequencies, whereas this one has an
+effective c only at 8 Hz. The measurement supports the claim — doubling the physical
+damping (c = 2c0 ) only brings the index to 4 897.25, and quadrupling it to 1 446.99,
+still two orders of magnitude away from 11.778, because the resonant line survives a
+damper and does not survive a canceller.
+
+
+4 . 5 Why the static design cannot be saved by more authority
+              It is tempting to conclude that the residual of design A is a matter of strength. It
+is not. Increasing the depth drive cannot help, because the leftover is not at 8 Hz: it
+is the 3 and 5 Hz lines, which the pair could only touch by leaving ω8 , and leaving ω8
+means giving up the cancellation of the line that dominates. Figure 4(b) makes the point
+literally: the force spectrum of design D contains the 8 Hz line at 38 kN and essentially
+nothing else, with 0.84 kN at 5 Hz and 0.06 kN at 3 Hz. The actuator deliberately spends
+its authority on one frequency.
+
+              (a) peak 38.2 kN of 404 kN                          (b) steady spectrum: 8 Hz line only, < 0.7 kN elsewhere
+
+         25                                                 100
+                                               |F|̂ / kN
+F / kN
+
+
+
+
+                                                           10−3
+         0
+                                                           10−6
+              0.0     2.5   5.0   7.5   10.0                      0        5         10
+                            t/s                                         frequency / Hz
+
+
+Figure 4 The force design D actually produces. (a) time history: a single 38.2 kN transient
+                    at 0.2 s followed by a steady oscillation of about ±18 kN, i.e. 9% of the 404 kN
+                    available. (b) steady spectrum: the 8 Hz line dominates and every other compo-
+                    nent is below 0.9 kN, which is why a single line is all the disturbance design needs
+                    to touch.
+
+
+
+
+4 . 6 Designs we implemented, measured and rejected
+              Three further mechanisms were built and evaluated before design D was adopted;
+reporting them is part of the answer, because each looks attractive on paper.
+Team # SHUWEICUP2503517                                                      Page 11 of 27
+
+
+     The α channel. Parking the eccentrics at θ = π/2 nulls the ω 2 term and turns
+Eq. (2) into F = 2mrα sin θ, i.e. a force proportional to angular acceleration with gain
+8mr = 160 N·s2 and a limit of 800 kN. Because α is the second derivative of the crank
+angle, a demanded force requires integrating it twice, and the required crank excursion
+is ε = F /(8mrw2 ): at 8 Hz that is 0.04 rad, but at 0.5 Hz it is 0.6 rad, where the
+lever sin θ collapses. With a Gaussian pre-filter of σ = 0.06 s the design reaches Ih =
+253.08 (98.08%) and with σ ≥ 0.10 the fixed-point iteration for the inverse dynamics
+diverges (the peak α reaches 1054 ). The best value found in the sweep is still an order
+of magnitude worse than design A. Rejected: elegant, wideband, and impossible below
+a few hertz.
+     A damping line. Using the second pair at the ring frequency to synthesise F =
+−ca ẏ looks like a one-line fix. One-shot values are respectable (ca /c = 1 gives 48.73),
+but the fixed-point iteration that would make it self-consistent oscillates between 48.9,
+76.6 and 48.2, and diverges for ca /c ≥ 1.5, reaching 1 820. Rejected: a single line
+cannot follow a residual that drifts.
+     Free-form optimisation. Parameterising θg as a 24-term Fourier series in 8 Hz
+harmonics and running SLSQP with the speed and acceleration limits as constraints
+converges, but the optimum it finds is a slower, more expensive way of arriving at the
+same law as Eq. (7) — the harmonics beyond the fundamental buy nothing, because the
+only line that matters is the fundamental. Rejected as equal result at higher complexity.
+     One pair per line. A reader may ask the obvious question: the machine has two
+pairs and the disturbance two lines that matter, so why not give each pair one line?
+Measured, it does worse than design D: with the 8 Hz pair tracked and the 5 Hz pair
+static, Ih = 12.517 (99.90%), and with both lines tracked, Ih = 2 718.336 (79.33%).
+The reason is the modulation index. A pair whose whole capacity is assigned to one line
+needs κ = 85.21◦ to produce 16.79 kN, where cos κ = 0.084 is steep: a 0.2% amplitude
+error moves the emitted line by 4%, and the 0.25 s demodulation leaks 7.3 kN into 5
+Hz. Splitting the capacity of both pairs on the same line lowers κ to 72◦ , where cos κ
+is three times less sensitive. The second pair is therefore worth more as capacity on
+the dominant line than as authority on a minor one, and two slow trackers fighting each
+other (the both-tracked case) is worse still.
+     The eccentric mass as part of the body. Because Assumption 4 admits the 8m =
+800 kg of eccentric mass into M , the ring sits at 8.08 Hz and scenario 2’s 8.0 Hz line
+drives it 1% off resonance. Dropping the eccentric mass, as most published solutions do,
+moves M to 2 000 kg, the ring to 9.57 Hz, and the uncontrolled index from 13 148.921
+to 209.650. We report both because the difference is a modelling convention, not an
+arithmetic one; Sec. 6 . 11 quantifies what it does to the designs.
+Team # SHUWEICUP2503517                                                        Page 12 of 27
+
+
+
+4 . 7 Short summary
+     Question 2 is answered by the pair {13 148.921, 71.053} for a static cancellation
+and by {13 148.921, 11.778} for the tracking law, with the actuator modulation shown
+in Figure 3(b) and the operating point quoted in absolute units: 58.2 rad/s of 100 rad/s,
+936.8 rad/s2 of 5 000, and 38.19 kN of 404 kN.
+
+
+    V. Question 3: suppression from acceleration alone
+
+5 . 1 What the sensor actually gives
+     Question 3 removes the disturbance record. What remains is the body acceleration
+ay (t), sampled at 10 ms, in real time; y and v are not measured and the disturbance is
+not observable. It is important to be precise about what has and has not been lost. The
+crank angles, their derivatives, the actuator force and the vehicle parameters are still
+known — the actuator has encoders and the data sheet gives M , k, c. What is unknown
+is the phase of the disturbance, which design D read from the disturbance record.
+     The natural first idea is to reconstruct the disturbance by inverting the equation of
+motion, F̂d = M ay −cv̂−k ŷ with ŷ, v̂ obtained by integrating ay twice. We implemented
+it, and it fails: the double integration drifts, the estimate is biased at the resonance by
+exactly the term that dominates, and the bias is then fed back through the command,
+closing a loop around the error. The measured result is Ih ≈ 1.39 × 104 , i.e. within
+15% of doing nothing, with 99.8 kN of actuator force being spent to achieve it. It is also
+fragile — a 10% stiffness error moves it to 2 416 and a −50% damping error to 26 469.
+Rejected, and reported because it is the obvious route.
+
+
+5 . 2 A demodulated Newton loop on the acceleration phasor
+     A better question is what the acceleration contains that the disturbance record did
+not: at 8 Hz, ay is the resonance filtered version of the total force, and its phase relative
+to the crank command is a direct measure of whether the actuator is helping or hurting.
+So control the acceleration phasor directly.
+     Write E(t) for the projection of ay onto the 8 Hz basis over the last 2 periods
+(N = 25 samples, deliberately the same window that worked in design D). Let
+                                          ω82
+                                H=−                                                      (9)
+                                    k − M ω82 + jc ω8
+be the acceleration response to a unit force at ω8 per unit mass, i.e. the factor obtained
+from Eq. (4) by dividing by M and writing y in terms of force. Then the increment that
+Team # SHUWEICUP2503517                                                       Page 13 of 27
+
+
+cancels E is −E/H, and we update the commanded phasor once per window,
+
+                                                      E
+                                  F̂cmd ← F̂cmd − µ     ,                              (10)
+                                                      H
+
+with µ the loop gain, and realise it through Eq. (7) (i.e. by converting F̂cmd into κ and ψ
+and keeping |ω| = ω8 ). This is the feedforward-then-feedback structure familiar from
+active noise control [6]: the inner loop tracks a phasor that the outer estimate supplies.
+Equation (9) must carry the −ω 2 factor: using the displacement transfer function instead
+makes the loop divergent, which is how we first discovered the point.
+     Three details were the difference between divergence and convergence, and they
+are worth recording because each produced the same symptom — an index that grew
+without bound at every gain. (i) The update must be applied once per window: applying
+it at every sample with a window average multiplies the effective gain by N . (ii) The
+commanded phase must be unwrapped before it is turned into an angle; a ±π jump in
+arg F̂cmd otherwise produces a 104 rad/s2 spike in α and a megawatt of force for one
+sample. (iii) The α contribution must vanish inside a window, which holds only if ω is
+held constant there — so the loop modulates κ and ψ, never ω.
+
+
+5 . 3 Results
+     With µ = 0.2 and a 0.25 s window the loop settles to
+
+                    Ih = 2 418.9 (−81.6% of the uncontrolled steady level),
+                                                                                       (11)
+            |Fact |max = 21.27 kN,        |ω| = 50.27 rad/s,
+
+where the index is quoted over 0.25–10 s to exclude the one-window acquisition tran-
+sient (the full-record value is 2 359.9). Peak displacement falls from 145.2 mm to 94.0
+mm and peak acceleration from 362.3 to 237.1 m/s2 . The loop is stable across the whole
+gain range we swept, with a broad optimum:
+
+     µ      0.10       0.15      0.20       0.30      0.35      0.50         0.80
+
+     Ih   2 802.1     2 420.1   2 418.9   3 350.2   4 412.4    12 592.6   130 234.1
+
+and the two-dimensional sweep (five windows × five gains) is reported in Table 2. The
+best cell is a shorter window at a smaller gain (0.13 s, µ = 0.10, Ih = 2 124.5), which
+tells us something about the mechanism rather than about tuning: the loop wants to react
+faster than two periods when the gain is low, and two periods is as fast as it can go before
+the estimate itself becomes unstable.
+Team # SHUWEICUP2503517                                                                                               Page 14 of 27
+
+
+Table 2              Question 3 tuning surface, Ih over 0.25–10 s (rows: causal window, columns:
+                     loop gain µ). Every cell is stable; the surface is smooth and has no isolated good
+                     point.
+
+
+                           window           µ = 0.10                0.15           0.20       0.30         0.40
+
+                           0.13 s (1.0T)       2 124.5             2 473.1 3 670.6 11 225.7 39 291.6
+
+                           0.25 s (2.0T)       2 802.1             2 420.1 2 418.9           3 350.2      6 084.3
+
+                           0.38 s (3.0T)       3 769.8             2 996.9 2 734.8           2 837.5      3 690.5
+
+                           0.50 s (4.0T)       4 692.7             3 574.6 3 115.9           2 922.4      3 260.2
+
+                           0.75 s (6.0T)       6 498.9             4 930.1 4 082.1           3 433.2      3 390.3
+
+                      (a) I=2419 vs 13149                       (b) indices, logarithmic            (c) ±10% parameter error
+                                                       105                                M-10%          457
+                          Q3 feedback                           13149
+ay / (m/s2)
+
+
+
+
+               100                                                                        M+10%                4774
+                                            Ih (log)
+
+
+
+
+                          uncontrolled                                            2419
+                                                            3                              c-50%                  13601
+                 0                                     10                                                  1154
+                                                                                          c+50%
+                                                                    71.1
+              −100                                                                         k-10%               4885
+                                                                           11.8                          459
+                                                       101                                k+10%
+
+                      4          5                           d   ic  d     k
+                                                         olle tat cke Q3 fb                        102          104
+                                                  c o ntr A s D tra
+                     t / s (steady slice)       un                                                         Ih
+
+Figure 5 Question 3. (a) a 1.5 s slice of the steady state: the loop brings the peak from 362.3
+                     to 237.1 m/s2 but leaves a visible oscillation, unlike design D in Figure 3(a). (b)
+                     the four indices on one logarithmic axis: 13 148.921 uncontrolled, 71.053 static,
+                     11.778 tracked, 2 418.9 feedback. (c) parameter error: the loop never destabilises,
+                     it becomes inaccurate — 457 at M − 10% against 13 601 at c − 50%.
+
+
+5 . 4 Why it cannot reach the open-loop number
+              The honest reading of −81.6% against −99.91% is that Question 3 is a different,
+harder problem, and the gap has a mechanism rather than a tuning excuse. The loop
+nulls the 8 Hz line of ay . But ay ’s 8 Hz content is not only the disturbance-forced part:
+the body’s own ring at 8.08 Hz is driven by the 3 and 5 Hz residual, and the loop cannot
+distinguish the two inside a two-period window because they are 1% apart in frequency
+and the ring decays over 1.56 s. So the loop cancels the ring, the residual immediately re-
+excites it, and the estimator sees the regrowth on the next window. The loop converges
+to the fixed point where the cancellation of the ring equals its regeneration — which
+is a small number, not zero. Design D does not suffer this because it demodulates the
+disturbance, where the two contributions are cleanly separated.
+              Two consequences follow, both visible in the measurements. First, the achievable
+Team # SHUWEICUP2503517                                                      Page 15 of 27
+
+
+index is bounded away from zero by the ring’s own regeneration, and the bound is no
+better than the 71.053 that a static cancellation of the same line achieves in open loop.
+Second, the loop leans on the plant model, Eq. (9), to convert an acceleration into a
+force, so a parameter error that is harmless in design D becomes an accuracy limit here:
+
+          case k + 10% k − 10% c + 50% c − 50% M + 10% M − 10%
+
+          Ih     458.6     4 884.8    1 154.2   13 600.6    4 773.7      456.8
+
+The spread from 457 to 13 601 is a factor of 30 at ±10%, and the favourable cells are
+favourable for a structural reason: a 10% stiffer suspension or a 10% lighter body moves
+ωn away from the 8 Hz line, which reduces the ring that the loop is fighting. The un-
+favourable cells are the ones that make the ring stronger. The loop never becomes un-
+stable; it becomes inaccurate, which is the failure mode a submission should report.
+
+
+5 . 5 Short summary
+     Question 3 is answered by Ih = 2 418.9 (−81.6%) from ay alone, with |Fact |max =
+21.27 kN, and by the measurement that the residual gap to the open-loop design is caused
+by ring–drive inseparability inside the estimator window, not by authority or by tuning.
+
+
+ VI. Learning the drift: a trained forecaster in the loop
+     Designs A and D are analytic, and they hit a wall that is not about algebra: a causal
+demodulator cannot report the present. Its moving average of 25 samples has a group
+delay of (25 − 1) × 0.01/2 = 0.12 s, which is 0.96 cycle at 8 Hz, so the phasor it
+hands to the controller is the phasor of the recent past. Section ?? then shows why that
+is expensive: a 6◦ error in the commanded phase costs one order of magnitude (128.98
+against 11.778). Neither can the delay be averaged away, because the line itself is not
+stationary — over the 10 s record its amplitude moves between 13.4 and 20.3 kN and
+its phase peak-to-peak is 33.4◦ — and the measured window sweep is U-shaped: 0.20 s
+overruns the actuator (|ω| = 69 rad/s, Ih = 16.79), 0.40 s lags the drift (53.00), and only
+0.25 s sits between them. This section replaces the average by a forecast, and trains it.
+
+
+6 . 1 What is learnt, and how
+     The quantity to predict is the disturbance phasor at t+H with H = 0.12 s, the delay
+that has to be undone. The features are eight numbers that a real controller can compute
+at time t: the in-phase and quadrature components of the line obtained from the causal
+Team # SHUWEICUP2503517                                                         Page 16 of 27
+
+
+window at four lags (0, 0.05, 0.10, 0.20 s). The label is the same two components, taken
+from a centred two-cycle window at t + H. The asymmetry is deliberate and is stated
+here because it is the kind of shortcut that silently turns a forecast into a cheat: the label
+may look at the future, the features never do, and the deployed model is only ever fed
+the eight causal numbers.
+     The regressor is a two-hidden-layer perceptron, 8-32-32-2 with tanh, i.e. 1 410
+trainable parameters, trained with Adam (learning rate 2 × 10−3 , cosine decay, mini-
+batches of 2 048, 60 epochs, best held-out epoch 59) on standardised inputs and targets.
+Standardising the targets is not cosmetic: with raw newton targets the first-epoch MSE
+is 4.5×107 and 400 full-batch steps never leave that plateau (held-out phase error 19.8◦ ),
+whereas the standardised mini-batch run converges to a held-out MSE of 0.202 in stan-
+dardised units, about 3.4◦ of phase.
+     Training data is the other half of the design, because the official workbook contains
+exactly one realisation per scenario — one draw of the drift, which is not a training
+set. We therefore built a synthetic corpus whose statistics are the measured ones: three
+lines at 3.111, 7.760 and 16.788 kN, each with its own random-walk phase whose peak-
+to-peak matches the measured 33.4◦ , plus colour noise carrying the measured 6.86%
+rms projection residual. 208 sequences of 1 000 samples are split by sequence into 160
+training, 24 validation and 24 held-out test sequences, so no window of a test sequence
+is ever seen. The real scenario 2 is in none of the three: it is kept as the deployment test,
+and it is the number we report.
+
+
+6 . 2 What the training buys
+     On the held-out sequences the median absolute phase error is 3.39◦ and the 95th
+percentile 12.52◦ . The obvious physics baseline — take the unwrapped phase of the
+causal phasor and extrapolate it linearly at its own local slope — gives 13.36◦ median,
+i.e. the learner is 3.9 times more accurate, and it is more accurate precisely where the
+extrapolation fails, which is when the drift changes sign.
+     Closed on the real scenario 2, with the forecast inserted into the same pair law as
+design D, the index is Ih = 9.211, −99.93% against 13 148.921, with |Fact |max = 23.90
+kN (5.9% of the 404 kN the two actuators can emit), |ω|max = 65.85 rad/s and |α|max =
+2 129.9 rad/s2 . Against design D’s 11.778 at 38.19 kN this is both a lower index and
+37% less force: the difference is not authority, it is timing.
+     The lead itself is a measurement of the mechanism, not a hyper-parameter. Sweep-
+ing it gives 18.172 at 0 ms, 21 500.9 at 60 ms, 10.008 at 90 ms, 9.211 at 120 ms, 7.561
+at 150 ms and 15.281 at 180 ms. The spike at 60 ms is the point of the figure: 0.06 s is
+Team # SHUWEICUP2503517                                                                                                      Page 17 of 27
+
+
+172.8◦ at 8 Hz, so a half-correction arrives almost in antiphase and doubles the line. That
+the required lead is the demodulator delay is therefore a physical statement about the
+estimator, and it is confirmed by the sweep rather than fitted. We deploy 120 ms even
+though 150 ms scores better on this one record, because choosing the 150 ms would
+mean tuning on the deployment test.
+
+             (a) the line as a point that walks                                      (b) median error on the official record
+
+
+
+
+                                                           phase error / deg
+                                                                                40                             causal window, 11 ∘
+                                                                                                               from ay only, 7.2 ∘
+                                                                                                               network, 1.8 ∘
+                                                                                20
+b / kN
+
+
+
+
+         5
+                                                                                 0
+                 true, walked by the line
+         0       causal window
+                                                                               −20
+                 network, +0.12 s
+
+
+                    10         15           20      25                               0.0       2.5       5.0        7.5       10.0
+                              a / kN                                                                     t/s
+
+Figure 6 The whole paper in one picture. (a) The 8 Hz line of scenario 2 is a single point
+                in the (a, b) plane, and over 0.75 s it walks a closed loop; the thick grey curve is
+                where it actually went, the dashed curve is what the causal window reports (the
+                recent past), and the blue curve is what the network reports for 0.12 s ahead. The
+                arrow is the correction the forecast supplies. (b) The same comparison as a phase
+                error against the true phasor over the full record: the causal window is off by 11◦
+                median, the network by 1.8◦ , and the acceleration-only learner of Section 6 by
+                7.2◦ .
+
+
+             Measured on the official record rather than on the synthetic corpus, the same quan-
+tity is 11.29◦ for the causal window, 1.83◦ for the network and 7.22◦ for the acceleration-
+only learner; Figure 6 draws all three. The ordering of the three is the ordering of the
+three indices, which is the cleanest evidence in this paper that the index is set by phase
+accuracy and by nothing else.
+
+Table 3          The five controllers on scenario 2. The learned forecaster (L) is the best open-
+                 loop design and the only one whose accuracy was measured on data it never saw.
+
+                controller                           Ih       reduction                    |F |max /kN    note
+
+                uncontrolled                13 148.921                           —               13.3     disturbance rms
+
+                A static, one line               71.053                  99.46%                16.79      4.2% of authority
+
+                D tracked, 0.25 s                11.778                  99.91%                38.19      sweep optimum
+
+                L learned, 0.12 s                 9.211                  99.93%                23.90      trained, unseen
+
+                Newton on ay                     2 418.9                 81.60%                21.27      feedback only
+Team # SHUWEICUP2503517                                                       Page 18 of 27
+
+
+
+6 . 3 From the acceleration alone
+     Question 3 forbids measuring the disturbance, so the same forecast is retrained
+with the eight features taken from ay instead of from Fd : 48 simulated sequences for
+training, 12 for validation, the same architecture and schedule. Deployed as an open-
+loop command it does surprisingly well — Ih = 25.423, i.e. −99.81%, with |Fact |max =
+18.99 kN — and that is 95 times better than the demodulated Newton loop of Section 5
+(2 418.9).
+     It does not get there by itself. The first attempt re-estimated the phasor from
+the controlled ay and re-applied it, iterating to a fixed point; the iteration diverges,
+3 694.2 → 13 037.8 → 12 882.4, for a reason worth reporting: the network was trained
+on uncontrolled acceleration, so the ring that its own force puts into ay is out of distri-
+bution, and each pass adds force to a signal the model misreads. The standard remedy
+is to let the policy visit its own states and label them: one round of aggregation (run the
+loop, record ay , attach the true disturbance phasor as the label, retrain) brings the index
+to 25.423. More rounds make it worse, 64.393, 82.822, 161.872. That is not noise: once
+the loop cancels part of the drive, two different disturbances produce nearly the same
+ay , the aggregated set teaches the learner the average of two answers, and the average
+is wrong for both. We deploy round one and say so.
+
+
+6 . 4 What the learner is not good at
+     The learned command is a model inversion: it maps a measured phasor to a force
+through the nominal plant, so it inherits the plant’s errors. Measured on the same seven
+perturbations used for the Newton loop: nominal 25.423, k + 10% 1 527.8, k − 10%
+2 731.1, c + 50% 565.4, c − 50% 9 964.7, M + 10% 2 903.4, M − 10% 1 670.0. The
+c − 50% cell is the honest failure: with half the real damping the force is sized for a
+plant that is not there, and the open-loop command is worse than doing nothing. Sensor
+noise, by contrast, barely matters (25.44, 25.69 and 27.00 at 0.5, 2 and 5 m/s2 , against
+an acceleration rms of 127.5 m/s2 ).
+     The remedy is to keep the model-based corrector and put it on top of the learned
+command. Starting the Newton loop from the forecast gives 108.97 at nominal — worse
+than the pure forecast, because feedback on a good command only adds noise — but
+it collapses the worst case from 9 964.7 to 1 345.2 and leaves every other cell below
+7 988.1: k + 10% 7 988.1, k − 10% 1 714.3, c + 50% 43.68, M + 10% 1 916.7, M − 10%
+5 442.0. Figure 7(d) puts the three loops side by side; the point of the panel is that
+no loop wins everywhere, and the engineering answer is to choose by how much the
+parameters are trusted, not by which number is smallest.
+Team # SHUWEICUP2503517                                                                                                        Page 19 of 27
+
+
+                                              (a) learning curve                                    (b) lead = demodulator delay
+                            −1
+MSE (std.)   6 × 10                                                    train           104                        anti-phase
+                                                                       held-out
+             4 × 10−1                                                                  103
+
+
+
+
+                                                                                  Ih
+             3 × 10−1                                                                  102
+
+             2 × 10−1            best ep 59                                            101
+                                 0     10         20   30     40       50    60                 0           50          100         150
+                                                 epoch                                                    forecast lead / ms
+                                       (c) own-state aggregation                                    (d) robustness to model error
+                                                  deploy round 1                       105          learned FF        FF + trim      Newton
+              Ih from ay
+
+
+
+
+                           103                                                              4
+                                                                                       10
+
+
+
+
+                                                                                  Ih
+                                                                                       103
+                           102
+                                                                                       102
+
+                                 0            1         2          3         4                  nom    +k        -k   +c       -c   +M    -M
+                                                  DAgger round
+
+
+Figure 7 The trained forecaster. (a) learning curve on standardised MSE, best held-out
+                            epoch 59, final 0.202; (b) the forecast lead, with the antiphase trap at 60 ms
+                            (Ih = 21 500.9) and the deployed 120 ms (9.211); (c) own-state aggregation for
+                            the acceleration-only learner, round one (25.423) is the one we deploy and later
+                            rounds regress; (d) the three loops under seven parameter perturbations — the
+                            learned command is the most accurate at nominal and the most fragile at c−50%,
+                            the Newton loop is the reverse, and the hybrid bounds the worst case.
+
+
+6 . 5 Cost
+                The model has 1 410 parameters and its inference cost is eight multiplies and two
+activations per sample, which is nothing beside the 1 kHz servo loop it sits in. Training is
+60 epochs over 160 000 windows, 69 s wall clock on one CPU core, and it is reproducible
+from a fixed seed (code/train_lead.py). What is not cheap is the corpus: it took the
+measured spectrum, the measured drift statistics and the measured residual to make a
+training set that transfers to the real record, and without those three measurements the
+network would have learnt the simulator.
+
+
+6 . 6 Command phase error
+                The dominant sensitivity of the whole approach is not gain but phase, because the
+cancellation is coherent. Holding the nominal amplitude and rotating the commanded
+phase of design D gives Ih = 564.12 at −11◦ , 157.32 at −6◦ , 51.73 at −3◦ , 11.778 at
+0◦ , 37.55 at +3◦ , 128.98 at +6◦ and 507.75 at +11◦ , i.e. a 6◦ error already costs an order
+of magnitude (128.98 against 11.778). Scaling the amplitude instead is much cheaper:
+±20% of amplitude moves the index by less than a factor of two at nominal phase,
+because an amplitude error leaves a residual at the line frequency while a phase error
+Team # SHUWEICUP2503517                                                                    Page 20 of 27
+
+
+leaves one at the same frequency but displaced by 90◦ , which the resonance amplifies
+in quadrature.
+
+                   Ih against the two command errors; the nominal point is the dark cell
+
+             1.2    1185    696    570    522    552    662   1117
+                                                                        3
+gain scale
+
+
+
+
+             1.1     744    296    180    136    164    265    682
+
+
+
+
+                                                                            log10 Ih
+             1.0     564    157    52     12     38     129    508
+                                                                        2
+             0.9     646    280    185    149    172    255    595
+
+             0.8     989    664    580    548    568    641    944
+
+
+                     -11    -6     -3     +0     +3     +6    +11
+                      command phase error (deg)
+
+Figure 8 The whole command-error surface of design D, with the index printed in every
+                   cell. The nominal point (1.0, 0◦ ) is the dark one at 11.778; the two axes are ordered
+                   by the damage they do, and the phase axis is the one that matters: one column
+                   away from nominal is already 51.73, while one row of gain error is only 548.
+
+
+
+
+6 . 7 Transport delay
+             A delay is a phase error that grows with frequency, and the acceleration path of
+Question 3 has two of them (sensor and command). Shifting the realised crank sequence
+by one to three samples moves design D from 11.778 to 3 323.5 (10 ms), 12 296.5 (20
+ms) and 24 704.8 (30 ms) — the last being nearly twice as bad as no actuator at all,
+because a delayed cancellation adds. This sets a hard engineering requirement: the loop
+must close inside about 5 ms, i.e. inside a single sample, which on a vehicle means
+running the demodulator on the servo drive rather than on a body controller.
+
+
+6 . 8 Sampling and numerical error
+             The record is sampled at 100 Hz, so the 8 Hz line has 12.5 samples per period and
+the projection of a non-integer number of periods leaks: the two-period window is cho-
+sen precisely because 25 samples span exactly two periods, which makes the leakage
+vanish to machine precision. Halving the step (Runge–Kutta at 1 ms instead of 2 ms)
+changes the index by less than 0.02%; the trapezoidal index over 1 000 samples is accu-
+rate to the same order. The discretisation is therefore not a contributor at the reported
+precision.
+Team # SHUWEICUP2503517                                                        Page 21 of 27
+
+
+
+6 . 9 Accelerometer noise
+     Adding white noise to ay at 0.5, 2, 5 and 10 m/s2 (i.e. 0.4% to 7.8% of the un-
+controlled root-mean-square acceleration) moves the closed-loop index from 2 418.9 to
+2 420.1, 2 426.4, 2 452.0 and 2 533.3. The loop averages the sensor over 25 samples and
+only acts once per window, so it is a low-pass filter on its own input; this is the one
+sensitivity that is comfortably benign.
+
+
+6 . 10 Model error
+     Beyond the parameter table of Section 5, two structural assumptions carry risk.
+The single-degree-of-freedom reduction cannot represent a torsional mode; if the real
+body has one between 6 and 10 Hz, the actuator would pump it. The assumption of
+an ideal servo is the one we would challenge first in a test rig, because the measured
+consequence of a 10 ms delay is larger than the consequence of a 50% damping error.
+
+
+6 . 11 The eccentric mass convention
+     The single largest sensitivity is not a parameter but a definition: whether the 8m =
+800 kg of rotating eccentric mass is counted in the body that the actuator pushes. Count-
+ing it (Assumption 4) gives the numbers of this paper; dropping it reproduces the Ih ≈
+210–226 baseline that most published solutions report for scenario 2, and would put this
+paper’s baseline in their range. Table 4 replays the same actuator commands under both
+conventions. Nothing in the actuator changes — its force follows from the disturbance
+and does not contain M — so the table separates the physics from the convention.
+
+Table 4   The same three designs under the two conventions for the eccentric mass. The
+          actuator force does not contain M , so the commands replayed here are identical;
+          only the body that receives them differs.
+
+  convention               M (kg) ring (Hz) uncontrolled design A design F design D
+
+  eccentric mass counted   2 800     8.08     13 148.921    71.053    12.517      11.778
+
+  dropped                  2 000     9.57       209.650     29.936    38.537      44.365
+
+
+Three conclusions follow, and they matter for comparing this paper with others. (i) The
+ratio between the two uncontrolled baselines is 63, because 8.0 Hz sits 1% from the
+ring at 2 800 kg and 16% from it at 2 000 kg; a resonant line is worth that much. (ii)
+The reduced percentage is not convention-free either: design D removes 99.91% under
+one convention and 79.61% under the other, because the remaining 3 and 5 Hz lines are
+Team # SHUWEICUP2503517                                                       Page 22 of 27
+
+
+suppressed by the ring in the first case and not in the second. (iii) The ranking of the
+designs inverts. With the ring at 8.08 Hz the tracking law wins, since the only thing
+worth doing is nulling the resonant line; with the ring at 9.57 Hz the static law wins,
+since the residual lines dominate and the tracking law’s modulation noise costs more
+than its tracking gains. A paper that reports one number without stating its convention
+is not reporting a comparable number, and we say so rather than picking whichever of
+the two flatters us.
+
+
+6 . 12 The reference axis, and why our Question 1 conclusion is not
+          the published one
+     The second definition that changes the answer is the axis the eccentric-block angle
+is measured from. We take θ from the lateral axis, so the lateral component is cos θ and
+the pair force is Eq. (3). Measuring θ from the forward axis instead makes the lateral
+component sin θ — a quarter-period shift of the same command, which at 5 Hz is not
+a small change: the prescribed table of scenario 1 then cancels part of the disturbance
+instead of reinforcing it. Table 5 records both readings of the same table.
+
+Table 5    The prescribed angle table of scenario 1, read two ways. The right-hand columns
+           also drop the eccentric mass and raise the damping to 1.1c0 , which is what the
+           published solutions use; the result then reproduces their reported pair 97.195 →
+           58.685 to about one percent.
+
+          reading              M (kg) c (N·s/m) ring (Hz) Ih off   Ih on   change
+
+          cos θ (this paper)   2 800    3 600     8.08    43.702 189.293 +333%
+
+          sin θ                2 800    3 600     8.08    43.702 30.517 −30.2%
+
+          sin θ                2 000    3 600     9.57    94.237 56.843 −39.7%
+
+          sin θ, published     2 000    3 500     9.57    95.480 57.910 −39.4%
+
+
+Four readings, one conclusion each, and the last row is worth reading twice: with M =
+2 000, c = 0.97c0 and the sin reference, our model returns 95.480 → 57.910, i.e. the
+−39% that the published solutions report, and its scenario-2 baseline is 210.756, within
+a quarter of a percent of the exact number one of them prints. So the published cluster is
+not a different model; it is the same model with two conventions set the other way, and its
+internal consistency is a point in its favour. We keep our reading because the problem’s
+force direction is stated as lateral and the table’s angles are the block positions, but we
+cannot claim the figure settles it, and a reader who prefers the other reading should take
+the second row of Table 5 rather than the first.
+Team # SHUWEICUP2503517                                                                                         Page 23 of 27
+
+
+                       (a) one table, four readings                                         (b) the body the actuator pushes
+                                                                                                13149
+                                                                                        4
+Ih, scenario 1                                                                     10
+
+
+
+
+                                                                  Ih, scenario 2
+                                               given angles off                                                  actuator off
+                 200    +333%
+                                               given angles on                          3                        design D on
+                                                                                   10
+                                                                                                                 210
+                                             -40%      -39%                        102                                 44.4
+                 100                                                                                11.8
+                                                                                        1
+                                    -30%                                           10
+                  0                                                                 0
+                          cos θ     sin θ    sin θ   sin θ                                      M=2800         M=2000
+                       this paper           M=2000 published                                      c0             c0
+
+
+Figure 9 The same data under the two conventions. (a) the prescribed angle table of sce-
+                       nario 1 read four ways: the reference axis decides whether the table helps (−30%)
+                       or hurts (+333%). (b) scenario 2 with the actuator off and with design D replayed,
+                       for the body with and without the eccentric mass counted. The commands are
+                       identical in both groups; only the receiving body differs.
+
+
+
+                                                 VII. Conclusion
+                  This paper models a large vehicle with two dual-motor centrifugal actuators and
+answers the three competition questions with numbers that can be recomputed from the
+supplied data.
+                  For Question 1, the vehicle without the actuator has Ih = 43.702; with the pre-
+scribed rotation it has Ih = 189.293, i.e. the prescribed sequence is an aggravating input,
+and the sign convention of the pair moves that number between 156.901 and 342.712.
+We state the audit rather than picking a convention.
+                  For Question 2, the counter-rotating pair is a single-line source whose amplitude
+and phase are κ and ψ, and both are free within the actuator limits. A static cancellation
+of the resonant line gives Ih = 71.053 at 4.2% of the available force; tracking the line’s
+drift with a causal 0.25 s demodulation window gives Ih = 11.778, −99.91% against
+the uncontrolled 13 148.921, using 38.19 kN of 404 kN and 58.2 rad/s of 100 rad/s. The
+window length is an interior optimum explained by the estimator’s half-window lag,
+and the design is physically a damper that acts only at 8 Hz: its mean mechanical power
+is −115.0 W, while quadrupling the passive damping reaches only 1 446.99.
+                  For Question 3, a demodulated Newton loop on the acceleration phasor reaches
+Ih = 2 418.9 (−81.6%) using nothing but ay , and we show that the residual gap to the
+open-loop design is caused by the inseparability of the body ring from the drive inside
+a two-period window: the loop cancels the ring and the 3/5 Hz residual immediately
+re-excites it. The loop is stable over a two-dimensional tuning surface and degrades
+gracefully with noise but poorly with parameter error (457 to 13 601 at ±10%).
+                  The last section trains the part that the analytic designs could not supply, which is a
+Team # SHUWEICUP2503517                                                      Page 24 of 27
+
+
+view of the future. A 1 410-parameter network, fed by eight causal features and trained
+on a synthetic corpus whose three statistics are measured from the official record, fore-
+casts the drifting phasor 0.12 s ahead and cuts the median phase error of linear extrap-
+olation from 13.36◦ to 3.39◦ on sequences it never saw. Used as the command it gives
+Ih = 9.211 (−99.93%) at 23.9 kN, a lower index than the best analytic design with 37%
+less force; used as the starting point of the Newton loop it bounds the worst parameter-
+error cell from 9 964.7 to 1 345.2. Driven by ay alone the same learner reaches 25.423
+(−99.81%), which is 95 times the index of the analytic loop on the same information
+and to our knowledge better than the published acceleration-only solutions, at the cost
+of being a model inversion: at half the true damping it is worse than doing nothing,
+which is why we keep the model-based trim.
+     The engineering conclusion is quantitative: the mechanism has 24 times the author-
+ity it needs, so the binding constraints are timing and phase, not force. A 6◦ command
+error costs an order of magnitude, and a 10 ms delay in the command path lifts the open-
+loop design from 11.778 to 3 323.5. The learned forecaster is best understood as buying
+timing out of measurement: it costs 69 s of training and eight multiplies per sample, and
+it is what closes the gap that no amount of gain tuning could close.
+
+
+                   VIII. Strengths and Weaknesses
+
+8 . 1 Strengths
+  • The actuator force is derived, not fitted: Eq. (3) is exact for counter-rotating pairs
+     and was verified to 0.3◦ , so every reported force is traceable to the geometry.
+  • The design is closed-form and constraint-respecting by construction (cos κ ∈ [0, 1],
+     ω fixed), which is why it needs no projection and no penalty terms and why the
+     operating point (58.2 rad/s, 936.8 rad/s2 ) is guaranteed admissible.
+  • The claimed improvement is cross-checked three ways: against the physical lower
+     bound of cancelling one line (71.053), against passive damping (1 446.99 at 4c0 ),
+     and against the feasibility of the command itself (38.19 kN of 404 kN).
+  • Every negative result is reported with its measurement, including the prescribed
+     angles being harmful, five rejected controller designs and the four DAgger rounds
+     that regressed, which makes the positive results falsifiable rather than merely plau-
+     sible.
+  • The learned component is small enough to audit and is audited: 1 410 parameters,
+     eight causal features, one fixed seed, 69 s of training, and its accuracy is quoted on
+     held-out sequences rather than on the record it was tuned against.
+Team # SHUWEICUP2503517                                                       Page 25 of 27
+
+
+
+8 . 2 Weaknesses
+  • Phase accuracy is a hard requirement and the paper cannot deliver it: at 6◦ the index
+    is 128.98, and a 30 ms delay makes the design worse than doing nothing (24 704.8
+    against 13 148.921).
+  • Question 3 is answered 2 418.9 by the analytic loop and 25.423 by the learned one,
+    both against 11.778 for the open-loop design, so even the trained controller leaves
+    a factor of 2.2 on the table when the disturbance is invisible: we close most of the
+    gap with a forecast, not all of it.
+  • The learned forecaster is trained on a synthetic corpus. Its three statistics (the three
+    measured line amplitudes, the measured 33.4◦ phase drift, the measured 6.86%
+    residual) come from the official record and the real record is only used as a test,
+    which is the honest way to do it and still not the same as training on field data. A
+    vehicle whose drift statistics differ from this one would need the corpus rebuilt.
+  • The learned command is a model inversion and inherits the plant’s errors: at half
+    the true damping it raises the index to 9 964.7, i.e. worse than the actuator off. The
+    trim brings that to 1 345.2, but the pair of numbers is a warning, not a guarantee.
+  • The single-degree-of-freedom reduction assumes the four corners move together;
+    a torsional mode between 6 and 10 Hz would be pumped rather than suppressed,
+    and the supplied data cannot rule that out.
+  • The disturbance is treated as exogenous. At 16.8 kN against a 2 800 kg body the
+    back-reaction is small, but it is not exactly zero, and we have not quantified it.
+  • Every headline number depends on a convention we chose and stated: counting
+    the 800 kg of eccentric mass gives Ih = 13 148.921 and design D removes 99.91%
+    of it; dropping it, as most published solutions do, gives 209.650 and 79.61%, and
+    the ranking of the designs inverts (Table 4). We consider the counted version the
+    correct one, but a reader comparing papers must renormalise before comparing.
+
+
+                                 IX. References
+ [1] Song K, et al. Modeling and control of a centrifugal-type active vibration actuator
+     for helicopter hubs[J]. Journal of Vibration Engineering, 2021.
+
+ [2] You X, et al. Dynamic analysis of a dual-motor centrifugal actuator with counter-
+     rotating eccentric masses[J]. Mechanical Science and Technology, 2013.
+
+ [3] Hu M, et al. Design of a centrifugal active mount for vehicle lateral vibration sup-
+     pression[J]. Automotive Engineering, 2023.
+Team # SHUWEICUP2503517                                                  Page 26 of 27
+
+
+ [4] Den Hartog J P. Mechanical Vibrations[M]. New York: Dover, 1985.
+
+ [5] Fuller C R, Elliott S J, Nelson P A. Active Control of Vibration[M]. London: Aca-
+       demic Press, 1996.
+
+ [6] Kuo S M, Morgan D R. Active Noise Control Systems: Algorithms and DSP Im-
+       plementations[M]. New York: Wiley, 1996.
+
+
+                            I. Appendix A: Code
+
+# -*- coding: utf-8 -*-
+"""Driver: reproduce every number in the paper, in order.
+
+
+      python code/main.py           Q1, Q2, Q3, the convention audits, the
+         trainer
+      python code/main.py --fast same, but skips the trainer (69 s)
+
+
+Every step writes its own JSON into data/; nothing is recomputed twice
+      and no
+figure is drawn here (code/figures.py reads the JSON instead, because
+      it needs a
+matplotlib build that this numerical interpreter cannot provide).
+
+
+Interpreter used for every reported number:
+      E:\\Mini\\envs\\mathmodel\\python.exe -X utf8
+Interpreter used for the figures:
+      E:\\Mini\\python.exe -X utf8 code/figures.py
+"""
+from __future__ import annotations
+
+
+import sys
+from pathlib import Path
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+
+import convention       # noqa: E402
+import make_results # noqa: E402
+import q1_alt           # noqa: E402
+import q1_axis          # noqa: E402
+Team # SHUWEICUP2503517                                          Page 27 of 27
+
+
+import solve_q1         # noqa: E402
+import solve_q2         # noqa: E402
+import solve_q3         # noqa: E402
+import train_lead       # noqa: E402
+
+
+STEPS = [
+    ("Q1", solve_q1),
+    ("Q2", solve_q2),
+    ("Q3", solve_q3),
+    ("conventions", convention),
+    ("reference axis (published numbers reproduced)", q1_alt),
+    ("reference axis (four readings)", q1_axis),
+]
+SLOW = [("trained forecaster", train_lead)]
+LAST = [("flatten for the data checker", make_results)]
+
+
+
+def main(argv: list[str] | None = None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    steps = STEPS if "--fast" in argv else STEPS + SLOW
+    for name, mod in steps + LAST:
+       print(f"\n{'=' * 12} {name} {'=' * 12}", flush=True)
+       rc = mod.main()
+       if rc:
+            print(f"{name} failed with {rc}", flush=True)
+            return rc
+    print("\nevery reported number reproduced", flush=True)
+    return 0
+
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+

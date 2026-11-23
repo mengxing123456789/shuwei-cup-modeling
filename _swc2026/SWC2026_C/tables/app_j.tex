@@ -1,0 +1,37 @@
+% numerals-ok: begin
+\section{Assumptions register}
+\label{app:assumptions}
+
+A model is only as good as the assumptions a reader can find. The table below lists every
+assumption the chain relies on, where it enters, how it was checked, and what changes if it is
+wrong. The rule we applied was to promote an assumption to a test wherever the package allowed
+one; the three entries marked \emph{declared} are stated rather than tested, and we say so.
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}p{0.040\linewidth}p{0.28\linewidth}p{0.13\linewidth}p{0.27\linewidth}p{0.18\linewidth}@{}}
+\caption{Assumptions register. \emph{Declared} marks the three assumptions that the released package cannot test; the remaining seven are checked by a number reported elsewhere in the paper.}\\
+\hline
+ID & Assumption & Enters in & How it was checked & If it fails \\
+\hline
+\endfirsthead
+\hline
+ID & Assumption & Enters in & How it was checked & If it fails \\
+\hline
+\endhead
+\hline
+\endfoot
+A1 & Released timestamps are the reference segmentation of a record into stages. & \S3.3, App.~L & Decoded stage agreement \slotPSegGPUARIRep{} (ARI, $\pm$\slotPSegGPUARIRepSD{} over \slotPSegGPURepN{} refits); boundary F1 \slotPSegGPUBFOneRep. & All agreement numbers move; the ranking of decoders is preserved by construction. \\
+A2 & The wrist keypoint represents the hand; the 21 keypoints share one rigid frame. & \S3.2 & Declared. A different representative point changes the absolute coordinates but not the boundary set. & Boundary scores and stage labels shift; the negative results in App.~E survive because they are rank-based. \\
+A3 & Frames missing inside a mask are missing uniformly within that mask length, and records of the same length are exchangeable. & \S4.4, App.~D & Split-conformal coverage averages \slotPConMeanCoverage{} and ranges from \slotPConCovMin{} to \slotPConCovMax{} across four environments, against a nominal \slotConfLevel{}\%. & The conformal radii lose their finite-sample guarantee; the point predictions are unaffected. \\
+A4 & Service time is affine in the source duration, $p_j=\alpha d_j+\beta$, with family-specific coefficients. & \S5.2 & Brier \slotPCFBrier{} with skill \slotPCFSkill{} over \slotPCFJobs{} executed jobs, across three cases and three service multipliers. & The closed form becomes an approximation; the measured on-time rates would drift with the true curvature. \\
+A5 & Release times are protocol decisions and do not depend on the realised duration of a job. & \S5.2 & Declared. The closed form conditions on the start time, so it survives a duration-dependent release as long as $s$ is observed. & Only the policy layer changes: the scheduler would need to model the release process. \\
+A6 & The reservation is idle time, charged $2+0.1b+0.2D$ per job, and never negative. & \S5.4 & The search grid covers $b\in[0.2,D]$; the cost model is the one stated in the protocol. & The level of the cost curve moves; the ordering of policies by on-time rate does not. \\
+A7 & A job unfinished at the horizon is charged as completing at the horizon. & \S2.4 & Declared, and held fixed across all three cases and all policies. & The absolute rates fall; the paired comparisons are unaffected because the convention is common. \\
+A8 & Coordinates are not aligned across environments; each record is normalised in its own frame. & \S2.1 & Declared. Cross-environment transfer is out of scope by design. & Pooling environments would mix frames and inflate agreement; we never pool. \\
+A9 & The production records in the released package are synthetic, not field measurements. & \S2.3 & Every number in the paper is reproducible from \texttt{data/}; no external measurement enters. & The economic reading changes; the methodological claims do not. \\
+A10 & The AI tools in the generative-tools table (App.~B) were used only at the stages listed. & App.~B & The table records tool, version, date, stage, prompt and what was accepted or rejected. & The declaration would be incomplete; the technical claims stand on the reproduction commands. \\
+\end{longtable}
+}
+% numerals-ok: end

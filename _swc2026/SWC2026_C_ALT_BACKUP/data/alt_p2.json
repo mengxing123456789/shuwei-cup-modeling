@@ -1,0 +1,773 @@
+{
+ "meta": {
+  "module": "alt_p2_kalman",
+  "method": "damped constant-velocity Kalman filter + value-of-information scheduling",
+  "created": "2026-11-21T15:43:51",
+  "runtime_s": 4.0,
+  "python": "3.11.18",
+  "numpy": "2.4.6",
+  "note": "all numbers produced by code/alt_p2_kalman.py from data/panel_alt.npz; no masked truth is read by the predictor"
+ },
+ "data": {
+  "n_records": 69,
+  "n_frames": 66070,
+  "splits": {
+   "train": 55,
+   "validation": 7,
+   "test": 7
+  },
+  "dominant_left": 26,
+  "dominant_right": 43,
+  "fps": 30,
+  "prefix_frames": 6,
+  "prefix_s": 0.2
+ },
+ "model": {
+  "state_dim": 126,
+  "keypoints": 21,
+  "alpha": 0.6,
+  "alpha_selection": [
+   {
+    "alpha": 0.4,
+    "mean_cm": 9.1524,
+    "detail_cm": [
+     3.2054,
+     6.8142,
+     9.0575,
+     12.3724,
+     12.4307,
+     11.8018,
+     8.3845
+    ]
+   },
+   {
+    "alpha": 0.5,
+    "mean_cm": 9.1315,
+    "detail_cm": [
+     3.0912,
+     6.7688,
+     9.0218,
+     12.4025,
+     12.4896,
+     11.7827,
+     8.3641
+    ]
+   },
+   {
+    "alpha": 0.6,
+    "mean_cm": 9.1165,
+    "detail_cm": [
+     2.9562,
+     6.721,
+     8.9832,
+     12.4601,
+     12.5861,
+     11.7638,
+     8.3453
+    ]
+   },
+   {
+    "alpha": 0.7,
+    "mean_cm": 9.1335,
+    "detail_cm": [
+     2.8233,
+     6.6976,
+     8.9512,
+     12.5883,
+     12.7688,
+     11.7593,
+     8.3463
+    ]
+   },
+   {
+    "alpha": 0.8,
+    "mean_cm": 9.3013,
+    "detail_cm": [
+     2.7586,
+     6.8625,
+     8.9915,
+     12.9568,
+     13.2123,
+     11.8554,
+     8.4722
+    ]
+   },
+   {
+    "alpha": 0.9,
+    "mean_cm": 10.4193,
+    "detail_cm": [
+     2.9246,
+     8.0736,
+     9.7695,
+     14.7677,
+     15.0076,
+     12.8561,
+     9.5358
+    ]
+   },
+   {
+    "alpha": 1.0,
+    "mean_cm": 29.9359,
+    "detail_cm": [
+     4.4555,
+     13.9335,
+     18.8613,
+     47.1493,
+     69.555,
+     36.111,
+     19.4857
+    ]
+   }
+  ],
+  "q_summary": {
+   "median": 0.009649842711671717,
+   "min": 0.004638537024452609,
+   "max": 0.01
+  },
+  "r_summary": {
+   "median": 1.6240955673858246e-09,
+   "min": 8.528245741266167e-10,
+   "max": 9.018501324120045e-09
+  },
+  "q_per_coord": [
+   0.01,
+   0.004638537024452609,
+   0.006106198615278763,
+   0.01,
+   0.004922311081333252,
+   0.006446072580563812,
+   0.01,
+   0.005272335510752658,
+   0.0070209560470675695,
+   0.01,
+   0.005939502348649269,
+   0.00785342785757755,
+   0.01,
+   0.007534108395400357,
+   0.009596582556783756,
+   0.01,
+   0.006381551450887447,
+   0.00746448768627799,
+   0.01,
+   0.0076792093661342325,
+   0.00851833320340807,
+   0.01,
+   0.008696146971573875,
+   0.009559450852049794,
+   0.01,
+   0.01,
+   0.01,
+   0.01,
+   0.006705594496394895,
+   0.007813633925044005,
+   0.01,
+   0.008431020125695807,
+   0.008992724554898152,
+   0.01,
+   0.009622960625337282,
+   0.01,
+   0.01,
+   0.01,
+   0.01,
+   0.01,
+   0.006602385971570768,
+   0.007871314225809622,
+   0.01,
+   0.008104307240491215,
+   0.008975510891539045,
+   0.01,
+   0.00943695226330345,
+   0.01,
+   0.01,
+   0.01,
+   0.01,
+   0.01,
+   0.006640387936788188,
+   0.007949795023733185,
+   0.01,
+   0.007772269177962249,
+   0.008867305648577425,
+   0.01,
+   0.008791469558718054,
+   0.009649842711671717,
+   0.01,
+   0.00998577816201508,
+   0.01
+  ],
+  "r_per_coord": [
+   4.485776108546996e-09,
+   9.420718974107198e-10,
+   8.528245741266167e-10,
+   4.521036109101123e-09,
+   9.616817205316695e-10,
+   9.06671153817975e-10,
+   4.721631006851209e-09,
+   1.0234679667729997e-09,
+   1.0132523705130304e-09,
+   4.957749750235779e-09,
+   1.1800678023355411e-09,
+   1.0934590141834602e-09,
+   5.271382895167815e-09,
+   1.4516123194577836e-09,
+   1.3379624714208742e-09,
+   4.9661141000111425e-09,
+   1.1586384108864874e-09,
+   9.704926683177768e-10,
+   5.187377977477239e-09,
+   1.3937536981621976e-09,
+   1.1587439784207292e-09,
+   5.342942394436207e-09,
+   1.4717679734312982e-09,
+   1.3960380321162618e-09,
+   6.2536292192639555e-09,
+   1.837927962521665e-09,
+   1.9009425164151695e-09,
+   5.0964632608545835e-09,
+   1.247345324325919e-09,
+   1.076798512642453e-09,
+   5.41546564181701e-09,
+   1.508008315050326e-09,
+   1.3283855426134749e-09,
+   5.673586251117422e-09,
+   1.6410477379410491e-09,
+   1.5744082266125996e-09,
+   7.141591573761451e-09,
+   1.8432114490561596e-09,
+   2.2097527030827663e-09,
+   4.957114824250964e-09,
+   1.212377231011397e-09,
+   1.0973082377846002e-09,
+   5.252003765243454e-09,
+   1.4622517061697097e-09,
+   1.365674599880048e-09,
+   5.7464233976428735e-09,
+   1.5567787392570798e-09,
+   1.641250730930204e-09,
+   7.593422409585324e-09,
+   1.9200884248353092e-09,
+   2.2046412515423675e-09,
+   4.808044776419836e-09,
+   1.212535913940258e-09,
+   1.1468339108853251e-09,
+   5.295316314142213e-09,
+   1.4250106949914907e-09,
+   1.3608269693197396e-09,
+   5.776193297628958e-09,
+   1.6240955673858246e-09,
+   1.6092963817846707e-09,
+   9.018501324120045e-09,
+   2.008651832850298e-09,
+   2.1612558027664807e-09
+  ],
+  "velocity_autocorr": {
+   "1": 0.9398,
+   "2": 0.9045,
+   "3": 0.897,
+   "5": 0.8751,
+   "10": 0.817
+  },
+  "fit": "method of moments; alpha selected on validation (official information rule)"
+ },
+ "mask_protocol": {
+  "definition": "prefix=6 frames; mask L in {6,12,18,30}; clean prefix+mask; stride max(1,L/2); cap 300/test split; target = last masked frame",
+  "rows": [
+   {
+    "n_windows": 300,
+    "n_records": 7,
+    "mean_cm": 2.862,
+    "rmse_cm": 3.526,
+    "median_cm": 2.346,
+    "p90_cm": 5.646,
+    "wrist_cm": 2.228,
+    "fingertips_cm": 3.252,
+    "L_s": 0.2,
+    "L_frames": 6,
+    "trace_cm2": 142.883
+   },
+   {
+    "n_windows": 300,
+    "n_records": 7,
+    "mean_cm": 5.656,
+    "rmse_cm": 6.862,
+    "median_cm": 4.734,
+    "p90_cm": 11.237,
+    "wrist_cm": 4.625,
+    "fingertips_cm": 6.201,
+    "L_s": 0.4,
+    "L_frames": 12,
+    "trace_cm2": 369.381
+   },
+   {
+    "n_windows": 300,
+    "n_records": 7,
+    "mean_cm": 7.095,
+    "rmse_cm": 8.742,
+    "median_cm": 5.872,
+    "p90_cm": 14.097,
+    "wrist_cm": 5.724,
+    "fingertips_cm": 7.777,
+    "L_s": 0.6,
+    "L_frames": 18,
+    "trace_cm2": 600.742
+   },
+   {
+    "n_windows": 300,
+    "n_records": 7,
+    "mean_cm": 9.464,
+    "rmse_cm": 11.334,
+    "median_cm": 7.791,
+    "p90_cm": 18.743,
+    "wrist_cm": 7.587,
+    "fingertips_cm": 10.264,
+    "L_s": 1.0,
+    "L_frames": 30,
+    "trace_cm2": 1063.932
+   }
+  ],
+  "baselines": [
+   {
+    "method": "hold",
+    "L_s": 0.2,
+    "L_frames": 6,
+    "mean_cm": 3.387,
+    "rmse_cm": 4.182,
+    "wrist_cm": 2.669
+   },
+   {
+    "method": "cv",
+    "L_s": 0.2,
+    "L_frames": 6,
+    "mean_cm": 2.914,
+    "rmse_cm": 3.765,
+    "wrist_cm": 2.191
+   },
+   {
+    "method": "linear",
+    "L_s": 0.2,
+    "L_frames": 6,
+    "mean_cm": 3.31,
+    "rmse_cm": 4.12,
+    "wrist_cm": 2.614
+   },
+   {
+    "method": "hold",
+    "L_s": 0.4,
+    "L_frames": 12,
+    "mean_cm": 5.998,
+    "rmse_cm": 7.326,
+    "wrist_cm": 4.916
+   },
+   {
+    "method": "cv",
+    "L_s": 0.4,
+    "L_frames": 12,
+    "mean_cm": 7.731,
+    "rmse_cm": 9.515,
+    "wrist_cm": 6.305
+   },
+   {
+    "method": "linear",
+    "L_s": 0.4,
+    "L_frames": 12,
+    "mean_cm": 6.342,
+    "rmse_cm": 7.582,
+    "wrist_cm": 5.119
+   },
+   {
+    "method": "hold",
+    "L_s": 0.6,
+    "L_frames": 18,
+    "mean_cm": 7.353,
+    "rmse_cm": 9.016,
+    "wrist_cm": 5.936
+   },
+   {
+    "method": "cv",
+    "L_s": 0.6,
+    "L_frames": 18,
+    "mean_cm": 11.502,
+    "rmse_cm": 14.337,
+    "wrist_cm": 9.142
+   },
+   {
+    "method": "linear",
+    "L_s": 0.6,
+    "L_frames": 18,
+    "mean_cm": 10.329,
+    "rmse_cm": 12.792,
+    "wrist_cm": 8.302
+   },
+   {
+    "method": "hold",
+    "L_s": 1.0,
+    "L_frames": 30,
+    "mean_cm": 9.554,
+    "rmse_cm": 11.44,
+    "wrist_cm": 7.7
+   },
+   {
+    "method": "cv",
+    "L_s": 1.0,
+    "L_frames": 30,
+    "mean_cm": 21.497,
+    "rmse_cm": 26.557,
+    "wrist_cm": 17.39
+   },
+   {
+    "method": "linear",
+    "L_s": 1.0,
+    "L_frames": 30,
+    "mean_cm": 18.003,
+    "rmse_cm": 21.402,
+    "wrist_cm": 14.531
+   }
+  ],
+  "compare_hold": {
+   "L6": {
+    "hold_cm": 3.387,
+    "kalman_cm": 2.862,
+    "delta_cm": -0.525
+   },
+   "L12": {
+    "hold_cm": 5.998,
+    "kalman_cm": 5.656,
+    "delta_cm": -0.342
+   },
+   "L18": {
+    "hold_cm": 7.353,
+    "kalman_cm": 7.095,
+    "delta_cm": -0.258
+   },
+   "L30": {
+    "hold_cm": 9.554,
+    "kalman_cm": 9.464,
+    "delta_cm": -0.09
+   }
+  },
+  "context_gain": [
+   {
+    "prefix_frames": 6,
+    "prefix_s": 0.2,
+    "lead_frames": 30,
+    "mean_cm": 9.874,
+    "wrist_cm": 7.963,
+    "n_windows": 300
+   },
+   {
+    "prefix_frames": 18,
+    "prefix_s": 0.6,
+    "lead_frames": 30,
+    "mean_cm": 9.874,
+    "wrist_cm": 7.963,
+    "n_windows": 300
+   },
+   {
+    "prefix_frames": 30,
+    "prefix_s": 1.0,
+    "lead_frames": 30,
+    "mean_cm": 9.874,
+    "wrist_cm": 7.963,
+    "n_windows": 300
+   },
+   {
+    "prefix_frames": 6,
+    "prefix_s": 0.2,
+    "lead_frames": 90,
+    "mean_cm": 12.789,
+    "wrist_cm": 10.316,
+    "n_windows": 210
+   },
+   {
+    "prefix_frames": 18,
+    "prefix_s": 0.6,
+    "lead_frames": 90,
+    "mean_cm": 12.789,
+    "wrist_cm": 10.316,
+    "n_windows": 210
+   },
+   {
+    "prefix_frames": 30,
+    "prefix_s": 1.0,
+    "lead_frames": 90,
+    "mean_cm": 12.789,
+    "wrist_cm": 10.316,
+    "n_windows": 210
+   }
+  ],
+  "hold_A_90": {
+   "n_windows": 221,
+   "mean_cm": 12.412,
+   "rmse_cm": 14.592
+  }
+ },
+ "official_options": [
+  {
+   "n_windows": 221,
+   "n_records": 7,
+   "mean_cm": 12.377,
+   "rmse_cm": 14.582,
+   "median_cm": 10.309,
+   "p90_cm": 24.337,
+   "wrist_cm": 10.041,
+   "fingertips_cm": 13.247,
+   "option": "A_no_request",
+   "ctx_frames": 6,
+   "ctx_s": 0.2,
+   "lead_frames": 90,
+   "lead_s": 3.0,
+   "requests": 0,
+   "cost_units": 0.0,
+   "wait_s": 0.0,
+   "observed_frames": 6,
+   "trace_cm2": 3379.943,
+   "pred_rmse_cm": 7.325
+  },
+  {
+   "n_windows": 300,
+   "n_records": 7,
+   "mean_cm": 12.809,
+   "rmse_cm": 15.311,
+   "median_cm": 10.608,
+   "p90_cm": 26.378,
+   "wrist_cm": 10.448,
+   "fingertips_cm": 13.714,
+   "option": "B_one_request",
+   "ctx_frames": 18,
+   "ctx_s": 0.6,
+   "lead_frames": 60,
+   "lead_s": 2.0,
+   "requests": 1,
+   "cost_units": 1.0,
+   "wait_s": 1.0,
+   "observed_frames": 18,
+   "trace_cm2": 2221.937,
+   "pred_rmse_cm": 5.939
+  },
+  {
+   "n_windows": 300,
+   "n_records": 7,
+   "mean_cm": 9.874,
+   "rmse_cm": 11.827,
+   "median_cm": 8.299,
+   "p90_cm": 19.387,
+   "wrist_cm": 7.963,
+   "fingertips_cm": 10.7,
+   "option": "C_two_requests",
+   "ctx_frames": 30,
+   "ctx_s": 1.0,
+   "lead_frames": 30,
+   "lead_s": 1.0,
+   "requests": 2,
+   "cost_units": 2.0,
+   "wait_s": 2.0,
+   "observed_frames": 30,
+   "trace_cm2": 1063.932,
+   "pred_rmse_cm": 4.109
+  }
+ ],
+ "voi": {
+  "rule": "buy the next look iff posterior position-trace reduction > lambda (cm^2 per cost unit); look adds 12 prefix frames, costs 1, consumes 30 frames of lead",
+  "marginal_cm2": [
+   1158.006,
+   1158.005
+  ],
+  "threshold_cm2": 1158.006,
+  "threshold_rmse_cm": 1.608,
+  "note": "marginal reductions are equal under the fitted horizon-dominated covariance, so the policy is a step function (0 or 2 looks), not an interior 1-look rule; posterior covariance is data-independent, so per-record VOI collapses to the same rule for every record",
+  "strategies": [
+   {
+    "name": "只看一次 (A)",
+    "mean_cm": 12.377,
+    "rmse_cm": 14.582,
+    "requests": 0,
+    "observed_frames": 6,
+    "cost_units": 0.0,
+    "wait_s": 0.0,
+    "note": "仅初始 0.2s 前缀（1 次观测），不付费"
+   },
+   {
+    "name": "固定间隔 (C)",
+    "mean_cm": 9.874,
+    "rmse_cm": 11.827,
+    "requests": 2,
+    "observed_frames": 30,
+    "cost_units": 2.0,
+    "wait_s": 2.0,
+    "note": "固定前缀 0.2/0.6/1.0 s，共 2 次付费；不看后验"
+   },
+   {
+    "name": "最后状态保持",
+    "mean_cm": 12.412,
+    "rmse_cm": 14.592,
+    "requests": 0,
+    "observed_frames": 6,
+    "cost_units": 0.0,
+    "wait_s": 0.0,
+    "note": "不做模型更新，保持最后观测位置（A 的同窗 90 帧 lead）"
+   },
+   {
+    "name": "VOI λ=579.0",
+    "mean_cm": 9.874,
+    "rmse_cm": 11.827,
+    "requests": 2,
+    "observed_frames": 30,
+    "cost_units": 2.0,
+    "wait_s": 2.0,
+    "note": "低于阈值 λ*，买满 2 次（与固定间隔同终点）"
+   },
+   {
+    "name": "VOI λ=1737.0",
+    "mean_cm": 12.377,
+    "rmse_cm": 14.582,
+    "requests": 0,
+    "observed_frames": 6,
+    "cost_units": 0.0,
+    "wait_s": 0.0,
+    "note": "高于阈值 λ*，不买（与只看一次同终点）"
+   }
+  ]
+ },
+ "ablation": {
+  "q_x2": {
+   "by_L": {
+    "6": {
+     "mean_cm": 2.862,
+     "delta_cm": -0.0,
+     "trace_cm2": 285.751,
+     "trace_ratio": 1.9999
+    },
+    "12": {
+     "mean_cm": 5.656,
+     "delta_cm": -0.0,
+     "trace_cm2": 738.747,
+     "trace_ratio": 2.0
+    },
+    "18": {
+     "mean_cm": 7.095,
+     "delta_cm": 0.0,
+     "trace_cm2": 1201.469,
+     "trace_ratio": 2.0
+    },
+    "30": {
+     "mean_cm": 9.464,
+     "delta_cm": 0.0,
+     "trace_cm2": 2127.85,
+     "trace_ratio": 2.0
+    }
+   }
+  },
+  "r_x2": {
+   "by_L": {
+    "6": {
+     "mean_cm": 2.862,
+     "delta_cm": 0.0,
+     "trace_cm2": 142.897,
+     "trace_ratio": 1.0001
+    },
+    "12": {
+     "mean_cm": 5.656,
+     "delta_cm": 0.0,
+     "trace_cm2": 369.396,
+     "trace_ratio": 1.0
+    },
+    "18": {
+     "mean_cm": 7.095,
+     "delta_cm": 0.0,
+     "trace_cm2": 600.757,
+     "trace_ratio": 1.0
+    },
+    "30": {
+     "mean_cm": 9.464,
+     "delta_cm": 0.0,
+     "trace_cm2": 1063.947,
+     "trace_ratio": 1.0
+    }
+   }
+  },
+  "alpha_1": {
+   "by_L": {
+    "6": {
+     "mean_cm": 2.914,
+     "delta_cm": 0.052,
+     "trace_cm2": 562.169,
+     "trace_ratio": 3.9345
+    },
+    "12": {
+     "mean_cm": 7.731,
+     "delta_cm": 2.075,
+     "trace_cm2": 4014.971,
+     "trace_ratio": 10.8695
+    },
+    "18": {
+     "mean_cm": 11.502,
+     "delta_cm": 4.407,
+     "trace_cm2": 13026.452,
+     "trace_ratio": 21.6839
+    },
+    "30": {
+     "mean_cm": 21.495,
+     "delta_cm": 12.031,
+     "trace_cm2": 58397.626,
+     "trace_ratio": 54.8885
+    }
+   }
+  },
+  "alpha_05": {
+   "by_L": {
+    "6": {
+     "mean_cm": 3.005,
+     "delta_cm": 0.143,
+     "trace_cm2": 107.83,
+     "trace_ratio": 0.7547
+    },
+    "12": {
+     "mean_cm": 5.753,
+     "delta_cm": 0.097,
+     "trace_cm2": 255.297,
+     "trace_ratio": 0.6911
+    },
+    "18": {
+     "mean_cm": 7.165,
+     "delta_cm": 0.07,
+     "trace_cm2": 403.509,
+     "trace_ratio": 0.6717
+    },
+    "30": {
+     "mean_cm": 9.477,
+     "delta_cm": 0.013,
+     "trace_cm2": 699.959,
+     "trace_ratio": 0.6579
+    }
+   }
+  }
+ },
+ "limitations": [
+  "Q,R 取对角，逐坐标独立滤波；手指之间的瞬时相关被忽略，这会让指尖误差被高估或低估，具体方向取决于相关符号。",
+  "只评估主导手；非主导手只用于选择主导手，不进入误差统计。",
+  "掩蔽协议是官方协议的可见子集：prefix 固定 0.2 s，官方还允许 0.6/1.0 s 前缀；A/B/C 三选项的 lead 分别为 90/60/30 帧，与官方 p2_official.py 的动作空间一致。L 集合按任务指定 {0.2,0.4,0.6,1.0}s，官方 p2_predict.py 另用 {6,15,30,60} 帧，本模块不覆盖后者。",
+  "VOI 的 trace 来自线性高斯后验，协方差与观测值无关：所有记录、所有窗口的后验 trace 只由 alpha、q、r 和 horizon 决定，因此逐记录 VOI 退化为同一条规则，无法体现“某条记录更值得看”的样本差异。",
+  "噪声参数 q,r 弱可辨识：r 从 1e-9 量级翻倍对误差几乎无影响（见消融），真实观测噪声可能被过程噪声吸收。",
+  "未做跨被试泛化：split 沿用官方 record_split.csv（train 55 / validation 7 / test 7），测试集只有 7 条记录。",
+  "没有把误差换算成成本；VOI 阈值以 cm^2/成本单位给出，成本到厘米的换算需要赛题额外给定。"
+ ],
+ "scaling_law": {
+  "form": "e(L) = c * L^gamma",
+  "gamma": 0.7407,
+  "c_cm": 10.0748,
+  "r2": 0.9674,
+  "ratio_double_L": 1.6709,
+  "n_points": 4,
+  "L_s": [
+   0.2,
+   0.4,
+   0.6,
+   1.0
+  ],
+  "fitted_cm": [
+   3.059,
+   5.111,
+   6.901,
+   10.075
+  ]
+ }
+}

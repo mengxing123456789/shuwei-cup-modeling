@@ -1,0 +1,119 @@
+[
+ {
+  "skill": "comp-prob-analysis",
+  "target": 100,
+  "actual": 270,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 400,
+  "actual": 1188,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 1000,
+  "actual": 2970,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 1600,
+  "actual": 4752,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 600,
+  "actual": 1782,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 1500,
+  "actual": 4482,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 2100,
+  "actual": 6264,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 300,
+  "actual": 864,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 1100,
+  "actual": 3294,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 3000,
+  "actual": 8964,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 10500,
+  "actual": 31482,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 5000,
+  "actual": 14958,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 31000,
+  "actual": 92988,
+  "result": [
+   "True",
+   ""
+  ]
+ }
+]

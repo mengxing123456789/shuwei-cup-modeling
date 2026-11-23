@@ -1,0 +1,31 @@
+\begin{table}[H]
+\centering
+\caption{Three-level design on the five knobs that actually act ($3^5=243$ cells per case, 30 seeds, five mappings). The middle level of each knob is its frozen value. Upper panel: where the frozen policy sits. Lower panel: least-squares coefficients of a coded linear model with all ten pairwise products, in on-time points; the curvature column is the pure quadratic term read off the centre cell.}
+\label{tab:p3-threelevel}
+\scriptsize
+\begin{tabular}{lrrrrrr}
+\toprule
+Case & Frozen & Cell min & Cell max & Range (pp) & Above frozen & Model $R^2$ \\
+\midrule
+S2 & 0.8486 & 0.7883 & 0.8508 & 6.25 & 6/243 & 0.419 \\
+S3 & 0.8056 & 0.7388 & 0.8106 & 7.19 & 36/243 & 0.631 \\
+\midrule
+\multicolumn{7}{l}{\emph{Main effects and curvature (pp)}}\\
+\midrule
+Case & $q\_hi$ & $gate$ & $late\_tol$ & $mix$ & $gam$ \\
+\midrule
+S2 main & -0.55 & -0.18 & +0.54 & -0.57 & +0.01 \\
+S2 curv & -0.36 & -2.10 & -1.67 & -1.19 & -0.04 \\
+S3 main & -0.57 & +0.21 & +2.24 & +0.04 & +0.01 \\
+S3 curv & -0.51 & +0.02 & -3.16 & -0.05 & +0.08 \\
+\midrule
+\multicolumn{7}{l}{\emph{Pairwise interactions (pp); only terms above $0.05$ in either case are listed}}\\
+\midrule
+Case & $q\_hi\times gate$ & $q\_hi\times late\_tol$ & $q\_hi\times mix$ & $q\_hi\times gam$ & $gate\times late\_tol$ \\
+\midrule
+S2 & +0.08 & +0.07 & -0.06 & +0.01 & -0.82 \\
+S3 & -0.10 & +0.02 & -0.02 & -0.01 & -0.26 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\footnotesize The centre cell is not exactly the frozen policy for S2, because the frozen mixing weight sits at the lower end of the three-level range; the frozen policy is therefore run as its own candidate and every delta is measured against it.
+\end{table}

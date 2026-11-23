@@ -1,0 +1,367 @@
+--- 1951
+
++++ 2004
+
+@@ -15,49 +15,45 @@
+
+ 
+ \abstract{%
+-This paper studies restocking work in unmanned supermarkets as a chain of three
+-questions that share one observation record: what state can be recovered from
+-the released ego-centric recordings, how far that state can be predicted once
+-observations stop, and how the resulting uncertainty should price the decision to
+-buy another look before a shelf is restocked. The released package contains
+-\slotNRecords{} recordings from \slotNEnv{} environments, \slotNTimestamps{}
+-timestamped frames and \slotSizeGB{} GB of sensor data, split by the organisers
+-into \slotSplitTrain{}/\slotSplitVal{}/\slotSplitTest{} environments; the three
+-recording formats differ in frame rate, coordinate definition and annotation
+-coverage, so we begin by fixing one convention and documenting what it costs.
+-
+-For the first question we define a two-layer hand state: a continuous layer
+-(position, orientation, velocity, aperture and a stationary flag) and a discrete
+-layer of \slotNStages{} rule-derived stages. Reliability is estimated two ways, a
+-calibrated logistic model on geometric descriptors and a label-free Mahalanobis
+-distance, and fused into a soft weight. On held-out records the calibrated route
+-reaches AUC \slotPRelCalTestAUC{} and the fused route \slotPRelFusTestAUC{}, with
+-average precision \slotPRelFusTestAP{} against a prevalence baseline of
+-\slotPRelAPBaseline{}. Stage agreement with the reference annotation rises from
+-\slotPSegWardARI{} (ARI) for the chain-constrained agglomeration to
+-\slotPSegGPUARI{} for a learned boundary detector whose decoding constants were
+-selected on validation records only; the raw-coordinate baseline reaches
+-\slotPSegRawARI{}. We report agreement, not accuracy.
+-
+-For the second question we mask the dominant-wrist trajectory for
+-\slotMaskA{}, \slotMaskB{}, \slotMaskC{} and \slotMaskD{} seconds and replay four
+-predictors on identical windows. A ridge predictor on the last \slotCtx{} frames
+-gives RMSE \slotPTwoARidgeRMSE{} cm at \slotMaskA{} s against \slotPTwoAHoldRMSE{}
+-cm for hold-last, and \slotPTwoDRidgeRMSE{} cm against \slotPTwoDHoldRMSE{} cm at
+-\slotMaskD{} s, so the advantage decays with the horizon. Split-conformal radii
+-grow from \slotPConAQNine{} m to \slotPConDQNine{} m over the same range. Pricing
+-a look at the frozen cost model puts the optimum at \slotPEconOptT{} s with
+-objective \slotPEconOptJ{}, below the fixed-interval baselines at
+-\slotPEconHalfJ{} and \slotPEconOneJ{}.
+-
+-For the third question we treat the service time as affine in the unknown source
+-duration, reserve capacity before execution and compare policies over the
+-\slotNSeeds{} official seeds. An adaptive-quantile reservation policy selected
+-on the first fifteen seeds reaches \slotPImpSTwoAllCand{} in S\slotCaseTwo{} and
+-\slotPImpSThreeAllCand{} in S\slotCaseThree{}, against \slotPImpSTwoAllBase{}
+-and \slotPImpSThreeAllBase{} for the slack-aware incumbent; the held-out gain is
+-\slotPImpMixedHoldDelta{} $\pm$ \slotPImpMixedHoldCI{} and the required floor of
+-\slotOnTimeFloor{} holds in both cases. Buying extra observation is not
+-worth its price under the measured prefix error: the policies that gate reviews
+-on value purchase \slotPSchedSTwoSLACKReviews{} reviews and gain nothing.}
++This paper studies restocking work in unmanned supermarkets as a chain of three questions
++that share one observation record: what state can be recovered from the released
++ego-centric recordings, how far that state can be predicted once observations stop, and
++how the resulting uncertainty should price the decision to buy another look. The package
++holds \slotNRecords{} recordings from \slotNEnv{} environments, \slotNTimestamps{}
++timestamped frames and \slotSizeGB{} GB, split into
++\slotSplitTrain{}/\slotSplitVal{}/\slotSplitTest{} environments; the three formats differ
++in frame rate, coordinate definition and annotation coverage, so we first fix one
++convention and document what it costs.
++
++For the first question we define a two-layer hand state, continuous (position,
++orientation, velocity, aperture, stationary flag) over \slotNStages{} rule-derived stages,
++with reliability fused into a soft weight from a calibrated logistic route and a
++label-free Mahalanobis route. Held-out records give AUC \slotPRelCalTestAUC{} and
++\slotPRelFusTestAUC{}, average precision \slotPRelFusTestAP{} against a prevalence
++baseline of \slotPRelAPBaseline{}. Stage agreement rises from \slotPSegWardARI{} (ARI) for
++chain-constrained agglomeration to \slotPSegGPUARI{} for a learned boundary detector whose
++decoding constants were selected on validation records only; we report agreement, not
++accuracy.
++
++For the second question we mask the dominant-wrist trajectory for \slotMaskA{},
++\slotMaskB{}, \slotMaskC{} and \slotMaskD{} seconds and replay four predictors on identical
++windows. A ridge predictor gives RMSE \slotPTwoARidgeRMSE{} cm at \slotMaskA{} s against
++\slotPTwoAHoldRMSE{} cm for hold-last, and \slotPTwoDRidgeRMSE{} against
++\slotPTwoDHoldRMSE{} cm at \slotMaskD{} s, so the advantage decays with the horizon;
++conformal radii grow from \slotPConAQNine{} m to \slotPConDQNine{} m. Pricing a look at
++the frozen cost model puts the optimum at \slotPEconOptT{} s with objective
++\slotPEconOptJ{}, below the fixed-interval baselines.
++
++For the third question we treat service time as affine in the unknown source duration and
++derive the punctuality event in closed form: a job finishes on time if and only if its
++duration lies below $(\textsf{due}-s-\beta)/\alpha$, so the on-time probability is one
++evaluation of the duration law and the reservation cancels out of it. Against
++\slotPCFJobs{} executed jobs the formula scores a Brier of \slotPCFBrier{} (skill
++\slotPCFSkill{}) and tracks the realised rate within \slotPCFMeanErr{} across three cases
++and three service multipliers. Reserving from that law, an adaptive-quantile policy
++selected on the first fifteen seeds reaches \slotPImpSTwoAllCand{} in S\slotCaseTwo{} and
++\slotPImpSThreeAllCand{} in S\slotCaseThree{} against \slotPImpSTwoAllBase{} and
++\slotPImpSThreeAllBase{}, a held-out gain of \slotPImpMixedHoldDelta{} $\pm$
++\slotPImpMixedHoldCI{}; and because the reservation cancels, extra observation can only
++pay through the duration law, which the measured prefix error leaves unchanged.}
+ 
+ \keywords{ego-centric hand state; observation reliability; conformal prediction;
+@@ -142,4 +138,9 @@
+
+         compared to EDF and to an oracle that knows the true duration, on paired
+         seeds rather than on independent runs.
++  \item A closed form for the punctuality event, $P(\text{on time})=
++        F_d\big((\textsf{due}-s-\beta)/\alpha\big)$, which removes the reservation
++        from the probability, collapses the five service mappings onto one duration
++        law, and turns the value of re-observing into a test of whether the released
++        prefix moves that law; it is calibrated on \slotPCFJobs{} executed jobs.
+ \end{itemize}
+ 
+@@ -149,5 +150,5 @@
+
+ Sections~\ref{sec:partone}--\ref{sec:partthree} answer the three questions in the
+ six-part form (model, solution, results, validation, discussion, summary).
+-Section~\ref{sec:limits} states the information-theoretic ceiling of the task,
++Section~\ref{sec:limits} states the empirical decision limits of the task,
+ Section~\ref{sec:eval} collects the limitations and the reproduction commands, and
+ Section~\ref{sec:concl} concludes. Appendices hold the notation, the excerpted
+@@ -524,14 +525,15 @@
+
+ The learned route escapes that problem by never choosing a count. A dilated temporal
+ convolutional network with \slotPSegGPUParams{} parameters scores each frame for being a
+-boundary, and only two decoding constants --- peak height \slotPSegGPUHeight{} and
+-minimum peak separation \slotPSegGPUDistance{} frames --- are tuned, on validation
+-records only (validation ARI \slotPSegGPUValARI{}). Scored once on test it reaches ARI
++boundary, and only two decoding constants --- peak height \slotPSegGPUHeight{} and a
++minimum peak separation of \slotPSegGPUDistance{} frames (\slotPSegGPUDistSec{} s, set from
++the training segment length distribution) --- are tuned, and on validation records
++only (validation ARI \slotPSegGPUValARI{}). Scored once on test it reaches ARI
+ \slotPSegGPUARI{} against \slotPSegWardARI{} for the agglomerative baseline, frame F1
+ \slotPSegGPUFOne{}, boundary error \slotPSegGPUBMae{} frames, fitted in
+-\slotPSegGPUSeconds{} s on one device. The gain is uneven: by dataset the test ARI is
+-\slotPSegGPUByDemo{} on EgoDemo, \slotPSegGPUByStd{} on EgoStandard and
+-\slotPSegGPUByPro{} on EgoPro, and one record with a single true stage is
++\slotPSegGPUSeconds{} s on one device. The gain is not uniform: boundary precision falls
++to F1 \slotPSegGPUBFOne{} against the agglomeration's, so the detector finds boundaries
++more accurately but cuts more of them, and one record with a single true stage is
+ over-segmented until its ARI collapses --- the failure the count study diagnosed, kept
+-in the average.
++in the average rather than dropped.
+ 
+ \begin{table}[htbp]
+@@ -799,6 +801,6 @@
+
+ exactly the frames that carried the motion. We keep the regularised predictor as the
+ reported one because it is fitted in seconds and its error is monotone in the
+-horizon, and we report the learned curve as the evidence that the ceiling is a
+-property of the information, not of the model class.
++horizon, and we report the learned curve as the evidence that the limit is a
++property of the information released, not of the model class.
+ 
+ \begin{table}[htbp]
+@@ -980,5 +982,5 @@
+
+ constraint on capacity pressure; \textsc{rollout} re-solves a two-stage lookahead
+ over a small set of duration quantiles. \textsc{oracle} is the same scheduler run
+-with $p$ known: it violates the information rule, is a ceiling, and is never
++with $p$ known: it violates the information rule, upper-bounds what this rule can reach, and is never
+ deployable.
+ 
+@@ -994,5 +996,5 @@
+
+ \centering
+ \caption{Weighted on-time completion rate on the nominal mapping, mean over
+-\slotNSeeds{} official seeds with half-widths in brackets. The ceiling knows the true
++\slotNSeeds{} official seeds with half-widths in brackets. The reference knows the true
+ duration; the last row is the statement's own reference.}
+ \label{tab:p3nom}
+@@ -1002,5 +1004,5 @@
+
+ Policy & S\slotCaseOne & S\slotCaseTwo & S\slotCaseThree \\
+ \midrule
+-Oracle (ceiling) & \slotPStochSOneOracleETA & \slotPStochSTwoOracleETA & \slotPStochSThreeOracleETA \\
++Duration-aware reference (p known) & \slotPStochSOneOracleETA & \slotPStochSTwoOracleETA & \slotPStochSThreeOracleETA \\
+ Risk fusion & \slotPStochSOneRiskFusionETA & \slotPStochSTwoRiskFusionETA & \slotPStochSThreeRiskFusionETA \\
+ Capacity-aware slack (incumbent) & \slotPStochSOneSlackOldETA & \slotPStochSTwoSlackOldETA & \slotPStochSThreeSlackOldETA \\
+@@ -1017,11 +1019,13 @@
+
+ S\slotCaseThree, while the capacity-aware policy reaches
+ \slotPStochSTwoSlackOldETA{} and \slotPStochSThreeSlackOldETA, paired gains of
+-\slotPStochPairSTwoEDFOldDiff{} and \slotPStochPairSThreeEDFOldDiff{}. The ceiling is
+-\slotPStochSTwoOracleETA{} and \slotPStochSThreeOracleETA, so the same policy closes
+-\slotPInfoRecoverSTwo{}\% and \slotPInfoRecoverSThree{}\% of the gap between the
+-reference and a scheduler that knows the true duration. S\slotCaseOne{} carries no
+-discrimination: \slotJobsSOne{} jobs fit inside a \slotHSOne{} s horizon for every
+-policy tried, so the rate saturates at the ceiling and the case is reported only for
+-completeness.
++\slotPStochPairSTwoEDFOldDiff{} and \slotPStochPairSThreeEDFOldDiff{}. The duration-aware
++reference --- the same reservation rule run with $p$ known --- reaches
++\slotPStochSTwoOracleETA{} and \slotPStochSThreeOracleETA, so the capacity-aware rule
++recovers \slotPInfoRecoverSTwo{}\% and \slotPInfoRecoverSThree{}\% of the distance from
++EDF to it. The adaptive rule goes past that reference in both cases, by
++\slotPInfoAdvSTwoAbs{} and \slotPInfoAdvSThreeAbs{}; Section~\ref{sec:limits} reads that
++as evidence about the rule, not about the information. S\slotCaseOne{} carries no
++discrimination: \slotJobsSOne{} jobs fit inside a \slotHSOne{} s horizon for every policy
++tried, so every rate saturates and the case is reported only for completeness.
+ 
+ The gain is bought with tardiness, not with capacity. The incumbent completes
+@@ -1141,15 +1145,9 @@
+
+ \label{sec:p3disc}
+ 
+-The ceiling is not perfection: even with $p$ known, S\slotCaseThree{} reaches only
+-\slotPStochSThreeOracleETA{}, since releases, due times and the horizon forbid a
+-perfect order. The residual gap to our policy, \slotPInfoGapSThree{}, is the price of
+-not knowing the duration and is five times smaller than the gap to the reference.
+-
+-More information is not monotonically better. In S\slotCaseThree{} a policy driven by
+-the family duration distribution reaches \slotPInfoFamSThree{}, while the calibrated
+-point estimate reaches \slotPInfoFamPCSThree{}: the prior over-reserves under a tight
+-budget, which is the downside this problem penalises. The \slotOnTimeFloorPct{}\%
+-floor is met on the nominal mapping but not under the high-$\alpha$ one, which is why
+-that table stays in the paper.
++Even with $p$ known the reference is not perfection --- S\slotCaseThree{} reaches only
++\slotPStochSThreeOracleETA{} --- and our adaptive rule is ahead of it there, so not
++knowing the duration is no longer the binding loss. What remains is the mapping: the
++\slotOnTimeFloorPct{}\% floor holds on the nominal mapping but not under the
++high-$\alpha$ one, which is why that table stays in the paper.
+ 
+ One probe separates prediction from scheduling. Adding forty-two visual descriptors
+@@ -1158,6 +1156,6 @@
+
+ (\slotPVisDurRel{}\%). The same scheduler then moves the fused reservation policy by
+ \slotPVisSchedSTwoD{} in S\slotCaseTwo{} and \slotPVisSchedSThreeD{} in S\slotCaseThree{},
+-while the ceiling rises by \slotPVisOracleSThreeD{} in S\slotCaseThree{}: a predictor
+-good enough to lift the ceiling left the realised rate unchanged, so the binding
++while the reference rises by \slotPVisOracleSThreeD{} in S\slotCaseThree{}: a predictor
++good enough to lift the reference left the realised rate unchanged, so the binding
+ constraint is the reservation rule and what is known before a job starts, not the
+ precision of the forecast.
+@@ -1176,62 +1174,62 @@
+
+ reference \slotPStochSTwoEDFOldETA{} to \slotPImpSTwoAllCand{} in S\slotCaseTwo{} and
+ from \slotPStochSThreeEDFOldETA{} to \slotPImpSThreeAllCand{} in S\slotCaseThree{} on
+-the same seeds, closes most of the gap to a duration-aware ceiling, and shows that
++the same seeds, goes past the duration-aware reference in both cases, and shows that
+ paid observations do not pay at the measured prefix quality. The gain is scheduling,
+ not prediction.
+ 
+-\section{Information-Theoretic Limits of the Task}
++\section{Empirical Decision Limits of the Task}
+ \label{sec:limits}
+ 
+-Two different limits bound Part III, and conflating them is the usual error. The
+-first is a duration-information limit: even with $p$ known, releases, due times and
+-the horizon forbid a perfect order, so the ceiling is a rate strictly below one. The
+-second is a decision limit: how much of that achievable rate survives when the only
+-duration information is a family label. Table~\ref{tab:limits} reports both for the
+-nominal mapping, per case, using the same \slotNSeeds{} seeds.
++Two quantities bound Part III. The first is what the instance allows: with $p$ known,
++releases, due times and the horizon still forbid a perfect order, so even a clairvoyant
++rule stops below one. The second is what our information allows.
++Table~\ref{tab:limits} separates them by running the reservation rule with and without the
++true duration, and placing the adaptive rule beside both.
+ 
+ \begin{table}[htbp]
+ \centering
+-\caption{Decision ceiling per case on the nominal mapping. The family row uses only
+-the family duration distribution; ours is the reported policy; the oracle knows the
+-true duration. The gap is oracle minus ours.}
++\caption{Per case on the nominal mapping, same \slotNSeeds{} seeds. The two rule columns run the
++capacity-aware and the adaptive reservation on the same information; the true-duration
++column keeps the capacity-aware rule but reveals $p$; The last column is the adaptive rule
++minus that reference, so a positive value means the rule, not the information, is what
++binds.}
+ \label{tab:limits}
+ \small
+ \begin{tabular}{lrrrr}
+ \toprule
+-Case & Family distribution & Ours & Oracle & Gap \\
+-\midrule
+-S\slotCaseOne & \slotPInfoFamSOne & \slotPStochSOneSlackOldETA & \slotPStochSOneOracleETA & \slotPInfoGapSOne \\
+-S\slotCaseTwo & \slotPInfoFamSTwo & \slotPStochSTwoSlackOldETA & \slotPStochSTwoOracleETA & \slotPInfoGapSTwo \\
+-S\slotCaseThree & \slotPInfoFamSThree & \slotPStochSThreeSlackOldETA & \slotPStochSThreeOracleETA & \slotPInfoGapSThree \\
++Case & Capacity-aware & Adaptive & True duration & Ours $-$ ref. \\
++\midrule
++S\slotCaseOne & \slotPStochSOneSlackOldETA & --- & \slotPStochSOneOracleETA & --- \\
++S\slotCaseTwo & \slotPStochSTwoSlackOldETA & \slotPImpSTwoAllCand & \slotPStochSTwoOracleETA & \slotPInfoAdvSTwo \\
++S\slotCaseThree & \slotPStochSThreeSlackOldETA & \slotPImpSThreeAllCand & \slotPStochSThreeOracleETA & \slotPInfoAdvSThree \\
+ \bottomrule
+ \end{tabular}
+ \end{table}
+ 
+-Three readings follow. The ceiling is not one: \slotPStochSThreeOracleETA{} in
+-S\slotCaseThree{} means that a fifth of the weighted work cannot be on time even with
+-the true duration, so any claim of a near-perfect scheduler would be a claim about
+-the instance rather than about the method. The gap between ours and the ceiling,
+-\slotPInfoGapSTwo{} in S\slotCaseTwo{} and \slotPInfoGapSThree{} in S\slotCaseThree,
+-is the part of the loss attributable to duration uncertainty, and it is what better
+-prefix features could recover at best; the gap between the reference and ours,
+-\slotPStochPairSTwoEDFOldDiff{} and \slotPStochPairSThreeEDFOldDiff{}, is larger by
+-roughly a factor of five, so better prediction is not where the remaining room is.
+-
+-The third reading is a caution. In S\slotCaseThree{} the policy driven by the family
+-duration distribution reaches \slotPInfoFamSThree{}, which is worse than the
+-calibrated point estimate at \slotPInfoFamPCSThree{}: adding distributional
+-information made the decision worse, because the quantile reservation it induces
+-over-reserves against a tight budget. More information is not monotonically better;
+-what matters is whether the policy can use it without paying for the extra
+-conservatism.
+-
+-The duration-error side of the ledger points the same way. The selected prefix
+-regression has test MAE \slotPDurSelTestMAE{} s against \slotPDurFreeBaseMAE{} s for
+-the family-median constant on the same split, so the honest reading is that the
+-scheduling gain of Part III comes from the policy and its online map estimate, not
+-from a superior duration model. Since the removable part of the error is bounded, the
+-policy ranking cannot be improved indefinitely by better regression; it can only be
+-improved by a different observation regime, which is the question Part II prices and
+-answers negatively at the current prefix quality.
++First, the reference is not a ceiling: it reaches only \slotPStochSThreeOracleETA{} in
++S\slotCaseThree{} even with the true duration, so a fifth of the weighted work cannot be
++on time for any rule that respects releases and due times, and a near-perfect claim would
++be a claim about the instance rather than the method. Second, and against the usual
++expectation, knowing the duration is worth less than choosing the reservation rule: the
++adaptive rule is ahead of the reference by \slotPInfoAdvSTwoAbs{} in S\slotCaseTwo{} and
++\slotPInfoAdvSThreeAbs{} in S\slotCaseThree. That is why we do not call the reference an
++upper bound --- it bounds this rule, not the information. Third, the distance from EDF to
++the reference, \slotPStochPairSTwoEDFOldDiff{} and \slotPStochPairSThreeEDFOldDiff, is
++five times the distance from the capacity-aware rule to the reference,
++\slotPInfoGapSTwo{} and \slotPInfoGapSThree, so neither better prediction nor a better
++rule is where the remaining room is.
++
++A fourth caution: in S\slotCaseThree{} the policy driven by the family duration law
++reaches \slotPInfoFamSThree{}, worse than the calibrated point estimate at
++\slotPInfoFamPCSThree{}, because the quantile reservation it induces over-reserves
++against a tight budget. More information is not monotonically better; what matters is
++whether the policy can use it without paying for the conservatism.
++
++The duration side points the same way. The selected prefix regression has test MAE
++\slotPDurSelTestMAE{} s against \slotPDurFreeBaseMAE{} s for the family-median constant
++on the same split, so the scheduling gain comes from the policy and its online map
++estimate, not from a superior duration model; the removable part of the error is bounded,
++so only a different observation regime could move it, which Part II prices and answers
++negatively at the current prefix quality.
+ 
+ \section{Model Evaluation}
+@@ -1277,14 +1275,12 @@
+
+ 
+ Two gaps stay open: the reliability weight does not enter the Part II regression as a
+-sample weight, and the Part II conformal radius does not become the Part III
+-reservation quantile, which uses duration residuals instead. The chain is a
+-sequence of informed modules, not one end-to-end estimator.
++sample weight, and the Part II conformal radius does not become the Part III reservation
++quantile, which takes duration residuals instead.
+ 
+ \subsection{Reproduction}
+ 
+ Every number above is regenerated by one command; the pipeline and its order are in
+-Appendix~\ref{app:repro}. The two compile passes and the page count are part of the
+-same script, and the slot file is regenerated before each compile so that a stale
+-number cannot survive a rebuild.
++Appendix~\ref{app:repro}, and the slot file is rebuilt before each compile so that a
++stale number cannot survive.
+ 
+ % ===========================================================================
+@@ -1410,5 +1406,11 @@
+
+ % numerals-ok: begin
+ This report follows the organiser's notice of November 2026
+-(\url{https://www.nmmcm.org.cn/News/220.html}). No other AI tool was used.
++(\url{https://www.nmmcm.org.cn/News/220.html}) and declares every generative tool the
++team used. The work was carried out with one interactive coding assistant operated
++locally through the team's own shell and data directories; several model routes were
++selected inside that assistant during the window, so the tool is named once and the
++routes are recorded rather than claimed homogeneous. No other generative tool, and no
++online service that answers questions about the data, was used: the released package
++was never uploaded anywhere.
+ % numerals-ok: end
+ 

@@ -1,0 +1,73 @@
+\section{Question 3: Chance-Constrained Scheduling and Rolling Horizon}\label{sec:q3}
+\subsection{Data Insight}
+The three scheduling cases are fixed by \texttt{common\_conditions.json}~\cite{ref8}: $8$, $12$ and $16$ jobs over horizons of $100$, $100$ and $125$~s, with cost budgets of $32$, $34$ and $40$ units and at most $4$, $6$ and $8$ paid looks. Because every job is charged a fixed execution fee of $2$ units, the budget left for reservation and movement is $16$, $10$ and $8$ units respectively --- the tightest case is also the one with the most jobs. Of the $349$ annotated segments, $343$ pass the $1.2$~s eligibility test and are available as duration evidence; grouped by family they are $172$ placement, $145$ arrangement and $26$ inspection segments, and the released tasks place between two and four jobs in each of the five zones. The jobs are therefore short (median $4.0$~s) relative to the movement and changeover cost between zones ($D + 0.5$~s), so the scheduling problem is dominated by travel and by how much service time is reserved, not by the service itself.
+\subsection{Modeling and Solution}
+\textbf{Duration scenarios.} For each job family $f$ and observation prefix we pool the duration residuals of all 343 eligible segments (246 train, 35 validation and 62 test) and form $S=20$ scenarios from a deterministic 5--95\% quantile grid; ranks are de-correlated across jobs by a per-unit CRC32 permutation so scenarios are not comonotone. The bank is a quantile grid rather than stratified resampling, and it is not train-only; Section~\ref{sec:sens} reports a train-only replication that leaves the policy ranking unchanged.
+
+\textbf{Chance-constrained program.} Let $\mathrm{inc}_j\in\{0,1\}$ indicate that job $j$ is admitted, $b_j\ge0.2$ the reserved service time, and $\ell_j\in\{0,1,2\}$ the number of paid looks. For the committed sequence the scenario-$\omega$ start times obey
+\[
+s_{j}= \max\{r_j,\; s_{j^-}+\max(p_{j^-}^{\omega},b_{j^-})+D_{j^-,j}+0.5\},
+\]
+where $j^-$ is the predecessor; the realised completion is $C_j^{\omega}=s_j+p_j^{\omega}$, the device is released at $s_j+\max(p_j^{\omega},b_j)$, and the cost of a run is
+\[
+\mathcal{C}=\sum_j\left(2+0.1b_j+0.2D_{j^-,j}\right)+\sum_j \ell_j .
+\]
+The chance constraint caps the probability that an admitted job cannot be finished inside the horizon~\cite{ref5} --- completion feasibility, not lateness --- as
+\[
+\frac1S\sum_{\omega}\mathbf 1\{C_j^{\omega}>H\}\le \varepsilon,\qquad \varepsilon=0.50,
+\]
+linearised as the scenario count
+\[
+\textstyle\sum_{\omega=1}^{S}\bigl(\mathrm{inc}_j-\mathrm{done}_j^{\omega}\bigr)\le \lfloor \varepsilon S\rfloor = \lfloor 0.50\times 20\rfloor = 10,
+\]
+so a job may miss its horizon in at most ten of the twenty scenarios ($S=20$); the big-$M$ device is used only for the ordering arcs. The scenario set stands in for the unknown duration distribution, so the program is a sample-average approximation of the true chance-constrained problem~\cite{ref7}. The objective is a lexicographic integer score: $10^4$ per unit weight for an on-time completion, $3\times10^3$ for a completion inside the horizon, weighted tardiness capped at 10~s and subtracted with unit weight, and cost charged with weight $10S\lambda$ ($\lambda=0.01$):
+\[
+\max\;\sum_{\omega}\sum_j w_j\left(10^4\,\mathbf 1\{C_j^{\omega}\le d_j\}+3\cdot10^3\,\mathbf 1\{C_j^{\omega}\le H\}-\min\{(C_j^{\omega}-d_j)^+,\,10\}\right)-10S\lambda\,\mathcal{C}.
+\]
+At most two looks per job are allowed and at most the case limit in total; a look extends the disclosed prefix exactly as in Q2.
+
+\textbf{Rolling horizon.} Instead of committing to the whole sequence, we fix only the first job, advance the clock to its realised device release $s_j+\max(p_j,b_j)$, drop it, and re-solve the residual problem with the remaining budget and horizon. This turns a static chance-constrained program into a closed-loop policy and is the main difference from a one-shot priority rule~\cite{ref6}.
+
+\textbf{Baselines.} Earliest-due-date (EDF) and SLACK are the two priority rules of the released engine: both use the prediction-based reserve $\hat p=\alpha\,\mathrm{pred}+\beta$ (EDF pays for a review when it raises the on-time probability; SLACK adds a pressure-triggered admission cap), not a median train duration. They are run on the same 30 seeds and the same job draws as our program.
+
+\textbf{Solution.} The program is solved with OR-Tools CP-SAT~\cite{ref10} at a 0.1~s time resolution under a 1.0~s wall-clock limit per call; a call returning neither OPTIMAL nor FEASIBLE falls back to a deterministic EDF order, and Section~\ref{sec:sens} counts those fallbacks. The driver is \texttt{code/alt\_p3\_ccmip.py}, the JSON of record is \texttt{data/alt\_p3.json}, and the measured chance-level sweep is \texttt{data/alt\_p3\_sweep.json}. The driver reads three read-only dependencies from the companion workspace (\texttt{common.py}, \texttt{p3\_stochastic\_schedule.py} and \texttt{p3\_duration\_predictions.csv}); frozen copies are included under \texttt{code/vendor/} so the numbers stay reproducible if that workspace is later revised.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Weighted on-time rate, weighted completion rate, weighted tardiness (s) and cost (abstract units) for five policies over 30 public seeds per case. Every policy sees the same job draws under the same seed and is charged the same fee schedule. \texttt{ccmip\_rolling} re-solves after every completion or paid look; \texttt{ccmip\_oneshot} solves once at $t=0$; in S2 and S3 that single call times out at the 1.0~s limit on every seed and falls back to a deterministic EDF order.}
+\label{tab:p3}
+\begin{tabular}{llrrrr}
+\toprule
+Case & Policy & On-time & Completion & Tardiness & Cost \\
+\midrule
+S1 & EDF & 0.988 & 1.000 & 0.92 & 22.78 \\
+S1 & SLACK & 0.988 & 1.000 & 3.29 & 22.79 \\
+S1 & CC-MIP rolling & 0.981 & 1.000 & 1.76 & 22.61 \\
+S1 & CC-MIP reserve & 0.969 & 1.000 & 4.83 & 24.28 \\
+S1 & CC-MIP one-shot & 0.883 & 0.898 & 50.31 & 16.02 \\
+\midrule
+S2 & EDF & 0.562 & 0.840 & 64.99 & 28.98 \\
+S2 & SLACK & 0.815 & 0.867 & 77.42 & 28.69 \\
+S2 & CC-MIP rolling & 0.772 & 0.869 & 184.40 & 30.54 \\
+S2 & CC-MIP reserve & 0.694 & 0.847 & 125.77 & 30.85 \\
+S2 & CC-MIP one-shot & 0.678 & 0.899 & 50.30 & 25.65 \\
+\midrule
+S3 & EDF & 0.522 & 0.822 & 158.33 & 36.15 \\
+S3 & SLACK & 0.741 & 0.825 & 180.20 & 34.74 \\
+S3 & CC-MIP rolling & 0.711 & 0.825 & 296.41 & 37.09 \\
+S3 & CC-MIP reserve & 0.686 & 0.799 & 306.25 & 37.78 \\
+S3 & CC-MIP one-shot & 0.627 & 0.883 & 100.90 & 32.48 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{What the numbers say.} Re-planning is worth more than the model. Holding the objective and the scenario set fixed and switching only re-planning on raises the weighted on-time rate by 0.098 in S1, 0.094 in S2 and 0.084 in S3 --- the largest single effect in the table --- at an extra cost of 6.59, 4.89 and 4.61 units respectively. These three gaps are not a clean ablation: in S2 and S3 the one-shot CP-SAT call times out at the 1.0~s limit on every seed and reverts to a deterministic EDF order, so they compare rolling re-solving against a degraded static plan rather than a converged one. Against the stronger baseline the picture is mixed: the rolling program beats EDF by 0.210 in S2 and 0.190 in S3, but it does \emph{not} beat SLACK, trailing it by 0.043 in S2 and 0.029 in S3. The program optimises the declared lexicographic score --- on-time count, completion inside the horizon, capped tardiness, cost --- while SLACK is a greedy rule reacting to the realised schedule; on instances this small the greedy rule is hard to beat. We report the ranking as measured: the best policy on the declared metric is \texttt{slack\_old}, not our program.
+\subsection{Robustness and Conclusion}
+\textbf{The chance level is measured, not assumed.} The final run fixes $\varepsilon=0.50$. A six-point sweep $\varepsilon\in\{0.20,0.30,0.40,0.50,0.60,0.70\}$ was run on eight paired seeds per cell with the same 20-scenario bank, the same 1.0~s solver limit and the same fee schedule; \texttt{code/alt\_p3\_sweep.py} produced 135 cells in 728.9~s of solver time (\texttt{data/alt\_p3\_sweep.json}). Averaged over the three cases the rolling program's mean on-time rate is 0.747, 0.761, 0.790, 0.804, 0.784 and 0.800, while \texttt{slack\_old} is best at every level (0.821); the two priority baselines do not depend on $\varepsilon$ at all. Replacing the residual bank by a train-only one (252 eligible residuals per prefix) at $\varepsilon=0.50$ lowers the rolling mean to 0.780 and leaves the winner unchanged. The 135 cells decompose as 90 ($6\varepsilon\times3$ cases$\times5$ policies on the full bank) plus 30 (five $\varepsilon$ levels with the train-only bank, baselines only) plus 15 (the full five policies on the train-only bank at $\varepsilon=0.50$). The sweep uses eight seeds while Table~\ref{tab:p3} uses thirty, so only the ranking --- not the absolute levels --- is comparable.
+
+\textbf{Solver fallbacks are measured, not hidden.} Under the 1.0~s limit the rolling solver returns no feasible incumbent at least once in all 30 S2 seeds and all 30 S3 seeds (mean 2.800 and 8.167 fallbacks per seed, 84 and 245 in total), while the one-shot solve times out on every S2 and S3 seed. The one-shot rows of Table~\ref{tab:p3} in those two cases therefore measure a static EDF plan, not a converged MIP.
+
+\textbf{What does survive.} Three statements hold across all five policies and all three cases. First, every policy meets the statement's floor of a mean weighted on-time rate of at least $0.50$ in every case (the minimum is 0.522), so the floor does not discriminate. Second, completion and punctuality do \emph{not} trade off monotonically: the one-shot plan has the highest completion in S3 (0.883) but the lowest on-time rate among the three MIP variants (0.627), whereas EDF is the least punctual policy overall (0.522); ordering the five S3 rows by completion gives on-time rates 0.686, 0.522, 0.741, 0.711 and 0.627. Third, cost is driven mainly by the case's job count and budget rather than by paid looks: across the 15 rows the correlation between cost and the mean review count is $r=0.083$, and the nine rows with zero reviews are not the cheapest.
+
+\paragraph{Conclusion to Question~3.} A scenario chance-constrained program with rolling re-planning lifts the tightest case from 0.522 (EDF) to 0.711 and passes the statement's floor everywhere, but a pressure-adaptive SLACK rule it cannot beat (0.741): on instances of eight to sixteen jobs the greedy rule reacts to the realised schedule faster than a 1.0~s solver can. The ranking is invariant across the six-point chance sweep, a train-only residual bank and all five official service mappings, while the absolute level moves by 0.336 with the service-time scale; solver fallbacks are counted and the one-shot rows are labelled as EDF fallbacks, so every number above is a measured property of the program, not an aspiration.
+% === Q3 END ===
+

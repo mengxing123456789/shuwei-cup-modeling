@@ -1,0 +1,5 @@
+{
+  "base_url": "http://127.0.0.1:3425/v1",
+  "api_key": "sk-local",
+  "model": "auto/glm-5.3-flash"
+}

@@ -1,0 +1,3 @@
+P2 final seeds=20261121,20261122,20261123 lens=[6, 18, 30] epochs=40 bar: L30 mean rmse_3d<=5.80 cm, q90<=9.50 cm, coverage in [0.88,0.93]
+L30 mean over 3 seeds: rmse_3d=6.140 +-0.130 cm | q90=9.968 +-0.219 cm | coverage=0.8967 | paired d=+0.162 cm (3/7 better in the worst seed) | T* ridge=0.30s vs quantile=0.25s | gain=+19.3%
+P2FINAL False L30_rmse=6.140 L30_q90=9.968 gain_pct=19.3 | verdict=decided 2/3 criteria failed. L30 mean rmse_3d=6.1401 cm vs <= 5.80 (FAIL, margin -0.3401); mean q90=9.9685 cm vs <= 9.50 (FAIL, margin -0.4685); mean coverage=0.8967 vs [0.88, 0.93] (PASS).

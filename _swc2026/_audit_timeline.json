@@ -1,0 +1,22 @@
+{
+ "violations": [
+  "p2.json: 有 timeline 但没找到 alerts 表（p2_2.unconstrained.timeline），只能查车辆段自洽",
+  "p2_2.unconstrained.timeline:V1[0] reset_end 3.1421 早于 obs_end 16.2141",
+  "p2_2.unconstrained.timeline:V2[0] reset_end 5.7396 早于 obs_end 10.9753",
+  "p2_2.unconstrained.timeline:V3[0] reset_end 1.0027 早于 obs_end 7.0246",
+  "p2_2.unconstrained.timeline:V3[1] reset_end 3.1867 早于 obs_end 16.2141",
+  "p2_2.unconstrained.timeline:V4[0] reset_end 3.8736 早于 obs_end 10.9753",
+  "p2_2.unconstrained.timeline:V5[0] reset_end 1.4976 早于 obs_end 7.0246",
+  "p2.json: 有 timeline 但没找到 alerts 表（p2_2.cap20.timeline），只能查车辆段自洽",
+  "p2_2.cap20.timeline:V1[0] reset_end 2.2434 早于 obs_end 36.3934",
+  "p2_2.cap20.timeline:V2[0] reset_end 3.7514 早于 obs_end 36.3934",
+  "p2_2.cap20.timeline:V3[0] reset_end 2.3369 早于 obs_end 36.1569",
+  "p2_2.cap20.timeline:V4[0] reset_end 2.5298 早于 obs_end 14.751",
+  "p2_2.cap20.timeline:V4[1] reset_end 3.9775 早于 obs_end 36.1569",
+  "p2_2.cap20.timeline:V5[0] reset_end 2.2049 早于 obs_end 14.751"
+ ],
+ "passed": [
+  "p2_2.unconstrained.timeline:V3[1] 顺序 OK (1.0027 -> 8.0273)",
+  "p2_2.cap20.timeline:V4[1] 顺序 OK (2.5298 -> 17.2809)"
+ ]
+}

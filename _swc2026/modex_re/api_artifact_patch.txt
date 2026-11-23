@@ -1,0 +1,40 @@
+MODULE backend.services.artifact_patch
+DOC: Transactional, target-bounded artifact edits for the chat workbench.
+
+The editor-agent is powerful by design.  Chat mode must never point it at the
+real workspace and hope that a prompt is obeyed.  This module runs it in an
+isolated copy, verifies the complete filesystem diff, then atomically replaces
+only the files the user approved.  Every committed edit has an independent
+local version that can be rolled back while its base still matches.
+CONSTANTS:
+CODE_SUFFIXES [frozenset] = frozenset({'.sh', '.ps1', '.h', '.cc', '.jl', '.cpp', '.vue', '.py', '.tsx', '.go', '.js', '.jsx', '.r', '.bat', '.less', '.m', '.rs', '.java', '.cs', '.svelte', '.sass', '.sql', '.hpp', '.c', '.swift', '.kt', '.kts', '.ts', '.scss'})
+EDITABLE_SUFFIXES [frozenset] = frozenset({'.yaml', '.yml', '.rmd', '.csv', '.cls', '.rs', '.svelte', '.drawio', '.css', '.scss', '.tex', '.sty', '.ps1', '.toml', '.svg', '.go', '.r', '.jsx', '.bib', '.htm', '.m', '.java', '.sass', '.sql', '.hpp', '.c', '.txt', '.kt', '.sh', '.vue', '.ini', '.json', '.py', '.tsv', '.bat', '.less', '.xml', '.cs', '.html', '.cfg', '.h', '.cc', '.jl', '.cpp', '.tsx', '.js', '.ipynb', '.md', '.qmd', '.swift', '.kts', '.ts'})
+FOCUSED_CONTEXT_LIMIT [int] = 20000
+FOCUSED_OUTPUT_SUFFIXES [frozenset] = frozenset({'.sh', '.npy', '.yaml', '.yml', '.swift', '.rmd', '.png', '.vue', '.ini', '.json', '.csv', '.py', '.tsv', '.pkl', '.cls', '.npz', '.bat', '.less', '.parquet', '.rs', '.xml', '.cs', '.xls', '.svelte', '.html', '.docx', '.drawio', '.css', '.scss', '.tex', '.sty', '.cfg', '.ps1', '.feather', '.webp', '.h', '.cc', '.jl', '.cpp', '.jpg', '.tsx', '.svg', '.xlsx', '.go', '.gif', '.r', '.jsx', '.bib', '.js', '.ipynb', '.htm', '.md', '.qmd', '.m', '.java', '.pdf', '.sass', '.sql', '.hpp', '.c', '.txt', '.jpeg', '.toml', '.kt', '.kts', '.ts'})
+PRIVATE_PARTS [frozenset] = frozenset({'.git', 'venv', '_editor_sandbox', '_references', '.claude-plugin', '_editor_agent_log.jsonl', '.mypy_cache', '_tmp', '.ruff_cache', '_editor_transaction.json', 'agents.md', 'skills', 'capsules', '_templates', '.mcp.json', 'claude.md', '.mh', 'node_modules', '_editor_chat_summary.txt', '.pytest_cache', '_editor_backup', '_utils', '_editor_chat.json', '__pycache__', 'modex-plugin.json', '_chat_patch_sandboxes', '.venv', 'skill.md', '.claude'})
+ROOT_ONLY_PRIVATE [frozenset] = frozenset({'skills', 'capsules'})
+_BULK_USER_DATA_BYTES [int] = 1073741824
+_COPY_SKIP_NAMES [frozenset] = frozenset({'_editor_chat.json', '_editor_chat_summary.txt', '_editor_agent_log.jsonl'})
+_DERIVED_BY_SOURCE [dict] = {'.tex': ('.pdf',), '.bib': ('.pdf',), '.md': ('.docx', '.pdf')}
+_DERIVED_EXPORT_SUFFIXES [frozenset] = frozenset({'.tif', '.webp', '.png', '.jpg', '.pdf', '.eps', '.svg', '.jpeg', '.tiff'})
+_MAX_COPY_BYTES [int] = 52428800
+_MAX_DIFF_CHARS [int] = 240000
+_MAX_FOCUSED_COPY_BYTES [int] = 536870912
+_MAX_FOCUSED_DERIVED [int] = 72
+_MAX_FOCUSED_TARGETS [int] = 24
+_MAX_FOCUSED_TARGET_BYTES [int] = 134217728
+_MAX_PATCH_TARGETS [int] = 24
+_MAX_TARGET_BYTES [int] = 4194304
+_PRIVATE_PARTS [frozenset] = frozenset({'venv', '_references', '.mypy_cache', 'agents.md', 'skills', 'capsules', '.mh', '_editor_chat_summary.txt', '.pytest_cache', '_editor_chat.json', '__pycache__', 'skill.md', '.git', '_editor_sandbox', '.claude-plugin', '_editor_agent_log.jsonl', '_tmp', '.ruff_cache', '_editor_transaction.json', '_templates', '.mcp.json', 'claude.md', 'node_modules', '_editor_backup', '_utils', 'modex-plugin.json', '_chat_patch_sandboxes', '.venv', '.claude'})
+_SANDBOX_CONFIG_LIMIT [int] = 6000
+_TRANSIENT_DELAYS [tuple] = (15, 30, 60, 120, 240)
+_TRANSIENT_REASON [str] = '上一轮在同一个任务里发生临时断线。续接原会话并核对副本里现有文件；不要重复已经完成的工具操作或覆盖有效结果，只完成中断部分。'
+CALLABLES:
+FocusedQualityError(?) :: A focused output was generated but failed deterministic local QA.
+PatchConflict(?) :: The real artifact changed after the proposal was created.
+PatchError(?) :: A user-actionable patch transaction failure.
+PatchQualityError(?) :: Repairable candidate content, never a permission/version/scope failure.
+Path(*args, **kwargs) :: 
+PurePosixPath(*args) :: 
+datetime(?) :: datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]]) |  | The year, month and day arguments are required. tzinfo may be None, or an | instance of a tzinfo subclass. The remaining arguments may be ints.
+timezone(?) :: Fixed offset from UTC implementation of tzinfo.

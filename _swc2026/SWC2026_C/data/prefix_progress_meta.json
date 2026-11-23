@@ -1,0 +1,24 @@
+{
+ "n_rows": 1047,
+ "n_units": 349,
+ "n_features": 94,
+ "feature_file": "data/prefix_progress_features.csv",
+ "prefix_seconds": [
+  0.2,
+  0.6,
+  1.0
+ ],
+ "allowed_inputs": [
+  "released prefix only",
+  "official family/task metadata"
+ ],
+ "forbidden_inputs": [
+  "future frames",
+  "true duration",
+  "source UUID",
+  "sample ID",
+  "segment index as feature"
+ ],
+ "target": "duration only in train split",
+ "missing_record_links": 0
+}

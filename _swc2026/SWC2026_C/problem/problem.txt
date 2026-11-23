@@ -1,0 +1,266 @@
+2026_“ShuWei Cup”
+Problem C：State Estimation and Decision Optimization for
+Restocking Operations in Unmanned Supermarkets
+1 Background
+Machine vision, the Internet of Things and electronic payment are increasingly used in retail, bringing
+together product recognition, convenient checkout and digital operations. Unmanned retail has potential in
+communities, business parks and campuses. Its continued operation also depends on timely, reliable and
+affordable restocking services.
+Restocking involves repeated product arrangement, picking, placement and transport. Shelf edges,
+operators’ hands and moving restocking carts may obstruct the view, while motion speed and operational
+stages vary with the task and environment. Figure 1 illustrates possible occlusion in a restocking scene. A
+system must assess the reliability of available information, decide when to observe again and schedule
+subsequent work within limited time and resources.
+Human operation records provide evidence for studying these questions. Observation quality means the
+completeness and reliability of recorded information such as hand positions and orientations; missing fields,
+occlusion and proximity to image edges provide relevant evidence. Actual motion, observation quality and
+stage transitions can support models of state estimation and operational patterns, which can then inform
+restocking decisions. Applying these patterns to robots requires explaining the relationships between hand
+states and product states, and between human and robot operation durations, together with their conditions
+of applicability.
+Figure 1. Restocking scene and possible occlusion; illustrative rather than a measured layout of the source records.
+Three sets of raw records, EgoDemo, EgoPro and EgoStandard, are provided, including video, 3D hand
+trajectories, camera parameters, timing information, quality flags and semantic segments. Use the raw data
+as the main evidence to study operational states and restocking decisions under observation uncertainty, and
+develop an evidence-supported solution.
+2 Problems
+Problem 1. Modeling operational states and observation reliability
+Restocking-related operations include reaching, picking, placement, transport and arrangement. Similar
+operations may exhibit different motion patterns and information quality across environments, operational
+stages and observation conditions.
+
+Read and organize all three raw datasets, checking time alignment, coordinate conventions, duplicate
+records and quality flags. A “record” means the operation data from one acquisition sequence; a “time
+interval” is a continuous portion of a record. Use field completeness, temporal continuity and observation
+quality to identify which records and intervals support model fitting, error evaluation, analysis of low-
+quality observations or exclusion, and explain the reasons and selection criteria. Develop mathematical
+models of changes in operational states and observation reliability, and investigate differences across tasks,
+environments or stages.
+Figure 2. Operational states and observation reliability in the raw records.
+Figure 2 illustrates the relationship between operational states and observation quality. Select and define
+your own state variables, such as hand positions, orientations or relative motion, and retain this
+representation in Problem 2. Influencing factors are task, stage, environment and historical information that
+may be associated with state changes or observation quality; select and test them using the records. Each
+hand has 21 recorded 3D keypoints. A representative hand point may be a selected keypoint or the
+geometric center of several keypoints; specify and justify its definition. A hand state must not be directly
+interpreted as a product state.
+Use the supplied raw records for both modeling and validation. Their correspondence is listed in
+Data_Documentation/record_index.csv, and the environment split in Data_Documentation/record_split.csv.
+Use the training set for parameter fitting, the validation set for model selection and the test set for
+evaluation after freezing the model. Include at least one reproducible baseline with a simple structure and
+few parameters, such as a constant predictor or a simple linear model, with its form appropriate to the state
+definition. Report data retention, main parameters and their uncertainty, error or consistency checks, and
+failure cases. Qualified held-out records may serve as references, but are not error-free, independent
+physical ground truth.
+Problem 2. State prediction and re-observation during missing observations
+When a hand reaches deep into a shelf, its operational state may temporarily become difficult to observe.
+Holding the last recorded state may introduce error, while frequent observation consumes resources. Study
+how prediction error or uncertainty grows without new observations, how long prediction can continue
+within justified tolerances, and when a new observation should be requested.
+This problem requires decisions that balance prediction error and observation expenditure. Retain the state
+variables selected and defined in Problem 1. Develop a prediction and uncertainty-update model for
+missing-observation periods, analyze the effects of missing duration, operational stage and historical
+information, and determine request times and waiting arrangements. Update your assessment as information
+returns. Waiting means making no additional request or waiting for requested information to return;
+prediction using existing information may continue. You may minimize observation cost and waiting
+subject to error requirements, or improve predictive accuracy with given resources. Explain your objective,
+tolerances and tradeoffs.
+
+Figure 3. Prediction during missing observations and re-observation by replaying existing records.
+Use artificial masking and replay experiments on real records: select intervals with qualified reference
+states, temporarily hide selected times or channels, predict using only information available at that point,
+and evaluate against the held-out records, as illustrated in Figure 3. A missing-observation window
+specifies the start and end of hidden observations. Windows, observation budgets, per-request costs and
+return delays are experimental conditions fixed in advance and shared by all compared methods. The
+decisions are when to request observations and how to wait; prediction error, accumulated cost and waiting
+time are evaluation measures. Make the experiments reproducible. Their results do not represent actual
+robot performance.
+Re-observation may return only times and channels that actually exist in the raw records, and returned
+information cannot be used before its delay has elapsed. Compare against baselines such as holding the last
+state, simple motion prediction or fixed-interval observation, reporting error, uncertainty and observation
+expenditure. Use natural occlusion to analyze its occurrence, duration and recovery. Do not calculate true
+position error for low-quality intervals without an independent reference. Explain differences between
+artificial masking and natural occlusion; choosing arbitrary new viewpoints is not required. See
+Data_Documentation/missing_observation_experiments.md for the experimental conventions.
+Problem 3. Scheduling restocking operations under uncertainty
+For the restocking-related jobs supplied in the attachments, use raw operation records to estimate operation
+durations and their uncertainty. Within limited time and cost, determine which jobs to prioritize and in what
+order, their reserved service durations, paid information reviews and waiting arrangements. Evaluate
+completion, on-time service, cost and equipment occupancy.
+Before execution, reserve a period of equipment service time for each job. This reserved service duration is
+a decision, rather than a known realized duration. An overrun delays later jobs; if service finishes early, the
+remainder of the reservation stays occupied and becomes idle time. Job order, reserved durations and the
+choice to pay for reviewing existing information all affect subsequent scheduling.
+Combine the first two problems into a scheduling model and apply it to the supplied task cases S1, S2 and
+S3; no additional task list is needed. Figure 4 relates recorded segments to scenario jobs. One work unit
+corresponds to one text-annotated interval, rather than one product. Of 349 intervals, the 343 lasting at least
+1.2 seconds enter common sampling; the remaining intervals stay in the source index. The cases contain 8,
+12 and 16 jobs, with horizons H of 100, 100 and 125 seconds, cost budgets of 32, 34 and 40, and paid-
+review limits of 4, 6 and 8, respectively. Costs use abstract units.
+Restocking_Tasks_and_Constraints/tasks.csv lists each job’s release time (earliest availability), due time
+(desired completion time), weight (relative importance), service zone and predecessors (jobs that must
+finish before execution). A job may finish after its due time but within H, with tardiness recorded. H
+terminates the entire trial. Field definitions and examples are provided in the attachment guide.
+
+Figure 4. Operation records and scenario job conditions.
+Upon release, a job provides the first 0.2 seconds of numerical data from the start of its source segment,
+free of charge. Each job allows at most two paid reviews: the first extends the cumulative visible prefix to
+0.6 seconds and the second to 1.0 second. Each review consumes 1 scenario second and 1 cost unit; waiting
+does not extend the prefix. The 0.2, 0.6 and 1.0 seconds are cumulative windows in the original segment,
+whereas review delays use scheduling time. Review means graded disclosure of existing demonstration
+information, rather than a new physical viewpoint. Unrevealed source identifiers, end times and subsequent
+states cannot be used in current decisions.
+Decisions include which jobs to prioritize and their order, each reserved service duration, whether and when
+to pay for review, how long to wait and when to stop. Figure 5 illustrates these relationships. On-time
+completion, tardiness, accumulated cost, overrun and reserved idle time are evaluation measures. Choose
+your research focus and optimization objective, justify weights and tradeoffs, and report all common
+metrics for every method.
+Common constraints allow each job to execute at most once and prohibit parallel execution, review and
+waiting. Respect releases, precedence, time and cost limits. If the original annotation duration is d, the
+scenario service duration is αd + β. The nominal mapping uses α = 1 and β = 0.5 seconds. Test sensitivity
+with α = 0.75 or 1.5 while β remains 0.5 seconds, and with β = 0 or 1 second while α remains 1. Estimate
+duration models and their uncertainty from the raw records and evaluate them on held-out records.
+The reserved service duration b must be at least 0.2 seconds. For inter-zone distance D, movement and
+changeover take D + 0.5 seconds, and execution costs 2 + 0.1b + 0.2D. Check the budget and reserved
+interval before execution. If realized scenario service takes p and starts at s, completion occurs at s + p, and
+the equipment becomes available again at s + max(p, b). If service crosses horizon H, terminate the trial and
+count that job as unfinished. Account for all actions and costs according to the attached rules.
+Figure 5. Job order, information review and service reservations under limited resources.
+Environments are identified by environment_id in the original metadata; one environment may contain
+multiple records. Training, validation and test sets contain 16, 4 and 4 environments, for parameter fitting,
+model selection and evaluation of frozen solutions. A random seed is an integer initial value that controls
+sampling and permits replication. For each case and mapping condition, use the same set of 30 supplied
+seeds to form 30 trials; all methods receive identical sampled jobs for paired comparison. Analyze
+performance, variation and parameter sensitivity. Objectives are open. If cost or capacity risk is the primary
+objective, the mean weighted on-time completion rate for each case under nominal conditions must be at
+least 0.50; report any failure to meet this requirement. See
+Restocking_Tasks_and_Constraints/tasks_and_evaluation.md for common metrics and the complete
+protocol.
+
+Task demands, costs, zones and duration mappings are scenario assumptions, rather than robot parameters
+identified from the raw data. Zone coordinates are not product positions. Overrun represents capacity and
+information risk, rather than grasp failure or collision. Common results come from a record-driven
+scheduling scenario; splicing original videos into a new order cannot demonstrate actual robot performance
+in that order.
+3 Data and common experimental conditions
+Table 1 describes the supplied local subset, rather than the complete public datasets. Use the internal
+episode_uuid for deduplication. The 69 records cover 24 environments and must not be treated as 69
+independent environments.
+Table 1. Local raw data and available information.
+Archive
+Records and trajectory
+timestamps
+Available information
+EgoDemo.zip
+31 records; 16,414
+timestamps
+Head stereo; 9 records also have both wrist views; hand
+states, cameras, quality flags and semantic segments.
+EgoPro.zip
+14 records; 17,642
+timestamps
+Head stereo and both wrist views; hand states, cameras,
+quality flags and semantic segments.
+EgoStandard.zip
+24 records; 32,014
+timestamps
+Head stereo; hand states, cameras, quality flags and
+semantic segments.
+Total
+69 records; 66,070
+timestamps
+Original local archives: 5,834,008,305 bytes (about
+5.834 GB). English package sizes are listed in
+file_manifest.csv.
+EgoDemo uses JSON, Parquet and MP4 files; the other two datasets use MCAP containers with embedded
+message schemas. Check field meanings, frame indices and coordinate directions before harmonizing time
+and units. World-coordinate origins from different records do not define a shared store layout. The head
+stereo cameras have camera parameters; world-frame extrinsics for wrist cameras are unavailable, so four
+video views cannot be assumed to share a common calibration.
+Original quality flags concern human hands, with reasons including occlusion and near edge. They do not
+directly indicate product occlusion or operation success. Numerically complete states may still be low
+quality. Semantic segments mainly contain natural-language descriptions with task-dependent granularity;
+they do not automatically correspond to individual product operations.
+Do not randomly split adjacent frames, records or related samples from the same environment and then
+treat them as independent training and test samples. Environments overlap across the three datasets. All
+three problems use the environment split in Data_Documentation/record_split.csv, also checking scene and
+operator overlap. The copy in Restocking_Tasks_and_Constraints is identical. Fix models, thresholds,
+weights and preferences before viewing test results. Report source differences and excluded samples
+separately. Operators may appear in multiple environments, so this split does not establish validation on
+entirely unseen operators.
+Compared methods must use identical information, budgets, delays and access conditions. Problem 3 uses
+the fixed attached replay protocol; in Problem 2, specify missing-observation and re-observation conditions
+and apply them consistently to every comparator. When hiding a reference state, also hide state features
+calculated from it. Future trajectories, future segment endpoints and information that has not returned
+cannot enter current decisions. A query does not make low-quality coordinates an accurate reference.
+4 Common evaluation metrics and comparisons
+Open objectives express the research focus, while common metrics permit verification of results. For
+Problem 1, report retained record and timestamp counts, the data split, model parameters, state error or
+consistency, quality-model performance and uncertainty checks. Match metrics to state definitions and do
+not summarize only easy samples.
+
+For Problem 2, report prediction error, performance at different missing durations, interval coverage or set
+reliability, observation counts and cost, waiting time and computational expense. For a representative 3D
+point, the mean distance error below may be used. Other state representations require appropriate metrics
+and units.
+�=
+1
+�
+�= 1
+�
+�ො�−�����
+2
+෍
+Here M is the number of evaluated timestamps, the hat denotes a prediction and superscript ref denotes a
+qualified held-out record reference. This measures prediction discrepancy from the recorded reference; it
+does not establish 3D product-localization accuracy. For probabilistic intervals, report nominal coverage,
+empirical coverage and interval size, rather than increasing coverage solely by widening intervals.
+For Problem 3, report duration- or state-model error on held-out records separately from common-scenario
+weighted completion, weighted on-time completion, weighted tardiness, cost, review count, elapsed time,
+observed overrun, reserved idle time, executed jobs unfinished at the horizon, and infeasible commands.
+Unfinished jobs remain in service-metric denominators and use H as completion time for tardiness. Retain
+trials with protocol violations. Completed work units are not product counts; do not report an actual robot
+success rate without physical robot experiments.
+Use identical records, jobs, information and resources for comparisons, and analyze the contributions of
+state models, information arrangements and job order. Aggregate raw-data validation by record or
+environment. For Problem 3, summarize paired trials by task case and report differences and variation.
+Explain the scale, weights and basis of custom objectives; scores defined by different teams or preferences
+cannot be compared directly by their numerical size.
+5 Attachments and submission requirements
+See Data_Documentation/attachment_guide.md for the complete inventory and field meanings.
+Problem_Statement contains matching English Word and PDF files and a preserved Chinese reference PDF.
+Raw_Data contains the three complete local data packages, EgoDemo.zip, EgoPro.zip and EgoStandard.zip.
+English packaging changes directory names and accompanying notes only; recorded payloads remain
+unchanged. Use file_manifest.csv at the package root to verify all attachments.
+Data_Documentation provides the source index for 69 records, a raw-field dictionary, the shared record
+split, artificial-masking conventions, data provenance and publication references. Read the original files and
+perform your own cleaning, variable selection, parameter estimation and modeling. Any programming
+language may be used.
+Restocking_Tasks_and_Constraints provides the common jobs, service zones, sampling families, the index
+of 349 source intervals, record split, common_conditions.json and tasks_and_evaluation.md, defining
+information access, time and cost accounting, and common evaluation rules.
+Hand trajectories describe human operational states, and quality flags describe hand observations. Product
+geometry, spatial occupancy and robot performance require corresponding independent references. Clearly
+label proxy experiments and scenario-based analysis.
+Submit a research report, reproducible programs and main result files, explaining the model basis,
+validation, applicability and limitations. For Problem 3, also submit frozen models and decision rules, trial-
+level results under common conditions and process logs, as specified in
+Restocking_Tasks_and_Constraints/tasks_and_evaluation.md. Distinguish real-record analysis, artificial-
+masking tests, annotation validation and scenario trials.
+6 References
+[1] DURBIN J, KOOPMAN S J. Time Series Analysis by State Space Methods[M]. 2nd ed. Oxford: Oxford
+University Press, 2012. DOI: 10.1093/acprof:oso/9780199641178.001.0001.
+[2] LITTLE R J A, RUBIN D B. Statistical Analysis with Missing Data[M]. 3rd ed. John Wiley & Sons, 2019. DOI:
+10.1002/9781119482260.
+
+[3] KAELBLING L P, LITTMAN M L, CASSANDRA A R. Planning and acting in partially observable stochastic
+domains[J]. Artificial Intelligence, 1998, 101(1-2): 99-134. DOI: 10.1016/S0004-3702(98)00023-X.
+[4] HOWARD R A. Information value theory[J]. IEEE Transactions on Systems Science and Cybernetics, 1966, 2(1):
+22-26. DOI: 10.1109/TSSC.1966.300074.
+[5] PINEDO M L. Scheduling: Theory, Algorithms, and Systems[M]. 6th ed. Cham: Springer, 2022. DOI:
+10.1007/978-3-031-05921-6.
+[6] RUBIN D B. Inference and missing data[J]. Biometrika, 1976, 63(3): 581-592. DOI: 10.1093/biomet/63.3.581.
+[7] GNEITING T, RAFTERY A E. Strictly proper scoring rules, prediction, and estimation[J]. Journal of the
+American Statistical Association, 2007, 102(477): 359-378. DOI: 10.1198/016214506000001437.
+[8] OUELHADJ D, PETROVIC S. A survey of dynamic scheduling in manufacturing systems[J]. Journal of
+Scheduling, 2009, 12(4): 417-431. DOI: 10.1007/s10951-008-0090-8.

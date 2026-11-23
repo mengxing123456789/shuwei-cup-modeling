@@ -1,0 +1,142 @@
+{
+ "_meta": {
+  "source": "data/panel.npz test split",
+  "context_frames": 10,
+  "cap": 300,
+  "convention": "same windows as p2_predict; wrist position of dominant hand"
+ },
+ "rows": [
+  {
+   "L_frames": 3,
+   "L_s": 0.1,
+   "n_windows": 2045,
+   "hold_rmse_m": 0.014351124875247478,
+   "cv_rmse_m": 0.010595860769486506,
+   "hold_median_m": 0.007433332968503237,
+   "cv_median_m": 0.0034540682103784606,
+   "cv_gain_mean_pct": 26.16703664977491,
+   "cv_gain_median_pct": 53.532712377958156,
+   "hold_endpoint_rmse_m": 0.019726229831576347,
+   "cv_endpoint_rmse_m": 0.01558214435430777
+  },
+  {
+   "L_frames": 6,
+   "L_s": 0.2,
+   "n_windows": 1707,
+   "hold_rmse_m": 0.02563893049955368,
+   "cv_rmse_m": 0.023395402889693676,
+   "hold_median_m": 0.013183814473450184,
+   "cv_median_m": 0.008399470695436173,
+   "cv_gain_mean_pct": 8.750472684104594,
+   "cv_gain_median_pct": 36.28952597633115,
+   "hold_endpoint_rmse_m": 0.037758827209472656,
+   "cv_endpoint_rmse_m": 0.038719331732100605
+  },
+  {
+   "L_frames": 8,
+   "L_s": 0.267,
+   "n_windows": 1654,
+   "hold_rmse_m": 0.03146180883049965,
+   "cv_rmse_m": 0.032902936741447654,
+   "hold_median_m": 0.016574706882238388,
+   "cv_median_m": 0.011955952190670489,
+   "cv_gain_mean_pct": -4.5805627982550945,
+   "cv_gain_median_pct": 27.86628279090353,
+   "hold_endpoint_rmse_m": 0.046489417552948,
+   "cv_endpoint_rmse_m": 0.05527422643401795
+  },
+  {
+   "L_frames": 10,
+   "L_s": 0.333,
+   "n_windows": 1569,
+   "hold_rmse_m": 0.03635517880320549,
+   "cv_rmse_m": 0.04029584994398908,
+   "hold_median_m": 0.019221175462007523,
+   "cv_median_m": 0.016114758314972714,
+   "cv_gain_mean_pct": -10.83936668862191,
+   "cv_gain_median_pct": 16.161431714594855,
+   "hold_endpoint_rmse_m": 0.053726620972156525,
+   "cv_endpoint_rmse_m": 0.06819787562896225
+  },
+  {
+   "L_frames": 12,
+   "L_s": 0.4,
+   "n_windows": 1423,
+   "hold_rmse_m": 0.040434807538986206,
+   "cv_rmse_m": 0.04927347691653253,
+   "hold_median_m": 0.021764442324638367,
+   "cv_median_m": 0.019927961724182666,
+   "cv_gain_mean_pct": -21.859061327358376,
+   "cv_gain_median_pct": 8.437986018951282,
+   "hold_endpoint_rmse_m": 0.05973031371831894,
+   "cv_endpoint_rmse_m": 0.08435158520766094
+  },
+  {
+   "L_frames": 15,
+   "L_s": 0.5,
+   "n_windows": 1299,
+   "hold_rmse_m": 0.046371087431907654,
+   "cv_rmse_m": 0.06301438276229286,
+   "hold_median_m": 0.02549336664378643,
+   "cv_median_m": 0.025195973160365783,
+   "cv_gain_mean_pct": -35.891535549656005,
+   "cv_gain_median_pct": 1.1665524117550508,
+   "hold_endpoint_rmse_m": 0.0684933289885521,
+   "cv_endpoint_rmse_m": 0.10749404398247243
+  },
+  {
+   "L_frames": 18,
+   "L_s": 0.6,
+   "n_windows": 1140,
+   "hold_rmse_m": 0.051575448364019394,
+   "cv_rmse_m": 0.07189532696022881,
+   "hold_median_m": 0.02835044637322426,
+   "cv_median_m": 0.030857880670491323,
+   "cv_gain_mean_pct": -39.39835569201795,
+   "cv_gain_median_pct": -8.844426166196895,
+   "hold_endpoint_rmse_m": 0.07590322196483612,
+   "cv_endpoint_rmse_m": 0.12305585936573836
+  },
+  {
+   "L_frames": 20,
+   "L_s": 0.667,
+   "n_windows": 1072,
+   "hold_rmse_m": 0.054096151143312454,
+   "cv_rmse_m": 0.07686543518691005,
+   "hold_median_m": 0.030357766896486282,
+   "cv_median_m": 0.034547779049120944,
+   "cv_gain_mean_pct": -42.09039564252328,
+   "cv_gain_median_pct": -13.802109249081917,
+   "hold_endpoint_rmse_m": 0.07872623950242996,
+   "cv_endpoint_rmse_m": 0.13269191956835463
+  },
+  {
+   "L_frames": 24,
+   "L_s": 0.8,
+   "n_windows": 933,
+   "hold_rmse_m": 0.05958142131567001,
+   "cv_rmse_m": 0.09403982669428429,
+   "hold_median_m": 0.0331348180770874,
+   "cv_median_m": 0.04190214249478412,
+   "cv_gain_mean_pct": -57.83414463386032,
+   "cv_gain_median_pct": -26.45955199542589,
+   "hold_endpoint_rmse_m": 0.08676618337631226,
+   "cv_endpoint_rmse_m": 0.16378932396684728
+  },
+  {
+   "L_frames": 30,
+   "L_s": 1.0,
+   "n_windows": 738,
+   "hold_rmse_m": 0.06717312335968018,
+   "cv_rmse_m": 0.11455304130907931,
+   "hold_median_m": 0.03857945650815964,
+   "cv_median_m": 0.05449046103706989,
+   "cv_gain_mean_pct": -70.53404037162628,
+   "cv_gain_median_pct": -41.24216867996844,
+   "hold_endpoint_rmse_m": 0.09442872554063797,
+   "cv_endpoint_rmse_m": 0.1986961667272447
+  }
+ ],
+ "crossover_s": 0.267,
+ "crossover_s_median": 0.6
+}

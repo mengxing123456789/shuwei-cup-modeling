@@ -1,0 +1,523 @@
+{
+ "_meta": {
+  "purpose": "bit-exact vectorised replay of code/p3_improved_verify.simulate",
+  "seeds": [
+   2026111700,
+   2026111701,
+   2026111702,
+   2026111703,
+   2026111704,
+   2026111705,
+   2026111706,
+   2026111707,
+   2026111708,
+   2026111709,
+   2026111710,
+   2026111711,
+   2026111712,
+   2026111713,
+   2026111714,
+   2026111715,
+   2026111716,
+   2026111717,
+   2026111718,
+   2026111719,
+   2026111720,
+   2026111721,
+   2026111722,
+   2026111723,
+   2026111724,
+   2026111725,
+   2026111726,
+   2026111727,
+   2026111728,
+   2026111729
+  ],
+  "cases": [
+   "S1",
+   "S2",
+   "S3"
+  ],
+  "reference": "code/p3_improved_verify.py (slack_old / risk_old, no review)",
+  "review_reference": "code/p3_stochastic_schedule.simulate(risk_old, reviews_allowed=True)",
+  "review_arm_params": {
+   "Q_HI": 0.7,
+   "GATE": 0.5,
+   "LATE_TOL_RISK": 12.0,
+   "rule": "abs",
+   "why": "stochastic engine hardcodes Q_HI=0.70"
+  },
+  "row_layout": "row = candidate * n_seeds + seed",
+  "tolerance": 1e-09
+ },
+ "gate": {
+  "max_abs_diff_all": 0.0,
+  "review_arm_max_abs_diff": 0.0,
+  "passed": true,
+  "metric_tolerance": 1e-09,
+  "per_arm": {
+   "S1|slack_old": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S2|slack_old": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S3|slack_old": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S1|risk_old_default": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S2|risk_old_default": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S3|risk_old_default": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S2|risk_old_selected": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S3|risk_old_selected": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S2|risk_review_q70": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   },
+   "S3|risk_review_q70": {
+    "weighted_on_time_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_completion_rate": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "weighted_tardiness_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "cost": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "elapsed_s": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_done": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    },
+    "n_drop": {
+     "max_abs": 0.0,
+     "mean_abs": 0.0,
+     "n_exact": 30,
+     "n": 30
+    }
+   }
+  }
+ },
+ "timing": {
+  "single_candidate_30_seeds": {
+   "vector_seconds": 0.22023344039916992,
+   "reference_seconds": 6.438023805618286,
+   "trials": 300,
+   "speedup": 29.232725938211114,
+   "note": "vector side pays a fixed per-call overhead; this is the worst case"
+  },
+  "batch_30cand_x_30seeds_s3": {
+   "vector_seconds": 0.12608075141906738,
+   "reference_seconds": 26.37580132484436,
+   "trials": 900,
+   "speedup": 209.19768503898294
+  },
+  "search_unit_960cand_x_30seeds_s3": {
+   "vector_seconds": 13.400817155838013,
+   "trials": 28800,
+   "reference_per_trial_s": 0.029306445916493732,
+   "reference_extrapolated_s": 844.0256423950195,
+   "speedup": 62.983147414060724
+  }
+ }
+}

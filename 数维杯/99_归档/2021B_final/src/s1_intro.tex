@@ -1,0 +1,32 @@
+\section{Introduction}
+
+\subsection{Background}
+
+On 20 July 2021 the city of Zhengzhou received 201.9\,mm of rain in a single hour, the largest hourly total ever recorded in mainland China, and 449\,mm in three days against an annual normal of 640.8\,mm quoted in the task statement. The storm killed 398 people in Henan province (380 of them in Zhengzhou) and caused 120.06 billion CNY of direct economic loss, 40.90 billion of it in Zhengzhou alone, according to the State Council disaster investigation report \cite{sc}. Two and a half months later, an equally unusual but dynamically different storm parked over Shanxi province for four days (3--6 October 2021). The provincial average of four-day rainfall reached 120\,mm, exceeding the previous record of 104\,mm set in 1981, yet the province lost 5.03 billion CNY and 18 lives, an order of magnitude less than Henan \cite{che2021,mem2021}. The contrast is the scientific core of this problem: the same word, ``extreme precipitation'', covers events that differ in duration, concentration and consequence, and a city that prepares for one type may be defenceless against the other.
+
+\subsection{Restatement of the tasks}
+
+The contest asks five linked questions.
+
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
+\item Using the three Zhengzhou-area station records, characterise the inter-annual variability of precipitation, identify the wet years, and quantify the July 2021 waterlogging event.
+\item Collect multi-decadal precipitation series for additional cities, document their provenance and acquisition, and analyse their trends.
+\item Using the collected city data, predict which cities are likely to experience extreme precipitation in the future by several different methods, and compare their predictive performance.
+\item Decide whether the Zhengzhou July 2021 storm and the Shanxi October 2021 storm share the same characteristics, and explain the difference in losses.
+\item Propose a long-term urban construction plan against extreme precipitation, with a deep analysis of typical cities.
+\end{enumerate}
+
+\subsection{Our work}
+
+We treat the five tasks as one measurement problem: hazard, exposure, vulnerability and intervention must be expressed in the same units before any policy statement is credible. The contributions are:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt]
+\item a reproducible data pipeline that merges the official GSOD attachment with 35 GHCN-Daily stations, decodes both provider conventions and validates the two sources against each other on the event of interest (Section~\ref{sec:data});
+\item a trend and change-point diagnosis of Zhengzhou that separates total, frequency and intensity and refuses to declare a trend where the evidence is weak (Section~\ref{sec:q1});
+\item a false-discovery-rate controlled national trend map with a data-driven regional classification (Section~\ref{sec:q2});
+\item a held-out forecast experiment in which ten strategies are compared on identical folds, and in which we show that the definition of the predictand matters more than the choice of distribution (Section~\ref{sec:q3});
+\item a storm-type test and a multiplicative decomposition that separates rainfall, exposure and vulnerability contributions to loss (Section~\ref{sec:q4});
+\item a 30-year hazard--capacity--damage portfolio model, with a targeted-protection variant that identifies where money actually buys risk reduction (Section~\ref{sec:q5}).
+\end{itemize}
+
+All numbers in this paper are produced by the scripts listed in Appendix~\ref{app:code} from the data described in Section~\ref{sec:data}; no result is quoted from an unpublished computation.

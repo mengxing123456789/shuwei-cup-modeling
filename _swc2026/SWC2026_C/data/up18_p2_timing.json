@@ -1,0 +1,11 @@
+{
+  "_meta": {
+    "purpose": "measured wall clock for the closed-form ridge route, not an estimate",
+    "features": 36,
+    "windows": 2207,
+    "repeats": 10
+  },
+  "fit_seconds": 0.002517,
+  "score_seconds_per_split": 0.000597,
+  "score_ms_per_window": 0.00027
+}

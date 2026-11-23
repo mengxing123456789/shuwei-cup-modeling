@@ -1,0 +1,31 @@
+00024720	人文稿：给 user_data/ 里的 PDF 补上带分页的 _paged.txt（核对引语页码用）。失败只记日志。
+000247b0	写作检查的后台接线（论证逻辑与文理分型 第 3、5 期，2026-10-11）。
+0002480c	规划步（paper-plan、paper-plan-zh、humanities-plan、course-plan、course-report-plan，以及开题、综述的规划部分）：
+00024895	- 表单模式的"写后复查"（workflow_engine 里的 ``_late_checks``）每查一轮就调 ``step_issues()``：先把 AI 在大纲里写下的
+00024928	  判断（研究类型、报告类型、课程学科）读回写作档案，再跑 ``tools/academic_writing_check.py`` 的 P 组，写
+000249b0	  ``.mh/quality/writing_check.json``（步骤卡读它，见 services/step_review_report.py）。
+00024a12	- 复查结束后 ``finalize_plan()`` 把仍没补上的需修项记进 OPEN_QUESTIONS.md 末尾的一段（每次覆盖同一段，都补上了就去掉）。
+00024ab3	写作步（paper-write*、humanities-write*、course-paper、course-report、thesis-proposal、literature-review，第 5 期）：
+00024b37	- 同一条写后复查通道跑稿件各组（S/I/R/D/C/N/K/T/H，开题、综述连 P 组一起），写 WRITING_CHECK.md。
+00024bb6	- 需修项变成 ``severity="fix"`` 的 CheckIssue：step_recovery 只让写作步照清单定点改一轮，改完再查；还有就照实显示，
+00024c4c	  不阻断、不判失败。提示合成一条不可修的 warning：只显示，不返修。检查器自己出错只记"检查未完成"，不拦、不返修。
+00024cef	- 人文稿先给 user_data/ 里的 PDF 补上带分页的 ``<名>_paged.txt``（services/paged_text.py），引语页码才核得了。
+00024d79	编译、导出步（paper-compile、paper-compile-zh、docx-export）：完成后 ``run_final()`` 再查一遍终稿，只报告。
+00024dff	免费复查、崩溃恢复这类不调模型的完成路径只调 ``run_for_step()``：查一遍、记一笔，不返修。
+00024e7c	结论和稿件版本绑定（检查器的 fingerprint）：稿件之后再改过，``is_stale()`` 返回 True，步骤卡显示"已过期"。
+00024f0c	对话模式这一版还没接（规划第 6 期）。竞赛、市调、软著专利等没有写作档案的工作区，检查器返回"不适用"。
+00024fb0	写后复查的一轮：规划步跑 P 组，写作步跑稿件各组（开题、综述连 P 组）。需修 → fix（改一轮、不阻断）；
+00025043	    规划步的提示 → 不可修的 warning；写作步的提示合成一条不可修的 warning（只显示）。编译、导出步、不适用或没查成返回空。
+000250f0	不调模型的完成路径（免费复查、崩溃恢复）：读回判断、查一遍、记一笔，不返修。不查的步骤直接返回 None。
+00025190	复查结束后：规划核对（P 组）仍有需修项就记进 OPEN_QUESTIONS.md 末尾一段（覆盖上一次的同一段）；都补上了就去掉。
+0002522d	    稿件各组的需修项不记这里：它们写在 WRITING_CHECK.md 和步骤卡上。
+00025290	步骤卡上的稿件阶段结论还对应现在的稿件吗：稿件（含 \input 的文件）之后改过、删过就是过期。
+00025320	在线程里跑 work()，最多等 STEP_CHECK_TIMEOUT_SECONDS 秒；超时记“检查未完成”、返回 empty，步骤照常往下走。
+000253b0	这一步跑哪个阶段：写作步 draft（开题、综述也是写作步）、规划步 plan、编译导出步 final；别的步骤不查。
+00025470	把 AI 在大纲里写下的判断读回写作档案（研究类型等），后面几步拼指南就按它来。
+000255c0	等超时了：先记上“不要了”，再写一份“检查未完成”（和线程写结论用同一把锁，不会一边写一半）。
+00025650	适用就查一遍、写结果；不适用返回 None。任何异常都只记"检查未完成"。
+000256c0	编译、导出步完成后的终稿写作检查：只报告（写 WRITING_CHECK.md），不返修。别的步骤直接返回 None。
+00025750	检查器自己出错：留一份"检查未完成"的结果，步骤卡照实显示。
+000257b0	step_issues 的限时版（引擎写后复查用）：超时当作没查成——不返修，步骤卡记“检查未完成”。
+000258d0	tools/academic_writing_check.py（打包后同样在 TOOLS_DIR 里，见 desktop/scripts/keep-py-tools.json）。按文件路径加载。

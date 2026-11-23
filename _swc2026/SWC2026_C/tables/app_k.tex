@@ -1,0 +1,88 @@
+% numerals-ok: begin
+\clearpage
+\section{Sensitivity of the two decision layers}
+\label{app:sensitivity}
+
+Two parameters carry the decision chain and neither is estimated inside the paper: the
+service multiplier that maps a duration into a service time, and the decoding constants
+of the boundary detector. The tables below move each of them and report what changes.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{@{}lrrrrr@{}}
+\hline
+Case & $\alpha$ & jobs & mean predicted & realised & gap \\
+\hline
+S1 & 0.75 & 720 & 0.9701 & 1.0000 & -0.0299 \\
+S1 & 1.00 & 720 & 0.9290 & 0.9750 & -0.0460 \\
+S1 & 1.50 & 628 & 0.8024 & 0.8344 & -0.0320 \\
+S2 & 0.75 & 1062 & 0.9179 & 0.9793 & -0.0614 \\
+S2 & 1.00 & 903 & 0.8067 & 0.8538 & -0.0471 \\
+S2 & 1.50 & 665 & 0.7411 & 0.7684 & -0.0273 \\
+S3 & 0.75 & 1315 & 0.9179 & 0.9567 & -0.0388 \\
+S3 & 1.00 & 1148 & 0.7652 & 0.8118 & -0.0467 \\
+S3 & 1.50 & 839 & 0.7040 & 0.7318 & -0.0278 \\
+\hline
+\end{tabular}
+\caption{Service-multiplier sweep on the closed-form layer. Each cell re-prices the same
+executed jobs at $\alpha\in\{0.75,1.0,1.5\}$; the largest absolute gap is
+0.0614 and the mean absolute gap 0.0397.}
+\label{tab:alpha-sweep}
+\end{table}
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llrrrr@{}}
+\hline
+Family & setting & $\sigma$ & $D$ & validation ARI & train ARI \\
+\hline
+quant & q0.85 & 3 & 78 & 0.6010 & 0.7147 \\
+fixed & H0.20 & 14 & 78 & 0.5969 & 0.6909 \\
+fixed & H0.25 & 7 & 78 & 0.5939 & 0.7175 \\
+quant & q0.85 & 5 & 78 & 0.5918 & 0.7029 \\
+fixed & H0.25 & 2 & 78 & 0.5900 & 0.6984 \\
+quant & q0.90 & 3 & 78 & 0.5880 & 0.7333 \\
+quant & q0.90 & 2 & 78 & 0.5875 & 0.7256 \\
+fixed & H0.20 & 10 & 78 & 0.5874 & 0.6882 \\
+fixed & H0.30 & 5 & 78 & 0.5870 & 0.7401 \\
+greedy & lam0.30 & 5 & 78 & 0.5870 & 0.7401 \\
+\hline
+\end{tabular}
+\caption{The ten best of the 192 decoder configurations on validation records. The
+configuration that would be best on test ranks 24 here, which is the transfer cost we discuss under Problem~1.}
+\label{tab:decoder-sweep}
+\end{table}
+
+The two sweeps answer different questions. The first asks whether the closed form is
+calibrated when the service multiplier is wrong: it stays within 0.0614 in the worst cell and the order of cases
+never changes. The second asks whether the decoding constants transfer: they do not,
+and the gap is the price of choosing them on seven validation records.
+
+
+\subsection*{The reservation is not a third parameter}
+
+Figure~\ref{fig:policy} first fixes the policy set; Figure~\ref{fig:phase} then sweeps the two axes a practitioner would tune: the service
+multiplier $\alpha$ and the residual quantile $q$ that sets the reserve. Raising $q$
+from 0.30 to 0.90 costs \slotPPhaseDropSTwo{} points in S\slotCaseTwo{} and
+\slotPPhaseDropSThree{} points in S\slotCaseThree{} at fixed $\alpha$; moving $\alpha$
+from 0.75 to 1.50 moves the rate by \slotPPhaseAlphaSpreadSTwo{} and
+\slotPPhaseAlphaSpreadSThree{} points. The rate is flat in $q$ while the reserve stays
+below the realised service time and falls once it exceeds it, which is the empirical
+form of Proposition~3: the reservation is a liability, not a tuning knob.
+
+\clearpage
+\subsection*{The value ladder in one picture}
+
+Figure~\ref{fig:value} puts the four mechanisms on one axis, in the same units.
+The scheduling rule is worth \slotPValueRuleSTwo{} points in S\slotCaseTwo{} and
+\slotPValueRuleSThree{} in S\slotCaseThree{}; handing the same rule the true duration is
+worth \slotPValueTruthSTwo{} and \slotPValueTruthSThree{}; the paid review is worth
+nothing detectable (best cell +0.28 point, interval crossing zero); and raising the
+reservation quantile from 0.30 to 0.90 moves the rate by
+\slotPValueReserveSTwo{} and \slotPValueReserveSThree{} points. The ordering is the
+paper in one line: rule, then knowledge, then nothing, then a liability.
+
+% numerals-ok: end

@@ -1,0 +1,188 @@
+{
+ "_meta": {
+  "script": "up2_p1state_v2.py",
+  "seed": 20261120,
+  "prereg": "data/up2_p1state_prereg.json",
+  "total_seconds": 249.3,
+  "protocol": {
+   "split": "panel_records.csv 16/4/4 environment",
+   "metric": "hand-frame level: n_test=24482, positives=462, prevalence=0.018871",
+   "windows": "causal T=15/60, no record boundary crossing, long window left-padded",
+   "model": "DualTCN 4 blocks d=1/2/4/8, 96ch, GroupNorm+GELU, dropout 0.10, aux heads occ/near_edge w=0.3",
+   "calibration": "Platt scaling (1-D logistic) fitted on validation only",
+   "smoothing": "bidirectional EMA, alpha selected on validation AUC only"
+  }
+ },
+ "config": {
+  "arms": [
+   "A_smooth_reliability",
+   "B_nextframe_residual",
+   "C_multitask_raw",
+   "D_full_v2"
+  ],
+  "feature_dim": {
+   "C": 82,
+   "D": 88
+  },
+  "residual_features": 6,
+  "geom_features": 16
+ },
+ "arms": {
+  "A_smooth_reliability": {
+   "arm": "A_smooth_reliability",
+   "alpha": 0.2,
+   "params": 0,
+   "val_auc": 0.7700292909600241,
+   "test_auc": 0.649611975590327,
+   "test_ap": 0.06545299861958896,
+   "ece15": 0.009936110743280097,
+   "per_env": [
+    {
+     "env": "logistics_x_courier_station_0011",
+     "n": 12634,
+     "positives": 426,
+     "auc": 0.5695222558593149
+    },
+    {
+     "env": "logistics_x_courier_station_0041",
+     "n": 7274,
+     "positives": 36,
+     "auc": 0.9448013570353996
+    }
+   ],
+   "unsmoothed_test_auc": 0.6267450284935714,
+   "unsmoothed_test_ap": 0.040703609027931985,
+   "seconds": 0.0,
+   "gate": {
+    "test_auc_min": 0.7,
+    "test_ap_min": 0.08,
+    "per_env_auc_min": 0.6,
+    "passes": null,
+    "note": "ablation only; gate judged on D_full_v2"
+   }
+  },
+  "B_nextframe_residual": {
+   "arm": "B_nextframe_residual",
+   "params": 22,
+   "val_auc": 0.6612735889233798,
+   "test_auc": 0.788870025339634,
+   "test_ap": 0.051712153054039124,
+   "ece15": 0.0022105930200974613,
+   "per_env": [
+    {
+     "env": "logistics_x_courier_station_0011",
+     "n": 12634,
+     "positives": 426,
+     "auc": 0.7032531580922846
+    },
+    {
+     "env": "logistics_x_courier_station_0041",
+     "n": 7274,
+     "positives": 36,
+     "auc": 0.9813023855577047
+    }
+   ],
+   "seconds": 0.0,
+   "gate": {
+    "test_auc_min": 0.7,
+    "test_ap_min": 0.08,
+    "per_env_auc_min": 0.6,
+    "passes": null,
+    "note": "ablation only; gate judged on D_full_v2"
+   }
+  },
+  "C_multitask_raw": {
+   "arm": "C_multitask_raw",
+   "params": 512387,
+   "seconds": 134.6,
+   "best_epoch": 1,
+   "val_auc": 0.8797714034030546,
+   "test_auc": 0.8325234022153257,
+   "test_ap": 0.10557203737311709,
+   "ece15": 0.006627185966132335,
+   "per_env": [
+    {
+     "env": "logistics_x_courier_station_0011",
+     "n": 12634,
+     "positives": 426,
+     "auc": 0.7855419981663682
+    },
+    {
+     "env": "logistics_x_courier_station_0041",
+     "n": 7274,
+     "positives": 36,
+     "auc": 0.8912683061619232
+    }
+   ],
+   "aux_test": {
+    "occlusion": {
+     "n": 12143,
+     "positives": 226,
+     "auc": 0.7829108932654399
+    },
+    "near_edge": {
+     "n": 12143,
+     "positives": 5,
+     "auc": 0.8086834733893556
+    }
+   },
+   "gate": {
+    "test_auc_min": 0.7,
+    "test_ap_min": 0.08,
+    "per_env_auc_min": 0.6,
+    "passes": null,
+    "note": "ablation only; gate judged on D_full_v2"
+   }
+  },
+  "D_full_v2": {
+   "arm": "D_full_v2",
+   "params": 513539,
+   "seconds": 107.0,
+   "best_epoch": 1,
+   "val_auc": 0.8541627233494853,
+   "alpha": 0.1,
+   "test_auc": 0.8221763249240351,
+   "test_ap": 0.09239119216937552,
+   "ece15": 0.008060931029169466,
+   "per_env": [
+    {
+     "env": "logistics_x_courier_station_0011",
+     "n": 12634,
+     "positives": 426,
+     "auc": 0.7473026230779171
+    },
+    {
+     "env": "logistics_x_courier_station_0041",
+     "n": 7274,
+     "positives": 36,
+     "auc": 0.957247244481287
+    }
+   ],
+   "unsmoothed_test_auc": 0.7995811571165442,
+   "unsmoothed_test_ap": 0.09538108523735823,
+   "aux_test": {
+    "occlusion": {
+     "n": 12143,
+     "positives": 226,
+     "auc": 0.7199564688208486
+    },
+    "near_edge": {
+     "n": 12143,
+     "positives": 5,
+     "auc": 0.2836216839677047
+    }
+   },
+   "gate": {
+    "test_auc_min": 0.7,
+    "test_ap_min": 0.08,
+    "per_env_auc_min": 0.6,
+    "per_env_values": {
+     "logistics_x_courier_station_0011": 0.7473026230779171,
+     "logistics_x_courier_station_0041": 0.957247244481287
+    },
+    "passes": true,
+    "fail_reasons": []
+   }
+  }
+ }
+}

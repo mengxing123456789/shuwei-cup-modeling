@@ -1,0 +1,1264 @@
+﻿ROOT E:\数学建模\_swc2026\SWC2026_C
+
+===== feature_names.json | 2395 bytes | mtime 2026-11-20 10:29:19 =====
+  TOP KEYS: ['_meta', 'state_l', 'state_r', 'geom_l', 'geom_r', 'dominant']
+  _meta <dict> = 1
+  _meta.note <str> = 'column names for the 32-dim per-hand state and 8-dim geometry features; dominant maps record index to dominant hand'
+  state_l <list> = 32
+  state_l[] <list> = 32
+  state_r <list> = 32
+  state_r[] <list> = 32
+  geom_l <list> = 8
+  geom_l[] <list> = 8
+  geom_r <list> = 8
+  geom_r[] <list> = 8
+  dominant <dict> = 69
+  dominant.0 <str> = 'L'
+  dominant.1 <str> = 'L'
+  dominant.2 <str> = 'R'
+  dominant.3 <str> = 'R'
+  dominant.4 <str> = 'L'
+  dominant.5 <str> = 'L'
+  dominant.6 <str> = 'R'
+  dominant.7 <str> = 'R'
+  dominant.8 <str> = 'L'
+  dominant.9 <str> = 'R'
+  dominant.10 <str> = 'R'
+  dominant.11 <str> = 'R'
+  dominant.12 <str> = 'L'
+  dominant.13 <str> = 'R'
+  dominant.14 <str> = 'R'
+  dominant.15 <str> = 'L'
+  dominant.16 <str> = 'L'
+  dominant.17 <str> = 'L'
+  dominant.18 <str> = 'L'
+  dominant.19 <str> = 'L'
+  dominant.20 <str> = 'R'
+  dominant.21 <str> = 'R'
+  dominant.22 <str> = 'R'
+  dominant.23 <str> = 'R'
+  dominant.24 <str> = 'L'
+  dominant.25 <str> = 'L'
+  dominant.26 <str> = 'R'
+  dominant.27 <str> = 'R'
+  dominant.28 <str> = 'R'
+  dominant.29 <str> = 'R'
+  dominant.30 <str> = 'R'
+  dominant.31 <str> = 'R'
+  dominant.32 <str> = 'R'
+  dominant.33 <str> = 'R'
+  dominant.34 <str> = 'L'
+  dominant.35 <str> = 'L'
+  dominant.36 <str> = 'R'
+  dominant.37 <str> = 'R'
+  dominant.38 <str> = 'L'
+  dominant.39 <str> = 'R'
+  dominant.40 <str> = 'R'
+  dominant.41 <str> = 'R'
+  dominant.42 <str> = 'R'
+  dominant.43 <str> = 'R'
+  dominant.44 <str> = 'R'
+  dominant.45 <str> = 'L'
+  dominant.46 <str> = 'R'
+  dominant.47 <str> = 'R'
+  dominant.48 <str> = 'R'
+  dominant.49 <str> = 'R'
+  dominant.50 <str> = 'R'
+  dominant.51 <str> = 'R'
+  dominant.52 <str> = 'L'
+  dominant.53 <str> = 'R'
+  dominant.54 <str> = 'R'
+  dominant.55 <str> = 'R'
+  dominant.56 <str> = 'R'
+  dominant.57 <str> = 'R'
+  dominant.58 <str> = 'R'
+  dominant.59 <str> = 'R'
+  dominant.60 <str> = 'L'
+  dominant.61 <str> = 'L'
+  dominant.62 <str> = 'R'
+  dominant.63 <str> = 'L'
+  dominant.64 <str> = 'L'
+  dominant.65 <str> = 'L'
+  dominant.66 <str> = 'L'
+  dominant.67 <str> = 'L'
+  dominant.68 <str> = 'L'
+
+===== gpu_summary.json | 12117 bytes | mtime 2026-11-20 14:41:43 =====
+  TOP KEYS: ['_meta', 'p1b', 'p2']
+  _meta <dict> = 3
+  _meta.note <str> = 'GPU 训练汇总；对照 CPU 基线见各块 baseline 字段'
+  _meta.env <dict> = 5
+  _meta.env.gpu <str> = 'NVIDIA GeForce RTX 4060 Laptop 8.59 GB'
+  _meta.env.torch <str> = '2.14.1+cu126'
+  _meta.env.cuda <str> = '12.6'
+  _meta.env.capability <str> = '8.9'
+  _meta.env.python <str> = 'E:\\Mini\\envs\\mathmodel\\python.exe'
+  _meta.caveat <str> = 'ridge 基线在 cap 300-400 窗口子集上评估，GPU 在全滑窗上评估；同一 record 划分，方向稳健，倍数按量级读'
+  p1b <dict> = 10
+  p1b._meta <dict> = 12
+  p1b._meta.model <str> = 'TCN(4 blocks, dilations 1/2/4/8, 96ch, GroupNorm, GELU) on GPU'
+  p1b._meta.window_frames <int> = 15
+  p1b._meta.window_s <float> = 0.5
+  p1b._meta.epochs <int> = 18
+  p1b._meta.batch <int> = 1024
+  p1b._meta.lr <float> = 0.002
+  p1b._meta.seed <int> = 20261120
+  p1b._meta.device <str> = 'cuda'
+  p1b._meta.features <str> = 'fl(32)+fr(32)+gl(8)+gr(8)+validL+validR = 82 dims/frame'
+  p1b._meta.label <str> = 'badL | badR (annotated hand bad frame)'
+  p1b._meta.split <str> = 'panel_records.csv split column (16/4/4 environment)'
+  p1b._meta.baseline_cpu_test <dict> = 5
+  p1b.best_epoch <int> = 1
+  p1b.val_auc_at_best <float> = 0.8852539948743638
+  p1b.test_auc <float> = 0.8220322044197129
+  p1b.test_ap <float> = 0.06755601550659424
+  p1b.test_positive_rate <float> = 0.01902330480515957
+  p1b.test_ap_lift <float> = 3.5512239933013916
+  p1b.per_env_test <list> = 2
+  p1b.per_env_test[] <list[dict]> = 2
+  p1b.per_env_test[0] keys <keys> = ['env', 'n', 'positives', 'auc_bad']
+  p1b.per_env_test[0].env <str> = 'logistics_x_courier_station_0011'
+  p1b.per_env_test[0].n <int> = 6275
+  p1b.per_env_test[0].positives <int> = 213
+  p1b.per_env_test[0].auc_bad <float> = 0.7646370912154993
+  p1b.train_seconds <float> = 18.8
+  p1b.params <int> = 243873
+  p2 <dict> = 3
+  p2._meta <dict> = 11
+  p2._meta.model <str> = 'GRU(128, 2 layers) encoder + MLP multi-horizon head, GPU'
+  p2._meta.context_frames <int> = 10
+  p2._meta.epochs <int> = 40
+  p2._meta.batch <int> = 512
+  p2._meta.lr <float> = 0.002
+  p2._meta.seed <int> = 20261120
+  p2._meta.device <str> = 'cuda'
+  p2._meta.target <str> = 'dominant-hand wrist position (head frame), displacement vs last observed frame'
+  p2._meta.variants <dict> = 2
+  p2._meta.baseline_ridge <dict> = 4
+  p2._meta.official_prefix_seconds <list> = 3
+  p2.rows <list> = 8
+  p2.rows[] <list[dict]> = 8
+  p2.rows[0] keys <keys> = ['L_frames', 'L_s', 'variant', 'n_train', 'n_val', 'n_test', 'best_val_epoch', 'val_rmse_m', 'test_rmse_m', 'test_rmse_per_frame_m', 'test_endpoint_rmse_m', ...
+  p2.rows[0].L_frames <int> = 6
+  p2.rows[0].L_s <float> = 0.2
+  p2.rows[0].variant <str> = 'v1'
+  p2.rows[0].n_train <int> = 55
+  p2.rows[0].n_val <int> = 7
+  p2.rows[0].n_test <int> = 7
+  p2.rows[0].best_val_epoch <int> = 14
+  p2.rows[0].val_rmse_m <float> = 0.015339844860136509
+  p2.rows[0].test_rmse_m <float> = 0.013801174238324165
+  p2.rows[0].test_endpoint_rmse_m <float> = 0.035416822880506516
+  p2.rows[0].test_median_err_m <float> = 0.012365991249680519
+  p2.rows[0].test_within_2cm <float> = 0.6968065247982539
+  p2.rows[0].test_within_5cm <float> = 0.95318916745642
+  p2.total_seconds <float> = 175.1
+
+===== p1_reliability.json | 2891 bytes | mtime 2026-11-20 10:26:25 =====
+  TOP KEYS: ['_meta', 'auc_bad_calibrated', 'auc_bad_geometry', 'auc_bad_fused', 'ap_bad_calibrated', 'ap_bad_geometry', 'ap_bad_fused', 'ap_baseline_test', 'per_env_test', 'coef', 'formula', 'threshold_sensitivity']
+  _meta <dict> = 10
+  _meta.n_train <int> = 94092
+  _meta.n_val <int> = 13566
+  _meta.n_test <int> = 24482
+  _meta.positives_train <int> = 883
+  _meta.positives_val <int> = 254
+  _meta.positives_test <int> = 462
+  _meta.positive_rate_test <float> = 0.018871007270647822
+  _meta.features <list> = 10
+  _meta.features[] <list> = 10
+  _meta.label <str> = 'annotated hand bad frame (occlusion/edge)'
+  _meta.auc_convention <str> = 'AUC_bad: score increases with P(bad frame); 0.5 = chance'
+  auc_bad_calibrated <dict> = 3
+  auc_bad_calibrated.train <float> = 0.7442710701156052
+  auc_bad_calibrated.validation <float> = 0.7518428107018473
+  auc_bad_calibrated.test <float> = 0.5960690225677736
+  auc_bad_geometry <dict> = 3
+  auc_bad_geometry.train <float> = 0.724766455083643
+  auc_bad_geometry.validation <float> = 0.7028245192307693
+  auc_bad_geometry.test <float> = 0.6130540566843647
+  auc_bad_fused <dict> = 2
+  auc_bad_fused.validation <float> = 0.746209092027559
+  auc_bad_fused.test <float> = 0.6267450284935714
+  ap_bad_calibrated <dict> = 2
+  ap_bad_calibrated.validation <float> = 0.07388408553250847
+  ap_bad_calibrated.test <float> = 0.03809240369306235
+  ap_bad_geometry <dict> = 2
+  ap_bad_geometry.validation <float> = 0.07597105861818332
+  ap_bad_geometry.test <float> = 0.03685680553446983
+  ap_bad_fused <dict> = 2
+  ap_bad_fused.validation <float> = 0.07640795120505989
+  ap_bad_fused.test <float> = 0.040703609027931985
+  ap_baseline_test <float> = 0.018871007270647822
+  per_env_test <list> = 2
+  per_env_test[] <list[dict]> = 2
+  per_env_test[0] keys <keys> = ['env', 'n', 'positives', 'auc_bad']
+  per_env_test[0].env <str> = 'logistics_x_courier_station_0011'
+  per_env_test[0].n <int> = 12634
+  per_env_test[0].positives <int> = 426
+  per_env_test[0].auc_bad <float> = 0.5280707563423355
+  coef <dict> = 10
+  coef.L_collinearity <float> = -0.49880183009905016
+  coef.L_bone_cv <float> = -0.4180993812660512
+  coef.L_min_gap <float> = -0.010783497838002712
+  coef.L_bbox_vol <float> = -0.10343896361781262
+  coef.L_z_std <float> = 0.08947497876595668
+  coef.L_palm_width <float> = 0.172324883804233
+  coef.L_jump <float> = 0.11948375501757727
+  coef.L_jump_max <float> = -0.28197576680674435
+  coef.jump_mean5 <float> = -0.378378144027441
+  coef.jump_max_mean5 <float> = 1.2021002845463447
+  formula <str> = 'R = 0.5*(1 - sigma(w.x_geo + b)) + 0.5*exp(-0.5*Mahalanobis(x_geo)^2/median_train)'
+  threshold_sensitivity <list> = 6
+  threshold_sensitivity[] <list[dict]> = 6
+  threshold_sensitivity[0] keys <keys> = ['threshold', 'retained', 'bad_recall', 'bad_precision', 'f1']
+  threshold_sensitivity[0].threshold <float> = 0.3
+  threshold_sensitivity[0].retained <float> = 0.9302753043052038
+  threshold_sensitivity[0].bad_recall <float> = 0.816017316017316
+  threshold_sensitivity[0].bad_precision <float> = 0.01655323819978046
+  threshold_sensitivity[0].f1 <float> = 0.032448250634763524
+
+===== p1_segmentation.json | 3626 bytes | mtime 2026-11-20 10:26:25 =====
+  TOP KEYS: ['_meta', 'by_method', 'improvement', 'by_dataset', 'ablation']
+  _meta <dict> = 6
+  _meta.records <int> = 7
+  _meta.split <str> = 'test'
+  _meta.feature_main <str> = 'head-normalised low-dim state (19 dims/hand, dominant hand)'
+  _meta.feature_baseline <str> = 'raw world 21x3 keypoints, both hands (126 dims)'
+  _meta.K_selection <str> = 'BIC of diagonal GMM on 1/3 subsample'
+  _meta.tol_s <float> = 5.0
+  by_method <dict> = 5
+  by_method.kmeans_headfeat <dict> = 6
+  by_method.kmeans_headfeat.ari <dict> = 2
+  by_method.kmeans_headfeat.f1 <dict> = 2
+  by_method.kmeans_headfeat.b_mae <dict> = 2
+  by_method.kmeans_headfeat.b_recall <dict> = 2
+  by_method.kmeans_headfeat.b_precision <dict> = 2
+  by_method.kmeans_headfeat.b_count_err <dict> = 2
+  by_method.raw <dict> = 6
+  by_method.raw.ari <dict> = 2
+  by_method.raw.f1 <dict> = 2
+  by_method.raw.b_mae <dict> = 2
+  by_method.raw.b_recall <dict> = 2
+  by_method.raw.b_precision <dict> = 2
+  by_method.raw.b_count_err <dict> = 2
+  by_method.ward <dict> = 6
+  by_method.ward.ari <dict> = 2
+  by_method.ward.f1 <dict> = 2
+  by_method.ward.b_mae <dict> = 2
+  by_method.ward.b_recall <dict> = 2
+  by_method.ward.b_precision <dict> = 2
+  by_method.ward.b_count_err <dict> = 2
+  by_method.ward_oracleK <dict> = 6
+  by_method.ward_oracleK.ari <dict> = 2
+  by_method.ward_oracleK.f1 <dict> = 2
+  by_method.ward_oracleK.b_mae <dict> = 2
+  by_method.ward_oracleK.b_recall <dict> = 2
+  by_method.ward_oracleK.b_precision <dict> = 2
+  by_method.ward_oracleK.b_count_err <dict> = 2
+  by_method.ward_rawfeat <dict> = 6
+  by_method.ward_rawfeat.ari <dict> = 2
+  by_method.ward_rawfeat.f1 <dict> = 2
+  by_method.ward_rawfeat.b_mae <dict> = 2
+  by_method.ward_rawfeat.b_recall <dict> = 2
+  by_method.ward_rawfeat.b_precision <dict> = 2
+  by_method.ward_rawfeat.b_count_err <dict> = 2
+  improvement <dict> = 1
+  improvement.ward <dict> = 6
+  improvement.ward.ari <float> = 0.07151290141836714
+  improvement.ward.f1 <float> = 0.16958852740624675
+  improvement.ward.b_mae <float> = 1.0350364590329784
+  improvement.ward.b_recall <float> = -0.31381673881673877
+  improvement.ward.b_precision <float> = 0.463608019493972
+  improvement.ward.b_count_err <float> = -37.0
+  by_dataset <dict> = 3
+  by_dataset.EgoDemo <dict> = 2
+  by_dataset.EgoDemo.ward <float> = 0.8698107448107448
+  by_dataset.EgoDemo.raw <float> = 0.5303113553113553
+  by_dataset.EgoPro <dict> = 2
+  by_dataset.EgoPro.ward <float> = 0.4226361102081425
+  by_dataset.EgoPro.raw <float> = 0.24733665297437868
+  by_dataset.EgoStandard <dict> = 2
+  by_dataset.EgoStandard.ward <float> = 0.44810838899227773
+  by_dataset.EgoStandard.raw <float> = 0.3956010561998044
+  ablation <dict> = 4
+  ablation.ward <dict> = 2
+  ablation.ward.ari <float> = 0.4138423666260523
+  ablation.ward.f1 <float> = 0.5613169824306583
+  ablation.raw <dict> = 2
+  ablation.raw.ari <float> = 0.34232946520768515
+  ablation.raw.f1 <float> = 0.39172845502441156
+  ablation.ward_rawfeat <dict> = 2
+  ablation.ward_rawfeat.ari <float> = 0.34428064207550746
+  ablation.ward_rawfeat.f1 <float> = 0.49096688756642226
+  ablation.kmeans_headfeat <dict> = 2
+  ablation.kmeans_headfeat.ari <float> = 0.3324556030890469
+  ablation.kmeans_headfeat.f1 <float> = 0.3724041772185351
+
+===== p1_stage_stats.json | 851 bytes | mtime 2026-11-20 10:26:25 =====
+  TOP KEYS: ['_meta', 'by_dataset', 'by_position']
+  _meta <dict> = 4
+  _meta.source <str> = 'data/segments.csv + data/state.npz'
+  _meta.n_segments <int> = 349
+  _meta.units <str> = 'm/s, m/s^2, dimensionless aperture, s'
+  _meta.aggregation <str> = 'per annotated subtask segment, then mean by dataset/position'
+  by_dataset <dict> = 4
+  by_dataset.speed <dict> = 3
+  by_dataset.speed.EgoDemo <float> = 0.14488
+  by_dataset.speed.EgoPro <float> = 0.187
+  by_dataset.speed.EgoStandard <float> = 0.1573
+  by_dataset.acc <dict> = 3
+  by_dataset.acc.EgoDemo <float> = 1.31436
+  by_dataset.acc.EgoPro <float> = 1.96975
+  by_dataset.acc.EgoStandard <float> = 1.47237
+  by_dataset.aperture <dict> = 3
+  by_dataset.aperture.EgoDemo <float> = 0.96398
+  by_dataset.aperture.EgoPro <float> = 0.80647
+  by_dataset.aperture.EgoStandard <float> = 0.97945
+  by_dataset.dur <dict> = 3
+  by_dataset.dur.EgoDemo <float> = 4.63051
+  by_dataset.dur.EgoPro <float> = 8.25211
+  by_dataset.dur.EgoStandard <float> = 6.66
+  by_position <dict> = 3
+  by_position.speed <dict> = 3
+  by_position.speed.first <float> = 0.16459
+  by_position.speed.last <float> = 0.1485
+  by_position.speed.middle <float> = 0.16085
+  by_position.aperture <dict> = 3
+  by_position.aperture.first <float> = 0.91805
+  by_position.aperture.last <float> = 0.98805
+  by_position.aperture.middle <float> = 0.92986
+  by_position.dur <dict> = 3
+  by_position.dur.first <float> = 4.23768
+  by_position.dur.last <float> = 6.43333
+  by_position.dur.middle <float> = 6.92701
+
+===== p1_state_summary.json | 844 bytes | mtime 2026-11-20 10:26:01 =====
+  TOP KEYS: ['_meta', 'n_records', 'n_frames', 'dominant_left', 'dominant_right', 'state_dim_per_hand', 'geom_dim_per_hand', 'dataset_means', 'note']
+  _meta <dict> = 5
+  _meta.source <str> = 'data/panel.npz'
+  _meta.fps <int> = 30
+  _meta.split <str> = 'record_split.csv 16/4/4 environments'
+  _meta.units <str> = 'm; normalised ratios dimensionless'
+  _meta.method <str> = 'head-frame rotation, finite-difference velocity/acceleration'
+  n_records <int> = 69
+  n_frames <int> = 66070
+  dominant_left <int> = 26
+  dominant_right <int> = 43
+  state_dim_per_hand <int> = 32
+  geom_dim_per_hand <int> = 8
+  dataset_means <dict> = 4
+  dataset_means.speed_mean <dict> = 3
+  dataset_means.speed_mean.EgoDemo <float> = 0.14477
+  dataset_means.speed_mean.EgoPro <float> = 0.16949
+  dataset_means.speed_mean.EgoStandard <float> = 0.1673
+  dataset_means.aperture_mean <dict> = 3
+  dataset_means.aperture_mean.EgoDemo <float> = 0.9489
+  dataset_means.aperture_mean.EgoPro <float> = 0.74918
+  dataset_means.aperture_mean.EgoStandard <float> = 1.03297
+  dataset_means.palm_width <dict> = 3
+  dataset_means.palm_width.EgoDemo <float> = 0.05879
+  dataset_means.palm_width.EgoPro <float> = 0.05968
+  dataset_means.palm_width.EgoStandard <float> = 0.05844
+  dataset_means.bad <dict> = 3
+  dataset_means.bad.EgoDemo <float> = 0.00222
+  dataset_means.bad.EgoPro <float> = 0.02053
+  dataset_means.bad.EgoStandard <float> = 0.00873
+  note <str> = 'coordinates are head-frame; aperture/reach normalised by palm width'
+
+===== p1b_gpu.json | 1091 bytes | mtime 2026-11-20 14:35:21 =====
+  TOP KEYS: ['_meta', 'best_epoch', 'val_auc_at_best', 'test_auc', 'test_ap', 'test_positive_rate', 'test_ap_lift', 'per_env_test', 'train_seconds', 'params']
+  _meta <dict> = 12
+  _meta.model <str> = 'TCN(4 blocks, dilations 1/2/4/8, 96ch, GroupNorm, GELU) on GPU'
+  _meta.window_frames <int> = 15
+  _meta.window_s <float> = 0.5
+  _meta.epochs <int> = 18
+  _meta.batch <int> = 1024
+  _meta.lr <float> = 0.002
+  _meta.seed <int> = 20261120
+  _meta.device <str> = 'cuda'
+  _meta.features <str> = 'fl(32)+fr(32)+gl(8)+gr(8)+validL+validR = 82 dims/frame'
+  _meta.label <str> = 'badL | badR (annotated hand bad frame)'
+  _meta.split <str> = 'panel_records.csv split column (16/4/4 environment)'
+  _meta.baseline_cpu_test <dict> = 5
+  _meta.baseline_cpu_test.auc_calibrated <float> = 0.5961
+  _meta.baseline_cpu_test.auc_geometry <float> = 0.6131
+  _meta.baseline_cpu_test.auc_fused <float> = 0.6267
+  _meta.baseline_cpu_test.ap_fused <float> = 0.0407
+  _meta.baseline_cpu_test.positive_rate <float> = 0.0189
+  best_epoch <int> = 1
+  val_auc_at_best <float> = 0.8852539948743638
+  test_auc <float> = 0.8220322044197129
+  test_ap <float> = 0.06755601550659424
+  test_positive_rate <float> = 0.01902330480515957
+  test_ap_lift <float> = 3.5512239933013916
+  per_env_test <list> = 2
+  per_env_test[] <list[dict]> = 2
+  per_env_test[0] keys <keys> = ['env', 'n', 'positives', 'auc_bad']
+  per_env_test[0].env <str> = 'logistics_x_courier_station_0011'
+  per_env_test[0].n <int> = 6275
+  per_env_test[0].positives <int> = 213
+  per_env_test[0].auc_bad <float> = 0.7646370912154993
+  train_seconds <float> = 18.8
+  params <int> = 243873
+
+===== p2_crossover.json | 4282 bytes | mtime 2026-11-20 10:26:41 =====
+  TOP KEYS: ['_meta', 'rows', 'crossover_s', 'crossover_s_median']
+  _meta <dict> = 4
+  _meta.source <str> = 'data/panel.npz test split'
+  _meta.context_frames <int> = 10
+  _meta.cap <int> = 300
+  _meta.convention <str> = 'same windows as p2_predict; wrist position of dominant hand'
+  rows <list> = 10
+  rows[] <list[dict]> = 10
+  rows[0] keys <keys> = ['L_frames', 'L_s', 'n_windows', 'hold_rmse_m', 'cv_rmse_m', 'hold_median_m', 'cv_median_m', 'cv_gain_mean_pct', 'cv_gain_median_pct', 'hold_endpoint_rmse_m'...
+  rows[0].L_frames <int> = 3
+  rows[0].L_s <float> = 0.1
+  rows[0].n_windows <int> = 2045
+  rows[0].hold_rmse_m <float> = 0.014351124875247478
+  rows[0].cv_rmse_m <float> = 0.010595860769486506
+  rows[0].hold_median_m <float> = 0.007433332968503237
+  rows[0].cv_median_m <float> = 0.0034540682103784606
+  rows[0].cv_gain_mean_pct <float> = 26.16703664977491
+  rows[0].cv_gain_median_pct <float> = 53.532712377958156
+  rows[0].hold_endpoint_rmse_m <float> = 0.019726229831576347
+  rows[0].cv_endpoint_rmse_m <float> = 0.01558214435430777
+  crossover_s <float> = 0.267
+  crossover_s_median <float> = 0.6
+
+===== p2_gpu.json | 10124 bytes | mtime 2026-11-20 14:41:01 =====
+  TOP KEYS: ['_meta', 'rows', 'total_seconds']
+  _meta <dict> = 11
+  _meta.model <str> = 'GRU(128, 2 layers) encoder + MLP multi-horizon head, GPU'
+  _meta.context_frames <int> = 10
+  _meta.epochs <int> = 40
+  _meta.batch <int> = 512
+  _meta.lr <float> = 0.002
+  _meta.seed <int> = 20261120
+  _meta.device <str> = 'cuda'
+  _meta.target <str> = 'dominant-hand wrist position (head frame), displacement vs last observed frame'
+  _meta.variants <dict> = 2
+  _meta.variants.v1 <str> = 'wrist only 3 dims/frame (same input as ridge baseline)'
+  _meta.variants.v2 <str> = 'both hands 32+32 + head geometry 8+8 = 80 dims/frame'
+  _meta.baseline_ridge <dict> = 4
+  _meta.baseline_ridge.L6 <dict> = 3
+  _meta.baseline_ridge.L15 <dict> = 1
+  _meta.baseline_ridge.L30 <dict> = 2
+  _meta.baseline_ridge.L60 <dict> = 1
+  _meta.official_prefix_seconds <list> = 3
+  _meta.official_prefix_seconds[] <list> = 3
+  rows <list> = 8
+  rows[] <list[dict]> = 8
+  rows[0] keys <keys> = ['L_frames', 'L_s', 'variant', 'n_train', 'n_val', 'n_test', 'best_val_epoch', 'val_rmse_m', 'test_rmse_m', 'test_rmse_per_frame_m', 'test_endpoint_rmse_m', ...
+  rows[0].L_frames <int> = 6
+  rows[0].L_s <float> = 0.2
+  rows[0].variant <str> = 'v1'
+  rows[0].n_train <int> = 55
+  rows[0].n_val <int> = 7
+  rows[0].n_test <int> = 7
+  rows[0].best_val_epoch <int> = 14
+  rows[0].val_rmse_m <float> = 0.015339844860136509
+  rows[0].test_rmse_m <float> = 0.013801174238324165
+  rows[0].test_endpoint_rmse_m <float> = 0.035416822880506516
+  rows[0].test_median_err_m <float> = 0.012365991249680519
+  rows[0].test_within_2cm <float> = 0.6968065247982539
+  rows[0].test_within_5cm <float> = 0.95318916745642
+  total_seconds <float> = 175.1
+
+===== p2_interval.json | 1318 bytes | mtime 2026-11-20 10:26:48 =====
+  TOP KEYS: ['_meta', 'by_length', 'summary']
+  _meta <dict> = 4
+  _meta.method <str> = 'split conformal, absolute 3D error radius, calibrated on validation, evaluated on test'
+  _meta.alpha <float> = 0.1
+  _meta.predictor <str> = 'ridge (alpha=10, context 10 frames)'
+  _meta.convention <str> = 'same windows as p2_predict'
+  by_length <list> = 4
+  by_length[] <list[dict]> = 4
+  by_length[0] keys <keys> = ['L_s', 'L_frames', 'n_val', 'n_test', 'q90_m', 'coverage_test', 'mean_radius_m', 'empirical_median_err_m']
+  by_length[0].L_s <float> = 0.2
+  by_length[0].L_frames <int> = 6
+  by_length[0].n_val <int> = 11892
+  by_length[0].n_test <int> = 13242
+  by_length[0].q90_m <float> = 0.04794992988495373
+  by_length[0].coverage_test <float> = 0.8929919951668932
+  by_length[0].mean_radius_m <float> = 0.04794992988495373
+  by_length[0].empirical_median_err_m <float> = 0.009543738208718209
+  summary <dict> = 2
+  summary.mean_coverage <float> = 0.922558000561793
+  summary.mean_radius_m <float> = 1.35157938258841
+
+===== p2_prediction.json | 6717 bytes | mtime 2026-11-20 10:26:36 =====
+  TOP KEYS: ['_meta', 'by_length', 'economics', 'occlusion']
+  _meta <dict> = 3
+  _meta.convention <str> = 'fixed before results: ctx=10 frames, L in {0.2,0.5,1,2}s, up to 400 windows/L, no bad frames in window; test split only'
+  _meta.splits <dict> = 2
+  _meta.splits.train_records <int> = 55
+  _meta.splits.test_records <int> = 7
+  _meta.windows <dict> = 4
+  _meta.windows.6 <int> = 2207
+  _meta.windows.15 <int> = 1499
+  _meta.windows.30 <int> = 738
+  _meta.windows.60 <int> = 348
+  by_length <list> = 16
+  by_length[] <list[dict]> = 16
+  by_length[0] keys <keys> = ['L_s', 'L_frames', 'method', 'n_windows', 'rmse', 'mae', 'endpoint_rmse', 'jump_mean', 'jump_p95', 'within_2cm', 'within_5cm']
+  by_length[0].L_s <float> = 0.2
+  by_length[0].L_frames <int> = 6
+  by_length[0].method <str> = 'hold'
+  by_length[0].n_windows <int> = 2207
+  by_length[0].rmse <float> = 0.026029208675026894
+  by_length[0].mae <float> = 0.018869588151574135
+  by_length[0].endpoint_rmse <float> = 0.03834870085120201
+  by_length[0].jump_mean <float> = 0.03446155786514282
+  by_length[0].jump_p95 <float> = 0.08136341720819473
+  by_length[0].within_2cm <float> = 0.6668177012535871
+  by_length[0].within_5cm <float> = 0.9384534058299351
+  economics <dict> = 2
+  economics.optimum <dict> = 8
+  economics.optimum.T_s <float> = 0.30000000000000004
+  economics.optimum.rmse_cm <float> = 2.6545230514727045
+  economics.optimum.cost_per_s <float> = 1.8666666666666665
+  economics.optimum.objective <float> = 4.521189718139371
+  economics.optimum.C0 <float> = 0.5
+  economics.optimum.C1 <float> = 0.2
+  economics.optimum.lambda_per_cm <float> = 1.0
+  economics.optimum.formula <str> = 'J(T)=RMSE(T)[cm] + lambda*(C0/T + C1)'
+  economics.baselines <dict> = 4
+  economics.baselines.fixed_0.5s <dict> = 4
+  economics.baselines.fixed_1.0s <dict> = 4
+  economics.baselines.reactive_5cm <dict> = 4
+  economics.baselines.never_observe <dict> = 4
+  occlusion <dict> = 6
+  occlusion.n_runs <int> = 264
+  occlusion.mean_s <float> = 0.2018939393939394
+  occlusion.median_s <float> = 0.13333333333333333
+  occlusion.p90_s <float> = 0.49000000000000055
+  occlusion.max_s <float> = 1.9
+  occlusion.share_over_1s <float> = 0.007575757575757576
+
+===== p3_duration_selected.json | 9585 bytes | mtime 2026-11-20 15:06:51 =====
+  TOP KEYS: ['_meta', 'selected', 'top10', 'validation', 'test', 'coverage']
+  _meta <dict> = 5
+  _meta.selection <str> = 'validation MAE + 0.08 nonmonotonicity - 0.03 positive monotone gain'
+  _meta.candidates <int> = 73
+  _meta.calibration <str> = 'train residuals; family shrinkage n/(n+20) toward prefix global'
+  _meta.deployment <str> = 'data/p3_duration_predictions.csv'
+  _meta.test_usage <str> = 'metrics only after selection'
+  selected <dict> = 8
+  selected.name <str> = 'old_neural_0.55'
+  selected.objective <float> = 2.9917458920132813
+  selected.mae <float> = 2.976678994131849
+  selected.rmse <float> = 3.7913804837693816
+  selected.spearman <float> = 0.21009775453215826
+  selected.monotone_gain <float> = -0.058831535199880935
+  selected.nonmonotone <float> = 0.1883362235179038
+  selected.by_prefix <list> = 3
+  selected.by_prefix[] <list[dict]> = 3
+  selected.by_prefix[0] keys <keys> = ['prefix', 'mae', 'rmse', 'spearman']
+  selected.by_prefix[0].prefix <float> = 0.2
+  selected.by_prefix[0].mae <float> = 3.01984722357119
+  selected.by_prefix[0].rmse <float> = 3.8555266089022795
+  selected.by_prefix[0].spearman <float> = 0.2171717530012545
+  top10 <list> = 10
+  top10[] <list[dict]> = 10
+  top10[0] keys <keys> = ['name', 'objective', 'mae', 'rmse', 'spearman', 'monotone_gain', 'nonmonotone', 'by_prefix']
+  top10[0].name <str> = 'old_neural_0.55'
+  top10[0].objective <float> = 2.9917458920132813
+  top10[0].mae <float> = 2.976678994131849
+  top10[0].rmse <float> = 3.7913804837693816
+  top10[0].spearman <float> = 0.21009775453215826
+  top10[0].monotone_gain <float> = -0.058831535199880935
+  top10[0].nonmonotone <float> = 0.1883362235179038
+  validation <dict> = 6
+  validation.mae <float> = 2.976678994131849
+  validation.rmse <float> = 3.7913804837693816
+  validation.spearman <float> = 0.21009775453215826
+  validation.monotone_gain <float> = -0.058831535199880935
+  validation.nonmonotone <float> = 0.1883362235179038
+  validation.by_prefix <list> = 3
+  validation.by_prefix[] <list[dict]> = 3
+  validation.by_prefix[0] keys <keys> = ['prefix', 'mae', 'rmse', 'spearman']
+  validation.by_prefix[0].prefix <float> = 0.2
+  validation.by_prefix[0].mae <float> = 3.01984722357119
+  validation.by_prefix[0].rmse <float> = 3.8555266089022795
+  validation.by_prefix[0].spearman <float> = 0.2171717530012545
+  test <dict> = 6
+  test.mae <float> = 3.1525919636968958
+  test.rmse <float> = 6.668640124702937
+  test.spearman <float> = 0.31056171853219977
+  test.monotone_gain <float> = 0.39198317997780574
+  test.nonmonotone <float> = 0.39198317997780574
+  test.by_prefix <list> = 3
+  test.by_prefix[] <list[dict]> = 3
+  test.by_prefix[0] keys <keys> = ['prefix', 'mae', 'rmse', 'spearman']
+  test.by_prefix[0].prefix <float> = 0.2
+  test.by_prefix[0].mae <float> = 3.3567895380237966
+  test.by_prefix[0].rmse <float> = 6.798834887354377
+  test.by_prefix[0].spearman <float> = 0.23760741404031538
+  coverage <dict> = 3
+  coverage.train <dict> = 7
+  coverage.train.q10 <float> = 0.10846560846560846
+  coverage.train.q25 <float> = 0.2526455026455027
+  coverage.train.q50 <float> = 0.4973544973544973
+  coverage.train.q60 <float> = 0.5992063492063492
+  coverage.train.q75 <float> = 0.7433862433862434
+  coverage.train.q80 <float> = 0.7896825396825397
+  coverage.train.q90 <float> = 0.8941798941798942
+  coverage.validation <dict> = 7
+  coverage.validation.q10 <float> = 0.18095238095238095
+  coverage.validation.q25 <float> = 0.3238095238095238
+  coverage.validation.q50 <float> = 0.4095238095238095
+  coverage.validation.q60 <float> = 0.44761904761904764
+  coverage.validation.q75 <float> = 0.5523809523809524
+  coverage.validation.q80 <float> = 0.638095238095238
+  coverage.validation.q90 <float> = 0.8380952380952381
+  coverage.test <dict> = 7
+  coverage.test.q10 <float> = 0.21505376344086022
+  coverage.test.q25 <float> = 0.24193548387096775
+  coverage.test.q50 <float> = 0.34946236559139787
+  coverage.test.q60 <float> = 0.4032258064516129
+  coverage.test.q75 <float> = 0.6397849462365591
+  coverage.test.q80 <float> = 0.7204301075268817
+  coverage.test.q90 <float> = 0.9032258064516129
+
+===== p3_final_duration.json | 4115 bytes | mtime 2026-11-20 15:28:09 =====
+  TOP KEYS: ['_meta', 'selected', 'evaluation', 'coverage', 'top10']
+  _meta <dict> = 6
+  _meta.selection <str> = 'validation mean MAE over the three official prefixes'
+  _meta.candidates <int> = 42
+  _meta.selected <str> = 'visual_a300'
+  _meta.features <str> = 'old 8 + progress 94 + visual 42, one ridge per prefix'
+  _meta.quantiles <str> = 'train residual, family shrunk n/(n+20) toward prefix global'
+  _meta.note <str> = 'image uses the released prefix only; no future frame, no identity'
+  selected <str> = 'visual_a300'
+  evaluation <list> = 3
+  evaluation[] <list[dict]> = 3
+  evaluation[0] keys <keys> = ['name', 'split', 'mae', 'spearman', 'mean_shrink', 'by_prefix']
+  evaluation[0].name <str> = 'visual_a300'
+  evaluation[0].split <str> = 'train'
+  evaluation[0].mae <float> = 3.2738578965088023
+  evaluation[0].spearman <float> = 0.6244311128505692
+  evaluation[0].mean_shrink <float> = 0.04114738582924249
+  coverage <dict> = 3
+  coverage.train <dict> = 7
+  coverage.train.q10 <float> = 0.10846560846560846
+  coverage.train.q25 <float> = 0.2552910052910053
+  coverage.train.q50 <float> = 0.5013227513227513
+  coverage.train.q60 <float> = 0.5992063492063492
+  coverage.train.q75 <float> = 0.7447089947089947
+  coverage.train.q80 <float> = 0.7923280423280423
+  coverage.train.q90 <float> = 0.9007936507936508
+  coverage.validation <dict> = 7
+  coverage.validation.q10 <float> = 0.10476190476190476
+  coverage.validation.q25 <float> = 0.2761904761904762
+  coverage.validation.q50 <float> = 0.37142857142857144
+  coverage.validation.q60 <float> = 0.4095238095238095
+  coverage.validation.q75 <float> = 0.5238095238095238
+  coverage.validation.q80 <float> = 0.6476190476190476
+  coverage.validation.q90 <float> = 0.9714285714285714
+  coverage.test <dict> = 7
+  coverage.test.q10 <float> = 0.026881720430107527
+  coverage.test.q25 <float> = 0.20430107526881722
+  coverage.test.q50 <float> = 0.40860215053763443
+  coverage.test.q60 <float> = 0.5268817204301075
+  coverage.test.q75 <float> = 0.6612903225806451
+  coverage.test.q80 <float> = 0.7258064516129032
+  coverage.test.q90 <float> = 0.9623655913978495
+  top10 <list> = 10
+  top10[] <list[dict]> = 10
+  top10[0] keys <keys> = ['name', 'val_mae']
+  top10[0].name <str> = 'visual_a300'
+  top10[0].val_mae <float> = 2.629904321581136
+
+===== p3_neural_progress.json | 51343 bytes | mtime 2026-11-20 15:04:58 =====
+  TOP KEYS: ['_meta', 'metrics', 'history', 'seconds']
+  _meta <dict> = 11
+  _meta.model <str> = 'causal TCN phase pretraining + monotone duration quantiles'
+  _meta.phase_pretrain <str> = 'full TRAIN demonstrations only; inference prefix only'
+  _meta.quantiles <list> = 5
+  _meta.quantiles[] <list> = 5
+  _meta.noncrossing <str> = 'positive softplus increments'
+  _meta.split <str> = 'official environments; model selected by validation MAE'
+  _meta.forbidden <list> = 4
+  _meta.forbidden[] <list> = 4
+  _meta.seed <int> = 20261120
+  _meta.device <str> = 'cuda'
+  _meta.parameters <int> = 122823
+  _meta.best_epoch <int> = 15
+  _meta.epochs <int> = 160
+  metrics <dict> = 2
+  metrics.validation <dict> = 4
+  metrics.validation.mae <float> = 3.083648527690342
+  metrics.validation.rmse <float> = 4.134376720446567
+  metrics.validation.spearman <float> = 0.21372907374629432
+  metrics.validation.by_prefix <list> = 3
+  metrics.test <dict> = 4
+  metrics.test.mae <float> = 3.8790588310969767
+  metrics.test.rmse <float> = 7.350306038829038
+  metrics.test.spearman <float> = 0.2907632087140139
+  metrics.test.by_prefix <list> = 3
+  history <list> = 33
+  history[] <list[dict]> = 33
+  history[0] keys <keys> = ['epoch', 'train_loss', 'validation', 'test']
+  history[0].epoch <int> = 1
+  history[0].train_loss <float> = 0.32439857200970723
+  seconds <float> = 25.49114727973938
+
+===== p3_prefix_informativeness.json | 4971 bytes | mtime 2026-11-20 15:19:09 =====
+  TOP KEYS: ['_meta', 'spread', 'p_late_by_prefix', 'voi_bounds', 'prefix_shrinks_spread_monotonically', 'relative_spread_reduction_0p2_to_1p0']
+  _meta <dict> = 3
+  _meta.question <str> = 'prefix informativeness on the P3 sampling pool and VoI break-even'
+  _meta.pool <str> = 'validation split; eligible units only'
+  _meta.note <str> = 'residual = true duration - frozen predictor; no test leakage'
+  spread <list> = 9
+  spread[] <list[dict]> = 9
+  spread[0] keys <keys> = ['split', 'prefix', 'n', 'sd_total', 'sd_resid_old', 'sd_resid_fusion', 'iqr_resid_fusion', 'sd_within_family_resid', 'shrinkage_old', 'shrinkage_fusion']
+  spread[0].split <str> = 'train'
+  spread[0].prefix <float> = 0.2
+  spread[0].n <int> = 252
+  spread[0].sd_total <float> = 10.204046927378624
+  spread[0].sd_resid_old <float> = 9.995253660478841
+  spread[0].sd_resid_fusion <float> = 9.58716738675737
+  spread[0].iqr_resid_fusion <float> = 2.4198576940208936
+  spread[0].sd_within_family_resid <float> = 9.58716738675737
+  spread[0].shrinkage_old <float> = 0.020461809749185544
+  spread[0].shrinkage_fusion <float> = 0.06045440059336604
+  p_late_by_prefix <list> = 9
+  p_late_by_prefix[] <list[dict]> = 9
+  p_late_by_prefix[0] keys <keys> = ['bar', 'prefix', 'p_late']
+  p_late_by_prefix[0].bar <float> = 0.25
+  p_late_by_prefix[0].prefix <float> = 0.2
+  p_late_by_prefix[0].p_late <float> = 0.42857142857142855
+  voi_bounds <list> = 3
+  voi_bounds[] <list[dict]> = 3
+  voi_bounds[0] keys <keys> = ['case', 'horizon', 'budget', 'w_max', 'best_on_time_gain_per_review', 'budget_share_per_review', 'obs_limit', 'n_reviews_if_all_used', 'max_possible_on_time...
+  voi_bounds[0].case <str> = 'S1'
+  voi_bounds[0].horizon <float> = 100.0
+  voi_bounds[0].budget <float> = 32.0
+  voi_bounds[0].w_max <float> = 3.0
+  voi_bounds[0].best_on_time_gain_per_review <float> = 0.1875
+  voi_bounds[0].budget_share_per_review <float> = 0.0312
+  voi_bounds[0].obs_limit <int> = 4
+  voi_bounds[0].n_reviews_if_all_used <int> = 4
+  voi_bounds[0].max_possible_on_time_gain <float> = 0.75
+  prefix_shrinks_spread_monotonically <bool> = False
+  relative_spread_reduction_0p2_to_1p0 <float> = -0.019057142135778322
+
+===== p3_prefix_marginal.json | 14800 bytes | mtime 2026-11-20 15:27:04 =====
+  TOP KEYS: ['_meta', 'rows', 'validation_median_gain_frac', 'test_median_gain_frac', 'validation_median_shrink_gain', 'test_median_shrink_gain', 'best_validation_1p0']
+  _meta <dict> = 3
+  _meta.question <str> = 'marginal information of the paid prefixes 0.6 s and 1.0 s over the free 0.2 s'
+  _meta.design <str> = 'one model per prefix, no prefix indicator, identical frozen split'
+  _meta.note <str> = 'positive mae_gain_frac means the longer prefix helps; near zero means useless'
+  rows <list> = 30
+  rows[] <list[dict]> = 30
+  rows[0] keys <keys> = ['features', 'model', 'split', 'mae_0p2', 'mae_0p6', 'mae_1p0', 'mae_gain_0p2_to_1p0', 'mae_gain_frac', 'shrink_0p2', 'shrink_1p0', 'shrink_gain', 'spearman_...
+  rows[0].features <str> = 'pose'
+  rows[0].model <str> = 'ridge'
+  rows[0].split <str> = 'validation'
+  rows[0].mae_0p2 <float> = 3.9306085638420405
+  rows[0].mae_0p6 <float> = 3.575217260185319
+  rows[0].mae_1p0 <float> = 2.759486633910477
+  rows[0].mae_gain_0p2_to_1p0 <float> = 1.1711219299315636
+  rows[0].mae_gain_frac <float> = 0.29794926432125574
+  rows[0].shrink_0p2 <float> = -0.20594290756189215
+  rows[0].shrink_1p0 <float> = 0.09843033775027266
+  rows[0].shrink_gain <float> = 0.3043732453121648
+  rows[0].spearman_0p2 <float> = -0.28663841796777956
+  rows[0].spearman_1p0 <float> = 0.37959075785170404
+  validation_median_gain_frac <float> = 0.04658603534079966
+  test_median_gain_frac <float> = -0.0609245607367927
+  validation_median_shrink_gain <float> = 0.03790705919206849
+  test_median_shrink_gain <float> = -0.011330404754824386
+  best_validation_1p0 <dict> = 13
+  best_validation_1p0.features <str> = 'visual'
+  best_validation_1p0.model <str> = 'rf'
+  best_validation_1p0.split <str> = 'validation'
+  best_validation_1p0.mae_0p2 <float> = 1.7308979944345124
+  best_validation_1p0.mae_0p6 <float> = 1.7777670499824427
+  best_validation_1p0.mae_1p0 <float> = 1.9177080324024152
+  best_validation_1p0.mae_gain_0p2_to_1p0 <float> = -0.18681003796790274
+  best_validation_1p0.mae_gain_frac <float> = -0.10792665920728271
+  best_validation_1p0.shrink_0p2 <float> = 0.3055850495817839
+  best_validation_1p0.shrink_1p0 <float> = 0.25532256255785013
+  best_validation_1p0.shrink_gain <float> = -0.050262487023933766
+  best_validation_1p0.spearman_0p2 <float> = 0.6911296504307024
+  best_validation_1p0.spearman_1p0 <float> = 0.6864608114410988
+
+===== p3_progress_models.json | 8832 bytes | mtime 2026-11-20 14:59:57 =====
+  TOP KEYS: ['_meta', 'results', 'seconds']
+  _meta <dict> = 6
+  _meta.split <str> = 'official train/validation/test by environment, no future lookup'
+  _meta.features <str> = 'progress-aware prefix features; no UUID/sample/source index'
+  _meta.selection <str> = 'validation MAE averaged over official prefix lengths'
+  _meta.target <str> = 'log duration for learned models'
+  _meta.models <list> = 5
+  _meta.models[] <list> = 5
+  _meta.seed <int> = 20261120
+  results <dict> = 5
+  results.M0_family_median <dict> = 2
+  results.M0_family_median.validation <dict> = 4
+  results.M0_family_median.test <dict> = 4
+  results.M1_old_ridge <dict> = 2
+  results.M1_old_ridge.validation <dict> = 4
+  results.M1_old_ridge.test <dict> = 4
+  results.M2_progress_ridge <dict> = 2
+  results.M2_progress_ridge.validation <dict> = 4
+  results.M2_progress_ridge.test <dict> = 4
+  results.M3_progress_hgb <dict> = 2
+  results.M3_progress_hgb.validation <dict> = 4
+  results.M3_progress_hgb.test <dict> = 4
+  results.M3_progress_extra <dict> = 2
+  results.M3_progress_extra.validation <dict> = 4
+  results.M3_progress_extra.test <dict> = 4
+  seconds <float> = 1.1643750667572021
+
+===== p3_scheduling.json | 90449 bytes | mtime 2026-11-20 14:49:24 =====
+  TOP KEYS: ['_meta', 'duration_model', 'residuals', 'capacity', 'capacity_analytic', 'summary', 'paired_vs_edf', 'constraint_nominal', 'review_bar_sensitivity']
+  _meta <dict> = 8
+  _meta.protocol <str> = 'C_Problem3_Requirements.txt; source pool=validation split, eligible only; random.Random(seed).choice per family, sorted job order'
+  _meta.seeds <list> = 2
+  _meta.seeds[] <list> = 2
+  _meta.n_seeds <int> = 30
+  _meta.n_trials_per_policy <int> = 450
+  _meta.mappings <list> = 5
+  _meta.mappings[] <list> = 5
+  _meta.policies <list> = 6
+  _meta.policies[] <list> = 6
+  _meta.review_voi <dict> = 5
+  _meta.review_voi.method <str> = 'empirical residual survival function per prefix'
+  _meta.review_voi.rule <str> = 'P(late|prefix)>0.25 and w*(P_late(cur)-P_late(next))>=bar, cost 1.0 and delay 1.0 s as specified'
+  _meta.review_voi.bar <float> = 0.02
+  _meta.review_voi.max_per_job <int> = 2
+  _meta.review_voi.obs_limit <dict> = 3
+  _meta.note <str> = 'oracle knows true p; upper bound for the same scheduler, not deployable; oracle runs nominal mapping only (90 trials); capacity uses seed-1 nearest-neighbou...
+  duration_model <dict> = 3
+  duration_model.0.2 <dict> = 5
+  duration_model.0.2.n <int> = 35
+  duration_model.0.2.mae <float> = 2.9391438428286376
+  duration_model.0.2.rmse <float> = 3.864369598710662
+  duration_model.0.2.spearman <float> = 0.2881946976309807
+  duration_model.0.2.mean_baseline_mae <float> = 3.3363265306122445
+  duration_model.0.6 <dict> = 5
+  duration_model.0.6.n <int> = 35
+  duration_model.0.6.mae <float> = 2.9718378750887293
+  duration_model.0.6.rmse <float> = 3.900320228687511
+  duration_model.0.6.spearman <float> = 0.25706910436695724
+  duration_model.0.6.mean_baseline_mae <float> = 3.3363265306122445
+  duration_model.1.0 <dict> = 5
+  duration_model.1.0.n <int> = 35
+  duration_model.1.0.mae <float> = 3.2903196469188543
+  duration_model.1.0.rmse <float> = 4.227856270039001
+  duration_model.1.0.spearman <float> = 0.10653441694458934
+  duration_model.1.0.mean_baseline_mae <float> = 3.3363265306122445
+  residuals <dict> = 5
+  residuals.0.5 <dict> = 3
+  residuals.0.5.0.2 <float> = -0.527
+  residuals.0.5.0.6 <float> = -0.2
+  residuals.0.5.1.0 <float> = -0.37
+  residuals.0.6 <dict> = 3
+  residuals.0.6.0.2 <float> = 0.19
+  residuals.0.6.0.6 <float> = 0.282
+  residuals.0.6.1.0 <float> = 0.236
+  residuals.0.7 <dict> = 3
+  residuals.0.7.0.2 <float> = 1.179
+  residuals.0.7.0.6 <float> = 1.086
+  residuals.0.7.1.0 <float> = 1.065
+  residuals.0.8 <dict> = 3
+  residuals.0.8.0.2 <float> = 2.882
+  residuals.0.8.0.6 <float> = 3.081
+  residuals.0.8.1.0 <float> = 3.064
+  residuals.0.9 <dict> = 3
+  residuals.0.9.0.2 <float> = 5.427
+  residuals.0.9.0.6 <float> = 5.43
+  residuals.0.9.1.0 <float> = 5.635
+  capacity <list> = 3
+  capacity[] <list[dict]> = 3
+  capacity[0] keys <keys> = ['case', 'n_jobs', 'mean_p_s', 'nn_route_s', 'capacity_ratio', 'horizon_s', 'budget']
+  capacity[0].case <str> = 'S1'
+  capacity[0].n_jobs <int> = 8
+  capacity[0].mean_p_s <float> = 5.625
+  capacity[0].nn_route_s <float> = 4.0
+  capacity[0].capacity_ratio <float> = 0.49
+  capacity[0].horizon_s <int> = 100
+  capacity[0].budget <int> = 32
+  capacity_analytic <list> = 3
+  capacity_analytic[] <list[dict]> = 3
+  capacity_analytic[0] keys <keys> = ['case', 'n_jobs', 'sum_family_mean_p_s', 'mst_route_s', 'capacity_ratio_analytic', 'horizon_s']
+  capacity_analytic[0].case <str> = 'S1'
+  capacity_analytic[0].n_jobs <int> = 8
+  capacity_analytic[0].sum_family_mean_p_s <float> = 58.79
+  capacity_analytic[0].mst_route_s <float> = 3.0
+  capacity_analytic[0].capacity_ratio_analytic <float> = 0.658
+  capacity_analytic[0].horizon_s <float> = 100.0
+  summary <list> = 78
+  summary[] <list[dict]> = 78
+  summary[0] keys <keys> = ['case', 'alpha', 'beta', 'policy', 'n', 'weighted_completion_rate', 'weighted_completion_rate_ci95', 'weighted_on_time_rate', 'weighted_on_time_rate_ci95', ...
+  summary[0].case <str> = 'S1'
+  summary[0].alpha <float> = 0.75
+  summary[0].beta <float> = 0.5
+  summary[0].policy <str> = 'edf'
+  summary[0].n <int> = 30
+  summary[0].weighted_completion_rate <float> = 1.0
+  summary[0].weighted_completion_rate_ci95 <float> = 0.0
+  summary[0].weighted_on_time_rate <float> = 0.9916666666666667
+  summary[0].weighted_on_time_rate_ci95 <float> = 0.007732723915741988
+  summary[0].weighted_tardiness_s <float> = 0.34754160808480017
+  summary[0].weighted_tardiness_s_ci95 <float> = 0.4112162007952975
+  summary[0].cost <float> = 21.726835263864036
+  summary[0].cost_ci95 <float> = 0.1283114485957602
+  summary[0].reviews <float> = 0.0
+  summary[0].reviews_ci95 <float> = 0.0
+  summary[0].elapsed_s <float> = 71.38974865168089
+  summary[0].elapsed_s_ci95 <float> = 3.0669364113722115
+  summary[0].observed_overrun_s <float> = 21.39321698679371
+  summary[0].observed_overrun_s_ci95 <float> = 2.506821432451585
+  summary[0].reserved_idle_s <float> = 3.544594344594387
+  summary[0].reserved_idle_s_ci95 <float> = 0.6614427190107092
+  summary[0].censored_units <float> = 0.0
+  summary[0].censored_units_ci95 <float> = 0.0
+  summary[0].n_done <float> = 8.0
+  summary[0].n_done_ci95 <float> = 0.0
+  summary[0].n_drop <float> = 0.0
+  summary[0].n_drop_ci95 <float> = 0.0
+  paired_vs_edf <list> = 63
+  paired_vs_edf[] <list[dict]> = 63
+  paired_vs_edf[0] keys <keys> = ['case', 'alpha', 'beta', 'policy', 'mean_diff', 'ci95']
+  paired_vs_edf[0].case <str> = 'S1'
+  paired_vs_edf[0].alpha <float> = 0.75
+  paired_vs_edf[0].beta <float> = 0.5
+  paired_vs_edf[0].policy <str> = 'edf_rev'
+  paired_vs_edf[0].mean_diff <float> = 0.0
+  paired_vs_edf[0].ci95 <float> = 0.0
+  constraint_nominal <list> = 18
+  constraint_nominal[] <list[dict]> = 18
+  constraint_nominal[0] keys <keys> = ['case', 'policy', 'mean_eta', 'met']
+  constraint_nominal[0].case <str> = 'S1'
+  constraint_nominal[0].policy <str> = 'edf'
+
+===== p3_stochastic_schedule.json | 23825 bytes | mtime 2026-11-20 15:18:30 =====
+  TOP KEYS: ['_meta', 'summary', 'paired_vs_slack_old', 'mapping_sensitivity', 'seconds']
+  _meta <dict> = 6
+  _meta.protocol <str> = 'corrected actual p=alpha*d+beta; C=s+p; availability=s+max(p,b)'
+  _meta.source <str> = 'official validation eligible units; 30 common seeds; sorted jobs'
+  _meta.model <str> = 'validation-selected fusion; conditional family/prefix train residual distributions'
+  _meta.risk <str> = 'capacity-pressure chance reservation q=clip(.70-.55*max(pressure-.75),.35,.70)'
+  _meta.rollout <str> = '19 common duration quantiles, two-stage stochastic MPC, no future true duration'
+  _meta.reviews <str> = 'expected lateness-probability gain net of 1s delay and cost shadow price'
+  summary <list> = 21
+  summary[] <list[dict]> = 21
+  summary[0] keys <keys> = ['case', 'policy', 'n', 'weighted_on_time_rate', 'weighted_on_time_rate_ci95', 'weighted_completion_rate', 'weighted_completion_rate_ci95', 'weighted_tardine...
+  summary[0].case <str> = 'S1'
+  summary[0].policy <str> = 'edf_fusion'
+  summary[0].n <int> = 30
+  summary[0].weighted_on_time_rate <float> = 0.9875
+  summary[0].weighted_on_time_rate_ci95 <float> = 0.009099071570675544
+  summary[0].weighted_completion_rate <float> = 1.0
+  summary[0].weighted_completion_rate_ci95 <float> = 0.0
+  summary[0].weighted_tardiness_s <float> = 1.0492064526551617
+  summary[0].weighted_tardiness_s_ci95 <float> = 0.951663985456211
+  summary[0].cost <float> = 22.84925335939268
+  summary[0].cost_ci95 <float> = 0.2170651842754591
+  summary[0].reviews <float> = 0.0
+  summary[0].reviews_ci95 <float> = 0.0
+  summary[0].reserved_idle_s <float> = 6.254636698697334
+  summary[0].reserved_idle_s_ci95 <float> = 0.94821272766121
+  summary[0].observed_overrun_s <float> = 17.182396817375896
+  summary[0].observed_overrun_s_ci95 <float> = 2.018934273382563
+  paired_vs_slack_old <list> = 15
+  paired_vs_slack_old[] <list[dict]> = 15
+  paired_vs_slack_old[0] keys <keys> = ['case', 'policy', 'mean_diff', 'ci95']
+  paired_vs_slack_old[0].case <str> = 'S1'
+  paired_vs_slack_old[0].policy <str> = 'edf_old'
+  paired_vs_slack_old[0].mean_diff <float> = 0.0
+  paired_vs_slack_old[0].ci95 <float> = 0.0
+  mapping_sensitivity <list> = 45
+  mapping_sensitivity[] <list[dict]> = 45
+  mapping_sensitivity[0] keys <keys> = ['case', 'policy', 'alpha', 'beta', 'eta', 'completion', 'cost']
+  mapping_sensitivity[0].case <str> = 'S1'
+  mapping_sensitivity[0].policy <str> = 'slack_old'
+  mapping_sensitivity[0].alpha <float> = 1.0
+  mapping_sensitivity[0].beta <float> = 0.5
+  mapping_sensitivity[0].eta <float> = 0.9875
+  mapping_sensitivity[0].completion <float> = 1.0
+  mapping_sensitivity[0].cost <float> = 22.792369825075017
+  seconds <float> = 268.23803067207336
+
+===== p3_visual_duration.json | 30147 bytes | mtime 2026-11-20 15:26:27 =====
+  TOP KEYS: ['_meta', 'rows']
+  _meta <dict> = 4
+  _meta.split <str> = 'official train/validation/test'
+  _meta.target <str> = 'log duration'
+  _meta.question <str> = 'does the image add transferable duration information to the pose features'
+  _meta.diagnostic <str> = 'residual spread per released prefix on the validation pool'
+  rows <list> = 30
+  rows[] <list[dict]> = 30
+  rows[0] keys <keys> = ['design', 'model', 'split', 'mae', 'mean_shrink', 'shrink_0p2', 'shrink_1p0', 'shrink_gain', 'spearman', 'by_prefix']
+  rows[0].design <str> = 'pose_old8'
+  rows[0].model <str> = 'ridge'
+  rows[0].split <str> = 'train'
+  rows[0].mae <float> = 3.551486230490875
+  rows[0].mean_shrink <float> = 0.026038099886362742
+  rows[0].shrink_0p2 <float> = 0.02026072758666886
+  rows[0].shrink_1p0 <float> = 0.029290168260678207
+  rows[0].shrink_gain <float> = 0.009029440674009348
+  rows[0].spearman <float> = 0.5177210433462603
+
+===== prefix_progress_meta.json | 436 bytes | mtime 2026-11-20 14:59:52 =====
+  TOP KEYS: ['n_rows', 'n_units', 'n_features', 'feature_file', 'prefix_seconds', 'allowed_inputs', 'forbidden_inputs', 'target', 'missing_record_links']
+  n_rows <int> = 1047
+  n_units <int> = 349
+  n_features <int> = 94
+  feature_file <str> = 'data/prefix_progress_features.csv'
+  prefix_seconds <list> = 3
+  prefix_seconds[] <list> = 3
+  allowed_inputs <list> = 2
+  allowed_inputs[] <list> = 2
+  forbidden_inputs <list> = 5
+  forbidden_inputs[] <list> = 5
+  target <str> = 'duration only in train split'
+  missing_record_links <int> = 0
+
+===== prefix_visual_meta.json | 12511 bytes | mtime 2026-11-20 15:25:57 =====
+  TOP KEYS: ['_meta', 'n_rows', 'n_units', 'n_visual_dim', 'missing', 'per_sample', 'seconds']
+  _meta <dict> = 5
+  _meta.source <str> = 'official Raw_Data videos, head-left camera'
+  _meta.resize <list> = 2
+  _meta.resize[] <list> = 2
+  _meta.prefix_seconds <list> = 3
+  _meta.prefix_seconds[] <list> = 3
+  _meta.descriptor <str> = 'edge/texture/colour/layout/motion, 39 dims + 3 flow'
+  _meta.method <str> = 'sequential grab()/retrieve(); no frame skipping beyond needed'
+  n_rows <int> = 1047
+  n_units <int> = 349
+  n_visual_dim <int> = 39
+  missing <list> = 0
+  missing[] <list> = 0
+  per_sample <list> = 69
+  per_sample[] <list[dict]> = 69
+  per_sample[0] keys <keys> = ['dataset', 'sample', 'video', 'n_frames', 'fps', 'n_requested', 'n_got']
+  per_sample[0].dataset <str> = 'EgoDemo'
+  per_sample[0].sample <str> = 'E001'
+  per_sample[0].video <str> = 'file-000.mp4'
+  per_sample[0].n_frames <int> = 1619
+  per_sample[0].fps <float> = 30.0
+  per_sample[0].n_requested <int> = 12
+  per_sample[0].n_got <int> = 12
+  seconds <float> = 199.0
+
+
+########## CODE ##########
+
+===== 00_probe.py | 32 lines | mtime 2026-11-20 09:39:20 =====
+  DOC: 30-line probe: schema, counts, alignment, environment coverage.
+  REFS: 
+
+===== build_panel.py | 138 lines | mtime 2026-11-20 09:40:52 =====
+  DOC: Build a harmonised frame panel (all 69 records) + segment table. /  / Outputs: /   data/panel.npz         L,R (N,21,3) head-frame later; here world coords
+  L32: def demo_bad_array(path, n, total):
+  L48: def stack_cells(col, shape):
+  L52: def read_demo(p):
+  L68: def read_pose_ds(p):
+  REFS: data/panel.npz; data/panel_records.csv; data/segments.csv; panel.npz; panel_records.csv; segments.csv
+
+===== check_no_peek.py | 67 lines | mtime 2026-11-20 09:34:19 =====
+  DOC: 扫本目录，禁止出现指向获奖论文/优秀论文的路径或行为（练习赛用）。 /  / 用法： /     python code/check_no_peek.py [目录]        # 默认本文件的上一级
+  L35: def scan(root: Path) -> list[str]:
+  L56: def main() -> int:
+  REFS: 
+
+===== common.py | 79 lines | mtime 2026-11-20 09:40:35 =====
+  DOC: (w,x,y,z) -> rotation matrix. Accepts (...,4), returns (...,3,3).
+  L18: def ensure_dirs():
+  L23: def load_index():
+  L29: def load_split():
+  L35: def load_tasks():
+  L39: def load_zones():
+  L43: def load_conditions():
+  L48: def record_dirs():
+  L56: def quat_to_R(q):
+  L74: def write_json(name, obj):
+  REFS: 
+
+===== make_numbers.py | 175 lines | mtime 2026-11-20 10:28:42 =====
+  DOC: Generate out/03-numbers.md from data/*.json. Every row carries its JSON key.
+  L5: def J(f):
+  REFS: p1_reliability.json; p1_segmentation.json; p1_state_summary.json; p2_crossover.json; p2_interval.json; p2_prediction.json; p3_scheduling.json; segments.csv
+
+===== p1_model.py | 382 lines | mtime 2026-11-20 10:19:54 =====
+  DOC: 5-frame trailing means of jump / jump_max: occlusion lasts many frames, /     single-frame geometry is noisy.
+  L37: def frames_of(r):
+  L42: def build_geom(split):
+  L56: def add_context(X):
+  L129: def state_matrix(r):
+  L143: def raw_matrix(r):
+  L149: def smooth(X, w=5):
+  L156: def choose_k(X, kmax=8):
+  L170: def ward_segments(X, K):
+  L191: def kmeans_segments(X, K):
+  L207: def true_labels(r, ii):
+  L215: def boundaries(lab):
+  L219: def boundary_metrics(pred_b, true_b, t, tol=5.0):
+  L237: def eval_record(r, method="ward", oracle_k=False, tol=5.0, feature=None):
+  REFS: data/p1_reliability.json; data/p1_segmentation.json; data/p1_tables.csv; data/segments.csv; data/state.npz; feature_names.json; p1_reliability.json; p1_segmentation.json; p1_segmentation_records.csv; p1_stage_stats.json; p1_stage_table.csv; panel.npz; panel_records.csv; segments.csv; state.npz
+
+===== p1_state.py | 181 lines | mtime 2026-11-20 10:29:19 =====
+  DOC: Observability proxies from geometry only (no labels).
+  L24: def to_head(P):
+  L28: def hand_feats(P, side):
+  L69: def geom_feats(P, side):
+  REFS: data/feature_names.json; data/p1_state_summary.json; data/panel.npz; data/prefix_features.csv; data/state.npz; feature_names.json; p1_state_by_record.csv; p1_state_summary.json; panel.npz; panel_records.csv; prefix_features.csv; state.npz
+
+===== p2_crossover.py | 50 lines | mtime 2026-11-20 10:23:26 =====
+  DOC: P2 crossover probe: hold-last vs constant-velocity error vs mask length. / Same test-split windows and context as p2_predict.py; median and mean are both reported / because the median is what a single request experiences, the mean is what the cost model uses.
+  REFS: data/panel.npz; p2_crossover.json
+
+===== p2_interval.py | 35 lines | mtime 2026-11-20 10:17:10 =====
+  DOC: P2 interval calibration: split-conformal 90% radius per mask length. / Calibrated on validation windows, evaluated on test windows. Uses the ridge predictor / already fixed in p2_predict.py (no test labels touched during calibration).
+  REFS: p2_interval.json
+
+===== p2_predict.py | 202 lines | mtime 2026-11-20 10:25:33 =====
+  DOC: P2: prediction under artificial missing-observation windows + re-observation economics. /  / State kept from P1: dominant-hand wrist world position (3D).  Windows are replayed / on held-out (test-split) records; all comparators see the same windows.
+  L33: def hand_of(r):
+  L37: def windows(split, L, cap=CAP):
+  L65: def feats(ctx):
+  L72: def train_ridge(train, L):
+  L85: def predict(kind, ctx, L, mdl=None):
+  L98: def ridge_predict(sc, mdl, ctx, L):
+  L104: def main():
+  REFS: p2_by_length.csv; p2_prediction.json; panel.npz; panel_records.csv; state.npz
+
+===== p3_blend_calibrate.py | 136 lines | mtime 2026-11-20 15:06:37 =====
+  DOC: Select a duration predictor on validation, then freeze quantile calibration. /  / Candidate point predictions: old ridge, progress ridge, phase-TCN median, family / median and convex blends. Selection uses validation MAE + monotone-prefix penalty.
+  L32: def old_design(df):
+  L49: def score(df, pred):
+  REFS: data/p3_duration_predictions.csv; p3_duration_predictions.csv; p3_duration_residuals.csv; p3_duration_selected.json; p3_neural_predictions.csv; prefix_features.csv; prefix_progress_features.csv
+
+===== p3_final_duration.py | 155 lines | mtime 2026-11-20 15:27:28 =====
+  DOC: Final frozen duration model for P3: selected on validation, test touched once. /  / Adds the image descriptor (legitimate: the released prefix is a graded release of / the recorded demonstration, so replaying it is inside the information rule) and
+  L30: def fam(df):
+  L38: def build(cols, alpha):
+  L66: def evaluate(pred, name):
+  REFS: p3_duration_predictions_v2.csv; p3_duration_residuals_v2.csv; p3_final_duration.json; prefix_features.csv; prefix_progress_features.csv; prefix_visual_features.csv
+
+===== p3_neural_progress.py | 263 lines | mtime 2026-11-20 15:04:05 =====
+  DOC: P3 v3: phase-pretrained causal encoder + joint duration quantiles. /  / Structural novelty is not the network size. The encoder is pretrained on complete / TRAIN demonstrations to separate normalized action phase from observation quality;
+  L35: def load_data():
+  L55: def resample(x, n=T):
+  L63: def make_arrays(idx, links):
+  L80: class CausalBlock(nn.Module):
+  L95: class PhaseDurationNet(nn.Module):
+  L123: def pinball(pred, y):
+  L129: def fam_meta(rows):
+  L136: def evaluate(model, rows, batch=512):
+  L170: def main():
+  REFS: p3_neural_predictions.csv; p3_neural_progress.json; p3_neural_progress.pt; panel.npz; panel_records.csv; state.npz
+
+===== p3_prefix_informativeness.py | 126 lines | mtime 2026-11-20 15:18:59 =====
+  DOC: Break-even spread shrink for one observation. /  /     Under the official nominal mapping the service cost is dominated by the /     reservation b and the fixed 2.0 + 0.2*D terms; the observation adds exactly
+  L29: def spread_table():
+  L57: def gain_rate_by_prefix(df):
+  L69: def voi_threshold():
+  L100: def main():
+  REFS: p3_duration_predictions.csv; p3_prefix_informativeness.json
+
+===== p3_prefix_marginal.py | 102 lines | mtime 2026-11-20 15:26:49 =====
+  DOC: Is extra prefix length worth anything? Fit one model per prefix length. /  / If MAE barely moves from 0.2 s to 1.0 s, then the marginal information of the paid / observation is ~0 and the observation budget is optimally unused. Fit per prefix
+  L34: def fam(df):
+  REFS: p3_prefix_marginal.json; p3_prefix_marginal_value.csv; prefix_features.csv; prefix_progress_features.csv; prefix_visual_features.csv
+
+===== p3_progress_features.py | 144 lines | mtime 2026-11-20 14:59:00 =====
+  DOC: P: dominant-hand (n,21,3); O: other hand; times: seconds.
+  L32: def safe(v):
+  L37: def stats(a):
+  L46: def make_features(P, O, times, family):
+  REFS: data/prefix_progress_features.csv; panel.npz; panel_records.csv; prefix_progress_features.csv; prefix_progress_meta.json; state.npz
+
+===== p3_progress_model.py | 128 lines | mtime 2026-11-20 14:59:39 =====
+  DOC: P3 v2 model comparison: frozen train/validation/test and monotone prefix audit. /  / Models: /   M0 official-family median / training residual quantiles
+  L34: def metrics(df, pred):
+  L47: def summary(rows):
+  L54: def fit_classical():
+  REFS: p3_progress_models.json; prefix_features.csv; prefix_progress_features.csv
+
+===== p3_report.py | 45 lines | mtime 2026-11-20 14:49:44 =====
+  DOC: 把重跑后的 P3 结果压成几张表：名义映射、配对差、再观测敏感性。
+  REFS: p3_scheduling.json
+
+===== p3_schedule.py | 374 lines | mtime 2026-11-20 14:48:16 =====
+  DOC: P3: restocking scheduling under duration uncertainty. /  / Protocol (Restocking_Tasks_and_Constraints + C_Problem3_Requirements.txt): /   one equipment unit, actions wait / review / execute, at most 200 actions.
+  L36: def dist(a, b):
+  L41: def design(df):
+  L69: def sample_unit(family, rng):
+  L74: def pfeat(unit_id, prefix):
+  L78: def predict(unit_id, prefix, alpha, beta):
+  L85: class Job:
+  L106: def p_late(prefix, x):
+  L117: def simulate(case, seed, policy, alpha=1.0, beta=0.5, review_gate=True, qbuf=0.6,
+  L243: def ci95(x):
+  REFS: p3_scheduling.json; p3_summary.csv; p3_trials.csv; prefix_features.csv
+
+===== p3_stochastic_schedule.py | 252 lines | mtime 2026-11-20 15:10:50 =====
+  DOC: P3 v4: protocol-correct, distribution-driven stochastic MPC. /  / Important correction to p3_schedule.py: actual service is p=alpha*d+beta, hence / C=s+p and next availability=s+max(p,b). The old script accidentally used C=s+d
+  L46: def dist(a,b): return math.hypot(ZONES[a][0]-ZONES[b][0],ZONES[a][1]-ZONES[b][1])
+  L47: def sample_unit(f,rng):
+  L50: def pred(uid,p,f,model):
+  L53: def residuals(uid,p,f,model):
+  L58: def quant(uid,p,f,model,q):
+  L61: def scenarios(uid,p,f,model,alpha,beta):
+  L67: class Job:
+  L77: def simulate(case,seed,policy="risk_fusion",alpha=1.,beta=.5,reviews_allowed=False):
+  L203: def ci95(x):
+  L207: def main():
+  REFS: p3_duration_predictions.csv; p3_stochastic_schedule.json; p3_stochastic_summary.csv; p3_stochastic_trials.csv
+
+===== p3_visual_duration.py | 105 lines | mtime 2026-11-20 15:26:14 =====
+  DOC: Does the image carry duration information that the pose features miss? /  / Same frozen official split. Compares pose-only, visual-only and fused designs, and / reports the diagnostic that matters for P3: the residual spread as the released
+  L33: def design(df, cols):
+  L38: def fit(cols, tag, hgb=True):
+  L82: def main():
+  REFS: p3_visual_duration.json; prefix_features.csv; prefix_progress_features.csv; prefix_visual_features.csv
+
+===== p3_visual_features.py | 184 lines | mtime 2026-11-20 15:22:30 =====
+  DOC: jobs: list of (unit_id, prefix, target_frame_idx). Returns dict unit->feat vectors.
+  L35: def find_head_left(dataset, sample):
+  L47: def frame_features(bgr):
+  L83: def extract_one(video, jobs):
+  L121: def main():
+  REFS: prefix_visual_features.csv; prefix_visual_meta.json
+
+===== probe_video_align.py | 56 lines | mtime 2026-11-20 15:21:55 =====
+  DOC: Probe 2: correct recursive layout, map segment time to frames, decode a prefix.
+  L16: def head_left_video(dataset, sample):
+  L21: def frames_table(dataset, sample):
+  REFS: 
+
+===== run_all.py | 38 lines | mtime 2026-11-20 10:25:00 =====
+  DOC: Run the whole P1/P2/P3 evidence chain. Entry point: python code/run_all.py. /  / Order matters: panel -> state -> P1 -> P2 (needs state) -> P3 (needs prefix_features). / Every step writes its own data/*.json; make_numbers rebuilds out/03-numbers.md from them.
+  REFS: 
+
+===== summarize_gpu.py | 65 lines | mtime 2026-11-20 14:41:37 =====
+  DOC: 把 p1b_gpu.json / p2_gpu.json 汇总成对照表（写 data/gpu_summary.json + 控制台）。
+  REFS: data/gpu_summary.json; data/p2_gpu.json; gpu_summary.json; p1b_gpu.json; p2_gpu.json
+
+===== train_gpu_p1b.py | 235 lines | mtime 2026-11-20 14:34:43 =====
+  DOC: C 题 P1-b 观测可靠性：GPU 时序模型（TCN）替代 CPU 逻辑回归+马氏距离。 /  / 对标基线（`data/p1_reliability.json`，CPU，10 个手工几何特征）： /     AUC_bad  test: 校准 0.5961 / 几何 0.6131 / 融合 0.6267
+  L43: def build(dataset_holdout=None):
+  L87: class Block(nn.Module):
+  L103: class TCN(nn.Module):
+  L118: def main():
+  REFS: data/p1_reliability.json; p1b_gpu.json; panel_records.csv; state.npz
+
+===== train_gpu_p2.py | 215 lines | mtime 2026-11-20 14:37:47 =====
+  DOC: C 题 P2：缺失观测窗口下的轨迹预测 —— GPU 序列模型（GRU encoder + multi-horizon head） / 对比 CPU 基线（`p2_crossover.json` / `p2_interval.json` 的 ridge, alpha=10, ctx=10 帧）。 /  / 两个变体，把「模型类」与「输入信息」两种增益分开归因：
+  L35: def load():
+  L49: def windows(recs, rec, dom, badL, badR, rich, slices, split, L):
+  L83: def nan_to_num(a):
+  L87: class Seq(nn.Module):
+  L100: def run(L, variant):
+  REFS: p2_crossover.json; p2_gpu.json; p2_interval.json; panel_records.csv; state.npz
+
+===== verify_numbers.py | 66 lines | mtime 2026-11-20 10:25:10 =====
+  DOC: Numeric invariants for the draft. No paper claims to match; checks the JSON chain.
+  L7: def chk(ok, msg):
+  L11: def J(f):
+  REFS: p1_reliability.json; p1_segmentation.json; p1_state_summary.json; p2_crossover.json; p2_interval.json; p2_prediction.json; p3_scheduling.json; p3_trials.csv

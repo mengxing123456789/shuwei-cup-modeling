@@ -1,0 +1,37 @@
+{
+ "note": "design D command shifted later by k samples",
+ "I_nominal": 11.777738407120376,
+ "rows": [
+  {
+   "delay_ms": 5,
+   "samples": 0,
+   "I": 11.777738407120376,
+   "reduction_pct": 99.91042809838197
+  },
+  {
+   "delay_ms": 10,
+   "samples": 1,
+   "I": 3323.514950947892,
+   "reduction_pct": 74.72404769727457
+  },
+  {
+   "delay_ms": 20,
+   "samples": 2,
+   "I": 12296.50325599271,
+   "reduction_pct": 6.482794759164379
+  },
+  {
+   "delay_ms": 30,
+   "samples": 3,
+   "I": 24704.7569695781,
+   "reduction_pct": -87.88429359566616
+  },
+  {
+   "delay_ms": 40,
+   "samples": 4,
+   "I": 37466.17901248845,
+   "reduction_pct": -184.93729309535408
+  }
+ ],
+ "I_uncontrolled": 13148.920804813857
+}

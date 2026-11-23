@@ -1,0 +1,23 @@
+{
+  "checked_rows": 120,
+  "failures": 0,
+  "skipped_non_numeric": [],
+  "failure_detail": [],
+  "n_figures_pdf": 13,
+  "figures": [
+    "fig10_mercury_precession.pdf",
+    "fig11_ortho_vs_perspective.pdf",
+    "fig12_drag_spiral.pdf",
+    "fig13_harmonics.pdf",
+    "fig1_three_views.pdf",
+    "fig2_parallax_scaling.pdf",
+    "fig3_observables_vs_i.pdf",
+    "fig4_mars_geocentric.pdf",
+    "fig5_identifiability.pdf",
+    "fig6_rosette.pdf",
+    "fig7_uniformity.pdf",
+    "fig8_resonance_width.pdf",
+    "fig9_kepler_laws.pdf"
+  ],
+  "tolerance": "|v|<1e-10 视为数值零；|v|<1e-6 用 rel 1e-2（拟合残差随舍入浮动）；其余 rel 1e-4"
+}

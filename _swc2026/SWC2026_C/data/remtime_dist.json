@@ -1,0 +1,103 @@
+{
+ "script": "remtime_dist.py",
+ "device": "cuda",
+ "seed": 20261120,
+ "torch": "2.0.0+cu118",
+ "quantiles": [
+  0.05,
+  0.1,
+  0.2,
+  0.3,
+  0.4,
+  0.5,
+  0.6,
+  0.7,
+  0.8,
+  0.9,
+  0.95
+ ],
+ "prefixes": [
+  0.2,
+  0.6,
+  1.0
+ ],
+ "target": "remaining time r = d - s at the moment the prefix ends",
+ "monotone_by_construction": "softplus increments, cumulative sum",
+ "results": {
+  "dist@0.2": {
+   "n_train": 252,
+   "n_val": 35,
+   "n_test": 62,
+   "pinball": 1.4058804804294764,
+   "crps": 2.811760960858953,
+   "pinball_constant": 1.1697038419240993,
+   "crps_constant": 2.3394076838481985,
+   "crps_ratio": 1.2019114839503984,
+   "mae_median": 3.7346086275192985,
+   "mae_constant": 2.990322580645161,
+   "cov50": 0.3870967741935484,
+   "cov80": 0.7580645161290323,
+   "cov90": 0.7580645161290323,
+   "cov50_const": 0.5806451612903226,
+   "cov80_const": 0.9516129032258065,
+   "cov90_const": 0.967741935483871,
+   "pinball_shuffled": 1.3607605133599843,
+   "crps_ratio_shuffled": 1.1633376454689652,
+   "information_gain": -0.23617663850537718,
+   "best_epoch": 5
+  },
+  "dist@0.6": {
+   "n_train": 250,
+   "n_val": 35,
+   "n_test": 62,
+   "pinball": 1.5535028338413917,
+   "crps": 3.1070056676827833,
+   "pinball_constant": 1.1682375665893916,
+   "crps_constant": 2.336475133178783,
+   "crps_ratio": 1.3297833234183367,
+   "mae_median": 4.05585415632494,
+   "mae_constant": 2.990322580645161,
+   "cov50": 0.3387096774193548,
+   "cov80": 0.6935483870967742,
+   "cov90": 0.7419354838709677,
+   "cov50_const": 0.5806451612903226,
+   "cov80_const": 0.967741935483871,
+   "cov90_const": 0.967741935483871,
+   "pinball_shuffled": 1.4482904910359147,
+   "crps_ratio_shuffled": 1.2397225807967491,
+   "information_gain": -0.38526526725200005,
+   "best_epoch": 8
+  },
+  "dist@1.0": {
+   "n_train": 244,
+   "n_val": 35,
+   "n_test": 62,
+   "pinball": 1.502810403551218,
+   "crps": 3.005620807102436,
+   "pinball_constant": 1.1556334612632164,
+   "crps_constant": 2.311266922526433,
+   "crps_ratio": 1.3004213307466057,
+   "mae_median": 3.848926616868665,
+   "mae_constant": 2.990322580645161,
+   "cov50": 0.4032258064516129,
+   "cov80": 0.7419354838709677,
+   "cov90": 0.7580645161290323,
+   "cov50_const": 0.6129032258064516,
+   "cov80_const": 0.967741935483871,
+   "cov90_const": 0.967741935483871,
+   "pinball_shuffled": 1.4799156705018828,
+   "crps_ratio_shuffled": 1.2806099166462308,
+   "information_gain": -0.34717694228800156,
+   "best_epoch": 9
+  }
+ },
+ "sequences": {
+  "crps_by_prefix": [
+   2.811760960858953,
+   3.1070056676827833,
+   3.005620807102436
+  ],
+  "improves_with_prefix": false
+ },
+ "interpretation": "crps_ratio < 1 means the learned distribution beats a constant reference distribution; crps_ratio_shuffled close to crps_ratio means the geometry columns carry no information about r"
+}

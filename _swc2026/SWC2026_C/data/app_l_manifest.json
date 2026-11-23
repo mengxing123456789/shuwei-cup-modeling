@@ -1,0 +1,18 @@
+{
+ "sources": {
+  "up2_benchmark.json": "116d7414774ef395615a0e5b820b9e33e2e1d4a2ad549eb660e0df197d5e49d6",
+  "p2_official_distance.json": "9c396340774a1e0adf0de6dfc69ae10e2854860a5215ee5e789d5fc2f9e61596",
+  "p3_official_audit.json": "f508210486f66807d27cc37d2d40b872e7b4330f738a2c993e4a24fc629f7247",
+  "p1a_zero_param.json": "bac1fd178279041327cace906d2d2439b6b61a40726005581c6fa6a7bc552f6f",
+  "p3_stochastic_schedule.json": "1681d3fab2ce82febe989a0721e83c1218ffca4eacc05a2e98328a361d3d03d9",
+  "up2_p1b.json": "3148a465181af50185e37ff054c146e6d5058ca0c6158537284d5f5bfd7ac94f",
+  "p1b_gpu.json": "d5a01cff5799046a10c06ceaa0141185d0681e5c1f07f834d5db6481f15bb040",
+  "up2_p2.json": "a36a1fc394d21fa8b625f8878ae309300d650f123a50c81a60e892c872b140d2",
+  "up3_video_badframe.json": "1e4c055e23e16115e53669b7984cf4dde0692aae1d9c903269a25223e8b47a42",
+  "up4_p1b_video.json": "8eee2b7029a1fe2ca5d2bc2702e2efe48d23923a6df2bb329ece854a2c87694a",
+  "up5_video_badframe_10hz.json": "0933a7811eca189a7bd128e9f81848dbf9d8320ff0b2c44917e324f5ca28d0e5",
+  "up6_video_late_fusion.json": "f0cef9a61c6da409aac7ea3729e78c2f1eaa17439d069703a8f4d2c3ab06147c",
+  "up15_p1a_final_repeats.json": "558fad2a1739a94537a34730b346de4a92a36693bcdd39444f5882cf772cc3da"
+ },
+ "output": "tables/app_l.tex"
+}

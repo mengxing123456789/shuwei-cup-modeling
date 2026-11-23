@@ -1,0 +1,69 @@
+_retry_backoff_seconds
+---
+workflow_engine._retry_backoff_seconds
+---
+_fresh_retry_handoff
+---
+workflow_engine._fresh_retry_handoff
+---
+_step_inactivity_timeout
+---
+workflow_engine._step_inactivity_timeout
+---
+_process_retry_policy
+---
+workflow_engine._process_retry_policy
+---
+workflow_engine._process_retry_policy.genexpr
+---
+step_inactivity_timeout
+---
+workflow_engine.__pyx_scope_struct_67__process_retry_policy
+---
+    编译步要 paper/main.tex，中间没有转换，选 PDF 必然失败）。改了返回 True。
+---
+软著/专利开跑前盘点上传材料（线程里跑；有缓存，重跑只处理变化的文件）。失败不拦流程。
+---
+Same artifact/type checks on first execution, retry and checkpoint edits.
+---
+    小白实测 10-13：开题报告导出时预检程序崩溃，失败卡只写了一句英文，小白以为要自己补资料。
+---
+    上传时后台提取在管的（排着队、在提取、已经失败过）不碰；这一版补过、没提出字的记下来，文件没变不再白试。
+---
+    paper-figure-drawio 是否要跑。如果文件不存在或解析失败, 返回安全的默认值
+---
+    也扣掉电脑睡眠的时间（10-20 复查：以前断网或合盖一晚，醒来这一步就算“超过 4 小时”失败）。
+---
+在线程里补提取（失败不影响后面）；见 _backfill_document_extracts。
+---
+    强制要求会误判失败)。全栈才要后端入口, 其余只要 code/ 下有主入口 + RUN.md。
+---
+本轮最新的重试原因 + 上一次执行留下的原因（保留，不被本轮的重试覆盖）。
+---
+    `paper/main.md`(Markdown), 而非默认的 50KB PDF, 用 PDF 阈值会误判失败,
+---
+Atomically retain only bounded retry metadata, never OCR text or secrets.
+---
+    （编程/统计分析步骤的任何健康失败本来就阻断）。
+---
+    单个文件提取失败不应该让整个 workflow 失败.
+---
+Internal retry ledger; deliberately excluded from public artifacts.
+---
+第 attempt 次（从 0 起）重试前的等待秒数；没登记的类别不等。
+---
+    重试与返修都基于 step_context 重建提示词，要求不会丢。
+---
+    需核对的页：识别与文本层对不上、没有可用文本层、有 [?]、识别失败（那一页只有文本兜底）。
+---
+    docx 导出据此整篇分栏；返回该用的 profile 路径（不分栏、注入失败都返回原来的）。
+---
+Classify a failed runner result and return ``(kind, retry_budget)``.
+---
+    content has made no repair progress and must not earn another paid retry.
+---
+    检查器缺失、超时、解密失败或自身出错时返回 ``[CHECK_UNAVAILABLE]``：不算完成，
+---
+    普通赛项工作区直接跳过；失败只记日志，不影响工作流状态。
+---
+    推送失败本身无所谓 —— 前端还有 5~8 秒轮询兜底。

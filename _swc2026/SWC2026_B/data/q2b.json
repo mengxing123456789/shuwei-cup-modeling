@@ -1,0 +1,180 @@
+{
+  "script": "q2b.py",
+  "source": "data/p2.json:p2_2.unconstrained",
+  "makespan": 10.858281,
+  "alerts": {
+    "T2": {
+      "obs_start": 10.8583,
+      "vehicles": [
+        "V1",
+        "V3"
+      ],
+      "wait_vehicle": "V1",
+      "wait_s": 0.0
+    },
+    "T3": {
+      "obs_start": 5.7776,
+      "vehicles": [
+        "V2",
+        "V4"
+      ],
+      "wait_vehicle": "V2",
+      "wait_s": 0.0
+    },
+    "T1": {
+      "obs_start": 1.532,
+      "vehicles": [
+        "V3",
+        "V5"
+      ],
+      "wait_vehicle": "V3",
+      "wait_s": 0.0
+    }
+  },
+  "timeline": {
+    "V1": [
+      {
+        "to_alert": "T2",
+        "station": [
+          15.0,
+          14.0
+        ],
+        "depart": 0.0,
+        "arrive": 0.0,
+        "slew_s": 3.1294,
+        "ready": 3.1294,
+        "wait_s": 7.7288,
+        "obs_start": 10.8583,
+        "obs_end": 15.8583,
+        "reset_end": 18.9877
+      }
+    ],
+    "V2": [
+      {
+        "to_alert": "T3",
+        "station": [
+          88.0,
+          10.0
+        ],
+        "depart": 0.0,
+        "arrive": 0.0,
+        "slew_s": 5.7776,
+        "ready": 5.7776,
+        "wait_s": 0.0,
+        "obs_start": 5.7776,
+        "obs_end": 10.7776,
+        "reset_end": 16.5552
+      }
+    ],
+    "V3": [
+      {
+        "to_alert": "T1",
+        "station": [
+          13.25,
+          86.0
+        ],
+        "depart": 0.0,
+        "arrive": 0.25,
+        "slew_s": 1.0148,
+        "ready": 1.2648,
+        "wait_s": 0.2672,
+        "obs_start": 1.532,
+        "obs_end": 6.532,
+        "reset_end": 7.5468
+      },
+      {
+        "to_alert": "T2",
+        "station": [
+          13.25,
+          86.0
+        ],
+        "depart": 7.5468,
+        "arrive": 7.5468,
+        "slew_s": 3.3114,
+        "ready": 10.8583,
+        "wait_s": 0.0,
+        "obs_start": 10.8583,
+        "obs_end": 15.8583,
+        "reset_end": 19.1697
+      }
+    ],
+    "V4": [
+      {
+        "to_alert": "T3",
+        "station": [
+          88.0,
+          68.0
+        ],
+        "depart": 0.0,
+        "arrive": 0.0,
+        "slew_s": 3.9081,
+        "ready": 3.9081,
+        "wait_s": 1.8695,
+        "obs_start": 5.7776,
+        "obs_end": 10.7776,
+        "reset_end": 14.6857
+      }
+    ],
+    "V5": [
+      {
+        "to_alert": "T1",
+        "station": [
+          50.0,
+          93.0
+        ],
+        "depart": 0.0,
+        "arrive": 0.0,
+        "slew_s": 1.532,
+        "ready": 1.532,
+        "wait_s": 0.0,
+        "obs_start": 1.532,
+        "obs_end": 6.532,
+        "reset_end": 8.064
+      }
+    ]
+  },
+  "slew_axis_deg": {
+    "V1->T2": {
+      "pan": 93.883,
+      "tilt": 29.371,
+      "slew_s": 3.129448
+    },
+    "V2->T3": {
+      "pan": 173.328,
+      "tilt": 61.852,
+      "slew_s": 5.777589
+    },
+    "V3->T1": {
+      "pan": 347.368,
+      "tilt": 30.444,
+      "slew_s": 1.014811
+    },
+    "V3->T2": {
+      "pan": 260.657,
+      "tilt": 67.482,
+      "slew_s": 3.311437
+    },
+    "V4->T3": {
+      "pan": 242.758,
+      "tilt": 40.741,
+      "slew_s": 3.908053
+    },
+    "V5->T1": {
+      "pan": 326.418,
+      "tilt": 45.961,
+      "slew_s": 1.532033
+    }
+  },
+  "invariant_max_err": {
+    "order": 0.0,
+    "travel": 0.0,
+    "slew": 0.0001,
+    "obs": 0.0001,
+    "reset": 4.8e-05
+  },
+  "invariant_tol": 0.001,
+  "all_ok": true,
+  "travel_offenders": [],
+  "n_travel_offenders": 0,
+  "note": "wait_s>0 的车先到先等；obs_start=ready+wait_s；两车同刻开始"
+}

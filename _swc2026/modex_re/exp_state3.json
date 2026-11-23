@@ -1,0 +1,15 @@
+{
+ "doc": "Durable pause metadata in the existing diagnostic column (old DB safe).\n\nIt is not a successful-execution receipt. Continuing still evaluates the\ncurrent step and all its checks; no existing file is treated as approval.",
+ "srs_doc": null,
+ "pcs": [
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {}
+ ],
+ "srs": {}
+}

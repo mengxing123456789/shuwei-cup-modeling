@@ -1,0 +1,380 @@
+{
+ "meta": {
+  "question": "约束在解处是否起作用（逐来源）",
+  "rule": "active=解落在该约束的边界或等式上；active-at-endpoints=只在设计端点起作用；active-near-edge=声明值离翻转点不足 20%；vacuous=没有删掉任何观测",
+  "note": "本题无不等式约束组，故不存在「一个 True 概括全部」的 binding 标量"
+ },
+ "sources": [
+  {
+   "id": "C1",
+   "from": "Annex I 每列四产物之和",
+   "statement": "Σ_p S_p = 1（四产物闭合）",
+   "binding": "active",
+   "measure": {
+    "max_abs_sum_minus_100": 1.4210854715202004e-14,
+    "n_columns": 25,
+    "dof_before": 4,
+    "dof_after": 3
+   },
+   "effect": "等式在机器精度内成立（1.42e-14），把四产物从 4 维压到 3 维；任何单产物 R² 都不能单独作为证据。"
+  },
+  {
+   "id": "C2",
+   "from": "自设（成分数据标准参数化）",
+   "statement": "拟合在 v = ilr(S) ∈ R^3 进行，不直接拟合 S",
+   "binding": "active",
+   "measure": {
+    "CS": {
+     "n_obs": 27,
+     "k_par": 6,
+     "df": 21
+    },
+    "CE": {
+     "n_obs": 24,
+     "k_par": 6,
+     "df": 18
+    },
+    "LG": {
+     "n_obs": 24,
+     "k_par": 6,
+     "df": 18
+    }
+   },
+   "effect": "自由度 3×n 而非 4×n；df = 21/18/18 是后面 F 检验与失拟判定的分母。"
+  },
+  {
+   "id": "C3",
+   "from": "题面 L74–L75（八档掺比，不等距）",
+   "statement": "r 只能取 0.1…1.0 八个观测档（CS 另有 r=0）",
+   "binding": "active-at-endpoints",
+   "measure": {
+    "CS": {
+     "n": 9,
+     "w_bar": 0.269649,
+     "sxx": 0.215803,
+     "leverage": [
+      0.448,
+      0.2592,
+      0.1603,
+      0.1181,
+      0.1123,
+      0.1299,
+      0.1625,
+      0.2527,
+      0.357
+     ],
+     "w": [
+      0.0,
+      0.090909,
+      0.166667,
+      0.230769,
+      0.285714,
+      0.333333,
+      0.375,
+      0.444444,
+      0.5
+     ],
+     "h_min": 0.1123,
+     "h_max": 0.448,
+     "h_at_first": 0.448,
+     "h_at_last": 0.357
+    },
+    "CE": {
+     "n": 8,
+     "w_bar": 0.303355,
+     "sxx": 0.134004,
+     "leverage": [
+      0.4618,
+      0.2644,
+      0.1643,
+      0.1273,
+      0.1317,
+      0.1633,
+      0.2736,
+      0.4136
+     ],
+     "w": [
+      0.090909,
+      0.166667,
+      0.230769,
+      0.285714,
+      0.333333,
+      0.375,
+      0.444444,
+      0.5
+     ],
+     "h_min": 0.1273,
+     "h_max": 0.4618,
+     "h_at_first": 0.4618,
+     "h_at_last": 0.4136
+    },
+    "LG": {
+     "n": 8,
+     "w_bar": 0.303355,
+     "sxx": 0.134004,
+     "leverage": [
+      0.4618,
+      0.2644,
+      0.1643,
+      0.1273,
+      0.1317,
+      0.1633,
+      0.2736,
+      0.4136
+     ],
+     "w": [
+      0.090909,
+      0.166667,
+      0.230769,
+      0.285714,
+      0.333333,
+      0.375,
+      0.444444,
+      0.5
+     ],
+     "h_min": 0.1273,
+     "h_max": 0.4618,
+     "h_at_first": 0.4618,
+     "h_at_last": 0.4136
+    }
+   },
+   "effect": "两端点杠杆最高：CS 首点 h=0.4480、末点 h=0.3570，中点最低 h=0.1123。解对 w=0 与 w=0.5 两端的观测最敏感，中间档几乎不约束斜率。"
+  },
+  {
+   "id": "C4",
+   "from": "题面 L78（5/100、7/100 为反例）",
+   "statement": "r=0.05 与 r=0.07 不得作实验点",
+   "binding": "vacuous",
+   "measure": {
+    "forbidden_labels_present_in_annex": [],
+    "n_rows_removed": 0,
+    "all_labels": [
+     "0/100",
+     "10/100",
+     "100/100",
+     "20/100",
+     "30/100",
+     "40/100",
+     "50/100",
+     "60/100",
+     "80/100"
+    ]
+   },
+   "effect": "附件里根本不存在这两档 → 该约束没有删掉任何一行观测，属空约束；它只禁止把 r=0.05/0.07 写进 Q5 网格。"
+  },
+  {
+   "id": "C5",
+   "from": "Annex I 与 Annex II 档位不同",
+   "statement": "跨附件只对齐 {20,40,50,80,100}（CS 另有 0/100）",
+   "binding": "active",
+   "measure": {
+    "CS": {
+     "n_levels_used": 6,
+     "labels": [
+      "0/100",
+      "20/100",
+      "40/100",
+      "50/100",
+      "80/100",
+      "100/100"
+     ],
+     "n_levels_annex1": 9,
+     "n_levels_annex2": 6
+    },
+    "CE": {
+     "n_levels_used": 5,
+     "labels": [
+      "20/100",
+      "40/100",
+      "50/100",
+      "80/100",
+      "100/100"
+     ],
+     "n_levels_annex1": 8,
+     "n_levels_annex2": 5
+    },
+    "LG": {
+     "n_levels_used": 5,
+     "labels": [
+      "20/100",
+      "40/100",
+      "50/100",
+      "80/100",
+      "100/100"
+     ],
+     "n_levels_annex1": 8,
+     "n_levels_annex2": 5
+    }
+   },
+   "effect": "CS 丢掉 10/100、30/100、60/100 三档才与 Annex II 对齐；CE/LG 八档全丢三档。beta_bridge 只在交集上定义，不能当全域质量闭合。"
+  },
+  {
+   "id": "C6",
+   "from": "Annex I（CE/LG 无 0/100 行）",
+   "statement": "CE/LG 没有纯生物质基线，百分比只能相对 10/100 档",
+   "binding": "active-on-interpretation",
+   "measure": {
+    "CS_Tar_pct_vs_0/100": -37.66700924974306,
+    "CS_Tar_pct_vs_10/100": -29.681159420289852,
+    "CE_Tar_pct_vs_10/100": 31.5514235909355,
+    "LG_Tar_pct_vs_10/100": -54.65116279069766
+   },
+   "effect": "CS 的 Tar 变化可报两个基准（−37.7% 对纯棉秆 / -29.7% 对 10/100），CE 的 +31.6% 与 LG 的 −54.7% 只有 10/100 这一个基准。三组合的百分数因此不可横向比较。"
+  },
+  {
+   "id": "A7",
+   "from": "自设（01-model.md L112–L121 C3/A7）",
+   "statement": "span ≥ 5 mL/g(daf) 判主量级",
+   "binding": "active-near-edge",
+   "measure": {
+    "band_keeping_all_tiers": [
+     2.5,
+     5.4
+    ],
+    "headroom_lo_pct": 50.0,
+    "headroom_hi_pct": 8.0,
+    "cells_within_20pct": [
+     {
+      "combo": "CS",
+      "gas": "CO",
+      "span": 5.399999999999999,
+      "tier": "major",
+      "gap_pct": 8.0
+     },
+     {
+      "combo": "LG",
+      "gas": "CO",
+      "span": 5.705000000000002,
+      "tier": "major",
+      "gap_pct": 14.1
+     }
+    ],
+    "contradiction_cells": [
+     {
+      "combo": "CS",
+      "gas": "C4H10",
+      "span": 0.31000000000000005,
+      "tier": "minor",
+      "span_over_thr": 8.230088495575222
+     },
+     {
+      "combo": "CE",
+      "gas": "CH4",
+      "span": 2.5,
+      "tier": "minor",
+      "span_over_thr": 14.880952380952383
+     },
+     {
+      "combo": "LG",
+      "gas": "C2H6",
+      "span": 0.039999999999999994,
+      "tier": "minor",
+      "span_over_thr": 5.714285714285713
+     }
+    ]
+   },
+   "effect": "全部分栏不变的阈值区间是 (2.50, 5.40]；声明值 5.0 距上边界只剩 8.0%，所以 CS 的 CO（5.40）与 LG 的 CO（5.71）是贴线解：阈值抬到 5.5 就把 CS CO 打回次量级。另有 3 个格子在次量级里却有 span_over_thr>5（如 CE 的 CH4，2.50 判次量级但比值 14.88），说明「分栏」与「是否谈趋势」是两套判据，不能互相代证。"
+  },
+  {
+   "id": "T_py",
+   "from": "自设（题面 L145–L146 只说同一温度，未给数值）",
+   "statement": "T_py = 800 K",
+   "binding": "active-on-A-only",
+   "measure": {
+    "k_required_per_s": {
+     "n=0": 0.0005277777777777777,
+     "n=1": 0.0016642957075299943,
+     "n=2": 0.010555555555555545
+    },
+    "k_required_independent_of_T": true,
+    "dlog10A_when_T_10pct_lower": [
+     {
+      "Ea_kJ_mol": 100.0,
+      "dlog10A_for_T_minus10pct": 0.7255
+     },
+     {
+      "Ea_kJ_mol": 250.0,
+      "dlog10A_for_T_minus10pct": 1.8138
+     }
+    ]
+   },
+   "effect": "k(T)·t 只由 α 与 t 定（k_need = kt/t_s，公式里没有 T），T 只进入脊线的 A。故 T_py 的自设误差不污染 k，只平移 log10A：T 降 10% 时 Ea=100 的 log10A 掉 0.726。"
+  },
+  {
+   "id": "eps_rel",
+   "from": "题面 L77（平行实验相对误差 ≈5%）",
+   "statement": "三条阈值路径共用 eps_rel = 0.05",
+   "binding": "active",
+   "measure": {
+    "eps_band_keeping_all_significance": [
+     0.012934,
+     0.065646
+    ],
+    "band_width_pct_of_eps": 105.42,
+    "tightest_significant": {
+     "path": "Q2",
+     "combo": "CS",
+     "key": "C2H4",
+     "span_over_thr": 1.3129,
+     "eps_flip": 0.065646
+    },
+    "tightest_nonsignificant": {
+     "path": "Q1",
+     "combo": "CS",
+     "key": "Char",
+     "span_over_thr": 0.2587,
+     "eps_flip": 0.012934
+    }
+   },
+   "effect": "比值与 eps_rel 成反比，故每个格子有一个翻转点 eps* = 0.05·ratio。全部显著性判定不变的区间是 (0.0129, 0.0656)，宽度只占声明值的 105.4%。判据在 5% 处不是「宽松」而是「刚好」。"
+  },
+  {
+   "id": "AnnexII",
+   "from": "Annex II（体积 mL/g(daf)，行和 ≠ 100）",
+   "statement": "Annex II 只作相对组成 φ，不做绝对质量闭合",
+   "binding": "active",
+   "measure": {
+    "row_sum_range": {
+     "CS": [
+      120.24,
+      153.25
+     ],
+     "CE": [
+      69.1,
+      80.2
+     ],
+     "LG": [
+      68.0,
+      95.205
+     ]
+    },
+    "beta_bridge_range": {
+     "CS": [
+      0.5700109334126631,
+      0.71293218637086
+     ],
+     "CE": [
+      0.14711491865288456,
+      0.49989455695594903
+     ],
+     "LG": [
+      0.8486341669050056,
+      1.246098251602237
+     ]
+    }
+   },
+   "effect": "行和落在 68.00–153.25，既不等于 100 也不等于 Annex I 的 Syngas；beta_bridge 只有 0.570–0.713，说明两附件量纲不同。把 Annex II 当绝对产率会系统性高估气相。"
+  },
+  {
+   "id": "C8",
+   "from": "附件（每档单次，无平行样）",
+   "statement": "无重复实验 → 不允许「±10% 扰动重解」冒充统计敏感性",
+   "binding": "active-as-prohibition",
+   "measure": {
+    "replicates_in_annex": 0,
+    "substitute": "5% 输入噪声 MC(4000) + 留一交叉验证 + 参数 ±10% 真跑"
+   },
+   "effect": "本棒按此约束把敏感性拆成两件独立的事：统计不确定性走 MC 与 LOO（results_q5.json），参数鲁棒性走真跑扰动（results_perturb.json），两者分母不同、不合并。"
+  }
+ ]
+}

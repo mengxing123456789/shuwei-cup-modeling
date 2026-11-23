@@ -1,0 +1,124 @@
+{
+ "_meta": {
+  "purpose": "bit-exact check of the three official measures added to the vectorised engine",
+  "arm": {
+   "SEL": 0,
+   "RULE": 0,
+   "q_hi": 0.7,
+   "gate": 0.5,
+   "late_tol": 12.0,
+   "REVIEW": true
+  },
+  "seeds": [
+   2026111700,
+   2026111701,
+   2026111702,
+   2026111703,
+   2026111704,
+   2026111705,
+   2026111706,
+   2026111707,
+   2026111708,
+   2026111709,
+   2026111710,
+   2026111711,
+   2026111712,
+   2026111713,
+   2026111714,
+   2026111715,
+   2026111716,
+   2026111717,
+   2026111718,
+   2026111719,
+   2026111720,
+   2026111721,
+   2026111722,
+   2026111723,
+   2026111724,
+   2026111725,
+   2026111726,
+   2026111727,
+   2026111728,
+   2026111729
+  ],
+  "reference": "code/p3_stochastic_schedule.simulate"
+ },
+ "cases": {
+  "S2": {
+   "reviews": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "reserved_idle_s": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "observed_overrun_s": {
+    "max_abs": 7.105427357601002e-15,
+    "n_exact": 24,
+    "n": 30
+   },
+   "censored_units": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "elapsed_s": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "cost": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "weighted_on_time_rate": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   }
+  },
+  "S3": {
+   "reviews": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "reserved_idle_s": {
+    "max_abs": 3.552713678800501e-15,
+    "n_exact": 28,
+    "n": 30
+   },
+   "observed_overrun_s": {
+    "max_abs": 1.4210854715202004e-14,
+    "n_exact": 26,
+    "n": 30
+   },
+   "censored_units": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "elapsed_s": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "cost": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   },
+   "weighted_on_time_rate": {
+    "max_abs": 0.0,
+    "n_exact": 30,
+    "n": 30
+   }
+  }
+ },
+ "worst_max_abs": 1.4210854715202004e-14,
+ "passed": true
+}

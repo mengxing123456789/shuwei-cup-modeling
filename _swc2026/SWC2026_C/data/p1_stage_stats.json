@@ -1,0 +1,47 @@
+{
+ "_meta": {
+  "source": "data/segments.csv + data/state.npz",
+  "n_segments": 349,
+  "units": "m/s, m/s^2, dimensionless aperture, s",
+  "aggregation": "per annotated subtask segment, then mean by dataset/position"
+ },
+ "by_dataset": {
+  "speed": {
+   "EgoDemo": 0.14488,
+   "EgoPro": 0.187,
+   "EgoStandard": 0.1573
+  },
+  "acc": {
+   "EgoDemo": 1.31436,
+   "EgoPro": 1.96975,
+   "EgoStandard": 1.47237
+  },
+  "aperture": {
+   "EgoDemo": 0.96398,
+   "EgoPro": 0.80647,
+   "EgoStandard": 0.97945
+  },
+  "dur": {
+   "EgoDemo": 4.63051,
+   "EgoPro": 8.25211,
+   "EgoStandard": 6.66
+  }
+ },
+ "by_position": {
+  "speed": {
+   "first": 0.16459,
+   "last": 0.1485,
+   "middle": 0.16085
+  },
+  "aperture": {
+   "first": 0.91805,
+   "last": 0.98805,
+   "middle": 0.92986
+  },
+  "dur": {
+   "first": 4.23768,
+   "last": 6.43333,
+   "middle": 6.92701
+  }
+ }
+}

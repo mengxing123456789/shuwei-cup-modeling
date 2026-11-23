@@ -1,0 +1,25 @@
+000261c0	writing_check 列要存的 JSON 文本；没有就是 None。
+00026210	步骤卡上的"看图质检"和"编译预处理改动"汇总（第一档 A4/A5，2026-10-08）。
+00026274	两份数据都由技能里的工具写在工作区隐藏目录 .mh/ 下：
+000262c1	- .mh/vision_ledger.json（tools/vision_ledger.py）：最终门登记的应审清单 + 每一版图的结论
+0002632f	  （通过 / 有问题 / 没审成）。步骤卡与最终门读同一份账本、同一份清单。
+00026395	- .mh/precompile/changes.json（skills/shared-scripts/precompile_guard.py）：每次编译预处理改了
+00026400	  哪些文件、改动清单和原文快照在哪（可恢复）。
+00026446	⛔ 只做展示：不进健康门、不触发返修、不写 error_message —— "带说明完成"那套机制已撤回
+000264c0	（docs/INTERNAL_REPAIR_NO_DRAFT_BYPASS_2026-09-09.md）。读不到、格式不对就当没有，绝不影响
+0002652f	步骤完成。结果在步骤完成时算一次存进 workflow_steps，前端轮询详情时不重算图片指纹。
+000265b0	本步编译后的投稿前检查（投稿格式库 1E，services/submission_review.py 写的）：只认本步开始以后生成的。
+00026640	给对话完成摘要用的几句话（与步骤卡同一口径）。
+00026690	tools/vision_ledger.py（正式包保留 .py；万一只有 .pyc 也能读）。
+000266f0	SQLite CURRENT_TIMESTAMP（UTC 'YYYY-MM-DD HH:MM:SS'）或带时区的 ISO 时间 → epoch 秒。
+00026760	步骤完成时调用：按本步开始时间取记录。started_at 不传就读库里这一步的开始时间。
+000267e0	本步记下的看图结论：按种类给出 总数/通过/有问题/没审成/没有记录，以及没通过的图。
+00026860	submission_check 列要存的 JSON 文本；没有就是 None。
+000268b0	步骤完成时调用（在投稿前检查跑完之后）：started_at 不传就读库里这一步的开始时间。
+00026930	(vision_review, precompile_report) 两列要存的 JSON 文本；没有就是 None。
+00026990	步骤完成时调用（在写作检查跑完之后）：started_at 不传就读库里这一步的开始时间；只认这一步技能写的结果。
+00026a30	本步编译预处理改了什么：涉及的文件、增删行数、最新一份改动清单和快照的位置、要点说明。
+00026ac0	本步的写作检查（论证逻辑与文理分型，services/writing_review.py 写的）：只认本步开始以后、本步技能生成的。
+00026b52	    规划步是规划核对（论证主线五栏、研究类型），需修项补写一轮后仍没补上的，后台已记进 OPEN_QUESTIONS.md；
+00026be7	    写作步、编译或导出步是稿件检查（第 5 期），完整报告在 WRITING_CHECK.md，结论带稿件版本（fingerprint），
+00026c77	    接口读出时按它判断稿件之后有没有再改过（routers/workflows.py 填 stale）。

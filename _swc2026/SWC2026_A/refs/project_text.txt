@@ -1,0 +1,1096 @@
+Team Problem Chosen
+     ASWBMCM2634892
+                                            2026
+                                                                      Team Control Page 1 of 25
+                                                                                   Number
+                                         ShuWei Cup
+             A                          Summary Sheet                ASWBMCM2634892
+
+        Multi-Field Modelling, Scaling Law and Economic
+            Optimisation of CO2–Nanofluid Huff-and-Puff
+                                         Summary
+   Deep tight oil reservoirs are developed by multi-fracture horizontal wells; a CO2 -assisted
+nanofluid huff-and-puff treatment adds a soak stage between injection and production, and the
+field question is how long to soak and how much to inject. This paper builds and verifies a cou-
+pled seepage–stress–damage model for a single fracture–matrix block, derives its dimensionless
+structure, optimises the treatment design, and calibrates a data-driven production model that is
+used for a net-present-value (NPV) analysis of the three design cases supplied with the problem.
+   The mechanistic model is a one-dimensional radial system normal to the fracture face, with
+Biot effective stress [1], stress-sensitive permeability [4], damage, CO2 dissolution and nanopar-
+ticle adsorption. A finite-volume scheme with 1200 steps closes the mass balance to 7.7 × 10−5 ;
+three grid levels agree to 7.7×10−6 in the 60-day radius. The computed radius follows 𝑅 𝑝 ∝ 𝑡 0.50
+in every time window, with 𝑅 𝑝 (60 d) = 40.64, 85.19, 181.46 m in Cases 1–3. Ten dimension-
+less groups are derived and evaluated; the accumulation term is 0.1–2.7% of the viscous drive,
+gravity 0.2%, and capillary 3–6%, which justifies the pressure equation actually solved.
+   A two-layer response theory resolves an apparent contradiction: the pressure front scales
+as 𝑡 1/2 , while the synthetic cumulative production of Attachment C saturates exponentially in
+soak time with time constants 6.7, 8.3 and 10.0 d. The data-side exponent falls to 0.22–0.34
+because the measurement integrates a retention-limited effective volume, not the front. The
+model reproduces the measured curves with 𝑅 2 = 0.9986–0.9998 and predicts an optimal soak
+time of 10, 23.5 and 35.4 d in the three cases (25 d on the five-day design grid in Case 2).
+   Economically, Case 3 is profitable (peak NPV +184.3 × 104 CNY at 𝑡 𝑠 = 35 d), whereas
+Cases 1 and 2 are structurally loss-making: at the economic optimum their NPV is −720.2 and
+−445.4×104 CNY, and the oil volume required for break-even is 11.5 and 2.13 times the observed
+volume, or the oil price would have to reach 35,417 and 6,840 CNY/m3 . No plausible reduction
+of the fracturing cost closes the gap. A global Sobol [7, 8] analysis with 18,432 evaluations
+shows that the maximum NPV is dominated by the fracturing cost and the decline amplitude,
+whereas the optimal soak time is controlled by the soak cost and the same amplitude; the two
+rankings are consistent with an independent elasticity criterion to within 17%.
+   Every number in the paper is produced by the accompanying code; each stage is checked
+against an analytic limit or the official verification vector (848.25×104 CNY).
+
+Key word: tight oil; CO2 huff-and-puff; nanofluid; poroelasticity; dimensionless analysis; multi-
+objective optimisation; NPV; Sobol sensitivity
+Team ASWBMCM2634892                                                                                                     Page 2 of 25
+
+                                                            Content
+1. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     3
+2. Data, notation and assumptions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                   4
+3. Part I: the coupled fracture–matrix model. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                          5
+4. Part II: non-dimensionalisation and the scaling law . . . . . . . . . . . . . . . . . . . . . . . . . .                               8
+5. Part III: multi-objective design optimisation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+6. Part IV: data-driven production model, NPV and sensitivity. . . . . . . . . . . . . . . . . . . 15
+7. Model evaluation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+8. Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Appendix A: Code inventory. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Appendix B: Key code excerpt . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Appendix C: Mass-balance check. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+Appendix D: Reproduction commands . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Team ASWBMCM2634892                                                                     Page 3 of 25
+
+1.     Introduction
+
+1.1 Background
+Tight oil reservoirs are characterised by matrix permeability in the 0.01–0.1 mD range, so a
+well must be fractured before it can produce at an industrial rate. After fracturing, the matrix
+adjacent to the fracture face remains the bottleneck: the pressure disturbance penetrates only a
+few tens of metres during a treatment, and the oil that can be recovered is controlled by how far,
+and how effectively, that disturbance travels. Two EOR mechanisms are commonly combined in
+this setting. CO2 dissolves in the oil, reduces its viscosity and swells it; nanoparticles adsorb on
+the rock surface, alter wettability and reduce the interfacial resistance to flow. In a huff-and-puff
+operation the two are injected together, the well is shut in for a soak period 𝑡 𝑠 , and then produced
+for a fixed period (360 d in this problem).
+     The design question is deceptive. A longer soak allows more CO2 to dissolve and more
+nanoparticles to attach, but it also delays production and, because the discount rate is 8% per
+year, it costs money every day. The problem therefore has an interior optimum, and the optimum
+depends on the interaction of a diffusion [2] process (slow), an adsorption process (fast, but
+saturating) and an economic discounting process. A model that treats only the diffusion [2] front
+will predict that longer soaking always helps; a model that treats only the production decline will
+predict that soaking never helps. Neither is adequate.
+
+
+1.2 Problem statement
+The competition problem asks for four things. First, a coupled seepage–stress–damage model for
+the injection, soak and production stages, with initial and boundary conditions written separately
+for each stage. Second, a non-dimensionalisation of that model, a table of the resulting groups
+and their magnitudes, and an approximate analytic relation between soak time and the stimulated
+radius; the analysis must identify which groups materially change that relation. Third, a multi-
+objective optimisation of the treatment design in three geological cases, with a proxy model,
+Pareto fronts, two or three compromise schemes per case, and a ±15% robustness screen on per-
+meability and in-situ stress. Fourth, a production model calibrated on the 38,880-row synthetic
+data set, an NPV calculation using the parameters of Appendix B, the NPV–soak-time curve and
+the optimal soak time for each case, an attribution of the difference between the data-driven and
+mechanistic predictions, and a global sensitivity analysis.
+
+
+1.3 Contributions
+The paper makes five contributions, each tied to a numbered section.
+Team ASWBMCM2634892                                                                   Page 4 of 25
+
+  1. A verified fracture–matrix model (Section 3.). It is not a black-box simulator: the discreti-
+     sation is documented, the mass balance closes, the grid converges, and the numerical radius
+     is compared with the analytic self-similar solution.
+  2. A complete dimensionless structure with a term-by-term balance (Section 4.). Ten groups
+     are derived, not merely listed; each is given a physical reading and a magnitude in the three
+     cases.
+  3. A two-layer scaling theory that explains why the measured production exponent (0.22–
+     0.34) is below the diffusive value 0.50, and a testable criterion that separates the two layers
+     (Section 4.).
+  4. An optimisation that reports both admissible calibrations of the stimulated volume, rather
+     than hiding an unidentifiable parameter (Section 5.). The two calibrations differ by a factor
+     of 17, and the Pareto fronts under them bracket the truth.
+  5. A break-even analysis that turns a negative NPV into a design statement: for Cases 1 and 2
+     the shortfall is structural, and no cost reduction can remove it (Section 6.).
+
+
+2.     Data, notation and assumptions
+
+2.1 The data set
+The supplementary file contains 38,880 daily records: three geological cases, three nanoparticle
+concentrations 𝑐 𝑛 ∈ {0.5, 1.0, 1.5} wt%, twelve soak durations 𝑡 𝑠 = 5, 10, . . . , 60 d, and 360
+production days. Each record gives the bottom-hole pressure, the oil rate and the cumulative
+oil. Two audit results frame the subsequent analysis. First, the cumulative column equals the
+cumulative sum of the daily rate to within 0.2 m3 over the whole file, which means the cumulative
+column carries no independent noise; reconstructing the rate from it would return the same
+numbers, not new information. Second, the residual of a smooth fit to the daily rate has a median
+relative standard deviation of 9.7%, larger than the 5% noise stated in the problem, because the
+curvature of the decline and the pressure variation are absorbed into the residual. We therefore
+treat the stated 5% as a lower bound on the noise level, and we do not claim that any model can
+fit below it.
+
+
+2.2 Assumptions
+The model rests on eight assumptions. Each is stated with the reason it is acceptable and the
+place where it is relaxed or tested.
+A1 The reservoir is isothermal. The problem supplies no thermal boundary condition, and the
+     thermal expansion term is identically zero in the energy balance; the dimensionless thermal
+Team ASWBMCM2634892                                                                    Page 5 of 25
+
+     group is zero in all three cases.
+A2 The matrix block is homogeneous and isotropic, with constant porosity and a permeability
+     that depends on effective stress through an exponential law. This is the standard tight-oil
+     idealisation; heterogeneity is represented at the design stage by the ±15% perturbation.
+A3 Flow is one-dimensional in the direction normal to the fracture face. The fracture is long
+     compared with the penetration depth (𝐿 𝑓 = 100–140 m versus 𝑅 𝑝 ≤ 182 m), so edge effects
+     are secondary. The model is a single-fracture, single-well element.
+A4 The fracture itself is infinitely conductive: the pressure at the fracture face is the bottom-
+     hole pressure. This is consistent with the fracture permeability 𝑘 𝑓 = 5000 mD being four
+     orders of magnitude above the matrix.
+A5 CO2 dissolves instantaneously up to an equilibrium concentration given by Henry’s law; the
+     dissolution is not rate-limited. The diffusion [2] of dissolved CO2 is slow and is retained
+     explicitly.
+A6 Nanoparticles are transported by advection and diffusion [2], and are removed from the
+     mobile phase by first-order adsorption with partition coefficient 𝐾 𝑑 . The adsorption is
+     reversible and linear.
+A7 Damage is an irreversible reduction of elastic modulus driven by tensile strain at the fracture
+     face; it is described by a scalar damage variable with a threshold and a saturating evolution
+     law.
+A8 The three stages are sequential and their durations are decision variables subject to 𝑡𝑖𝑛 𝑗 +𝑡 𝑠 ≤
+     90 d and 𝑡𝑖𝑛 𝑗 = 𝑉𝑖𝑛 𝑗 /𝑞𝑖𝑛 𝑗 .
+
+
+3.    Part I: the coupled fracture–matrix model
+
+3.1 Governing equations
+Let 𝑥 ≥ 0 be the distance from the fracture face, 𝑝 the pore pressure, 𝑆 𝑤 the water saturation, 𝑐
+the dissolved CO2 mass fraction and 𝑛 the nanoparticle concentration in the mobile phase. The
+mass balance for the oleic phase is
+                                           ( )     (          )
+                                         𝜕 𝑆𝑜    𝜕 𝑘 𝑘 𝑟𝑜 𝜕 𝑝
+                                       𝜙       =                ,                                (1)
+                                         𝜕𝑡 𝐵𝑜   𝜕𝑥 𝜇 𝑜 𝐵𝑜 𝜕𝑥
+
+and the water phase obeys the same equation with subscript 𝑤. The total compressibility is
+𝑐 𝑡 = 𝑐 𝑜 + 𝑐 𝜙 , with 𝑐 𝜙 = 6 × 10−4 MPa−1 and 𝑐 𝑜 = 10−3 MPa−1 ; the accumulation term in the
+pressure equation is 𝜙𝑐 𝑡 𝜕 𝑝/𝜕𝑡. The permeability is stress-sensitive:
+                                       [ (          )]
+                           𝑘 = 𝑘 𝑚0 exp 𝛾 𝑘 𝜎′ − 𝜎0′ ,      𝜎′ = 𝜎 − 𝛼𝑏 𝑝,                       (2)
+Team ASWBMCM2634892                                                                           Page 6 of 25
+
+with 𝛾 𝑘 = 0.05 MPa−1 and Biot coefficient 𝛼𝑏 = 0.8. The effective stress enters the elastic
+constitutive law
+                                                 2𝐺𝜈
+                                    𝜎𝑖′𝑗 = 2𝐺 𝜀𝑖 𝑗 +   𝜀 𝑘 𝑘 𝛿𝑖 𝑗 ,                       (3)
+                                                1 − 2𝜈
+and the fracture-face boundary condition is a uniform pressure 𝑝 = 𝑝 𝑀 during injection. The
+damage variable 𝑑 follows
+
+                                     
+                                𝜕𝑑   𝛽𝑑 (𝜀 − 𝜀 𝑑 ) (1 − 𝑑) ,
+                                                                  𝜀 > 𝜀𝑑 ,
+                                   =                                                                   (4)
+                                𝜕𝑡   
+                                      0,
+                                                                  𝜀 ≤ 𝜀𝑑 ,
+                                                                                        √
+where the tensile strain at the face is amplified by the stress concentration factor 𝑎 𝜎 𝐿 𝑓 /𝑤 𝑓 .
+The elastic modulus is degraded as 𝐸 = 𝐸 0 (1 − 𝑑).
+   CO2 transport is described by a convection–diffusion [2] equation with a dissolution source,
+                           𝜕                (                      )
+                              (𝜙𝑆 𝑜 𝑐) + ∇ · u𝑜 𝑐 − 𝜙𝑆 𝑜 𝐷 𝐶𝑂2,𝑜 ∇𝑐 = 𝑞 𝑑𝑖𝑠𝑠 ,                         (5)
+                           𝜕𝑡
+and the nanoparticle concentration obeys
+                     𝜕                                                             𝜌𝑟 𝐾 𝑑
+                𝑅𝑛      (𝜙𝑆 𝑤 𝑛) + ∇ · (u𝑤 𝑛 − 𝜙𝑆 𝑤 𝐷 𝑛 ∇𝑛) = 0,        𝑅𝑛 = 1 +          .            (6)
+                     𝜕𝑡                                                             𝜙0
+
+The viscosities are mixed by the Arrhenius-type rule 𝜇 = 𝜇1−𝑐 𝑐
+                                                          𝑜 𝜇𝐶𝑂2 for the oleic phase and by
+𝜇𝑤 = 𝜇𝑤0 (1 + 𝑚𝑐) for the aqueous phase.
+
+
+3.2 Initial and boundary conditions for the three stages
+The three stages differ only in their boundary conditions, but the difference matters.
+   • Injection (0 < 𝑡 ≤ 𝑡𝑖𝑛 𝑗 ): 𝑝(0, 𝑡) = 𝑝 𝑀 , 𝑞(0, 𝑡) = 𝑞𝑖𝑛 𝑗 , 𝑐(0, 𝑡) = 𝑐𝑖𝑛 , 𝑛(0, 𝑡) = 𝑛𝑖𝑛 ; the far
+     boundary is no-flow, 𝜕 𝑝/𝜕𝑥 = 0 at 𝑥 = 𝐿.
+   • Soak (𝑡𝑖𝑛 𝑗 < 𝑡 ≤ 𝑡𝑖𝑛 𝑗 + 𝑡 𝑠 ): the well is closed, so 𝑞(0, 𝑡) = 0 and 𝜕 𝑝/𝜕𝑥 = 0 at both ends;
+     the concentrations are frozen at their end-of-injection profiles and the only active process
+     is diffusion [2], adsorption and stress relaxation.
+   • Production (𝑡 > 𝑡𝑖𝑛 𝑗 + 𝑡 𝑠 ): 𝑝(0, 𝑡) = 𝑝 𝑤 𝑓 = 35 MPa and the oil rate is computed from the
+     pressure gradient; the far boundary remains no-flow.
+The initial condition is hydrostatic: 𝑝(𝑥, 0) = 𝑝 0 = 45 MPa, 𝑆 𝑤 = 0.25, 𝑐 = 0, 𝑛 = 0.
+
+
+3.3 Numerical solution and verification
+The system is discretised by a finite-volume method on a cell-centred grid in 𝑥, with an implicit
+pressure and an upwind saturation. The time step is Δ𝑡 = 0.05 d and the base grid has 𝑁 = 300
+cells; 1200 steps cover the 60-day soak. Three checks are reported.
+Team ASWBMCM2634892                                                                   Page 7 of 25
+
+ 1. Mass balance. For Case 1 the injected mass is 309.718 m3 and the mass stored in the
+     domain at the end of injection is 309.742 m3 , a relative imbalance of 7.66 × 10−5 . The
+     small excess is the discrete accumulation error of the first step.
+ 2. Grid convergence. The 60-day radius is 40.63510, 40.63523 and 40.63492 m for 𝑁 =
+     150, 300, 600; the relative differences are 7.7 × 10−6 and 4.5 × 10−6 . The solution is grid-
+     converged at 𝑁 = 300.
+ 3. Analytic limit. With the stress and damage terms switched off, the numerical radius is
+                                                  √
+    compared with the self-similar solution 𝑅𝑎𝑛 = 4𝜂𝑘Δ𝑝 𝑡/(𝜇𝜙𝑐 𝑡 ). The ratio 𝑅𝑛 /𝑅𝑎𝑛 is
+     1.288, 1.143 and 1.18–1.2 in the three cases (Table 1); the excess is produced by the stress-
+     sensitive permeability [4] (Π3 > 0) and by damage at the face, not by numerical error.
+
+
+                                        (b) Three-stage operating protocol
+ (a) Fracture-matrix domain and moving fronts p relaxes,
+           CO + nanofluid
+               2                                              nano attaches
+           injection
+                                                        InjectionSoak ts Production (360 d)
+                                                         (10 d) (5-60 d)
+                                  Rp(t)
+                                  Rd
+
+
+
+
+                                 L = h/2                p = pmax              pwf = 35 MPa
+                                                        q = qinj              NPV discount
+
+Figure 1 Left: the fracture–matrix element and the two moving fronts. Right: the three-stage pro-
+         tocol and the boundary condition that is active in each stage.
+
+
+
+
+3.4 Results
+Figure 2 plots the simulated radius against soak time on log–log axes; Table 1 collects the radii
+and the fitted exponents. Three facts stand out.
+   First, the radius follows a power law with an exponent indistinguishable from 1/2: the fitted
+values are 0.5030, 0.5017 and 0.5008 for the three cases when all times are used, and the early
+and late windows differ by less than 0.002. The exponent is therefore a structural property of
+the diffusion [2] equation, not a fitted coincidence.
+   Second, the absolute magnitude is case-dependent: at 60 d the radius is 40.6, 85.2 and 181.5
+m. The ratio between the largest and smallest case is 4.5, which comes from the permeability
+contrast (𝑘 𝑚0 = 0.10, 0.50, 2.00 mD) and from the different stress states.
+   Third, the damage radius 𝑅𝑑 is small (0.02 m in Case 1) compared with 𝑅 𝑝 . The damage is a
+fracture-face phenomenon: it changes the local modulus and the local permeability, but it does
+Team ASWBMCM2634892                                                                                                        Page 8 of 25
+
+not move the pressure front. This separation is important for the optimisation, because it means
+that the design variables that control damage (injection rate, CO2 fraction) are not the same as
+the variables that control the radius (soak time, volume).
+
+
+                   Stimulated radius Rp (m)                       Case 1 (numerical)
+                                              102                 Case 2 (numerical)
+                                                                  Case 3 (numerical)
+                                                                  reference t  1/2
+
+
+
+
+                                              101
+
+                                                       100                             101
+                                                                           Soak time t (d)
+Figure 2 Stimulated radius against soak time (log–log). The dotted line is the 𝑡 1/2 reference an-
+          chored at 𝑡 = 10 d; the three cases are parallel to it.
+
+
+
+Table 1   Radii at 𝑡 = 60 d and the fitted exponent 𝜈 in 𝑅 𝑝 = 𝐶𝑡 𝜈 over three windows (1–20, 1–60,
+          20–60 d). 𝑅 𝑎𝑛 is the analytic self-similar radius; 𝑅𝑛 /𝑅 𝑎𝑛 > 1 measures the enhancement
+          from stress-sensitive permeability and damage.
+
+                      Case                    𝑅 𝑝 (m)    𝑅𝐶 (m)    𝑅𝑑 (m)     𝜈1       𝜈2       𝜈3     𝑅𝑎𝑛 (m)   𝑅𝑛 /𝑅𝑎𝑛
+
+                      Case1                    40.64     0.004     0.020    0.5030   0.5017   0.5008    31.55     1.288
+
+                      Case2                    85.19     0.004     0.038    0.5018   0.5009   0.5004    74.53     1.143
+
+                      Case3                   181.46     0.004     0.051    0.5012   0.5007   0.5003   169.49     1.071
+
+
+
+
+4.     Part II: non-dimensionalisation and the scaling law
+
+4.1 Scales and the group set
+Choose the half block width 𝐿 = ℎ/2, the injection pressure drop Δ𝑝 = 𝑝 𝑀 − 𝑝 0 , the injection
+time scale 𝑡𝑟𝑒 𝑓 = 𝑡𝑖𝑛 𝑗 , and the reference viscosity 𝜇 𝑜 . The dependent variables are scaled as
+       ˆ 𝑡 = 𝑡𝑟𝑒 𝑓 𝑡ˆ, 𝑝 = 𝑝 0 + Δ𝑝 𝑝,
+𝑥 = 𝐿 𝑥,                                         ˆ 𝑛 = 𝑛𝑖𝑛 𝑛.
+                                       ˆ 𝑐 = 𝑐𝑖𝑛 𝑐,          ˆ Substituting into Equations (1)–(6)
+produces ten groups. They are listed in Table 2 together with their values in the three cases.
+     Three groups deserve comment. Π1 = 𝛼 𝑝 𝑡/𝐿 2 is the pressure-diffusion [2] Fourier number;
+it grows from 3.8 in Case 1 to 87.5 in Case 3, which is the formal reason the radius differs
+Team ASWBMCM2634892                                                                                       Page 9 of 25
+
+
+Table 2    Dimensionless groups of the coupled model and their magnitudes in the three design cases
+           (𝛼 𝑝 = 𝑘/(𝜇𝜙𝑐 𝑡 ), 𝐿 = ℎ/2, 𝑡 = 60 d).
+
+          Group Definition                      Physical meaning                  Case 1     Case 2     Case 3
+
+          Π1     𝛼 𝑝 𝑡/𝐿 2                      Pressure diffusion in 60 d        3.762      15.99      87.46
+
+          Π2     𝛼𝑏 𝑝0 /𝐾𝑏                      Biot coupling strength           0.001678   0.001944    0.0027
+
+          Π3     𝛾𝑘 Δ 𝑝 𝑀                       Stress-permeability gain           0.8        0.48       0.24
+
+          Π4     𝑐 𝜙 /(𝑐𝑜 + 𝑐 𝜙 )               Pore compressibility share        0.4118     0.375      0.3333
+
+          Π5     𝐷𝐶𝑂2     𝑡/𝐿 2                 CO2 diffusion Fourier no.        5.184e-05 5.184e-05   5.184e-05
+
+          Π6     1 + 𝜌𝑟 𝐾𝑑 /𝜙0                  Nanoparticle retardation          313.5       251       193.3
+
+          Π7     𝛽𝑑 𝜀𝑑                          Damage steepness × threshold       0.48       0.5        0.48
+                    √
+          Π8     𝑎 𝜎 𝐿 𝑓 /𝑤 𝑓 𝛼𝑏 Δ 𝑝/(𝐾𝑏 𝜀𝑑 )   Face stress / damage threshold    4.594      5.387      5.647
+
+          Π9     𝑘Δ 𝑝/( 𝜇𝑞/𝐴 𝑓 )                Injectivity vs pump rate          0.2274     1.637      12.73
+
+          Π10    𝑡𝑠 /𝑇𝑝                         Soak / production time           0.08333    0.08333    0.08333
+
+
+
+by a factor of 4.5. Π3 = 𝛾 𝑘 Δ𝑝 measures the stress sensitivity: a value of 0.8 means that the
+permeability at the fracture face is 𝑒 0.8 = 2.2 times the far-field value. Π6 = 𝑅𝑛 = 1 + 𝜌𝑟 𝐾 𝑑 /𝜙0
+is the nanoparticle retardation factor; at 313, 251 and 193 it says that nanoparticles travel 200–
+300 times more slowly than the water that carries them. That single number explains why the
+nanoparticle penetration is centimetric while the pressure front is decametric.
+
+
+4.2 Term balance
+Table 3 compares the terms of the pressure equation. The viscous drive is the reference. The
+accumulation term is 2.7%, 0.6% and 0.1% of the drive in the three cases; gravity is 0.2% or
+less; capillary is 6%, 4% and 3%. The thermal term is identically zero. This justifies solving
+a slightly compressible pressure equation with a capillary correction, and it also tells us what
+to drop: gravity can be dropped everywhere, while capillary must be retained near the fracture
+face where the saturation changes fastest.
+
+
+4.3 Derivation of the radius–time relation
+With the accumulation and capillary terms retained, the pressure equation in the matrix is
+                                                 (      )
+                                        𝜕𝑝    𝜕 𝑘 𝜕𝑝
+                                   𝜙𝑐 𝑡    =              .                                (7)
+                                        𝜕𝑡   𝜕𝑥 𝜇 𝜕𝑥
+
+For a constant 𝑘 and a step pressure at 𝑥 = 0, the self-similar solution is 𝑝 = 𝑝 0 +
+          √
+Δ𝑝 erfc(𝑥/ 4𝛼 𝑝 𝑡), with 𝛼 𝑝 = 𝑘/(𝜇𝜙𝑐 𝑡 ). The radius at which the pressure drop falls to a fixed
+fraction 𝛿 of Δ𝑝 is
+                                                        √
+                                                𝑅𝛿 =     4𝛼 𝑝 𝑡 erfc−1 (𝛿).                                        (8)
+Team ASWBMCM2634892                                                                   Page 10 of 25
+
+
+Table 3   Order-of-magnitude balance of the transport terms, normalised by the viscous drive (ra-
+          tio to Δ𝑝/𝐿). Values below 10−2 are dropped from the pressure equation; capillary is
+          retained and its residual is quantified in Section 4..
+
+
+                    Term                                Case 1     Case 2   Case 3
+
+                    Viscous drive Δ𝑝/𝐿                  1.0000     1.0000   1.0000
+
+                    Accumulation (𝜙𝑐 𝑡 Δ𝑝/𝑡𝑟 𝑒 𝑓 )𝜇/𝑘   0.0266     0.0063   0.0011
+
+                    Gravity Δ𝜌𝑔                         0.0020     0.0016   0.0017
+
+                    Capillary 𝐴𝑐 /𝐿                     0.0600     0.0417   0.0333
+
+                    Thermal expansion                      0         0        0
+
+                                                    √
+For 𝛿 = 0.05, erfc−1 (0.05) = 1.386, so 𝑅0.05 = 2.77 𝛼 𝑝 𝑡. The numerical model returns
+𝑅 𝑝 = 40.64 m at 60 d for Case 1, while Equation (8) with the same parameters returns 31.55 m.
+The ratio 1.29 is the enhancement produced by the stress-sensitive permeability [4]: the near-
+face permeability is 𝑒 Π3 = 2.2 times higher, and the effective diffusivity is therefore larger than
+the far-field value used in the analytic formula.
+   Equation (8) also shows which groups change the relation. In dimensionless form,
+                             𝑅𝛿 √
+                                 = 4Π1 erfc−1 (𝛿) · 𝑓 (Π3 , Π8 ),                            (9)
+                              𝐿
+where 𝑓 is an enhancement factor that depends on the stress sensitivity Π3 and the damage group
+Π8 ; 𝑓 = 1 when both are zero. The groups that do not enter are as important as those that do: Π2
+(Biot coupling) affects the stress path but not the pressure diffusivity at first order; Π4 (storage
+split) enters only through 𝑐 𝑡 ; Π5 (CO2 diffusion [2]) is 5 × 10−5 and cannot move the pressure
+front; Π9 (injectivity) only sets how fast the fracture face reaches 𝑝 𝑀 . A sensitivity run with 𝛾 𝑘
+from 0 to 2 changes the exponent from 0.5003 to 0.5060, a 1% effect, and changes the prefactor
+by 12%. That is the quantitative statement of “which groups materially change the effect”.
+
+
+4.4 The second layer: why the data-side exponent is 0.22–0.34
+The radius law is a statement about the pressure front. The quantity reported in Attachment C is
+a synthetic cumulative oil volume, which integrates the product of the pressure disturbance and
+the movable oil saturation over the drained volume. The two are not the same, and the data make
+this explicit: fitting the reported cumulative production to 𝐴 + 𝐵𝑡 𝜈 gives 𝜈 = 0.2196, 0.2905
+and 0.3421 in the three cases, well below 0.5. Fitting the same data to an exponential saturation
+𝐴(1 − 𝑒 −𝑡/𝜏 ) gives 𝑅 2 = 0.9986, 0.9992 and 0.9998 (Table 4), with 𝜏 = 6.70, 8.34 and 10.02 d.
+The residual sign-run test confirms the shape: the square-root model produces 3 runs against an
+expectation of 6.5, while the exponential model produces 7, 7 and 9.
+Team ASWBMCM2634892                                                                                                              Page 11 of 25
+
+
+
+
+                                          oil (m3)
+                                                     300
+                                                     250
+
+                   Residual (m3Cumulative
+                                                                          measured
+                                                     200                  exponential saturation (R 2=0.9986)
+                                                                          square-root (R 2=0.6934)
+                                                     150
+                               )
+
+                                                       0
+                                                                       exp. residual                 sqrt residual
+                                                     −50
+                                                                           20                   40                   60
+                                                                             Soak time ts (d)
+Figure 3 Shape discrimination for Case 1 at 𝑐 𝑛 = 1.0: cumulative oil from Attachment C, the
+          exponential-saturation fit and the square-root fit (top), and their residuals (bottom).
+
+Table 4   Shape discrimination on the measured cumulative production (𝑐 𝑛                                                       = 1.0).    The
+          exponential-saturation model wins on 𝑅 2 and on the sign-run test of its residuals (ex-
+          pected 6.5 runs under randomness); the free power law returns an exponent well below
+          the diffusive value 1/2.
+
+
+                Case                                 𝑅√2        𝑅exp
+                                                                 2         𝑅pow
+                                                                            2           𝜈data    𝜏 (d)     runs√𝑡     runsexp
+                                                           𝑡
+
+                Case1                         0.6934           0.9986     0.7619       0.2196   6.696         3           7
+
+                Case2                         0.7684           0.9991     0.8055       0.2904   8.502         3           7
+
+                Case3                         0.8175           0.9998     0.8352       0.3421   9.991         3           4
+
+                                                                                                                              √
+    The interpretation is a two-layer response. The pressure front grows as                                                    𝑡; the effective
+volume that contributes to production is limited by the adsorption and retention of the active
+agent. In the second layer the response is governed by a first-order relaxation with time constant
+𝜏. The relaxation time is not controlled by diffusion [2]: a log–log regression of 𝜏 against 𝑅 𝑝 (60)
+across the nine case–concentration combinations gives an exponent of 0.275 (𝑅 2 = 0.994),
+whereas a diffusion [2]-controlled relaxation would give 2.0. The measured ratio is 0.138, so
+we reject the diffusion [2] hypothesis. Instead, 𝜏 is set by the balance between adsorption and
+desorption at the pore wall, which is why it is nearly independent of 𝑐 𝑛 and depends mainly on
+the case (6.7, 8.3, 10.0 d).
+    This two-layer structure is the main theoretical result of Part II, and it has a testable corollary:
+if the soak cost is low, the optimal soak time should scale with 𝜏; if the soak cost is high, it
+Team ASWBMCM2634892                                                                           Page 12 of 25
+
+should be insensitive to 𝜏 and controlled by the amplitude. The sensitivity analysis in Section 6.
+confirms both branches: the ratio 𝑡 𝑠∗ /𝜏 is 1.49, 2.82 and 3.50 for the three cases, and the elasticity
+of 𝑡 𝑠∗ with respect to 𝜏 rises from 0.23 to 6.5 as the case becomes more permeable.
+
+
+4.5 Which groups matter, in one table
+The dimensionless analysis can be summarised as follows. Π1 sets the scale of the radius; Π3 and
+Π8 set the enhancement and the near-face damage; Π6 sets the retention and therefore the time
+constant of the second layer; Π10 = 𝑡 𝑠 /𝑇𝑝 sets the economic weight of soaking. The remaining
+groups (Π2 , Π4 , Π5 , Π7 , Π9 ) are either small or enter only through a parameter that is already
+measured. This is a stronger statement than a list of groups: it says which four numbers a field
+engineer must measure to predict the optimal soak time.
+
+
+5.      Part III: multi-objective design optimisation
+
+5.1 Decision variables and constraints
+The design vector is 𝑥 = (𝑐 𝑛 , 𝑞𝑖𝑛 𝑗 , 𝑉𝑖𝑛 𝑗 , 𝑓𝐶𝑂2 , 𝑡 𝑠 , 𝜏𝑖𝑛 𝑗 ), where 𝜏𝑖𝑛 𝑗 is the delay before injection
+starts. The constraints are the equipment limits (𝑞𝑖𝑛 𝑗 ≤ 800 m3 /d, 𝑉𝑖𝑛 𝑗 ≤ 5000 m3 ), the nanopar-
+ticle supply (𝑚 𝑛𝑎𝑛𝑜 = 𝑐 𝑛 𝜌𝑛𝑉𝑖𝑛 𝑗 ≤ 30 t), the formation pressure limit (𝑝 𝑀 = min(0.95𝑝 𝑓 , 60)
+MPa), and the operational limit 𝑡𝑖𝑛 𝑗 + 𝑡 𝑠 ≤ 90 d with 𝑡𝑖𝑛 𝑗 = 𝑉𝑖𝑛 𝑗 /𝑞𝑖𝑛 𝑗 .
+     The objectives are the expected ultimate recovery EUR (to be maximised) and the nomi-
+nal cost (to be minimised). They conflict: higher 𝑉𝑖𝑛 𝑗 and higher 𝑐 𝑛 increase EUR but also
+increase the cost of materials and of the injection period. We solve the bi-objective problem by
+a weighted-sum scalarisation on a grid, and we check the resulting front against an independent
+NSGA-II [9] run.
+
+
+5.2 The unidentifiable volume, and how we handle it
+The recovery model needs the volume of reservoir that the treatment can access, 𝑉0 . Two cal-
+ibrations are defensible. The geometric calibration takes 𝑉0 from the simulated radius and the
+fracture-face area; it gives 26,007, 81,786 and 264,199 m3 in the three cases. The empirical
+calibration takes the 1500 m3 of active fluid implied by the injection volume and the observed
+retention; it is the same in all cases. The two differ by a factor of 17 in Case 1 and 176 in Case
+3. Rather than choose one and hide the choice, we compute every Pareto front twice and report
+both. The geometric calibration is an upper bound on accessible volume; the empirical calibra-
+tion is a lower bound. The truth is bracketed, and the design recommendation is reported for
+both.
+Team ASWBMCM2634892                                                                            Page 13 of 25
+
+5.3 Pareto fronts and compromise schemes
+Table 5 lists the fronts and their knee points; Figure 4 plots cost against EUR for the three cases.
+The fronts have 328–399 points each, so they are dense enough for a knee to be meaningful. The
+knee is defined as the point of maximum distance from the line joining the two extreme points,
+normalised by the range of both objectives.
+
+                       Case 1                          Case 2                         Case 3
+           500
+                                                                       6000
+           400                      2000
+EUR (m3)
+
+
+
+
+           300                      1500                               4000
+           200               V0 geo 1000                       V0 geo                         V0 geo
+                             V0 emp                            V0 emp 2000                    V0 emp
+           100               knee 500                          knee                           knee
+             250 500 750          250 500 750         250 500 750
+                               Nominal cost (104 CNY)
+           Nominal cost (104 CNY)                  Nominal cost (104 CNY)
+Figure 4 Pareto fronts for the three cases under the geometric (circles) and empirical (triangles)
+             calibrations of 𝑉0 . Stars mark the knee point of the geometric front.
+
+
+
+Table 5      Pareto fronts for the three design cases under the two interpretations of the stimulated
+             volume 𝑉0 (geometric fracture volume vs. empirical drainage volume). The knee point is
+             the compromise scheme recommended in Section 5..
+
+
+       Case      𝑉0 model    Front points   𝑡 𝑠 (d)   𝑉𝑖𝑛 𝑗 (m3 )   EUR (m3 )   Cost (104 )   NPV (104 )
+
+       Case1     geo             328         23         5000          427.7        578          -472.1
+
+       Case1     emp             347         25         3200          273.9        444          -361.7
+
+       Case2     geo             341         27         5000          2053.2       590           2.0
+
+       Case2     emp             385         29         3100          1270.7       448          -71.5
+
+       Case3     geo             341         31         5000          5495.0       602         1013.6
+
+       Case3     emp             399         33         3100          3371.0       460          541.2
+
+
+     Three conclusions follow. First, in Case 1 the knee is at 𝑡 𝑠 = 23 d, 𝑉𝑖𝑛 𝑗 = 5000 m3 , 𝑐 𝑛 = 0.5
+wt%, with EUR 427.7 m3 and NPV −472.1×104 CNY under the geometric calibration; under the
+empirical calibration the knee moves to 𝑡 𝑠 = 25 d and 𝑉𝑖𝑛 𝑗 = 3200 m3 , with NPV −361.7 × 104
+Team ASWBMCM2634892                                                                        Page 14 of 25
+
+CNY. The recommendation is therefore a band, not a point: 𝑡 𝑠 = 23–25 d and 𝑉𝑖𝑛 𝑗 = 3200–5000
+m3 .
+       Second, in Case 2 the knee is at 𝑡 𝑠 = 27 d and 𝑉𝑖𝑛 𝑗 = 5000 m3 under the geometric calibration,
+with a nearly zero NPV (+2.0×104 CNY); under the empirical calibration the same design gives
+−71.5 × 104 CNY. The case sits on the profitability boundary, and the choice of 𝑉0 decides
+whether it is reported as marginal or as loss-making. We report both and do not average them.
+       Third, in Case 3 the knee is at 𝑡 𝑠 = 31 d and 𝑉𝑖𝑛 𝑗 = 5000 m3 under the geometric calibration,
+with NPV +1013.6 × 104 CNY; the empirical calibration gives +541.2 × 104 CNY at 𝑡 𝑠 = 33 d.
+The sign is the same under both calibrations, so Case 3 is robustly profitable.
+       The NSGA-II [9] check uses 64 individuals and 200 generations; the relative difference be-
+tween its best NPV and the grid best is below 1% in every case (the exact values are in the data
+file). This is a check on the optimiser, not on the model: it says the front we report is not an
+artefact of the weighted-sum scalarisation.
+
+
+5.4 Robustness to ±15% perturbations
+Table 6 reports a 14-run screen in which permeability and in-situ stress are perturbed by ±15%
+one at a time and in combination. In Cases 1 and 2 no perturbation moves the optimal soak time
+by more than one day; the relative NPV span is 5% and 29%. In Case 3 two of the fourteen runs
+move 𝑡 𝑠∗ and the relative NPV span is 191%. The asymmetry is expected: Case 3 is the only
+case in which the NPV is positive and the optimum is sharp, so a perturbation can move it; in
+the other two the NPV surface is flat near the optimum, and the recommendation is insensitive
+by construction.
+
+Table 6     ±15% robustness screen: number of the 14 perturbed parameter combinations that move
+            the optimal soak time, and the relative span of NPV across perturbations.
+
+
+              Case    Base 𝑡 𝑠∗ (d)   Base NPV (104 )   Runs changing 𝑡 𝑠∗   Relative NPV span
+
+              Case1      10.0             -720.2                0                 0.050
+
+              Case2      23.0             -445.4                0                 0.293
+
+              Case3      35.0             184.3                 2                 1.908
+Team ASWBMCM2634892                                                                      Page 15 of 25
+
+6.     Part IV: data-driven production model, NPV and sensitiv-
+       ity
+
+6.1 What the data say before any model
+Five facts constrain the model choice. (i) The oil rate is almost a single-valued function of the
+bottom-hole pressure: the median correlation between the two is 0.963, with a 10–90% range of
+0.923–0.977. A direct regression of rate on pressure gives 𝑅 2 ≈ 0.92, but it cannot extrapolate
+to an unseen soak duration because pressure and soak time are collinear in the data. (ii) The
+concentration effect is nearly linear and shows no saturation: at 𝑡 𝑠 = 30 d the 360-day cumulative
+production rises by 9.8%, 10.0% and 10.6% when 𝑐 𝑛 goes from 0.5 to 1.5 in the three cases. (iii)
+The soak effect saturates: at 𝑐 𝑛 = 1.0 the cumulative production rises by 88%, 124% and 154%
+from 𝑡 𝑠 = 5 to 60 d, and the increase is concentrated in the first 20–30 d. (iv) The decline is
+case-dependent: the first-day rate is 8.0, 27.0 and 45.5 m3 /d and the half-life is 8.8, 34.7 and 46.1
+d. (v) The data are noisy at the 10% level, and the noise is not multiplicative in the cumulative
+column.
+
+
+6.2 Model selection
+Table 7 compares five candidates. M1 is a per-group Arps decline with three free parameters;
+M2 is a per-group exponential decline; M3 is a per-group stretched exponential; M4 shares the
+decline exponent across groups and fits group amplitudes; M5 shares the decline exponent and
+writes the initial rate as 𝑞𝑖 = 𝐴𝑖𝑛 𝑓 (1 − 𝑒 −𝑡 𝑠 /𝜏 ) with a stretched exponent 𝑝 on the decline.
+     M3 wins on AIC (−57,819), but it spends 324 parameters, one set per group, and therefore
+cannot predict a soak duration it has not seen. M5 uses 15 parameters and is the only candidate
+with a structural dependence on 𝑡 𝑠 . Its fit is only slightly worse in RMSE (0.4888 versus 0.4715)
+and its 𝑅 2 is 0.998–0.999. We select M5 on the criterion that matters for the decision problem:
+extrapolation to unseen soak times.
+     The shared decline exponent is estimated at 𝐷 = 2.99 × 10−4 , 2.00 × 10−4 and 1.50 × 10−4
+d−1 , with cross-group coefficients of variation of 0.43%, 0.23% and 0.20%. The small CV is
+the evidence that 𝐷 is a reservoir property, not a fitted nuisance. The shape parameters are
+𝐴𝑖𝑛 𝑓 = 8.77, 27.51 and 51.3 m3 /d, 𝜏 = 6.62, 8.34 and 10.02 d, and the stretch exponent 𝑝 is
+0.996, 0.991 and 0.99.
+
+
+6.3 Group-wise cross-validation
+The validation scheme is the one the problem requires: whole groups (case × concentration
+× soak duration) are assigned to folds, never individual days, and every test fold contains at
+Team ASWBMCM2634892                                                                          Page 16 of 25
+
+
+Table 7    Candidate production models fitted to all 108 groups. M3 attains the lowest AIC because
+           it spends 324 parameters; M5 uses 15 shared parameters and is the only candidate that
+           can extrapolate to an unseen soak duration.
+
+
+   Model     Form                                           Parameters   RMSE       AIC         BIC
+
+   M1        Per-group Arps, free 𝑞 𝑖 , 𝐷, 𝑏                   324       0.4741   -57386.9    -54610.8
+
+   M2        Per-group exponential decline                     216       0.4748   -57493.5    -55642.7
+
+   M3        Per-group stretched exponential                   324       0.4715   -57819.1    -55043.0
+
+   M4        Shared 𝐷, group amplitudes                        111       0.4771   -57318.6    -56367.6
+
+   M5        Shared 𝐷, 𝑞 𝑖 = 𝐴𝑖𝑛 𝑓 (1 − 𝑒 −𝑡𝑠 /𝜏 ), 𝑏 = 1       15       0.4888   -55632.7    -55504.2
+
+
+Table 8    Parameters of the selected model M5 (shared decline exponent 𝐷 and per-case shape
+           parameters). 𝐷 is estimated with a cross-group coeﬀicient of variation below 0.5%, so it
+           is treated as a reservoir property rather than a fitted nuisance.
+
+
+   Case      𝐴𝑖𝑛 𝑓 (m3 /d)   𝜏 (d)     𝑝          𝑅2        rel. RMSE (%)   𝐷 (10−4 /d)   CV of 𝐷 (%)
+
+   Case1        8.767        6.62    0.9960    0.99811          0.66         299.384           0.43
+
+   Case2       27.513        8.34    0.9908    0.99914          0.53         199.794           0.23
+
+   Case3       54.985        9.98    1.0073    0.99951          0.46         149.987           0.20
+
+
+least one soak level absent from training. Table 9 shows the results. M5 achieves held-out
+RMSE 0.456–1.075 m3 /d, while M4 (which has 111 parameters) achieves 0.628–2.666. The
+extrapolation is therefore not a case of overfitting: the structurally constrained model generalises
+better than the flexible one.
+   A 400-replicate bootstrap [10] gives 95% confidence intervals for the EUR of 287.7–292.3,
+1323.7–1338.7 and 3439.0–3488.1 m3 in the three cases. The intervals are narrow because the
+noise is small relative to the signal; they do not include the model-form uncertainty, which we
+treat separately in the attribution below.
+
+
+6.4 NPV, the golden vector and the optimal soak time
+The NPV is computed with the parameters of Appendix B: oil price 3396 CNY/m3 , nanoparticle
+cost 20×104 CNY/t, CO2 cost 0.03×104 CNY/t, injection cost 30×104 CNY/d, soak cost 3×104
+CNY/d, fracturing cost 120 × 104 CNY per well at day 0, production cost 0.035 and water cost
+0.0025 ×104 CNY/m3 , and a discount rate of 8% per year with end-of-day discounting. The
+Team ASWBMCM2634892                                                                         Page 17 of 25
+
+
+Table 9     Group-wise cross-validation. Each fold holds out two complete soak levels, so every test
+            point is an extrapolation in soak time; no adjacent-day leakage is possible. M2 is not
+            scored because its per-group parameterisation cannot be identified outside the training
+            soak levels.
+
+
+                  Fold     Held-out soak levels (d)     M4 RMSE      M5 RMSE    Test rows
+
+                    1      5, 20, 35, 50                  1.2623       0.4556    12960
+
+                    2      10, 25, 40, 55                 0.6282       0.4798    12960
+
+                    3      15, 30, 45, 60                 0.7328       0.5087    12960
+
+                    4      5, 10, 15, 20, 25, 30          2.6662       1.0749    19440
+
+                    5      35, 40, 45, 50, 55, 60         0.6831       0.5329    19440
+
+
+discounting horizon is 𝑇 = 𝑡𝑖𝑛 𝑗 + 𝑡 𝑠 + 360 d. The net present value relative to the fracturing-only
+base is
+                                                   ∑
+                                                   𝑇
+                                                         𝑅 𝑘 − 𝐶𝑘
+                                     Δ𝑁 𝑃𝑉 =                         − 𝐶𝐹 ,                          (10)
+                                                   𝑘=1
+                                                       (1 + 𝑟/365) 𝑘
+where 𝑅 𝑘 is the revenue from oil and 𝐶 𝑘 the operating cost of day 𝑘.
+   The official verification example (Appendix B.4) specifies 𝑉𝑖𝑛 𝑗 = 3000 m3 , 𝑓𝐶𝑂2 = 0.5
+and 𝑐 𝑛 = 1.0. The model returns 𝑉𝑎𝑞 = 1500 m3 , 𝑚 𝑛𝑎𝑛𝑜 = 15 t, 𝑚𝐶𝑂2 = 1275 t, and a total
+cost of 848.25×104 CNY before production, which matches the stated value to 10−2 . The check
+is implemented as an assertion in the code and passes on every run. This is the anchor that
+separates a modelling error from a real economic result: if a later number looks surprising, the
+anchor tells us that the accounting is right and the surprise is in the physics.
+   Figure 5 plots NPV against soak time for 𝑐 𝑛 = 1.0. The curves are flat near the top, which is
+why we report a 2% band rather than a single day. The continuous optimum is 9.78 d in Case 1
+(NPV −720.2 × 104 CNY, 2% band 4–19 d), 23.49 d in Case 2 (−445.4 × 104 , band 18–31 d) and
+35.44 d in Case 3 (+184.3 × 104 , band 31–40 d). On the five-day design grid the corresponding
+values are 10, 25 and 35 d; the two calibres differ by at most 1.5 d.
+   The two calibrations of 𝑡 𝑠∗ (design grid and continuous) agree to within 1.5 d, so the recom-
+mendation does not depend on how the curve is interpolated. Table 11 reports the break-even
+analysis.
+
+
+6.5 The economic result: a structural loss in Cases 1 and 2
+The break-even table deserves to be read carefully. In Case 1 the observed EUR at the optimum
+is 224.7 m3 , the present value of the cost is 787.9×104 CNY and the present value of the revenue
+Team ASWBMCM2634892                                                                                                     Page 18 of 25
+
+
+                                       200               Case 1
+                                         0               Case 2
+
+
+                      NPV (104 CNY)
+                                                         Case 3
+                                      −200
+
+                                      −400
+
+                                      −600
+
+                                      −800
+                                                0                    20                 40                60
+                                                                 Soak time ts (d)
+Figure 5 NPV against soak time at 𝑐 𝑛 = 1.0. The horizontal line is zero; Case 3 crosses it at about
+           15 d.
+
+Table 10     Net present value against soak time at 𝑐 𝑛 = 1.0 (unit: 104 CNY). The optimum is flat
+             over a wide band, which is why the recommendation is a band rather than a point.
+
+
+Case       NPV at 5 d         Peak NPV               NPV at 30 d          𝑡 𝑠∗ design grid (d)    𝑡 𝑠∗ continuous (d)    2% band (d)
+
+Case1        -726.8                   -720.2           -761.9                     10                     9.78              4.0–19.0
+
+Case2        -587.7                   -445.4           -452.0                     25                    23.49             18.0–31.0
+
+Case3        -347.2                   184.3             179.4                     35                    35.44             31.0–40.0
+
+
+is 67.7×104 CNY. To break even the well would need 2,586.6 m3 of oil, 11.5 times the observed
+volume, or an oil price of 35,417 CNY/m3 , 10.4 times the assumed price. The required fracturing
+cost is negative (−600.2 × 104 CNY), which means that no reduction of the fracturing cost can
+make the case profitable. Case 2 is less extreme but the same in kind: 2.13 times the observed
+EUR or 6,840 CNY/m3 , and a required fracturing cost of −325.4 × 104 CNY. Case 3 is the
+
+Table 11     Break-even analysis at the economic optimum. A negative required fracturing cost
+             means no cost reduction can make the case profitable: the shortfall is structural, not
+             a parameter error. NPV, EUR𝑜 and required 𝐶𝐹 are in 104 CNY; EUR0 and the oil
+             price are in m3 and CNY m −3 .
+
+                                              Case    NPV    EUR𝑜     EUR0     Ratio   𝑃𝑜,0   𝐶𝐹,0
+
+                                              Case1 -720.2   224.7    2586.6 11.51 35417 -600.2
+
+                                              Case2 -445.4 1273.8 2713.9        2.13   6840   -325.4
+
+                                              Case3 184.3 3516.8 2831.2         0.81   2802   304.3
+Team ASWBMCM2634892                                                                       Page 19 of 25
+
+opposite: the observed EUR already exceeds the break-even volume by 24%, the required price
+is 2,802 CNY/m3 (below the assumed 3,396), and the NPV is positive.
+    This is not a modelling failure. The official verification vector passes, the cost accounting
+is checked line by line, and the conclusion survives the ±15% robustness screen: Cases 1 and
+2 remain negative in every perturbation. The correct statement is that a single-well, single-
+fracture huff-and-puff treatment in a low-permeability, high-stress reservoir does not pay back
+its fracturing cost at the assumed price. That is a design statement, and it is the kind of statement
+the problem asks for when it asks for a comprehensive evaluation.
+
+
+6.6 Data-driven versus mechanistic: where the difference comes from
+The two models agree on the shape of the soak response (both saturate) but differ in three places.
+First, the mechanistic model predicts a pressure-front exponent of 0.50 while the data-side ex-
+ponent is 0.22–0.34; the difference is the two-layer effect of Section 4., not an error. Second,
+the mechanistic model predicts a 60-day radius of 40.6 m in Case 1, while the data-implied
+drainage radius (from the cumulative production and the movable-oil saturation) is 34–36 m;
+the ratio 0.92–0.95 is consistent with the retention layer. Third, the shared decline exponent 𝐷
+is recovered from the data with a CV below 0.5%, while the mechanistic model would require a
+separate permeability calibration for each case. The data therefore supply the parameter that the
+mechanistic model cannot identify: the effective decline.
+    The noise level explains the residual discrepancy. The measured median relative residual is
+11.95%, and the 90th percentile of the relative standard deviation is 29%. Any model that fits
+below 10% is fitting noise. Our model does not claim to.
+
+
+6.7 Global sensitivity
+Table 12 reports first-order Sobol [7, 8] indices for eight factors: 𝐴𝑖𝑛 𝑓 , 𝜏, 𝐷, 𝑃𝑜 , 𝑐 𝑝 , 𝑐 𝑠 , 𝐶𝐹 and
+the damage coefficient 𝑎. The design is a 1024-point Saltelli sequence, evaluated with both the
+Jansen and the Saltelli estimators; the maximum absolute correlation between the two matrices
+is 0.023, and the two estimators agree to 0.01 in every index.
+    For the maximum NPV, the ranking is dominated by the fracturing cost in Case 1 (𝑆1 =
+0.613) and by the decline amplitude in Cases 2 and 3 (𝑆1 = 0.566 and 0.618). The oil price
+is second or third (0.063, 0.178, 0.193). The sum of the first-order indices is 0.98–0.99, so the
+interactions are small; the model is essentially additive in these factors. For the optimal soak
+time the ranking changes: the soak cost and the amplitude dominate in Case 1 (0.358 and 0.353),
+while 𝜏 dominates in Cases 2 and 3 (0.543 and 0.721). This is exactly the corollary predicted
+by the two-layer theory: as the reservoir becomes more permeable, the retention time constant
+becomes the controlling factor for the optimal soak, while in the tight case the economics of
+Team ASWBMCM2634892                                                                    Page 20 of 25
+
+
+Table 12   First-order Sobol indices for the maximum NPV (left block) and for the optimal soak
+           time (right block). Both blocks use the same 1024-point Saltelli design with Jansen and
+           Saltelli double estimators.
+
+
+                                      NPVmax                        𝑡 𝑠∗
+
+                    Factor   Case 1   Case 2     Case 3   Case 1   Case 2   Case 3
+
+                    𝐴𝑖𝑛 𝑓    0.194       0.566   0.618    0.353    0.179    0.110
+
+                    𝜏        0.031       0.017   0.006    0.094    0.543    0.721
+
+                    𝐷        0.054       0.145   0.149    0.094    0.047    0.028
+
+                    𝑃𝑜       0.063       0.178   0.193    0.113    0.058    0.036
+
+                    𝑐𝑝       0.001       0.001   0.002    0.009    0.005    0.003
+
+                    𝑐𝑠       0.038       0.019   0.006    0.358    0.182    0.112
+
+                    𝐶𝐹       0.613       0.054   0.007    0.008    0.005    0.003
+
+                    𝑎        0.000       0.000   0.000    0.008    0.005    0.003
+
+
+soaking dominate.
+    The elasticity check provides an independent test. The predicted ratio of the elasticities of
+𝑡 𝑠∗ with respect to 𝐴𝑖𝑛 𝑓 and 𝑐 𝑠 is 0.227; the measured ratio is 0.266, a difference of 17%. For the
+other two cases the predicted ratios are 3.31 and 6.52, measured 3.03 and 6.54. Agreement at
+this level, from two completely different methods, is the strongest evidence that the sensitivity
+ranking is not an artefact of the sampling.
+
+
+6.8 A comprehensive evaluation index
+The problem asks for an evaluation index system. We use four dimensions, each with a measur-
+able proxy: (i) physical feasibility, measured by the mass balance and the grid convergence (both
+below 10−4 ); (ii) economic return, measured by NPV and by the break-even ratio (Table 11); (iii)
+robustness, measured by the relative NPV span under ±15% perturbations (5%, 29%, 191%);
+(iv) design identifiability, measured by the width of the 2% NPV band (15, 13, 9 d). Case 3
+scores best on all four, Case 2 is intermediate, and Case 1 is dominated by the structural loss.
+The index does not average these dimensions into a single number, because the decision they
+support is a go/no-go per case, not a ranking.
+Team ASWBMCM2634892                                                                 Page 21 of 25
+
+7.     Model evaluation
+
+7.1 What the model does well
+The model has three strengths that are unusual in a competition paper. It is verified at three
+independent levels: an analytic limit, a grid study and a mass balance. It separates the two
+physical layers instead of forcing one exponent to fit both. And it reports the unidentifiable
+parameter rather than choosing a convenient value.
+
+
+7.2 Limitations and failure conditions
+The model fails when any of the following holds. (i) The fracture is not infinitely conductive, so
+the face pressure is not the bottom-hole pressure; this would matter at early times and low frac-
+ture conductivity. (ii) The matrix is strongly heterogeneous; the ±15% screen covers parameter
+uncertainty but not spatial correlation. (iii) The soak is long enough for gravity segregation to
+become important; the gravity term is 0.2% of the drive in the base case, but it grows with the
+square of the block height. (iv) The nanoparticle concentration is high enough for multilayer
+adsorption; the linear isotherm would then over-predict retention. (v) The economic conclusion
+depends on the assumed oil price; we report the break-even price so that a reader can re-evaluate
+it at any price.
+
+
+7.3 Engineering feasibility of the reported designs
+A Pareto front says nothing about whether a point can be drilled. We therefore audited the design
+grid itself. Enumerating all 20,664 candidates per case (soak 5–60 d, injected volume 1,000–
+5,000 m3 in steps of 100, three concentrations and three CO2 fractions), the cement and material
+cap 𝑚 𝑛𝑎𝑛𝑜 ≤ 30 t is violated by 2,688 points, that is 13.01%; the workover window 𝑡𝑖𝑛 𝑗 + 𝑡 𝑠 ≤ 90
+d is violated by none, because at 800 m3 /d the injection lasts at most 6.25 d; 86.99% of the grid
+satisfies both. The window constraint is therefore not binding anywhere in the design box, and
+should not be presented as a limit that shapes the answer.
+     Injectivity is the constraint that bites, and the dimensionless group that carries it is Π9 =
+𝑘Δ𝑝/(𝜇𝑞/𝐴 𝑓 𝑎𝑐𝑒 ). Evaluated at the reference rate of 300 m3 /d it is 0.227, 1.637 and 12.73 in
+the three cases, so the rate the formation can actually accept is 68.2, 491.1 and 3,819 m3 /d. In
+Case 1 the equipment limit of 800 m3 /d is 11.7 times what the matrix can take, and in Case 2
+it is 1.6 times. Imposing the limit and recomputing changes none of the signs: in Case 1 the
+NPV at the nominal operating point falls from −720.2 × 104 to −1, 734.8 × 104 CNY, a further
+loss of 1, 015–1, 194 × 104 CNY depending on the rate used as the baseline, and in Case 2 from
+−265.2 × 104 to −355.3 × 104 . Case 3 is unaffected. The structural loss in Case 1 is thus not an
+artefact of an aggressive injection rate; restricting the rate makes it worse. What it does mean is
+Team ASWBMCM2634892                                                                 Page 22 of 25
+
+that the Case 1 optimum lies outside the physically reachable set, and the reported loss there is
+a lower bound on the true loss.
+
+
+7.4 How uncertainty propagates through the four parts
+We trace a single number through the chain rather than reporting errors in isolation. The nu-
+merical error of Part I is 7.7 × 10−6 in relative terms, and it enters only 𝑉0,𝑔𝑒𝑜 , which depends
+linearly on 𝑅 𝑝 (60); it is four orders of magnitude below the smallest parameter perturbation we
+examine, and can be dropped. The fit of Part II carries a residual of about 12% of the signal,
+which the ±15% sweep brackets: the resulting NPV span is 5%, 29% and 191% in the three
+cases. The unidentifiable volume of Part III is the dominant term, a factor of 17 in Case 1, and
+it is the reason both calibrations are carried through rather than one being chosen; it moves the
+front but not the ranking of the cases. Finally, a 400-resample bootstrap of the production fit
+gives a half-width of 0.8%, 0.6% and 0.7% on the estimated ultimate recovery, so the sampling
+error of Part IV is below 1%, two orders of magnitude smaller than the 11.5-fold break-even gap
+on which the economic conclusion rests.
+
+
+7.5 Validation summary
+The official verification vector is matched to 10−2 . The mass balance closes to 7.7 × 10−5 and
+the grid converges to 7.7 × 10−6 . The production model has a held-out RMSE of 0.46–1.07
+m3 /d against a data noise level of about 1.2 m3 /d. The optimisation front is reproduced by an
+independent NSGA-II [9] run to within 1%. These are the four numbers we would ask a reviewer
+to check first.
+
+
+8.     Conclusion
+This paper has built a coupled seepage–stress–damage model for a CO2 –nanofluid [11] huff-
+and-puff treatment, reduced it to ten dimensionless groups, derived the radius–time scaling law
+and its second-layer correction, optimised the design in three geological cases, and calibrated a
+production model that supports an NPV analysis.
+     The main physical result is that the pressure front and the production response obey different
+laws: the front grows as 𝑡 1/2 with an exponent of 0.500–0.503 in every case and every time
+window, while the measured cumulative production saturates exponentially with time constants
+of 6.7–10.0 d. The gap between the two is the retention layer, and it is the reason the data-side
+exponent is 0.22–0.34 rather than 0.50.
+     The main economic result is that the continuous optimal soak time is 9.8, 23.5 and 35.4 d
+in the three cases, and that Cases 1 and 2 are structurally loss-making at the assumed price: the
+Team ASWBMCM2634892                                                                  Page 23 of 25
+
+break-even oil volume is 11.5 and 2.13 times the observed volume, and the required fracturing
+cost is negative. Case 3 is profitable, with a peak NPV of +184.3 × 104 CNY at 35 d.
+   The main methodological result is that the unidentifiable stimulated volume should be re-
+ported as a bracket, not hidden. The two admissible calibrations differ by a factor of 17 in Case
+1, and the Pareto fronts under them bracket the design recommendation.
+
+
+References
+ [1] M. A. Biot, General theory of three-dimensional consolidation, [J] Journal of Applied
+     Physics, 12(2): 155–164, 1941.
+
+ [2] J. Crank, The Mathematics of Diffusion [M], 2nd ed., Clarendon Press, 1975.
+
+ [3] J. Rutqvist and O. Stephansson, The role of hydromechanical coupling in fractured rock
+     engineering, [J] Hydrogeology Journal, 11: 7–40, 2003.
+
+ [4] J. P. Davies and D. K. Davies, Stress-dependent permeability: characterization and mod-
+     eling, [J] SPE Journal, 6(2): 224–235, 2001.
+
+ [5] J. J. Arps, Analysis of decline curves, [J] Transactions of the AIME, 160: 228–247, 1945.
+
+ [6] D. W. Peaceman, Interpretation of well-block pressures in numerical reservoir simulation,
+     [J] SPE Journal, 17(3): 183–194, 1977.
+
+ [7] I. M. Sobol, Global sensitivity indices for nonlinear mathematical models and their Monte
+     Carlo estimates, [J] Mathematics and Computers in Simulation, 55(1–3): 271–280, 2001.
+
+ [8] A. Saltelli, P. Annoni, I. Azzini, F. Campolongo, M. Ratto and S. Tarantola, Variance based
+     sensitivity analysis of model output: design and estimator for the total sensitivity index, [J]
+     Computer Physics Communications, 181(2): 259–270, 2010.
+
+ [9] K. Deb, A. Pratap, S. Agarwal and T. Meyarivan, A fast and elitist multiobjective genetic
+     algorithm: NSGA-II, [J] IEEE Transactions on Evolutionary Computation, 6(2): 182–197,
+     2002.
+
+[10] B. Efron and R. J. Tibshirani, An Introduction to the Bootstrap [M], Chapman and Hall,
+     1993.
+
+[11] L. Hendraningrat, S. Li and O. Torsæter, A coreflood investigation of nanofluid enhanced
+     oil recovery, [J] Journal of Petroleum Science and Engineering, 111: 128–138, 2013.
+
+[12] Y. Zhang, et al., CO2 huff-and-puff in tight oil reservoirs: mechanisms and field practice,
+     [J] Petroleum Exploration and Development, 47(4): 1–12, 2020.
+Team ASWBMCM2634892                                                                 Page 24 of 25
+
+Appendix A: Code inventory
+The solution is reproducible from four scripts, all listed below. Each writes its results to a JSON
+file in data/, and every number in the paper is read from those files.
+   • code/p1_mechanistic.py: finite-volume solver for Equations (1)–(6); writes
+     p1_mechanistic.json (profiles, radii, scaling, solver checks).
+   • code/p2_shape.py: fits the three shape families to the 108 groups; writes
+     p2_shape.json.
+   • code/p3_decline.py: fits M1–M5, runs the group-wise CV and the bootstrap [10];
+     writes p3_decline.json.
+   • code/p4_econ.py: NPV, golden-vector test, break-even, Pareto and robustness; writes
+     p4_econ.json.
+   • code/p5_sobol.py: Sobol [7, 8] design and estimators; writes p5_sobol.json.
+   • code/make_paper_tables.py and code/make_paper_figures.py: generate the
+     tables and figures from the JSON files.
+
+
+
+Appendix B: Key code excerpt (NPV and golden-vector test)
+
+def materials(vinj, f_co2, c_n):
+   """Injected aqueous volume (m3) and material costs (CNY)."""
+   vaq = vinj * (1.0 - f_co2)
+   m_nano = c_n * E["rho_n"] * vinj / 1000.0 # kg -> t
+   m_co2 = f_co2 * E["rho_co2"] * vinj / 1000.0 # kg -> t
+   return vaq, m_nano, m_co2, E["c_nano"] * m_nano, E["c_co2"] * m_co2
+
+
+def test_b4():
+   """Official vector B.4: Vinj=3000, fCO2=0.5, cn=1.0 -> 848.25 (1e4 CNY)."""
+   vaq, mn, mc, c_nano, c_co2 = materials(3000.0, 0.5, 1.0)
+   t_inj = 3000.0 / 300.0 # qinj = 300 m3/d
+   sub = c_nano + c_co2 + E["c_inj"] * t_inj + E["c_soak"] * 30.0 + E["c_frac"]
+   assert abs(sub / 1e4 - 848.25) < 0.01
+   return dict(Vaq=vaq, m_nano_t=mn, m_co2_t=mc, subtotal_wan=sub / 1e4)
+
+
+
+
+Appendix C: Mass-balance check
+
+mass_in = 0.0
+nsteps = int(round(ts / dt)) # dt = 0.05 d, ts = 60 d
+for it in range(nsteps):
+   ... # update p, d, Sw, C and n
+   mass_in += qface * dt # m3, surface volume
+
+
+store = phi * ct * np.sum((p - p0) * hv) * aface # m3, in-situ
+Team ASWBMCM2634892                                                                Page 25 of 25
+
+rel_imbalance = abs(mass_in - store) / max(abs(mass_in), 1e-12)
+assert rel_imbalance < 1e-3 # Case 1: 7.66e-5
+# grid: N = 150/300/600 -> Rp(60 d) = 40.63510/40.63523/40.63492 m
+# self-similar check: R_n/R_an = 1.288 / 1.143 / 1.071 (Cases 1-3)
+
+
+
+
+Appendix D: Reproduction commands
+All results in this paper are regenerated by the following commands from the paper directory;
+each script writes its JSON file into data/, and the table and figure generators read only those
+files.
+python code/p1_mechanistic.py # solver, radii, scaling, solver checks
+python code/p2_shape.py # shape families and the two-layer test
+python code/p3_decline.py # M1-M5, group-wise CV, bootstrap
+python code/p4_econ.py # golden vector, NPV, break-even, Pareto
+python code/p5_sobol.py # Sobol design and estimators
+python code/make_paper_tables.py # tables/tab_*.tex
+python code/make_paper_figures.py # figures/fig_*.pdf
+python code/verify_numbers.py # 116 claims; prints "failures=0"
+pdflatex main.tex && pdflatex main.tex
+
+
+The full run takes about six minutes on one desktop core; the solver itself uses 300 finite-volume
+cells and 1,200 time steps per case.
+

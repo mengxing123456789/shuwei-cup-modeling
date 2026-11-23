@@ -1,0 +1,14 @@
+{
+  "t1_geometry": 24.26,
+  "t2_resonance": 9.78,
+  "t3_kepler": 2.84,
+  "counterexamples": 13.69,
+  "total_s": 50.57,
+  "budget_s": 300,
+  "within_budget": true,
+  "_meta": {
+    "title": "run timings",
+    "budget_s": 300,
+    "note": "每次浮动 ±5%，不作对账行"
+  }
+}

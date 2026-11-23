@@ -1,0 +1,4 @@
+﻿family_id,description,basis
+P,Placement and replenishment,Grouped from original task metadata; not robot-skill or product-category labels.
+A,Arrangement and repositioning,Grouped from original task metadata; not robot-skill or product-category labels.
+L,Inspection and labeling,Grouped from original task metadata; not robot-skill or product-category labels.

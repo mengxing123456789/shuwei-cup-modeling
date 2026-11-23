@@ -1,0 +1,16 @@
+{
+  "file": "tables/app_g.tex",
+  "sha256": "3b6ea690a0030864a99050e60d8fe89b95cf51bc34ab116ff6ad30585d95deb0",
+  "bytes": 8600,
+  "sources": {
+    "up_p1a_final.json": "6d79271972179b2695a21e4b1850b00cf240db178e3e2e8e6b1f9882450516a2",
+    "up_p1b_dual.json": "e0617b63012ae77fff32fba5b2f31fcda62f40d44339fec0421ea7fe23287d8b",
+    "up_p1b_final.json": "e6a667a9dcdf27ada03961de7ec3d05bc05033b0d30ef8a12444efb4e7e50fde",
+    "up_p2_final.json": "9536ee5431bbcf13751a4943858798759d6963411adb84d1a07b216bff2f96c8",
+    "up_p3_vec_check.json": "8c32ab8dcd65ff7479aad4396eb040db31b476da557740ef04737be570a2bebf",
+    "up_p3_review.json": "14b5fe15a04c8e6e7138a9a0878b4f23e46378a720fde904be9ac2ccee63e08f",
+    "up_p3_two_regime.json": "b60292c7e374f0eb6f63da7b7757e72b33679037f23b66fd3f40a9b57c01fc89",
+    "up_video_value.json": "cd9373631e3aa930c3f9dbcbeb3ac6169f7bc8fdafdafda8692c3f8a766681c6",
+    "up_p3_rl.json": "a6194a883be23a69423128a750a122e43a5535facb36cbc62ff0d42732bd16ce"
+  }
+}

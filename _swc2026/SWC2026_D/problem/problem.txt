@@ -1,0 +1,106 @@
+1 / 4
+2026_“ShuWei Cup”
+Problem D：A Model for the Sole Centrism of a Stellar
+System and Closures of Planetary Orbits
+i.
+Scientific Problem
+After Kepler formulated his three laws of planetary motion in 1609, Isaac Newton
+established the law of universal gravitation, which provided a unified framework of the
+motion of all planets, thereby laying a solid foundation for the development of modern
+astrophysics. However, as observational techniques have become increasingly precise,
+along with the synergistic effects of Newtonian gravitational dynamics in multi-body
+systems and the spacetime curvature predicted by general relativity, Kepler's laws have
+been found to have significant deficiencies in both accuracy and rigor.
+Coordinate system
+First, the orbital observational data used by Kepler is incomplete in the spatial
+dimension：It is apparent that any planetary body executes three-dimensional motion;
+determining true orbit requires observations from at least three mutually orthogonal
+directions—corresponding, in engineering terms, to a three-view orthographic
+representation. In the era of Galileo, Tycho and Kepler, however, observations were
+
+2 / 4
+obtained from only a single terrestrial viewpoint: a relatively fixed line of sight lying
+in the plane of the ecliptic. No additional viewpoints were available, particularly a top-
+view observation perpendicular to the ecliptic.
+Consequently, the data on which Kepler relied suffers from insufficient
+observability of the planetary system state, imposing fundamental limitations on the
+complete reconstruction of the celestial-system state. Second, the observational data
+were also temporally incomplete. The temporal baseline accumulated by Tycho was
+insufficient; the principal observations were concentrated in the interval from 1580 to
+1600. Complete data establishing completion of an orbital cycle were therefore neither
+observed nor obtained, and a full cycle of the radial periodic perturbations was never
+captured. The actual radial resonant period may be extremely long (possibly several
+centuries). From the standpoint of system identification in control theory, a finite-
+duration time-series sample is inadequate for fully identifying long-period modes.
+Third, idealization is inherent in the two-body problem. The strictly elliptical (or
+circular) orbits derived from the inverse-square law of gravitation constitute an exact
+solution to a mathematically integrable two-body conservative system. A real planetary
+system, however, is a non-integrable multi-body dissipative system (even if dissipation
+is extremely small) that exhibits chaos and resonance. An elliptical (or circular) orbit is
+therefore essentially a reduced-order idealized reference model rather than a complete
+description of the dynamics of the true multi-body nonlinear system.
+Fourth, a sufficient condition does not constitute a necessary-and-sufficient
+conclusion. Deriving and proving the law of universal gravitation starting from circular
+motion and elliptical orbits could not exclude other non-conic or composite-curve orbits;
+alternative orbital models may equally well describe the actual trajectories. Therefore,
+this argument represents a derivation based on a particular sufficient condition rather
+than a necessary-and-sufficient identification of the structural parameters of the
+planetary dynamical system [1-7].
+ii.
+Research Task
+
+3 / 4
+Task 1: Derive mathematically and plot programmatically:
+From the observational perspective on Earth, remote measuring and mapping the
+orbital curve of a planet in the solar system, such as Venus or Mars, involves a certain
+angle of view—either looking down or looking up perspective. This results in geometric
+discrepancies between the observed orbital shape and the true orbit that is depicted from
+a viewpoint perpendicular to the planet's orbital ecliptic plane. Please derive these
+geometric differences mathematically by using geometric principles combined with
+optical parallax, and plot these orbital curves programmatically.
+Task 2: Create and develop a new
+“Model for the Sole Centrism of a Stellar System and Closures of Planetary Orbits”
+by some methodologies of mathematics and physics.
+That is, dual-resonance (radial and azimuthal oscillatory motions) model should
+be used, with a core conclusion long-period limits accumulative orbits will form an
+isotropic uniform symmetric orbital ring with a single dynamical center.
+Task 3: Basing on the above equations present the geometric trajectories of
+planetary motions by a computer programing.
+From above demonstrating the computed geometric trajectories of planetary
+motions, could be shown that Kepler's laws have been found to have significant
+deficiencies in both accuracy and rigor.
+iii.
+Solving Tips
+To solve this multibody problem, please refer to Newton's study of spiral motion
+in a resistive medium [8], and to DTQ Law by James Deng's SDP atomic model [9-12]
+(which shows radial resonances), we propose that orbital precession can be considered
+the sum of independent radial and azimuthal oscillatory motions. A parametric dual-
+resonance model is constructed, angular momentum is conserved, and it can be shown
+
+4 / 4
+that the long-term cumulative orbit converges to an isotropic uniform ring; thus, the
+idea of a single dynamical center is supported.
+References
+[1] J. L. Russell, Kepler’s Laws of Planetary Motion: 1609–1666. The British
+Journal for the History of Science, 2(1), 1–24 (1964)
+[2] V. E. Thoren, & J. R. Christianson, The lord of Uraniborg: a biography of Tycho
+Brahe. (Cambridge University Press, 1990)
+[3] M. Plakhotnyk, Kepler's laws with introduction to differential calculus. arXiv
+preprint arXiv:1702.06537 (2017).
+[4] P. S. marquis de Laplace, Traité de mécanique céleste (Vol. 5). (Chez JBM
+Duprat, libraire pour les mathématiques, quai des Augustins, 1825)
+[5] J. L. Lagrange, Mécanique analytique (Vol. 1). (Mallet-Bachelier, 1853)
+[6] H. Poincaré, Sur le problème des trois corps et les équations de la dynamique.
+Acta mathematica, 13(1), A3-A270 (1890)
+[7] A. Einstein, Die Grundlagen der allgemeinen. Relativitats−teorie, Annale der
+Physic, 49, 769 (1916).
+[8] I. Newton, Philosophiae naturalis principia mathematica (Vol. 1). (G. Brookman,
+1833)
+[9] James T. Q. Deng, A new terahertz source from the wave particle duality
+mechanism. The Journal of Engineering, 2023(1), e12217 (2023).
+[10] James. Deng, Theoretically Proving the Quantization Hypothesis. Authorea
+Preprints, 05373575/v1 (2022).
+[11] James. Deng, Theoretically Proving the Quantized Wave-Particle Duality.
+Authorea Preprints, 68586916/v1 (2022).
+[12] James T. Q. Deng, Decisive Theory for Quantum, ISBN: 979-8-90049-112-7,
+(United Science Press, NY 12204, USA, 2025)

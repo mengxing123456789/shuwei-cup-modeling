@@ -1,0 +1,127 @@
+{
+ "version": 1,
+ "entries": {
+  "2:dc6087c685c0bb1b3585599d650f828aac6d5934b0b849ea8098981f4527703d": {
+   "figure": "fig1_decline_family",
+   "kind": "datafig",
+   "source": "figures/fig1_decline_family.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795143474.8734329
+   ],
+   "at": "2026-11-20T02:57:54+00:00",
+   "at_ts": 1795143474.8734329
+  },
+  "2:4d33773030b86942583e398296ee406feceb00e553bc2b59dc619b45f4642b26": {
+   "figure": "fig2_soak_saturation",
+   "kind": "datafig",
+   "source": "figures/fig2_soak_saturation.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795143507.028806
+   ],
+   "at": "2026-11-20T02:58:27+00:00",
+   "at_ts": 1795143507.028806
+  },
+  "2:8efc833e57b524aa987e4912dd6a09da7ce8d261678f2ed9ce3177db7ffc89e1": {
+   "figure": "fig_npv",
+   "kind": "datafig",
+   "source": "figures/fig_npv.pdf",
+   "status": "unreviewed",
+   "reason": "视觉服务暂时不可用（timed out（共尝试 2 次））",
+   "reply": "",
+   "attempts": 0,
+   "calls": [],
+   "at": "2026-11-20T06:57:38+00:00",
+   "at_ts": 1795157858.6457887
+  },
+  "2:ec0558a588c382c5f1d1984af9db329b853a85601345925caf713661ef299c55": {
+   "figure": "fig_pareto",
+   "kind": "datafig",
+   "source": "figures/fig_pareto.pdf",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [三个子图底部的 x 轴标题] 相邻子图的 \"Nominal cost (10⁴ CNY)\" 标题横向互相重叠，Case 1 与 Case 2、Case 2 与 Case 3 的标题文字叠在一起，出现 \"CNNYY\"、\"N\" 被盖住变成 \"o minal\" 等乱码状重叠，无法正常阅读 [修复建议] 缩小该行标题字号，或加大子图间距（如 plt.subplots_adjust(wspace=…) / constrained_layout），或只在中间子图（或整图底部）保留一个共享的 x 轴标题。",
+   "attempts": 1,
+   "calls": [
+    1795144767.8533597
+   ],
+   "at": "2026-11-20T03:19:27+00:00",
+   "at_ts": 1795144767.8533597
+  },
+  "2:f8f069469bcd596b85b955e4b2df09f75d96b35461e34add5dbae1eaa3f0a03b": {
+   "figure": "fig_robust",
+   "kind": "datafig",
+   "source": "figures/fig_robust.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795144790.3226485
+   ],
+   "at": "2026-11-20T03:19:50+00:00",
+   "at_ts": 1795144790.3226485
+  },
+  "2:a3d04303bd0e4c1d1413c03db2bd1bbb8f9d4591d3e5dabed49753e680dbf7a6": {
+   "figure": "fig_scaling",
+   "kind": "datafig",
+   "source": "figures/fig_scaling.pdf",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [左上图例区] 绿色点划线（Case 3 曲线）从图例文字 \"Case 3 (numerical)\" 的尾部（\"…al)\" 处）穿过，数据线与图例文字直接重叠，该行文字和曲线互相干扰、难以辨认 [修复建议] 将图例移到无数据的空白区域（如右下角蓝色/reference 曲线下方的空白区，`loc='lower right'`），或整体缩小图例/移出坐标轴外，确保任何曲线不再穿过图例文字后再出图。",
+   "attempts": 1,
+   "calls": [
+    1795158026.5363476
+   ],
+   "at": "2026-11-20T07:00:26+00:00",
+   "at_ts": 1795158026.5363476
+  },
+  "2:f8d064010894fb56a11e83094bc8af83e83d3015aa088055d1a8df935aaa7ef2": {
+   "figure": "fig_schematic",
+   "kind": "datafig",
+   "source": "figures/fig_schematic.pdf",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [Panel (b) 蓝色 Injection 框与黄色 Soak 框交界处] \"Injection (10 d)\" 标签比蓝色框宽，文字溢出框边界，\"Injection\" 的尾部与 \"Soak t_s\" 的开头直接相撞（读起来像 \"InjectionSoak\"），\"(10 d)\" 与 \"(5-60 d)\" 也几乎贴在一起，两个阶段标签难以分辨。修复建议：缩小该处字号并把标签按框宽强制换行（如 Injection 框内用 \"Inject.\\n(10 d)\" 或 \"Injection\\n(10 d)\" 分两行居中），或将 Injection 标签连同箭头移到框的上方/下方空白处，也可适当加宽蓝色框，确保文字不跨过框边界、不与相邻标签接触。",
+   "attempts": 1,
+   "calls": [
+    1795145229.478666
+   ],
+   "at": "2026-11-20T03:27:09+00:00",
+   "at_ts": 1795145229.478666
+  },
+  "2:5466c6396d7d4cda3ac7d5ec8f5df91c44ab29690ae7b92f9e8512670990106b": {
+   "figure": "fig_shape",
+   "kind": "datafig",
+   "source": "figures/fig_shape.pdf",
+   "status": "unreviewed",
+   "reason": "视觉服务暂时不可用（timed out（共尝试 2 次））",
+   "reply": "",
+   "attempts": 0,
+   "calls": [],
+   "at": "2026-11-20T07:03:30+00:00",
+   "at_ts": 1795158210.9458966
+  },
+  "2:73a30c11d7c65455916eaa63937d4817b183e6675bdd1fd524c90aac1db4b78a": {
+   "figure": "fig_soak",
+   "kind": "datafig",
+   "source": "figures/fig_soak.pdf",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [图内左上角 \"Case 1\" 图例] 绿色点划线曲线（Case 3 系列）上升段直接穿过 \"Case 1 c_n=0.5\"、\"Case 1 c_n=1.0\" 等图例文字，文字被曲线压过难以完整辨认 [修复建议] 将该图例移到下方空白区（如 y<1000 的中部区域，Case 1 与 Case 2 曲线之间的大片空白），或用不透明白底 framealpha 并置于顶层，或移到画布外。\n\nISSUE 2: [图内中部 \"Case 2\" 图例] 浅绿/深绿点划线曲线同样穿过 \"Case 2 c_n=0.5\"、\"Case 2 c_n=1.0\" 的文字区域，图例文字与数据曲线交叠 [修复建议] 将 Case 2 图例下移至橙色曲线（y≈1300–1500）与蓝色曲线（y≈300）之间的空白带，或统一将三个图例合并后放到坐标区右侧/下方空白处，避免压线。",
+   "attempts": 1,
+   "calls": [
+    1795158251.143701
+   ],
+   "at": "2026-11-20T07:04:11+00:00",
+   "at_ts": 1795158251.143701
+  }
+ }
+}

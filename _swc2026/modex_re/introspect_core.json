@@ -1,0 +1,1453 @@
+[
+ {
+  "module": "backend.services.workflow_engine",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"workflow_engine.py\", line 4, in init workflow_engine\nModuleNotFoundError: No module named 'services'\n"
+ },
+ {
+  "module": "backend.services.quality_receipts",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"quality_receipts.py\", line 8, in init quality_receipts\nModuleNotFoundError: No module named 'services'\n"
+ },
+ {
+  "module": "backend.services.submission_review",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"submission_review.py\", line 20, in init submission_review\nModuleNotFoundError: No module named 'config'\n"
+ },
+ {
+  "module": "backend.services.writing_review",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"writing_review.py\", line 35, in init writing_review\nModuleNotFoundError: No module named 'config'\n"
+ },
+ {
+  "module": "backend.services.conversation_writing_check",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\conversation_writing_check.cp311-win_amd64.pyd",
+  "doc": "对话模式 · 写完自动查写作（论证逻辑与文理分型第 6 期）。\n\n全自动的写作检查（services/writing_review）只接在引擎的步骤里：规划步核对大纲论证主线、写作步查成稿，需修项让这一步\n照清单定点改一轮。对话模式里有三条路会改论文，这里把检查接上，结论交给对话 AI 和运行块：\n\n1. 跑步骤（run_steps，交给全自动引擎）：引擎照常查、照常补一轮；跑完时（conversation_dispatch._reconcile_engine）\n   用 run_summary() 把这几步里最后一份结论写进结果行和任务记忆——还有没改好的需修项，AI 能看到、能用一句话告诉用户。\n2. 改文件（edit_files，编辑器）、局部任务（focus_task）：改了成稿或大纲以后，在后台按同一个检查器查一遍（不调模型、\n   不花钱），和动手前的结论比（按规则 + 命中处的原文比），只把\"这次改出来的\"需修项写进任务记忆（AI 下一轮、跑完自动\n   汇报都看得到），运行块下面列出来。改完自动修（默认开）：其中措辞类的（竞赛口吻、流程用语、话说过头……）自动安排\n   一次只改这几处的修改，只补一轮；要补内容、要用户拍板、像是用户点名要写的，只报告，问用户一句。\n   结论单独存 .mh/quality/writing_check_after_edit.json（不碰引擎那份，免得和正在跑的步骤抢同一个文件），\n   下次再改时拿它当\"动手前\"。\n3. 只读检查（check）：查某一步时连写作检查一起查，结论放进检查结果（不写文件）。\n\n竞赛、开发、软著等没有写作档案的项目，检查器返回\"不适用\"，这里什么也不做。任何失败只记日志。\n",
+  "attrs": [
+   {
+    "name": "AFTER_EDIT_RELATIVE",
+    "type": "WindowsPath"
+   },
+   {
+    "name": "AUTO_FIX_MAX",
+    "type": "int",
+    "value": "5"
+   },
+   {
+    "name": "AUTO_FIX_PARAM",
+    "type": "str",
+    "value": "'_auto_fix_writing'"
+   },
+   {
+    "name": "AUTO_FIX_RULES",
+    "type": "frozenset"
+   },
+   {
+    "name": "Any",
+    "type": "_AnyMeta",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "CHECK_TIMEOUT_SECONDS",
+    "type": "int",
+    "value": "180"
+   },
+   {
+    "name": "DICTATED_RUN",
+    "type": "int",
+    "value": "8"
+   },
+   {
+    "name": "MAX_ITEMS",
+    "type": "int",
+    "value": "8"
+   },
+   {
+    "name": "MEMORY_MARK",
+    "type": "str",
+    "value": "'写作检查：'"
+   },
+   {
+    "name": "Optional",
+    "type": "_SpecialForm",
+    "doc": null,
+    "sig": "(*args, **kwds)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "_ACCOUNT_BLOCKERS",
+    "type": "dict",
+    "value": "{'ACCOUNT_MODEL_NOT_SELECTED': '积分模式还没选改文件用的模型（跟对话模型走：点输入框下面的模型按钮选一个）', 'ACCOUNT_MODEL_UNAVAILABLE': '改文件用的模型现在用不了了（积分账号里没有它了，或报价过期）', 'ACCOUNT_SESSION_REQUIRED': '积分模式没有登录', 'ACCOUNT_INFERENCE_NOT_ENABLED': '积分账号现在不能调模型', 'WORKFLOW_PAYER_CHANGED': '项目和现在的接入方式对不上'}"
+   },
+   {
+    "name": "_ALL_TASK_STATUSES",
+    "type": "tuple",
+    "value": "('proposed', 'queued', 'running', 'waiting', 'done', 'failed', 'cancelled', 'interrupted', 'stale')"
+   },
+   {
+    "name": "_DROP",
+    "type": "dict",
+    "value": "{65292: None, 12290: None, 12289: None, 65307: None, 65306: None, 65281: None, 65311: None, 8220: None, 8221: None, 8216: None, 8217: None, 12300: None, 12301: None, 12302: None, 12303: None, 65288: None, 65289: None, 12298: None, 12299: None, 12296: None, 12297: None, 12304: None, 12305: None, 8230: None, 183: None, 8212: None, 8211: None, 45: None, 44: None, 46: None, 59: None, 58: None, 33: None, 63: None, 40: None, 41: None, 91: None, 93: None, 123: None, 125: None, 60: None, 62: None, 10214: None, 10215: None, 47: None, 124: None, 96: None, 126: None, 42: None, 95: None, 35: None, 61: None, 43: None, 94: None, 36: None, 37: None, 38: None, 64: None, 34: None, 39: None, 92: None}"
+   },
+   {
+    "name": "_NEEDS_PLACES",
+    "type": "frozenset"
+   },
+   {
+    "name": "_QUOTES",
+    "type": "tuple",
+    "value": "(('“', '”'), ('「', '」'), ('『', '』'), ('‘', '’'), ('\"', '\"'))"
+   },
+   {
+    "name": "_RULE_NOTES",
+    "type": "dict",
+    "value": "{'T7': '只把“实证”“调查显示”“实测”这类说法改成如实的说法（如“基于模拟数据的方法演示”“模拟结果显示”），数字和结论本身不动；题目里的不要自动改，原样留着，在说明里写一句请用户定', 'T3': '把疑似编造的注册号、伦理批号换成“［待作者填写：注册号］”“［待作者填写：伦理批号］”，别的字一个不动；不要另编一个号'}"
+   },
+   {
+    "name": "_after_fix",
+    "type": "cython_function_or_method",
+    "doc": "自动修那一次做完再查的结论（10-14 复审 M2）：改好 / 还剩只按交给它的那几项算（按处数：交出去的那几处都没了\n才算改好），还剩的写出名字；再查出错照实说没做完；别的问题对不上动手前的结论时照实说分不出新旧。",
+    "sig": "(view: 'dict', handed: 'Any', totals: 'dict[str, int]') -> 'None'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_auto_fix",
+    "type": "cython_function_or_method",
+    "doc": "这次修改改出来的需修项里，措辞类的自动安排一次只改这几处的修改（编辑器在独立副本里改、能撤销）；\n要补内容、要用户拍板、像是用户点名要写的，只报告（记进 view[\"asks\"]）。\n\n只认能和动手前那次检查对上的新问题（分不出新旧的不改，原来就有的只报告）。检查在线程里跑的这段时间，用户可能\n关了开关、撤销了这次修改：安排前重读一次任务和项目（10-14 复审 H2、M3）。\n不安排返回 None；否则 {\"state\": arranged / ask / failed, \"count\": 交出去几项, ...}。",
+    "sig": "(wf_id: 'str', task_id: 'int', view: 'dict', new: 'list', totals: 'dict[str, int]', changed: 'list[str]') -> 'Optional[dict]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_compare",
+    "type": "cython_function_or_method",
+    "doc": "和动手前那次比：(这次改出来的 [(条目, 新出现的位置, 多出来几处)], 原来就有的, 改好了的)。\n\n同一规则处数变多了才算这次改出来的，新出现的位置按命中处前后的原文认（行号会随修改移动）；以前只按规则编号比，\n同类问题换个地方又写一处认不出来（10-14 复审 M1）。没有位置的按规则 + 说法比（数字不算）。",
+    "sig": "(now: 'list[dict]', then: 'list[dict]') -> 'tuple[list[tuple[dict, list, int]], list[dict], list[dict]]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_cut",
+    "type": "cython_function_or_method",
+    "doc": "按句截断（10-14 复审 M5：按字数截，指令和摘要里会留半句话）。",
+    "sig": "(text: 'Any', limit: 'int') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_dictated",
+    "type": "cython_function_or_method",
+    "doc": "这几处是不是用户点名要写的（10-14 复审 H1：用户让 AI\"原样加一句'本文首次……'\"，软件自动改掉了）：\n命中的字在用户用引号括起来的原话里，或者盖住命中处的一段原文和用户原话 / 这次的修改要求连着 8 个字一样\n（只看盖住命中处的那几段，前后文碰巧和用户原话一样的不算）。",
+    "sig": "(locs: 'list[dict]', words: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_edit_sentence",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(view: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_fix_instruction",
+    "type": "cython_function_or_method",
+    "doc": "给编辑器的话：每项写名称、怎么改（按句截）和全部新出现的位置（带命中处的原文，免得认错地方，10-14 复审 M5）。",
+    "sig": "(stage: 'str', handed: 'list[tuple[dict, list, int]]') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_fixes",
+    "type": "cython_function_or_method",
+    "doc": "检查器原样的需修项。同一规则可以有几条说法不同的（如 T7\"没写用了模拟数据\"/\"摘要写了实证\"），都留着\n（10-14 复审 M1：以前按编号建字典，只剩最后一条）。",
+    "sig": "(result: 'dict') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_handed_item",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(raw: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_hints",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(result: 'dict') -> 'int'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_item",
+    "type": "cython_function_or_method",
+    "doc": "一项需修给人和 AI 看的样子；locs 给了就只写这几处（比如这次新出现的位置）。",
+    "sig": "(raw: 'dict', locs: 'Optional[list]' = None) -> 'dict'",
+    "defaults": "(None,)",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_locs",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(raw: 'dict') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_model_blocker",
+    "type": "cython_function_or_method",
+    "doc": "积分模式下改文件（编辑器）有没有模型可用：按编辑器开工时同一套规则（对话模型 → 项目的默认模型 → 账号里只有\n一个模型）先看一眼，只查模型清单、不调模型。用不了返回原因；Key 模式、能用、查不出来都返回空串（照旧安排，\n真开工时照实报错）。",
+    "sig": "(params: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_module",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "()",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_norm",
+    "type": "cython_function_or_method",
+    "doc": "比对用：去掉空白、标点和命中标记（⟦⟧），英文小写。行号会随修改移动，新旧按原文比。",
+    "sig": "(text: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_note_fix",
+    "type": "cython_function_or_method",
+    "doc": "安排自动修以后补在结论后面的话。给 AI 的（summary，进任务记忆）和给用户看的（user_text，运行块上）分开写：\n以前给 AI 的\"告诉用户……问要不要改\"直接摆在界面上（10-14 复审 M7）。",
+    "sig": "(view: 'dict', fix: 'Optional[dict]') -> 'None'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_old_after_fix_sentence",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(view: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_own_paths",
+    "type": "cython_function_or_method",
+    "doc": "问题没有位置时：允许改这次改过的成稿文件（含 \\input 的），没有就改检查的那个文件。",
+    "sig": "(ws: 'Path', view: 'dict', changed: 'list[str]') -> 'list[str]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_place",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(loc: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_previous",
+    "type": "cython_function_or_method",
+    "doc": "可以拿来当\"动手前\"的结论：上次改完后查的、引擎上次查的（同一阶段、同一技能）。",
+    "sig": "(ws: 'Path', stage: 'str', skill: 'str') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_quoted",
+    "type": "cython_function_or_method",
+    "doc": "原话里引号括起来的几段（去掉空白标点后至少 2 个字）。",
+    "sig": "(words: 'str') -> 'list[str]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_run_sentence",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(view: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_sha",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(data: 'bytes') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_shape",
+    "type": "cython_function_or_method",
+    "doc": "说法的样子：数字不算（\"1 处\"和\"2 处\"是同一种说法）。",
+    "sig": "(text: 'Any') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_target",
+    "type": "cython_function_or_method",
+    "doc": "这次改动碰到的检查对象：(阶段, 技能, 成稿或大纲)。成稿（含 \\input 的文件）优先，其次大纲；都没碰到返回 None。",
+    "sig": "(ws: 'Path', steps: 'list[dict]', changed: 'set[str]', module) -> 'Optional[tuple[str, str, str]]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_text",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(item: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_timed_out_view",
+    "type": "cython_function_or_method",
+    "doc": "改完的检查超时：照实说没查完（不知道有没有改出新问题），不影响这次修改。",
+    "sig": "() -> 'dict'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_total",
+    "type": "cython_function_or_method",
+    "doc": "这一项有几处：检查器给了处数用处数，没给按列出的位置数，都没有算 1 处。",
+    "sig": "(raw: 'dict') -> 'int'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_totals",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(raws: 'list[dict]') -> 'dict[str, int]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "_was_current_before",
+    "type": "cython_function_or_method",
+    "doc": "这份结论是不是正好对应动手前的稿件：它记下的每个源文件，改过的按动手前那一版比，没改的按现在比。",
+    "sig": "(ws: 'Path', data: 'dict', changed: 'set[str]', before: 'Optional[dict]') -> 'bool'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "asyncio",
+    "type": "module"
+   },
+   {
+    "name": "auto_fix_enabled",
+    "type": "cython_function_or_method",
+    "doc": "默认开；只有明确关掉（False）才不自动修。",
+    "sig": "(params: 'Optional[dict]') -> 'bool'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "check_after_change",
+    "type": "cython_function_or_method",
+    "doc": "查一遍、和动手前比（同步，在线程里跑）。不适用返回 None。\n结论里下划线开头的键（检查器原样的条目、各规则的处数）只给自动修用，存进任务行之前拿掉。\nabandoned：等的那边已经超时、被取消（线程停不下来）——查完也不写结论文件，免得盖掉之后那次修改的结论，\n也免得在已经删掉的项目里重新建出 .mh/ 目录。",
+    "sig": "(ws: 'Path', steps: 'list[dict]', changed: 'list[str]', before: 'Optional[dict]', abandoned: 'Optional[threading.Event]' = None) -> 'Optional[dict]'",
+    "defaults": "(None,)",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "hashlib",
+    "type": "module"
+   },
+   {
+    "name": "json",
+    "type": "module"
+   },
+   {
+    "name": "log",
+    "type": "Logger"
+   },
+   {
+    "name": "logging",
+    "type": "module"
+   },
+   {
+    "name": "public_view",
+    "type": "cython_function_or_method",
+    "doc": "给测试和别的模块读 dispatch_json 里的 writing_check 用。",
+    "sig": "(value: 'Any') -> 'Optional[dict]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "readonly_lines",
+    "type": "cython_function_or_method",
+    "doc": "只读检查（check）带上写作检查：只算、不写文件。返回要放进检查结果的几行；不适用返回空。",
+    "sig": "(ws: 'Path', skill: 'str', targets: 'Optional[list[str]]' = None) -> 'list[str]'",
+    "defaults": "(None,)",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "run_for_task",
+    "type": "cython_function_or_method",
+    "doc": "改文件 / 局部任务做完后调（conversation_consistency.note_changed 排在改完自查后面，同一个后台任务里）。",
+    "sig": "(wf_id: 'str', task_id: 'int') -> 'Optional[dict]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "run_summary",
+    "type": "cython_function_or_method",
+    "doc": "这次跑的几步里最后一份写作检查结论（步骤表 writing_check 列，引擎写的）：给结果行一句话、给运行块一行。\n没有结论（不是学术写作、这几步没有要查的）返回 (\"\", None)。",
+    "sig": "(planned: 'list[dict]', workspace: 'Path') -> 'tuple[str, Optional[dict]]'",
+    "defaults": "None",
+    "module_of": "conversation_writing_check"
+   },
+   {
+    "name": "threading",
+    "type": "module"
+   },
+   {
+    "name": "time",
+    "type": "module"
+   },
+   {
+    "name": "uuid",
+    "type": "module"
+   }
+  ]
+ },
+ {
+  "module": "backend.services.paper_submission_contract",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"paper_submission_contract.py\", line 25, in init paper_submission_contract\nModuleNotFoundError: No module named 'config'\n"
+ },
+ {
+  "module": "backend.services.checkpoint_runtime",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\checkpoint_runtime.cp311-win_amd64.pyd",
+  "doc": "One server-owned clock and one decision per human checkpoint round.\n\nNo model calls. Runtime identities deliberately expire on process restart: an\nold browser must never approve a recovered/new round with its previous token.\n",
+  "attrs": [
+   {
+    "name": "CHECKPOINT_TIMEOUT_SECONDS",
+    "type": "int",
+    "value": "1800"
+   },
+   {
+    "name": "Checkpoint",
+    "type": "type",
+    "doc": "Checkpoint(workflow_id: 'str', payload: 'dict', timeout: 'float' = 1800, checkpoint_id: 'str' = <factory>, started_at: 'float' = <factory>, started_monotonic: 'float' = <factory>, event: 'asyncio.Event' = <factory>, response: 'dict | None' = None, on_timeout: 'str' = 'approve')",
+    "sig": "(workflow_id: 'str', payload: 'dict', timeout: 'float' = 1800, checkpoint_id: 'str' = <factory>, started_at: 'float' = <factory>, started_monotonic: 'float' = <factory>, event: 'asyncio.Event' = <factory>, response: 'dict | None' = None, on_timeout: 'str' = 'approve') -> None",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "CheckpointConflict",
+    "type": "type",
+    "doc": "Inappropriate argument value (of correct type).",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "CheckpointTimeoutPaused",
+    "type": "type",
+    "doc": "检查点等满时限、按设定改为暂停：步骤保持“等待确认”，用户回来点继续会重新进入检查点。",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "OrderedDict",
+    "type": "type",
+    "doc": "Dictionary that remembers insertion order",
+    "defaults": "None",
+    "module_of": "collections"
+   },
+   {
+    "name": "TIMEOUT_ACTIONS",
+    "type": "tuple",
+    "value": "('approve', 'pause')"
+   },
+   {
+    "name": "_active",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_finish",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(session: 'Checkpoint', response: 'dict') -> 'None'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "_finished",
+    "type": "OrderedDict",
+    "value": "OrderedDict()"
+   },
+   {
+    "name": "asyncio",
+    "type": "module"
+   },
+   {
+    "name": "close",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(session: 'Checkpoint') -> 'None'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "current",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str') -> 'dict | None'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "dataclass",
+    "type": "function",
+    "doc": null,
+    "sig": "(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)",
+    "defaults": "(None,)",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "datetime",
+    "type": "type",
+    "doc": "datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])\n\nThe year, month and day arguments are required. tzinfo may be None, or an\ninstance of a tzinfo subclass. The remaining arguments may be ints.",
+    "defaults": "None",
+    "module_of": "datetime"
+   },
+   {
+    "name": "field",
+    "type": "function",
+    "doc": null,
+    "sig": "(*, default=<dataclasses._MISSING_TYPE object at 0x000002864350C110>, default_factory=<dataclasses._MISSING_TYPE object at 0x000002864350C110>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x000002864350C110>)",
+    "defaults": "None",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "math",
+    "type": "module"
+   },
+   {
+    "name": "require_live",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str', checkpoint_id: 'str | None') -> 'Checkpoint'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "resolve",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str', checkpoint_id: 'str | None', response: 'dict') -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "start",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workflow_id: 'str', payload: 'dict', timeout: 'float' = 1800, on_timeout: 'str' = 'approve') -> 'Checkpoint'",
+    "defaults": "(1800, 'approve')",
+    "module_of": "checkpoint_runtime"
+   },
+   {
+    "name": "time",
+    "type": "module"
+   },
+   {
+    "name": "timezone",
+    "type": "type",
+    "doc": "Fixed offset from UTC implementation of tzinfo.",
+    "defaults": "None",
+    "module_of": "datetime"
+   },
+   {
+    "name": "uuid",
+    "type": "module"
+   },
+   {
+    "name": "wait",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(session: 'Checkpoint', *, release: 'bool' = True) -> 'dict'",
+    "defaults": "None",
+    "module_of": "checkpoint_runtime"
+   }
+  ]
+ },
+ {
+  "module": "backend.services.step_review_report",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"step_review_report.py\", line 24, in init step_review_report\nModuleNotFoundError: No module named 'config'\n"
+ },
+ {
+  "module": "backend.services.artifact_bundle",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\artifact_bundle.cp311-win_amd64.pyd",
+  "doc": "对话里打包下载（用户 2026-10-16：“对话那边如果跑完一些文件能不能批量打包下载啊”）。\n\n四种打包（spec[\"kind\"]）：\n  task        结果块里的“打包下载（N 个文件）”：那一件任务这一次跑出来的文件。成果清单从库里读，不信界面传来的列表。\n  paths       右栏「文件」里自己勾的文件和文件夹（文件夹连里面的文件一起）。\n  all         全部成果：论文、代码、图、提交包……项目里公开的文件，不含用户上传的材料（user_data/）、选的格式模板原件\n              （user_template/，写作步放进 paper/ 的那一份照常装，编译要用）和项目设置文件。\n  submission  参赛提交版（竞赛项目才有）：和项目页「导出参赛版」同一套挑法（论文成品与源码、代码、图、代码要读的数据，\n              不含赛题原文；代码去掉软件加的自举头），再加上大数据赛整理好的提交包。\nAI 的 package_files（“把刚跑出来的打包给我”）只核对、数一数（plan），下载链接由界面画在 AI 那条回复下面，点了才打包。\n\n压缩包放在资料位置的 cache/bundles（不进项目、AI 看不到），30 分钟内可以重复下载；合计超过 3 GB 先删最早的。\n只装公开文件（和右栏、AI 看到的是同一道路径闸）。打包时读不了的（被别的程序占着、刚被删掉）跳过，写进包里的\n“打包说明.txt”，界面也说一声。\n",
+  "attrs": [
+   {
+    "name": "Any",
+    "type": "_AnyMeta",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "BundleError",
+    "type": "type",
+    "doc": "打包不了：code 给程序看，message 是给用户看的中文，status 是接口回的 HTTP 状态。",
+    "sig": "(code: 'str', message: 'str', status: 'int' = 400)",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "Collected",
+    "type": "type",
+    "doc": "Collected(kind: 'str', label: 'str', files: 'list[tuple[Path, str]]' = <factory>, bytes: 'int' = 0, skipped: 'list[dict]' = <factory>, runtime: 'dict[str, bytes]' = <factory>, warnings: 'list[str]' = <factory>, readme: 'str' = '', strip_code: 'bool' = False)",
+    "sig": "(kind: 'str', label: 'str', files: 'list[tuple[Path, str]]' = <factory>, bytes: 'int' = 0, skipped: 'list[dict]' = <factory>, runtime: 'dict[str, bytes]' = <factory>, warnings: 'list[str]' = <factory>, readme: 'str' = '', strip_code: 'bool' = False) -> None",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "KEEP_SECONDS",
+    "type": "int",
+    "value": "1800"
+   },
+   {
+    "name": "KEEP_TOTAL_BYTES",
+    "type": "int",
+    "value": "3221225472"
+   },
+   {
+    "name": "KINDS",
+    "type": "tuple",
+    "value": "('task', 'paths', 'all', 'submission')"
+   },
+   {
+    "name": "LABELS",
+    "type": "dict",
+    "value": "{'task': '这次的成果', 'paths': '选中的文件', 'all': '全部成果', 'submission': '参赛提交版'}"
+   },
+   {
+    "name": "MATERIALS",
+    "type": "str",
+    "value": "'user_data'"
+   },
+   {
+    "name": "MAX_BYTES",
+    "type": "int",
+    "value": "4294967296"
+   },
+   {
+    "name": "MAX_FILES",
+    "type": "int",
+    "value": "20000"
+   },
+   {
+    "name": "MAX_PATHS",
+    "type": "int",
+    "value": "200"
+   },
+   {
+    "name": "NOTE_NAME",
+    "type": "str",
+    "value": "'打包说明.txt'"
+   },
+   {
+    "name": "ORPHAN_SECONDS",
+    "type": "int",
+    "value": "600"
+   },
+   {
+    "name": "Optional",
+    "type": "_SpecialForm",
+    "doc": null,
+    "sig": "(*args, **kwds)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "SPARE_BYTES",
+    "type": "int",
+    "value": "209715200"
+   },
+   {
+    "name": "SUBMISSION_DIRS",
+    "type": "frozenset"
+   },
+   {
+    "name": "TEMPLATE_STORE",
+    "type": "str",
+    "value": "'user_template'"
+   },
+   {
+    "name": "_Ready",
+    "type": "type",
+    "doc": "_Ready(workflow_id: 'str', path: 'Path', name: 'str', size: 'int', created: 'float')",
+    "sig": "(workflow_id: 'str', path: 'Path', name: 'str', size: 'int', created: 'float') -> None",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_STORED",
+    "type": "frozenset"
+   },
+   {
+    "name": "_TOKEN",
+    "type": "Pattern"
+   },
+   {
+    "name": "_UNSAFE_NAME",
+    "type": "Pattern"
+   },
+   {
+    "name": "_building",
+    "type": "BoundedSemaphore"
+   },
+   {
+    "name": "_cleanup",
+    "type": "cython_function_or_method",
+    "doc": "删过期的、超出合计的、上次运行留下的。",
+    "sig": "(now: 'Optional[float]' = None) -> 'None'",
+    "defaults": "(None,)",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_collected",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', raw_spec: 'Any') -> 'tuple[dict, dict, Collected, str]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_expand",
+    "type": "cython_function_or_method",
+    "doc": "把选中的文件夹换成里面的公开文件（一次遍历）。返回里面找到了文件的那几个文件夹。",
+    "sig": "(root: 'Path', folders: 'list[str]', picked: 'dict', *, noise) -> 'set[str]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_free_name",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wanted: 'str', taken: 'set[str]') -> 'str'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_lock",
+    "type": "lock"
+   },
+   {
+    "name": "_make",
+    "type": "cython_function_or_method",
+    "doc": "在工作线程里打包、登记（同时最多两个）。",
+    "sig": "(collected: 'Collected', workflow_id: 'str', name: 'str', root: 'Path') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_note",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(collected: 'Collected', late: 'list[dict]') -> 'str'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_pick_listed",
+    "type": "cython_function_or_method",
+    "doc": "一份路径清单（任务的成果、用户勾的）：文件直接放，文件夹连里面的文件一起，过不了路径闸的、不在了的记下原因。",
+    "sig": "(root: 'Path', listed: 'list[str]', picked: 'dict', skipped: 'list', *, gone: 'str', noise) -> 'None'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_project",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_ready",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_rel",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(root: 'Path', path: 'Path') -> 'str'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_reset_for_test",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'None'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_runtime",
+    "type": "cython_function_or_method",
+    "doc": "代码要用的公开运行库（plot_utils 这类）：只在选了代码时找，和导出一样只放审过的那几份。",
+    "sig": "(collected: 'Collected', root: 'Path') -> 'None'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "_setting_files",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'frozenset'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "asyncio",
+    "type": "module"
+   },
+   {
+    "name": "build",
+    "type": "cython_function_or_method",
+    "doc": "把挑好的文件写进 target（先写 .part，写完再换名）。返回 (写进去的文件数, 打包时才发现读不了的)。",
+    "sig": "(collected: 'Collected', target: 'Path') -> 'tuple[int, list[dict]]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "bundle_dir",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'Path'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "collect",
+    "type": "cython_function_or_method",
+    "doc": "挑出要打包的文件（同步，不写任何东西）。task 的成果清单由调用方从库里读好传进来（outputs）。",
+    "sig": "(workspace: 'Path', spec: 'dict', *, template: 'str' = '', params: 'Optional[dict]' = None, outputs: 'Optional[list[str]]' = None) -> 'Collected'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "dataclass",
+    "type": "function",
+    "doc": null,
+    "sig": "(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)",
+    "defaults": "(None,)",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "datetime",
+    "type": "type",
+    "doc": "datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])\n\nThe year, month and day arguments are required. tzinfo may be None, or an\ninstance of a tzinfo subclass. The remaining arguments may be ints.",
+    "defaults": "None",
+    "module_of": "datetime"
+   },
+   {
+    "name": "download_url",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(wf_id: 'str', token: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "field",
+    "type": "function",
+    "doc": null,
+    "sig": "(*, default=<dataclasses._MISSING_TYPE object at 0x000002864350C110>, default_factory=<dataclasses._MISSING_TYPE object at 0x000002864350C110>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x000002864350C110>)",
+    "defaults": "None",
+    "module_of": "dataclasses"
+   },
+   {
+    "name": "human_size",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(size: 'int') -> 'str'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "is_competition",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(template: 'str', params: 'Optional[dict]') -> 'bool'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "json",
+    "type": "module"
+   },
+   {
+    "name": "latest_task",
+    "type": "cython_function_or_method",
+    "doc": "最近做完、记了成果的那一件任务（“刚跑出来的”）。",
+    "sig": "(wf_id: 'str') -> 'Optional[int]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "log",
+    "type": "Logger"
+   },
+   {
+    "name": "logging",
+    "type": "module"
+   },
+   {
+    "name": "lookup",
+    "type": "cython_function_or_method",
+    "doc": "下载：只认这个项目、还没过期、文件还在的。",
+    "sig": "(wf_id: 'str', token: 'str') -> 'Optional[tuple[Path, str]]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "normalize_spec",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(raw: 'Any') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "options",
+    "type": "cython_function_or_method",
+    "doc": "右栏「文件」顶上「打包下载」菜单里有哪几项（参赛提交版只给竞赛项目）。",
+    "sig": "(template: 'str', params: 'Optional[dict]') -> 'list[dict]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "os",
+    "type": "module"
+   },
+   {
+    "name": "plan",
+    "type": "cython_function_or_method",
+    "doc": "只数一数（AI 的 package_files 用）：不打包、不写文件。",
+    "sig": "(wf_id: 'str', raw_spec: 'Any') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "prepare",
+    "type": "cython_function_or_method",
+    "doc": "打好包，给下载地址（30 分钟内有效）。",
+    "sig": "(wf_id: 'str', raw_spec: 'Any') -> 'dict'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "re",
+    "type": "module"
+   },
+   {
+    "name": "secrets",
+    "type": "module"
+   },
+   {
+    "name": "shutil",
+    "type": "module"
+   },
+   {
+    "name": "task_outputs",
+    "type": "cython_function_or_method",
+    "doc": "那一件任务记下的成果清单（库里的）和它的名字。",
+    "sig": "(wf_id: 'str', task_id: 'int') -> 'tuple[list[str], str]'",
+    "defaults": "None",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "threading",
+    "type": "module"
+   },
+   {
+    "name": "time",
+    "type": "module"
+   },
+   {
+    "name": "zip_name",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(title: 'str', label: 'str', now: 'Optional[datetime]' = None) -> 'str'",
+    "defaults": "(None,)",
+    "module_of": "artifact_bundle"
+   },
+   {
+    "name": "zipfile",
+    "type": "module"
+   }
+  ]
+ },
+ {
+  "module": "backend.services.paper_readiness",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\paper_readiness.cp311-win_amd64.pyd",
+  "doc": "Deterministic, read-only paper readiness evidence for the chat workbench.\n\nThis module is deliberately observational.  A missing or malformed file may\nproduce ``pending``/``attention`` but must never fail, restart or mutate a\nworkflow.  The UI therefore shows verifiable facts instead of a model-invented\nquality score.\n",
+  "attrs": [
+   {
+    "name": "Iterable",
+    "type": "_SpecialGenericAlias",
+    "doc": "A generic version of collections.abc.Iterable.",
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "_ABSTRACT_PROBLEM_RE",
+    "type": "Pattern"
+   },
+   {
+    "name": "_ABSTRACT_TOKEN_RE",
+    "type": "Pattern"
+   },
+   {
+    "name": "_CACHE",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_CACHE_TTL_SECONDS",
+    "type": "float",
+    "value": "10.0"
+   },
+   {
+    "name": "_PRIVATE_PARTS",
+    "type": "frozenset"
+   },
+   {
+    "name": "_abstract_problem_emphasis_ok",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(abstract: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_abstract_text",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(paper: 'str', *, stats: 'bool' = False) -> 'str'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_abstract_units",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(abstract: 'str') -> 'int'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_brace_end",
+    "type": "cython_function_or_method",
+    "doc": "``text[open_index]`` 是 ``{``：返回与之配对的 ``}`` 下标，找不到返回 -1。",
+    "sig": "(text: 'str', open_index: 'int') -> 'int'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_display_math_count",
+    "type": "cython_function_or_method",
+    "doc": "Count display-math blocks without counting both ends of ``$$...$$``.",
+    "sig": "(text: 'str') -> 'int'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_first",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(files: 'Iterable[Path]', names: 'set[str]') -> 'Path | None'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_is_final_docx",
+    "type": "cython_function_or_method",
+    "doc": "Do not mistake a user-uploaded problem statement for the final paper.",
+    "sig": "(workspace: 'Path', path: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_is_final_pdf",
+    "type": "cython_function_or_method",
+    "doc": "Identify a deliverable PDF without counting embedded paper figures.",
+    "sig": "(workspace: 'Path', path: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_is_stats_paper",
+    "type": "cython_function_or_method",
+    "doc": "统计建模论文：工作区是统计建模，或论文源码第 2 行一类的模板标记写明 stats。",
+    "sig": "(workspace: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_item",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(key: 'str', label: 'str', state: 'str', summary: 'str', evidence: 'Iterable[str]' = ()) -> 'dict'",
+    "defaults": "((),)",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_paper_text",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workspace: 'Path', files: 'list[Path]') -> 'tuple[str, list[str]]'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_public_files",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workspace: 'Path') -> 'list[Path]'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_read",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(path: 'Path', limit: 'int' = 2097152) -> 'str'",
+    "defaults": "(2097152,)",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_rel",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(workspace: 'Path', path: 'Path') -> 'str'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_size",
+    "type": "cython_function_or_method",
+    "doc": "Return a race-safe size while a producer may still be replacing a file.",
+    "sig": "(path: 'Path | None') -> 'int'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "_stats_abstract_text",
+    "type": "cython_function_or_method",
+    "doc": "统计建模手排摘要：从 ``\\section*{…摘要…}`` 起，到含“关键词：”的那一行止（关键词行不计入）。",
+    "sig": "(paper: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "build_readiness",
+    "type": "cython_function_or_method",
+    "doc": "Build bounded evidence from public files only; never writes to disk.",
+    "sig": "(workspace: 'Path', params: 'dict | None' = None) -> 'dict'",
+    "defaults": "(None,)",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "build_readiness_cached",
+    "type": "cython_function_or_method",
+    "doc": "Bound repeated 5-second UI polling without hiding task completion long.",
+    "sig": "(workspace: 'Path', params: 'dict | None' = None, *, now: 'float | None' = None) -> 'dict'",
+    "defaults": "(None,)",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "from_stage_progress",
+    "type": "cython_function_or_method",
+    "doc": "Non-contest projects use their actual stage evidence, not a paper rubric.",
+    "sig": "(progress: 'dict | None') -> 'dict'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "os",
+    "type": "module"
+   },
+   {
+    "name": "re",
+    "type": "module"
+   },
+   {
+    "name": "time",
+    "type": "module"
+   },
+   {
+    "name": "unavailable_readiness",
+    "type": "cython_function_or_method",
+    "doc": "Safe fallback for the state endpoint; contains no exception/path text.",
+    "sig": "(detail: 'str' = '完成度证据暂时无法读取') -> 'dict'",
+    "defaults": "('完成度证据暂时无法读取',)",
+    "module_of": "paper_readiness"
+   },
+   {
+    "name": "with_stage_progress",
+    "type": "cython_function_or_method",
+    "doc": "Attach execution history without upgrading it to current verification.\n\nOverlay outside the filesystem cache, so a newly completed stage is visible\nimmediately. Never mutate the cached object shared by state requests.",
+    "sig": "(readiness: 'dict', progress: 'dict | None') -> 'dict'",
+    "defaults": "None",
+    "module_of": "paper_readiness"
+   }
+  ]
+ },
+ {
+  "module": "backend.services.results_consistency_gate",
+  "ok": false,
+  "error": "Traceback (most recent call last):\n  File \"E:\\数学建模\\_swc2026\\modex_re\\introspect.py\", line 14, in describe\n    m = __import__(name, fromlist=['*'])\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"results_consistency_gate.py\", line 16, in init results_consistency_gate\nModuleNotFoundError: No module named 'services'\n"
+ },
+ {
+  "module": "backend.services.deliverable_facts",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\deliverable_facts.cp311-win_amd64.pyd",
+  "doc": "快照里的一句“成品现在多大”：主文稿实际的字数、页数，和目标放在一起（小白实测 10-16：课程论文目标 3000 字，\n导出前检查报了“字数 4399 高于目标 3000 的 120%”，快照里却只有“目标字数=3000”，用户问“还差什么”，AI 答\n“约 3000 字，可以直接交了”）。\n\n- Word 输出（Markdown 主文稿）：正文字数和导出前检查一个口径（tools/docx_precheck：去掉标题、摘要、关键词、参考文献、\n  图片、引用标记）；英文为主的按词数。页数只用右栏预览已经转好的真实分页 PDF（这里不转：每轮对话都要读快照）。\n  主文稿比 Word 新，就说 Word 还没重新导出。\n- PDF 输出（LaTeX）：编译出的 PDF 页数，PDF 比源文件旧就说还没重新编译；有字数目标的再给粗略字数（含公式表格里的字）。\n- 字数页数只作参考（用户定的：超出只提醒，不删内容、不因此返修），句子里写明。\n软著、专利的成品另有页数和格式规矩，不在这里说。按文件大小和修改时间记住数出来的字数，不每轮都重数。\n",
+  "attrs": [
+   {
+    "name": "FILE_LIMIT_BYTES",
+    "type": "int",
+    "value": "2097152"
+   },
+   {
+    "name": "Optional",
+    "type": "_SpecialForm",
+    "doc": null,
+    "sig": "(*args, **kwds)",
+    "defaults": "None",
+    "module_of": "typing"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "SKIP_TEMPLATES",
+    "type": "frozenset"
+   },
+   {
+    "name": "STALE_SECONDS",
+    "type": "float",
+    "value": "2.0"
+   },
+   {
+    "name": "_MEMO_MAX",
+    "type": "int",
+    "value": "200"
+   },
+   {
+    "name": "_REFERENCES_HEAD",
+    "type": "Pattern"
+   },
+   {
+    "name": "_body_text",
+    "type": "cython_function_or_method",
+    "doc": "导出前检查数“正文字数”的那段正文（tools/docx_precheck.body_text）。",
+    "sig": "(content: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_compare",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(actual: 'int', target: 'Optional[int]', unit: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_count_file",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(path: 'Path', counter, *, limit: 'Optional[int]' = 2097152) -> 'Optional[tuple[int, str]]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_latex_count",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(path: 'Path') -> 'tuple[int, str]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_markdown_count",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(path: 'Path') -> 'tuple[int, str]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_memo",
+    "type": "dict",
+    "value": "{}"
+   },
+   {
+    "name": "_mtime",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(path: 'Path') -> 'float'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_pages",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(pdf: 'Path') -> 'Optional[int]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_precheck",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "()",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_references_start",
+    "type": "cython_function_or_method",
+    "doc": "（参考文献那一页的页码, \"\"）：PDF 里第一处单独成行的 References / 参考文献 标题；没找到是 0。只看前 300 页。",
+    "sig": "(pdf: 'Path') -> 'tuple[int, str]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_reset_for_test",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "() -> 'None'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_target",
+    "type": "cython_function_or_method",
+    "doc": null,
+    "sig": "(params: 'dict', key: 'str') -> 'Optional[int]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "_word_pages",
+    "type": "cython_function_or_method",
+    "doc": "右栏预览已经转好的真实分页 PDF 的页数；还没转过就不知道（这里不转）。",
+    "sig": "(docx: 'Path') -> 'Optional[int]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "asyncio",
+    "type": "module"
+   },
+   {
+    "name": "body_count",
+    "type": "cython_function_or_method",
+    "doc": "（数目, 单位）：中文为主按字，英文为主按词；就是导出前检查数的那个数（tools/docx_precheck.body_count）。",
+    "sig": "(content: 'str') -> 'tuple[int, str]'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "log",
+    "type": "Logger"
+   },
+   {
+    "name": "logging",
+    "type": "module"
+   },
+   {
+    "name": "re",
+    "type": "module"
+   },
+   {
+    "name": "size_line",
+    "type": "cython_function_or_method",
+    "doc": "一句话：成品现在多少字、多少页，比目标多还是少；成品还不在就是空串。",
+    "sig": "(ws: 'Path', mode_info: 'dict', params: 'dict') -> 'str'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "snapshot_line",
+    "type": "cython_function_or_method",
+    "doc": "快照里的那一句（项目不在、类型不适用、成品还没有：空串）。",
+    "sig": "(wf_id: 'str') -> 'str'",
+    "defaults": "None",
+    "module_of": "deliverable_facts"
+   },
+   {
+    "name": "sys",
+    "type": "module"
+   }
+  ]
+ }
+]

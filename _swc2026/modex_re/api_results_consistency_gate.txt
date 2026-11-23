@@ -1,0 +1,20 @@
+MODULE backend.services.results_consistency_gate ok=True
+DOC: 编程步骤完成前的确定性结果对账（机制审查 P4）。
+
+后台自己跑 ``results_consistency_check.py``，不靠模型自觉：汇总 JSON 与各问 JSON、
+RESULTS.md 的 RESULTS_KEYS 块只要同一字段数值不同，就不算完成。
+
+⛔ 只拦零歧义矛盾；检查器缺失、超时或解密失败一律放行（宁漏勿误），
+   绝不因为检查器自身的问题把一个真实完成的步骤卡死。
+
+
+CONSTANTS:
+REASON_PREFIX [str] = '结果数字前后不一致'
+SCRIPT [str] = 'results_consistency_check.py'
+_TIMEOUT_S [int] = 60
+
+CALLABLES:
+Path(*args, **kwargs) :: 
+check_results_consistency(workspace: 'Path') -> 'tuple[bool, str]' :: Return (ok, reason). ``ok`` is False only for an explicit contradiction.
+checker_environment() -> 'dict[str, str]' :: 
+repair_prompt(reason: 'str') -> 'str' :: 

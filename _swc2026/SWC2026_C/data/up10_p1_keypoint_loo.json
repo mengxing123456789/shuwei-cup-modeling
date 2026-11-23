@@ -1,0 +1,187 @@
+{
+ "note": "palm_full is the paper's representative point. Each row removes one keypoint; a small |d_rigidity| means the choice does not rest on it.",
+ "n_frames": 66070,
+ "rows": [
+  {
+   "n_points": 1,
+   "rigidity_cm": 5.1909502933638434e-05,
+   "jitter_ratio": 0.13891975325594574,
+   "finger_pose_sensitivity_cm": 4.5295727529849495e-06,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.4369,
+    "EgoPro": 0.4155,
+    "EgoStandard": 0.4506
+   },
+   "cross_dataset_spread_m": 0.03510929410930025,
+   "name": "wrist_kp0",
+   "d_rigidity_vs_palm_cm": 3.730678157564036e-05,
+   "d_jitter_vs_palm": 0.0007153102674163359
+  },
+  {
+   "n_points": 5,
+   "rigidity_cm": 1.4602721357998074e-05,
+   "jitter_ratio": 0.1382044429885294,
+   "finger_pose_sensitivity_cm": 0.0,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.4785,
+    "EgoPro": 0.4564,
+    "EgoStandard": 0.4881
+   },
+   "cross_dataset_spread_m": 0.0316856254827283,
+   "name": "palm_full",
+   "d_rigidity_vs_palm_cm": 0.0,
+   "d_jitter_vs_palm": 0.0
+  },
+  {
+   "n_points": 5,
+   "rigidity_cm": 1.5382339318652956,
+   "jitter_ratio": 0.14283359925890715,
+   "finger_pose_sensitivity_cm": 0.4887644908108164,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.5192,
+    "EgoPro": 0.4905,
+    "EgoStandard": 0.5242
+   },
+   "cross_dataset_spread_m": 0.03371375508327534,
+   "name": "tips_full",
+   "d_rigidity_vs_palm_cm": 1.5382193291439377,
+   "d_jitter_vs_palm": 0.004629156270377743
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.782014050529336e-05,
+   "jitter_ratio": 0.13858250344207765,
+   "finger_pose_sensitivity_cm": 1.0125751858093427e-06,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.4799,
+    "EgoPro": 0.458,
+    "EgoStandard": 0.4897
+   },
+   "cross_dataset_spread_m": 0.031712238473302234,
+   "name": "palm_minus_kp5",
+   "d_rigidity_vs_palm_cm": 3.217419147295285e-06,
+   "d_jitter_vs_palm": 0.00037806045354824014
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.8253401697497354e-05,
+   "jitter_ratio": 0.1383467165271594,
+   "finger_pose_sensitivity_cm": 1.1075773381255997e-06,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.4759,
+    "EgoPro": 0.4539,
+    "EgoStandard": 0.4859
+   },
+   "cross_dataset_spread_m": 0.03203372581661412,
+   "name": "palm_minus_kp9",
+   "d_rigidity_vs_palm_cm": 3.6506803394992797e-06,
+   "d_jitter_vs_palm": 0.00014227353863000003
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.6740633511516167e-05,
+   "jitter_ratio": 0.13794064605856826,
+   "finger_pose_sensitivity_cm": 1.1218663080264043e-06,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.4742,
+    "EgoPro": 0.4521,
+    "EgoStandard": 0.4841
+   },
+   "cross_dataset_spread_m": 0.03200092294178031,
+   "name": "palm_minus_kp13",
+   "d_rigidity_vs_palm_cm": 2.1379121535180926e-06,
+   "d_jitter_vs_palm": -0.00026379692996114645
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.4483590328210267e-05,
+   "jitter_ratio": 0.1375700417482039,
+   "finger_pose_sensitivity_cm": 9.77341589474698e-07,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.4733,
+    "EgoPro": 0.4511,
+    "EgoStandard": 0.483
+   },
+   "cross_dataset_spread_m": 0.03190088105501504,
+   "name": "palm_minus_kp17",
+   "d_rigidity_vs_palm_cm": -1.1913102978780762e-07,
+   "d_jitter_vs_palm": -0.0006344012403255161
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.8134697754463063,
+   "jitter_ratio": 0.14413546260586574,
+   "finger_pose_sensitivity_cm": 0.6807097359152523,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.526,
+    "EgoPro": 0.4959,
+    "EgoStandard": 0.5307
+   },
+   "cross_dataset_spread_m": 0.034797137747818674,
+   "name": "tips_minus_kp4",
+   "d_rigidity_vs_palm_cm": 1.8134551727249484,
+   "d_jitter_vs_palm": 0.0059310196173363305
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.5395197734753259,
+   "jitter_ratio": 0.14407496869826586,
+   "finger_pose_sensitivity_cm": 0.482866781645235,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.5188,
+    "EgoPro": 0.4904,
+    "EgoStandard": 0.5244
+   },
+   "cross_dataset_spread_m": 0.03392478399901161,
+   "name": "tips_minus_kp8",
+   "d_rigidity_vs_palm_cm": 1.539505170753968,
+   "d_jitter_vs_palm": 0.005870525709736452
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.4362413789675448,
+   "jitter_ratio": 0.14339526620475862,
+   "finger_pose_sensitivity_cm": 0.4367618940115986,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.5161,
+    "EgoPro": 0.4883,
+    "EgoStandard": 0.5216
+   },
+   "cross_dataset_spread_m": 0.03333880337713807,
+   "name": "tips_minus_kp12",
+   "d_rigidity_vs_palm_cm": 1.4362267762461869,
+   "d_jitter_vs_palm": 0.005190823216229212
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.454246429556515,
+   "jitter_ratio": 0.1423730762090963,
+   "finger_pose_sensitivity_cm": 0.44882120728971087,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.5165,
+    "EgoPro": 0.4885,
+    "EgoStandard": 0.5215
+   },
+   "cross_dataset_spread_m": 0.033061907703000104,
+   "name": "tips_minus_kp16",
+   "d_rigidity_vs_palm_cm": 1.454231826835157,
+   "d_jitter_vs_palm": 0.004168633220566903
+  },
+  {
+   "n_points": 4,
+   "rigidity_cm": 1.5882559375759986,
+   "jitter_ratio": 0.1422092238803842,
+   "finger_pose_sensitivity_cm": 0.500660461704637,
+   "dhead_by_dataset_m": {
+    "EgoDemo": 0.5187,
+    "EgoPro": 0.4899,
+    "EgoStandard": 0.5233
+   },
+   "cross_dataset_spread_m": 0.03346408227701886,
+   "name": "tips_minus_kp20",
+   "d_rigidity_vs_palm_cm": 1.5882413348546407,
+   "d_jitter_vs_palm": 0.004004780891854798
+  }
+ ],
+ "max_abs_d_rigidity_cm": 1.8134551727249484
+}

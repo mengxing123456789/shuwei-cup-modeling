@@ -1,0 +1,10 @@
+MODULE backend.services.quality_receipts
+DOC: Version-bound evidence; existence and model claims are not passing receipts.
+CALLABLES:
+_diagnostics(values) -> 'list[dict]' :: 
+observe_completed_step(ws: 'Path', skill: 'str') -> 'bool' :: Record real lightweight material checks after automatic completion. |  | Never invoked merely by opening the sidebar, never invokes a model, and | never changes workflow success if evidence is unavailable. These are | material checks, not a claim of independent mathematical verification.
+paper_snapshot(ws: 'Path', output: 'str') -> 'dict[str, str]' :: 
+record(ws: 'Path', key: 'str', baseline: 'dict[str, str]', checks: 'list[str]', passed: 'bool', *, scope: 'str | None' = None, diagnostics: 'list[dict] | None' = None) -> 'bool' :: Observational failure cannot turn successful production into a model retry.
+snapshot(ws: 'Path', paths) -> 'dict[str, str]' :: 
+status(ws: 'Path', key: 'str') -> 'dict' :: 
+step_snapshot(ws: 'Path', skill: 'str | None' = None) -> 'dict[str, str]' :: Stage inputs/materials, not later paper drafts or unrelated build logs. |  | The no-skill form preserves conservative legacy receipt semantics. New | scopes still include additions/deletions within their input/output trees.

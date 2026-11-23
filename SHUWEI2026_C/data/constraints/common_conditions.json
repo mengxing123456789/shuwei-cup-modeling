@@ -1,0 +1,108 @@
+{
+  "version": "q3-20261117-v1",
+  "units": "seconds and abstract cost units",
+  "worker_count": 1,
+  "initial_zone": "Z0",
+  "cases": [
+    {
+      "case_id": "S1",
+      "jobs": 8,
+      "horizon_s": 100,
+      "cost_budget": 32,
+      "observation_limit": 4
+    },
+    {
+      "case_id": "S2",
+      "jobs": 12,
+      "horizon_s": 100,
+      "cost_budget": 34,
+      "observation_limit": 6
+    },
+    {
+      "case_id": "S3",
+      "jobs": 16,
+      "horizon_s": 125,
+      "cost_budget": 40,
+      "observation_limit": 8
+    }
+  ],
+  "observation": {
+    "prefix_seconds": [
+      0.2,
+      0.6,
+      1.0
+    ],
+    "delay_s": 1.0,
+    "cost": 1.0,
+    "max_per_job": 2,
+    "semantics": "graded release of recorded demonstration prefix; not a new physical camera view"
+  },
+  "service": {
+    "alpha": 1.0,
+    "beta_s": 0.5,
+    "alpha_sensitivity": [
+      0.75,
+      1.5
+    ],
+    "beta_sensitivity": [
+      0.0,
+      1.0
+    ],
+    "reserve_min_s": 0.2,
+    "formula": "alpha * source_annotation_duration_s + beta_s",
+    "reservation_released_early": false
+  },
+  "movement": {
+    "speed": 1.0,
+    "changeover_s": 0.5,
+    "coordinates": "synthetic service-area coordinates, not object positions"
+  },
+  "fees": {
+    "service_fixed": 2.0,
+    "reserve_per_second": 0.1,
+    "distance_per_unit": 0.2,
+    "wait": 0.0
+  },
+  "minimum_service_for_cost_or_risk_objective": {
+    "metric": "mean_weighted_on_time_rate",
+    "value": 0.5,
+    "scope": "nominal alpha=1 beta=0.5; each case over the same 30 trials"
+  },
+  "validation_seeds": [
+    2026111700,
+    2026111701,
+    2026111702,
+    2026111703,
+    2026111704,
+    2026111705,
+    2026111706,
+    2026111707,
+    2026111708,
+    2026111709,
+    2026111710,
+    2026111711,
+    2026111712,
+    2026111713,
+    2026111714,
+    2026111715,
+    2026111716,
+    2026111717,
+    2026111718,
+    2026111719,
+    2026111720,
+    2026111721,
+    2026111722,
+    2026111723,
+    2026111724,
+    2026111725,
+    2026111726,
+    2026111727,
+    2026111728,
+    2026111729
+  ],
+  "information_rule": "fit on train; choose model on validation; freeze before test; no future-source lookup during a replay",
+  "source_sampling": "uniform eligible units within family and split, with replacement; same seed pairs methods",
+  "task_semantics": "source semantic segment is one work unit, not one product",
+  "max_actions": 200,
+  "terminal_on_invalid": true
+}

@@ -1,0 +1,89 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-11-21 13:05",
+ "generated_epoch": 1795237507.651383,
+ "venue": {
+  "family": "",
+  "label_zh": "",
+  "review_mode": "",
+  "language": "en",
+  "user_template": false
+ },
+ "pdf": null,
+ "pages": null,
+ "counts": {
+  "issue": 0,
+  "error": 0,
+  "info": 2,
+  "skipped": 3,
+  "ok": 3
+ },
+ "items": [
+  {
+   "key": "pages",
+   "title": "页数（只作参考）",
+   "status": "skipped",
+   "summary": "没有 paper/main.pdf（编译没出 PDF），PDF 相关的项没法查",
+   "details": [],
+   "rule": null
+  },
+  {
+   "key": "chinese_in_english",
+   "title": "英文稿里的中文",
+   "status": "ok",
+   "summary": "正文和 PDF 里都没有中文字符或全角标点。（PDF 没法读，只查了 .tex）",
+   "details": [],
+   "rule": null
+  },
+  {
+   "key": "template_intact",
+   "title": "模板没被改",
+   "status": "skipped",
+   "summary": "没有用内置投稿模板或上传的 LaTeX 模板。",
+   "details": [],
+   "rule": null
+  },
+  {
+   "key": "sample_residue",
+   "title": "样例文字与没填的占位",
+   "status": "ok",
+   "summary": "源文件里没有样例文字（PDF 没法读，占位没查）。",
+   "details": [],
+   "rule": null
+  },
+  {
+   "key": "ai_statement",
+   "title": "AI 使用声明",
+   "status": "info",
+   "summary": "没有运行记录，软件没生成 AI 使用声明；你另外用过 AI 工具的话，按投稿要求自己写。",
+   "details": [],
+   "rule": null
+  },
+  {
+   "key": "overflow",
+   "title": "图表出栏",
+   "status": "skipped",
+   "summary": "没有 paper/main.pdf（编译没出 PDF），PDF 相关的项没法查",
+   "details": [],
+   "rule": null
+  },
+  {
+   "key": "references",
+   "title": "参考文献核验",
+   "status": "info",
+   "summary": "文献核验还没上线：参考文献未核验（这里不算通过）。",
+   "details": [
+    "投稿前请自己核对每条文献都查得到，作者、年份、卷期、页码和 DOI 对得上。"
+   ],
+   "rule": null
+  },
+  {
+   "key": "ai_not_author",
+   "title": "作者栏里没有 AI",
+   "status": "ok",
+   "summary": "作者和单位里没有 AI 工具或模型的名字。",
+   "details": [],
+   "rule": null
+  }
+ ]
+}

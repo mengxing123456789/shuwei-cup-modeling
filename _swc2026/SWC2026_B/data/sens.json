@@ -1,0 +1,231 @@
+{
+  "_meta": {
+    "script": "sens.py",
+    "generated_utc": "2026-11-20T11:31:04+00:00",
+    "problem_sha256": "fddb5110ce5b563d5c84dee066c3703c3f69ebad7c3e9502468a57628285a842",
+    "python": "3.11.18",
+    "numpy": "2.4.6"
+  },
+  "sens": {
+    "p2_1_speed_table": [
+      {
+        "v": 2.0,
+        "travel_s1": 6.6222,
+        "travel_s2": 19.6078,
+        "drms": 0.143623
+      },
+      {
+        "v": 3.0,
+        "travel_s1": 4.4148,
+        "travel_s2": 13.0719,
+        "drms": 0.143623
+      },
+      {
+        "v": 5.0,
+        "travel_s1": 2.6489,
+        "travel_s2": 7.8431,
+        "drms": 0.143623
+      }
+    ],
+    "baseline_makespan": 10.8582,
+    "baseline_starts": {
+      "T1": 1.532,
+      "T3": 5.7776,
+      "T2": 10.8582
+    },
+    "oat_sigma": [
+      {
+        "sigma_deg": 0.5,
+        "drms_lb_T2": 0.071812,
+        "travel1_s_at_v3": 4.4148,
+        "p2_drms": 0.071812,
+        "p4_drms": 0.104453,
+        "d_pct": -50.0
+      },
+      {
+        "sigma_deg": 0.75,
+        "drms_lb_T2": 0.107718,
+        "travel1_s_at_v3": 4.4148,
+        "p2_drms": 0.107717,
+        "p4_drms": 0.15668,
+        "d_pct": -25.0
+      },
+      {
+        "sigma_deg": 1.0,
+        "drms_lb_T2": 0.143623,
+        "travel1_s_at_v3": 4.4148,
+        "p2_drms": 0.143623,
+        "p4_drms": 0.208907,
+        "d_pct": 0.0
+      },
+      {
+        "sigma_deg": 1.5,
+        "drms_lb_T2": 0.215435,
+        "travel1_s_at_v3": 4.4148,
+        "p2_drms": 0.215435,
+        "p4_drms": 0.31336,
+        "d_pct": 50.0
+      },
+      {
+        "sigma_deg": 2.0,
+        "drms_lb_T2": 0.287247,
+        "travel1_s_at_v3": 4.4148,
+        "p2_drms": 0.287246,
+        "p4_drms": 0.417814,
+        "d_pct": 100.0
+      }
+    ],
+    "oat_speed": [
+      {
+        "v": 2.0,
+        "makespan": 10.8582,
+        "delta_s": 0.0,
+        "d_pct": 0.0
+      },
+      {
+        "v": 2.5,
+        "makespan": 10.8582,
+        "delta_s": 0.0,
+        "d_pct": 0.0
+      },
+      {
+        "v": 3.0,
+        "makespan": 10.8582,
+        "delta_s": 0.0,
+        "d_pct": 0.0
+      },
+      {
+        "v": 3.5,
+        "makespan": 10.8582,
+        "delta_s": 0.0,
+        "d_pct": 0.0
+      },
+      {
+        "v": 4.0,
+        "makespan": 10.8582,
+        "delta_s": 0.0,
+        "d_pct": 0.0
+      },
+      {
+        "v": 5.0,
+        "makespan": 10.8582,
+        "delta_s": 0.0,
+        "d_pct": 0.0
+      }
+    ],
+    "oat_elev": [
+      {
+        "elev_max": 75.0,
+        "area_T1": 56.07,
+        "area_T2": 65.25,
+        "area_T3": 53.29,
+        "r_min_T2": 8.842323,
+        "drms_lb_T2": 0.218252,
+        "delta_area_T1_pp": -1.83,
+        "delta_area_T2_pp": -0.79
+      },
+      {
+        "elev_max": 77.5,
+        "area_T1": 57.06,
+        "area_T2": 65.71,
+        "area_T3": 55.08,
+        "r_min_T2": 7.315924,
+        "drms_lb_T2": 0.180577,
+        "delta_area_T1_pp": -0.84,
+        "delta_area_T2_pp": -0.33
+      },
+      {
+        "elev_max": 80.0,
+        "area_T1": 57.9,
+        "area_T2": 66.04,
+        "area_T3": 56.67,
+        "r_min_T2": 5.81879,
+        "drms_lb_T2": 0.143623,
+        "delta_area_T1_pp": 0.0,
+        "delta_area_T2_pp": 0.0
+      },
+      {
+        "elev_max": 82.5,
+        "area_T1": 58.55,
+        "area_T2": 66.23,
+        "area_T3": 57.88,
+        "r_min_T2": 4.344532,
+        "drms_lb_T2": 0.107235,
+        "delta_area_T1_pp": 0.65,
+        "delta_area_T2_pp": 0.19
+      },
+      {
+        "elev_max": 85.0,
+        "area_T1": 59.09,
+        "area_T2": 66.32,
+        "area_T3": 58.74,
+        "r_min_T2": 2.887126,
+        "drms_lb_T2": 0.071262,
+        "delta_area_T1_pp": 1.19,
+        "delta_area_T2_pp": 0.28
+      }
+    ],
+    "joint": {
+      "n": 1000,
+      "seed": 20261120,
+      "ranges": {
+        "sigma": [
+          0.5,
+          2.0
+        ],
+        "v": [
+          2.0,
+          5.0
+        ],
+        "elev": [
+          75.0,
+          85.0
+        ]
+      },
+      "out": {
+        "drms_lb_T1": {
+          "mean": 0.2374,
+          "std": 0.11025,
+          "p05": 0.08831,
+          "p95": 0.44812,
+          "rho_sigma": 0.7695,
+          "rho_v": 0.0696,
+          "rho_elev": -0.5896
+        },
+        "drms_lb_T2": {
+          "mean": 0.18219,
+          "std": 0.08461,
+          "p05": 0.06777,
+          "p95": 0.34391,
+          "rho_sigma": 0.7695,
+          "rho_v": 0.0696,
+          "rho_elev": -0.5896
+        },
+        "drms_lb_T3": {
+          "mean": 0.29261,
+          "std": 0.13589,
+          "p05": 0.10885,
+          "p95": 0.55234,
+          "rho_sigma": 0.7695,
+          "rho_v": 0.0696,
+          "rho_elev": -0.5896
+        },
+        "makespan": {
+          "mean": 10.8582,
+          "std": 0.0,
+          "p05": 10.8582,
+          "p95": 10.8582,
+          "rho_sigma": -0.0377,
+          "rho_v": -0.0841,
+          "rho_elev": -0.0063
+        }
+      },
+      "log_slope_drms_T2_vs_sigma": 0.9881
+    },
+    "calibers": {
+      "speed": "固定指派重放（不改指派），makespan 只含 5 s 观测与复位 slew",
+      "elev": "面积按 1 m 栅格重算；elev 改变可观测域，未重解站位",
+      "sigma": "P2/P4 的测角链，DRMS 与 σ 严格线性（log 斜率应为 1.0）"
+    }
+  }
+}

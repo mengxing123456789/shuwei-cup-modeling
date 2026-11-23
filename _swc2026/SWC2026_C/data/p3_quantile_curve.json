@@ -1,0 +1,170 @@
+{
+  "_meta": {
+    "script": "p3_quantile_curve.py",
+    "question": "where is the reservation quantile optimum, and is the curve unimodal?",
+    "protocol": "risk_old rule held fixed; only Q_HI varies; selection on the first fifteen seeds",
+    "q_grid": [
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9
+    ],
+    "n_tune": 15,
+    "seeds": [
+      2026111700,
+      2026111701,
+      2026111702,
+      2026111703,
+      2026111704,
+      2026111705,
+      2026111706,
+      2026111707,
+      2026111708,
+      2026111709,
+      2026111710,
+      2026111711,
+      2026111712,
+      2026111713,
+      2026111714,
+      2026111715,
+      2026111716,
+      2026111717,
+      2026111718,
+      2026111719,
+      2026111720,
+      2026111721,
+      2026111722,
+      2026111723,
+      2026111724,
+      2026111725,
+      2026111726,
+      2026111727,
+      2026111728,
+      2026111729
+    ],
+    "policy": "risk_old",
+    "max_wiggle_points": 1.46,
+    "max_wiggle_definition": "largest increase between adjacent grid points of the tuning curve, in percentage points; the trend is decreasing but not strictly monotone"
+  },
+  "cases": {
+    "S2": {
+      "base_params": {
+        "Q_HI": 0.5,
+        "GATE": 0.6,
+        "LATE_TOL_RISK": 12.0
+      },
+      "tune_curve": [
+        0.908333,
+        0.897222,
+        0.891667,
+        0.891667,
+        0.888889,
+        0.883333,
+        0.872222,
+        0.855556,
+        0.858333,
+        0.844444,
+        0.825,
+        0.783333,
+        0.763889
+      ],
+      "holdout_curve": [
+        0.830556,
+        0.844444,
+        0.844444,
+        0.841667,
+        0.844444,
+        0.844444,
+        0.841667,
+        0.847222,
+        0.838889,
+        0.819444,
+        0.783333,
+        0.741667,
+        0.747222
+      ],
+      "q_star": 0.3,
+      "tune_value_at_star": 0.9083333333333332,
+      "holdout_value_at_star": 0.8305555555555555,
+      "holdout_at_selected_q": 0.8444444444444444,
+      "tune_at_selected_q": 0.8888888888888888,
+      "sign_changes": 4,
+      "unimodal": false,
+      "spread": 0.144444,
+      "plateau_width": 1,
+      "implied_delay_to_idle_ratio": 0.428571
+    },
+    "S3": {
+      "base_params": {
+        "Q_HI": 0.6,
+        "GATE": 0.5,
+        "LATE_TOL_RISK": 20.0
+      },
+      "tune_curve": [
+        0.814583,
+        0.8125,
+        0.810417,
+        0.802083,
+        0.802083,
+        0.8,
+        0.814583,
+        0.810417,
+        0.789583,
+        0.777083,
+        0.783333,
+        0.75625,
+        0.708333
+      ],
+      "holdout_curve": [
+        0.820833,
+        0.80625,
+        0.80625,
+        0.80625,
+        0.8125,
+        0.804167,
+        0.797917,
+        0.8,
+        0.795833,
+        0.779167,
+        0.766667,
+        0.766667,
+        0.729167
+      ],
+      "q_star": 0.3,
+      "tune_value_at_star": 0.8145833333333333,
+      "holdout_value_at_star": 0.8208333333333333,
+      "holdout_at_selected_q": 0.7979166666666667,
+      "tune_at_selected_q": 0.8145833333333333,
+      "sign_changes": 6,
+      "unimodal": false,
+      "spread": 0.10625,
+      "plateau_width": 5,
+      "implied_delay_to_idle_ratio": 0.428571
+    }
+  },
+  "ordering_check": {
+    "utilisation": {
+      "S2": 0.9051939793967061,
+      "S3": 0.9667753747455432
+    },
+    "q_star": {
+      "S2": 0.3,
+      "S3": 0.3
+    },
+    "implied_ratio": {
+      "S2": 0.428571,
+      "S3": 0.428571
+    },
+    "higher_load_has_higher_q": true,
+    "both_unimodal": false
+  }
+}

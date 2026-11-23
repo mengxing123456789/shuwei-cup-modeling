@@ -1,0 +1,176 @@
+\section{Question 2: Kalman Prediction and Value-of-Information Re-Observation}\label{sec:q2}
+\subsection{Data Insight}
+The masking protocol of the statement hides a window of length $L$ after a 0.2~s prefix, and the quantity to predict is the position of a representative point at the end of that window. Two features of the corpus decide the modelling choice. First, the hand is not ballistic: the lag-1 autocorrelation of the fingertip velocity is 0.940, lag-3 is 0.897, lag-5 is 0.875 and lag-10 is 0.817, so a constant-velocity extrapolation stays competitive at the shortest mask (2.914 against 2.862~cm at 0.2~s) but breaks down once the hidden window exceeds 0.4~s. Second, the wrist camera is present in 9 of 31 EgoDemo records and in all 14 EgoPro records but in none of the 24 EgoStandard records, and it carries no world extrinsic, so a filter that needs a second viewpoint cannot be run on the whole corpus. Both facts point the same way: the predictor must be a single-viewpoint recursive filter~\cite{ref3} with explicit velocity damping, not a ballistic extrapolation and not a multi-view triangulation.
+\subsection{Modeling and Solution}
+\textbf{State-space model.} Let $p_t\in\mathbb{R}^3$ be the position of the representative point and $v_t$ its velocity. The filter is
+\[
+\begin{aligned}
+p_t &= p_{t-1}+\Delta t\,v_{t-1}+w_t, &
+v_t &= v_{t-1}+a_t,\\
+z_t &= p_t+\epsilon_t, & w_t&\sim\mathcal N(0,Q),\quad \epsilon_t\sim\mathcal N(0,R),
+\end{aligned}
+\]
+with $Q=\sigma_a^2\,\Delta t^2 I_3$ and $R=\sigma_z^2 I_3$. The two noise scales are fitted once by the method of moments on the training records --- process variance from the velocity-increment variance and measurement variance from the tenth percentile of squared second differences --- and are then held fixed for every record and observation channel, so that a shaky segment does not silently widen every other segment's posterior.
+
+\textbf{Prediction.} At decision time $t_0$ the filter is updated with the disclosed prefix $z_{1:t_0}$; the $h$-step prediction is $\hat x_{t_0+h|t_0}$ with covariance $P_{t_0+h|t_0}$, and the reported error is the average Euclidean distance between the predicted and the reference representative point over the masked window, in centimetres.
+
+\textbf{Value of information.} A paid look at time $t$ costs one unit, arrives after one second, and extends the disclosed prefix to 0.6~s or 1.0~s of the source segment. In a linear--Gaussian model the expected reduction in the trace of the position covariance from one look~\cite{ref4} is
+\[
+\Delta(t) = \operatorname{tr}\!\left(P_{t|t-1}-P_{t|t}\right)
+        = \operatorname{tr}\!\left(P_{t|t-1}H^\top S^{-1}HP_{t|t-1}\right),
+\qquad S=HP_{t|t-1}H^\top+R .
+\]
+The policy looks when $\Delta(t)>\lambda$ and the remaining budget and time allow it; $\lambda$ is not fitted on a held-out split: it is the break-even marginal posterior-trace reduction between the three official options, computed on the test windows of Table~\ref{tab:p2voi}, so we report it as a derived price rather than a calibrated hyperparameter. This is a one-step lookahead approximation of the optimal information-acquisition policy~\cite{ref4}; it is greedy but it is explicit about the trade-off instead of hiding it in a fixed re-observation interval.
+
+\textbf{Baselines.} Last-state hold, constant-velocity extrapolation and a least-squares linear extrapolation of the visible prefix are run on exactly the same masked windows and the same seeds; all three are reported in Table~\ref{tab:p2mask}.
+
+\textbf{Solution.} The full computation is in \texttt{code/alt\_p2\_kalman.py}; the JSON of record is \texttt{data/alt\_p2.json}. The damping factor was chosen on validation environments only (Table~\ref{tab:p2alpha}); $\alpha=0.6$ minimises the mean error and sits in the middle of a flat region, whereas $\alpha=1$, the textbook constant-velocity filter, is 29.94~cm against 9.12~cm --- a factor of 3.3. On the held-out test records the filter gives the errors in Table~\ref{tab:p2mask}: the advantage over constant velocity grows with the mask length, from 2.86 against 2.91~cm at 0.2~s to 9.46 against 21.50~cm at 1.0~s, while the last-state hold degrades far more slowly (9.55~cm) because the hand genuinely stops between subtasks. The honest summary is that damping buys a factor of 2.3 against a naive extrapolator and a few percent against a hold; the value is in not being catastrophically wrong when the hand does move.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Damping factor selected on validation environments (mean 3D error over the four mask lengths, cm).}\label{tab:p2alpha}
+\begin{tabular}{rr}
+\toprule
+$\alpha$ & Mean error (cm) \\
+\midrule
+0.4 & 9.152 \\
+0.5 & 9.132 \\
+0.6 & 9.117 \\
+0.7 & 9.133 \\
+0.8 & 9.301 \\
+0.9 & 10.419 \\
+1.0 & 29.936 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Official masking protocol on the seven test records: 300 windows per mask length, prefix 0.2~s, stride $L/2$. Errors are mean Euclidean distance in cm.}\label{tab:p2mask}
+\begin{tabular}{rrrrrr}
+\toprule
+$L$ (s) & Kalman & RMSE & Hold & Const.-vel. & Linear fit \\
+\midrule
+0.2 & 2.862 & 3.526 & 3.387 & 2.914 & 3.310 \\
+0.4 & 5.656 & 6.862 & 5.998 & 7.731 & 6.342 \\
+0.6 & 7.095 & 8.742 & 7.353 & 11.502 & 10.329 \\
+1.0 & 9.464 & 11.334 & 9.554 & 21.497 & 18.003 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Trained baselines and the training protocol.} The statement asks for parameter fitting on the training set, model selection on validation and a simple linear baseline (\texttt{problem.txt}, lines 49--51). We therefore fit three learned predictors on exactly the windows of Table~\ref{tab:p2mask}: a ridge regression mapping the flattened 0.2~s prefix ($6\times21\times3=378$ features) to the 63-dimensional displacement, a one-parameter linear-velocity model, and a compact $64\times32$ multilayer perceptron (MLP) with early stopping. The ridge penalty is selected on validation from $\{0.01,0.1,1,10,100,1000\}$, and a five-fold grouped cross-validation~\cite{ref9} (groups are recordings, so no record leaks across folds) gives mean errors of 2.128, 4.217, 5.665 and 6.860~cm at the four mask lengths; the selected penalties are $\alpha^\star=1,10,1000,1000$. Table~\ref{tab:p2train} reports test errors on the same 300 windows per length.
+
+On the test windows the ridge \emph{beats the Kalman filter at every mask length} (2.464 against 2.862~cm at 0.2~s and 8.653 against 9.464~cm at 1.0~s), and the one-parameter velocity model is close behind. The nonlinear MLP does not beat the linear ridge at any length (3.139, 5.887, 7.349 and 9.153~cm) and at the two shortest masks it is worse than the Kalman filter itself. This is a controlled negative result, not a missing experiment: with 55 training records the extrapolation is dominated by the horizon, which the sub-linear scaling law of the next paragraph already captures linearly, so extra capacity buys nothing. We keep the Kalman filter as the reported model because it is the one the value-of-information derivation needs, but we no longer claim it is the accuracy ceiling.
+
+\begin{table}[htbp]\centering\footnotesize
+\begin{minipage}[t]{0.52\textwidth}\centering
+\caption{Trained predictors on the official masking windows (mean 3D error, cm). All methods are fitted on training records; every method sees the same test windows.}\label{tab:p2train}
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+$L$ (s) & Kalman & Ridge & Lin.-vel. & MLP \\
+\midrule
+  0.2 & 2.862 & 2.464 & 2.556 & 3.139 \\
+  0.4 & 5.656 & 5.245 & 5.495 & 5.887 \\
+  0.6 & 7.095 & 6.912 & 7.033 & 7.349 \\
+  1.0 & 9.464 & 8.653 & 9.473 & 9.153 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.44\textwidth}\centering
+\caption{Split-conformal boxes around the ridge forecast at nominal coverage $0.90$~\cite{ref11,ref12}; coverage is empirical on 300 test windows.}\label{tab:p2conf}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+$L$ (s) & rad. (cm) & width (cm) & cover \\
+\midrule
+  0.2 & 6.088 & 12.175 & 0.947 \\
+  0.4 & 10.436 & 20.871 & 0.883 \\
+  0.6 & 12.744 & 25.489 & 0.893 \\
+  1.0 & 14.710 & 29.419 & 0.880 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table}
+
+\paragraph{Interval coverage.} The statement also asks for interval coverage (\texttt{problem.txt}, line 202). We place a split-conformal box around the ridge forecast: the calibration score is the per-window sup-norm residual $s_i=\|\hat y_i-y_i\|_\infty$ on the validation records, and the radius is the finite-sample $(1-0.10)$-quantile of those scores,
+\[
+\hat q_{0.90}=\text{the } \bigl\lceil (n_{\mathrm{cal}}+1)\,0.90\bigr\rceil\text{-th smallest } s_i, \qquad \Pr\{\|\hat y-y\|_\infty\le \hat q_{0.90}\}\ge 0.90,
+\]
+with $n_{\mathrm{cal}}=2132$. Table~\ref{tab:p2conf} shows empirical test coverage of 0.947, 0.883, 0.893 and 0.880 at nominal $0.90$, i.e.\ calibrated to within sampling error on 300 windows, while the box widens from 12.175 to 29.419~cm as the mask grows. This quantifies how quickly certainty is lost under occlusion without assuming Gaussian tails.
+
+
+\paragraph{Model promotion.} Three trained baselines compete with the filter under one protocol: flattened-prefix ridge, a single-parameter linear velocity law, and a 64$\times$32 MLP, all trained on the 55 training records with grouped five-fold cross-validation and selected on validation (Table~\ref{tab:p2train}). The promotion rule was fixed before the test split was touched: a challenger replaces the filter only if it wins at every mask length. Ridge wins at all four (2.464 against 2.862~cm at 0.2~s, 8.653 against 9.464~cm at 1.0~s), the MLP never beats ridge, and the velocity law trails ridge everywhere --- so the filter is demoted to an interpretable pricing device, ridge becomes the accuracy reference, and conformal intervals are attached to ridge (Table~\ref{tab:p2conf}). Q1 and Q3 keep their original models because no challenger was run against them at comparable cost; we state that rather than implying a search.
+\paragraph{Scaling law.} Fitted in log--log coordinates over the four mask lengths, the mean error follows $e(L)=10.07\,L^{0.741}$ with $R^2=0.967$, i.e.\ growth is sub-linear: doubling the hidden window multiplies the error by $1.67$, not by $2$. The exponent is the signature of the damping. A ballistic predictor would have to grow linearly with the horizon, and the constant-velocity column does exactly that once the mask exceeds $0.4$~s ($7.73$, $11.50$ and $21.50$~cm); the damped filter instead lets the velocity die out, so the error saturates near the distance the hand travels in the first half second. That is also why the fitted exponent is well below one and why it must not be extrapolated far beyond $1$~s: the law describes the saturating regime, not a universal scaling.
+
+\paragraph{Value of information.} The three options the statement allows are compared in Table~\ref{tab:p2voi}. Because the position covariance of a linear--Gaussian filter does not depend on the observations, the marginal trace reduction of the second look equals that of the first (1158.0 and 1158.0~cm$^2$), so the optimal policy is a step function: buy none or buy both, never one. The break-even price is 1158.0~cm$^2$ per cost unit, equivalently 1.61~cm of root-mean-square error per look --- the centimetre figure converts the trace difference through the per-window error distribution (RMSE is averaged over windows, the trace is a covariance sum, so the two are different statistics of the same filter) --- and a look is worth buying exactly when the operator values a centimetre of accuracy more than that. This is a negative result about interior solutions and a positive result about pricing: it converts a scheduling heuristic into a threshold an operator can argue about.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{The three information options of the statement, evaluated on the same windows.}\label{tab:p2voi}
+\begin{tabular}{lrrrr}
+\toprule
+Option & Prefix (frames) & Looks & Mean error (cm) & Posterior trace (cm$^2$) \\
+\midrule
+A no request & 6 & 0 & 12.377 & 3379.9 \\
+B one request & 18 & 1 & 12.809 & 2221.9 \\
+C two requests & 30 & 2 & 9.874 & 1063.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.90\linewidth]{figures/fig3_p2_error.pdf}
+\caption{Mean 3D error against the hidden-window length on the seven test records,
+300 windows per length, prefix 0.2~s. Annotations below the blue points give the
+factor by which constant-velocity extrapolation exceeds the damped filter. The
+damped filter is never worse than holding the last state and is a factor of 2.3
+better than ballistic extrapolation at the longest window.}
+\label{fig:p2err}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.90\linewidth]{figures/fig4_p2_voi.pdf}
+\caption{The three information options of the statement. Because the position
+covariance of a linear--Gaussian filter does not depend on the observations, the
+second look is worth exactly as much as the first, so the value of information is a
+step function: buy none or buy both. The dashed line joins the two interior points
+of the frontier; the break-even price is annotated.}
+\label{fig:p2voi}
+\end{figure}
+
+\paragraph{When to spend a look inside a gap.} The three official options fix the prefix up front, so they do not answer the question a scheduler actually faces: given a gap longer than the return delay, \emph{where} inside it should the look be spent, and does an adaptive trigger beat a blind schedule? The protocol answers the first half by itself. A look requested at gap-frame $u$ discloses the real frames $[u,u+6)$ and is usable only once $u+30<W$; hence a hidden window of $31$ frames ($1.03$~s) or less admits \emph{no} interior look at all, whatever the policy. Interior looks are possible once the hidden window exceeds 31 frames; the tested grid is $1.5$, $2.0$ and $3.0$~s (Table~\ref{tab:p2policy}, Figure~\ref{fig:p2policy}).
+
+Four policies are run on identical decision points and identical targets: no look with a last-state hold; no look with the damped filter; a fixed schedule spending both looks at 45\% and 95\% of the usable window; and a drift trigger that buys a look as soon as the forecast displacement away from the last observation exceeds a threshold $\tau$, with $\tau$ grid-searched on validation over nine fractions of the observed drift range and then frozen.
+
+Two results, both against the intuition that adaptivity should win. First, the fixed schedule is the best policy at every gap where looking is possible: $9.54$ against $11.23$~cm at $1.5$~s, $10.10$ against $12.43$~cm at $2.0$~s and $9.85$ against $12.88$~cm at $3.0$~s, with paired $t$ of $-5.24$, $-5.51$ and $-6.25$ over 250 windows per gap. Second, the drift trigger is nearly worthless: it fires $0.04$ times per window at $3.0$~s, i.e.\ it almost never finds the drift worth paying for, and it lands $0.09$~cm \emph{worse} than not looking at all ($t=1.90$, $3$ wins, $241$ ties, $6$ losses). Its validation optimum is also unstable --- the grid search picks the most eager threshold at $1.5$ and $2.0$~s and the most conservative one at $3.0$~s --- so the trigger has no transferable operating point.
+
+The mechanism is the same one that made the value of information a step function. The trigger statistic must be data-dependent to discriminate at all, but the only cheap data-dependent quantity here is the estimated velocity, and a 0.2~s prefix is too short to place a look inside a 1.5--3.0~s gap. An uncertainty-based trigger would be worse still: with fixed $(q,r)$ the posterior trace is a function of the horizon alone, so ``buy when the trace exceeds $\tau$'' fires either always or never. A blind schedule at least places its looks where the remaining horizon is short enough for the disclosure to still matter. We therefore report the negative result and keep the fixed schedule as the recommended policy, with the break-even price of $1.61$~cm per look from Table~\ref{tab:p2voi} as the criterion for whether to look at all.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Within-gap scheduling on the seven test records, 250 windows per gap. ``Usable'' is the number of gap frames at which a look can still land before the gap ends. Errors are mean Euclidean distance in cm.}\label{tab:p2policy}
+\begin{tabular}{rrrrrr}
+\toprule
+$W$ (s) & Usable & Hold & Damped & Fixed & Drift \\
+\midrule
+1.0 & 0 & 10.488 & 10.351 & 10.351 & 10.351 \\
+1.5 & 14 & 11.265 & 11.231 & \textbf{9.544} & 10.663 \\
+2.0 & 29 & 12.466 & 12.425 & \textbf{10.099} & 11.898 \\
+3.0 & 59 & 12.819 & 12.876 & \textbf{9.850} & 12.969 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.90\linewidth]{figures/fig5_p2_policy.pdf}
+\caption{Mean error against the hidden-window length for the four within-gap
+scheduling policies. The shaded band marks the windows in which no interior look
+can land before the gap ends, so every policy coincides there. Once looking
+becomes possible, the blind fixed schedule dominates both the no-look filter and
+the adaptive drift trigger; the trigger is indistinguishable from not looking.}
+\label{fig:p2policy}
+\end{figure}
+
+\subsection{Robustness and Conclusion}
+The filter is insensitive in mean error to the two noise scales --- doubling $q$ or $R$ moves the mean by less than 0.005~cm at every mask length --- but very sensitive in posterior scale: doubling $q$ doubles the reported trace at 1.0~s (ratio 2.000) while doubling $R$ leaves it unchanged (ratio 1.0000). The reason is that the fitted measurement noise is already at the numerical floor ($R$ median $1.6\times10^{-9}$), so the filter trusts the last visible frame completely and the posterior collapses onto it; expectation--maximisation degenerates to the same corner and was abandoned in favour of moment matching. The reported covariance therefore understates occluded uncertainty, and the per-record value of information collapses to one shared rule. The damping ablation is the one that matters for accuracy: setting $\alpha=1$ adds 12.03~cm at the longest mask.
+
+\paragraph{Conclusion to Question~2.} A single-viewpoint damped-velocity filter predicts the masked window to 2.86~cm at 0.2~s and 9.46~cm at 1.0~s, beating constant-velocity extrapolation by a factor of 2.3 at the long horizon. Re-observation is worth buying in pairs, never singly, and the price at which it stops being worth buying is 1.61~cm of error per look. When a gap is long enough for a look to land inside it, spend the looks on a blind schedule: the fixed schedule beats both the no-look filter and a drift-triggered look at every such gap, and the trigger is statistically indistinguishable from not looking at all.
+% === Q2 END ===
+
+% === Q3 BEGIN ===

@@ -1,0 +1,1070 @@
+--- PAGE 1 ---
+2026_“ShuWei Cup”
+Problem A：Multi-Field Modeling and Parameter Optimization
+for Multi-Fluid Injection Development
+in Deep Unconventional Reservoirs
+China’s recoverable tight-oil reserves are approximately 17.82 billion tonnes,
+accounting for about 40% of its recoverable petroleum resources, and are mainly
+distributed in the Ordos, Junggar, Sichuan, and Songliao basins; they constitute an
+important replacement resource for safeguarding national energy security. In deep
+tight-oil reservoirs, the matrix permeability is generally no higher than
+3
+2
+0.1 10
+m
+
+
+
+;
+the pore throats are small, natural fractures are poorly developed, and the natural
+productivity of a single well is low, so that the recovery factor under conventional
+development is commonly below 10%.
+In field practice, a composite fluid of liquid/supercritical CO2 plus a
+nano-imbibition agent is used for reservoir stimulation and huff-and-puff
+development. The process comprises three stages: (1) high-pressure injection, in
+which CO2 and the nano-imbibition agent are injected into the formation in a
+specified mixing ratio and hydraulic fractures are created under conditions above the
+formation breakdown pressure; (2) shut-in soaking, during which CO2 diffuses into
+the matrix and dissolves in the crude oil and formation water, the nano-agent alters
+the oil–water interfacial tension and wettability, and the reservoir pressure, effective
+stress, and damage state are reconfigured accordingly; and (3) well opening and
+production, in which crude oil and the mixed fluid are produced.
+Soaking time is the key variable linking “stimulation performance” to “economic
+viability”: if the soak is too short, CO2 has not yet penetrated deep into the matrix and
+the nano-agent has not had time to act fully, so the stimulation extent is limited; if the
+soak is too long, operation and capital-occupancy costs continue to rise and
+production is deferred, so the net present value (NPV) may decline. The injection
+composition, injection rate, total injection volume, and injection timing also affect
+
+--- PAGE 2 ---
+both the production-enhancement response and the operation cost, and must be
+weighed quantitatively within a unified modeling framework.
+Injection timing τinj: after fracturing is completed, injection of the CO2 +
+nanoparticle composite fluid begins only after a waiting period of τinj days; τinj = 0
+means that the fluid is injected immediately after fracturing ends. This definition is
+supplemented in the notes to Table A.3.
+Problem 1
+During high-pressure fluid injection and soaking, fluid seepage,
+rock deformation, pore-pressure variation, and damage evolution occur
+simultaneously within the reservoir. Establish the coupled equations for the
+interacting seepage, stress, and damage fields, comprising the fluid-seepage continuity
+equation, the rock mechanical constitutive relation, the Biot effective-stress coupling
+relation, and the damage evolution equation. Specify the physical assumptions, initial
+conditions, and boundary conditions of the model, briefly explain the physical
+meaning of each equation, and distinguish the boundary conditions of the injection,
+soaking, and production stages.
+Problem 2
+To identify the key factors governing reservoir stimulation,
+nondimensionalize the coupled equations established in Problem 1, obtain the
+dimensionless governing parameter groups, and explain the physical meaning of each
+parameter; with reference to Appendix A, give the order of magnitude of a reasonable
+value for each parameter. Use dimensional analysis to derive an approximate
+analytical relation between the soaking time and the radius of stimulation influence,
+and analyze which dimensionless parameters significantly modify the effect of
+soaking time on the stimulation extent.
+Problem 3
+Formulate a multi-objective optimization model with the objectives
+of enhancing reservoir production and reducing the total operational cost, define the
+design variables, and impose engineering constraints on the basis of equipment
+capacity, the limits on nanomaterial use, and the upper limit of formation
+pressure-bearing capacity. Taking Case0 (the base case) as the starting point, select
+three representative scenarios—a low-permeability, high-stress reservoir; a
+medium-permeability, low-stress reservoir; and a high-permeability reservoir with
+
+--- PAGE 3 ---
+complex natural fractures—choose an appropriate intelligent optimization algorithm,
+and solve for the Pareto-optimal solution set by means of simulation or a surrogate
+model. Justify the choice of algorithm, and provide 2–3 compromise operational
+schemes for reference for each of the three scenarios. In view of measurement errors
+in geological parameters, assume ±15% random perturbations in key parameters such
+as permeability and in-situ stress, screen the Pareto-optimal set for robust operational
+schemes with strong disturbance resistance, and give engineering recommendations.
+Problem 4
+Use the productivity simulation data in Attachment C to build a
+productivity prediction model, divide the training and test sets appropriately, and
+adopt corresponding measures to prevent overfitting. Using the economic parameters
+in Appendix B, calculate the net present value (NPV), plot the variation of NPV with
+soaking time, and determine the optimal soaking time for each of the three scenarios.
+Compare the results of the data-driven model with those of the mechanistic model;
+where discrepancies arise, analyze their causes in terms of model assumptions,
+numerical error, and data noise. Construct a comprehensive evaluation index system
+for reservoir stimulation performance, carry out a global sensitivity analysis of the
+key geological and operational parameters, and identify the parameters that most
+strongly influence the optimal soaking time.
+Supplementary notes:
+Stimulation radius: defined as the farthest normal distance, measured from the
+fracture surface, at which a specified physical quantity reaches a given threshold. The
+quantities that may be specified include the pore-pressure disturbance Δp, the CO2
+mass fraction, the nanoparticle concentration, and the damage variable d; the
+recommended thresholds are Δp/p0 = 5%, a CO2 mass fraction of 0.01, a nanoparticle
+concentration of 0.01 wt%, and d = 0.10. Unless otherwise stated, the term refers by
+default to the normal distance at which the pressure disturbance reaches 5% of p0.
+Problems 2, 3, and 4 must remain consistent with Problem 1.
+Model Assumptions and Unified Conventions
+To facilitate the formulation of the equations, the following unified conventions
+are adopted. Contestants may relax, replace, or supplement them, provided that the
+
+--- PAGE 4 ---
+reasons are stated and consistency is maintained across all problems.
+Definition of the three fields: The three fields referred to in the problem
+statement are uniformly taken to be the seepage field, the stress field, and the damage
+field. The unknowns of the seepage field are the pore pressure, the phase saturations,
+and the component concentrations; those of the stress field are the displacement, the
+strain, and the effective stress; and those of the damage field are the scalar damage
+variable d together with the porosity and permeability evolution driven by it. The pore
+pressure is an unknown of the seepage field and also enters the stress field through the
+Biot effective stress; it is therefore the coupling variable between the two and is no
+longer listed separately as an independent pore-pressure field. The expression
+“seepage field–in-situ stress field–pore pressure field” in the background is to be
+understood in this sense.
+Basic Assumptions
+(1) The reservoir is an isothermal, isotropic continuum, and the matrix is
+described by a single-porosity formulation; the hydraulic fracture is a
+high-conductivity planar region embedded in the matrix; natural fractures may be
+superimposed in Case3.
+(2) Under reservoir conditions, CO2 is in a supercritical state (Tc = 304.13 K, pc
+= 7.38 MPa). The density and viscosity of CO2 vary with pressure and temperature
+and are described by the Peng–Robinson equation or by the property table in
+Appendix A; the latent heat of phase change is neglected.
+(3) The dissolution of CO2 in crude oil and formation water is treated as
+instantaneous equilibrium described by Henry’s law; dissolution causes crude-oil
+swelling and viscosity reduction. Whether the free CO2 phase is modeled separately is
+left to the contestants; if it is neglected, the applicable conditions must be stated and a
+comparison with the case in which the free phase is considered must be provided.
+(4) The nanoparticles are transported only in the aqueous phase, and advection,
+molecular diffusion, and reversible adsorption are taken into account; the
+nanoparticles influence the capillary pressure and relative permeability by reducing
+the oil–water interfacial tension and altering the contact angle.
+
+--- PAGE 5 ---
+(5) The rock is an isotropic poroelastic body, and the small-deformation and
+quasi-static assumptions are adopted; damage is described by the scalar variable d,
+and after damage the Young’s modulus, porosity, and permeability are reduced
+according to the prescribed relations.
+(6) Flow obeys Darcy’s law, and the relative permeability and capillary pressure
+are functions of saturation; stress sensitivity is represented through the variation of
+porosity, matrix permeability, fracture aperture, and fracture permeability with
+effective stress (or pore pressure).
+(7) The top and bottom caprocks are impermeable, and the outer boundaries are
+constant-pressure/constant-stress boundaries; gravity, the thermal field, chemical
+reactions, salt precipitation, asphaltene precipitation, and wettability hysteresis are
+neglected; back-injection into production wells is not permitted.
+(8) The economic evaluation is carried out strictly in accordance with Appendix
+B; all injection volumes, production volumes, and material consumptions are
+measured at the reference state of 25 MPa and 300 K; taxes and fees, salvage value,
+and common sunk costs are not considered.
+
+--- PAGE 6 ---
+Appendix A: Table of Typical Ranges of Geological and Engineering Parameters
+Default Parameter Values of the Base Case (Case0):
+To provide a unified baseline, the following default parameters are supplied as a
+starting point for calculations. On this basis, contestants may perturb the parameters
+reasonably within the given ranges to construct typical scenarios such as
+low-permeability, medium-permeability, and high-permeability reservoirs.
+Case0 is the base case, and its complete set of values is given in the Case0
+columns of the three tables below (A.1–A.3); the complete values for the three typical
+scenarios are also listed in the same tables. The “lower bound–upper bound” ranges in
+the tables are intended for parameter perturbation, sensitivity analysis, and uncertainty
+scenarios, and do not represent probability distributions.
+Usage notes: (1) the breakdown pressure is pf = GfHd, and the upper limit of the
+bottomhole pressure is pmax = min(0.95pf, 60 MPa); (2) parameters marked “design
+variable” are optimized in Problem 3, and the Case0–Case3 columns give the base
+values; (3) stress sensitivity is an optional mechanism—when it is not considered,
+take γk = 0 and cφ = 0 and keep the fracture aperture and permeability unchanged; (4)
+the natural-fracture density is measured as the total fracture length per unit area; (5)
+parameters not listed in the tables may be added by the contestants, with justification.
+A.1
+Geological and Rock Mechanics Parameters
+Table A.1
+Geological and Rock Mechanics Parameters
+Parameter (symbol)
+Unit
+Lower
+bound
+Upper
+bound
+Case0
+Case1
+Case2
+Case3
+Burial depth Hd
+m
+2800
+3600
+3000
+3200
+3000
+3000
+Reservoir thickness h
+m
+15
+30
+20
+20
+20
+20
+Initial formation pressure p0
+MPa
+40
+55
+45
+50
+45
+48
+Formation temperature T
+°C
+100
+130
+110
+120
+110
+100
+Matrix permeability km0
+mD
+0.01
+1.0
+0.10
+0.03
+0.10
+0.50
+Initial porosity φ0
+—
+0.06
+0.15
+0.10
+0.08
+0.10
+0.13
+Young’s modulus E
+GPa
+20
+45
+30
+38
+30
+24
+Poisson’s ratio ν
+—
+0.18
+0.28
+0.23
+0.25
+0.23
+0.20
+Overburden pressure σv
+MPa
+65
+90
+75
+80
+75
+72
+
+--- PAGE 7 ---
+Parameter (symbol)
+Unit
+Lower
+bound
+Upper
+bound
+Case0
+Case1
+Case2
+Case3
+Maximum horizontal principal stress
+σH
+MPa
+50
+75
+62
+66
+62
+58
+Minimum horizontal principal stress
+σh
+MPa
+40
+65
+52
+58
+52
+48
+Breakdown pressure gradient Gf
+MPa/m
+0.018
+0.024
+0.020
+0.021
+0.020
+0.022
+Breakdown pressure pf
+MPa
+—
+—
+60.0
+67.2
+60.0
+66.0
+Upper limit of bottomhole pressure
+pmax
+MPa
+50
+65
+57
+60
+57
+60
+Rock density ρr
+kg/m3
+2400
+2700
+2500
+2500
+2500
+2500
+Biot coefficient α
+—
+0.60
+0.90
+0.80
+0.85
+0.80
+0.75
+Stress-sensitivity coefficient γk
+MPa-1
+0.01
+0.10
+0.05
+0.08
+0.04
+0.02
+Porosity pressure coefficient cφ
+10-4 MPa-1
+3
+10
+6
+7
+6
+5
+Damage threshold εd
+—
+0.002
+0.010
+0.005
+0.004
+0.005
+0.006
+Damage softening parameter βd
+—
+50
+200
+100
+120
+100
+80
+A.2
+Fluid, Phase-Behavior, and Nanoparticle Parameters
+Table A.2
+Fluid, Phase-Behavior, and Nanoparticle Parameters
+Parameter (symbol)
+Unit
+Lower
+bound
+Upper
+bound
+Case0
+Case1
+Case2
+Case3
+Crude oil density ρo
+kg/m3
+780
+850
+800
+810
+800
+790
+Crude oil viscosity μo
+mPa·s
+1.0
+5.0
+2.0
+3.0
+2.0
+1.5
+Formation water density ρw
+kg/m3
+1000
+1050
+1000
+1010
+1000
+1000
+Formation water viscosity μw
+mPa·s
+0.25
+0.60
+0.35
+0.40
+0.35
+0.30
+CO2 viscosity (reservoir conditions)
+mPa·s
+0.03
+0.10
+0.05
+0.05
+0.05
+0.05
+Crude oil compressibility co
+10-4 MPa-1
+5
+20
+10
+10
+10
+10
+Formation water compressibility cw
+10-4 MPa-1
+3
+8
+5
+5
+5
+5
+Initial water saturation Sw0
+—
+0.15
+0.35
+0.25
+0.22
+0.25
+0.28
+Irreducible water saturation Swr
+—
+0.15
+0.30
+0.20
+0.20
+0.20
+0.20
+Residual oil saturation Sor
+—
+0.15
+0.30
+0.20
+0.20
+0.20
+0.20
+Oil relative permeability endpoint kro0
+—
+0.60
+1.00
+0.90
+0.90
+0.90
+0.90
+Water relative permeability endpoint
+krw0
+—
+0.20
+0.50
+0.30
+0.30
+0.30
+0.30
+Oil-phase exponent no
+—
+2.0
+4.0
+3.0
+3.0
+3.0
+3.0
+Water-phase exponent nw
+—
+2.0
+3.0
+2.5
+2.5
+2.5
+2.5
+
+--- PAGE 8 ---
+Parameter (symbol)
+Unit
+Lower
+bound
+Upper
+bound
+Case0
+Case1
+Case2
+Case3
+Matrix capillary pressure coefficient
+Ac
+MPa
+0.2
+1.0
+0.5
+0.6
+0.5
+0.4
+CO2 critical temperature Tc
+K
+—
+—
+304.13
+304.13
+304.13
+304.13
+CO2 critical pressure pc
+MPa
+—
+—
+7.38
+7.38
+7.38
+7.38
+CO2 density at the reference state
+ρCO2,ref
+kg/m3
+800
+900
+850
+850
+850
+850
+Henry constant of CO2 in oil Ho
+MPa-1
+0.003
+0.010
+0.006
+0.006
+0.006
+0.006
+Henry constant of CO2 in water Hw
+MPa-1
+0.0004
+0.0012
+0.0008
+0.0008
+0.0008
+0.0008
+Crude oil swelling coefficient βsw
+—
+0.5
+1.0
+0.8
+0.8
+0.8
+0.8
+Viscosity-reduction exponent mμ
+—
+2.0
+4.0
+3.0
+3.0
+3.0
+3.0
+Diffusion coefficient of CO2 in oil
+DCO2,o
+m2/s
+5×10-10
+2×10-9
+1×10-9
+1×10-9
+1×10-9
+1×10-9
+Diffusion coefficient of CO2 in water
+DCO2,w
+m2/s
+1×10-9
+5×10-9
+2×10-9
+2×10-9
+2×10-9
+2×10-9
+Nanoparticle diameter dn
+nm
+10
+50
+25
+25
+25
+25
+Nanoparticle concentration Cn
+(design variable)
+wt%
+0.5
+1.5
+1.0
+1.0
+1.0
+1.0
+Nanoparticle diffusion coefficient in
+the aqueous phase Dn
+m2/s
+1×10-10
+1×10-9
+5×10-10
+5×10-10
+5×10-10
+5×10-10
+Nanoparticle adsorption partition
+coefficient Kd
+m3/kg
+0
+0.05
+0.01
+0.01
+0.01
+0.01
+Interfacial tension reduction
+coefficient aσ
+(wt%)-1
+0
+0.5
+0.3
+0.3
+0.3
+0.3
+Contact angle alteration coefficient aθ
+(°)/(wt%)
+0
+30
+15
+15
+15
+15
+A.3
+Fracture, Operational, and Numerical Parameters
+Table A.3
+Fracture, Operational, and Numerical Parameters
+Parameter (symbol)
+Unit
+Lower
+bound
+Upper
+bound
+Case0
+Case1
+Case2
+Case3
+Hydraulic fracture half-length Lf
+m
+60
+160
+120
+100
+120
+140
+Fracture height hf
+m
+15
+30
+20
+20
+20
+20
+Fracture aperture wf
+mm
+2
+6
+4
+3
+4
+5
+Fracture permeability kf
+mD
+1000
+10000
+5000
+3000
+5000
+8000
+Fracture porosity φf
+—
+0.25
+0.40
+0.30
+0.30
+0.30
+0.35
+
+--- PAGE 9 ---
+Parameter (symbol)
+Unit
+Lower
+bound
+Upper
+bound
+Case0
+Case1
+Case2
+Case3
+Natural-fracture density ρnf
+m/m2
+0
+0.10
+0
+0
+0.01
+0.08
+Injection rate qinj (design variable)
+m3/d
+100
+800
+300
+300
+300
+300
+Total injection volume Vinj
+(design variable)
+m3
+1000
+5000
+3000
+3000
+3000
+3000
+CO2 volume fraction fCO2
+(design variable)
+—
+0.2
+0.8
+0.5
+0.5
+0.5
+0.5
+Soaking time ts (design variable)
+d
+5
+60
+30
+30
+30
+30
+Injection timing τinj (design variable)
+d
+0
+15
+0
+0
+0
+0
+Bottomhole flowing pressure pwf
+MPa
+30
+40
+35
+35
+35
+35
+Production duration
+d
+360
+360
+360
+360
+360
+360
+Upper limit of injection + soaking
+duration
+d
+90
+90
+90
+90
+90
+90
+Upper limit of daily liquid production
+per well
+m3/d
+50
+200
+100
+100
+100
+100
+Notes: (1) In the table, pf is calculated from GfHd and rounded to one decimal place; pmax is taken
+as the smaller of 0.95pf and the equipment limit of 60 MPa. (2) The values of Case1–Case3 all fall
+within the lower–upper bounds, but the three scenarios are not the interval endpoints, and
+contestants may perturb them further. (3) The fracture half-length refers to the length of a single
+fracture wing; the natural-fracture density is measured as the total fracture length per unit area. (4)
+The discrete or continuous type of the design variables is specified in Problem 3, and the values
+given in the table are the base values.
+Appendix B: Table of Unified Economic Baseline Parameters
+Unified economic baseline parameters are prescribed for this problem. Unless
+otherwise specified, the economic evaluations in Problems 3 and 4 (such as the NPV
+calculation) must strictly adopt the values in the table below.
+Table B.1
+Unified Economic Baseline Parameters
+Item
+Symbol
+Value
+Unit
+Notes
+Crude oil price
+Poil
+75
+USD/bbl
+Given in the problem statement; converted at 1
+bbl = 0.159 m3
+Exchange rate
+e
+7.20
+CNY/USD
+Given in the problem statement
+Converted crude oil price
+Poil*
+3396
+CNY/m3
+75 × 7.20/0.159, rounded
+Unit price of
+nanomaterial
+cnano
+200
+CNY/kg
+Given in the problem statement; equivalent to 20
+× 104 CNY/t
+
+--- PAGE 10 ---
+Item
+Symbol
+Value
+Unit
+Notes
+Wellhead price of CO2
+cCO2
+300
+CNY/t
+Given in the problem statement; equivalent to
+0.03 × 104 CNY/t
+Daily charge for injection
+operations
+cinj
+30
+104 CNY/d
+Given in the problem statement; charged only
+during the injection stage
+Daily charge for soaking
+maintenance
+csoak
+3
+104 CNY/d
+Taken as 10% of cinj; charged during the soaking
+stage
+Fracturing treatment cost
+Cfrac
+120
+104 CNY per
+well
+treatment
+Covers perforation, fracturing pump fleet,
+proppant, etc.; paid on day 0
+Variable production cost
+cprod
+350
+CNY/m3 oil
+Charged on the daily oil production
+Produced-water
+treatment cost
+cwater
+25
+CNY/m3
+water
+Charged on the daily water production
+Annual discount rate
+r
+8
+%
+Converted on the basis of 365 d per year
+To unify the dimensions, the formulas in Sections B.2–B.4 are all expressed in
+104 CNY, t, m3, and d. Converted according to Table B.1: cnano = 20 × 104 CNY/t, cCO2
+= 0.03 × 104 CNY/t, cprod = 0.035 × 104 CNY/m3, cwater = 0.0025 × 104 CNY/m3, and
+Poil* = 0.3396 × 104 CNY/m3.
+B.2
+Nanomaterial and CO2 Consumption
+Let the total volume of the injected composite fluid at the reference state of 25
+MPa and 300 K be Vinj, with a CO2 volume fraction of fCO2; then
+VCO2 = fCO2Vinj,
+Vaq = (1 - fCO2)Vinj
+The masses of CO2 and of the nanomaterial are, respectively (in units of t)
+mCO2 = ρCO2,refVCO2/1000,
+mnano = (Cn/100)ρaqVaq/1000
+where ρCO2,ref = 850 kg/m3, ρaq = 1000 kg/m3, and Cn is substituted in wt%. The
+corresponding costs are
+Cnano = cnanomnano,
+CCO2 = cCO2mCO2
+The upper limit of nanomaterial consumption is 30 t per well treatment; schemes
+exceeding this limit are regarded as infeasible. The nanomaterial consumption is
+based on the volume Vaq of the injected nano-agent aqueous solution and is not
+converted from the stimulated reservoir volume; if another convention of preparing
+the fluid according to the stimulated volume is adopted, the conversion relation
+between Vaq and the stimulated volume must be given and kept consistent throughout
+
+--- PAGE 11 ---
+the paper.
+B.3
+Total Cost, Cash Flow, and NPV
+The total cost (undiscounted, including construction and production operating
+costs) is
+Ctotal = Cfrac + cinjtinj + csoakts + Cnano + CCO2 + cprodQo + cwaterQw
+where tinj = Vinj/qinj is the actual injection duration, and Qo and Qw are the
+cumulative oil production and water production over 360 d of production, respectively.
+The net cash flow on day t is
+CF(t) = Poil*Qo - cprodQo - cwaterQw - cinjIinj - csoakIsoak - cnanomnanoday - cCO2mCO2day
+where Iinj(t) and Isoak(t) are indicator functions for the injection and soaking
+stages, and mnanoday(t) and mCO2day(t) are the consumptions of the nano-agent and CO2
+on that day (t/d). The NPV is
+NPV = -Cfrac + Σt=1T CF(t)/(1+r)t/365
+For a candidate scheme, T = tinj + ts + 360 d; for the baseline scheme B1
+(fracturing only, without injection of the composite fluid), T = 360 d; the incremental
+net present value is ΔNPV = NPV −NPVB1. The discounting reference is day 0, with
+discounting applied at the end of each day; during the production stage no daily
+operation charge is counted, and only the variable production cost and the
+produced-water treatment cost are included; the daily soaking charge is included, and
+the daily injection charge is counted for the actual number of injection days.
+B.4
+Unit Conversions and Reference State
+Table B.2
+Common Unit Conversions
+Conversion
+Equivalent
+Quantity
+1 mD
+9.869233×10-16 m2
+Permeability
+1 MPa
+106 Pa
+Pressure
+1 mPa·s
+10-3 Pa·s
+Viscosity
+1 d
+86 400 s
+Time
+1 wt%
+0.01 kg/kg
+Mass fraction
+1 bbl
+0.159 m3
+Volume
+1 t
+1000 kg
+Mass
+
+--- PAGE 12 ---
+Conversion
+Equivalent
+Quantity
+1 × 104 CNY
+104 CNY
+Amount
+Example: for Vinj = 3000 m3, fCO2 = 0.5, and Cn = 1.0 wt%, Vaq = 1500 m3, mnano
+= 15 t, and the material cost is 300 × 104 CNY; mCO2 = 1275 t and the CO2 cost is
+38.25 × 104 CNY; for 10 d of injection and 30 d of soaking, the daily injection charge
+is 300 × 104 CNY and the daily soaking charge is 90 × 104 CNY, which together with
+the fracturing cost of 120 × 104 CNY gives a subtotal of 848.25 × 104 CNY
+(excluding production costs).
+Attachment C: Description of the Productivity-Dynamics Simulation Data at
+Different Soaking Times
+Attachment C is described as follows:
+The Attachment C file is Synthetic_Production_Data.xlsx, which contains 38,880
+records formed by the combination of 3 scenarios, 3 nanoparticle concentration levels,
+12 soaking-time levels, and 360 production days (3 × 3 × 12 × 360 = 38,880). The
+data were generated by a reference mechanistic model, and the daily oil rate contains
+±5% random Gaussian noise; the data are not field observations and do not constitute
+a “standard answer”.
+Table C.1
+Field Descriptions of Attachment C
+Field
+Type
+Unit
+Description
+Values/Notes
+Case_ID
+Text
+—
+Case identifier
+Case1_low-permeability high-stress;
+Case2_medium-permeability low-stress;
+Case3_high-permeability complex
+fractures
+Nano_Concentration_wt%
+Numeric
+wt%
+Nanoparticle mass
+fraction
+0.5, 1.0, and 1.5 (three levels)
+Soak_Time_Days
+Integer
+d
+Soaking time
+5–60, step 5, 12 levels in total
+Production_Day
+Integer
+d
+Production time after
+well opening
+1–360
+BHP_MPa
+Numeric
+MPa
+Bottomhole flowing
+pressure
+Simulated values for the production
+stage; may briefly exceed the initial
+formation pressure at the beginning of
+production
+
+--- PAGE 13 ---
+Field
+Type
+Unit
+Description
+Values/Notes
+Oil_Rate_m3_d
+Numeric
+m3/d
+Daily oil rate
+Contains ±5% Gaussian noise; truncated
+to non-negative values
+Cum_Oil_m3
+Numeric
+m3
+Cumulative oil
+production
+Sum of the daily oil rates up to and
+including the current day; inherits the
+noise
+Usage rules: (1) The data must be divided into training, validation, and test sets
+by whole groups defined by “scenario × concentration × soaking time”; randomly
+splitting adjacent production days within the same group is prohibited. (2) The test set
+must contain at least one soaking-time level that does not participate in training, so as
+to test the extrapolation capability. (3) The Cum_Oil_m3 field must not be used to
+back-calculate the daily oil rate and then add noise again, which would double-count
+the noise; back-calculating the production rate from Cum_Oil is prohibited. (4)
+Attachment C covers only the two operational dimensions Cn and ts; the influence of
+the remaining variables on productivity must be given by the mechanistic model or by
+explicit assumptions. (5) Smoothing, denoising, or group aggregation of the data is
+permitted, but the processing method must be stated and a comparison with the raw
+data must be retained.
+Data consistency note: The BHP values in Attachment C are simulated values for
+the production stage; at the beginning of production they may briefly exceed the
+initial formation pressure, which reflects the incomplete dissipation of pressure in the
+near-wellbore zone after injection. BHP and the production rate do not constitute
+boundary conditions for the contestants’ models, nor is record-by-record reproduction
+required. Contestants should focus on comparing trends, orders of magnitude, and
+relative rankings rather than on point-by-point fitting.
+Special note: This problem does not provide field production data, recovery
+factors, or optimal schemes; all numerical values are modeling conditions set by the
+problem. Contestants must establish the mechanistic model, extract the scaling
+relations, and construct the optimization and evaluation methods themselves, and are
+responsible for the reproducibility of their results. The productivity simulation data
+provided in Attachment C were generated by a reference mechanistic model and are
+
+--- PAGE 14 ---
+intended only for modeling, validation, and comparison in Problems 3 and 4; they
+must not be used as field observation data.

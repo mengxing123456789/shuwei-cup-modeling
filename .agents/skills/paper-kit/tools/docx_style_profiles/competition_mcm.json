@@ -1,0 +1,87 @@
+{
+  "profile_name": "MCM/ICM 美赛英文论文样式（Word 导出）",
+  "_rules": "COMAP 2027 MCM/ICM instructions: typed in English with a readable font of at least 12-point type; team control number and page number at the top of each page (e.g. 'Team # 0000000, Page 6 of 25'); a Table of Contents is encouraged and counts toward the 25 pages (each 2026 problem lists it among the required items). Contents come from a <!-- toc --> line after the Summary Sheet; the official Summary Sheet header (Problem Chosen / year MCM/ICM Summary Sheet / Team Control Number) comes from a <!-- summary-sheet problem=X --> line at the top, and its control number also fills {CONTROL} in the page header.",
+  "page": {
+    "size": "A4",
+    "margin_top_cm": 2.5,
+    "margin_bottom_cm": 2.5,
+    "margin_left_cm": 2.5,
+    "margin_right_cm": 2.5
+  },
+  "fonts": {
+    "chinese_heading": "SimHei",
+    "chinese_body": "SimSun",
+    "latin": "Times New Roman",
+    "monospace": "Consolas"
+  },
+  "headings": {
+    "level1_pt": 16,
+    "level2_pt": 14,
+    "level3_pt": 12,
+    "level4_pt": 12,
+    "bold": true,
+    "level1_alignment": "left",
+    "level2_alignment": "left",
+    "level3_alignment": "left",
+    "level1_page_break_before": false,
+    "level2_page_break_before": false,
+    "level3_page_break_before": false
+  },
+  "body": {
+    "font_size_pt": 12,
+    "line_spacing": 1.15,
+    "first_line_indent_chars": 0,
+    "space_before_pt": 0,
+    "space_after_pt": 6
+  },
+  "title": {
+    "font_size_pt": 16,
+    "bold": true,
+    "alignment": "center",
+    "font_family": "Times New Roman",
+    "line_spacing": 1.15,
+    "space_before_pt": 12,
+    "space_after_pt": 6
+  },
+  "table": {
+    "top_border_pt": 1.5,
+    "header_border_pt": 0.75,
+    "bottom_border_pt": 1.5,
+    "font_size_pt": 12,
+    "header_bold": true,
+    "cell_alignment": "center"
+  },
+  "references": {
+    "hanging_indent_cm": 0.74,
+    "font_size_pt": 12,
+    "numbering_style": "bracket"
+  },
+  "image": {
+    "max_width_cm": 14,
+    "alignment": "center"
+  },
+  "code_block": {
+    "font_size_pt": 10,
+    "line_spacing": 1.0,
+    "background_color": "F5F5F5"
+  },
+  "layout_markers": true,
+  "toc": {
+    "title": "Contents",
+    "heading_range": "2-3"
+  },
+  "header_text": "Team # {CONTROL}, Page {PAGE} of {PAGES}",
+  "header_size_pt": 12,
+  "header_color": "000000",
+  "header_align": "right",
+  "footer_page_number": false,
+  "summary_sheet": {
+    "left_label": "Problem Chosen",
+    "middle_lines": ["{YEAR}", "MCM/ICM", "Summary Sheet"],
+    "right_label": "Team Control Number",
+    "control_number": "0000000",
+    "label_size_pt": 12,
+    "value_size_pt": 20,
+    "abstract_heading": "Summary"
+  }
+}

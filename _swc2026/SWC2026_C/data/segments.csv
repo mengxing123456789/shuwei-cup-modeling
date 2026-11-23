@@ -1,0 +1,350 @@
+rec,dataset,sample,env,split,seg,start,end,dur,label,sid
+0,EgoDemo,E001,logistics_x_courier_station_0021,train,0,0.0,13.0,13.0,Flip the cardboard box on the shelf and arrange it neatly.,ST_01
+0,EgoDemo,E001,logistics_x_courier_station_0021,train,1,13.0,25.0,12.0,Flip the cardboard box on the left side of the shelf and arrange it neatly.,ST_02
+0,EgoDemo,E001,logistics_x_courier_station_0021,train,2,25.0,45.0,20.0,Rearrange the stacked cardboard boxes and flip them with labels facing out.,ST_03
+0,EgoDemo,E001,logistics_x_courier_station_0021,train,3,45.0,53.8,8.799999999999997,Flip the leftmost cardboard box and arrange it neatly.,ST_04
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,0,0.0,4.4,4.4,Pick up the cardboard box from the shelf and flip it to adjust the orientation.,ST_01
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,1,4.4,8.4,4.0,Put the cardboard box back on the shelf and adjust its position.,ST_02
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,2,8.4,12.4,4.0,Pick up another cardboard box and flip it to adjust the orientation.,ST_03
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,3,12.4,21.0,8.6,Pick up two cardboard boxes and place them side by side in a neat arrangement.,ST_04
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,4,21.0,28.0,7.0,"Pick up the cardboard box, flip it, and place it side by side on the shelf.",ST_05
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,5,28.0,32.4,4.399999999999999,"Pick up the cardboard box, flip it, and place it side by side on the shelf.",ST_06
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,6,32.4,40.4,8.0,Take the cardboard box from behind the shelf and place it side by side.,ST_07
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,7,40.4,49.0,8.600000000000001,"Pick up the cardboard box, flip it, and place it side by side on the shelf.",ST_08
+1,EgoDemo,E002,logistics_x_courier_station_0021,train,8,49.0,56.0,7.0,"Pick up the cardboard box, flip it, and place it side by side on the shelf.",ST_09
+2,EgoDemo,E003,home_x_apartment_0342,train,0,0.0,4.0,4.0,Put the two spice bottles into the transparent storage box,ST_01
+2,EgoDemo,E003,home_x_apartment_0342,train,1,4.0,6.4,2.4000000000000004,Put the third spice bottle into the transparent storage box,ST_02
+2,EgoDemo,E003,home_x_apartment_0342,train,2,6.4,9.6,3.1999999999999993,Put the fourth spice bottle into the transparent storage box,ST_03
+3,EgoDemo,E004,home_x_apartment_0342,train,0,0.0,2.8,2.8,Move the spice bottle from the stove to the transparent tray,ST_01
+3,EgoDemo,E004,home_x_apartment_0342,train,1,2.8,10.4,7.6000000000000005,Move the remaining spice bottles to the transparent tray and arrange them neatly,ST_02
+4,EgoDemo,E005,home_x_apartment_0342,train,0,0.0,2.8,2.8,Put the spice bottle into the transparent storage box,ST_01
+4,EgoDemo,E005,home_x_apartment_0342,train,1,2.8,8.4,5.6000000000000005,Put the other two spice bottles into the storage box,ST_02
+4,EgoDemo,E005,home_x_apartment_0342,train,2,8.4,11.0,2.5999999999999996,Push the storage box back to the original position in the corner,ST_03
+5,EgoDemo,E006,retail_x_supermarket_0054,train,0,0.0,3.0,3.0,Pick up the green packaging bag from the shopping cart and place it on the shelf,ST_01
+5,EgoDemo,E006,retail_x_supermarket_0054,train,1,3.0,6.4,3.4000000000000004,Pick up the orange packaging bag from the shopping cart and place it on the shelf,ST_02
+5,EgoDemo,E006,retail_x_supermarket_0054,train,2,6.4,10.4,4.0,Pick up another orange packaging bag from the shopping cart and place it on the shelf,ST_03
+5,EgoDemo,E006,retail_x_supermarket_0054,train,3,10.4,13.8,3.4000000000000004,Arrange the orange and green packaging bags on the shelf,ST_04
+6,EgoDemo,E007,retail_x_supermarket_0121,train,0,0.0,8.0,8.0,Move the basket with bottles to the front of the shelf,ST_01
+6,EgoDemo,E007,retail_x_supermarket_0121,train,1,8.0,31.0,23.0,Take the white bottle from the basket and place it on the shelf,ST_02
+6,EgoDemo,E007,retail_x_supermarket_0121,train,2,31.0,41.0,10.0,Take the pink bottle from the basket and place it on the shelf,ST_03
+6,EgoDemo,E007,retail_x_supermarket_0121,train,3,41.0,58.8,17.799999999999997,Arrange the bottles on the shelf in a neat row,ST_04
+7,EgoDemo,E008,retail_x_supermarket_0054,train,0,0.0,5.0,5.0,Straighten the fallen black bottle on the right and arrange it neatly,ST_01
+7,EgoDemo,E008,retail_x_supermarket_0054,train,1,5.0,9.0,4.0,Straighten the fallen black bottle in the middle and arrange it neatly,ST_02
+7,EgoDemo,E008,retail_x_supermarket_0054,train,2,9.0,14.0,5.0,Straighten the fallen black bottle on the left and arrange it neatly,ST_03
+7,EgoDemo,E008,retail_x_supermarket_0054,train,3,14.0,18.6,4.600000000000001,Adjust the position of the black bottles on the shelf to align them,ST_04
+8,EgoDemo,E009,retail_x_supermarket_0037,train,0,0.0,3.8,3.8,Pick up the ketchup packet from the shopping cart and place it on the shelf,ST_01
+8,EgoDemo,E009,retail_x_supermarket_0037,train,1,3.8,7.8,4.0,Pick up the ketchup packet from the shopping cart again and place it on the shelf,ST_02
+8,EgoDemo,E009,retail_x_supermarket_0037,train,2,7.8,10.8,3.000000000000001,Pick up the ketchup packet from the shopping cart for the last time and place it on the shelf,ST_03
+9,EgoDemo,E010,retail_x_supermarket_0054,train,0,0.0,3.4,3.4,Put the red detergent bottle back on the shelf,ST_01
+9,EgoDemo,E010,retail_x_supermarket_0054,train,1,3.4,9.4,6.0,Put the blue detergent bottle back on the shelf,ST_02
+9,EgoDemo,E010,retail_x_supermarket_0054,train,2,9.4,11.0,1.5999999999999996,Arrange the green bottles on the shelf,ST_03
+9,EgoDemo,E010,retail_x_supermarket_0054,train,3,11.0,12.4,1.4000000000000004,Arrange the red detergent bottles on the shelf,ST_04
+10,EgoDemo,E011,retail_x_supermarket_0037,train,0,0.0,3.0,3.0,Put the two red-lid seasoning bottles back on the shelf,ST_01
+10,EgoDemo,E011,retail_x_supermarket_0037,train,1,3.0,6.4,3.4000000000000004,Put the two blue-lid seasoning jars back on the shelf,ST_02
+10,EgoDemo,E011,retail_x_supermarket_0037,train,2,6.4,9.0,2.5999999999999996,Arrange the red-lid seasoning bottles on the shelf,ST_03
+10,EgoDemo,E011,retail_x_supermarket_0037,train,3,9.0,11.2,2.1999999999999993,Arrange the blue-lid seasoning jars on the shelf,ST_04
+11,EgoDemo,E012,retail_x_supermarket_0054,train,0,0.0,1.4,1.4,Move the Pepsi bottle to the middle position on the shelf,ST_01
+11,EgoDemo,E012,retail_x_supermarket_0054,train,1,1.4,3.0,1.6,Move the Fanta bottle to the left position on the shelf,ST_02
+11,EgoDemo,E012,retail_x_supermarket_0054,train,2,3.0,5.0,2.0,Move the Sprite bottle to the right position on the shelf,ST_03
+11,EgoDemo,E012,retail_x_supermarket_0054,train,3,5.0,7.0,2.0,Align the Pepsi bottle with the Sprite bottle,ST_04
+11,EgoDemo,E012,retail_x_supermarket_0054,train,4,7.0,8.6,1.5999999999999996,Align the Fanta bottle on the left side of the shelf,ST_05
+12,EgoDemo,E013,retail_x_supermarket_0125,train,0,0.0,4.4,4.4,Move the two red beverage cans from the back of the shelf to the front and place them side by side,ST_01
+12,EgoDemo,E013,retail_x_supermarket_0125,train,1,4.4,9.0,4.6,Move the two white beverage bottles from the right side of the shelf to the left side and place them side by side,ST_02
+12,EgoDemo,E013,retail_x_supermarket_0125,train,2,9.0,13.4,4.4,Move the two brown beverage bottles from the back of the shelf to the front and place them side by side,ST_03
+12,EgoDemo,E013,retail_x_supermarket_0125,train,3,13.4,19.0,5.6,Move the other two brown beverage bottles from the back of the shelf to the front and place them side by side,ST_04
+12,EgoDemo,E013,retail_x_supermarket_0125,train,4,19.0,22.8,3.8000000000000007,Move the two white beverage bottles from the back of the shelf to the front and place them side by side,ST_05
+13,EgoDemo,E014,retail_x_supermarket_0058,train,0,0.0,1.4,1.4,Move the green bottle from the shelf to the lower layer,ST_01
+13,EgoDemo,E014,retail_x_supermarket_0058,train,1,1.4,5.4,4.0,Move the black bottle from the shelf to the lower layer,ST_02
+13,EgoDemo,E014,retail_x_supermarket_0058,train,2,5.4,7.8,2.3999999999999995,Put the green bottle back to the original position on the shelf,ST_03
+14,EgoDemo,E015,retail_x_supermarket_0147,validation,0,0.0,3.0,3.0,Move the pink bottle from the upper shelf to the lower shelf,ST_01
+14,EgoDemo,E015,retail_x_supermarket_0147,validation,1,3.0,7.0,4.0,Move the blue bottle from the lower shelf back to the upper shelf,ST_02
+14,EgoDemo,E015,retail_x_supermarket_0147,validation,2,7.0,11.0,4.0,Adjust the position of the pink bottle on the lower shelf,ST_03
+14,EgoDemo,E015,retail_x_supermarket_0147,validation,3,11.0,15.0,4.0,Move the blue bottle from the upper shelf to the lower shelf and put it back next to the red bottle,ST_04
+14,EgoDemo,E015,retail_x_supermarket_0147,validation,4,15.0,18.0,3.0,Move the red bottle from the lower shelf back to the upper shelf,ST_05
+14,EgoDemo,E015,retail_x_supermarket_0147,validation,5,18.0,20.0,2.0,Adjust the position of the blue bottle on the lower shelf,ST_06
+15,EgoDemo,E016,retail_x_supermarket_0054,train,0,0.0,1.8,1.8,Pick up the purple snack bag from the shelf and place it on the lower shelf,ST_01
+15,EgoDemo,E016,retail_x_supermarket_0054,train,1,1.8,5.0,3.2,Pick up the cyan snack bag from the lower shelf and place it on the upper shelf,ST_02
+15,EgoDemo,E016,retail_x_supermarket_0054,train,2,5.0,7.0,2.0,Arrange the purple snack bag on the lower shelf,ST_03
+16,EgoDemo,E017,retail_x_supermarket_0054,train,0,0.0,2.4,2.4,Pick up the orange snack bag from the lower shelf and place it on the upper shelf,ST_01
+16,EgoDemo,E017,retail_x_supermarket_0054,train,1,2.4,5.4,3.0000000000000004,Pick up the green snack bag from the upper shelf and place it on the lower shelf,ST_02
+16,EgoDemo,E017,retail_x_supermarket_0054,train,2,5.4,7.8,2.3999999999999995,Move the orange snack bag on the upper shelf forward for arrangement,ST_03
+17,EgoDemo,E018,retail_x_supermarket_0078,test,0,0.0,2.0,2.0,Rotate the box on the far right to face outward.,ST_01
+17,EgoDemo,E018,retail_x_supermarket_0078,test,1,2.0,4.0,2.0,Rotate the middle box to face outward.,ST_02
+17,EgoDemo,E018,retail_x_supermarket_0078,test,2,4.0,6.0,2.0,Rotate the box on the far left to face outward.,ST_03
+17,EgoDemo,E018,retail_x_supermarket_0078,test,3,6.0,8.4,2.4000000000000004,Adjust the positions of the three boxes for neat alignment.,ST_04
+18,EgoDemo,E019,retail_x_supermarket_0078,test,0,0.0,3.0,3.0,Move the rightmost cello SWIFT box to the left and align it,ST_01
+18,EgoDemo,E019,retail_x_supermarket_0078,test,1,3.0,6.4,3.4000000000000004,Move the middle cello SWIFT box to the left and align it,ST_02
+18,EgoDemo,E019,retail_x_supermarket_0078,test,2,6.4,10.0,3.5999999999999996,Move the leftmost cello SWIFT box to the right and align it,ST_03
+18,EgoDemo,E019,retail_x_supermarket_0078,test,3,10.0,13.0,3.0,Adjust the positions of the three cello SWIFT boxes for a neat arrangement,ST_04
+19,EgoDemo,E020,retail_x_supermarket_0054,train,0,0.0,2.4,2.4,Pull forward the Balaji snack bag on the right,ST_01
+19,EgoDemo,E020,retail_x_supermarket_0054,train,1,2.4,6.4,4.0,Pull forward the Balaji snack bag on the left,ST_02
+20,EgoDemo,E021,retail_x_supermarket_0054,train,0,0.0,3.4,3.4,Move the purple snack bag on the right to the left,ST_01
+20,EgoDemo,E021,retail_x_supermarket_0054,train,1,3.4,8.2,4.799999999999999,Move the purple snack bag in the middle to the left,ST_02
+21,EgoDemo,E022,retail_x_supermarket_0058,train,0,0.0,2.0,2.0,Push the pink cleaner bottle to the left back to its original position,ST_01
+21,EgoDemo,E022,retail_x_supermarket_0058,train,1,2.0,4.0,2.0,Push the purple cleaner bottle to the right back to its original position,ST_02
+21,EgoDemo,E022,retail_x_supermarket_0058,train,2,4.0,6.0,2.0,Push the yellow cleaner bottle to the left back to its original position,ST_03
+21,EgoDemo,E022,retail_x_supermarket_0058,train,3,6.0,7.8,1.7999999999999998,Push the purple cleaner bottle to the right back to its original position,ST_04
+22,EgoDemo,E023,retail_x_supermarket_0049,train,0,0.0,3.0,3.0,Place the orange canned beverage on the shelf,ST_01
+22,EgoDemo,E023,retail_x_supermarket_0049,train,1,3.0,18.0,15.0,Arrange the green canned beverages on the shelf,ST_02
+22,EgoDemo,E023,retail_x_supermarket_0049,train,2,18.0,22.4,4.399999999999999,Arrange the red canned beverages on the shelf,ST_03
+23,EgoDemo,E024,retail_x_supermarket_0058,train,0,0.0,2.4,2.4,Pick up the blue hand sanitizer bottle from the lower shelf and place it on the upper shelf,ST_01
+23,EgoDemo,E024,retail_x_supermarket_0058,train,1,2.4,4.4,2.0000000000000004,Pick up the green hand sanitizer bottle from the lower shelf and place it on the upper shelf,ST_02
+23,EgoDemo,E024,retail_x_supermarket_0058,train,2,4.4,7.4,3.0,"Pick up the brown hand sanitizer bottle from the upper shelf, adjust its position, and put it back",ST_03
+23,EgoDemo,E024,retail_x_supermarket_0058,train,3,7.4,9.0,1.5999999999999996,Adjust the position of the green hand sanitizer bottle on the upper shelf,ST_04
+23,EgoDemo,E024,retail_x_supermarket_0058,train,4,9.0,10.0,1.0,Adjust the position of the blue hand sanitizer bottle on the upper shelf,ST_05
+24,EgoDemo,E025,retail_x_supermarket_0066,train,0,0.0,2.0,2.0,Move the bottle with yellow liquid from the right side of the shelf to the middle position,ST_01
+24,EgoDemo,E025,retail_x_supermarket_0066,train,1,2.0,4.0,2.0,Move the bottle with clear liquid from the middle of the shelf to the left position,ST_02
+24,EgoDemo,E025,retail_x_supermarket_0066,train,2,4.0,5.8,1.7999999999999998,Move the bottle with yellow liquid from the middle of the shelf to the left position,ST_03
+25,EgoDemo,E026,retail_x_supermarket_0074,validation,0,0.0,3.0,3.0,Place the yellow sponge and the colorful sponge in the back row of the storage box,ST_01
+25,EgoDemo,E026,retail_x_supermarket_0074,validation,1,3.0,6.0,3.0,Place the yellow sponge and the colorful sponge in the front row of the storage box,ST_02
+25,EgoDemo,E026,retail_x_supermarket_0074,validation,2,6.0,9.0,3.0,Place the green sponge and the round sponge in the storage box,ST_03
+25,EgoDemo,E026,retail_x_supermarket_0074,validation,3,9.0,13.0,4.0,Place the blue sponge and the yellow sponge in the front row of the storage box,ST_04
+25,EgoDemo,E026,retail_x_supermarket_0074,validation,4,13.0,22.0,9.0,Adjust the position of the sponges in the back row of the storage box,ST_05
+25,EgoDemo,E026,retail_x_supermarket_0074,validation,5,22.0,26.0,4.0,Adjust the position of the sponges in the front row of the storage box,ST_06
+26,EgoDemo,E027,retail_x_convenience_0014,train,0,0.0,7.0,7.0,Stand the white paper cup and the brown paper cup upright and place them side by side on the shelf,ST_01
+26,EgoDemo,E027,retail_x_convenience_0014,train,1,7.0,18.0,11.0,Stand the remaining white paper cup and brown paper cup upright and place them side by side on the shelf,ST_02
+26,EgoDemo,E027,retail_x_convenience_0014,train,2,18.0,55.2,37.2,Adjust the position of the paper cups on the shelf to make the arrangement neat,ST_03
+27,EgoDemo,E028,home_x_apartment_0342,train,0,0.0,3.0,3.0,Pick up the seasoning bottle from the countertop and place it by the sink.,ST_01
+27,EgoDemo,E028,home_x_apartment_0342,train,1,3.0,10.0,7.0,Pick up the seasoning bottle by the sink and place it on the countertop.,ST_02
+27,EgoDemo,E028,home_x_apartment_0342,train,2,10.0,11.2,1.1999999999999993,Place the transparent divider in front of the seasoning bottle.,ST_03
+28,EgoDemo,E029,home_x_apartment_0342,train,0,0.0,2.8,2.8,Pick up the first seasoning bottle and tighten the cap,ST_01
+28,EgoDemo,E029,home_x_apartment_0342,train,1,2.8,6.8,4.0,Pick up the second seasoning bottle and tighten the cap,ST_02
+28,EgoDemo,E029,home_x_apartment_0342,train,2,6.8,9.4,2.6000000000000005,Pick up the third seasoning bottle and tighten the cap,ST_03
+29,EgoDemo,E030,home_x_apartment_0342,train,0,0.0,2.8,2.8,Pick up the first bottle with a green cap and tighten the cap,ST_01
+29,EgoDemo,E030,home_x_apartment_0342,train,1,2.8,6.4,3.6000000000000005,Pick up the second bottle with a green cap and tighten the cap,ST_02
+29,EgoDemo,E030,home_x_apartment_0342,train,2,6.4,9.8,3.4000000000000004,Pick up the third bottle with a green cap and tighten the cap,ST_03
+30,EgoDemo,E031,home_x_apartment_0342,train,0,0.0,1.8,1.8,Place the seasoning bottle on the countertop.,ST_01
+30,EgoDemo,E031,home_x_apartment_0342,train,1,1.8,5.8,4.0,Arrange the seasoning bottles on the countertop.,ST_02
+30,EgoDemo,E031,home_x_apartment_0342,train,2,5.8,8.8,3.000000000000001,Place the seasoning bottle on the countertop.,ST_03
+30,EgoDemo,E031,home_x_apartment_0342,train,3,8.8,12.4,3.5999999999999996,Place the transparent baffle on the countertop.,ST_04
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,0,0.0,10.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,1,10.0,20.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,2,20.0,30.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,3,30.0,40.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,4,40.0,50.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,5,50.0,60.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,6,60.0,70.0,10.0,Pick up the cardboard box from the shelf and rearrange it,
+31,EgoPro,291aff24-8b62-4a5e-b470-85114bdf86dc,logistics_x_courier_station_0021,train,7,70.0,81.8,11.799999999999997,Pick up the cardboard box from the shelf and rearrange it,
+32,EgoPro,2bb0222e-a5e8-4f0b-b49a-81aa87411149,office_x_corporate_office_0086,train,0,0.0,0.9,0.9,Pull out the drawer of the transparent storage box,
+32,EgoPro,2bb0222e-a5e8-4f0b-b49a-81aa87411149,office_x_corporate_office_0086,train,1,0.9,1.9,0.9999999999999999,Take the green packaged item out of the drawer,
+32,EgoPro,2bb0222e-a5e8-4f0b-b49a-81aa87411149,office_x_corporate_office_0086,train,2,1.9,4.4,2.5000000000000004,Put the green packaged item into the top compartment of the storage box,
+32,EgoPro,2bb0222e-a5e8-4f0b-b49a-81aa87411149,office_x_corporate_office_0086,train,3,4.4,5.8,1.3999999999999995,Push back the drawer of the storage box,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,0,0.0,9.8,9.8,Pick up the first cardboard box and place it on the left side,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,1,9.8,15.9,6.1,Pick up the second cardboard box and place it on the left side,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,2,15.9,23.8,7.9,Pick up the third cardboard box and place it on the left side,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,3,23.8,32.9,9.099999999999998,Pick up the fourth cardboard box and place it on the left side,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,4,32.9,39.9,7.0,Pick up the fifth cardboard box and place it on the left side,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,5,39.9,46.0,6.100000000000001,Pick up the sixth cardboard box and place it on the left side,
+33,EgoPro,347600c2-2623-4180-aff6-538097e87ab7,logistics_x_courier_station_0022,validation,6,46.0,56.5,10.5,Pick up the seventh cardboard box and place it on the left side,
+34,EgoPro,3a3e6211-f2ef-44e0-aee9-bc98b8754234,office_x_corporate_office_0086,train,0,0.0,11.0,11.0,Tear off the label paper on the shelf,
+34,EgoPro,3a3e6211-f2ef-44e0-aee9-bc98b8754234,office_x_corporate_office_0086,train,1,11.0,49.0,38.0,Stick the label paper back onto the shelf,
+34,EgoPro,3a3e6211-f2ef-44e0-aee9-bc98b8754234,office_x_corporate_office_0086,train,2,49.0,50.0,1.0,Throw the remaining label paper into the trash can,
+35,EgoPro,478f3e70-4066-408b-93cf-831625320004,hospitality_x_restaurant_0004,validation,0,0.0,11.9,11.9,Take the mineral water bottle out of the plastic bag and put it on the table,
+35,EgoPro,478f3e70-4066-408b-93cf-831625320004,hospitality_x_restaurant_0004,validation,1,11.9,21.9,9.999999999999998,Continue to take the mineral water bottle out of the plastic bag and put it on the table,
+35,EgoPro,478f3e70-4066-408b-93cf-831625320004,hospitality_x_restaurant_0004,validation,2,21.9,38.3,16.4,Arrange the mineral water bottles on the table into a neat formation,
+36,EgoPro,7d112e74-5837-42af-93e9-8321fbd1237e,logistics_x_courier_station_0022,validation,0,0.0,8.9,8.9,"Stick the paper with ""Receiving Area"" onto the shelf",
+36,EgoPro,7d112e74-5837-42af-93e9-8321fbd1237e,logistics_x_courier_station_0022,validation,1,8.9,18.9,9.999999999999998,"Remove the paper with ""Express Sorting Area"" from the shelf",
+36,EgoPro,7d112e74-5837-42af-93e9-8321fbd1237e,logistics_x_courier_station_0022,validation,2,18.9,33.1,14.200000000000003,"Stick the ""Express Sorting Area"" paper onto the shelf and smooth it out",
+37,EgoPro,83cee2e9-2153-4ac1-a042-f5500cecbb3f,logistics_x_courier_station_0011,test,0,0.0,3.0,3.0,Organize and arrange the small cardboard boxes on the shelf,
+37,EgoPro,83cee2e9-2153-4ac1-a042-f5500cecbb3f,logistics_x_courier_station_0011,test,1,3.0,54.8,51.8,Place the small cardboard boxes into the blue plastic basket one by one,
+38,EgoPro,a3a85c3e-79cd-4d76-a91c-a7405f4647c9,office_x_corporate_office_0086,train,0,0.0,8.4,8.4,Tear the label off the shelf and throw it into the trash can,
+38,EgoPro,a3a85c3e-79cd-4d76-a91c-a7405f4647c9,office_x_corporate_office_0086,train,1,8.4,44.0,35.6,Tear the label off the label paper and stick it on the shelf,
+38,EgoPro,a3a85c3e-79cd-4d76-a91c-a7405f4647c9,office_x_corporate_office_0086,train,2,44.0,45.6,1.6000000000000014,Throw the remaining label paper into the trash can,
+39,EgoPro,c6b52545-fbce-479d-8393-17bb8c5d0311,logistics_x_courier_station_0022,validation,0,0.0,8.5,8.5,Tear off the paper on the shelf,
+39,EgoPro,c6b52545-fbce-479d-8393-17bb8c5d0311,logistics_x_courier_station_0022,validation,1,8.5,11.3,2.8000000000000007,Place the paper on the lower layer of the shelf,
+39,EgoPro,c6b52545-fbce-479d-8393-17bb8c5d0311,logistics_x_courier_station_0022,validation,2,11.3,20.4,9.099999999999998,Clean the adhesive residue on the shelf post,
+39,EgoPro,c6b52545-fbce-479d-8393-17bb8c5d0311,logistics_x_courier_station_0022,validation,3,20.4,33.4,13.0,Pick up another piece of paper and stick it on the shelf post,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,0,0.0,3.0,3.0,Move the white box from the cart to the table,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,1,3.0,7.0,4.0,Move the yellow box from the cart to the table,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,2,7.0,12.0,5.0,Move the spray bottle and the wet wipes from the cart to the table,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,3,12.0,16.0,4.0,Move the container with cloth from the cart to the table,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,4,16.0,20.0,4.0,Move the spray bottle and the container with cloth from the table back to the cart,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,5,20.0,24.0,4.0,Move the wet wipes from the table back to the cart,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,6,24.0,29.0,5.0,Move the yellow box from the table to the lower layer of the cart,
+40,EgoPro,cc9d0407-3b74-4f82-92dc-a25c06eaf044,office_x_corporate_office_0086,train,7,29.0,34.0,5.0,Move the white box from the table to the lower layer of the cart,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,0,0.0,4.8,4.8,Pick up a cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,1,4.8,9.8,5.000000000000001,Pick up the second cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,2,9.8,14.8,5.0,Pick up the third cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,3,14.8,19.8,5.0,Pick up the fourth cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,4,19.8,24.8,5.0,Pick up the fifth cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,5,24.8,29.8,5.0,Pick up the sixth cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,6,29.8,34.8,4.9999999999999964,Pick up the seventh cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,7,34.8,39.8,5.0,Pick up the eighth cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,8,39.8,44.8,5.0,Pick up the ninth cardboard box from the shelf and put it into the blue plastic basket.,
+41,EgoPro,d58db8d6-2869-4d26-9217-9e0a0bfe4923,logistics_x_courier_station_0011,test,9,44.8,49.4,4.600000000000001,Pick up the last cardboard box from the shelf and put it into the blue plastic basket.,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,0,0.0,4.4,4.4,Open the cabinet door,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,1,4.4,10.0,5.6,Place the two bottles of beverage on the table into the lower layer of the cabinet,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,2,10.0,18.0,8.0,Pick up the two bottles of beverage on the floor and place them into the lower layer of the cabinet,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,3,18.0,25.0,7.0,Pick up the other two bottles of beverage on the floor and place them into the lower layer of the cabinet,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,4,25.0,34.0,9.0,Place the pack of mineral water on the table into the upper layer of the cabinet,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,5,34.0,44.4,10.399999999999999,Arrange the beverage bottles in the lower layer of the cabinet,
+42,EgoPro,e1b42dfc-841c-400e-9beb-10bd19f17a22,home_x_apartment_0701,train,6,44.4,49.2,4.800000000000004,Close the cabinet door,
+43,EgoPro,efac6caf-deab-461b-b839-96423abff9b9,home_x_apartment_0701,train,0,0.0,4.8,4.8,Open the cabinet door,
+43,EgoPro,efac6caf-deab-461b-b839-96423abff9b9,home_x_apartment_0701,train,1,4.8,21.8,17.0,Put the bottle in the lower layer of the cabinet,
+43,EgoPro,efac6caf-deab-461b-b839-96423abff9b9,home_x_apartment_0701,train,2,21.8,33.8,11.999999999999996,Put the whole pack of water in the upper layer of the cabinet,
+43,EgoPro,efac6caf-deab-461b-b839-96423abff9b9,home_x_apartment_0701,train,3,33.8,42.8,9.0,Arrange the bottle in the lower layer of the cabinet,
+43,EgoPro,efac6caf-deab-461b-b839-96423abff9b9,home_x_apartment_0701,train,4,42.8,47.8,5.0,Close the cabinet door,
+44,EgoPro,fdbb7805-04f7-46c0-ae1e-1b454accd7a8,office_x_corporate_office_0086,train,0,0.0,1.0,1.0,Pull open the drawer of the transparent storage box,
+44,EgoPro,fdbb7805-04f7-46c0-ae1e-1b454accd7a8,office_x_corporate_office_0086,train,1,1.0,2.4,1.4,Take out the green packaged item from the drawer,
+44,EgoPro,fdbb7805-04f7-46c0-ae1e-1b454accd7a8,office_x_corporate_office_0086,train,2,2.4,5.0,2.6,Put the green packaged item into the upper compartment of the storage box,
+44,EgoPro,fdbb7805-04f7-46c0-ae1e-1b454accd7a8,office_x_corporate_office_0086,train,3,5.0,6.2,1.2000000000000002,Push back the drawer of the storage box,
+45,EgoStandard,01e98c50-1164-448f-a7ff-b722d7a1c19b,retail_x_supermarket_0054,train,0,0.0,3.4,3.4,Take the red cleaner from the shopping cart and put it back on the shelf,
+45,EgoStandard,01e98c50-1164-448f-a7ff-b722d7a1c19b,retail_x_supermarket_0054,train,1,3.4,7.0,3.6,Take the other bottle of red cleaner from the shopping cart and put it back on the shelf,
+45,EgoStandard,01e98c50-1164-448f-a7ff-b722d7a1c19b,retail_x_supermarket_0054,train,2,7.0,10.4,3.4000000000000004,Take the blue cleaner from the shopping cart and put it back on the shelf,
+45,EgoStandard,01e98c50-1164-448f-a7ff-b722d7a1c19b,retail_x_supermarket_0054,train,3,10.4,14.0,3.5999999999999996,Take the other bottle of blue cleaner from the shopping cart and put it back on the shelf,
+45,EgoStandard,01e98c50-1164-448f-a7ff-b722d7a1c19b,retail_x_supermarket_0054,train,4,14.0,17.4,3.3999999999999986,Arrange the cleaner bottles on the shelf,
+46,EgoStandard,03a51a05-58f0-4937-8f05-e0b697c7c5fd,retail_x_supermarket_0054,train,0,0.0,2.8,2.8,Pick up the purple packaging bag from the shopping cart and place it on the shelf,
+46,EgoStandard,03a51a05-58f0-4937-8f05-e0b697c7c5fd,retail_x_supermarket_0054,train,1,2.8,6.6,3.8,Pick up the blue packaging bag from the shopping cart and place it on the shelf,
+46,EgoStandard,03a51a05-58f0-4937-8f05-e0b697c7c5fd,retail_x_supermarket_0054,train,2,6.6,8.0,1.4000000000000004,Adjust the position of the purple packaging bag on the shelf,
+47,EgoStandard,045c1e70-ab63-404a-94ef-735e68c8fd6a,retail_x_supermarket_0054,train,0,0.0,3.0,3.0,Move the juice box on the right to the middle position.,
+47,EgoStandard,045c1e70-ab63-404a-94ef-735e68c8fd6a,retail_x_supermarket_0054,train,1,3.0,7.0,4.0,Move the remaining juice box on the right to the middle position.,
+47,EgoStandard,045c1e70-ab63-404a-94ef-735e68c8fd6a,retail_x_supermarket_0054,train,2,7.0,11.0,4.0,Adjust the positions of the juice boxes in the middle and on the left to make them neat.,
+48,EgoStandard,06a855ba-c079-46f7-b2a4-3a0ad1c72e90,retail_x_supermarket_0054,train,0,0.0,2.4,2.4,Set the fallen Real juice box upright and place it on the left side of the shelf,
+48,EgoStandard,06a855ba-c079-46f7-b2a4-3a0ad1c72e90,retail_x_supermarket_0054,train,1,2.4,5.4,3.0000000000000004,Set the fallen Meaza juice box upright and place it in the middle of the shelf,
+48,EgoStandard,06a855ba-c079-46f7-b2a4-3a0ad1c72e90,retail_x_supermarket_0054,train,2,5.4,9.4,4.0,Set the fallen Real juice box upright and place it on the left side of the shelf,
+48,EgoStandard,06a855ba-c079-46f7-b2a4-3a0ad1c72e90,retail_x_supermarket_0054,train,3,9.4,12.8,3.4000000000000004,Adjust the positions of the Real and Meaza juice boxes on the shelf to make them neat,
+49,EgoStandard,0793b27b-acf5-40f2-8b19-cda2f3d868d1,retail_x_supermarket_0037,train,0,0.0,3.4,3.4,Pick up the ketchup packet from the shopping cart and place it on the shelf,
+49,EgoStandard,0793b27b-acf5-40f2-8b19-cda2f3d868d1,retail_x_supermarket_0037,train,1,3.4,7.0,3.6,Pick up the ketchup packet from the shopping cart and place it on the shelf,
+49,EgoStandard,0793b27b-acf5-40f2-8b19-cda2f3d868d1,retail_x_supermarket_0037,train,2,7.0,10.4,3.4000000000000004,Pick up the ketchup packet from the shopping cart and place it on the shelf,
+50,EgoStandard,09101133-d656-4ce4-921b-3cc6f5a5bcb1,retail_x_supermarket_0054,train,0,0.0,4.0,4.0,Pull the snack bag on the right forward,
+50,EgoStandard,09101133-d656-4ce4-921b-3cc6f5a5bcb1,retail_x_supermarket_0054,train,1,4.0,7.2,3.2,Pull the snack bag on the left forward,
+51,EgoStandard,0fd872a6-6e35-436d-a317-12fc025d5b38,retail_x_supermarket_0054,train,0,0.0,2.8,2.8,Take the blue snack bag out of the shopping cart and put it back on the shelf,
+51,EgoStandard,0fd872a6-6e35-436d-a317-12fc025d5b38,retail_x_supermarket_0054,train,1,2.8,6.6,3.8,Take the green snack bag out of the shopping cart and put it back on the shelf,
+51,EgoStandard,0fd872a6-6e35-436d-a317-12fc025d5b38,retail_x_supermarket_0054,train,2,6.6,10.2,3.5999999999999996,Arrange the blue snack bag on the shelf,
+51,EgoStandard,0fd872a6-6e35-436d-a317-12fc025d5b38,retail_x_supermarket_0054,train,3,10.2,12.8,2.6000000000000014,Arrange the green snack bag on the shelf,
+52,EgoStandard,11b6fab6-0b4a-45b7-9180-61d2dde0ec92,retail_x_supermarket_0074,validation,0,0.0,2.0,2.0,Pick up several bottles of mineral water from the black folding table,
+52,EgoStandard,11b6fab6-0b4a-45b7-9180-61d2dde0ec92,retail_x_supermarket_0074,validation,1,2.0,5.0,3.0,Place the mineral water on the shelf,
+52,EgoStandard,11b6fab6-0b4a-45b7-9180-61d2dde0ec92,retail_x_supermarket_0074,validation,2,5.0,8.0,3.0,Pick up mineral water from the black folding table again,
+52,EgoStandard,11b6fab6-0b4a-45b7-9180-61d2dde0ec92,retail_x_supermarket_0074,validation,3,8.0,11.0,3.0,Place the mineral water on the shelf,
+52,EgoStandard,11b6fab6-0b4a-45b7-9180-61d2dde0ec92,retail_x_supermarket_0074,validation,4,11.0,14.0,3.0,Pick up the remaining mineral water from the black folding table,
+52,EgoStandard,11b6fab6-0b4a-45b7-9180-61d2dde0ec92,retail_x_supermarket_0074,validation,5,14.0,17.6,3.6000000000000014,Place the mineral water on the shelf and organize it,
+53,EgoStandard,16827d3f-6d3c-40e5-aeea-451e008e1247,retail_x_supermarket_0037,train,0,0.0,3.4,3.4,Pick up the ketchup packet from the shopping cart and place it on the shelf,
+53,EgoStandard,16827d3f-6d3c-40e5-aeea-451e008e1247,retail_x_supermarket_0037,train,1,3.4,7.4,4.0,Pick up the ketchup packet from the shopping cart and place it on the shelf,
+53,EgoStandard,16827d3f-6d3c-40e5-aeea-451e008e1247,retail_x_supermarket_0037,train,2,7.4,10.8,3.4000000000000004,Pick up the ketchup packet from the shopping cart and place it on the shelf,
+54,EgoStandard,1a4aed15-de7a-4444-a87c-87d6195d7388,retail_x_supermarket_0054,train,0,0.0,3.4,3.4,Take the red cleaner bottle from the shopping cart and put it back on the shelf,
+54,EgoStandard,1a4aed15-de7a-4444-a87c-87d6195d7388,retail_x_supermarket_0054,train,1,3.4,8.0,4.6,Take the blue cleaner bottle from the shopping cart and put it back on the shelf,
+54,EgoStandard,1a4aed15-de7a-4444-a87c-87d6195d7388,retail_x_supermarket_0054,train,2,8.0,10.4,2.4000000000000004,Arrange the green bottles on the shelf,
+54,EgoStandard,1a4aed15-de7a-4444-a87c-87d6195d7388,retail_x_supermarket_0054,train,3,10.4,11.6,1.1999999999999993,Arrange the red cleaner bottles on the shelf,
+55,EgoStandard,1d855c6c-e844-41b8-9339-d344dd71c7f1,retail_x_supermarket_0058,train,0,0.0,1.4,1.4,Move the yellow bottle to the right for arrangement,
+55,EgoStandard,1d855c6c-e844-41b8-9339-d344dd71c7f1,retail_x_supermarket_0058,train,1,1.4,3.4,2.0,Move the purple bottle to the right for arrangement,
+55,EgoStandard,1d855c6c-e844-41b8-9339-d344dd71c7f1,retail_x_supermarket_0058,train,2,3.4,5.0,1.6,Move the pink bottle to the right for arrangement,
+55,EgoStandard,1d855c6c-e844-41b8-9339-d344dd71c7f1,retail_x_supermarket_0058,train,3,5.0,7.0,2.0,Arrange the bottles on the shelf with both hands,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,0,0.0,6.0,6.0,Place the pink package on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,1,6.0,15.0,9.0,Place the cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,2,15.0,25.0,10.0,Place the long cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,3,25.0,36.0,11.0,Place the cardboard box with the orange label on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,4,36.0,45.0,9.0,Place the cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,5,45.0,54.0,9.0,Place the cardboard box with the green mark on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,6,54.0,62.0,8.0,Place the cardboard box with the yellow label on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,7,62.0,71.0,9.0,Place the small cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,8,71.0,80.0,9.0,Place the cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,9,80.0,89.0,9.0,Place the small cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,10,89.0,97.0,8.0,Place the cardboard box on the shelf,
+56,EgoStandard,1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8,logistics_x_courier_station_0011,test,11,97.0,105.8,8.799999999999997,Place the cardboard box with the yellow label on the shelf,
+57,EgoStandard,1f88d4ce-f51e-440e-a072-e6986fae9da4,retail_x_supermarket_0058,train,0,0.0,2.0,2.0,Move the pink bottle to the right,
+57,EgoStandard,1f88d4ce-f51e-440e-a072-e6986fae9da4,retail_x_supermarket_0058,train,1,2.0,3.4,1.4,Move the purple bottle to the right,
+57,EgoStandard,1f88d4ce-f51e-440e-a072-e6986fae9da4,retail_x_supermarket_0058,train,2,3.4,5.0,1.6,Move the yellow bottle to the left,
+57,EgoStandard,1f88d4ce-f51e-440e-a072-e6986fae9da4,retail_x_supermarket_0058,train,3,5.0,8.8,3.8000000000000007,Adjust the position of the bottle with both hands,
+58,EgoStandard,25702370-2103-4de3-ab02-59288316ec2b,retail_x_supermarket_0054,train,0,0.0,3.0,3.0,Move the snack bag on the right to the left,
+58,EgoStandard,25702370-2103-4de3-ab02-59288316ec2b,retail_x_supermarket_0054,train,1,3.0,7.0,4.0,Move the snack bag in the middle to the left,
+58,EgoStandard,25702370-2103-4de3-ab02-59288316ec2b,retail_x_supermarket_0054,train,2,7.0,10.0,3.0,Move the snack bag on the left to the left,
+59,EgoStandard,2af40d05-034e-4d51-84dc-c4124c06d40d,retail_x_supermarket_0058,train,0,0.0,2.4,2.4,Align the pink Lysol disinfectant bottle on the shelf,
+59,EgoStandard,2af40d05-034e-4d51-84dc-c4124c06d40d,retail_x_supermarket_0058,train,1,2.4,4.4,2.0000000000000004,Align the green Lysol disinfectant bottle on the shelf,
+59,EgoStandard,2af40d05-034e-4d51-84dc-c4124c06d40d,retail_x_supermarket_0058,train,2,4.4,6.4,2.0,Align the yellow Harpic toilet cleaner bottle on the shelf,
+59,EgoStandard,2af40d05-034e-4d51-84dc-c4124c06d40d,retail_x_supermarket_0058,train,3,6.4,8.0,1.5999999999999996,Adjust the position of the pink Lysol disinfectant bottle again,
+59,EgoStandard,2af40d05-034e-4d51-84dc-c4124c06d40d,retail_x_supermarket_0058,train,4,8.0,10.0,2.0,Adjust the position of the green Lysol disinfectant bottle again,
+59,EgoStandard,2af40d05-034e-4d51-84dc-c4124c06d40d,retail_x_supermarket_0058,train,5,10.0,10.8,0.8000000000000007,Adjust the position of the yellow Harpic toilet cleaner bottle again,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,0,0.0,2.0,2.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,1,2.0,6.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,2,6.0,10.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,3,10.0,14.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,4,14.0,18.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,5,18.0,22.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,6,22.0,26.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,7,26.0,30.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,8,30.0,34.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,9,34.0,38.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,10,38.0,42.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,11,42.0,46.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,12,46.0,50.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,13,50.0,54.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,14,54.0,58.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,15,58.0,62.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,16,62.0,66.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,17,66.0,70.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,18,70.0,74.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,19,74.0,78.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,20,78.0,82.0,4.0,Take two bottles of cola from the cardboard box,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,21,82.0,86.0,4.0,Place the two bottles of cola on the shelf,
+60,EgoStandard,2f290382-a060-4352-99cd-883e46698bc5,retail_x_supermarket_0071,train,22,86.0,133.6,47.599999999999994,Arrange the cola bottles on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,0,0.0,2.4,2.4,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,1,2.4,7.4,5.0,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,2,7.4,11.4,4.0,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,3,11.4,16.4,4.999999999999998,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,4,16.4,20.4,4.0,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,5,20.4,26.0,5.600000000000001,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,6,26.0,30.4,4.399999999999999,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,7,30.4,39.0,8.600000000000001,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,8,39.0,43.4,4.399999999999999,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,9,43.4,48.4,5.0,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,10,48.4,53.0,4.600000000000001,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,11,53.0,58.0,5.0,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,12,58.0,62.0,4.0,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,13,62.0,67.0,5.0,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,14,67.0,71.4,4.400000000000006,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,15,71.4,76.0,4.599999999999994,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,16,76.0,82.4,6.400000000000006,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,17,82.4,92.0,9.599999999999994,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,18,92.0,96.4,4.400000000000006,Pick up two cardboard boxes from the blue plastic basket,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,19,96.4,103.0,6.599999999999994,Place the two cardboard boxes on the shelf,
+61,EgoStandard,36de3405-6829-4882-a8ab-0ff472768480,logistics_x_courier_station_0041,test,20,103.0,121.2,18.200000000000003,Arrange the cardboard boxes on the shelf,
+62,EgoStandard,39d35af4-d31f-4f8a-a55d-9251b1c6a87e,retail_x_supermarket_0058,train,0,0.0,2.0,2.0,Move the pink disinfectant bottle to the right for alignment,
+62,EgoStandard,39d35af4-d31f-4f8a-a55d-9251b1c6a87e,retail_x_supermarket_0058,train,1,2.0,4.0,2.0,Move the purple disinfectant bottle to the right for alignment,
+62,EgoStandard,39d35af4-d31f-4f8a-a55d-9251b1c6a87e,retail_x_supermarket_0058,train,2,4.0,6.0,2.0,Move the yellow disinfectant bottle to the left for alignment,
+62,EgoStandard,39d35af4-d31f-4f8a-a55d-9251b1c6a87e,retail_x_supermarket_0058,train,3,6.0,8.0,2.0,Push the purple and pink disinfectant bottles toward the center for alignment,
+63,EgoStandard,3c5b6818-d151-418a-ac00-c461bbebefc8,retail_x_supermarket_0124,train,0,0.0,11.0,11.0,Remove the red packaged food from the cardboard box and place it on the shelf,
+63,EgoStandard,3c5b6818-d151-418a-ac00-c461bbebefc8,retail_x_supermarket_0124,train,1,11.0,44.0,33.0,Remove the transparent packaged bread from the cardboard box and place it on the shelf,
+63,EgoStandard,3c5b6818-d151-418a-ac00-c461bbebefc8,retail_x_supermarket_0124,train,2,44.0,63.0,19.0,Remove the purple rice flavored bread from the cardboard box and place it on the shelf,
+63,EgoStandard,3c5b6818-d151-418a-ac00-c461bbebefc8,retail_x_supermarket_0124,train,3,63.0,123.0,60.0,Remove the pink packaged bread from the cardboard box and place it on the shelf,
+63,EgoStandard,3c5b6818-d151-418a-ac00-c461bbebefc8,retail_x_supermarket_0124,train,4,123.0,131.0,8.0,Fold the empty cardboard box and move it away,
+64,EgoStandard,443485f0-29be-4389-a40d-3f50d1ed38d2,retail_x_supermarket_0059,train,0,0.0,7.0,7.0,Walk to and pick up the shopping basket on the floor,
+64,EgoStandard,443485f0-29be-4389-a40d-3f50d1ed38d2,retail_x_supermarket_0059,train,1,7.0,17.0,10.0,Carry the shopping basket to the shelf,
+64,EgoStandard,443485f0-29be-4389-a40d-3f50d1ed38d2,retail_x_supermarket_0059,train,2,17.0,41.0,24.0,Place the yellow bottle in the shopping basket on the shelf,
+64,EgoStandard,443485f0-29be-4389-a40d-3f50d1ed38d2,retail_x_supermarket_0059,train,3,41.0,166.0,125.0,Place the blue bottle in the shopping basket on the shelf,
+64,EgoStandard,443485f0-29be-4389-a40d-3f50d1ed38d2,retail_x_supermarket_0059,train,4,166.0,173.8,7.800000000000011,Pick up the empty shopping basket and leave,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,0,0.0,10.0,10.0,Pick up the orange-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,1,10.0,21.0,11.0,Pick up the purple-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,2,21.0,32.0,11.0,Pick up the pink-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,3,32.0,42.0,10.0,Pick up the brown-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,4,42.0,54.0,12.0,Pick up the pink-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,5,54.0,65.0,11.0,Pick up the orange-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,6,65.0,75.0,10.0,Pick up the white-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,7,75.0,85.0,10.0,Pick up the white-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,8,85.0,94.0,9.0,Pick up the pink-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,9,94.0,104.0,10.0,Pick up the brown-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,10,104.0,113.0,9.0,Pick up the red-and-yellow-striped snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,11,113.0,122.0,9.0,Pick up the green-and-yellow-striped snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,12,122.0,134.0,12.0,Pick up the brown-packaged snack from the floor and place it on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,13,134.0,138.0,4.0,Arrange the pink-packaged snacks on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,14,138.0,140.0,2.0,Arrange the white-packaged snacks on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,15,140.0,144.0,4.0,Arrange the orange-packaged snacks on the shelf,
+65,EgoStandard,4a4d93ed-066f-4460-acbb-5c9034e24862,retail_x_supermarket_0087,train,16,144.0,147.4,3.4000000000000057,Arrange the green-and-yellow-striped snacks on the shelf,
+66,EgoStandard,4b0fb52d-29ea-4014-a1e7-fc440037790f,retail_x_supermarket_0054,train,0,0.0,4.0,4.0,Take the blue cleaner out of the shopping cart and put it back on the shelf,
+66,EgoStandard,4b0fb52d-29ea-4014-a1e7-fc440037790f,retail_x_supermarket_0054,train,1,4.0,8.0,4.0,Take the transparent cleaner out of the shopping cart and put it back on the shelf,
+66,EgoStandard,4b0fb52d-29ea-4014-a1e7-fc440037790f,retail_x_supermarket_0054,train,2,8.0,12.0,4.0,Take the red cleaner out of the shopping cart and put it back on the shelf,
+66,EgoStandard,4b0fb52d-29ea-4014-a1e7-fc440037790f,retail_x_supermarket_0054,train,3,12.0,16.4,4.399999999999999,Adjust the position of the cleaner bottles on the shelf,
+67,EgoStandard,7962fc83-dd18-4ddd-bcc6-9e23c007c7a2,retail_x_supermarket_0054,train,0,0.0,3.0,3.0,Pick up the blue cleaner bottle from the shopping cart and place it on the shelf,
+67,EgoStandard,7962fc83-dd18-4ddd-bcc6-9e23c007c7a2,retail_x_supermarket_0054,train,1,3.0,7.0,4.0,Pick up the green bottle from the shopping cart and place it on the shelf,
+67,EgoStandard,7962fc83-dd18-4ddd-bcc6-9e23c007c7a2,retail_x_supermarket_0054,train,2,7.0,11.0,4.0,Pick up the blue toilet cleaner bottle from the shopping cart and place it on the shelf,
+67,EgoStandard,7962fc83-dd18-4ddd-bcc6-9e23c007c7a2,retail_x_supermarket_0054,train,3,11.0,13.0,2.0,Arrange the blue toilet cleaner bottles on the shelf,
+67,EgoStandard,7962fc83-dd18-4ddd-bcc6-9e23c007c7a2,retail_x_supermarket_0054,train,4,13.0,16.0,3.0,Arrange the green bottles on the shelf,
+67,EgoStandard,7962fc83-dd18-4ddd-bcc6-9e23c007c7a2,retail_x_supermarket_0054,train,5,16.0,17.8,1.8000000000000007,Arrange the blue cleaner bottles on the shelf,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,0,0.0,7.0,7.0,Take two packs of orange snacks from the box and place them on the shelf,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,1,7.0,13.0,6.0,Pick up two packs of black snacks from the shelf and put them back into the box,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,2,13.0,17.0,4.0,Pick up two packs of orange snacks from the shelf and put them back into the box,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,3,17.0,24.0,7.0,Pick up two packs of orange-wrapped strip snacks from the shelf and place them on the other side,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,4,24.0,28.0,4.0,Pick up two packs of green snacks from the shelf and rearrange them,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,5,28.0,33.0,5.0,Arrange multiple packs of orange snacks into a neat stack on the shelf,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,6,33.0,38.0,5.0,Arrange two packs of green snacks neatly on the shelf,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,7,38.0,45.0,7.0,Pick up two stacks of yellow-wrapped snacks from the shelf and rearrange them,
+68,EgoStandard,bca969eb-9f5d-4842-b1c8-d60faaf03243,retail_x_supermarket_0159,test,8,45.0,54.4,9.399999999999999,Arrange multiple packs of orange strip snacks into a neat stack on the shelf,

@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "script": "code/p3_official_audit.py",
+    "protocol": "30 public seeds per case, five mappings, one row per (case, mapping)",
+    "policy": "risk rule with the selected q/gate per case",
+    "metric_names": [
+      "invalid_actions",
+      "valid_protocol",
+      "budget_ok_rate",
+      "horizon_ok_rate"
+    ]
+  },
+  "cells": {
+    "S1|alpha1|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S2|alpha1|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S3|alpha1|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S1|alpha0.75|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S2|alpha0.75|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S3|alpha0.75|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S1|alpha1.5|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S2|alpha1.5|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S3|alpha1.5|beta0.5": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S1|alpha1|beta0": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S2|alpha1|beta0": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S3|alpha1|beta0": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S1|alpha1|beta1": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S2|alpha1|beta1": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    },
+    "S3|alpha1|beta1": {
+      "n_trials": 30,
+      "invalid_actions": 0,
+      "valid_protocol": true,
+      "budget_ok_rate": 1.0,
+      "horizon_ok_rate": 1.0,
+      "bad_budget": 0,
+      "bad_horizon": 0
+    }
+  },
+  "summary": {
+    "n_trials": 450,
+    "invalid_actions": 0,
+    "valid_protocol": true,
+    "budget_ok_rate": 1.0,
+    "horizon_ok_rate": 1.0
+  }
+}

@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\setlength{\parskip}{2pt}
+\setlength{\parindent}{0pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}
+\setlength{\belowdisplayskip}{4pt plus 1pt minus 1pt}
+\renewcommand{\arraystretch}{1.08}
+\sisetup{detect-all}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\fancyhead[L]{\small Team \# 2021B-PRACTICE}
+\fancyhead[R]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newcommand{\unitmm}{\,\mathrm{mm}}
+\newcommand{\dec}{\,\mathrm{decade}^{-1}}
+
+\title{\vspace{-1.2cm}\textbf{Quantitative Analysis and Prediction of Extreme Precipitation:\\
+From a Single City's Record to a National Risk Map and an Investment Portfolio}}
+\author{}
+\date{}
+
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.78}
+
+\begin{document}
+
+\input{summary}
+
+\newpage
+\setcounter{tocdepth}{1}
+{\small
+\tableofcontents
+}
+\newpage
+
+\input{s1_intro}
+\input{s2_assume}
+\input{s2_data}
+\input{s3_q1}
+\input{s4_q2}
+\input{s5_q3}
+\input{s6_q4}
+\input{s7_q5}
+\input{s8_eval}
+
+\newpage
+\input{refs}
+
+\newpage
+\appendix
+\input{appendix}
+
+\end{document}

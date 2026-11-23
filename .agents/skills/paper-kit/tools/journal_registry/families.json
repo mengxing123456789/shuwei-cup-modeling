@@ -1,0 +1,732 @@
+{
+  "schema_version": 1,
+  "version": "2026-10-10",
+  "_doc": "投稿格式注册表。规则必须附官网原文（quote）、出处（source_url）和访问日期（accessed），找不到原文的值不写进来；页数一律 reference_only（只作参考）。出版社文件指纹按 LF 规范化后的 SHA-256。改这里要同步跑 web/backend/tests/test_venue_registry_and_templates.py。",
+  "families": [
+    {
+      "id": "ieee_conf",
+      "kind": "conference",
+      "language": "en",
+      "label_zh": "IEEE 会议论文",
+      "label_en": "IEEE conference paper",
+      "publisher": "IEEE",
+      "distribution": "bundled",
+      "columns": 2,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://www.ieee.org/conferences/publishing/templates.html",
+      "template": {
+        "skill": "paper-write",
+        "folder": "ieee_conf",
+        "main": "main.tex",
+        "class": "IEEEtran",
+        "class_version": "V1.8b (2015/08/26)",
+        "license": "LPPL 1.3",
+        "license_source": "IEEEtran README（CTAN 包 ieeetran）",
+        "files": {
+          "IEEEtran.cls": "da751920a317ed318b7b5cd7fa585a6cc7d28502d457856382e9be24b10a3bd7",
+          "IEEEtran.bst": "314f0ece704568faf827011bac498650691b2b5ee06320720830e782416d5a5f"
+        },
+        "ai_hook": true
+      },
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "paper_sizes": [
+        "letter",
+        "a4"
+      ],
+      "default_paper_size": "letter",
+      "citation_styles": [
+        "numeric"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only",
+        "note_zh": "页数上限和超页费以会议网站为准；IEEE 给的参考是全文常见 6–8 页、短文 4 页以内",
+        "source_url": "https://conferences.ieeeauthorcenter.ieee.org/become-an-ieee-conference-author/types-of-ieee-conference-papers/",
+        "locator_zh": "会议论文类型列表下第 1 段",
+        "accessed": "2026-10-10",
+        "typical_pages": 8
+      },
+      "ai_statement": {
+        "location": "acknowledgment",
+        "text_zh": "用 AI 生成的文字、图、图像、代码等要在致谢里写明用了哪个 AI 系统、用在哪些章节、用到什么程度；只做编辑和语法润色的不强制、但建议披露；用 AI 改语法时把参考文献部分排除在外",
+        "source_url": "https://conferences.ieeeauthorcenter.ieee.org/author-ethics/guidelines-and-policies/submission-policies/",
+        "locator_zh": "AI 生成文本指南小节第 1–3 段（期刊页同文：Submission and Peer Review Policies 的作者使用段）",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "关键词写在 `IEEEkeywords` 环境里；图题在图下方、表题在表格上方（IEEEtran 的版式）。"
+      ],
+      "rules": [
+        {
+          "key": "pdf_fonts_embedded",
+          "text_zh": "投稿 PDF 的字体必须全部嵌入或子集嵌入",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 3 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "pdf_no_bookmarks_links",
+          "text_zh": "投稿 PDF 不得含书签和超链接（模板没加载 hyperref）",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 5 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "pdf_version",
+          "text_zh": "PDF 版本 1.4（Acrobat 5）及以上，但不能是 Acrobat 9、X、XI",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 1 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "pdf_not_encrypted",
+          "text_zh": "PDF 不得设密码或任何安全设置，不得带附件、不能是合并的 PDF 包",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 4、8、9 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "language_english",
+          "text_zh": "IEEE 期刊、汇刊、快报和会议录都用英语",
+          "source_url": "https://pspb.ieee.org/images/files/files/opsmanual.pdf",
+          "locator_zh": "PSPB 运营手册 §8.1.1.I（印刷页 83）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "ai_not_author",
+          "text_zh": "不能把 AI 当作者；AI 生成的模拟数据要标明",
+          "source_url": "https://pspb.ieee.org/images/files/files/opsmanual.pdf",
+          "locator_zh": "PSPB 运营手册引言的 AI 伦理原则（印刷页 5–6）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "conference_mode_template",
+          "text_zh": "LaTeX 要用 IEEEtran 的 conference 模式；Word 模板分 US letter 和 A4；投稿前删掉模板里的说明文字",
+          "source_url": "https://cai.ieee.org/2025/manuscript-templates-for-conference-proceedings/",
+          "locator_zh": "Accessing the templates 一节（IEEE 官方模板页对机器访问做了人机验证，这里是 IEEE CAI 2025 会议站的转载）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "review_modes",
+          "text_zh": "IEEE 出版物多数是单盲，也有双盲；以会议通知为准",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/understand-peer-review/",
+          "locator_zh": "How does it work? 部分末尾三段",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "ieee_journal",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "IEEE 期刊论文（Transactions 等通用版）",
+      "label_en": "IEEE journal paper",
+      "publisher": "IEEE",
+      "distribution": "bundled",
+      "columns": 2,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://template-selector.ieee.org/",
+      "template": {
+        "skill": "paper-write",
+        "folder": "ieee_journal",
+        "main": "main.tex",
+        "class": "IEEEtran",
+        "class_version": "V1.8b (2015/08/26)",
+        "license": "LPPL 1.3",
+        "license_source": "IEEEtran README（CTAN 包 ieeetran）",
+        "files": {
+          "IEEEtran.cls": "da751920a317ed318b7b5cd7fa585a6cc7d28502d457856382e9be24b10a3bd7",
+          "IEEEtran.bst": "314f0ece704568faf827011bac498650691b2b5ee06320720830e782416d5a5f"
+        },
+        "ai_hook": true
+      },
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "acknowledgment",
+        "text_zh": "用 AI 生成的文字、图、图像、代码等要在致谢里写明用了哪个 AI 系统、用在哪些章节、用到什么程度；只做编辑和语法润色的不强制、但建议披露；用 AI 改语法时把参考文献部分排除在外",
+        "source_url": "https://journals.ieeeauthorcenter.ieee.org/become-an-ieee-journal-author/publishing-ethics/guidelines-and-policies/submission-and-peer-review-policies/",
+        "locator_zh": "Submission and Peer Review Policies 的作者使用段（会议页同文）",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "很多 IEEE 期刊（如 IEEE Access）有自己的模板：作者指南给了专用模板时，改用上传模板。",
+        "关键词写在 `IEEEkeywords` 环境里；作者单位、基金写在 `\\thanks{}` 占位里，由用户自己填。"
+      ],
+      "rules": [
+        {
+          "key": "pdf_fonts_embedded",
+          "text_zh": "投稿 PDF 的字体必须全部嵌入或子集嵌入",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 3 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "pdf_no_bookmarks_links",
+          "text_zh": "投稿 PDF 不得含书签和超链接（模板没加载 hyperref）",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 5 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "pdf_version",
+          "text_zh": "PDF 版本 1.4（Acrobat 5）及以上，但不能是 Acrobat 9、X、XI",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 1 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "pdf_not_encrypted",
+          "text_zh": "PDF 不得设密码或任何安全设置，不得带附件、不能是合并的 PDF 包",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/meet-ieee-xplore-requirements/",
+          "locator_zh": "PDF eXpress 检查项清单第 4、8、9 条",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "language_english",
+          "text_zh": "IEEE 期刊、汇刊、快报和会议录都用英语",
+          "source_url": "https://pspb.ieee.org/images/files/files/opsmanual.pdf",
+          "locator_zh": "PSPB 运营手册 §8.1.1.I（印刷页 83）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "ai_not_author",
+          "text_zh": "不能把 AI 当作者；AI 生成的模拟数据要标明",
+          "source_url": "https://pspb.ieee.org/images/files/files/opsmanual.pdf",
+          "locator_zh": "PSPB 运营手册引言的 AI 伦理原则（印刷页 5–6）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "review_modes",
+          "text_zh": "IEEE 出版物多数是单盲，也有双盲；以期刊作者指南为准",
+          "source_url": "https://conferences.ieeeauthorcenter.ieee.org/understand-peer-review/",
+          "locator_zh": "How does it work? 部分末尾三段",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "springer_lncs",
+      "kind": "conference",
+      "language": "en",
+      "label_zh": "Springer 会议录（LNCS、CCIS 等 llncs 系列）",
+      "label_en": "Springer proceedings (LNCS and other llncs series)",
+      "publisher": "Springer",
+      "distribution": "bundled",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://link.springer.com/series/558/information-for-authors-and-editors",
+      "template": {
+        "skill": "paper-write",
+        "folder": "springer_lncs",
+        "main": "main.tex",
+        "class": "llncs",
+        "class_version": "v2.25 (2026/09/03)",
+        "license": "CC BY 4.0",
+        "license_source": "llncs README（CTAN 包 llncs）",
+        "files": {
+          "llncs.cls": "04ec99046ad9867f6cd54ffd1ef8c47c767b327d1baec77536db0528cd492fa2",
+          "splncs04.bst": "f36c3a17e5304a692706359aafa9de709395a085e579eb47c027095aeaa35174"
+        },
+        "ai_hook": true
+      },
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only",
+        "note_zh": "计算机类会议录（LNCS、CCIS、LNBIP 等）常见全文 12–15 页、短文 6–11 页，不足 4 页的会被移到书末、不进索引；工程类系列（LNEE、LNNS 等）由会议组织方定",
+        "source_url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27852130/data/Instructions%20for%20Authors%20PDF",
+        "locator_zh": "计算机类会议录作者须知 §4.2；工程/物理/数学类见作者须知 §3.2",
+        "accessed": "2026-10-10",
+        "typical_pages": 12
+      },
+      "ai_statement": {
+        "location": "footnote_and_end",
+        "text_zh": "文字用了 AI（翻译、编辑、改写、格式等）：首页脚注 + 文末完整披露；图、表用了 AI：在图题、表题里写明；数据、代码、模型用了 AI：首页脚注 + 文末披露",
+        "source_url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/53830640/data/v2",
+        "locator_zh": "《Disclosing AI Use in Manuscripts – Books and Proceedings》（2026 年 10 月 v.2）各用例下的位置要求",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "关键词之间用 `\\and` 分隔，写在 abstract 环境里的 `\\keywords{}`。",
+        "利益冲突声明由用户自己写进 `sections/disclosure.tex`（软件不替作者做这项声明，没写时 PDF 里印着占位）。",
+        "每张图在 `paper/ALT_TEXT.md` 里按图号写一句客观的替代文本（只描述图里画了什么，不写结论），方便交稿时整理成 Excel。"
+      ],
+      "rules": [
+        {
+          "key": "disclosure_of_interests",
+          "text_zh": "文末必须有利益冲突声明（Disclosure of Interests），没有冲突也要写明；放在致谢之后",
+          "source_url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27852130/data/Instructions%20for%20Authors%20PDF",
+          "locator_zh": "计算机类会议录作者须知 §10 之后的示例段",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "alt_text",
+          "text_zh": "图、插图、图片形式的表格都要有替代文本（alt text），交稿清单附 alt text 的 Excel 文件",
+          "source_url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27852130/data/Instructions%20for%20Authors%20PDF",
+          "locator_zh": "计算机类会议录作者须知 §3 与 §10 交稿清单",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "source_files",
+          "text_zh": "交 LaTeX 全部源文件和 PDF，附 .bib/.bbl；不要自定义环境；Word 稿存 .docx、不用 .docm",
+          "source_url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27852130/data/Instructions%20for%20Authors%20PDF",
+          "locator_zh": "计算机类会议录作者须知 §4",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "ai_not_author",
+          "text_zh": "只有能对内容负责的真实个人可以署名；把作者身份或责任交给 AI 不允许",
+          "source_url": "https://www.springernature.com/gp/policies/book-publishing-policies",
+          "locator_zh": "图书出版政策页 AI Editorial Policies 的红色示例（计算机类作者须知 §5.2 同义）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "engineering_series_pages",
+          "text_zh": "工程、物理、数学类会议录（LNEE、LNNS、LNME、LNCE 等）的页数由会议组织方规定",
+          "source_url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/26362278/data/v2",
+          "locator_zh": "工程/物理/数学类会议录作者须知 §3.2",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "elsevier",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "Elsevier 期刊（elsarticle 投稿版）",
+      "label_en": "Elsevier journal (elsarticle)",
+      "publisher": "Elsevier",
+      "distribution": "bundled",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions",
+      "template": {
+        "skill": "paper-write",
+        "folder": "elsevier",
+        "main": "main.tex",
+        "class": "elsarticle",
+        "class_version": "3.4 (2024/04/04)",
+        "license": "LPPL 1.3",
+        "license_source": "Elsarticle Bundle 文件头与 README（CTAN 包 elsarticle）",
+        "files": {
+          "elsarticle.cls": "01addb492c5d075b320636ac3a30d8a5762fa937220dea07a5e107042d25384d",
+          "elsarticle-num.bst": "0db2e53b2378cbe5815e436c1afe9dcac67123a32406fa8f11fad7978808e202",
+          "elsarticle-harv.bst": "f1f4e7503b7e9e225b0b4c7be370a82a34f4f9b0b7fe99c32bb5c7aa91b8da34"
+        },
+        "ai_hook": true
+      },
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric",
+        "author_year"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "separate_section",
+        "heading": "Declaration of generative AI and AI-assisted technologies in the manuscript preparation process",
+        "text_zh": "写明工具名称、用途和作者把关程度；基本的语法、拼写、标点检查不用声明，改动了句子结构或段落组织的要声明；研究过程中用的 AI 写进 Methods",
+        "source_url": "https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals",
+        "locator_zh": "For authors → Disclosure（推荐标题和声明模板）；位置见同页 FAQ“在哪里披露”",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "关键词之间用 `\\sep` 分隔；期刊要求 Highlights 时才写 `sections/highlights.tex`（每行一个 `\\item`）。",
+        "不少 Elsevier 期刊要求用 CAS 模板（cas-sc / cas-dc）：作者指南这样要求时，改用上传模板。"
+      ],
+      "rules": [
+        {
+          "key": "ai_not_author",
+          "text_zh": "不得把 AI 工具列为作者或共同作者，也不得把 AI 工具当作者引用",
+          "source_url": "https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals",
+          "locator_zh": "Authorship 段第一句",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "ai_figures",
+          "text_zh": "示意类图片用了 AI 要在图题注明并写进总声明；数据可视化用 AI 写进 Methods；图形摘要不得用通用生成式图像工具",
+          "source_url": "https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals",
+          "locator_zh": "For authors → Disclosure 与 FAQ",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "no_subfolders",
+          "text_zh": "投稿系统不接受放在子文件夹里的源文件：交稿前把 sections/*.tex 合进 main.tex，图放在同一层",
+          "source_url": "https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions",
+          "locator_zh": "The Elsevier article class 小节",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "cas_templates",
+          "text_zh": "Elsevier 另有单栏、双栏的 CAS 模板（els-cas-templates.zip）；CRC 期刊（如 Procedia）用 ecrc.sty，要先经期刊编辑确认",
+          "source_url": "https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions",
+          "locator_zh": "The Elsevier article class 小节第 1–2 段",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "journal_en",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "通用英文期刊稿（单栏起稿）",
+      "label_en": "Generic English journal manuscript",
+      "distribution": "bundled",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "template": {
+        "skill": "paper-write",
+        "folder": "journal_en",
+        "main": "main.tex",
+        "class": "article",
+        "class_version": "LaTeX 标准文档类",
+        "license": "MH Agent 自写，只用标准宏包",
+        "license_source": "skills/paper-write/templates/journal_en/main.tex",
+        "files": {},
+        "ai_hook": true
+      },
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "unspecified"
+      },
+      "writing_notes_zh": [
+        "这是没有专用模板的期刊用的起稿版式；目标期刊有自己的模板时，改用上传模板。"
+      ],
+      "rules": []
+    },
+    {
+      "id": "cn_journal",
+      "kind": "journal",
+      "language": "zh",
+      "label_zh": "中文学术期刊（通用版式）",
+      "label_en": "Chinese academic journal",
+      "distribution": "bundled",
+      "columns": 2,
+      "engine": {
+        "tex": "xelatex",
+        "bib": "bibtex"
+      },
+      "template": {
+        "skill": "paper-write-zh",
+        "folder": ".",
+        "main": "journal_main.tex",
+        "class": "ctexart",
+        "class_version": "ctex 宏集",
+        "license": "MH Agent 自写，只用标准宏包",
+        "license_source": "skills/paper-write-zh/templates/journal_main.tex",
+        "files": {},
+        "ai_hook": true
+      },
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "methods_or_appendix",
+        "text_zh": "生成式 AI 不得列为成果共同完成人；在研究方法或附录等位置披露主要用法和细节",
+        "source_url": "https://www.most.gov.cn/kjbgz/202312/W020231221582942330036.pdf",
+        "locator_zh": "科技部监督司《负责任研究行为规范指引（2023）》“四、成果署名”第 7 条（印刷页 8）",
+        "quote": "7. 生成式人工智能不得列为成果共同完成人。应在研究方法或附录等相关位置披露使用生成式人工智能的主要方式和细节。",
+        "quote_license": "国家机关文件（《著作权法》第五条，不受著作权保护）",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "各刊版式差别大：目标期刊官网有 LaTeX 模板时，改用上传模板。",
+        "中图分类号、文献标识码、文章编号是不少中文期刊的版面要素，但不在 GB/T 7713.2—2022 里：按目标期刊要求保留或删除，软件不替用户填。"
+      ],
+      "rules": [
+        {
+          "key": "ai_disclosure_details",
+          "text_zh": "期刊会要求作者披露是否用了生成式 AI、软件名称、版本和使用时间，涉及事实和观点引证的内容要具体标注",
+          "source_url": "https://www.most.gov.cn/kjbgz/202312/W020231221582942330036.pdf",
+          "locator_zh": "同一指引“（三）学术出版单位”第 3 条（印刷页 11）",
+          "accessed": "2026-10-10",
+          "quote": "3. 应要求作者披露是否使用生成式人工智能，说明具体的软件名称、版本和使用时间，并对涉及事实和观点引证的辅助生成内容作出具体标注。",
+          "quote_license": "国家机关文件（《著作权法》第五条，不受著作权保护）"
+        },
+        {
+          "key": "ai_generated_content",
+          "text_zh": "引用生成式 AI 生成的内容（尤其是事实和观点）要明确标注并说明生成过程；不得直接使用没核实过的 AI 生成参考文献",
+          "source_url": "https://www.most.gov.cn/kjbgz/202312/W020231221582942330036.pdf",
+          "locator_zh": "同一指引“三、文献引用”第 4 条与第 7 条（印刷页 7）",
+          "accessed": "2026-10-10",
+          "quote": "使用生成式人工智能生成的内容，特别是涉及事实和观点等关键内容的，应明确标注并说明其生成过程",
+          "quote_license": "国家机关文件（《著作权法》第五条，不受著作权保护）"
+        },
+        {
+          "key": "aigc_guide_disclosure",
+          "text_zh": "写明使用者、AI 系统及版本、使用时间、所用提示、哪些文字或想法来自 AIGC；在方法或致谢部分详细说明；AIGC 不能列为作者",
+          "source_url": "https://www.lib.szu.edu.cn/sites/szulib/files/2025-06/%E5%AD%A6%E6%9C%AF%E5%87%BA%E7%89%88%E4%B8%ADAIGC%E4%BD%BF%E7%94%A8%E8%BE%B9%E7%95%8C%E6%8C%87%E5%8D%972.0.pdf",
+          "locator_zh": "《学术出版中AIGC使用边界指南2.0》4.2.3 披露和声明、4.2.1 作者署名（深圳大学图书馆转载件）",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "front_matter",
+          "text_zh": "GB/T 7713.2—2022：前置部分有题名（一般不超过 25 字，宜有外文题名）、作者信息、摘要、关键词（3–8 个，宜有外文关键词），基金名称及编号应标注、收稿日期宜标注；标准里没有“中图分类号”",
+          "source_url": "https://rdswxb.hainanu.edu.cn/fileRDSWXB/cms/news/info/2026/01/41e67574695042e1aa9c000514287220/GBT%207713.2%E2%80%942022%20%E5%AD%A6%E6%9C%AF%E8%AE%BA%E6%96%87%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf",
+          "locator_zh": "4.1、4.2.1–4.2.5（印刷页 2–3）与附录 A 表 A.1（海南大学期刊网站转载的扫描件）",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "springer_nature",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "Springer Nature 期刊",
+      "label_en": "Springer Nature journal",
+      "publisher": "Springer Nature",
+      "distribution": "upload_only",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://www.springernature.com/gp/authors/campaigns/latex-author-support",
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric",
+        "author_year"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "methods_or_alternative",
+        "text_zh": "用了大语言模型要写在 Methods（没有 Methods 就写在合适的替代位置），只做 AI 辅助文字编辑的不用声明；AI 生成或辅助的图像要在 AI 声明里说明并在图题里具体披露；各刊可能不同",
+        "source_url": "https://link.springer.com/journal/10994/submission-guidelines",
+        "locator_zh": "以 Machine Learning 期刊投稿指南为例；图像类见中央政策页 Transparency and disclosure for visual content 小节",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "按上传的官方模板和样例写；栏数、参考文献格式以模板为准。"
+      ],
+      "rules": [
+        {
+          "key": "template",
+          "text_zh": "期刊作者推荐用 Springer Nature LaTeX authoring template（2024 年 12 月版，zip 或 Overleaf），不要用自定义字体",
+          "source_url": "https://www.springernature.com/gp/authors/campaigns/latex-author-support",
+          "locator_zh": "Journal authors 小节",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "ai_policy_tiers",
+          "text_zh": "2026 版中央政策按风险分级：绿色、琥珀色允许但要说明用途并确认由作者负责；红色禁止，包括把 AI 列为作者",
+          "source_url": "https://www.springernature.com/gp/policies/editorial-policies/ai-manuscript-preparation",
+          "locator_zh": "政策正文与视觉内容小节",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "wiley",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "Wiley 期刊",
+      "label_en": "Wiley journal",
+      "publisher": "Wiley",
+      "distribution": "upload_only",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://authors.wiley.com/author-resources/Journal-Authors/Prepare/latex-template.html",
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric",
+        "author_year"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "acknowledgment",
+        "text_zh": "写作、编辑、翻译、格式用了 AI 写在致谢（工具名称和版本、使用时间、做了什么、用在哪些部分、作者怎么把关）；研究方法、数据分析、文献综述用了 AI 写进 Methods；图像类写在图题",
+        "source_url": "https://www.wiley.com/publishing/article/ai-guidelines",
+        "locator_zh": "FAQ“Where should I disclose AI use in my manuscript?”",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "按上传的官方模板和样例写；栏数、参考文献格式以模板为准。"
+      ],
+      "rules": [
+        {
+          "key": "template",
+          "text_zh": "Wiley PDF design LaTeX 模板（WileyDesign.zip）；具体格式以各期刊 Author Guidelines 为准，有的期刊先要 PDF",
+          "source_url": "https://authors.wiley.com/author-resources/Journal-Authors/Prepare/latex-template.html",
+          "locator_zh": "页首两段与 Journal-level instructions",
+          "accessed": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "id": "mdpi",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "MDPI 期刊",
+      "label_en": "MDPI journal",
+      "publisher": "MDPI",
+      "distribution": "upload_only",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://www.mdpi.com/authors/latex",
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric",
+        "author_year"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "methods_or_acknowledgment",
+        "text_zh": "在 Materials and Methods 写明 GenAI 的具体用法，致谢里写工具名称、版本和用途；只做语法、拼写、标点、格式这类表面编辑的不用声明",
+        "source_url": "https://www.overleaf.com/latex/templates/mdpi-article-template/fcpwsspfzsph",
+        "locator_zh": "MDPI 官方 Overleaf 模板的 Materials and Methods 节与 Acknowledgments 节（MDPI 官网对机器访问返回 403）",
+        "quote": "In this section, where applicable, authors are required to disclose details of how generative artificial intelligence (GenAI) has been used in this paper",
+        "quote_license": "CC BY 4.0（MDPI 官方模板）",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "按上传的官方模板和样例写；栏数、参考文献格式以模板为准。"
+      ],
+      "rules": []
+    },
+    {
+      "id": "tandf",
+      "kind": "journal",
+      "language": "en",
+      "label_zh": "Taylor & Francis 期刊",
+      "label_en": "Taylor & Francis journal",
+      "publisher": "Taylor & Francis",
+      "distribution": "upload_only",
+      "columns": 1,
+      "engine": {
+        "tex": "pdflatex",
+        "bib": "bibtex"
+      },
+      "official_download_url": "https://authorservices.taylorandfrancis.com/publishing-your-research/writing-your-paper/formatting-and-templates/",
+      "review_modes": [
+        "single_blind",
+        "double_blind"
+      ],
+      "default_review_mode": "single_blind",
+      "citation_styles": [
+        "numeric",
+        "author_year"
+      ],
+      "default_citation": "numeric",
+      "page_reference": {
+        "semantics": "reference_only"
+      },
+      "ai_statement": {
+        "location": "separate_section",
+        "heading": "Declaration of generative AI use",
+        "text_zh": "单列一段生成式 AI 使用声明，写明工具全名和版本、怎么用、为什么用；没用也要声明；AI 做的图要在图注写明；研究方法里用了 AI 要在 Methods 详细写",
+        "source_url": "https://taylorandfrancis.com/our-policies/ai-policy/",
+        "locator_zh": "AI Policy 的 Authors 段；声明名称见 Defining authorship 页",
+        "accessed": "2026-10-10"
+      },
+      "writing_notes_zh": [
+        "按上传的官方模板和样例写；栏数、参考文献格式以模板为准。"
+      ],
+      "rules": [
+        {
+          "key": "template",
+          "text_zh": "多数期刊可用 T&F Word 模板，很多期刊接受不限格式投稿；接受 LaTeX 的期刊在各刊 Instructions for authors 里给模板链接",
+          "source_url": "https://authorservices.taylorandfrancis.com/publishing-your-research/writing-your-paper/formatting-and-templates/",
+          "locator_zh": "How to format… 与 LaTex templates 两小节",
+          "accessed": "2026-10-10"
+        },
+        {
+          "key": "ai_not_author",
+          "text_zh": "生成式 AI 不得列为作者",
+          "source_url": "https://taylorandfrancis.com/our-policies/ai-policy/",
+          "locator_zh": "AI Policy 的 Authors 段",
+          "accessed": "2026-10-10"
+        }
+      ]
+    }
+  ]
+}

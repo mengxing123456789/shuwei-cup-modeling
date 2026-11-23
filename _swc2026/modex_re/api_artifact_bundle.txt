@@ -1,0 +1,39 @@
+MODULE backend.services.artifact_bundle
+DOC: 对话里打包下载（用户 2026-10-16：“对话那边如果跑完一些文件能不能批量打包下载啊”）。
+
+四种打包（spec["kind"]）：
+  task        结果块里的“打包下载（N 个文件）”：那一件任务这一次跑出来的文件。成果清单从库里读，不信界面传来的列表。
+  paths       右栏「文件」里自己勾的文件和文件夹（文件夹连里面的文件一起）。
+  all         全部成果：论文、代码、图、提交包……项目里公开的文件，不含用户上传的材料（user_data/）、选的格式模板原件
+              （user_template/，写作步放进 paper/ 的那一份照常装，编译要用）和项目设置文件。
+  submission  参赛提交版（竞赛项目才有）：和项目页「导出参赛版」同一套挑法（论文成品与源码、代码、图、代码要读的数据，
+              不含赛题原文；代码去掉软件加的自举头），再加上大数据赛整理好的提交包。
+AI 的 package_files（“把刚跑出来的打包给我”）只核对、数一数（plan），下载链接由界面画在 AI 那条回复下面，点了才打包。
+
+压缩包放在资料位置的 cache/bundles（不进项目、AI 看不到），30 分钟内可以重复下载；合计超过 3 GB 先删最早的。
+只装公开文件（和右栏、AI 看到的是同一道路径闸）。打包时读不了的（被别的程序占着、刚被删掉）跳过，写进包里的
+“打包说明.txt”，界面也说一声。
+CONSTANTS:
+KEEP_SECONDS [int] = 1800
+KEEP_TOTAL_BYTES [int] = 3221225472
+KINDS [tuple] = ('task', 'paths', 'all', 'submission')
+LABELS [dict] = {'task': '这次的成果', 'paths': '选中的文件', 'all': '全部成果', 'submission': '参赛提交版'}
+MATERIALS [str] = 'user_data'
+MAX_BYTES [int] = 4294967296
+MAX_FILES [int] = 20000
+MAX_PATHS [int] = 200
+NOTE_NAME [str] = '打包说明.txt'
+ORPHAN_SECONDS [int] = 600
+SPARE_BYTES [int] = 209715200
+SUBMISSION_DIRS [frozenset] = frozenset({'submission', '提交包'})
+TEMPLATE_STORE [str] = 'user_template'
+_STORED [frozenset] = frozenset({'.pptx', '.webp', '.png', '.jpg', '.bz2', '.heic', '.xlsx', '.mp3', '.gif', '.zip', '.7z', '.avi', '.mp4', '.mkv', '.pdf', '.m4a', '.tgz', '.docx', '.jpeg', '.gz', '.xz', '.mov', '.rar'})
+CALLABLES:
+Any(*args, **kwargs) :: 
+BundleError(code: 'str', message: 'str', status: 'int' = 400) :: 打包不了：code 给程序看，message 是给用户看的中文，status 是接口回的 HTTP 状态。
+Collected(kind: 'str', label: 'str', files: 'list[tuple[Path, str]]' = <factory>, bytes: 'int' = 0, skipped: 'list[dict]' = <factory>, runtime: 'dict[str, bytes]' = <factory>, warnings: 'list[str]' = <factory>, readme: 'str' = '', strip_code: 'bool' = False) -> None :: Collected(kind: 'str', label: 'str', files: 'list[tuple[Path, str]]' = <factory>, bytes: 'int' = 0, skipped: 'list[dict]' = <factory>, runtime: 'dict[str, bytes]' = <factory>, warnings: 'list[str]' = <factory>, readme: 'str' = '', strip_code: 'bool' = False)
+Path(*args, **kwargs) :: 
+_Ready(workflow_id: 'str', path: 'Path', name: 'str', size: 'int', created: 'float') -> None :: _Ready(workflow_id: 'str', path: 'Path', name: 'str', size: 'int', created: 'float')
+dataclass(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False) :: 
+datetime(?) :: datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]]) |  | The year, month and day arguments are required. tzinfo may be None, or an | instance of a tzinfo subclass. The remaining arguments may be ints.
+field(*, default=<dataclasses._MISSING_TYPE object at 0x0000021F056F5E50>, default_factory=<dataclasses._MISSING_TYPE object at 0x0000021F056F5E50>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x0000021F056F5E50>) :: 

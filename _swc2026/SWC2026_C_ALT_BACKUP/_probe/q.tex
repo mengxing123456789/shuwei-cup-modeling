@@ -1,0 +1,18 @@
+\documentclass{swmcmthesis}
+\usepackage{refcount}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\makeatletter
+\newcommand{\secref}[1]{\expandafter\stripone\expandafter{\getrefnumber{#1}}\@nil}
+\def\stripone#1.#2\@nil{#1}
+\makeatother
+\title{x}\baominghao{X}\zubie{C}\abstract{a}\keywords{k}\date{2026}
+\begin{document}
+\typeout{PROBE parindent=\the\parindent}
+\section{Alpha}\label{s:a}
+text
+\section{Beta}\label{s:b}
+\typeout{PROBE rawref=[\getrefnumber{s:b}] secred=[\secref{s:b}]}
+\begin{table}\caption{t}\label{t:a}\begin{tabular}{c}x\end{tabular}\end{table}
+\typeout{PROBE tabref=[\getrefnumber{t:a}]}
+\end{document}

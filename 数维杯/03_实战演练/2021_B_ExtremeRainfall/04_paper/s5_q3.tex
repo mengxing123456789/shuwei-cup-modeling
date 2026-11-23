@@ -1,0 +1,109 @@
+\section{Task 3: predicting which city breaks its record next}\label{sec:q3}
+
+\subsection{Problem formulation}
+
+The task says ``predict which cities may experience extreme precipitation''. Any comparison of methods is meaningless until the predictand is fixed, and the choice of predictand turns out to be more consequential than the choice of model. We therefore state the problem as a genuine forecast: using only 1961--2010, predict each city's largest daily rainfall in the held-out window 2011--2024.
+
+The held-out window is not the nominal 14 years. Because of the 300-valid-day rule (Section~\ref{sec:data}), a city contributes 5, 6 or 7 test years (18 cities give 7, two give 6, three give 5); Zhengzhou contributes 2011, 2012 and 2020--2024. The forecast horizon is therefore $n_{\text{test}}$ years per city, and every method is evaluated against the same realized maximum. Twenty-three cities pass the training requirement of at least 40 valid years in 1961--2010 and at least 5 in 2011--2024.
+
+\subsection{Ten strategies}
+
+All strategies are fitted on the training window only.
+
+\textbf{Extreme-value family.} Seven variants share a GEV \cite{coles2001} or Gumbel fit to the annual maxima: (i) the $T$-year quantile with $T$ equal to the city's test length, fitted by maximum likelihood; (ii) the same quantile fitted by L-moments \cite{hosking1985}, which is more stable on short records; (iii) the \emph{expected maximum} of the next $n$ years, $\mathbb{E}[M_n]=\int_0^1 F^{-1}(u^{1/n})\,du$ by adaptive quadrature, the statistic that minimises mean squared forecast error when the predictand is a maximum and which exceeds the $n$-year quantile by $0.577\sigma$ under a Gumbel tail, so a quantile target is biased low; (iv) the expected maximum with the location shifted by the Sen slope over the 32-year gap between window midpoints; (v) a peaks-over-threshold model with the threshold at the wet-day 95th percentile, three-day declustering and a Poisson--GPD return level; (vi) and (vii) the quantile and the trend quantile under $\xi=0$.
+
+\textbf{Regression and classification family.} Each city is described by thirteen features (mean annual total, mean and standard deviation of Rx1day, its Sen slope, the R95p slope, SDII, wet days, days $\ge50$\,mm, latitude, longitude, elevation, training years). Ridge, random forest and gradient boosting regress the realized maximum on these features with leave-one-city-out cross-validation, so no city is predicted by a model that has seen it; for the binary question ``will this city exceed its training record?'' we add the GEV exceedance probability $\Pr(M_T>x_{\text{record}})$ with both estimators plus the same three learners.
+
+\subsection{Results}
+
+Table~\ref{tab:q3} reports the comparison. Four findings stand out.
+
+\begin{table}[H]
+\centering
+\caption{Held-out forecast of each city's maximum daily rainfall, 23 cities. Bias is prediction minus observation. Overlap counts how many of the five largest predicted values are among the five largest observed.}
+\label{tab:q3}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & RMSE (mm) & MAE (mm) & $R^2$ & Spearman & Bias (mm) & Overlap\\
+\midrule
+GEV, $T$-year quantile (MLE) & 64.8 & 45.5 & 0.242 & 0.747 & $-41.5$ & 4\\
+GEV, $T$-year quantile (L-moment) & 66.0 & 46.5 & 0.213 & 0.748 & $-42.2$ & 4\\
+\textbf{GEV, expected maximum} & \textbf{55.7} & \textbf{39.6} & \textbf{0.440} & \textbf{0.746} & $-20.5$ & 4\\
+GEV, expected maximum + trend & \textbf{53.9} & \textbf{38.5} & \textbf{0.475} & 0.688 & $-17.4$ & 3\\
+GPD peaks-over-threshold & 70.6 & 49.3 & 0.099 & 0.735 & $-45.8$ & 3\\
+Gumbel, quantile & 65.6 & 45.8 & 0.223 & 0.739 & $-39.8$ & 4\\
+Gumbel, quantile + trend & 62.9 & 44.7 & 0.286 & 0.743 & $-36.7$ & 4\\
+Ridge regression & 61.8 & 43.6 & 0.310 & 0.643 & $-1.2$ & 3\\
+Random forest & 63.8 & 48.9 & 0.265 & 0.613 & $+6.4$ & 1\\
+Gradient boosting & 66.3 & 51.4 & 0.207 & 0.598 & $+5.8$ & 2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{(1) The target dominates the model.} Moving from a $T$-year quantile to the expected maximum of $n$ years reduces RMSE from 64.8 to 55.7\,mm and halves the bias ($-41.5$ to $-20.5$\,mm), with the same data and the same distribution; a paired bootstrap over cities puts the RMSE gain at $[3.3, 13.6]$\,mm, so the improvement is not sampling noise. A quantile is systematically too high for a maximum; this is a bias of definition, not of fit, and it explains why so many published ``predictions'' are over-confident.
+
+\textbf{(2) Trends help levels and hurt ranks.} The trend-shifted variant achieves the best RMSE (53.9\,mm) and the best $R^2$ (0.475) but its Spearman correlation falls from 0.746 to 0.688 and its top-five overlap from 4 to 3; the RMSE gain over the stationary expected maximum is only 1.7\,mm, with a bootstrap interval of $[-1.9, 7.0]$ that straddles zero. The reason is that a Sen slope estimated on 50 years is noisy; using it to shift a level adds variance that helps on average but reshuffles the ranking. We therefore use the stationary model to \emph{rank} cities and the trend model to report \emph{levels}, and we say so explicitly rather than hiding the trade-off.
+
+\textbf{(3) Extreme-value theory beats machine learning on ranking.} Seven EVT variants have Spearman correlations of 0.69--0.75 and top-five overlaps of 3/5 or 4/5; the best machine-learning model reaches 0.643 with 3/5, the weakest 0.598 with 2/5, and one model orders only 1/5. The regression family is competitive on RMSE but poor at ordering, because it regresses towards the mean of the feature space and compresses the extremes. The complementarity is real: machine learning removes the bias ($-1.2$\,mm for Ridge) while EVT preserves the ordering. A hybrid that ranks with EVT and calibrates the level with a regression is the sensible product, and the numbers in Table~\ref{tab:q3} say why neither alone is enough.
+
+\textbf{(4) MLE becomes pathological on short records.} Guangzhou's MLE fit returns a 50-year level of 450\,048\,mm, because a single very large annual maximum pushes the shape parameter into the heavy-tail region where the return level explodes. The L-moment fit on the same data gives 268.3\,mm. We flag such fits automatically (a 50-year level more than three times the observed record) rather than reporting them.
+
+For the classification task the GEV exceedance probability with MLE parameters is best (AUC 0.833, Brier 0.143, accuracy 0.826), followed by the L-moment version (0.756, 0.174, 0.783) and logistic regression (0.178, 0.227, 0.783). The two tree ensembles fail (AUC 0.522 and 0.178): with 23 cities and five positives, a tree cannot learn a decision boundary without overfitting the folds.
+
+\subsection{Which cities, and which records broke}
+
+Five cities exceeded their 1961--2010 record in the held-out window (Table~\ref{tab:records}). None of them is Zhengzhou, and none of the breaks happened in 2021. This is the most important negative result in the paper: a daily-index screen would have assigned Zhengzhou a moderate risk, because its 2021 daily total (188.7\,mm) did not even beat its 1978 value (189.4\,mm). The extremity of that disaster lived at the hourly and three-day scales, which the annual-maximum machinery does not see. We keep the daily screen, because it is the only one available for 25 cities, but we state its blind spot and carry it into the recommendations of Section~\ref{sec:q5}.
+
+\begin{table}[H]
+\centering
+\caption{Cities that broke their 1961--2010 daily record during the held-out window.}
+\label{tab:records}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+City & Training record (mm) & Held-out max (mm) & Year & Test years\\
+\midrule
+Harbin & 123.7 & 146.6 & 2012 & 7\\
+Urumqi & 57.7 & 89.9 & 2020 & 6\\
+Yinchuan & 87.1 & 113.3 & 2012 & 7\\
+Fuzhou & 195.6 & 357.6 & 2023 & 7\\
+Haikou & 327.9 & 331.2 & 2011 & 5\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Regional pooling: is one growth curve admissible?}
+
+Every prediction above rests on fifty annual maxima and a five-to-seven-year hold-out, so at-site parameters are noisy. Index-flood pooling \cite{hosking1997} borrows strength across sites: divide each city's annual maxima by its mean, pool the scaled series, fit one regional GEV by L-moments, and multiply the growth curve back by the site index \cite{hosking1985}. On the 23 cities the growth curve is $0.916$, $1.525$ and $2.138$ at 2, 10 and 50 years. Whether it may be applied nationally is testable, and the Hosking--Wallis test rejects it: with 400 simulated homogeneous regions $H_1=2.56$, $H_2=-0.68$, $Z=-0.39$, and $H_1>2$ marks a heterogeneous region. Pooling still shaves the expected-maximum error from $55.7$ to $54.5$\,mm, but it forces one curve on every city, so the $p_{10}$ ranking drifts from the at-site one ($\rho=0.545$).
+
+The test also says what the correct pooling unit is. Grouping the cities by their own L-moment ratios (L-CV, L-skew and the log index, $k=2$) yields two groups of 12 and 11 sites (the heterogeneity statistic is Hosking and Wallis \cite{hosking1993}) with $H_1=0.22$ and $0.03$, both comfortably homogeneous, a growth curve of $1.566$ and $1.473$ at ten years, an error of $56.3$\,mm and a ranking that stays close to the at-site one ($\rho=0.843$). The honest summary is therefore narrow: pooling buys at most $1.2$\,mm of level accuracy, because the error is dominated by the five record-breaking cities, but it is admissible only group-wise, and the ranking should stay at-site. We report the grouped curve as a short-record fallback, not as a replacement.
+
+\subsection{Risk ranking}
+
+Combining the expected maximum, the $T$-year level and the exceedance probability gives the ranking in Table~\ref{tab:risk}. The humid south dominates the top of the list: Fuzhou, Haikou and Guangzhou, which is exactly the cluster that Section~\ref{sec:q2} found to be intensifying. Two continental cities intrude, Hohhot and Yuncheng, not because their rainfall is large but because a short, variable record makes an existing record easier to beat in relative terms. Zhengzhou is a deliberate counter-example: it ranks sixteenth by $p_{10}=0.073$ and tenth on the composite, the mean of its rank by $p_{10}$ and by the regression ten-year maximum (170.1\,mm), because its 1961--2010 record of 189.4\,mm already sits high inside a light-tailed local distribution. Probability alone therefore does not flag the city that suffered the disaster, which is the quantitative reason why Sections~\ref{sec:q4} and~\ref{sec:q5} add exposure and vulnerability to the hazard layer.
+
+\begin{table}[H]
+\centering
+\caption{Ten-year probability $p_{10}$ of exceeding the 1961--2010 daily record, from the L-moment GEV fit, with that fit's 10- and 50-year return levels and the regression estimate of the ten-year maximum.}
+\label{tab:risk}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+City & $p_{10}$ & RL10 (mm) & RL50 (mm) & Regression ten-year max (mm)\\
+\midrule
+Fuzhou & 0.283 & 172.2 & 247.8 & 288.7\\
+Haikou & 0.248 & 260.9 & 358.7 & 296.7\\
+Guangzhou & 0.230 & 184.6 & 268.3 & 205.1\\
+Hohhot & 0.210 & 86.5 & 129.9 & 82.8\\
+Yuncheng & 0.170 & 89.3 & 140.0 & 94.4\\
+Nanjing & 0.170 & 154.7 & 203.7 & 219.8\\
+Dalian & 0.165 & 149.6 & 219.9 & 161.7\\
+Urumqi & 0.162 & 49.0 & 82.6 & 92.5\\
+Wuhan & 0.162 & 182.2 & 286.9 & 199.4\\
+Nanning & 0.132 & 150.0 & 208.3 & 174.1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The same probabilities are mapped in Appendix~\ref{app:extrafig} (Figure~\ref{fig:riskmap}).

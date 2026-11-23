@@ -1,0 +1,100 @@
+\documentclass{swmcmthesis}
+% 数维杯官方模板（2026 秋季赛）。与 apmcmthesis 的三处接口差异：
+%   1) 摘要用 \abstract{...} 宏，不是 \begin{abstract}...\end{abstract}；
+%   2) 选题用 \zubie{ABCD}，不是 \tihao{A}；
+%   3) 页眉两行（队号一行、页码一行），review_bench.HEADER_RE 已同时认两种排版。
+% 宏参数里不要出现空行（空行会被当 \par，参数没加 \long 时直接报错），换行用 \\。
+\title{<<title>>}
+\baominghao{SWBMCM2634892}
+\zubie{C}
+\abstract{
+\textbf{Background and Task} <<one sentence with a number>>. This paper addresses <<N>> problems: <<task 1>>; <<task 2>>; <<task 3>>. <<N>> models are developed. \\
+\textbf{Modeling Framework} <<Q1 model>>, based on which <<Q2 model>>, and extending to <<Q3 model>>. \\
+\textbf{Results per Question} <<Q1 number + conclusion>>; <<Q2 number + conclusion>>; <<Q3 number + conclusion>>. \\
+\textbf{Validation and Limitation} <<validation 1 with number>>; <<validation 2 with number>>. The main limitation is that <<one concrete limitation with a number>>.
+}
+\keywords{<<model names in the order they appear above>>}
+\date{2026}
+\begin{document}
+% 第 1 页 = 标题 + 摘要 + 关键词（\maketitle 生成），第 2 页 = 目录，第 3 页起正文。
+\maketitle
+\tableofcontents
+\newpage
+% 必须重置：本类默认不重置，正文会从物理第 3 页起编号（实测 "Page 3 of 5"），
+% 于是 body_pages 判成 0、R-V02 报跳号。重置后与 apmcmthesis 同语义（Page 1 of N 指正文页）。
+\setcounter{page}{1}
+
+\section{Introduction}
+\subsection{Background}
+<<why this matters now, one paragraph>>
+\subsection{Restatement of the Problems}
+<<restate each question in your own variables>>
+\subsection{Our Work}
+<<what this paper delivers, one line per question>>
+\section{Problem Analysis}
+<<the mechanism, the key tension, what you simplify and why>>
+\section{Assumptions and Justifications}
+\begin{enumerate}
+  \item <<assumption>> --- <<why>>; used by Section~<<x>>.
+  \item <<assumption>> --- <<why>>; used by Section~<<x>>.
+\end{enumerate}
+\section{Notations}
+\begin{table}[htbp]\centering\caption{Notations}\label{tab:notation}
+\begin{tabular}{@{}lll@{}}\toprule Symbol & Meaning & Unit \\ \midrule
+$<<sym>>$ & <<meaning>> & <<unit>> \\ \bottomrule\end{tabular}\end{table}
+\section{Data Description and Preprocessing}
+\subsection{Sources and Acquisition}
+<<institution, indicator, period, URL, access date --- one line per source>>
+\subsection{Cleaning}
+<<missing rate, outliers, unit conversion, post-processing row count>>
+\subsection{Rationality and Consistency}
+<<cross-check two independent sources, report the gap in per cent>>
+\section{Question 1: <<What it does>>}
+\subsection{Data Insight}
+<<fill>>
+\subsection{Modeling and Solution}
+<<fill>>
+\subsection{Robustness and Conclusion}
+<<fill>>
+\section{Question 2: <<What it does>>}
+\subsection{Data Insight}
+<<fill>>
+\subsection{Modeling and Solution}
+<<fill>>
+\subsection{Robustness and Conclusion}
+<<fill>>
+\section{Sensitivity Analysis and Error Analysis}
+<<perturbation / resampling / variance decomposition; report the unfavourable half>>
+\section{Conclusion}
+<<per-question summary, each pointing at a number>>
+\section{Strengths and Weaknesses}
+\subsection{Strengths}
+\begin{itemize}
+  \item <<strength 1, points to a result>>
+  \item <<strength 2>>
+  \item <<strength 3>>
+\end{itemize}
+\subsection{Weaknesses}
+\begin{itemize}
+  \item <<weakness 1, with a number>>
+  \item <<weakness 2, with a number>>
+  \item <<weakness 3, with a number>>
+\end{itemize}
+
+\begin{thebibliography}{99}
+\bibitem{ref1} <<author>>. <<title>>[J]. <<journal>>, <<year>>, <<vol>>(<<no>>): <<pages>>.
+\bibitem{ref2} <<author>>. <<book>>[M]. <<place>>: <<publisher>>, <<year>>.
+\bibitem{ref3} <<institution>>. <<report>>[R]. <<year>>.
+\bibitem{ref4} <<institution>>. <<dataset>>[DB/OL]. <<url>>, accessed <<YYYY-MM-DD>>.
+\end{thebibliography}
+
+\appendix
+% 必须用 \section{Appendix A: Code}：apmcmthesis.cls 里 \section 被改成罗马数字（I. ），
+% \appendix 不会把它变成 "Appendix A"。而 gauntlet 认正文首页的锚点正是字面 "Appendix A"。
+\section{Appendix A: Code}
+% 先把 code/main.py 写出来，再把下一行取消注释。模板默认不启用：
+% 缺文件时 listings 抛 "! Package Listings Error: File `code/main(.py)' not found"
+% + "! Emergency stop."，exit=1，且 lastpage 跳号让页眉变成 "Page N of ??"。
+%\lstinputlisting{code/main.py}
+<<paste the full source of every script that produced a number, one appendix per script>>
+\end{document}

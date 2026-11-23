@@ -1,0 +1,57 @@
+{
+ "_meta": {
+  "script": "_null_check.py",
+  "design": "true boundaries vs random non-boundary frames of the same records; statistic = max boundary probability within +-2 / +-5 frames",
+  "nulls_per_record": 250,
+  "seed": 20261120,
+  "test_records": [
+   17,
+   18,
+   37,
+   41,
+   56,
+   61,
+   68
+  ]
+ },
+ "auc_at_2_frames": 0.6602630741487218,
+ "auc_at_5_frames": 0.6501007743714862,
+ "mean_pos_p2": 0.293712846392935,
+ "mean_neg_p2": 0.1738083570935381,
+ "mean_pos_p5": 0.3294967210512947,
+ "mean_neg_p5": 0.21355687768693715,
+ "share_pos_ge_half_p2": 0.2545454545454545,
+ "share_neg_ge_half_p2": 0.08518086347724621,
+ "per_record": {
+  "17": {
+   "n_true": 3,
+   "n_null": 214
+  },
+  "18": {
+   "n_true": 3,
+   "n_null": 250
+  },
+  "37": {
+   "n_true": 1,
+   "n_null": 250
+  },
+  "41": {
+   "n_true": 9,
+   "n_null": 250
+  },
+  "56": {
+   "n_true": 11,
+   "n_null": 250
+  },
+  "61": {
+   "n_true": 20,
+   "n_null": 250
+  },
+  "68": {
+   "n_true": 8,
+   "n_null": 250
+  }
+ },
+ "seconds": 0.1,
+ "created": "2026-11-22 10:12:28"
+}

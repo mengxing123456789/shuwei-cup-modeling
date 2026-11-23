@@ -1,0 +1,107 @@
+======================================================================
+_resolve_competition_page_rule
+SIG: (template: 'str', params: 'Optional[dict]') -> 'tuple'
+DOC:
+Return the final-submission page reference for one competition.
+
+Every competition uses ``advisory_max`` locally: the value is visible to the
+user but never becomes a generation, expansion, or compression gate.
+======================================================================
+_check_paper_body_pages
+SIG: (workspace: 'Path', skill_name: 'str', max_pages: 'Optional[int]', page_policy: 'str' = 'advisory_max') -> 'tuple'
+DOC:
+按竞赛页数语义做保守的正文字符预检。
+
+正文定义：
+- LaTeX 模式：`paper/sections/*.tex` 总字符数
+- Word 模式：`paper/main.md` 中"## 附录"之前的部分
+- 中文 chars_per_page ≈ 800（含图表），英文 ≈ 2200
+
+Returns: (ok: bool, reason: str)
+======================================================================
+_step_inactivity_timeout
+SIG: (skill_name: 'str') -> 'int'
+DOC:
+Bound silent model calls without shortening any visible work.
+
+Competition manuscript and compile steps should continuously emit tool or
+compiler events.  Forty-five silent minutes indicates a stalled provider
+request, not productive writing; other legacy steps keep the conservative
+ninety-minute allowance.
+======================================================================
+_check_figures_step_health_static
+SIG: (workspace: 'Path', skill_name: 'str', params: 'Dict[str, Any]') -> 'Tuple[bool, str]'
+DOC:
+图表步骤健康检查(静态版, 不依赖 files_created)。
+
+用于崩溃恢复 / waiting_checkpoint 等无法获取增量的场景。
+退化为「figures/ 下当前是否存在该步骤应有的图类」。
+======================================================================
+_check_data_figure_quality
+SIG: (workspace: 'Path', candidates: 'Optional[List[str]]' = None, *, _checker_root: 'Optional[Path]' = None) -> 'Tuple[bool, str]'
+DOC:
+Check source text budget first, then the PDFs that users will see.
+======================================================================
+_check_figure_pdf_quality
+SIG: (workspace: 'Path', candidates: 'Optional[List[str]]' = None, *, _checker_root: 'Optional[Path]' = None) -> 'Tuple[bool, str]'
+DOC:
+Run the deterministic PDF visual gate for the requested figure subset.
+
+The model saying that a chart "looks fine" is not evidence.  This guard
+inspects the files that actually landed in ``figures/`` and runs locally,
+so it adds no model calls or token cost.  ``candidates`` may contain source
+names, PNG paths or PDF paths; only corresponding existing PDFs are passed
+to the checker.  A PNG-only Word workflow is therefore left compatible.
+======================================================================
+_check_paper_modeling_quality_raw
+SIG: (workspace: 'Path', skill_name: 'str', *, write_report: 'bool' = True) -> 'ModelingQualityReport'
+DOC:
+Compare upstream formulation depth with the completed paper.
+
+Detect definite structural omissions. A passing result does not certify the
+derivation: the writer must still compare each mechanism chain against its
+actual formulation and solver, as described in the shared paper contract.
+======================================================================
+_check_stats_coherence
+SIG: (workspace: 'Path', stage: 'str' = 'analysis') -> 'Tuple[bool, str]'
+DOC:
+后台跑 ``stats_coherence_check.py --stage <stage>``（统计建模“前后对得上”）。
+
+只拦零歧义的自相矛盾：退出 0 通过（提示不拦）、1 自相矛盾、2 不适用（非统计工作区）。
+检查器缺失、超时、解密失败或自身出错时返回 ``[CHECK_UNAVAILABLE]``：不算完成，
+也不据此让模型改写数据和结果（与图表质量门的约定一致）。
+======================================================================
+_generate_claude_md
+SIG: (workspace: 'Path', title: 'str', template: 'str', params: 'dict')
+DOC:
+在工作区生成 CLAUDE.md，为 Claude CLI 提供项目上下文。
+======================================================================
+_build_context_summary
+SIG: (workspace: 'Path', files: 'List[str]', max_chars: 'int' = 12000) -> 'str'
+DOC:
+读取工作区已有文件的内容摘要，供给 Claude 参考。
+优先读取关键类型文件（md/tex/bib），并做字符预算。
+======================================================================
+_primary_output_size
+SIG: (workspace: 'Path', skill_name: 'str', primary_path: 'Path') -> 'int'
+DOC:
+Return meaningful source size for a possibly split LaTeX manuscript.
+
+``paper/main.tex`` is often only an assembly file whose real content lives
+under ``paper/sections``.  Measuring the root alone falsely classified a
+complete split manuscript as an empty shell and launched paid retries.
+======================================================================
+_primary_output_health
+SIG: (workspace: 'Path', skill_name: 'str', primary: 'Optional[str]') -> 'tuple[bool, str]'
+DOC:
+Same artifact/type checks on first execution, retry and checkpoint edits.
+======================================================================
+_main_output_receipt
+SIG: (skill_name: 'str', primary: 'str | None', created: 'list', modified: 'list', started: 'float') -> 'str'
+DOC:
+started = 那次主调用开始的时间：沿用回执完成时，步骤卡按它取那次执行的看图/预处理记录。
+======================================================================
+_write_step_handoff_evidence
+SIG: (workspace: 'Path', workflow_id: 'str', skill_name: 'str', outputs: 'List[str]') -> 'Path'
+DOC:
+Atomically record artifact evidence used by the next Skill/new session.

@@ -1,0 +1,246 @@
+{
+ "file_sha256": "5ba477df29c5d4d63e6a24837d3f7a9caba542954ed8e7c86a518658879d34aa",
+ "shape": [
+  38880,
+  7
+ ],
+ "cum_eq_cumsum_max_abs_dev": 0.20000000000004547,
+ "cum_eq_cumsum_all_exact": false,
+ "groups": 108,
+ "group_len_min_max": [
+  360,
+  360
+ ],
+ "cn_levels": [
+  0.5,
+  1.0,
+  1.5
+ ],
+ "ts_levels": [
+  5,
+  10,
+  15,
+  20,
+  25,
+  30,
+  35,
+  40,
+  45,
+  50,
+  55,
+  60
+ ],
+ "noise_rel_sigma_median": 0.09719879796861758,
+ "noise_rel_sigma_p10_p90": [
+  0.07972398539410847,
+  0.15215093408833455
+ ],
+ "cum_by_case_cn_ts": {
+  "Case1_low-permeability high-stress|cn0.5|ts5": 144.73,
+  "Case1_low-permeability high-stress|cn0.5|ts10": 215.09,
+  "Case1_low-permeability high-stress|cn0.5|ts15": 248.54,
+  "Case1_low-permeability high-stress|cn0.5|ts20": 261.11,
+  "Case1_low-permeability high-stress|cn0.5|ts25": 265.23,
+  "Case1_low-permeability high-stress|cn0.5|ts30": 272.6,
+  "Case1_low-permeability high-stress|cn0.5|ts35": 273.19,
+  "Case1_low-permeability high-stress|cn0.5|ts40": 274.75,
+  "Case1_low-permeability high-stress|cn0.5|ts45": 274.8,
+  "Case1_low-permeability high-stress|cn0.5|ts50": 276.6,
+  "Case1_low-permeability high-stress|cn0.5|ts55": 275.11,
+  "Case1_low-permeability high-stress|cn0.5|ts60": 273.62,
+  "Case1_low-permeability high-stress|cn1.0|ts5": 154.01,
+  "Case1_low-permeability high-stress|cn1.0|ts10": 223.28,
+  "Case1_low-permeability high-stress|cn1.0|ts15": 257.75,
+  "Case1_low-permeability high-stress|cn1.0|ts20": 271.72,
+  "Case1_low-permeability high-stress|cn1.0|ts25": 284.47,
+  "Case1_low-permeability high-stress|cn1.0|ts30": 285.85,
+  "Case1_low-permeability high-stress|cn1.0|ts35": 288.42,
+  "Case1_low-permeability high-stress|cn1.0|ts40": 289.29,
+  "Case1_low-permeability high-stress|cn1.0|ts45": 287.93,
+  "Case1_low-permeability high-stress|cn1.0|ts50": 286.95,
+  "Case1_low-permeability high-stress|cn1.0|ts55": 289.96,
+  "Case1_low-permeability high-stress|cn1.0|ts60": 290.24,
+  "Case1_low-permeability high-stress|cn1.5|ts5": 160.54,
+  "Case1_low-permeability high-stress|cn1.5|ts10": 236.43,
+  "Case1_low-permeability high-stress|cn1.5|ts15": 270.83,
+  "Case1_low-permeability high-stress|cn1.5|ts20": 287.0,
+  "Case1_low-permeability high-stress|cn1.5|ts25": 294.46,
+  "Case1_low-permeability high-stress|cn1.5|ts30": 299.2,
+  "Case1_low-permeability high-stress|cn1.5|ts35": 303.93,
+  "Case1_low-permeability high-stress|cn1.5|ts40": 297.98,
+  "Case1_low-permeability high-stress|cn1.5|ts45": 301.81,
+  "Case1_low-permeability high-stress|cn1.5|ts50": 296.69,
+  "Case1_low-permeability high-stress|cn1.5|ts55": 304.11,
+  "Case1_low-permeability high-stress|cn1.5|ts60": 301.39,
+  "Case2_medium-permeability low-stress|cn0.5|ts5": 587.77,
+  "Case2_medium-permeability low-stress|cn0.5|ts10": 909.76,
+  "Case2_medium-permeability low-stress|cn0.5|ts15": 1087.93,
+  "Case2_medium-permeability low-stress|cn0.5|ts20": 1181.7,
+  "Case2_medium-permeability low-stress|cn0.5|ts25": 1225.0,
+  "Case2_medium-permeability low-stress|cn0.5|ts30": 1260.21,
+  "Case2_medium-permeability low-stress|cn0.5|ts35": 1269.36,
+  "Case2_medium-permeability low-stress|cn0.5|ts40": 1285.55,
+  "Case2_medium-permeability low-stress|cn0.5|ts45": 1292.07,
+  "Case2_medium-permeability low-stress|cn0.5|ts50": 1307.01,
+  "Case2_medium-permeability low-stress|cn0.5|ts55": 1295.4,
+  "Case2_medium-permeability low-stress|cn0.5|ts60": 1296.25,
+  "Case2_medium-permeability low-stress|cn1.0|ts5": 609.39,
+  "Case2_medium-permeability low-stress|cn1.0|ts10": 944.51,
+  "Case2_medium-permeability low-stress|cn1.0|ts15": 1137.95,
+  "Case2_medium-permeability low-stress|cn1.0|ts20": 1236.02,
+  "Case2_medium-permeability low-stress|cn1.0|ts25": 1282.97,
+  "Case2_medium-permeability low-stress|cn1.0|ts30": 1317.94,
+  "Case2_medium-permeability low-stress|cn1.0|ts35": 1352.54,
+  "Case2_medium-permeability low-stress|cn1.0|ts40": 1363.36,
+  "Case2_medium-permeability low-stress|cn1.0|ts45": 1355.77,
+  "Case2_medium-permeability low-stress|cn1.0|ts50": 1355.61,
+  "Case2_medium-permeability low-stress|cn1.0|ts55": 1371.58,
+  "Case2_medium-permeability low-stress|cn1.0|ts60": 1367.37,
+  "Case2_medium-permeability low-stress|cn1.5|ts5": 648.98,
+  "Case2_medium-permeability low-stress|cn1.5|ts10": 1001.71,
+  "Case2_medium-permeability low-stress|cn1.5|ts15": 1186.84,
+  "Case2_medium-permeability low-stress|cn1.5|ts20": 1289.85,
+  "Case2_medium-permeability low-stress|cn1.5|ts25": 1353.25,
+  "Case2_medium-permeability low-stress|cn1.5|ts30": 1385.91,
+  "Case2_medium-permeability low-stress|cn1.5|ts35": 1410.25,
+  "Case2_medium-permeability low-stress|cn1.5|ts40": 1404.81,
+  "Case2_medium-permeability low-stress|cn1.5|ts45": 1425.06,
+  "Case2_medium-permeability low-stress|cn1.5|ts50": 1415.24,
+  "Case2_medium-permeability low-stress|cn1.5|ts55": 1410.28,
+  "Case2_medium-permeability low-stress|cn1.5|ts60": 1417.55,
+  "Case3_high-permeability complex fractures|cn0.5|ts5": 1362.87,
+  "Case3_high-permeability complex fractures|cn0.5|ts10": 2175.9,
+  "Case3_high-permeability complex fractures|cn0.5|ts15": 2691.46,
+  "Case3_high-permeability complex fractures|cn0.5|ts20": 2986.11,
+  "Case3_high-permeability complex fractures|cn0.5|ts25": 3208.41,
+  "Case3_high-permeability complex fractures|cn0.5|ts30": 3295.11,
+  "Case3_high-permeability complex fractures|cn0.5|ts35": 3340.7,
+  "Case3_high-permeability complex fractures|cn0.5|ts40": 3412.65,
+  "Case3_high-permeability complex fractures|cn0.5|ts45": 3427.43,
+  "Case3_high-permeability complex fractures|cn0.5|ts50": 3441.69,
+  "Case3_high-permeability complex fractures|cn0.5|ts55": 3433.96,
+  "Case3_high-permeability complex fractures|cn0.5|ts60": 3469.53,
+  "Case3_high-permeability complex fractures|cn1.0|ts5": 1425.54,
+  "Case3_high-permeability complex fractures|cn1.0|ts10": 2292.51,
+  "Case3_high-permeability complex fractures|cn1.0|ts15": 2826.89,
+  "Case3_high-permeability complex fractures|cn1.0|ts20": 3136.55,
+  "Case3_high-permeability complex fractures|cn1.0|ts25": 3313.71,
+  "Case3_high-permeability complex fractures|cn1.0|ts30": 3433.97,
+  "Case3_high-permeability complex fractures|cn1.0|ts35": 3511.71,
+  "Case3_high-permeability complex fractures|cn1.0|ts40": 3545.2,
+  "Case3_high-permeability complex fractures|cn1.0|ts45": 3584.67,
+  "Case3_high-permeability complex fractures|cn1.0|ts50": 3601.67,
+  "Case3_high-permeability complex fractures|cn1.0|ts55": 3627.54,
+  "Case3_high-permeability complex fractures|cn1.0|ts60": 3614.89,
+  "Case3_high-permeability complex fractures|cn1.5|ts5": 1488.35,
+  "Case3_high-permeability complex fractures|cn1.5|ts10": 2394.22,
+  "Case3_high-permeability complex fractures|cn1.5|ts15": 2925.97,
+  "Case3_high-permeability complex fractures|cn1.5|ts20": 3288.03,
+  "Case3_high-permeability complex fractures|cn1.5|ts25": 3503.48,
+  "Case3_high-permeability complex fractures|cn1.5|ts30": 3643.28,
+  "Case3_high-permeability complex fractures|cn1.5|ts35": 3660.61,
+  "Case3_high-permeability complex fractures|cn1.5|ts40": 3722.42,
+  "Case3_high-permeability complex fractures|cn1.5|ts45": 3707.44,
+  "Case3_high-permeability complex fractures|cn1.5|ts50": 3760.47,
+  "Case3_high-permeability complex fractures|cn1.5|ts55": 3770.33,
+  "Case3_high-permeability complex fractures|cn1.5|ts60": 3768.43
+ },
+ "npv_opt_ts": {
+  "Case1_low-permeability high-stress|cn0.5": {
+   "ts": 10,
+   "npv_1e4": -535.3
+  },
+  "Case1_low-permeability high-stress|cn1.0": {
+   "ts": 10,
+   "npv_1e4": -682.8
+  },
+  "Case1_low-permeability high-stress|cn1.5": {
+   "ts": 10,
+   "npv_1e4": -828.8
+  },
+  "Case2_medium-permeability low-stress|cn0.5": {
+   "ts": 20,
+   "npv_1e4": -276.1
+  },
+  "Case2_medium-permeability low-stress|cn1.0": {
+   "ts": 20,
+   "npv_1e4": -409.8
+  },
+  "Case2_medium-permeability low-stress|cn1.5": {
+   "ts": 25,
+   "npv_1e4": -540.1
+  },
+  "Case3_high-permeability complex fractures|cn0.5": {
+   "ts": 40,
+   "npv_1e4": 324.6
+  },
+  "Case3_high-permeability complex fractures|cn1.0": {
+   "ts": 35,
+   "npv_1e4": 220.1
+  },
+  "Case3_high-permeability complex fractures|cn1.5": {
+   "ts": 30,
+   "npv_1e4": 125.5
+  }
+ },
+ "npv_opt_per_case": {
+  "Case1_low-permeability high-stress": {
+   "ts": 10,
+   "cn": 0.5,
+   "npv_1e4": -535.3
+  },
+  "Case2_medium-permeability low-stress": {
+   "ts": 20,
+   "cn": 0.5,
+   "npv_1e4": -276.1
+  },
+  "Case3_high-permeability complex fractures": {
+   "ts": 40,
+   "cn": 0.5,
+   "npv_1e4": 324.6
+  }
+ },
+ "npv_monotone_in_ts": {
+  "Case1_low-permeability high-stress|cn0.5": false,
+  "Case1_low-permeability high-stress|cn1.0": false,
+  "Case1_low-permeability high-stress|cn1.5": false,
+  "Case2_medium-permeability low-stress|cn0.5": false,
+  "Case2_medium-permeability low-stress|cn1.0": false,
+  "Case2_medium-permeability low-stress|cn1.5": false,
+  "Case3_high-permeability complex fractures|cn0.5": false,
+  "Case3_high-permeability complex fractures|cn1.0": false,
+  "Case3_high-permeability complex fractures|cn1.5": false
+ },
+ "cum_pivot_head": {
+  "('Case1_low-permeability high-stress', 5)": {
+   "0.5": 144.73,
+   "1.0": 154.01,
+   "1.5": 160.54
+  },
+  "('Case1_low-permeability high-stress', 10)": {
+   "0.5": 215.09,
+   "1.0": 223.28,
+   "1.5": 236.43
+  },
+  "('Case1_low-permeability high-stress', 15)": {
+   "0.5": 248.54,
+   "1.0": 257.75,
+   "1.5": 270.83
+  },
+  "('Case1_low-permeability high-stress', 20)": {
+   "0.5": 261.11,
+   "1.0": 271.72,
+   "1.5": 287.0
+  },
+  "('Case1_low-permeability high-stress', 25)": {
+   "0.5": 265.23,
+   "1.0": 284.47,
+   "1.5": 294.46
+  },
+  "('Case1_low-permeability high-stress', 30)": {
+   "0.5": 272.6,
+   "1.0": 285.85,
+   "1.5": 299.2
+  }
+ }
+}

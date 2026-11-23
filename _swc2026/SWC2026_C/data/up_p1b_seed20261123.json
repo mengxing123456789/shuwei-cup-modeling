@@ -1,0 +1,350 @@
+{
+ "_meta": {
+  "script": "up_p1b_dual.py",
+  "seed": 20261123,
+  "seconds": 71.3,
+  "bar": {
+   "primary": "test AUC >= 0.85 OR test AP >= 0.09",
+   "secondary": "if primary fails: AP relative gain >= 15% AND val same direction AND worst per-env AUC drop <= 0.02 vs baseline 0.7646370912154993",
+   "baseline_repro": {
+    "test_auc": 0.8220322044197129,
+    "test_ap": 0.06755601550659424,
+    "val_auc": 0.8852539948743638,
+    "tol": 1e-06
+   },
+   "worst_env_baseline": 0.7646370912154993
+  },
+  "baseline": {
+   "source": "data/p1b_gpu.json (production train_gpu_p1b.py)",
+   "test_auc": 0.8220322044197129,
+   "test_ap": 0.06755601550659424,
+   "val_auc": 0.8852539948743638,
+   "params": 243873,
+   "worst_env": 0.7646370912154993,
+   "best_epoch": 1
+  },
+  "protocol": {
+   "split": "panel_records.csv split (16/4/4 environment)",
+   "window_short": 15,
+   "window_long": 60,
+   "window_rule": "causal; no window crosses a record boundary; the long window is left-padded with the record's first frame so that A/B/C share the exact same sample set (defined by the T=15 window)",
+   "model": "TCN 4 blocks dilations 1/2/4/8, 96ch, GroupNorm(8)+GELU, dropout 0.10",
+   "dual": "two independent 96ch branches (T=15 and T=60), features (last||mean) of each concatenated -> MLP head",
+   "multitask": {
+    "aux_heads": [
+     "occlusion",
+     "near_edge"
+    ],
+    "aux_weight": 0.3,
+    "aux_mask": "frames with a resolved reason label (data/up_p1b_aux.npz)",
+    "aux_target": "frame-level multi-label (side-agnostic)"
+   },
+   "selection": "best epoch by validation AUC; test scored once from that state",
+   "batch": 1024,
+   "lr": 0.002,
+   "wd": 0.0001,
+   "epochs": 18,
+   "early_stop": "none (fixed 18 epochs, best val AUC kept)"
+  },
+  "alignment": {
+   "script": "up_p1b_align.py",
+   "failure_rate": 0.0,
+   "gate": "<= 0.05"
+  },
+  "arms_run": [
+   "A",
+   "C"
+  ]
+ },
+ "arms": {
+  "A_baseline_replica": {
+   "arm": "A_baseline_replica",
+   "params": 243873,
+   "epochs": 18,
+   "best_epoch": 1,
+   "val_auc": 0.860706360096511,
+   "val_ap": 0.10775946396315692,
+   "val_auc_selected": 0.860706360096511,
+   "val_ap_selected": 0.10775946396315692,
+   "test_auc": 0.8035292723842087,
+   "test_ap": 0.07855514197334709,
+   "test_ap_lift": 4.129416143931053,
+   "per_env": [
+    {
+     "env": "logistics_x_courier_station_0011",
+     "n": 6275,
+     "positives": 213,
+     "auc_bad": 0.7344730430310888
+    },
+    {
+     "env": "logistics_x_courier_station_0041",
+     "n": 3623,
+     "positives": 18,
+     "auc_bad": 0.958206195099399
+    }
+   ],
+   "seconds": 16.0,
+   "history": [
+    {
+     "epoch": 1,
+     "loss": 1.0857,
+     "val_auc": 0.860706360096511,
+     "val_ap": 0.10775946396315692
+    },
+    {
+     "epoch": 2,
+     "loss": 0.7287,
+     "val_auc": 0.8203026496973745,
+     "val_ap": 0.10107647187556387
+    },
+    {
+     "epoch": 3,
+     "loss": 0.6564,
+     "val_auc": 0.7638565209079008,
+     "val_ap": 0.08438471183478541
+    },
+    {
+     "epoch": 4,
+     "loss": 0.641,
+     "val_auc": 0.8428827952383373,
+     "val_ap": 0.1094640527358048
+    },
+    {
+     "epoch": 5,
+     "loss": 0.6727,
+     "val_auc": 0.7671538199057637,
+     "val_ap": 0.08819735294070019
+    },
+    {
+     "epoch": 6,
+     "loss": 0.5264,
+     "val_auc": 0.8125736598445853,
+     "val_ap": 0.0739473394233468
+    },
+    {
+     "epoch": 7,
+     "loss": 0.4432,
+     "val_auc": 0.8369682273478585,
+     "val_ap": 0.09070017432768077
+    },
+    {
+     "epoch": 8,
+     "loss": 0.346,
+     "val_auc": 0.818294019849135,
+     "val_ap": 0.08671072269440605
+    },
+    {
+     "epoch": 9,
+     "loss": 0.3049,
+     "val_auc": 0.8231691822940489,
+     "val_ap": 0.08190857097197544
+    },
+    {
+     "epoch": 10,
+     "loss": 0.2709,
+     "val_auc": 0.8024052737423677,
+     "val_ap": 0.10242150887444872
+    },
+    {
+     "epoch": 11,
+     "loss": 0.1801,
+     "val_auc": 0.8069246909009068,
+     "val_ap": 0.08625754804663877
+    },
+    {
+     "epoch": 12,
+     "loss": 0.1433,
+     "val_auc": 0.8143166907460244,
+     "val_ap": 0.09488855234287491
+    },
+    {
+     "epoch": 13,
+     "loss": 0.1395,
+     "val_auc": 0.8297407899481387,
+     "val_ap": 0.09804079370855419
+    },
+    {
+     "epoch": 14,
+     "loss": 0.0853,
+     "val_auc": 0.8346074822671866,
+     "val_ap": 0.1085240945880889
+    },
+    {
+     "epoch": 15,
+     "loss": 0.0757,
+     "val_auc": 0.829326963798682,
+     "val_ap": 0.09679146890794263
+    },
+    {
+     "epoch": 16,
+     "loss": 0.0493,
+     "val_auc": 0.8352899324083954,
+     "val_ap": 0.1087290370657184
+    },
+    {
+     "epoch": 17,
+     "loss": 0.0318,
+     "val_auc": 0.8332316918229404,
+     "val_ap": 0.10875043200887963
+    },
+    {
+     "epoch": 18,
+     "loss": 0.0311,
+     "val_auc": 0.8334386048976689,
+     "val_ap": 0.10785767425219386
+    }
+   ],
+   "aux_test": null
+  },
+  "C_dual_plus_multitask": {
+   "arm": "C_dual_plus_multitask",
+   "params": 512387,
+   "epochs": 18,
+   "best_epoch": 8,
+   "val_auc": 0.8627863810056218,
+   "val_ap": 0.12271196423093926,
+   "val_auc_selected": 0.8627863810056218,
+   "val_ap_selected": 0.12271196423093926,
+   "test_auc": 0.7790147226849712,
+   "test_ap": 0.15539233688296472,
+   "test_ap_lift": 8.168524789699982,
+   "per_env": [
+    {
+     "env": "logistics_x_courier_station_0011",
+     "n": 6275,
+     "positives": 213,
+     "auc_bad": 0.71541876354354
+    },
+    {
+     "env": "logistics_x_courier_station_0041",
+     "n": 3623,
+     "positives": 18,
+     "auc_bad": 0.804638619201726
+    }
+   ],
+   "seconds": 55.3,
+   "history": [
+    {
+     "epoch": 1,
+     "loss": 1.1024,
+     "val_auc": 0.8623677147842417,
+     "val_ap": 0.13317376682605978
+    },
+    {
+     "epoch": 2,
+     "loss": 0.8047,
+     "val_auc": 0.7962124017162895,
+     "val_ap": 0.09534780149269656
+    },
+    {
+     "epoch": 3,
+     "loss": 0.6524,
+     "val_auc": 0.8077354029480879,
+     "val_ap": 0.07578599619114934
+    },
+    {
+     "epoch": 4,
+     "loss": 0.5574,
+     "val_auc": 0.7730272471848931,
+     "val_ap": 0.05574682210208319
+    },
+    {
+     "epoch": 5,
+     "loss": 0.5195,
+     "val_auc": 0.7543881302076147,
+     "val_ap": 0.0596567385100522
+    },
+    {
+     "epoch": 6,
+     "loss": 0.454,
+     "val_auc": 0.8151903237282105,
+     "val_ap": 0.09015327283846598
+    },
+    {
+     "epoch": 7,
+     "loss": 0.402,
+     "val_auc": 0.8229755794171102,
+     "val_ap": 0.08187618733496403
+    },
+    {
+     "epoch": 8,
+     "loss": 0.312,
+     "val_auc": 0.8627863810056218,
+     "val_ap": 0.12271196423093926
+    },
+    {
+     "epoch": 9,
+     "loss": 0.3378,
+     "val_auc": 0.8308890970119817,
+     "val_ap": 0.09749813161481856
+    },
+    {
+     "epoch": 10,
+     "loss": 0.1923,
+     "val_auc": 0.825135461512958,
+     "val_ap": 0.11422205593083369
+    },
+    {
+     "epoch": 11,
+     "loss": 0.1496,
+     "val_auc": 0.8265015718133571,
+     "val_ap": 0.09237871265377683
+    },
+    {
+     "epoch": 12,
+     "loss": 0.1002,
+     "val_auc": 0.8349741177153893,
+     "val_ap": 0.0828414048143755
+    },
+    {
+     "epoch": 13,
+     "loss": 0.0578,
+     "val_auc": 0.8153222156881249,
+     "val_ap": 0.08989641054648603
+    },
+    {
+     "epoch": 14,
+     "loss": 0.048,
+     "val_auc": 0.8495705646185903,
+     "val_ap": 0.10731813200916503
+    },
+    {
+     "epoch": 15,
+     "loss": 0.0398,
+     "val_auc": 0.8173223754104987,
+     "val_ap": 0.0782661613041189
+    },
+    {
+     "epoch": 16,
+     "loss": 0.0308,
+     "val_auc": 0.8253919853249019,
+     "val_ap": 0.09129230685046293
+    },
+    {
+     "epoch": 17,
+     "loss": 0.0251,
+     "val_auc": 0.8243441097534708,
+     "val_ap": 0.09301720187988882
+    },
+    {
+     "epoch": 18,
+     "loss": 0.0258,
+     "val_auc": 0.8241492968585513,
+     "val_ap": 0.09187791617803541
+    }
+   ],
+   "aux_test": {
+    "occlusion": {
+     "n": 12143,
+     "positives": 226,
+     "auc": 0.8027522220431732
+    },
+    "near_edge": {
+     "n": 12143,
+     "positives": 5,
+     "auc": 0.16562860438292965
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,26 @@
+\begin{center}
+{\large\bfseries 2021 ``ShuWei Cup'' International Contest --- Problem B}\\[3pt]
+{\large\bfseries Quantitative Analysis and Prediction of Extreme Precipitation:\\[0pt]
+From One City's Record to a National Risk Map and an Investment Portfolio}\\[2pt]
+{\normalsize Team \# 2021B-PRACTICE}
+\end{center}
+
+\enlargethispage{2\baselineskip}
+
+\noindent\textbf{Summary}
+
+The July 2021 Zhengzhou storm delivered 449\,mm in 72\,h and 201.9\,mm in one hour, killed 398 people and caused 120.06 billion CNY of direct loss in Henan. One pipeline answers the five tasks: an archive, a hazard layer, a held-out forecast experiment, a type-and-loss decomposition and an investment model.
+
+\textbf{Data.} The official GSOD attachment and 35 GHCN-Daily stations are merged; keeping years with 300 valid days leaves 25 cities with 45+ years; at Zhengzhou the sources correlate at 0.6776 daily, 0.9217 annually.
+
+\textbf{Model I (trend, rarity, waterlogging).} Zhengzhou's annual total (+1.19\,mm per decade, $p=0.92$) and one-day maximum (+0.45\,mm, $p=0.82$) are flat, but wet days fall by 2.0 per decade ($p=0.021$) while intensity rises by 0.23\,mm ($p=0.062$): fewer, heavier events without a change point ($p=0.88$). A GEV fit ($\xi=-0.026$) gives 78.0 and 163.4\,mm at 2 and 50 years; the 20 July 188.7\,mm has a 54-year empirical and 151-year fitted return period, the three-day 313.4\,mm $6.4\times10^{3}$\,yr. SCS-CN over 1\,180\,km$^2$ yields $3.13\times10^{8}$\,m$^3$ of runoff; the peak hour leaves $1.4\times10^{8}$\,m$^3$ above capacity and the three-day runoff needs 7.4\,h to drain.
+
+\textbf{Model II (national map).} Across 25 cities and one declared family of 146 controlled tests only 2 total and 1 extreme trends survive, against 7 intensity and 9 wet-day: redistribution, not more rain. $k$-means separates 17 continental (602\,mm, $+0.80$\,mm per decade) from 8 humid-south cities (1\,389\,mm, $+3.03$\,mm).
+
+\textbf{Model III (who breaks a record next).} Over 5--7 held-out years the target beats the distribution: the expected maximum instead of the $T$-year quantile cuts RMSE from 64.8 to 55.7\,mm (bootstrap gain $[3.3,13.6]$) and bias from $-41.5$ to $-20.5$\,mm; a trend-shifted GEV reaches 53.9\,mm but ranks worse, and extreme-value models beat machine learning on ranking (4/5 versus 3/5 top-five overlap). Index-flood pooling is rejected for the country ($H_1=2.56$) and accepted for two L-moment groups ($H_1=0.22$, $0.03$): pooling buys at most 1.2\,mm, and only group-wise. By ten-year exceedance probability the leaders are Fuzhou, Haikou, Guangzhou, Hohhot; Zhengzhou is sixteenth.
+
+\textbf{Model IV (are the storms the same?).} No: Zhengzhou is an intensity-type storm (134-year daily event, 52\% of the event total in one day), Taiyuan a persistent-type storm (9.5-year daily event, one-day share at its 6th climatological percentile), separated by 14.1 in period ratio. Area-normalised, Henan lost 22.4 times more than Shanxi while rainfall was only 2.2 times larger; the identity splits that gap into density ($\times2.68$), affected share ($\times2.95$) and loss per affected person ($\times2.84$), and Shapley shares of $31/34/33/2.5\%$ show that removing any one social factor still leaves a factor of 8.1--8.9.
+
+\textbf{Model V (what to build).} Uniform upgrading never pays: the best ratio on a 378-point menu is 0.28 (Guangzhou), 0.18 (Haikou) and 0.10 (Zhengzhou), because damage is carried by overflow volume and a city-wide millimetre of capacity costs about a billion CNY. Protecting the 2\% most exposed area, where damage density is twenty times the average, returns 4.05, 2.62 and 1.50 for the same money. A CVaR$_{95}$ cap forces spending but buys no ratio above 0.28, so the cap is a constraint to be met at least cost, and the least-cost way is the hotspot.
+
+\noindent\textbf{Keywords:} extreme precipitation; Mann--Kendall trend; generalized extreme value; L-moments; expected maximum; SCS-CN; false discovery rate; benefit--cost analysis; CVaR

@@ -1,0 +1,38 @@
+{
+ "A2023101419943.pdf": {
+  "pages": 36,
+  "chars": 58704,
+  "img_total": 19,
+  "img_pages_nonzero": 13
+ },
+ "A2023101519953.pdf": {
+  "pages": 37,
+  "chars": 60573,
+  "img_total": 9,
+  "img_pages_nonzero": 9
+ },
+ "A2023101519958.pdf": {
+  "pages": 32,
+  "chars": 41055,
+  "img_total": 19,
+  "img_pages_nonzero": 9
+ },
+ "B2023081819323.pdf": {
+  "pages": 47,
+  "chars": 80855,
+  "img_total": 24,
+  "img_pages_nonzero": 14
+ },
+ "B2023090819411.pdf": {
+  "pages": 25,
+  "chars": 57118,
+  "img_total": 14,
+  "img_pages_nonzero": 8
+ },
+ "B2023091819500.pdf": {
+  "pages": 45,
+  "chars": 69226,
+  "img_total": 60,
+  "img_pages_nonzero": 29
+ }
+}

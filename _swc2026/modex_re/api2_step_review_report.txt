@@ -1,0 +1,29 @@
+MODULE backend.services.step_review_report
+DOC: 步骤卡上的"看图质检"和"编译预处理改动"汇总（第一档 A4/A5，2026-10-08）。
+
+两份数据都由技能里的工具写在工作区隐藏目录 .mh/ 下：
+
+- .mh/vision_ledger.json（tools/vision_ledger.py）：最终门登记的应审清单 + 每一版图的结论
+  （通过 / 有问题 / 没审成）。步骤卡与最终门读同一份账本、同一份清单。
+- .mh/precompile/changes.json（skills/shared-scripts/precompile_guard.py）：每次编译预处理改了
+  哪些文件、改动清单和原文快照在哪（可恢复）。
+
+⛔ 只做展示：不进健康门、不触发返修、不写 error_message —— "带说明完成"那套机制已撤回
+（docs/INTERNAL_REPAIR_NO_DRAFT_BYPASS_2026-09-09.md）。读不到、格式不对就当没有，绝不影响
+步骤完成。结果在步骤完成时算一次存进 workflow_steps，前端轮询详情时不重算图片指纹。
+CALLABLES:
+_count(value: 'object') -> 'int' :: 
+_load_ledger() :: tools/vision_ledger.py（正式包保留 .py；万一只有 .pyc 也能读）。
+collect(db, step_id: 'int', workspace: 'Path', started_at: 'object' = None) -> 'tuple[str | None, str | None]' :: 步骤完成时调用：按本步开始时间取记录。started_at 不传就读库里这一步的开始时间。
+collect_submission(db, step_id: 'int', workspace: 'Path', started_at: 'object' = None) -> 'str | None' :: 步骤完成时调用（在投稿前检查跑完之后）：started_at 不传就读库里这一步的开始时间。
+collect_writing(db, step_id: 'int', workspace: 'Path', started_at: 'object' = None) -> 'str | None' :: 步骤完成时调用（在写作检查跑完之后）：started_at 不传就读库里这一步的开始时间；只认这一步技能写的结果。
+columns(workspace: 'Path', started_at: 'object') -> 'tuple[str | None, str | None]' :: (vision_review, precompile_report) 两列要存的 JSON 文本；没有就是 None。
+parse(value: 'object') -> 'dict | None' :: 
+precompile_report(workspace: 'Path', since: 'float') -> 'dict | None' :: 本步编译预处理改了什么：涉及的文件、增删行数、最新一份改动清单和快照的位置、要点说明。
+since_epoch(timestamp: 'object') -> 'float | None' :: SQLite CURRENT_TIMESTAMP（UTC 'YYYY-MM-DD HH:MM:SS'）或带时区的 ISO 时间 → epoch 秒。
+submission_check(workspace: 'Path', since: 'float') -> 'dict | None' :: 本步编译后的投稿前检查（投稿格式库 1E，services/submission_review.py 写的）：只认本步开始以后生成的。
+submission_column(workspace: 'Path', started_at: 'object') -> 'str | None' :: submission_check 列要存的 JSON 文本；没有就是 None。
+summary_lines(vision: 'object', precompile: 'object') -> 'list[str]' :: 给对话完成摘要用的几句话（与步骤卡同一口径）。
+vision_review(workspace: 'Path', since: 'float') -> 'dict | None' :: 本步记下的看图结论：按种类给出 总数/通过/有问题/没审成/没有记录，以及没通过的图。
+writing_check(workspace: 'Path', since: 'float', skill: 'str | None' = None) -> 'dict | None' :: 本步的写作检查（论证逻辑与文理分型，services/writing_review.py 写的）：只认本步开始以后、本步技能生成的。 |  | 规划步是规划核对（论证主线五栏、研究类型），需修项补写一轮后仍没补上的，后台已记进 OPEN_QUESTIONS.md； | 写作步、编译或导出步是稿件检查（第 5 期），完整报告在 WRITING_CHECK.md，结论带稿件版本（fingerprint）， | 接口读出时按它判断稿件之后有没有再改过（routers/workflows.py 填 stale）。
+writing_column(workspace: 'Path', started_at: 'object', skill: 'str | None' = None) -> 'str | None' :: writing_check 列要存的 JSON 文本；没有就是 None。

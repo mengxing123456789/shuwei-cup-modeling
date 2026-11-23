@@ -1,0 +1,63 @@
+[
+ {
+  "problem": "A",
+  "checks": {
+   "F1": "FAIL 缺 ['out/00-problem.md', 'out/01-model.md', 'out/03-numbers.md']",
+   "F2": "FAIL 无 code/run_all.py",
+   "F3": "PASS",
+   "F4": "PASS",
+   "F5": "FAIL 数据早于代码（可能用了旧结果）"
+  },
+  "notes": [
+   "json=7 键=3059 md引用=0",
+   "数值条目=33932",
+   "files=46"
+  ]
+ },
+ {
+  "problem": "B",
+  "checks": {
+   "F1": "FAIL 缺 ['out/00-problem.md', 'out/01-model.md', 'out/03-numbers.md']",
+   "F2": "FAIL 无 code/run_all.py",
+   "F3": "PASS",
+   "F4": "FAIL 只有 0 张图",
+   "F5": "FAIL 数据早于代码（可能用了旧结果）"
+  },
+  "notes": [
+   "json=3 键=636 md引用=0",
+   "数值条目=692",
+   "files=21"
+  ]
+ },
+ {
+  "problem": "C",
+  "checks": {
+   "F1": "FAIL 缺 ['out/01-model.md', 'out/03-numbers.md']",
+   "F2": "FAIL 无 code/run_all.py",
+   "F3": "PASS",
+   "F4": "PASS",
+   "F5": "FAIL 数据早于代码（可能用了旧结果）"
+  },
+  "notes": [
+   "json=9 键=563 md引用=0",
+   "数值条目=2386",
+   "files=56"
+  ]
+ },
+ {
+  "problem": "D",
+  "checks": {
+   "F1": "PASS",
+   "F2": "PASS 复跑 40.2s rc=0",
+   "F3": "FAIL 1 个键无对应 ['file.path']",
+   "F4": "PASS",
+   "F5": "FAIL 数据早于代码（可能用了旧结果）"
+  },
+  "notes": [
+   "run_all 复跑 40.2s",
+   "json=5 键=544 md引用=3",
+   "数值条目=3340",
+   "files=58"
+  ]
+ }
+]

@@ -1,0 +1,188 @@
+[
+  {
+    "squad": "数学建模小队",
+    "name": "题目侦察手",
+    "file": "main/01-题目侦察手.md",
+    "chars": 827
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "建模架构手",
+    "file": "main/02-建模架构手.md",
+    "chars": 1005
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "数据溯源手",
+    "file": "main/03-数据溯源手.md",
+    "chars": 810
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "求解与优化手",
+    "file": "main/04-求解与优化手.md",
+    "chars": 1097
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "代理模型训练手",
+    "file": "main/05-代理模型训练手.md",
+    "chars": 617
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "数值对账手",
+    "file": "main/06-数值对账手.md",
+    "chars": 982
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "图表手",
+    "file": "main/07-图表手.md",
+    "chars": 1610
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "论文撰写手",
+    "file": "main/08-论文撰写手.md",
+    "chars": 1285
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "格式合规手",
+    "file": "main/09-格式合规手.md",
+    "chars": 1611
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "对抗评审手",
+    "file": "main/10-对抗评审手.md",
+    "chars": 992
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "创新挖掘手",
+    "file": "main/11-创新挖掘手.md",
+    "chars": 660
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "时间与质检手",
+    "file": "main/12-时间与质检手.md",
+    "chars": 896
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "调度手",
+    "file": "main/13-调度手.md",
+    "chars": 1254
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "口径审计手",
+    "file": "main/14-口径审计手.md",
+    "chars": 1029
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "版式与出栏手",
+    "file": "main/15-版式与出栏手.md",
+    "chars": 941
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "附录与自指手",
+    "file": "main/16-附录与自指手.md",
+    "chars": 1092
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "流水线运维手",
+    "file": "main/17-流水线运维手.md",
+    "chars": 902
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "合规审查员",
+    "file": "review/01-合规审查员.md",
+    "chars": 813
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "论文结构审读",
+    "file": "review/02-论文结构审读.md",
+    "chars": 540
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "摘要与表达审读",
+    "file": "review/03-摘要与表达审读.md",
+    "chars": 631
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "题目契合度审读",
+    "file": "review/04-题目契合度审读.md",
+    "chars": 419
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "模型与检验审读",
+    "file": "review/05-模型与检验审读.md",
+    "chars": 518
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "数据与代码审读",
+    "file": "review/06-数据与代码审读.md",
+    "chars": 558
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "图表审读",
+    "file": "review/07-图表审读.md",
+    "chars": 613
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "创新性评估",
+    "file": "review/08-创新性评估.md",
+    "chars": 494
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "改进方案总编",
+    "file": "review/09-改进方案总编.md",
+    "chars": 638
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "数字对账员",
+    "file": "review/10-数字对账员.md",
+    "chars": 701
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "口径冲突审读",
+    "file": "review/11-口径冲突审读.md",
+    "chars": 598
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "版式与出栏审读",
+    "file": "review/12-版式与出栏审读.md",
+    "chars": 733
+  },
+  {
+    "squad": "数学建模评审小队",
+    "name": "修复排序手",
+    "file": "review/13-修复排序手.md",
+    "chars": 611
+  },
+  {
+    "squad": "数学建模小队",
+    "name": "真题对标手",
+    "file": "main/18-真题对标手.md",
+    "chars": 1328
+  }
+]

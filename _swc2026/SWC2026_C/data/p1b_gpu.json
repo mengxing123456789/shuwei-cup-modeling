@@ -1,0 +1,44 @@
+{
+ "_meta": {
+  "model": "TCN(4 blocks, dilations 1/2/4/8, 96ch, GroupNorm, GELU) on GPU",
+  "window_frames": 15,
+  "window_s": 0.5,
+  "epochs": 18,
+  "batch": 1024,
+  "lr": 0.002,
+  "seed": 20261120,
+  "device": "cuda",
+  "features": "fl(32)+fr(32)+gl(8)+gr(8)+validL+validR = 82 dims/frame",
+  "label": "badL | badR (annotated hand bad frame)",
+  "split": "panel_records.csv split column (16/4/4 environment)",
+  "baseline_cpu_test": {
+   "auc_calibrated": 0.5961,
+   "auc_geometry": 0.6131,
+   "auc_fused": 0.6267,
+   "ap_fused": 0.0407,
+   "positive_rate": 0.0189
+  }
+ },
+ "best_epoch": 1,
+ "val_auc_at_best": 0.8852539948743638,
+ "test_auc": 0.8220322044197129,
+ "test_ap": 0.06755601550659424,
+ "test_positive_rate": 0.01902330480515957,
+ "test_ap_lift": 3.5512239933013916,
+ "per_env_test": [
+  {
+   "env": "logistics_x_courier_station_0011",
+   "n": 6275,
+   "positives": 213,
+   "auc_bad": 0.7646370912154993
+  },
+  {
+   "env": "logistics_x_courier_station_0041",
+   "n": 3623,
+   "positives": 18,
+   "auc_bad": 0.8638619201725998
+  }
+ ],
+ "train_seconds": 48.9,
+ "params": 243873
+}

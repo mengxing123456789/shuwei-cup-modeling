@@ -1,0 +1,151 @@
+--- PAGE 1 ---
+Problem 3 Requirements
+For the supplied restocking-related jobs, estimate operation durations and their uncertainty from the original 
+records. Under the common time, cost and information constraints, determine job selection and order, 
+reserved service durations, paid information reviews, waiting and stopping decisions. Participants choose and 
+justify their optimization objective and report every common metric below.
+1  Task data and source units
+The files in this directory define the common experiment: tasks.csv gives the 36 jobs; service_zones.csv 
+gives service locations; job_families.csv defines sampling strata; source_segment_index.csv gives original 
+annotated intervals; record_split.csv fixes the environment split; and common_conditions.json gives the 
+numerical conditions. S1, S2 and S3 are independent cases. Each starts at time 0 in Z0, with zero 
+accumulated cost and reviews. Time uses scenario seconds and cost uses abstract units.
+Case
+Jobs
+Horizon H
+Cost budget B
+Review limit K
+S1
+8
+100
+32
+4
+S2
+12
+100
+34
+6
+S3
+16
+125
+40
+8
+A work unit is one original text-annotated interval, rather than one product or necessarily one complete 
+transfer action. The source index contains 349 intervals. Its eligible column fixes a pool of 343 intervals 
+meeting the common length condition of at least 1.2 seconds; the other 6 remain indexed but are not 
+sampled. Eligibility does not certify observation quality. source_segment_index is zero-based. Original 
+duration d equals end_s minus start_s.
+P, A and L are sampling families, not robot-skill or product-category labels. Sort jobs by job_id and sample 
+one eligible interval uniformly with replacement from the specified split and family for each job. Preserve 
+source-pool row order from source_segment_index.csv. Reinitialize the generator for each case. The 
+reference sequence is Python 3 random.Random(int(seed)), calling choice successively in sorted job order; 
+equivalent implementations are allowed. Source assignments are independent of the policy’s subsequent 
+actions.
+2  Data split and permitted information
+Use the supplied record_split.csv for all three problems: 16 training, 4 validation and 4 test environments. 
+Keep all records and intervals from one environment together. Fit on training data, select models and 
+thresholds on validation data, and freeze models and decision rules before testing. Operators may occur 
+across environments; this is not entirely unseen-operator validation.
+Reset policy state for each trial. Public task conditions and information already returned during that trial are 
+available to the policy. Returned execution feedback may update current assessments. Do not accumulate 
+validation/test source truths as fitting data for later trials. Do not use the full source collection, source index, 
+prefix matching, seed knowledge or hidden source identifiers to retrieve unrevealed states, endpoints or 
+durations. All source records are public for checking; compliance must be demonstrated by reproducible 
+programs and logs.
+On release, a job supplies its first 0.2 source seconds of numerical data free of charge. Each job permits at 
+most two paid reviews: the first extends the cumulative visible prefix to 0.6 seconds, the second to 1.0 
+second. Each costs 1 unit and occupies the equipment for 1 scenario second, also subject to K and B. Return 
+time may not exceed H. Only released, unattempted jobs may be reviewed; completed predecessors are not 
+required for review. Information returns only after the delay. Waiting alone reveals no additional data.
+Prefixes begin at the original annotation start and contain only existing samples within the window. They 
+include timestamps; positions and orientations of both hands’ 21 keypoints; head and left/right head-camera 
+poses; and original hand-quality flags. They exclude source identifiers, segment endpoints, total duration, 
+
+--- PAGE 2 ---
+semantic descriptions and subsequent samples. No prior filling, interpolation or correction is applied. 
+Participants clean and model only the information permitted at that point. The common trial uses numerical 
+channels; full videos are not additional policy inputs.
+The 0.2, 0.6 and 1.0 seconds are cumulative source-time windows. Review delay uses scheduling time. 
+Prefix lengths do not consume scenario service time. Review releases an existing demonstration prefix; it is 
+not a physical new camera view.
+3  Duration mapping and feasible actions
+Scenario service duration is p = αd + β. Nominal conditions are α = 1 and β = 0.5 seconds. Sensitivity 
+conditions are α = 0.75 and 1.5 with β = 0.5, and β = 0 and 1 second with α = 1. These are five conditions, 
+not a full factorial design. They are problem assumptions, not measured robot parameters.
+Each job executes at most once. Execution requires release and completed predecessors. The predecessors 
+field contains job IDs separated by |; blank means none. release_s is earliest information availability, due_s is 
+desired completion time, priority_weight is relative importance, and zone_id is the scenario service location. 
+Late completion within H is allowed and incurs tardiness. No unsupported failure/retry mechanism is 
+imposed.
+There is one equipment unit. Execution, review and waiting cannot overlap. Waiting must be positive, cannot 
+cross H and is free. Stopping is allowed at any time. At most 200 actions may be submitted per trial. Waiting 
+and review do not change location.
+Zones are Z0=(0,0), Z1=(1,0), Z2=(0,1), Z3=(1,1), Z4=(2,0). Let D be Euclidean distance from the current to 
+the service zone. Travel speed is 1 length unit per second. Every execution adds 0.5 seconds of changeover, 
+including execution in the current zone.
+Execution selects a reserved service duration b ≥ 0.2 seconds. At current time t, service starts at s = t + D + 
+0.5 and costs 2 + 0.1b + 0.2D. Before accepting the action, require cumulative cost ≤ B and s + b ≤ H. Do not 
+use unrevealed p in this check. Charge an accepted execution immediately, with no refund. b excludes 
+travel/changeover and is a decision, not a known realized duration or a start time.
+Completion occurs at C = s + p. If C ≤ H, the job completes and the equipment is next available at s + 
+max(p,b). A reservation is not released early: b > p creates reserved idle time; p > b extends occupancy. 
+Execution is non-preemptive. If H arrives before service finishes, terminate at H and count the executed job 
+as unfinished and censored. The trial also ends when the equipment next becomes available at H. Log 
+executed-source references after completion or termination; later information cannot revise an earlier 
+decision.
+An unreleased or repeated job, unmet predecessor, insufficient reservation, excess cost, a planned action 
+crossing H, non-finite or otherwise invalid numerical values, or exceeding 200 actions is an infeasible 
+command. Do not implement it. Retain resources already consumed, record a violation and terminate the 
+trial. Keep violating trials in the reported results.
+4  Common evaluation and comparisons
+Let w be a job’s priority weight and W the total weight of all jobs in the case. Every job remains in the 
+denominators, including unfinished jobs. For tardiness, assign C = H to unfinished jobs. Report all metrics 
+for each trial.
+Metric
+Definition
+weighted_completion_rate
+Weight completed by H, divided by W.
+weighted_on_time_rate
+Weight completed by individual due times, divided by 
+W.
+weighted_tardiness_s
+Sum of w × max(C − due time, 0) over all jobs; not 
+divided by W.
+cost and observations
+Accumulated cost and number of paid reviews.
+
+--- PAGE 3 ---
+Metric
+Definition
+elapsed_s
+Trial end time, which may be less than H after stopping.
+observed_overrun_s
+Sum over executed jobs of max(min(p,H−s)−b,0).
+reserved_idle_s
+Sum over completed jobs of max(b−p,0).
+censored_units
+Executed jobs unfinished because service crosses H.
+invalid_actions and valid_protocol
+Infeasible-command count and compliance with the 
+action protocol.
+Observed overrun is counted only up to H. If cost or capacity risk is the primary objective, mean weighted 
+on-time completion must be at least 0.50 for each case over the same 30 trials under the nominal mapping. 
+Report any failure to meet the requirement without claiming mathematical infeasibility. Other objectives 
+may use different preferences, while reporting all common metrics and tradeoffs.
+Validation uses the 30 public seeds in common_conditions.json, 2026111700 through 2026111729: 30 trials 
+per case, 90 across cases, and 450 across five mappings. Compared policies share the same source 
+assignments for paired comparisons. Report means, variation and uncertainty of differences by case. Final 
+tests use test records and 30 additional seeds frozen by the organizers. Seeds are not policy inputs; freeze the 
+policy before obtaining test results.
+5  Submission requirements
+Submit the research report, reproducible programs, frozen models and decision rules, environment 
+information, and validation results for all five mappings. Each trial-result row identifies case, split, trial 
+number, seed, α, β and all common metrics. Use the metric names above or clearly defined equivalents. 
+Summaries must trace to trial-level records.
+Process logs identify decision time, action, job, available information, reservation or waiting duration, return 
+time, and changes in time, zone and cost. For execution, include service start, completion, overrun, idle and 
+censoring. Add executed-source references for retrospective checking. Logs must permit checking 
+information access and task/resource feasibility. Programming language and implementation are unrestricted.
+The task, price, zone and duration-mapping values define a record-driven scenario. Zone coordinates are not 
+measured product positions. Overrun is capacity risk, not grasp failure or collision. These results do not 
+establish physical robot performance.

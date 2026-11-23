@@ -1,0 +1,130 @@
+{
+ "_meta": {
+  "note": "P1-a segmentation and P1-b V8 detector retrained from scratch around three representative points; identical seeds, split, hyper-parameters and decoding grid",
+  "p1a_seeds": 3,
+  "p1a_epochs": 40,
+  "p1b_seeds": "20261120,20261122,20261123",
+  "anchors": [
+   "wrist",
+   "palm",
+   "tips"
+  ]
+ },
+ "p1a": {
+  "wrist": {
+   "ok": true,
+   "seconds": 154.4,
+   "height": 0.15,
+   "distance": 30,
+   "val_ari": 0.47563521433490713,
+   "test_ari": 0.4764599863568379,
+   "test_std": 0.2541698894391778,
+   "boundary_f1": 0.12144486338034725,
+   "boundary_mae": 3.333333333333333,
+   "by_dataset": {
+    "EgoDemo": 0.7321,
+    "EgoPro": 0.2968,
+    "EgoStandard": 0.4258
+   },
+   "json": "data\\up13_p1a_anchor_wrist.json"
+  },
+  "palm": {
+   "ok": true,
+   "seconds": 157.1,
+   "height": 0.15,
+   "distance": 55,
+   "val_ari": 0.5216456110059308,
+   "test_ari": 0.5262456302744514,
+   "test_std": 0.26370941172426837,
+   "boundary_f1": 0.16428925155174276,
+   "boundary_mae": 1.8,
+   "by_dataset": {
+    "EgoDemo": 0.7757,
+    "EgoPro": 0.2934,
+    "EgoStandard": 0.5152
+   },
+   "json": "data\\up13_p1a_anchor_palm.json"
+  },
+  "tips": {
+   "ok": true,
+   "seconds": 147.2,
+   "height": 0.45,
+   "distance": 40,
+   "val_ari": 0.5639917058870229,
+   "test_ari": 0.558755918173587,
+   "test_std": 0.26233181728349403,
+   "boundary_f1": 0.2050375939849624,
+   "boundary_mae": 2.9333333333333336,
+   "by_dataset": {
+    "EgoDemo": 0.7814,
+    "EgoPro": 0.333,
+    "EgoStandard": 0.5608
+   },
+   "json": "data\\up13_p1a_anchor_tips.json"
+  }
+ },
+ "p1b": {
+  "wrist": {
+   "ok": true,
+   "seconds": 123.4,
+   "test_ap": 0.14933155308832577,
+   "test_auc": 0.8270846476857222,
+   "worst_env": 0.7776610910007129,
+   "params": 318790,
+   "gate_passes": true,
+   "json": "data\\up13_p1b_anchor_wrist.json"
+  },
+  "palm": {
+   "ok": true,
+   "seconds": 122.8,
+   "test_ap": 0.12356088018750082,
+   "test_auc": 0.8075184833076036,
+   "worst_env": 0.7393107170017471,
+   "params": 318790,
+   "gate_passes": false,
+   "json": "data\\up13_p1b_anchor_palm.json"
+  },
+  "tips": {
+   "ok": true,
+   "seconds": 123.5,
+   "test_ap": 0.08194817233710425,
+   "test_auc": 0.8098921916081082,
+   "worst_env": 0.7519334637540408,
+   "params": 318790,
+   "gate_passes": false,
+   "json": "data\\up13_p1b_anchor_tips.json"
+  }
+ },
+ "summary": [
+  {
+   "anchor": "wrist",
+   "p1a_ari": 0.4764599863568379,
+   "p1a_bf1": 0.12144486338034725,
+   "p1a_delta_pt": 0.0,
+   "p1b_ap": 0.14933155308832577,
+   "p1b_auc": 0.8270846476857222,
+   "p1b_worst": 0.7776610910007129,
+   "p1b_ap_delta": 0.0
+  },
+  {
+   "anchor": "palm",
+   "p1a_ari": 0.5262456302744514,
+   "p1a_bf1": 0.16428925155174276,
+   "p1a_delta_pt": 4.978564391761347,
+   "p1b_ap": 0.12356088018750082,
+   "p1b_auc": 0.8075184833076036,
+   "p1b_worst": 0.7393107170017471,
+   "p1b_ap_delta": -0.02577067290082495
+  },
+  {
+   "anchor": "tips",
+   "p1a_ari": 0.558755918173587,
+   "p1a_bf1": 0.2050375939849624,
+   "p1a_delta_pt": 8.229593181674916,
+   "p1b_ap": 0.08194817233710425,
+   "p1b_auc": 0.8098921916081082,
+   "p1b_worst": 0.7519334637540408,
+   "p1b_ap_delta": -0.06738338075122152
+  }
+ ]
+}

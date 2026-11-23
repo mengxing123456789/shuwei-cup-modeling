@@ -1,0 +1,24 @@
+MODULE backend.services.artifact_graph
+DOC: Public artifact provenance and impact analysis.
+
+The graph is intentionally derived from public workspace files instead of
+trusting model-authored metadata.  It never descends into protected directories
+and never executes user code.  The result powers beginner-friendly actions such
+as "modify this chart" while keeping the actual edit bounded to explicit source
+files.
+CALLABLES:
+_conventional_outputs(workspace: 'Path', source: 'Path') -> 'list[str]' :: Recognise the conservative ``gen_<artifact>`` sibling convention.
+_existing_rel(workspace: 'Path', raw: 'str', base: 'Path | None' = None) -> 'str' :: 
+_is_public_rel(path: 'Path') -> 'bool' :: 
+_iter_files(workspace: 'Path', suffixes: 'set[str] | None' = None) -> 'Iterable[tuple[Path, str]]' :: 
+_kind(path: 'Path', rel: 'str') -> 'str' :: 
+_literal_outputs(workspace: 'Path', source: 'Path') -> 'list[str]' :: 
+_normal_rel(raw: 'object') -> 'str' :: 
+_public_path(workspace: 'Path', rel: 'str') -> 'Path' :: 
+_python_output_literals(text: 'str') -> 'list[str]' :: Return literals used by actual write/export calls. |  | The old scanner treated *every* path literal as an output.  A plotting | script that read ``problem_1_results.json`` and wrote ``fig_q1.pdf`` thus | granted write access to both.  AST inspection keeps the provenance closure | narrow: read/open(..., "r") inputs are never promoted to writable outputs.
+_read_small_text(path: 'Path') -> 'str' :: 
+_references(workspace: 'Path', target_rel: 'str') -> 'list[str]' :: 
+_source_candidates(workspace: 'Path', target: 'Path', rel: 'str') -> 'list[str]' :: 
+_string_paths(node: 'ast.AST') -> 'list[str]' :: Collect string file literals below one call without evaluating code.
+derived_outputs_for_sources(workspace: 'Path', raw_sources: 'Iterable[object]') -> 'list[str]' :: Return exact existing outputs proven to come from public source files.
+describe(workspace: 'Path', raw_rel: 'object') -> 'dict' :: 

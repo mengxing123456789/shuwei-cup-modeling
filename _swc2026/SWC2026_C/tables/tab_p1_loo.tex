@@ -1,0 +1,24 @@
+\begin{table}[H]
+\centering
+\caption{Leave-one-keypoint-out for the representative point. Each row removes one keypoint from the palm set or from the fingertip set and recomputes the same within-record rigidity on all 66,070 frames. A near-zero change means the choice does not rest on any single joint.}
+\label{tab:p1-loo}
+\scriptsize
+\begin{tabular}{lrrrr}
+\toprule
+Candidate & Points & Rigidity (cm) & Jitter ratio & $\Delta$ rigidity (cm) \\
+\midrule
+wrist kp0 & 1 & 0.00005 & 0.1389 & +3.73e-05 \\
+palm full & 5 & 0.00001 & 0.1382 & +0.00e+00 \\
+tips full & 5 & 1.53823 & 0.1428 & +1.54e+00 \\
+palm minus kp5 & 4 & 0.00002 & 0.1386 & +3.22e-06 \\
+palm minus kp9 & 4 & 0.00002 & 0.1383 & +3.65e-06 \\
+palm minus kp13 & 4 & 0.00002 & 0.1379 & +2.14e-06 \\
+palm minus kp17 & 4 & 0.00001 & 0.1376 & -1.19e-07 \\
+tips minus kp4 & 4 & 1.81347 & 0.1441 & +1.81e+00 \\
+tips minus kp8 & 4 & 1.53952 & 0.1441 & +1.54e+00 \\
+tips minus kp12 & 4 & 1.43624 & 0.1434 & +1.44e+00 \\
+tips minus kp16 & 4 & 1.45425 & 0.1424 & +1.45e+00 \\
+tips minus kp20 & 4 & 1.58826 & 0.1422 & +1.59e+00 \\
+\bottomrule
+\end{tabular}
+\end{table}

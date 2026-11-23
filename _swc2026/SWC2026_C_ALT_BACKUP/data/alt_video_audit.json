@@ -1,0 +1,4970 @@
+[
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E001/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 50126915,
+  "sha256": "3d99bd5f39e0ce7e3997b4516098d5f2896f59749187537a66836721d3eb867d",
+  "expected_frames": 1619,
+  "open": true,
+  "frames": 1619,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 53.96666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 809,
+    "ok": true
+   },
+   {
+    "position": 1618,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E001/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 49816484,
+  "sha256": "3e3c98ee29f46ae26487f4f4e76036fae7559e103ab71ad3e1bb630c8872fa1a",
+  "expected_frames": 1619,
+  "open": true,
+  "frames": 1619,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 53.96666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 809,
+    "ok": true
+   },
+   {
+    "position": 1618,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E001/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 63185390,
+  "sha256": "0809102100808a04580b5fc0940cc1538aa0934d27947c41d9858c6968afe08c",
+  "expected_frames": 1619,
+  "open": true,
+  "frames": 1619,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 53.96666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 809,
+    "ok": true
+   },
+   {
+    "position": 1618,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E001/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 64593561,
+  "sha256": "bb3a5e87eca6906889e2e63069e2d2871f044f9c4e20c76bb11ff1f6f275735f",
+  "expected_frames": 1619,
+  "open": true,
+  "frames": 1619,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 53.96666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 809,
+    "ok": true
+   },
+   {
+    "position": 1618,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E002/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 55268298,
+  "sha256": "1f433c7e26e71c282fe0fc805f3f6baf80ff7c70d435aae4d2c6a3cb5978cd4a",
+  "expected_frames": 1686,
+  "open": true,
+  "frames": 1686,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 56.2,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 843,
+    "ok": true
+   },
+   {
+    "position": 1685,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E002/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 55207200,
+  "sha256": "e3d262d2cce079a278932fb652d13f1c16cc124a2414beb6df0c769c6c35c1f4",
+  "expected_frames": 1686,
+  "open": true,
+  "frames": 1686,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 56.2,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 843,
+    "ok": true
+   },
+   {
+    "position": 1685,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E002/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 66904462,
+  "sha256": "f679ffddee30204a294ad3649d55d1c38bb25c43447d0b3f5327fc0f1700e795",
+  "expected_frames": 1686,
+  "open": true,
+  "frames": 1686,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 56.2,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 843,
+    "ok": true
+   },
+   {
+    "position": 1685,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E002/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 66074251,
+  "sha256": "a08ea19bd240f9a1f927a2b87b24b68ee9cd592643bbb0b64b23a22ef8d35e77",
+  "expected_frames": 1686,
+  "open": true,
+  "frames": 1686,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 56.2,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 843,
+    "ok": true
+   },
+   {
+    "position": 1685,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E003/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 9987909,
+  "sha256": "34dc80de5f988add4036deee874ebb7e426fd4c52a630f947730e4d3ac115934",
+  "expected_frames": 289,
+  "open": true,
+  "frames": 289,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 9.633333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 144,
+    "ok": true
+   },
+   {
+    "position": 288,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E003/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 10171368,
+  "sha256": "e622da73ac9217d22f9318f1ae00fea3c563f396877bf05cd29ac3f63aa14886",
+  "expected_frames": 289,
+  "open": true,
+  "frames": 289,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 9.633333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 144,
+    "ok": true
+   },
+   {
+    "position": 288,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E003/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 12019938,
+  "sha256": "fe604b7af9bd982dbde38a97083413bdb84a77f17e9e4389333eee223b0b98a9",
+  "expected_frames": 289,
+  "open": true,
+  "frames": 289,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 9.633333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 144,
+    "ok": true
+   },
+   {
+    "position": 288,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E003/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 12646045,
+  "sha256": "edf20cb5466dacdd75ca22bd457b412a50be1acabd31e68e0a7a61d8e2101d65",
+  "expected_frames": 289,
+  "open": true,
+  "frames": 289,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 9.633333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 144,
+    "ok": true
+   },
+   {
+    "position": 288,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E004/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 10784416,
+  "sha256": "db8f08d5cac04b22a1cde31ea40cca1b718f856db8d7bdf3bb779c1f5be62f76",
+  "expected_frames": 316,
+  "open": true,
+  "frames": 316,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.533684456148539,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 158,
+    "ok": true
+   },
+   {
+    "position": 315,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E004/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 10850553,
+  "sha256": "b5581ac6bf32a946cbc100db4aec66eb1f361bf9bed79d847935251a1fd12d1a",
+  "expected_frames": 316,
+  "open": true,
+  "frames": 316,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.533684456148539,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 158,
+    "ok": true
+   },
+   {
+    "position": 315,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E004/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 12939900,
+  "sha256": "1f462e44c83f85a886b10bce083b67a9741809f83c0ce06ba5361daa5c5c4728",
+  "expected_frames": 316,
+  "open": true,
+  "frames": 316,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 10.533684456148539,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 158,
+    "ok": true
+   },
+   {
+    "position": 315,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E004/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 13691198,
+  "sha256": "595b7861b647c4a98ecbc5690549101adf065f65026d3fd4b41416c9e221dfc5",
+  "expected_frames": 316,
+  "open": true,
+  "frames": 316,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 10.533684456148539,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 158,
+    "ok": true
+   },
+   {
+    "position": 315,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E005/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 12783484,
+  "sha256": "9bf8e5e36a1ae01f34aecf8a7390403a96164c35dd7299078ad6345a24c41d33",
+  "expected_frames": 331,
+  "open": true,
+  "frames": 331,
+  "fps": 30.003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.0322301103223,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 165,
+    "ok": true
+   },
+   {
+    "position": 330,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E005/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 12893893,
+  "sha256": "ef4a18a0cd0663dcddcf08a6e4ce8adee609f1bf21db1b97b1569a88457d02f6",
+  "expected_frames": 331,
+  "open": true,
+  "frames": 331,
+  "fps": 30.003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.0322301103223,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 165,
+    "ok": true
+   },
+   {
+    "position": 330,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E005/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 14285560,
+  "sha256": "b220c852ef4f1517e22af48a7ae86fc870a4b4628c4c2a23c65388e4599da1dc",
+  "expected_frames": 331,
+  "open": true,
+  "frames": 331,
+  "fps": 30.003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 11.0322301103223,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 165,
+    "ok": true
+   },
+   {
+    "position": 330,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E005/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 14096650,
+  "sha256": "4dfff0ae579304b8101ecb19474ae3b3d0941c5d5d5444d13f24cfb3986517df",
+  "expected_frames": 331,
+  "open": true,
+  "frames": 331,
+  "fps": 30.003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 11.0322301103223,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 165,
+    "ok": true
+   },
+   {
+    "position": 330,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E006/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 25408399,
+  "sha256": "88e5ea695e2c60d3a13beb5733d8d39cf3b2be42f251c3d795a2584bf0e6db90",
+  "expected_frames": 348,
+  "open": true,
+  "frames": 348,
+  "fps": 25.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 13.92,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 174,
+    "ok": true
+   },
+   {
+    "position": 347,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E006/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 26927220,
+  "sha256": "d8a6cd67c14cde7d157f37671d1f703af0b360742e6ed56da497fbe13c717781",
+  "expected_frames": 348,
+  "open": true,
+  "frames": 348,
+  "fps": 25.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 13.92,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 174,
+    "ok": true
+   },
+   {
+    "position": 347,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E007/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 68458807,
+  "sha256": "4e324c501a6b79b0055d4fad1ff0b7deae1de795eda4f74c397fc7163e37a78c",
+  "expected_frames": 1766,
+  "open": true,
+  "frames": 1766,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 58.86666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 883,
+    "ok": true
+   },
+   {
+    "position": 1765,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E007/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 69320183,
+  "sha256": "498cca651b9ac2ed4a125699063c63e8f09eb3aa17f381af771f31bd03ffc95a",
+  "expected_frames": 1766,
+  "open": true,
+  "frames": 1766,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 58.86666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 883,
+    "ok": true
+   },
+   {
+    "position": 1765,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E008/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 22557917,
+  "sha256": "a7ef6b7654b8347a5dc2d0721a18d7fd487244dcdd6eff6ba4a7f7ee43b12ede",
+  "expected_frames": 564,
+  "open": true,
+  "frames": 564,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 18.8,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 282,
+    "ok": true
+   },
+   {
+    "position": 563,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E008/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 24132220,
+  "sha256": "3086c61a2856ea9d2cfec2cd97a967c543d4587a7a0eed1ed3f2d9ff1ed9951a",
+  "expected_frames": 564,
+  "open": true,
+  "frames": 564,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 18.8,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 282,
+    "ok": true
+   },
+   {
+    "position": 563,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E009/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 21753690,
+  "sha256": "ca7b59e7d309eaf55d24d18745c9f42e91ad5cc179110819898763f585cb88b5",
+  "expected_frames": 325,
+  "open": true,
+  "frames": 325,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.833333333333334,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 162,
+    "ok": true
+   },
+   {
+    "position": 324,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E009/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 25314463,
+  "sha256": "d6e6b33427ab273be195e8581ff5ec9c7efb7a31169ac7df65d7fa19341bfa24",
+  "expected_frames": 325,
+  "open": true,
+  "frames": 325,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.833333333333334,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 162,
+    "ok": true
+   },
+   {
+    "position": 324,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E010/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 24417283,
+  "sha256": "1945f143053b0106900949d81ea9222a9ffb16ee1cd1da079ddfefc58f66e8ca",
+  "expected_frames": 383,
+  "open": true,
+  "frames": 383,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 12.766666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 191,
+    "ok": true
+   },
+   {
+    "position": 382,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E010/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 23693744,
+  "sha256": "b6e8002b6bee376be6cdd1110dff5125890c354b27ad2840f366fe3b0c4d2ddc",
+  "expected_frames": 383,
+  "open": true,
+  "frames": 383,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 12.766666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 191,
+    "ok": true
+   },
+   {
+    "position": 382,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E011/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 19653104,
+  "sha256": "d1d115416482f512f0a5c3b7e30daa8bfedfc272e177155ab3fd4e0f89721f02",
+  "expected_frames": 339,
+  "open": true,
+  "frames": 339,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.3,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 169,
+    "ok": true
+   },
+   {
+    "position": 338,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E011/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 22631796,
+  "sha256": "3b3bcc56613bcf2c069000ba5fcfa544f1683b823d3893f31fe197075b31e9e2",
+  "expected_frames": 339,
+  "open": true,
+  "frames": 339,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.3,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 169,
+    "ok": true
+   },
+   {
+    "position": 338,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E012/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 11785644,
+  "sha256": "3e38f6d4092f820b2ecb4ba314090b25722bfda5bd91c9785fb0ecda2d545f31",
+  "expected_frames": 220,
+  "open": true,
+  "frames": 220,
+  "fps": 25.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.8,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 110,
+    "ok": true
+   },
+   {
+    "position": 219,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E012/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 13109408,
+  "sha256": "561f8dbc63f7cb23852062711177e11b2807ca6955af2b30e943b358ee0b43bc",
+  "expected_frames": 220,
+  "open": true,
+  "frames": 220,
+  "fps": 25.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.8,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 110,
+    "ok": true
+   },
+   {
+    "position": 219,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E013/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 26174112,
+  "sha256": "c2a8884ec8bbe41d44b5911034029e9059c14a9ffbdcc93b8879ea4ae2191d64",
+  "expected_frames": 685,
+  "open": true,
+  "frames": 685,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 22.833333333333332,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 342,
+    "ok": true
+   },
+   {
+    "position": 684,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E013/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 27046474,
+  "sha256": "c86ce240b1dc99a5177b05d350cdbc33602d404214681d8e6c86c1224d250054",
+  "expected_frames": 685,
+  "open": true,
+  "frames": 685,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 22.833333333333332,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 342,
+    "ok": true
+   },
+   {
+    "position": 684,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E014/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 13926221,
+  "sha256": "9f7277a2347b5ea7fecc2ab5bec678fdb638033a31e8553a6b19987a08b8bc86",
+  "expected_frames": 235,
+  "open": true,
+  "frames": 235,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.833333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 117,
+    "ok": true
+   },
+   {
+    "position": 234,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E014/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 14353012,
+  "sha256": "87a46d08c0ae8d238fa361500dabf5c3d0cf25b3df7e1e5c3af3ad28892ebf45",
+  "expected_frames": 235,
+  "open": true,
+  "frames": 235,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.833333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 117,
+    "ok": true
+   },
+   {
+    "position": 234,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E015/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 36342232,
+  "sha256": "32b44434ba08208a788f91f65f73dff409ffe14151d20684cce5ba43c4242750",
+  "expected_frames": 606,
+  "open": true,
+  "frames": 606,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 20.2,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 303,
+    "ok": true
+   },
+   {
+    "position": 605,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E015/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 38773853,
+  "sha256": "20dac758439157a45c8d52b49d2ec25c7728a6b5ecf694752d07c1b1058d4c41",
+  "expected_frames": 606,
+  "open": true,
+  "frames": 606,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 20.2,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 303,
+    "ok": true
+   },
+   {
+    "position": 605,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E016/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 12044528,
+  "sha256": "cfc415f40edd21183a10a99aee4291ac3b1d2453bfa8e7cb394b9560a0b780e6",
+  "expected_frames": 214,
+  "open": true,
+  "frames": 214,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.133333333333334,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 107,
+    "ok": true
+   },
+   {
+    "position": 213,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E016/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 13436568,
+  "sha256": "eec841debff810bb139adda9017de39d5b5f2a7579de1f9c65947ab859ebbed5",
+  "expected_frames": 214,
+  "open": true,
+  "frames": 214,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.133333333333334,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 107,
+    "ok": true
+   },
+   {
+    "position": 213,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E017/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 15057860,
+  "sha256": "3895bb23823dbcd25a4c4a6838dbe14d401cda577b768a6a61264f807ee96253",
+  "expected_frames": 239,
+  "open": true,
+  "frames": 239,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.966666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 119,
+    "ok": true
+   },
+   {
+    "position": 238,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E017/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 15866203,
+  "sha256": "675bb53d99bb3fa501b3fbe23e92785549ab62ae6bc103b9c8876c02668ec62f",
+  "expected_frames": 239,
+  "open": true,
+  "frames": 239,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.966666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 119,
+    "ok": true
+   },
+   {
+    "position": 238,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E018/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 12389742,
+  "sha256": "180fd33f84e4e98fbfec692e8914edea0e91f6788ee27dee812c712c0c830b3d",
+  "expected_frames": 257,
+  "open": true,
+  "frames": 257,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.566666666666666,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 128,
+    "ok": true
+   },
+   {
+    "position": 256,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E018/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 13664682,
+  "sha256": "e446254912c28f3a04a656b7294d1fb32c2d3cd09046b93c09555fda04c6a9b4",
+  "expected_frames": 257,
+  "open": true,
+  "frames": 257,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.566666666666666,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 128,
+    "ok": true
+   },
+   {
+    "position": 256,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E019/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 20151124,
+  "sha256": "a2b5605fc8dd1639a60778f1cc8eb4ad64c379292bb0ef2230f49ccec603592f",
+  "expected_frames": 391,
+  "open": true,
+  "frames": 391,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 13.033333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 195,
+    "ok": true
+   },
+   {
+    "position": 390,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E019/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 21801472,
+  "sha256": "dfb840c81f6863449a3c3ade7e52ff36d947b1d7d1d8b1800ea8574aafa7ca55",
+  "expected_frames": 391,
+  "open": true,
+  "frames": 391,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 13.033333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 195,
+    "ok": true
+   },
+   {
+    "position": 390,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E020/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 9773391,
+  "sha256": "055b3abe87ca97c51d5c977b2315097946c039b890dfa302c03f4fa75e19735f",
+  "expected_frames": 195,
+  "open": true,
+  "frames": 195,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 6.5,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 97,
+    "ok": true
+   },
+   {
+    "position": 194,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E020/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 10886776,
+  "sha256": "5d6db76c3ea42cbdc761142cbc935821dc32f8c8eb83b4d86bffbe687d76c4af",
+  "expected_frames": 195,
+  "open": true,
+  "frames": 195,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 6.5,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 97,
+    "ok": true
+   },
+   {
+    "position": 194,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E021/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 12216683,
+  "sha256": "02cf3215e7deedd0fbc5780e7f1cf66821fd4773c897551f1e6488f724cbb637",
+  "expected_frames": 249,
+  "open": true,
+  "frames": 249,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.3,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 124,
+    "ok": true
+   },
+   {
+    "position": 248,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E021/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 12713279,
+  "sha256": "ed79069102310227a6fe4d3219480a25f690aefc460543ccf2d1c2dbfad419da",
+  "expected_frames": 249,
+  "open": true,
+  "frames": 249,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.3,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 124,
+    "ok": true
+   },
+   {
+    "position": 248,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E022/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 10754871,
+  "sha256": "1bfcf90b7c0d3bd05fe7f32d83e5513ae0cf9609415584a7578c528bc06bc8da",
+  "expected_frames": 239,
+  "open": true,
+  "frames": 239,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.966666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 119,
+    "ok": true
+   },
+   {
+    "position": 238,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E022/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 11805577,
+  "sha256": "be2c3f51fd7e6adeb4c0ac9bbb42be0e95f78a171f04857960511044b2c2f562",
+  "expected_frames": 239,
+  "open": true,
+  "frames": 239,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.966666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 119,
+    "ok": true
+   },
+   {
+    "position": 238,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E023/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 32661654,
+  "sha256": "449c08663389010748071f7fd051ed4e3e86302ae0e7064da746a72bb8028cad",
+  "expected_frames": 679,
+  "open": true,
+  "frames": 679,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 22.633333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 339,
+    "ok": true
+   },
+   {
+    "position": 678,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E023/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 34007515,
+  "sha256": "0287086a84062815357497e4b2c2f7233ddcbfafab762ba68179d16847c55003",
+  "expected_frames": 679,
+  "open": true,
+  "frames": 679,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 22.633333333333333,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 339,
+    "ok": true
+   },
+   {
+    "position": 678,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E024/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 14701490,
+  "sha256": "d9fb18f7ccdf1b2f14bc8fd8d6c2fad775d6e9c85f234559a2749af3a8b11b91",
+  "expected_frames": 305,
+  "open": true,
+  "frames": 305,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.166666666666666,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 152,
+    "ok": true
+   },
+   {
+    "position": 304,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E024/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 17308202,
+  "sha256": "6e577c7c14ec4dd272a7ba1f6bd59c95bffafb682cafb538551e84b51e303818",
+  "expected_frames": 305,
+  "open": true,
+  "frames": 305,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.166666666666666,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 152,
+    "ok": true
+   },
+   {
+    "position": 304,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E025/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 6886430,
+  "sha256": "1eb17622ad2c3ce40d9cc5e9dec572660e0c3eefd05ca59b15c8c8d77a8e0845",
+  "expected_frames": 179,
+  "open": true,
+  "frames": 179,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 5.966666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 89,
+    "ok": true
+   },
+   {
+    "position": 178,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E025/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 6930457,
+  "sha256": "b7cf5523aa852b474cff0083d432e8e251f6090593faba450370921db21fd271",
+  "expected_frames": 179,
+  "open": true,
+  "frames": 179,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 5.966666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 89,
+    "ok": true
+   },
+   {
+    "position": 178,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E026/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 28311430,
+  "sha256": "f0618b3b6b2b1370a51dfd6d5b0b1e520b0215c6db0ee1be4c43e674b66649d6",
+  "expected_frames": 791,
+  "open": true,
+  "frames": 791,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 26.366666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 395,
+    "ok": true
+   },
+   {
+    "position": 790,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E026/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 26660152,
+  "sha256": "55829d84abbcf577d25076dd3994d507511b6c29895561b34533592587c5a82c",
+  "expected_frames": 791,
+  "open": true,
+  "frames": 791,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 26.366666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 395,
+    "ok": true
+   },
+   {
+    "position": 790,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E027/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 52935589,
+  "sha256": "c49a8e470d76e3f5dfec3035712ee9f1fb0ee4ec0ce90e255fa731a6ff52ba2b",
+  "expected_frames": 1661,
+  "open": true,
+  "frames": 1661,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 55.36666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 830,
+    "ok": true
+   },
+   {
+    "position": 1660,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E027/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 53471288,
+  "sha256": "65b68c063c116a73e49f84da78853eae2dee92f9f8c67cd40abb042a698c253f",
+  "expected_frames": 1661,
+  "open": true,
+  "frames": 1661,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 55.36666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 830,
+    "ok": true
+   },
+   {
+    "position": 1660,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E028/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 13158311,
+  "sha256": "c65d983683393682d29a2763e3e175581b605ebeff17f3c6c4dfb85de6449f6a",
+  "expected_frames": 338,
+  "open": true,
+  "frames": 338,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.266666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 169,
+    "ok": true
+   },
+   {
+    "position": 337,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E028/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 13527108,
+  "sha256": "e0a15e7eb0c7c680751361874255dfff502a9d5436d2cd76c84683456060b824",
+  "expected_frames": 338,
+  "open": true,
+  "frames": 338,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.266666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 169,
+    "ok": true
+   },
+   {
+    "position": 337,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E028/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 14637211,
+  "sha256": "d97f4cccb6452abcf651f60c5b958692d4677f5f3801b20588a93cd8bd223340",
+  "expected_frames": 338,
+  "open": true,
+  "frames": 338,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 11.266666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 169,
+    "ok": true
+   },
+   {
+    "position": 337,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E028/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 15553973,
+  "sha256": "a06da8838468154f8a728649330dae85ba0f603e4cf24609f83a876f6aa92e1a",
+  "expected_frames": 338,
+  "open": true,
+  "frames": 338,
+  "fps": 30.0,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 11.266666666666667,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 169,
+    "ok": true
+   },
+   {
+    "position": 337,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E029/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 14188054,
+  "sha256": "ee6547b6dfcc60f0bbe55261c5cb3f53be3c0c0c8053346e69d6cabde13a8ff0",
+  "expected_frames": 286,
+  "open": true,
+  "frames": 286,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 9.533651121704057,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 143,
+    "ok": true
+   },
+   {
+    "position": 285,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E029/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 14500034,
+  "sha256": "b4a13e9b6a9f97cb7a776fc7baeedeb5b65dde1b1987a1798a426d89e47f11e5",
+  "expected_frames": 286,
+  "open": true,
+  "frames": 286,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 9.533651121704057,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 143,
+    "ok": true
+   },
+   {
+    "position": 285,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E029/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 15548999,
+  "sha256": "2dade3cd2849efa5b9ee7c9ebd819e90b1899fa8adb7c4c755500776806edfca",
+  "expected_frames": 286,
+  "open": true,
+  "frames": 286,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 9.533651121704057,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 143,
+    "ok": true
+   },
+   {
+    "position": 285,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E029/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 16386608,
+  "sha256": "8f8f8ab7979e84291401471ea75488368e4570db4946ab9dfa78a2a82c702dab",
+  "expected_frames": 286,
+  "open": true,
+  "frames": 286,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 9.533651121704057,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 143,
+    "ok": true
+   },
+   {
+    "position": 285,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E030/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 13902731,
+  "sha256": "093e20d41d62a8880199f3ecafef32bbd8462a2232df2098062b99e81e792ad9",
+  "expected_frames": 298,
+  "open": true,
+  "frames": 298,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 9.93366445548185,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 149,
+    "ok": true
+   },
+   {
+    "position": 297,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E030/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 14297933,
+  "sha256": "21dad95e8b6e5a80b2fe53ab7e370c6118c8923acefc920f2213a0f7275e02fc",
+  "expected_frames": 298,
+  "open": true,
+  "frames": 298,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 9.93366445548185,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 149,
+    "ok": true
+   },
+   {
+    "position": 297,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E030/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 15817064,
+  "sha256": "25fc40a01c0237498da1c51de3cd0afee0bc27162a8e41785962cba8598ebb3d",
+  "expected_frames": 298,
+  "open": true,
+  "frames": 298,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 9.93366445548185,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 149,
+    "ok": true
+   },
+   {
+    "position": 297,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E030/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 16820289,
+  "sha256": "c4288bd41337391b41b2692ba9090bb80185174cc48b953f02e057b0475cde1e",
+  "expected_frames": 298,
+  "open": true,
+  "frames": 298,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 9.93366445548185,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 149,
+    "ok": true
+   },
+   {
+    "position": 297,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E031/videos/observation.images.head_left/chunk-000/file-000.mp4",
+  "bytes": 14654141,
+  "sha256": "42df5fb13e615c51934e2b3ba88c87c852bdd10abda392d321663ff2ab083139",
+  "expected_frames": 381,
+  "open": true,
+  "frames": 381,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 12.700423347444916,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 190,
+    "ok": true
+   },
+   {
+    "position": 380,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E031/videos/observation.images.head_right/chunk-000/file-000.mp4",
+  "bytes": 14851986,
+  "sha256": "8f94d1d9379c64f6b0ca327cac6d530182290c39767aa020adc91d43ee9f3f7d",
+  "expected_frames": 381,
+  "open": true,
+  "frames": 381,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 12.700423347444916,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 190,
+    "ok": true
+   },
+   {
+    "position": 380,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E031/videos/observation.images.left_wrist/chunk-000/file-000.mp4",
+  "bytes": 16331499,
+  "sha256": "1a33d053c66835e2a23224eb58ea60f2763f0addbea559f9dc1a0c16ccb05173",
+  "expected_frames": 381,
+  "open": true,
+  "frames": 381,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 12.700423347444916,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 190,
+    "ok": true
+   },
+   {
+    "position": 380,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoDemo",
+  "member": "EgoDemo/E031/videos/observation.images.right_wrist/chunk-000/file-000.mp4",
+  "bytes": 16989976,
+  "sha256": "75789f16dddd2a9bcd892db06c7268124e03b353c1df096b22b8dd59e4e49553",
+  "expected_frames": 381,
+  "open": true,
+  "frames": 381,
+  "fps": 29.999,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 12.700423347444916,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 190,
+    "ok": true
+   },
+   {
+    "position": 380,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/291aff24-8b62-4a5e-b470-85114bdf86dc/videos/head_left.mp4",
+  "bytes": 54078114,
+  "sha256": "c0f339dc5923fb6c4ff0ef2bbcf05e7f3e18c39ec83bcc9086090becaef497f2",
+  "expected_frames": 2458,
+  "open": true,
+  "frames": 2458,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 81.932514,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1229,
+    "ok": true
+   },
+   {
+    "position": 2457,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/291aff24-8b62-4a5e-b470-85114bdf86dc/videos/head_right.mp4",
+  "bytes": 54109380,
+  "sha256": "54bc7d476e7e8b163540836581c209699f0860374758f4057adb6b990344f79b",
+  "expected_frames": 2458,
+  "open": true,
+  "frames": 2458,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 81.932514,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1229,
+    "ok": true
+   },
+   {
+    "position": 2457,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/291aff24-8b62-4a5e-b470-85114bdf86dc/videos/left_wrist.mp4",
+  "bytes": 63116956,
+  "sha256": "7bb0da02545227d91b0ece4495b81912ea6ce7f22f45039ef3e392f77a42dba7",
+  "expected_frames": 2458,
+  "open": true,
+  "frames": 2458,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 81.932514,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1229,
+    "ok": true
+   },
+   {
+    "position": 2457,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/291aff24-8b62-4a5e-b470-85114bdf86dc/videos/right_wrist.mp4",
+  "bytes": 67944326,
+  "sha256": "2df0f90ecfe0c1020dbbaad454a076ebfe1471d8e5b43a1ee85729ab82f054ba",
+  "expected_frames": 2458,
+  "open": true,
+  "frames": 2458,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 81.932514,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1229,
+    "ok": true
+   },
+   {
+    "position": 2457,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/2bb0222e-a5e8-4f0b-b49a-81aa87411149/videos/head_left.mp4",
+  "bytes": 4159504,
+  "sha256": "0e4e9404fb115e61e951a2b166b9dcfc6c2931b2e2ff4a274ea87b1bf2c8b38e",
+  "expected_frames": 181,
+  "open": true,
+  "frames": 181,
+  "fps": 30.012910526041754,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 6.030738,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 90,
+    "ok": true
+   },
+   {
+    "position": 180,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/2bb0222e-a5e8-4f0b-b49a-81aa87411149/videos/head_right.mp4",
+  "bytes": 4176808,
+  "sha256": "ab688de2863e9e83b12dae72eb561ee0300e9e57a282a32efe1e0553104834d7",
+  "expected_frames": 181,
+  "open": true,
+  "frames": 181,
+  "fps": 30.012910526041754,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 6.030738,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 90,
+    "ok": true
+   },
+   {
+    "position": 180,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/2bb0222e-a5e8-4f0b-b49a-81aa87411149/videos/left_wrist.mp4",
+  "bytes": 5220560,
+  "sha256": "7276482f05430a0145fa6182595e01f97ffd96748299d8b672cfe4d92e15d3ca",
+  "expected_frames": 181,
+  "open": true,
+  "frames": 181,
+  "fps": 30.012910526041754,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 6.030738,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 90,
+    "ok": true
+   },
+   {
+    "position": 180,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/2bb0222e-a5e8-4f0b-b49a-81aa87411149/videos/right_wrist.mp4",
+  "bytes": 5957667,
+  "sha256": "9d8c29347ae496fa4449e2a18fbbef4f12afb958be96f15213db2cd3eaf6b76e",
+  "expected_frames": 181,
+  "open": true,
+  "frames": 181,
+  "fps": 30.012910526041754,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 6.030738,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 90,
+    "ok": true
+   },
+   {
+    "position": 180,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/347600c2-2623-4180-aff6-538097e87ab7/videos/head_left.mp4",
+  "bytes": 38052031,
+  "sha256": "8e9cb923e8ec2e6e2a6167c43251b8342f1afefee94151c47de2c9e455c15ec7",
+  "expected_frames": 1704,
+  "open": true,
+  "frames": 1704,
+  "fps": 30.00120004800192,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 56.797728,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 852,
+    "ok": true
+   },
+   {
+    "position": 1703,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/347600c2-2623-4180-aff6-538097e87ab7/videos/head_right.mp4",
+  "bytes": 38082272,
+  "sha256": "ae1803346e70bdde4f56c373113089f02420d13d4d1aab24e501d8fa260a5913",
+  "expected_frames": 1704,
+  "open": true,
+  "frames": 1704,
+  "fps": 30.00120004800192,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 56.797728,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 852,
+    "ok": true
+   },
+   {
+    "position": 1703,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/347600c2-2623-4180-aff6-538097e87ab7/videos/left_wrist.mp4",
+  "bytes": 50708185,
+  "sha256": "3e156d083cff42a97d7d839e21ea8f08d0837d9f71e12880117cebdd94569ff9",
+  "expected_frames": 1704,
+  "open": true,
+  "frames": 1704,
+  "fps": 30.00120004800192,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 56.797728,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 852,
+    "ok": true
+   },
+   {
+    "position": 1703,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/347600c2-2623-4180-aff6-538097e87ab7/videos/right_wrist.mp4",
+  "bytes": 47390225,
+  "sha256": "af62417dde7cdf0244eeb1313ccb647ff279d42115b7102b0a94b1877afd049a",
+  "expected_frames": 1704,
+  "open": true,
+  "frames": 1704,
+  "fps": 30.00120004800192,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 56.797728,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 852,
+    "ok": true
+   },
+   {
+    "position": 1703,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/3a3e6211-f2ef-44e0-aee9-bc98b8754234/videos/head_left.mp4",
+  "bytes": 30181482,
+  "sha256": "aae191f2aab9f8b510be104a0f3fd7f803871eefd144368a8ff0f96b49921676",
+  "expected_frames": 1503,
+  "open": true,
+  "frames": 1503,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 50.099498999999994,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 751,
+    "ok": true
+   },
+   {
+    "position": 1502,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/3a3e6211-f2ef-44e0-aee9-bc98b8754234/videos/head_right.mp4",
+  "bytes": 29990723,
+  "sha256": "f49b800a8049caa83baa7e192d52323a105369dcbb82d24807acc8af92fffbed",
+  "expected_frames": 1503,
+  "open": true,
+  "frames": 1503,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 50.099498999999994,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 751,
+    "ok": true
+   },
+   {
+    "position": 1502,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/3a3e6211-f2ef-44e0-aee9-bc98b8754234/videos/left_wrist.mp4",
+  "bytes": 31325646,
+  "sha256": "af243be78fe2a994d2a14b51af47ff1b32d53276db97d100291820faf93d7118",
+  "expected_frames": 1503,
+  "open": true,
+  "frames": 1503,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 50.099498999999994,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 751,
+    "ok": true
+   },
+   {
+    "position": 1502,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/3a3e6211-f2ef-44e0-aee9-bc98b8754234/videos/right_wrist.mp4",
+  "bytes": 39959707,
+  "sha256": "880887debc31c1fc9fd7c0e2bdce4ecc11aa8640e25eeb21d5a935757cd98eef",
+  "expected_frames": 1503,
+  "open": true,
+  "frames": 1503,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 50.099498999999994,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 751,
+    "ok": true
+   },
+   {
+    "position": 1502,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/478f3e70-4066-408b-93cf-831625320004/videos/head_left.mp4",
+  "bytes": 25655778,
+  "sha256": "169de2f2e8389dc431fac8f600e6f4396de85b506d43e7934ccca30eba952c88",
+  "expected_frames": 1150,
+  "open": true,
+  "frames": 1150,
+  "fps": 30.00660145231951,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 38.3249,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 575,
+    "ok": true
+   },
+   {
+    "position": 1149,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/478f3e70-4066-408b-93cf-831625320004/videos/head_right.mp4",
+  "bytes": 26228967,
+  "sha256": "cdedc7d951bb883ac7b482ff4ceb95e954f02f54dbff45a961928e8e5462a9d7",
+  "expected_frames": 1150,
+  "open": true,
+  "frames": 1150,
+  "fps": 30.00660145231951,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 38.3249,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 575,
+    "ok": true
+   },
+   {
+    "position": 1149,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/478f3e70-4066-408b-93cf-831625320004/videos/left_wrist.mp4",
+  "bytes": 33125878,
+  "sha256": "b74125e8db46a1f536452e6a309fb38ba7413019c9bf45547166ccb48157fa44",
+  "expected_frames": 1150,
+  "open": true,
+  "frames": 1150,
+  "fps": 30.00660145231951,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 38.3249,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 575,
+    "ok": true
+   },
+   {
+    "position": 1149,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/478f3e70-4066-408b-93cf-831625320004/videos/right_wrist.mp4",
+  "bytes": 32958243,
+  "sha256": "c6189b9da84a5d13e80e5c85263ae67ffa3ec3228acaeb909bc5d68f4ab1dc68",
+  "expected_frames": 1150,
+  "open": true,
+  "frames": 1150,
+  "fps": 30.00660145231951,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 38.3249,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 575,
+    "ok": true
+   },
+   {
+    "position": 1149,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/7d112e74-5837-42af-93e9-8321fbd1237e/videos/head_left.mp4",
+  "bytes": 24582949,
+  "sha256": "77f0b2d0c8331d2fcea6ee4d7318f5f4bc1998c1e956512775d979a3f6b32f5b",
+  "expected_frames": 1004,
+  "open": true,
+  "frames": 1004,
+  "fps": 30.008402352658745,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 33.457296,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 502,
+    "ok": true
+   },
+   {
+    "position": 1003,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/7d112e74-5837-42af-93e9-8321fbd1237e/videos/head_right.mp4",
+  "bytes": 24338427,
+  "sha256": "d91099938d5e0478b4c7fd1620670d5fcd2ec367cf7a6a1bdc57ed77de9a980d",
+  "expected_frames": 1004,
+  "open": true,
+  "frames": 1004,
+  "fps": 30.008402352658745,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 33.457296,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 502,
+    "ok": true
+   },
+   {
+    "position": 1003,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/7d112e74-5837-42af-93e9-8321fbd1237e/videos/left_wrist.mp4",
+  "bytes": 28799461,
+  "sha256": "1c5c1e6977a331502aec817d9c8f76dc1c5af80cd8c3bbdf2f5ef050598cf809",
+  "expected_frames": 1004,
+  "open": true,
+  "frames": 1004,
+  "fps": 30.008402352658745,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 33.457296,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 502,
+    "ok": true
+   },
+   {
+    "position": 1003,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/7d112e74-5837-42af-93e9-8321fbd1237e/videos/right_wrist.mp4",
+  "bytes": 29303174,
+  "sha256": "42f9fbddcd2ac57a0c99bdb81b445534af916d4d192963bf5d7b9ca4ef2aad1b",
+  "expected_frames": 1004,
+  "open": true,
+  "frames": 1004,
+  "fps": 30.008402352658745,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 33.457296,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 502,
+    "ok": true
+   },
+   {
+    "position": 1003,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/83cee2e9-2153-4ac1-a042-f5500cecbb3f/videos/head_left.mp4",
+  "bytes": 49587525,
+  "sha256": "82f0bab866e6307ae2006a18f93791d9f08e84d6496bd20bd1b142045412624a",
+  "expected_frames": 1650,
+  "open": true,
+  "frames": 1650,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 54.999449999999996,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 825,
+    "ok": true
+   },
+   {
+    "position": 1649,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/83cee2e9-2153-4ac1-a042-f5500cecbb3f/videos/head_right.mp4",
+  "bytes": 50435855,
+  "sha256": "7bf27be9a115c2761e23d4e205d3ab24f04484933a4c684c0ff1bfe7b423437b",
+  "expected_frames": 1650,
+  "open": true,
+  "frames": 1650,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 54.999449999999996,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 825,
+    "ok": true
+   },
+   {
+    "position": 1649,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/83cee2e9-2153-4ac1-a042-f5500cecbb3f/videos/left_wrist.mp4",
+  "bytes": 57060372,
+  "sha256": "07354cd2ced86cd9e080c1dde57f972248a9772fc9d128fd003fde3893b0475b",
+  "expected_frames": 1650,
+  "open": true,
+  "frames": 1650,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 54.999449999999996,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 825,
+    "ok": true
+   },
+   {
+    "position": 1649,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/83cee2e9-2153-4ac1-a042-f5500cecbb3f/videos/right_wrist.mp4",
+  "bytes": 61673697,
+  "sha256": "383ae4c35bda99791c6f20ce938b14e2ea2d3c56643e4ba0b7cbb41e6d28fd5d",
+  "expected_frames": 1650,
+  "open": true,
+  "frames": 1650,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 54.999449999999996,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 825,
+    "ok": true
+   },
+   {
+    "position": 1649,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/a3a85c3e-79cd-4d76-a91c-a7405f4647c9/videos/head_left.mp4",
+  "bytes": 28089718,
+  "sha256": "d51131d6947b3b5c78dfad625e9442f1347a98b927fa30da08a68015860c33ec",
+  "expected_frames": 1374,
+  "open": true,
+  "frames": 1374,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 45.799541999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 687,
+    "ok": true
+   },
+   {
+    "position": 1373,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/a3a85c3e-79cd-4d76-a91c-a7405f4647c9/videos/head_right.mp4",
+  "bytes": 28112796,
+  "sha256": "2aea2160b578236471151347ec42c81aac7ccde9cd1007e12b11e2e031bf5c9c",
+  "expected_frames": 1374,
+  "open": true,
+  "frames": 1374,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 45.799541999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 687,
+    "ok": true
+   },
+   {
+    "position": 1373,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/a3a85c3e-79cd-4d76-a91c-a7405f4647c9/videos/left_wrist.mp4",
+  "bytes": 30952057,
+  "sha256": "e037ec969c791f6056a8b1f5956fae295b15443a05f33ea70a16a352e581aa44",
+  "expected_frames": 1374,
+  "open": true,
+  "frames": 1374,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 45.799541999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 687,
+    "ok": true
+   },
+   {
+    "position": 1373,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/a3a85c3e-79cd-4d76-a91c-a7405f4647c9/videos/right_wrist.mp4",
+  "bytes": 36327841,
+  "sha256": "ad762cc7c5b2c170ac770917d166c04f74a413d1fd038b6a731af5deaa61983a",
+  "expected_frames": 1374,
+  "open": true,
+  "frames": 1374,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 45.799541999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 687,
+    "ok": true
+   },
+   {
+    "position": 1373,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/c6b52545-fbce-479d-8393-17bb8c5d0311/videos/head_left.mp4",
+  "bytes": 23272822,
+  "sha256": "42ffc68e12fa51769084d96461e2acb68e3bd98dc88bb001aec006da1012c7a3",
+  "expected_frames": 995,
+  "open": true,
+  "frames": 995,
+  "fps": 29.654231658857718,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 33.55339,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 497,
+    "ok": true
+   },
+   {
+    "position": 994,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/c6b52545-fbce-479d-8393-17bb8c5d0311/videos/head_right.mp4",
+  "bytes": 23114382,
+  "sha256": "627938a1f641c516f7653e3bc055f6d268ee6653e5bd0a19d2dfd425bc98a652",
+  "expected_frames": 995,
+  "open": true,
+  "frames": 995,
+  "fps": 29.654231658857718,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 33.55339,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 497,
+    "ok": true
+   },
+   {
+    "position": 994,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/c6b52545-fbce-479d-8393-17bb8c5d0311/videos/left_wrist.mp4",
+  "bytes": 28170740,
+  "sha256": "001a43b2b4ed93b1c357fe9ef0ea183b5b79744ea9f60f17d3b7dec47432cae7",
+  "expected_frames": 995,
+  "open": true,
+  "frames": 995,
+  "fps": 29.654231658857718,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 33.55339,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 497,
+    "ok": true
+   },
+   {
+    "position": 994,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/c6b52545-fbce-479d-8393-17bb8c5d0311/videos/right_wrist.mp4",
+  "bytes": 27817766,
+  "sha256": "62879f1d3d4d766fbf78c853d1ff56a897953c16120669c39977fedd7a16348b",
+  "expected_frames": 995,
+  "open": true,
+  "frames": 995,
+  "fps": 29.654231658857718,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 33.55339,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 497,
+    "ok": true
+   },
+   {
+    "position": 994,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/cc9d0407-3b74-4f82-92dc-a25c06eaf044/videos/head_left.mp4",
+  "bytes": 30371406,
+  "sha256": "6301fc195b64b0bd4d588e762388328a2390acc5006ce8f38216f2358d47969a",
+  "expected_frames": 1022,
+  "open": true,
+  "frames": 1022,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 34.066326,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 511,
+    "ok": true
+   },
+   {
+    "position": 1021,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/cc9d0407-3b74-4f82-92dc-a25c06eaf044/videos/head_right.mp4",
+  "bytes": 30757506,
+  "sha256": "798806bcd08a4007e77ac3ff22dfbc94b7251766c47a70a9c44ec577f98a8650",
+  "expected_frames": 1022,
+  "open": true,
+  "frames": 1022,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 34.066326,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 511,
+    "ok": true
+   },
+   {
+    "position": 1021,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/cc9d0407-3b74-4f82-92dc-a25c06eaf044/videos/left_wrist.mp4",
+  "bytes": 30815562,
+  "sha256": "66a8fc60a31a8cdbe3bc11764c4fd6271fd15e9d401f5852fb6d686c3619b58d",
+  "expected_frames": 1022,
+  "open": true,
+  "frames": 1022,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 34.066326,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 511,
+    "ok": true
+   },
+   {
+    "position": 1021,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/cc9d0407-3b74-4f82-92dc-a25c06eaf044/videos/right_wrist.mp4",
+  "bytes": 30840510,
+  "sha256": "1cf67a6d1a4ef4d76fc42b019dcd80ba05e7794c0213028be6dee7e572fd9741",
+  "expected_frames": 1022,
+  "open": true,
+  "frames": 1022,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 34.066326,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 511,
+    "ok": true
+   },
+   {
+    "position": 1021,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/d58db8d6-2869-4d26-9217-9e0a0bfe4923/videos/head_left.mp4",
+  "bytes": 43017942,
+  "sha256": "811a6f5d80e182bb3792e13b07db4a43c66b1e841055b8ccafc0cd5f38f2493a",
+  "expected_frames": 1487,
+  "open": true,
+  "frames": 1487,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 49.567658,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 743,
+    "ok": true
+   },
+   {
+    "position": 1486,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/d58db8d6-2869-4d26-9217-9e0a0bfe4923/videos/head_right.mp4",
+  "bytes": 44150752,
+  "sha256": "2e66e5e654095148cb55bc18f10b81701ed8afa2c0e11383ab109c2569224745",
+  "expected_frames": 1487,
+  "open": true,
+  "frames": 1487,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 49.567658,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 743,
+    "ok": true
+   },
+   {
+    "position": 1486,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/d58db8d6-2869-4d26-9217-9e0a0bfe4923/videos/left_wrist.mp4",
+  "bytes": 48111338,
+  "sha256": "eb329676940749bb136616dc898043723fb2815ce9bbc6f7f83152d702fa9737",
+  "expected_frames": 1487,
+  "open": true,
+  "frames": 1487,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 49.567658,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 743,
+    "ok": true
+   },
+   {
+    "position": 1486,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/d58db8d6-2869-4d26-9217-9e0a0bfe4923/videos/right_wrist.mp4",
+  "bytes": 57495695,
+  "sha256": "095c9313bcb8404d7a83bc20f06f2fd287c68724cb771d267a5047d0a8e59e63",
+  "expected_frames": 1487,
+  "open": true,
+  "frames": 1487,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 49.567658,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 743,
+    "ok": true
+   },
+   {
+    "position": 1486,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/e1b42dfc-841c-400e-9beb-10bd19f17a22/videos/head_left.mp4",
+  "bytes": 31525287,
+  "sha256": "fa06c04f4729f3c26910c213671799208ee5955a641af22367f036531539f9e0",
+  "expected_frames": 1482,
+  "open": true,
+  "frames": 1482,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 49.399505999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 741,
+    "ok": true
+   },
+   {
+    "position": 1481,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/e1b42dfc-841c-400e-9beb-10bd19f17a22/videos/head_right.mp4",
+  "bytes": 32209790,
+  "sha256": "786f21bb34a451272bae9dd3d3764cb16d7640224a4725bb9797210473edcecd",
+  "expected_frames": 1482,
+  "open": true,
+  "frames": 1482,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 49.399505999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 741,
+    "ok": true
+   },
+   {
+    "position": 1481,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/e1b42dfc-841c-400e-9beb-10bd19f17a22/videos/left_wrist.mp4",
+  "bytes": 42968400,
+  "sha256": "77c225e5bfb6991c117fb12cdbc544c5ce0c4a7ff191de094dd5e63f31943dd9",
+  "expected_frames": 1482,
+  "open": true,
+  "frames": 1482,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 49.399505999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 741,
+    "ok": true
+   },
+   {
+    "position": 1481,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/e1b42dfc-841c-400e-9beb-10bd19f17a22/videos/right_wrist.mp4",
+  "bytes": 45152646,
+  "sha256": "ae17fd47b1b96a99c1b55f88251ff2767fe6fa461669a20ccc0580f6b940fdd6",
+  "expected_frames": 1482,
+  "open": true,
+  "frames": 1482,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 49.399505999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 741,
+    "ok": true
+   },
+   {
+    "position": 1481,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/efac6caf-deab-461b-b839-96423abff9b9/videos/head_left.mp4",
+  "bytes": 29851372,
+  "sha256": "13a4d4888b90b9c5af8cae403e46cc0f5c5895bb92c0deb9805a235cdefcdf15",
+  "expected_frames": 1442,
+  "open": true,
+  "frames": 1442,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 48.067628,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 721,
+    "ok": true
+   },
+   {
+    "position": 1441,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/efac6caf-deab-461b-b839-96423abff9b9/videos/head_right.mp4",
+  "bytes": 30548109,
+  "sha256": "5b3b48aab33b04aaa2e6d0a50fe334e5086272d044e43ab4ed3932ed1a6d10a4",
+  "expected_frames": 1442,
+  "open": true,
+  "frames": 1442,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 48.067628,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 721,
+    "ok": true
+   },
+   {
+    "position": 1441,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/efac6caf-deab-461b-b839-96423abff9b9/videos/left_wrist.mp4",
+  "bytes": 41035540,
+  "sha256": "d42e7842fe1a00a463ef710604bc9e0ca76c9de6dc240b62a01d17f161190671",
+  "expected_frames": 1442,
+  "open": true,
+  "frames": 1442,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 48.067628,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 721,
+    "ok": true
+   },
+   {
+    "position": 1441,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/efac6caf-deab-461b-b839-96423abff9b9/videos/right_wrist.mp4",
+  "bytes": 43064456,
+  "sha256": "c8f269393ae0d78c7b4d30d638a7bd8a8fd61d4caf78ac7dc21b818ddc7cf158",
+  "expected_frames": 1442,
+  "open": true,
+  "frames": 1442,
+  "fps": 29.99940001199976,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 48.067628,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 721,
+    "ok": true
+   },
+   {
+    "position": 1441,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/fdbb7805-04f7-46c0-ae1e-1b454accd7a8/videos/head_left.mp4",
+  "bytes": 4161724,
+  "sha256": "57463a9905808530bdc659669ce9839c1495993cb1336175de2d0814ffd3ef7d",
+  "expected_frames": 190,
+  "open": true,
+  "frames": 190,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 6.33327,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 95,
+    "ok": true
+   },
+   {
+    "position": 189,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/fdbb7805-04f7-46c0-ae1e-1b454accd7a8/videos/head_right.mp4",
+  "bytes": 4175045,
+  "sha256": "359659157feaea07b50f2a9321592359a151ea15e4246ae6c15f2e6d9225670e",
+  "expected_frames": 190,
+  "open": true,
+  "frames": 190,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 6.33327,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 95,
+    "ok": true
+   },
+   {
+    "position": 189,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/fdbb7805-04f7-46c0-ae1e-1b454accd7a8/videos/left_wrist.mp4",
+  "bytes": 5366498,
+  "sha256": "42c710ed33a5d861be9b6f2ba2ee834266c033f5b13d2a35dee32dc102b2f6a0",
+  "expected_frames": 190,
+  "open": true,
+  "frames": 190,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 6.33327,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 95,
+    "ok": true
+   },
+   {
+    "position": 189,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoPro",
+  "member": "EgoPro/fdbb7805-04f7-46c0-ae1e-1b454accd7a8/videos/right_wrist.mp4",
+  "bytes": 6022295,
+  "sha256": "2e60bb771939357e6aa58032a9752f0771a1d8db7d03c09809b95be3ffd58e09",
+  "expected_frames": 190,
+  "open": true,
+  "frames": 190,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1536,
+  "duration_s": 6.33327,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 95,
+    "ok": true
+   },
+   {
+    "position": 189,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/01e98c50-1164-448f-a7ff-b722d7a1c19b/videos/head_left.mp4",
+  "bytes": 21304015,
+  "sha256": "63b23e341ecbbab7fe0b1fbea1a3dbdbcce9645302869f6bd6f7d464c757610e",
+  "expected_frames": 528,
+  "open": true,
+  "frames": 528,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 17.599823999999998,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 264,
+    "ok": true
+   },
+   {
+    "position": 527,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/01e98c50-1164-448f-a7ff-b722d7a1c19b/videos/head_right.mp4",
+  "bytes": 22278787,
+  "sha256": "8e3d5558381ee265ec9af8780b0af3d6dd9a250f1af9d745cec4d8d480527431",
+  "expected_frames": 528,
+  "open": true,
+  "frames": 528,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 17.599823999999998,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 264,
+    "ok": true
+   },
+   {
+    "position": 527,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/03a51a05-58f0-4937-8f05-e0b697c7c5fd/videos/head_left.mp4",
+  "bytes": 9566619,
+  "sha256": "4a59b34e148fe1605033478ddb5bfd7463b2a68d17c134e28aa9b6dcad051b4c",
+  "expected_frames": 242,
+  "open": true,
+  "frames": 242,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.066586,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 121,
+    "ok": true
+   },
+   {
+    "position": 241,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/03a51a05-58f0-4937-8f05-e0b697c7c5fd/videos/head_right.mp4",
+  "bytes": 10103050,
+  "sha256": "1c9571286a534e82ef6c3c11a97729e66b4a11f51770a8819a93bc3eaefe309f",
+  "expected_frames": 242,
+  "open": true,
+  "frames": 242,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.066586,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 121,
+    "ok": true
+   },
+   {
+    "position": 241,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/045c1e70-ab63-404a-94ef-735e68c8fd6a/videos/head_left.mp4",
+  "bytes": 8296589,
+  "sha256": "d1de02fa99fd148aff657c4a85a6cbb56b53dc81a9a0c7d49a69f81aa2141092",
+  "expected_frames": 334,
+  "open": true,
+  "frames": 334,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.133222,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 167,
+    "ok": true
+   },
+   {
+    "position": 333,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/045c1e70-ab63-404a-94ef-735e68c8fd6a/videos/head_right.mp4",
+  "bytes": 8707402,
+  "sha256": "9d14324f4c72a29c4cc876fe5eb166b9637306d70f47aa46babd8fea7a9bc383",
+  "expected_frames": 334,
+  "open": true,
+  "frames": 334,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.133222,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 167,
+    "ok": true
+   },
+   {
+    "position": 333,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/06a855ba-c079-46f7-b2a4-3a0ad1c72e90/videos/head_left.mp4",
+  "bytes": 11549781,
+  "sha256": "e4324f3e605f63178b4521b391b33af79efff95c821412d7f3840b8ea7f33c2a",
+  "expected_frames": 385,
+  "open": true,
+  "frames": 385,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 12.833205,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 192,
+    "ok": true
+   },
+   {
+    "position": 384,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/06a855ba-c079-46f7-b2a4-3a0ad1c72e90/videos/head_right.mp4",
+  "bytes": 12384071,
+  "sha256": "947e721be1d3beb42d66cef4a0fbb75d8f290b38e812cdbd16ff782a1e93a86f",
+  "expected_frames": 385,
+  "open": true,
+  "frames": 385,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 12.833205,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 192,
+    "ok": true
+   },
+   {
+    "position": 384,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/0793b27b-acf5-40f2-8b19-cda2f3d868d1/videos/head_left.mp4",
+  "bytes": 12174515,
+  "sha256": "cec8b88d48841333cdb80df50b7ceb8db6cf59be1778c693c277e4ea220c502c",
+  "expected_frames": 318,
+  "open": true,
+  "frames": 318,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.599893999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 159,
+    "ok": true
+   },
+   {
+    "position": 317,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/0793b27b-acf5-40f2-8b19-cda2f3d868d1/videos/head_right.mp4",
+  "bytes": 12909236,
+  "sha256": "fbfb274e7558b0be8def17a580b60ca20ea29fbfc988b76490b24fa7004c1860",
+  "expected_frames": 318,
+  "open": true,
+  "frames": 318,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.599893999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 159,
+    "ok": true
+   },
+   {
+    "position": 317,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/09101133-d656-4ce4-921b-3cc6f5a5bcb1/videos/head_left.mp4",
+  "bytes": 6990009,
+  "sha256": "00064426c6593525608b90a866e9d3c20b97dd0237a94c16c771cf6dd78b3efe",
+  "expected_frames": 220,
+  "open": true,
+  "frames": 220,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.333259999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 110,
+    "ok": true
+   },
+   {
+    "position": 219,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/09101133-d656-4ce4-921b-3cc6f5a5bcb1/videos/head_right.mp4",
+  "bytes": 7495502,
+  "sha256": "e09c4ce1ee31c307361f26bea7e373dc25441efce0475db4ff49c2c4b02b6653",
+  "expected_frames": 220,
+  "open": true,
+  "frames": 220,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.333259999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 110,
+    "ok": true
+   },
+   {
+    "position": 219,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/0fd872a6-6e35-436d-a317-12fc025d5b38/videos/head_left.mp4",
+  "bytes": 16099965,
+  "sha256": "0195d85664e8914026baaa9acaa4c3aa8c688de2df5cb3959dbb492148c856d6",
+  "expected_frames": 325,
+  "open": true,
+  "frames": 325,
+  "fps": 25.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 13.0,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 162,
+    "ok": true
+   },
+   {
+    "position": 324,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/0fd872a6-6e35-436d-a317-12fc025d5b38/videos/head_right.mp4",
+  "bytes": 16462407,
+  "sha256": "956c50079c3429fb09370c129bc9761ebd6d3042fc6556e500506e451e2ed161",
+  "expected_frames": 325,
+  "open": true,
+  "frames": 325,
+  "fps": 25.0,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 13.0,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 162,
+    "ok": true
+   },
+   {
+    "position": 324,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/11b6fab6-0b4a-45b7-9180-61d2dde0ec92/videos/head_left.mp4",
+  "bytes": 21146410,
+  "sha256": "0fcf83a2ccf4f24c4d566a080c148d15e66c381b888ac3b2f50fe6cd332b90b2",
+  "expected_frames": 533,
+  "open": true,
+  "frames": 533,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 17.766489,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 266,
+    "ok": true
+   },
+   {
+    "position": 532,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/11b6fab6-0b4a-45b7-9180-61d2dde0ec92/videos/head_right.mp4",
+  "bytes": 21796219,
+  "sha256": "9d68e2813d62125607bb6a871b08bf814ab38e1d3720304f408a46b7fa512464",
+  "expected_frames": 533,
+  "open": true,
+  "frames": 533,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 17.766489,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 266,
+    "ok": true
+   },
+   {
+    "position": 532,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/16827d3f-6d3c-40e5-aeea-451e008e1247/videos/head_left.mp4",
+  "bytes": 12850625,
+  "sha256": "b4c5e9676c76d34361c386176718d940af2ed1458a99bc595c68cc9e1957c274",
+  "expected_frames": 325,
+  "open": true,
+  "frames": 325,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.833224999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 162,
+    "ok": true
+   },
+   {
+    "position": 324,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/16827d3f-6d3c-40e5-aeea-451e008e1247/videos/head_right.mp4",
+  "bytes": 13913366,
+  "sha256": "a56cf865cda31cb01ccf27ca3531a75885245fbbf1a7159305e04a60c15598b5",
+  "expected_frames": 325,
+  "open": true,
+  "frames": 325,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.833224999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 162,
+    "ok": true
+   },
+   {
+    "position": 324,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1a4aed15-de7a-4444-a87c-87d6195d7388/videos/head_left.mp4",
+  "bytes": 14189753,
+  "sha256": "dc08432036c1b774a68062b96b3949f014e6e111ec092b62aa67cb8e3fccf3e1",
+  "expected_frames": 353,
+  "open": true,
+  "frames": 353,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.766549,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 176,
+    "ok": true
+   },
+   {
+    "position": 352,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1a4aed15-de7a-4444-a87c-87d6195d7388/videos/head_right.mp4",
+  "bytes": 14844281,
+  "sha256": "bab0796f582b000e5b6814d7d95fef21522fb47472f4cbf0ef9d37b77961ab9a",
+  "expected_frames": 353,
+  "open": true,
+  "frames": 353,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 11.766549,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 176,
+    "ok": true
+   },
+   {
+    "position": 352,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1d855c6c-e844-41b8-9339-d344dd71c7f1/videos/head_left.mp4",
+  "bytes": 5309033,
+  "sha256": "4d1594141c3f004de1df30655846f1668290aa7576f1906ef9822d8a81329ea0",
+  "expected_frames": 213,
+  "open": true,
+  "frames": 213,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.0999289999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 106,
+    "ok": true
+   },
+   {
+    "position": 212,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1d855c6c-e844-41b8-9339-d344dd71c7f1/videos/head_right.mp4",
+  "bytes": 5572486,
+  "sha256": "de5bf74b5dd78027927a28dc2701951994270ddfe85c8744ff4c1e005eab7e80",
+  "expected_frames": 213,
+  "open": true,
+  "frames": 213,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 7.0999289999999995,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 106,
+    "ok": true
+   },
+   {
+    "position": 212,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8/videos/head_left.mp4",
+  "bytes": 102307034,
+  "sha256": "548fe0436c099c52af7f64b89b17f61d1817e8d921b827a8efbb2bf7038b348d",
+  "expected_frames": 3180,
+  "open": true,
+  "frames": 3180,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 105.99893999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1590,
+    "ok": true
+   },
+   {
+    "position": 3179,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1edd4d05-8bdd-4d3c-ae0f-fbc25447ffe8/videos/head_right.mp4",
+  "bytes": 110283316,
+  "sha256": "64b889d9b349d6f3c80f8e324532776b8b45512a755d5d1d486975abaca0b9df",
+  "expected_frames": 3180,
+  "open": true,
+  "frames": 3180,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 105.99893999999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1590,
+    "ok": true
+   },
+   {
+    "position": 3179,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1f88d4ce-f51e-440e-a072-e6986fae9da4/videos/head_left.mp4",
+  "bytes": 6474151,
+  "sha256": "3a2dafa37ccaa32774c9251683183bcaa1e22064a58b49e88b48d49522c9baa1",
+  "expected_frames": 267,
+  "open": true,
+  "frames": 267,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.899911,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 133,
+    "ok": true
+   },
+   {
+    "position": 266,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/1f88d4ce-f51e-440e-a072-e6986fae9da4/videos/head_right.mp4",
+  "bytes": 6678277,
+  "sha256": "425b75f0236b3aeee5554b0350c7179b42f4ead345f49d79cc9f4f516ec284c4",
+  "expected_frames": 267,
+  "open": true,
+  "frames": 267,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.899911,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 133,
+    "ok": true
+   },
+   {
+    "position": 266,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/25702370-2103-4de3-ab02-59288316ec2b/videos/head_left.mp4",
+  "bytes": 11368326,
+  "sha256": "4444c70f6d7e394ce622bedad8307c3dfc0d842208667cc5d30cc51a6367268a",
+  "expected_frames": 311,
+  "open": true,
+  "frames": 311,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.366563,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 155,
+    "ok": true
+   },
+   {
+    "position": 310,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/25702370-2103-4de3-ab02-59288316ec2b/videos/head_right.mp4",
+  "bytes": 12011206,
+  "sha256": "657ffa8d1a1f479f0430723a43199d578876a7046208805b1ca084f72d8e392d",
+  "expected_frames": 311,
+  "open": true,
+  "frames": 311,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.366563,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 155,
+    "ok": true
+   },
+   {
+    "position": 310,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/2af40d05-034e-4d51-84dc-c4124c06d40d/videos/head_left.mp4",
+  "bytes": 7792727,
+  "sha256": "652483e0ad8f050c0ebbd492ee942d51f99ab8bacb93124f84dbba4baf763e16",
+  "expected_frames": 327,
+  "open": true,
+  "frames": 327,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.899891,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 163,
+    "ok": true
+   },
+   {
+    "position": 326,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/2af40d05-034e-4d51-84dc-c4124c06d40d/videos/head_right.mp4",
+  "bytes": 8162012,
+  "sha256": "08bda6de8f9f64e990c1bc644024f2e7fbf50210918d5979604ad17b16a3e9ed",
+  "expected_frames": 327,
+  "open": true,
+  "frames": 327,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 10.899891,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 163,
+    "ok": true
+   },
+   {
+    "position": 326,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/2f290382-a060-4352-99cd-883e46698bc5/videos/head_left.mp4",
+  "bytes": 124356092,
+  "sha256": "e78041e46d6dc0178202e1bd48970c730404f3e1a60e31cdfdce7c0603842ee5",
+  "expected_frames": 4012,
+  "open": true,
+  "frames": 4012,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 133.73199599999998,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 2006,
+    "ok": true
+   },
+   {
+    "position": 4011,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/2f290382-a060-4352-99cd-883e46698bc5/videos/head_right.mp4",
+  "bytes": 129992534,
+  "sha256": "370b226fd8dd1baeba72c140c2bff41807caab0cca359eb0bcaadd95185d26bf",
+  "expected_frames": 4012,
+  "open": true,
+  "frames": 4012,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 133.73199599999998,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 2006,
+    "ok": true
+   },
+   {
+    "position": 4011,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/36de3405-6829-4882-a8ab-0ff472768480/videos/head_left.mp4",
+  "bytes": 81810938,
+  "sha256": "94ca84bc2f8155290ecee8ea95e47be02c781a3836b514c875496d8ce90c0908",
+  "expected_frames": 3637,
+  "open": true,
+  "frames": 3637,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 121.23212099999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1818,
+    "ok": true
+   },
+   {
+    "position": 3636,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/36de3405-6829-4882-a8ab-0ff472768480/videos/head_right.mp4",
+  "bytes": 87134854,
+  "sha256": "af4220c89e7603723a97b2ffbb7fb9c9bebd1670804b014ab148bf04ffb6d320",
+  "expected_frames": 3637,
+  "open": true,
+  "frames": 3637,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 121.23212099999999,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1818,
+    "ok": true
+   },
+   {
+    "position": 3636,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/39d35af4-d31f-4f8a-a55d-9251b1c6a87e/videos/head_left.mp4",
+  "bytes": 7046487,
+  "sha256": "df88513299ffe1746cb6a9f9dfa5e83f22cc9fbc7747ccfb8f08158f9497c68c",
+  "expected_frames": 242,
+  "open": true,
+  "frames": 242,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.066586,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 121,
+    "ok": true
+   },
+   {
+    "position": 241,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/39d35af4-d31f-4f8a-a55d-9251b1c6a87e/videos/head_right.mp4",
+  "bytes": 7159861,
+  "sha256": "f0dedc62ce65e06ec9b2e1415498430ef7920c4a4c9a8ca73692f6fbdcbcfa93",
+  "expected_frames": 242,
+  "open": true,
+  "frames": 242,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 8.066586,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 121,
+    "ok": true
+   },
+   {
+    "position": 241,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/3c5b6818-d151-418a-ac00-c461bbebefc8/videos/head_left.mp4",
+  "bytes": 98885705,
+  "sha256": "a235acdb9669e4e08090304cb033337739f258a94f607cccf21b4f89c82b2c94",
+  "expected_frames": 3945,
+  "open": true,
+  "frames": 3945,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 131.498685,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1972,
+    "ok": true
+   },
+   {
+    "position": 3944,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/3c5b6818-d151-418a-ac00-c461bbebefc8/videos/head_right.mp4",
+  "bytes": 97232725,
+  "sha256": "61cc33ea8fc745dc9bd31f784942aab1accee8926214edbb0c39e8bc49a6c8c0",
+  "expected_frames": 3945,
+  "open": true,
+  "frames": 3945,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 131.498685,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 1972,
+    "ok": true
+   },
+   {
+    "position": 3944,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/443485f0-29be-4389-a40d-3f50d1ed38d2/videos/head_left.mp4",
+  "bytes": 125361956,
+  "sha256": "aeb81eb645f6e308447a76a641b25ae06f78d1c29703fb127af448f6e5cba5c1",
+  "expected_frames": 5220,
+  "open": true,
+  "frames": 5220,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 173.99826,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 2610,
+    "ok": true
+   },
+   {
+    "position": 5219,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/443485f0-29be-4389-a40d-3f50d1ed38d2/videos/head_right.mp4",
+  "bytes": 133298158,
+  "sha256": "9cd8b4af923c83f7a3f0bf90de971caa3769e7872d8ed2c0b26193f3f8c07b75",
+  "expected_frames": 5220,
+  "open": true,
+  "frames": 5220,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 173.99826,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 2610,
+    "ok": true
+   },
+   {
+    "position": 5219,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/4a4d93ed-066f-4460-acbb-5c9034e24862/videos/head_left.mp4",
+  "bytes": 135554541,
+  "sha256": "041a8a73f00ce4553bbd95fc4c99b492aa2842753d429b778836d301ad91e3d8",
+  "expected_frames": 4428,
+  "open": true,
+  "frames": 4428,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 147.598524,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 2214,
+    "ok": true
+   },
+   {
+    "position": 4427,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/4a4d93ed-066f-4460-acbb-5c9034e24862/videos/head_right.mp4",
+  "bytes": 137241412,
+  "sha256": "b8dbb0882fa031b3ae1042b764a0a8f496d50c59761c534ead99366403026146",
+  "expected_frames": 4428,
+  "open": true,
+  "frames": 4428,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 147.598524,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 2214,
+    "ok": true
+   },
+   {
+    "position": 4427,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/4b0fb52d-29ea-4014-a1e7-fc440037790f/videos/head_left.mp4",
+  "bytes": 19482952,
+  "sha256": "a4861b1f0d64ae09d7899cbaf74b7822455d6778e05b20c51c3d3686c1558c4e",
+  "expected_frames": 494,
+  "open": true,
+  "frames": 494,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 16.466502,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 247,
+    "ok": true
+   },
+   {
+    "position": 493,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/4b0fb52d-29ea-4014-a1e7-fc440037790f/videos/head_right.mp4",
+  "bytes": 20604267,
+  "sha256": "46e8ffd63d496b9dff9734113ae9af9836918cc513b5d9c63606ecee1dcb5923",
+  "expected_frames": 494,
+  "open": true,
+  "frames": 494,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 16.466502,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 247,
+    "ok": true
+   },
+   {
+    "position": 493,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/7962fc83-dd18-4ddd-bcc6-9e23c007c7a2/videos/head_left.mp4",
+  "bytes": 21530652,
+  "sha256": "e0faea322530ba5594580b62219547198395595fbf95daecf25911f9e84240d7",
+  "expected_frames": 536,
+  "open": true,
+  "frames": 536,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 17.866488,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 268,
+    "ok": true
+   },
+   {
+    "position": 535,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/7962fc83-dd18-4ddd-bcc6-9e23c007c7a2/videos/head_right.mp4",
+  "bytes": 22899264,
+  "sha256": "5362a794e556214761b512777147b8eab69fed1449cef973f95ce777319b66fb",
+  "expected_frames": 536,
+  "open": true,
+  "frames": 536,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 17.866488,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 268,
+    "ok": true
+   },
+   {
+    "position": 535,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/bca969eb-9f5d-4842-b1c8-d60faaf03243/videos/head_left.mp4",
+  "bytes": 42135613,
+  "sha256": "ccaa37bb233cd63c10d5a435b28f18e7347e63bbca4a5f8c2d6d0c7c6c8622c6",
+  "expected_frames": 1639,
+  "open": true,
+  "frames": 1639,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 54.632787,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 819,
+    "ok": true
+   },
+   {
+    "position": 1638,
+    "ok": true
+   }
+  ]
+ },
+ {
+  "dataset": "EgoStandard",
+  "member": "EgoStandard/bca969eb-9f5d-4842-b1c8-d60faaf03243/videos/head_right.mp4",
+  "bytes": 44375064,
+  "sha256": "e95cfa1ea9134c6867a40d46641e9e71266edb4bbc8cf3bd1bd54e22b56fe2fe",
+  "expected_frames": 1639,
+  "open": true,
+  "frames": 1639,
+  "fps": 30.00030000300003,
+  "width": 1920,
+  "height": 1456,
+  "duration_s": 54.632787,
+  "decoded_samples": [
+   {
+    "position": 0,
+    "ok": true
+   },
+   {
+    "position": 819,
+    "ok": true
+   },
+   {
+    "position": 1638,
+    "ok": true
+   }
+  ]
+ }
+]

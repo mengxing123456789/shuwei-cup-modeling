@@ -1,0 +1,74 @@
+{
+ "p1": "pass",
+ "p2": "issue",
+ "p3": "unreviewed",
+ "summarize": {
+  "kind": "datafig",
+  "total": 2,
+  "pass": 1,
+  "issue": 1,
+  "unreviewed": 0,
+  "missing": 0,
+  "figures": [
+   {
+    "figure": "fig_cost",
+    "file": "figures/fig_cost.pdf",
+    "status": "pass",
+    "reason": ""
+   },
+   {
+    "figure": "fig_sens",
+    "file": "figures/fig_sens.pdf",
+    "status": "issue",
+    "reason": ""
+   }
+  ]
+ },
+ "step_summary": {
+  "kinds": [
+   {
+    "kind": "datafig",
+    "total": 2,
+    "pass": 1,
+    "issue": 1,
+    "unreviewed": 0,
+    "missing": 0,
+    "figures": [
+     {
+      "figure": "fig_cost",
+      "file": "figures/fig_cost.pdf",
+      "status": "pass",
+      "reason": ""
+     },
+     {
+      "figure": "fig_sens",
+      "file": "figures/fig_sens.pdf",
+      "status": "issue",
+      "reason": ""
+     }
+    ]
+   },
+   {
+    "kind": "drawio",
+    "total": 1,
+    "pass": 0,
+    "issue": 0,
+    "unreviewed": 1,
+    "missing": 0,
+    "figures": [
+     {
+      "figure": "fig_arch",
+      "file": "figures/fig_arch.pdf",
+      "status": "unreviewed",
+      "reason": "视觉模型的回复里既没有 PASS 也没有列出 ISSUE，无法判定"
+     }
+    ]
+   }
+  ]
+ },
+ "ledger_keys": [
+  "2:32590fd262a07a249891fc6e9024e005dd657468941cbbb419c5791c95b5fba0",
+  "2:574d8b5fba4c4a0ef0a98e35fc7f72dd39ca8d261d8b0af1e256a46e7b2e83e3",
+  "2:affae84d89114353a71da4ac9af02fcf5774412593b5c985e607efd3fc3c248f"
+ ]
+}

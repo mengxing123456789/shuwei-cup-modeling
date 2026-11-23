@@ -1,0 +1,51 @@
+===== bad-frame stats =====
+EgoPro: rows=17642 is_bad=410 (2.32%) reasons={'right:occlusion': 280, 'left:occlusion': 104, 'left:near edge': 22, 'right:near edge': 34}
+   per-record bad counts: [('291aff24', 2458, 0), ('2bb0222e', 181, 0), ('347600c2', 1704, 45), ('3a3e6211', 1503, 0), ('478f3e70', 1150, 46), ('7d112e74', 1004, 0), ('83cee2e9', 1650, 119), ('a3a85c3e', 1374, 0), ('c6b52545', 995, 0), ('cc9d0407', 1022, 44), ('d58db8d6', 1487, 49), ('e1b42dfc', 1482, 71), ('efac6caf', 1442, 36), ('fdbb7805', 190, 0)]
+EgoStandard: rows=32014 is_bad=310 (0.97%) reasons={'right:occlusion': 227, 'left:occlusion': 167, 'left:near edge': 5, 'right:near edge': 2}
+   per-record bad counts: [('01e98c50', 528, 12), ('03a51a05', 242, 0), ('045c1e70', 334, 7), ('06a855ba', 385, 0), ('0793b27b', 318, 4), ('09101133', 220, 0), ('0fd872a6', 325, 0), ('11b6fab6', 533, 36), ('16827d3f', 325, 0), ('1a4aed15', 353, 0), ('1d855c6c', 213, 0), ('1edd4d05', 3180, 45), ('1f88d4ce', 267, 0), ('25702370', 311, 0), ('2af40d05', 327, 0), ('2f290382', 4012, 30), ('36de3405', 3637, 18), ('39d35af4', 242, 0), ('3c5b6818', 3945, 0), ('443485f0', 5220, 103), ('4a4d93ed', 4428, 40), ('4b0fb52d', 494, 15), ('7962fc83', 536, 0), ('bca969eb', 1639, 0)]
+EgoDemo: frames=16414 hand_bad_frame_details=108 (0.66%)
+EgoDemo quality/hand_bad_frame_count == len(json details) for all? True ; mismatches=[]
+EgoDemo quality/hand_bad_reason_counts values: {'{"occlusion":20}': 1, '{"occlusion":57}': 1, '{}': 26, '{"occlusion":2}': 1, '{"occlusion":65}': 1, '{"occlusion":15}': 1}
+
+===== NaN/inf scan (numeric columns) =====
+  EgoPro tables/pose_head.csv                           cells=87690 nan=0 inf=0 (4 recs)
+  EgoPro tables/pose_left_hand.csv                      cells=906130 nan=0 inf=0 (4 recs)
+  EgoPro tables/sensor_camera_head_left_extrinsic.csv   cells=75998 nan=0 inf=0 (4 recs)
+  EgoStandard tables/pose_head.csv                           cells=22335 nan=0 inf=0 (4 recs)
+  EgoStandard tables/pose_left_hand.csv                      cells=230795 nan=0 inf=0 (4 recs)
+  EgoStandard tables/sensor_camera_head_left_extrinsic.csv   cells=19357 nan=0 inf=0 (4 recs)
+
+===== record_split join check =====
+records found=69 ; split uuids=69 ; intersection=69
+split uuids not found in records: []
+dataset label mismatches: 0 []
+env label mismatches (EgoPro/Std): 0 []
+operator label mismatches (EgoPro/Std): 0 []
+
+===== source_segment_index vs annotation =====
+eligible=0 rows:
+       unit_id                               sample     dataset  start_s  end_s  duration_s         exclusion_reason
+U_7bb3ed386502                                 E024     EgoDemo      9.0   10.0         1.0 shorter_than_1p2_seconds
+U_49db4ad6dd6c 2bb0222e-a5e8-4f0b-b49a-81aa87411149      EgoPro      0.0    0.9         0.9 shorter_than_1p2_seconds
+U_ed3f74279fdf 2bb0222e-a5e8-4f0b-b49a-81aa87411149      EgoPro      0.9    1.9         1.0 shorter_than_1p2_seconds
+U_ec36ec078c69 fdbb7805-04f7-46c0-ae1e-1b454accd7a8      EgoPro      0.0    1.0         1.0 shorter_than_1p2_seconds
+U_928b9c0ff6d9 3a3e6211-f2ef-44e0-aee9-bc98b8754234      EgoPro     49.0   50.0         1.0 shorter_than_1p2_seconds
+U_0eabd1cf2e70 2af40d05-034e-4d51-84dc-c4124c06d40d EgoStandard     10.0   10.8         0.8 shorter_than_1p2_seconds
+duration range: [0.800, 125.000] ; rows with duration<1.2: 8 ; eligible=1 & duration<1.2: 2
+duration == end-start max abs err: 0.00e+00
+  E001: index rows=4 annotation subtasks=4 exact_match=True
+  E003: index rows=3 annotation subtasks=3 exact_match=True
+  EgoPro 291aff24: index rows=8 segments=8 starts_eq=True ends_eq=True
+segment-row distribution: {('EgoPro', 8): 2, ('EgoPro', 4): 3, ('EgoPro', 7): 2, ('EgoPro', 3): 4, ('EgoPro', 2): 1, ('EgoPro', 10): 1, ('EgoPro', 5): 1, ('EgoStandard', 5): 3, ('EgoStandard', 3): 5, ('EgoStandard', 4): 7, ('EgoStandard', 2): 1, ('EgoStandard', 6): 3, ('EgoStandard', 12): 1, ('EgoStandard', 23): 1, ('EgoStandard', 21): 1, ('EgoStandard', 17): 1, ('EgoStandard', 9): 1}
+
+===== mcap / documentation scan =====
+filenames containing mcap (case-insens): []
+extensions: {'.json': 125, '.parquet': 93, '.mp4': 184, '.csv': 593, '.pdf': 1}
+doc-like files (md/txt/rst/yaml/docx/pdf): ['Restocking_Tasks_and_Constraints\\Problem_3_Requirements.pdf']
+names containing manifest/documentation/readme/license: []
+names containing experiment/missing: []
+'mcap' string hits in sampled json/csv: []
+
+===== video fps vs declared fps =====
+EgoDemo declared vs actual fps (only where differ by >0.001):
+EgoPro table step 33332992-33334016 ns -> 30.00015 fps nominal

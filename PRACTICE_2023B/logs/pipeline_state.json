@@ -1,0 +1,119 @@
+{
+  "schema": 4,
+  "s1": {
+    "gates": {
+      "G1": true,
+      "G2": true,
+      "G20": true
+    },
+    "started_at": "2026-11-19 16:49:24",
+    "outcomes": {
+      "题目侦察手": "delivered",
+      "数据溯源手": "delivered",
+      "真题对标手": "delivered"
+    },
+    "gate_detail": {
+      "G1": "out/00-problem.md 40274 B, VERDICT: PASS",
+      "G2": "204 条记录，全带出处+sha256+fetched_at",
+      "G20": "out/15-benchmark.md 35572 B, VERDICT: PASS"
+    },
+    "status": "done",
+    "finished_at": "2026-11-19 17:05:25",
+    "review_after": {
+      "题目契合度审读": "failed"
+    }
+  },
+  "s2": {
+    "gates": {
+      "G3": true
+    },
+    "started_at": "2026-11-19 17:17:26",
+    "outcomes": {
+      "建模架构手": "delivered"
+    },
+    "gate_detail": {
+      "G3": "out/01-model.md 19474 B, VERDICT: PASS"
+    },
+    "status": "done",
+    "finished_at": "2026-11-19 17:33:27",
+    "review_after": {
+      "模型与检验审读": "failed"
+    }
+  },
+  "s3": {
+    "gates": {
+      "G4": true,
+      "G5": true,
+      "G10": "NA"
+    },
+    "started_at": "2026-11-19 18:13:42",
+    "outcomes": {
+      "求解与优化手": "delivered",
+      "代理模型训练手": "delivered",
+      "数值对账手": "failed"
+    },
+    "gate_detail": {
+      "G4": "out/02-solve.md 34305 B, VERDICT: PASS",
+      "G5": "failures=0 declared=525 checked=525 json_fail=0  report=E:\\数学建模\\PRACTICE_2023B\\out\\03-numbers.md bytes=35762",
+      "G10": "没有 figures/TABLE_*（表格写在正文里），表格模式无从核对"
+    },
+    "status": "done",
+    "finished_at": "2026-11-19 18:13:43",
+    "review_after": {
+      "数据与代码审读": "failed",
+      "数字对账员": "failed"
+    }
+  },
+  "s4": {
+    "gates": {
+      "G16": true
+    },
+    "started_at": "2026-11-19 20:05:21",
+    "outcomes": {
+      "口径审计手": "delivered"
+    },
+    "gate_detail": {
+      "G16": "机器 PASS（E:\\数学建模\\PRACTICE_2023B\\out\\15-caliber-machine.md  硬项 0 / 提示 0  VERDICT: PASS）；人 PASS"
+    },
+    "status": "done",
+    "finished_at": "2026-11-19 20:39:22",
+    "review_after": {
+      "口径冲突审读": "failed"
+    }
+  },
+  "s5": {
+    "gates": {
+      "G6": true,
+      "G11": true
+    },
+    "started_at": "2026-11-19 21:05:34",
+    "outcomes": {
+      "图表手": "delivered"
+    },
+    "gate_detail": {
+      "G6": "figures pdf=16 png=16 min_pt=4.76@fig02_q1_span_noise.pdf",
+      "G11": "16 张图全部视觉审查通过  [auto/glm-5.3-flash]"
+    },
+    "status": "done",
+    "finished_at": "2026-11-19 21:28:04"
+  },
+  "s6": {
+    "gates": {
+      "G7": true,
+      "G12": true,
+      "G17": false
+    },
+    "started_at": "2026-11-19 22:58:11",
+    "outcomes": {
+      "论文撰写手": "delivered",
+      "附录与自指手": "failed"
+    },
+    "gate_detail": {
+      "G7": "12 项 fail=0 unknown=0",
+      "G12": "致命=0 条目=2547 已比对=564 未溯源=33  正文绑定 145/145",
+      "G17": "首行自报 BYTES 20347，实际 20414"
+    },
+    "status": "gate-failed",
+    "finished_at": "2026-11-19 22:58:13"
+  }
+}

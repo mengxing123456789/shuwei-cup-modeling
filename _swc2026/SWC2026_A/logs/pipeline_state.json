@@ -1,0 +1,29 @@
+{
+  "schema": 4,
+  "s1": {
+    "gates": {
+      "G1": true,
+      "G2": true,
+      "G20": true
+    },
+    "started_at": "2026-11-20 10:53:52",
+    "gate_detail": {
+      "G1": "out/00-problem.md 15964 B, VERDICT: PASS",
+      "G2": "1 条记录，全带出处+sha256+fetched_at",
+      "G20": "out/15-benchmark.md 12919 B, VERDICT: PASS"
+    },
+    "status": "done",
+    "finished_at": "2026-11-20 10:53:52"
+  },
+  "s2": {
+    "gates": {
+      "G3": true
+    },
+    "started_at": "2026-11-20 11:11:27",
+    "gate_detail": {
+      "G3": "out/01-model.md 48891 B, VERDICT: PASS"
+    },
+    "status": "done",
+    "finished_at": "2026-11-20 11:11:27"
+  }
+}

@@ -1,0 +1,2460 @@
+=== B2023081819323.pdf | pages=47 ===
+
+----- PAGE 1 (imgs=0) -----
+Problem Chosen 
+B 
+2023 
+ShuWei Cup 
+Summary Sheet 
+Team Control Number 
+2023081819323 
+ 
+Abstract 
+With the increasing global demand for renewable energy, cotton stalk, as an important 
+biomass resource, has attracted much attention recently. Based on the data of pyrolysis products 
+and pyrolysis gas products under different catalytic pyrolysis reactions, the effective utilization 
+and sustainable development of cotton stalk are studied in this paper. 
+Data preprocessing. For the data given by the question, firstly, the scatterplot is drawn to 
+roughly analyze the given data set. Then using the data set to draw q-q graph and carry out Shapiro-
+Wilk test, the data set given by the question is judged to obey the normal distribution. 
+For the first problem, in order to analyze the relationship between the yield of pyrolysis 
+products of each pyrolysis combination and the mixture ratio of the corresponding pyrolysis 
+combination. Firstly, the line graphs of thermal valence products under different mixing ratios 
+are drawn and discussed. Then we introduced person correlation analysis to conduct correlation 
+analysis on the yields of different products under different mixing ratios. For example, the 
+correlation coefficient between tar yield and DFA/CS ratio was -0.8827, which showed a strong 
+negative correlation. Then polynomial regression fitting was carried out, and the scatter plot 
+trend was fitted by using second-order polynomial curve. Finally, the relationship between 
+pyrolysis products and mixing ratio was judged by functional relationship. In order to verify the 
+importance of desulfurization ash as catalyst, the reaction results were compared separately 
+under the condition of desulfurization ash as catalyst. 
+For the second problem, the line diagram of each of the three pyrolysis combinations was 
+drawn by matlab, and the function relationship was obtained by using the second-order polynomial 
+curve fitting method of the first problem. The image and function relationship were used for 
+discussion and analysis, and the change process under different mixing ratios was explained, and 
+the different results of each group of pyrolysis gases were explained. For example, we can find 
+that the yield of H2 increases significantly with the increase of DFA/CS ratio. This may indicate 
+that desulfurization ash promotes the release of H2 in the catalytic reaction, possibly because it 
+affects the pyrolysis reaction during the pyrolysis process and enhances the generation of H2. 
+For the third problem, for the situation with the same mixing ratio, the rank sum test method 
+was used for significance analysis. For example, the analysis results of the yield difference of CE 
+and LG pyrolysis products were observed, and the relationship between P-value and 0.05 was 
+compared to determine whether there was a significant difference. The P-values for both Tar , Char 
+and Syngas yields are very small (near zero) at about 0.0002, well below the standard significance 
+level of 0.05, indicating a statistically significant difference between tar yields at DFA/CE and 
+DFA/LG ratios. 
+For the fourth problem, we demonstrated the reaction mechanism through the pyrolysis 
+reaction process, and queried relevant parameters according to the characteristics of the reaction 
+path and the Arrhenius equation to establish the reaction kinetics model. 
+For the fifth problem, we use BP neural network to make prediction, specify input index and 
+output index, divide training set and test set, adjust and train the model parameters, and then predict 
+the data of the test set and finally conduct error analysis. In this paper, according to the BP neural 
+network prediction model, the data in DAF/CS group in Annex 1 is selected as the training set, the 
+prediction model is trained and the test results of the test set are predicted. The fitting coefficient 
+R is 0.9993 and the relative error is very small, which indicating that the fitting effect is very good. 
+Keywords：person correlation analysis，person correlation analysis，BP neural network，regression 
+analysis，reaction kinetics model
+
+----- PAGE 2 (imgs=0) -----
+ 
+ 
+Content 
+1. Introduction ................................................................................................................................... 1 
+1.1 Background ......................................................................................................................... 1 
+1.2 Work .................................................................................................................................... 1 
+2. Problem analysis ........................................................................................................................... 2 
+2.1 Data analysis ....................................................................................................................... 2 
+2.2 Analysis of question one ..................................................................................................... 3 
+2.3 Analysis of question two ..................................................................................................... 3 
+2.4 Analysis of question three ................................................................................................... 3 
+2.5 Analysis of question four .................................................................................................... 3 
+2.6 Analysis of question five ..................................................................................................... 3 
+3. Symbol and Assumptions .............................................................................................................. 4 
+3. 1 Symbol Description ............................................................................................................ 4 
+3.2 Fundamental assumptions ................................................................................................... 4 
+4. Model ............................................................................................................................................ 5 
+4.1Data preprocessing ............................................................................................................... 5 
+4.2Establishment and solution of problem 1 model .................................................................. 6 
+4.3Establishment and solution of problem 2 model ................................................................ 10 
+4.4Establishment and solution of problem 3 model ................................................................ 15 
+4.5Establishment and solution of problem 4 model ................................................................ 17 
+4.6Establishment and solution of problem 5 model ................................................................ 18 
+5.Error Analysis .............................................................................................................................. 20 
+6.Strengths and Weakness ............................................................................................................... 21 
+6.1Strengths ............................................................................................................................ 21 
+6.2Weakness ........................................................................................................................... 21 
+7.Conclusion ................................................................................................................................... 21 
+References ....................................................................................................................................... 22 
+Appendix ......................................................................................................................................... 23 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+----- PAGE 3 (imgs=0) -----
+Team B2023081819323                                                 Page1of 22 
+                                           
+1. Introduction 
+1.1 Background 
+With the increasing global demand for renewable energy, cotton stalk is rich in 
+cellulose, lignin and other biomass components, which is regarded as an important 
+biomass resource and has attracted much attention recently. The quality and yield of 
+cotton straw pyrolysis products are affected by various temperatures such as pyrolysis 
+temperature and catalyst. Based on the data of pyrolysis products and pyrolysis gas 
+products under different catalytic pyrolysis reactions, this paper will study the 
+mechanism and properties of cotton straw pyrolysis products as well as the mechanism 
+and function of catalysts in the pyrolysis process, so as to promote the effective 
+utilization and sustainable development of cotton stalk. 
+1.2 Work 
+For the first problem, in order to analyze the relationship between the yield of 
+pyrolysis products of each pyrolysis combination and the mixture ratio of the 
+corresponding pyrolysis combination. Taking DFA/CS combination as an example, 
+the line graphs of thermal valence products under different mixing ratios are drawn 
+first, and the line graphs are discussed. In order to further obtain the exact 
+relationship, person correlation analysis was introduced to conduct correlation 
+analysis on the yields of different products under different mixing ratios. Then a 
+polynomial regression model was established to solve the relationship between the 
+mixing ratio of different pyrolysis combinations and the yield of pyrolysis products. 
+In order to verify whether desulfurization ash as catalyst can promote the pyrolysis of 
+cotton stalk, cellulose and lignin, the first derivative of each function is obtained, and 
+the influence of catalyst on the pyrolysis is analyzed and explained. 
+For the second problem, images of each of the three pyrolysis combinations is 
+drawn by using matlab. The function relationship is obtained by using the second-
+order polynomial curve fitting method of problem 1, and the image and function 
+relationship are discussed and analyzed, and the variation process under different 
+mixing ratios is explained, and the different results of each group of pyrolysis gases 
+are explained. 
+For the third problem, For the same mixed ratio, we use the rank sum test 
+method for significance analysis and observe the results of significance difference 
+analysis. 
+For the fourth problem, we demonstrated the reaction mechanism through the 
+pyrolysis reaction process, and queried relevant parameters according to the 
+characteristics of the reaction path and the Arrhenius equation to establish the reaction 
+kinetics model.  
+
+----- PAGE 4 (imgs=0) -----
+Team B2023081819323                                                 Page2of 22 
+                                           
+For the fifth problem, We used BP neural network to predict, then input index 
+and output index are specified, training set and test set are divided, model parameters 
+are adjusted and trained, and then data of test set are predicted and error analysis is 
+carried out. 
+2. Problem analysis 
+2.1 Data analysis 
+The question gives us two attachments. 
+Annex I is Annex I- Pyrolysis Product Yields of Three Pyrolysis Combinations, it 
+contains three tables ：Yield of Decomposition Products from DA/CS Pyrolysis 
+wt.%(daf), Yield of Decomposition Products from DFA/CE Pyrolysis wt.%(daf), Yield 
+of Decomposition Products from DFA/LG Pyrolysis wt.%(daf). 
+ 
+Fig.1. Screenshot of Annex I 
+Annex II is Annex II-Pyrolysis Gas Yields of Three Pyrolysis Combinations, it 
+contains three tables: Yield of Gaseous Components from DFA/CS Pyrolysis 
+(mL/g,daf), Yield of Gaseous Components from DFA/CE Pyrolysis (mL/g,daf), Yield 
+of Gaseous Components from DFA/LG Pyrolysis (mL/g,daf). 
+ 
+Fig.2. Screenshot of Annex II 
+Data preprocessing. Drawing q-q graph for the given data set and carrying out 
+DFA/CS
+0/100
+10/100
+20/100
+30/100
+40/100
+50/100
+60/100
+80/100
+100/100
+Tar yield
+19.46
+17.25
+15.43
+14.14
+13.89
+13.21
+12.84
+12.57
+12.13
+Water yield
+26.84
+27.64
+28.11
+28.23
+28.62
+29.01
+30.07
+30.68
+31.02
+Char yield
+29.21
+29.11
+29.3
+29.34
+29.14
+29.33
+29.47
+29.64
+29.87
+Syngas yield
+24.49
+26
+27.16
+28.29
+28.35
+28.45
+27.62
+27.11
+26.98
+DFA/CE
+10/100
+20/100
+30/100
+40/100
+50/100
+60/100
+80/100
+100/100
+Tar yield
+34.42
+38.31
+42.69
+43.78
+44.53
+44.41
+43.24
+45.28
+Water yield
+27.42
+21.37
+17.84
+16.9
+16.25
+18.25
+19.93
+16.14
+Char yield
+21.43
+24.91
+24.17
+24.7
+24.54
+24.59
+23.57
+24.61
+Syngas yield
+16.73
+15.41
+15.3
+14.62
+14.68
+12.75
+13.26
+13.97
+DFA/LG
+10/100
+20/100
+30/100
+40/100
+50/100
+60/100
+80/100
+100/100
+Tar yield
+18.06
+13.77
+11.29
+10.28
+9.49
+9.02
+10.3
+8.19
+Water yield
+15.3
+18.54
+20.17
+20.97
+21.53
+21.87
+21.41
+23.69
+Char yield
+58.17
+57.46
+57.13
+56.98
+57.14
+57.23
+57.15
+57.43
+Syngas yield
+8.47
+10.23
+11.41
+11.77
+11.84
+11.88
+11.14
+10.69
+Tab 1 Yield of Decomposition Products from DA/CS Pyrolysis wt.%(daf)
+Tab 2 Yield of Decomposition Products from DFA/CE Pyrolysis wt.%(daf)
+Tab 3 Yield of Decomposition Products from DFA/LG Pyrolysis wt.%(daf)
+DFA/CS
+H2
+CO
+CO2
+CH4
+C2H6
+C3H8
+C3H6
+C2H4
+C4H10
+0/100
+6.48
+25.93
+60.4
+23.41
+2.09
+0.55
+0.35
+0.71
+0.32
+20/100
+12.94
+21.61
+57.84
+28.79
+2.73
+0.61
+0.37
+0.74
+0.48
+40/100
+22.65
+20.53
+52.31
+33.11
+3.08
+0.62
+0.41
+0.81
+0.56
+50/100
+30.35
+20.95
+51.92
+32.45
+2.99
+0.71
+0.39
+0.79
+0.37
+80/100
+37.93
+22
+51.53
+30.83
+2.96
+0.88
+0.37
+0.77
+0.28
+100/100
+43.62
+23.32
+50.91
+30.21
+2.94
+0.87
+0.38
+0.75
+0.25
+DFA/CE
+H2
+CO
+CO2
+CH4
+C2H6
+20/100
+26.6
+13.7
+18.7
+3.2
+13.8
+40/100
+47.8
+10.6
+9.8
+1.9
+8.6
+50/100
+55.6
+8.1
+5.9
+1.3
+4.4
+80/100
+65.8
+6.5
+3.2
+1.3
+3.4
+100/100
+57.9
+5.3
+2
+0.7
+3.2
+DFA/LG
+H2
+CO
+CO2
+CH4
+C2H6
+20/100
+0.67
+15.23
+24.35
+27.67
+0.08
+40/100
+0.72
+15.76
+37.91
+33.25
+0.06
+50/100
+0.78
+17.305
+39.26
+33.86
+0.09
+80/100
+0.81
+19.075
+41.23
+30.26
+0.07
+100/100
+0.79
+20.935
+43.56
+29.87
+0.05
+Tab 1 Yield of Gaseous Components from DFA/CS Pyrolysis (mL/g,daf)
+Tab 2 Yield of Gaseous Components from DFA/CE Pyrolysis (mL/g,daf)
+Tab 3 Yield of Gaseous Components from DFA/LG Pyrolysis (mL/g,daf)
+
+----- PAGE 5 (imgs=0) -----
+Team B2023081819323                                                 Page3of 22 
+                                           
+Shapiro-Wilk test to determine that the data set given by the question is subject to 
+normal distribution. 
+2.2 Analysis of question one 
+To solve problem 1, in order to analyze the relationship between the yield of 
+pyrolysis products of each pyrolysis combination and the mixing ratio of the 
+corresponding pyrolysis combination, the line graph of the yield of pyrolysis products 
+under different mixing ratios was first drawn, and the general relationship was obtained 
+by analyzing the line graph. Then Pearson correlation analysis was used to analyze the 
+yield of different products at different mixing ratios. After correlation analysis, we 
+establish a regression analysis model, where the mixing ratio is the independent variable 
+and the output of the product is the dependent variable. In order to verify whether 
+desulfurization ash as catalyst can promote the pyrolysis of cotton stalk, cellulose and 
+lignin, the first derivative of each function is obtained, and the influence of catalyst on 
+the pyrolysis is analyzed and explained. 
+2.3 Analysis of question two 
+To solve problem 2, images of each of the three pyrolysis combinations is drawn 
+by using matlab. The function relationship is obtained by using the second-order 
+polynomial curve fitting method of problem 1, and the image and function relationship 
+are discussed and analyzed, and the variation process under different mixing ratios is 
+explained, and the different results of each group of pyrolysis gases are explained. 
+2.4 Analysis of question three 
+To solve problem 3, For the same mixed ratio, we use the rank sum test method 
+for significance analysis and observe the results of significance difference analysis. 
+2.5 Analysis of question four 
+To solve problem 4, we demonstrated the reaction mechanism through the 
+pyrolysis reaction process, and queried relevant parameters according to the 
+characteristics of the reaction path and the Arrhenius equation to establish the reaction 
+kinetics model. 
+2.6 Analysis of question five 
+To solve problem 5,BP neural network is used for prediction, input index and 
+output index are specified, training set and test set are divided, model parameters are 
+adjusted and trained, and then data of test set are predicted and error analysis is carried 
+out. 
+ 
+
+----- PAGE 6 (imgs=0) -----
+Team B2023081819323                                                 Page4of 22 
+                                           
+3. Symbol and Assumptions 
+3. 1 Symbol Description 
+variable 
+description 
+dimension 
+cov (X,Y) 
+the covariance of X multiplied by the 
+covariance of Y 
+- 
+𝛔X and 𝛔Y 
+the standard deviations of X and Y 
+respectively 
+- 
+Ei 
+chemical reaction activation energy 
+KJ/mol-1 
+A 
+frequency factors 
+min-1 
+T 
+ambient temperature 
+℃ 
+RC 
+gas constant 
+- 
+ki 
+parameter 
+- 
+3.2 Fundamental assumptions 
+1. Assume that the data given by the title is true and reliable, and does not contain 
+any missing values or error records;  
+2. The data preprocessing method is reasonable and has no great impact on the 
+results;  
+3. It is assumed that desulfurization ash, as a catalyst, has the same catalytic effect 
+on all samples, that is, it is not affected by the characteristics of samples (such as the 
+origin and type of cotton stalk);  
+4. It is assumed that the data set accurately reflects various conditions of the 
+catalytic reaction of cotton stalk pyrolysis, including changes under different conditions. 
+
+----- PAGE 7 (imgs=3) -----
+Team B2023081819323                                                 Page5of 22 
+                                           
+4. Model 
+4.1Data preprocessing 
+Using the data set to draw the QQ map and carry out Shapiro-Wilk test, the 
+judgment problem shows that there is no anomaly in the data set and all obey normal 
+distribution. 
+Shapiro-Wilk test  
+Shapiro-Wilk test is a statistical test used to test whether a sample data set is 
+derived from a normal distribution. Especially suitable for small and medium sample 
+size. The null hypothesis (H0) of the SW test is that the sample data comes from a 
+normal distribution. If the P-value is less than the significance level (0.05 is usually 
+chosen), the null hypothesis can be rejected, indicating that the sample data is not from 
+a normal distribution. The figure is the result of the SW test. Since the P-values are all 
+much higher than 0.05, the null hypothesis of the test, that is, the data come from the 
+normal distribution, cannot be rejected. So this sample of data might come from a 
+normal distribution. 
+ 
+Fig.3. p-value 
+QQ map drawing 
+The QQ (Quantile-Quantile) graph is used to test whether a sample data set 
+conforms to a particular theoretical distribution, most commonly to test whether it 
+conforms to a normal distribution. 
+QQ plots evaluate the consistency between the quantiles of the sample data by 
+comparing them to the quantiles of the theoretical distribution. In the QQ plot, the 
+horizontal axis represents the quantile of the theoretical distribution, while the vertical 
+axis represents the quantile of the sample data. If the sample data agrees with the 
+theoretical distribution, then the points on the QQ plot will approximately fall on a 
+straight line, usually a 45-degree diagonal. If the scatter plot deviates from the diagonal, 
+it may indicate that the distribution of the sample data is inconsistent with the chosen 
+theoretical distribution. 
+ 
+
+----- PAGE 8 (imgs=3) -----
+Team B2023081819323                                                 Page6of 22 
+                                           
+ 
+ 
+Fig.4. QQ map 
+As shown in the figure above, the points on the QQ chart will approximately fall 
+on a straight line, so that this set of sample data comes from a normal distribution. 
+Therefore, we can conclude that there are no abnormal data in this dataset and all of 
+them obey normal distribution. 
+4.2Establishment and solution of problem 1 model 
+Data visualization 
+In order to explore the relationship between the yield of pyrolysis products (Tar, 
+Water, Char, Syngas) and the ratio of pyrolysis combination under the condition of 
+different proportions of pyrolysis combination, the data of DFA/CS group was first 
+taken as an example, and the relationship between them was visually demonstrated by 
+drawing line charts. 
+ 
+Fig.5. Yield of Decomposition Products vs DFA/CS Ratio 
+According to the above line chart, taking Tar as an example, we can see that as the 
+proportion increases, Tar production gradually decreases. 
+ 
+Person correlation analysis 
+The person correlation coefficient between two variables is defined as the quotient 
+of the covariance of the two variables and the standard deviation product of both, which 
+defines the overall correlation coefficient, expressed in ρ : 
+𝜌𝑋𝑌= 𝑐𝑜𝑣(𝑥, 𝑌)
+𝜎𝑋𝜎𝑌
+= 𝐸(𝑋−𝜇𝑋)(𝑌−𝜇𝑌)
+𝜎𝑋𝜎𝑌
+ 
+
+----- PAGE 9 (imgs=1) -----
+Team B2023081819323                                                 Page7of 22 
+                                           
+If the covariance and standard deviation calculated by the sample are replaced by 
+the covariance and standard deviation of the population, it is the sample correlation 
+coefficient, which is usually expressed as follows: 
+𝑟=
+∑
+(𝑋𝑖−𝑋)(𝑌𝑖−𝑌)
+𝑛
+𝑖=1
+√∑
+(𝑋𝑖−𝑋)2
+𝑛
+𝑖=1
+√∑
+(𝑌𝑖−𝑌)2
+𝑛
+𝑖=1
+ 
+Where, cov (X,Y) is the covariance of X multiplied by the covariance of Y, σX 
+and σY are the standard deviations of X and Y respectively, 𝑋 and 𝑌 are the sample 
+means of X and Y respectively. 
+ 
+Fig.6. Thermal map of correlation coefficient 
+Based on the person correlation analysis, we can make a thermal map of the 
+correlation coefficient, which clearly shows the correlation between the yield of each 
+pyrolysis product and the ratio of DFA/CS. As can be seen from the figure: 
+There is a strong negative correlation between Tar yield and DFA/CS ratio, and 
+the correlation coefficient is -0.8827, which indicates that with the increase of DFA/CS 
+ratio, Tar yield has a significant downward trend.  
+There is a very strong positive correlation between Water yield and DFA/CS ratio, 
+and the correlation coefficient is 0.9838, which indicates that with the increase of 
+DFA/CS ratio, Water yield has a significant upward trend.  
+There is a very strong positive correlation between Char yield and DFA/CS ratio, 
+and the correlation coefficient is 0.8979, which indicates that with the increase of 
+DFA/CS ratio, Char yield has a significant upward trend.  
+There is no strong correlation between Syngas yield and DFA/CS ratio, and the 
+correlation coefficient is 0.4162, which indicates that with the increase of DFA/CS ratio, 
+there is no significant trend of increase or decrease of Syngas yield. 
+ 
+Regression analysis 
+In order to get the exact functional relationship between the two, we take DFA/CS 
+
+----- PAGE 10 (imgs=2) -----
+Team B2023081819323                                                 Page8of 22 
+                                           
+and Tar yield as examples, and use their data to judge the reaction mechanism. 
+Assume that the relationship between Tar yield and combination ratio is: 
+y=anxn+an-1xn-1+…+a0 
+Where y represents the tar yield, x represents the combination ratio, and ai 
+represents the coefficient. The ai is then solved using the least square method. 
+y=0.0011x2-0.1710x+18.9240 
+ 
+Fig.7. Tar Yield vs DFA/CS 
+Where R2=0.96936, the correlation coefficient obtained from the above 
+calculation is close to 1, indicating a high degree of fitting. The above formula can be 
+used to describe the relationship between tar yield and combination ratio. 
+ 
+The relationship between Water yield and combination ratio: 
+Through matlab software to solve the relationship: 
+y=-0.0001x2+0.0521x+26.9329 
+ 
+Fig.8. Water Yield vs DFA/CS 
+The relationship between Char yield and combination ratio: 
+Through matlab software to solve the relationship: 
+y=0.0001x2-0.0007x+29.1948 
+
+----- PAGE 11 (imgs=2) -----
+Team B2023081819323                                                 Page9of 22 
+                                           
+ 
+Fig.9. Char Yield vs DFA/CS 
+The relationship between Char yield and combination ratio: 
+Through matlab software to solve the relationship: 
+y=-0.0010x2+0.1196x+24.9498 
+ 
+Fig.10. Syngas Yield vs DFA/CS 
+Similarly, the proportional relationship between pyrolysis products and 
+combinations can be obtained by using the above method for other combinations, as 
+shown in the following table. 
+ 
+Table 2 proportional relationship between pyrolysis products and combinations. 
+Pyrolysis combinition 
+Pyrolysis product 
+Relational expression 
+DFA/CS 
+Tar yield 
+y=0.0011x2-0.1710x+18.9240 
+Water yield 
+y=-0.0001x2+0.0521x+26.9329 
+Char yield 
+y=0.0001x2-0.0007x+29.1948 
+Syngas yield 
+y=-0.0010x2+0.1196x+24.9498 
+DFA/CE 
+Tar yield 
+y=-0.0025x2+0.3633x+32.2226 
+Water yield 
+y=0.0024x2-0.3369x+28.0436 
+Char yield 
+y=-0.0007x2+0.0879x+21.9392 
+Syngas yield 
+y=0.0007x2-0.1144x+17.7945 
+DFA/LG 
+Tar yield 
+y=0.0019x2-0.2940x+19.5045 
+
+----- PAGE 12 (imgs=1) -----
+Team B2023081819323                                                 Page10of 22 
+                                           
+Water yield 
+y=-0.0011x2+0.1926x+14.5517 
+Char yield 
+y=0.0004x2-0.0435x+58.3300 
+Syngas yield 
+y=-0.0012x2+0.1449x+7.6138 
+ 
+Differentiate the four functional relations in the DFA/CS combination respectively. 
+Tar： 
+𝑦′ = 0.0022𝑥−0.1710 
+By analyzing the above first-order derivative function, we can see that in the 
+DFA/CS group, with the increase of catalyst proportion, the increase of Tar yield 
+becomes larger, and the catalyst can promote the production of Tar. 
+Water： 
+𝑦′ = −0.0002𝑥+ 0.0521 
+By analyzing the first derivative function above, we can see that in the DFA/CS 
+group, with the increase of catalyst proportion, the increase of Water yield becomes 
+smaller, and the catalyst has an inhibitory effect on the production of Water. 
+Char： 
+𝑦′ = 0.0002𝑥−0.0007 
+By analyzing the above first-order derivative function, we can see that in the 
+DFA/CS group, the Char yield increases with the increase of catalyst proportion, and 
+the catalyst can promote the Char production. 
+Syngas： 
+𝑦′ = −0.0020𝑥+ 0.1196 
+By analyzing the first derivative function above, we can see that in the DFA/CS 
+group, with the increase of catalyst proportion, the growth of Syngas yield becomes 
+smaller, and the catalyst has an inhibitory effect on Syngas production. 
+ 
+4.3Establishment and solution of problem 2 model 
+Through the classification and discussion of the three combinations, we explore 
+the influence of different mixing ratios on the gas yield under different combinations. 
+ 
+Fig.11. Effect of DFA/CS Gas Yield (all) 
+
+----- PAGE 13 (imgs=1) -----
+Team B2023081819323                                                 Page11of 22 
+                                           
+ 
+Fig.12. Line chart of DFA/CS 
+According to problem-1 regression analysis model, the relationship between 
+different mixing ratios and yields under this combination condition is as follows: 
+Table 3 the relationship between different mixing ratios and yields under this 
+combination condition(DFA/CS) 
+Products 
+Functional relationship 
+H2 
+y = -0.0013x2 + 0.5111x + 5.3516 
+CO 
+y = 0.0016x2 - 0.1803x + 25.418 
+CO2 
+y = 0.0015x2 - 0.2462x + 60.821 
+CH4 
+y = -0.0025x2 + 0.3026x + 23.722 
+C2H6 
+y = -0.0002x2 + 0.0294x + 2.1543 
+C3H8 
+y = 6E-06x2 + 0.003x + 0.5403 
+C3H6 
+y = -1E-05x2 + 0.0015x + 0.3515 
+C2H4 
+y = -1E-05x2 + 0.0015x + 0.3515 
+C4H10 
+y = -7E-05x2 + 0.0052x + 0.3602 
+ 
+Below are the four main products affected by the DFA/CS mixture ratio. Because 
+the proportion of the five secondary products is very small, only about 6% at most, 
+and their changes are very small for the whole, so the analysis of their changes is 
+almost not practical significance, only the analysis of the four main products. 
+H2： 
+We can find that the hydrogen yield increases significantly with the increase of 
+DFA/CS ratio. This may indicate that desulfurization ash promotes the release of H2 
+in the catalytic reaction, possibly because it affects the pyrolysis reaction during the 
+pyrolysis process and enhances the generation of H2. 
+CO： 
+We can find that the CO yield initially decreased with the increase of DFA/CS 
+ratio, and then stabilized. This may indicate that desulfurization ash has an inhibitory 
+
+----- PAGE 14 (imgs=2) -----
+Team B2023081819323                                                 Page12of 22 
+                                           
+effect on CO production at a lower DFA/CS ratio, but this effect is weakened with the 
+increase of catalyst proportion. 
+CO2： 
+We can find that the overall CO2 yield shows a downward trend. This may mean 
+that desulphurized ash promotes partial oxidation of carbon rather than complete 
+oxidation, resulting in lower CO2 yield. 
+CH4： 
+The CH4 yield decreased after peaking at a moderate DFA/CS ratio, which may 
+indicate that the moderate desulfurization ash concentration is the most favorable 
+condition for CH4 production. 
+ 
+Fig.13. Effect of DFA/CE on Gas Yield 
+ 
+Fig.14. Line chart of DFA/CE 
+According to problem-1 regression analysis model, the relationship between 
+
+----- PAGE 15 (imgs=1) -----
+Team B2023081819323                                                 Page13of 22 
+                                           
+different mixing ratios and yields under this combination condition is as follows: 
+ 
+Table 4 the relationship between different mixing ratios and yields under this combination 
+condition(DFA/CE) 
+Products 
+Functional relationship 
+H2 
+y = -0.0119x2 + 1.8261x - 5.6417 
+CO 
+y = 0.0012x2 - 0.2491x + 18.192 
+CO2 
+y = 0.0038x2 - 0.6496x + 29.858 
+CH4 
+y = 0.0005x2 - 0.0824x + 4.5417 
+C2H6 
+y = 0.0029x2 - 0.4726x + 22.117 
+ 
+H2: 
+The H2 yield generally increased with the increase of DFA/CE ratio, but 
+decreased slightly at 100/100. This may indicate that the catalyst is more effective at 
+promoting H2 production at higher concentrations, but at some point its efficiency is 
+slightly reduced, perhaps because an equilibrium or other limitation of the reaction 
+has been reached. 
+CO: 
+The CO yield continued to decrease with the increase of DFA/CE ratio. This 
+suggests that the addition of desulfurized ash may inhibit the formation of CO or 
+promote the conversion of CO to CO2. 
+CO2: 
+The CO2 yield decreased significantly with the increase of DFA/CE ratio, which 
+may be due to the presence of desulfurization ash to promote partial oxidation of 
+carbon, resulting in more CO and H2 than CO2. 
+CH4: 
+The CH4 yield continued to decrease with the increase of DFA/CE ratio, which 
+indicated that the addition of desulphurized ash may inhibit the formation of CH4 or 
+promote the conversion of CH4. 
+ 
+Fig.15. Effect of DFA/LG on Gas Yields 
+
+----- PAGE 16 (imgs=1) -----
+Team B2023081819323                                                 Page14of 22 
+                                           
+ 
+Fig.16. Line chart of DFA/LG 
+According to problem-1 regression analysis model, the relationship between different 
+mixing ratios and yields under this combination condition is as follows: 
+ 
+Table 4 the relationship between different mixing ratios and yields under this combination 
+condition(DFA/LG) 
+Products 
+Functional relationship 
+H2 
+y = -4E-05x2 + 0.006x + 0.5575 
+CO 
+y = 0.0003x2 + 0.0383x + 14.247 
+CO2 
+y = -0.0048x2 + 0.7849x + 11.826 
+CH4 
+y = -0.003x2 + 0.3619x + 22.419 
+C2H6 
+y = -8E-06x2 + 0.0006x + 0.065 
+ 
+H2: 
+H2 yield increases with the increase of DFA/LG ratio, but decreases slightly at 
+100/100. This indicates that with the increase of the ratio of DFA to LG, the hydrogen 
+production first increases and then decreases, possibly because the catalytic efficiency 
+reaches its peak. 
+CO: 
+The CO yield continues to rise with the increase of DFA/LG ratio. This may 
+indicate that the increase in desulphurized ash is beneficial for the production of CO, 
+which may be related to the promotion of oxidation reactions. 
+CO2: 
+The CO2 yield increased significantly with the increase of DFA/LG ratio. This 
+may mean that the desulfurization ash promotes the complete oxidation of the lignin 
+components. 
+CH4: 
+The CH4 yield peaked at a DFA/LG ratio of 50/100 and then declined. This may 
+indicate that a moderate desulfurization ash concentration is the most favorable 
+
+----- PAGE 17 (imgs=1) -----
+Team B2023081819323                                                 Page15of 22 
+                                           
+condition for CH4 formation. 
+ 
+4.4Establishment and solution of problem 3 model 
+Due to the small amount of data in this paper, methods such as T test are 
+excluded, and rank sum test is chosen instead. Its principle is to assign rank after 
+sorting continuous data, which is used to compare the distribution difference between 
+two groups of independent samples. The process is as follows :  
+1. Set hypothesis null hypothesis (H0): The distribution of the two groups of samples 
+is the same; Alternative hypothesis (H1): There is a significant difference in the 
+distribution of the two groups of samples. 
+2. Collect data Merge the data of the two samples and label each data point with the 
+group it belongs to. Assign rank to each data point: The combined data is sorted by size, 
+and the rank is assigned to each data point, and the average rank is taken for data of the 
+same value.  
+3. Calculate the rank sum For each group, calculate the rank sum of all its data points.  
+4. Calculate the U statistic using the smaller sum of ranks as the U statistic. Since the 
+sample size in this paper is small, the exact calculation method is used, that is, U= small 
+rank sum. 
+The calculation formula is: 
+𝑍=
+𝑈−𝑛1𝑛2
+2
+√𝑛1𝑛2(𝑛1 + 𝑛2 + 1)
+12
+ 
+ 5. Compare the U statistic with the critical value: Compare the calculated U statistic with the 
+critical value, and reject the null hypothesis if the U statistic is less than or equal to the critical value 
+of 0.05.  
+In this paper, MALTAB was used for calculation and bar chart was drawn to analyze the differences. 
+ 
+
+----- PAGE 18 (imgs=2) -----
+Team B2023081819323                                                 Page16of 22 
+                                           
+Fig.17. Comparison of Yeild 
+ 
+Fig.18. Productivity 
+The analysis results of the significant difference in yield of CE and LG pyrolysis 
+products are shown in the figure below. 
+ 
+Fig.19. analysis results of the significant difference in yield of CE and LG pyrolysis products 
+Through analysis, we can see that the P-value of Tar, Char and Syngas yield: both 
+about 0.0002 is very small(near to 0), Well below the standard significance level of 0.05, 
+indicating a statistically significant difference between tar yields at DFA/CE and 
+DFA/LG ratios. This means that we have very strong evidence that the change in tar 
+yield under both conditions is not accidental. That is, there is a significant difference in 
+the yield of Tar, Char and Syngas compared with that of LG.  
+The p value of Water yield, 0.1949, was higher than the standard significance level 
+of 0.05, indicating that there was no statistically significant difference between water 
+yield at the DFA/CE and DFA/LG ratios. This means that we do not have sufficient 
+evidence to conclude that the variation in water yield under the two conditions is due 
+to the different conditions rather than chance factors, that is, there is no significant 
+difference in water yield between CE and LG.  
+Similarly, we can know whether there are significant differences in pyrolysis gases 
+under different pyrolysis ratios. P-values for each gas yield: all about 0.0079, very small 
+(near zero), well below the standard significance level of 0.05, indicating a statistically 
+significant difference between tar yields at the DFA/CE and DFA/LG ratios. This means 
+that we have very strong evidence that the change in tar yield under both conditions is 
+not accidental. That is, there are significant differences in the yield of CE and LG 
+pyrolysis gas components. 
+
+----- PAGE 19 (imgs=1) -----
+Team B2023081819323                                                 Page17of 22 
+                                           
+ 
+4.5Establishment and solution of problem 4 model 
+4.5.1Reaction mechanism 
+By analyzing the question, we can conclude that the decomposition path of CE 
+under catalytic action is assumed as follows: 
+ 
+Fig.20. Reaction mechanism 
+4.5.2Reaction kinetics model 
+According to the reaction path characteristics and the Arrhenius equation, taking 
+the combination DFA/CE as an example without considering the catalyst mixing ratio, 
+the generation rate of the four products generated by the pyrolysis reaction meets the 
+following formula: 
+𝑑𝑆𝐶𝐸
+𝑑𝑡
+= −𝐴1 exp [−𝐸1
+𝑅𝐶𝑇] −𝐴2 exp[−𝐸2
+𝑅𝐶𝑇] −𝐴3 exp[−𝐸3
+𝑅𝐶𝑇] −𝐴4exp⁡ [−𝐸4
+𝑅𝐶𝑇] 
+Where, 𝐸1 represents the chemical reaction activation energy of tar; 𝐸2 is the 
+activation energy of chemical reaction of water. 𝐸3 represents the activation energy 
+of chemical reaction of coke residue. 𝐸4 represents the chemical reaction activation 
+energy of gas; 𝐴1,𝐴2,𝐴3,𝐴4 are frequency factors. 𝑅𝐶 is the gas constant; T is the 
+experimental temperature. 
+When the pyrolysis combination is the same, different mixing ratios will affect 
+the generation rate of various pyrolysis products. Therefore, we assume that 𝜌𝑖 is the 
+influencing factor of the generation rate of pyrolysis products. 
+𝜌𝑖= 𝑘𝑖exp⁡[𝑓𝑖(𝑥)] 
+Where, 𝑘𝑖 represents the parameter; 𝑓𝑖(𝑥) is the relationship between the yield 
+of pyrolysis products and the mixing ratio. x represents the corresponding mixture 
+ratio. 
+In summary, the reaction kinetics equation of DFA/CE combination under 
+different mixing ratios can be written as 
+𝑑𝑆𝐶𝐸
+𝑑𝑡
+= −∑𝑘𝑖𝐴𝑖exp⁡ [ 𝐸𝑖
+𝑅𝐶𝑇]
+4
+𝑖=1
+∙𝑒𝑥𝑝[𝑓𝑖(𝑥)] 
+Where, 
+𝑓1(𝑥) = −0.0025𝑥2 + 0.3633𝑥+ 32.2226 
+𝑓2(𝑥) = 0.0024𝑥2 −0.3369𝑥+ 28.0436 
+𝑓3(𝑥) = −0.0007𝑥2 + 0.0879𝑥+ 21.9392 
+𝑓4(𝑥) = 0.0007𝑥2 −0.1144𝑥+ 17.7945 
+
+----- PAGE 20 (imgs=0) -----
+Team B2023081819323                                                 Page18of 22 
+                                           
+According to the data query[1], the kinetic parameters of the pyrolysis products are 
+shown as follows: 
+ 
+Table 5 the kinetic parameters of the pyrolysis products 
+Products 
+𝐴𝑖/min-1 
+𝐸𝑖/(kJ∙mol-1) 
+Tar 
+1.5 
+39.5 
+Water 
+9 
+27 
+Char 
+7 
+19 
+Syngas 
+6 
+22 
+ 
+同理可知DFA/LG 组合在不同混合比例的情况下的反应动力学方程 
+𝑑𝑆𝐿𝐺
+𝑑𝑡
+= −∑𝑘𝑖𝐴𝑖exp⁡ [ 𝐸𝑖
+𝑅𝐶𝑇]
+4
+𝑖=1
+∙𝑒𝑥𝑝[𝑓𝑖(𝑥)] 
+其中 
+𝑓1(𝑥) = 0.0019𝑥2 −0.2940𝑥+ 19.5045 
+𝑓2(𝑥) = −0.0011𝑥2 + 0.1926𝑥+ 14.5517 
+𝑓3(𝑥) = 0.0004𝑥2 −0.0435𝑥+ 58.3300 
+𝑓4(𝑥) = −0.0012𝑥2 + 0.1449𝑥+ 7.6138 
+ 
+4.6Establishment and solution of problem 5 model 
+4.6.1Data selection 
+Among the three sets of data, DFA/ CS, DFA/CE and DFA/LG, DFA/ CS has the 
+largest amount of data, which is more conducive to the training of training sets and 
+improve the accuracy of model prediction results. Therefore, we selected the yield data 
+of pyrolysis products at different DFA/CS ratios to predict the yield data through BP 
+neural network 
+4.6.2Model selection 
+BP neural network 
+Back Propagation Network is called BP neural network for short. The theory of 
+neural network has proved that BP network has powerful nonlinear mapping ability and 
+generalization function, and any continuous function or mapping can be implemented 
+by three-layer network [2]. Taking a three-layer BP network as an example, the network 
+can be described as follows: the input layer neurons are numbered by i, the hidden layer 
+neurons are numbered by j, and the output layer neurons are numbered by k. The 
+prediction model is established by using a BP neural network containing a hidden layer. 
+The structure is shown in the figure[3]. 
+
+----- PAGE 21 (imgs=3) -----
+Team B2023081819323                                                 Page19of 22 
+                                           
+ 
+Fig.21. BP neural network(3 layers) 
+4.6.3 Model use 
+ 
+Fig.22. BP neural network model prediction flowchart 
+In this paper, the mixing ratio of different combinations is used as input index, 
+while the pyrolysis products (Tar, Water, Char, Syngas) are used as output index. Set 
+the data in Attachment 1 as training data, set the appropriate number of layers and 
+training times. The predictive model can then be trained to predict the test results of 
+the test set. 
+According to the BP neural network prediction model, the data in DAF/CS group 
+in Annex 1 is selected as the training set, wherein, set the mixing ratio as 𝑃训练集 and 
+the corresponding thermal engine product yield as 𝑇训练集 . Then set various training 
+index data to obtain the BP neural network prediction model, set 𝑃测试集 =𝑃训练集, The 
+predicted value of the product 𝑇预测 can be obtained by using the BP neural network 
+prediction model. 
+𝜔=
+|𝑇预测−𝑇训练集|
+𝑇训练集
+× 100% 
+Where, ω represents the prediction error of BP neural network. 
+ 
+
+----- PAGE 22 (imgs=0) -----
+Team B2023081819323                                                 Page20of 22 
+                                           
+Fig.23. R 
+We can draw from the figure above that the fitting coefficient R=0.9993 indicates 
+that the fitting effect is very good.  
+The predicted values and errors obtained by substituding DFA/CS group data in 
+Annex 1 are shown in the following table: 
+ 
+Table 6 The predicted values and errors obtained by substituding DFA/CS group data in Annex 1 
+DFA/CS 
+0/100 
+10/100 
+20/100 
+30/100 
+40/100 
+50/100 
+60/100 
+80/100 
+100/100 
+Tar yield 
+19.4600 
+17.2500 
+15.4300 
+14.1400 
+13.8900 
+13.2100 
+12.8400 
+12.5700 
+12.1300 
+Water yield 
+26.8400 
+27.6400 
+28.1100 
+28.2300 
+28.6200 
+29.0100 
+30.0700 
+30.6800 
+31.0200 
+Char yield 
+29.2100 
+29.1100 
+29.3000 
+29.3400 
+29.1400 
+29.3300 
+29.4700 
+29.6400 
+29.8700 
+Syngas yield 
+24.4900 
+26.0000 
+27.1600 
+28.2900 
+28.3500 
+28.4500 
+27.6200 
+27.1100 
+26.9800 
+Predicted value 
+of Tar yield 
+19.5228 
+17.1497 
+15.4484 
+14.1756 
+13.8783 
+13.1988 
+12.8735 
+12.5404 
+12.1386 
+Predicted value 
+of Water yield 
+26.8182 
+27.7103 
+28.0355 
+28.2660 
+28.6121 
+29.0062 
+30.0781 
+30.6605 
+31.0327 
+Predicted value 
+of Char yield 
+29.1912 
+29.1457 
+29.2786 
+29.3390 
+19.1450 
+29.3305 
+29.4666 
+29.6425 
+29.8673 
+Predicted value 
+of Syngas yield 
+24.4678 
+25.9943 
+27.2375 
+28.2194 
+28.3647 
+28.4645 
+27.5818 
+27.1566 
+26.9615 
+Error of Tar 
+yield 
+0.0032 
+0.0058 
+0.0012 
+0.0025 
+0.0008 
+0.0008 
+0.0026 
+0.0024 
+0.0007 
+Error of Water 
+yield 
+0.0008 
+0.0025 
+0.0027 
+0.0013 
+0.0003 
+0.0001 
+0.0003 
+0.0006 
+0.0004 
+Error of Char 
+yield 
+0.0006 
+0.0012 
+0.0007 
+0.0000 
+0.0002 
+0.0000 
+0.0001 
+0.0001 
+0.0001 
+Error of Syngas 
+yield 
+0.0009 
+0.0002 
+0.0029 
+0.0025 
+0.0005 
+0.0005 
+0.0014 
+0.0017 
+0.0007 
+ 
+In the above table, we summarized the true value, predicted value and predicted value 
+error of Tar, Water, Char and Syngas production in one table. According to the fact that 
+all errors are far less than 1%, and the average variance of the training results is less 
+than or equal to the negative third power of 10, the relative error of training and 
+prediction using BP neural network model is small, so this model can be used to predict 
+the yield of pyrolysis products. 
+ 
+5.Error Analysis 
+For the second-order polynomial curves fitted by regression in problem 1 and problem 
+2, a few curves have low fitting degree, which may not accurately reflect the changing 
+trend of pyrolysis product yield. For example, in the DFA/CE combination, the R2 of 
+the fitting curve of Char yield is only 0.37426, and the curve fitting degree is low. 
+Therefore, the regression model used in this paper needs to be improved to improve the 
+fitting accuracy to reflect the changing trend more accurately. 
+
+----- PAGE 23 (imgs=0) -----
+Team B2023081819323                                                 Page21of 22 
+                                           
+6.Strengths and Weakness 
+6.1Strengths 
+6.1.1 We first conducted data preprocessing, which can eliminate some biased, 
+incomplete or wrong data and improve the quality of data. After data preprocessing, the 
+subsequent fitting and prediction will be more accurate. 
+6.1.2 As for the correlation analysis, we combine the person correlation analysis and 
+polynomial regression fitting from the simple to the deep, which is conducive to 
+obtaining more accurate correlation. Person correlation analysis is an intuitive and easy 
+to understand analysis method that can help people quickly understand the degree of 
+relationship between variables. 
+6.1.3 We use BP neural network for prediction. This method has strong fitting ability 
+and can perform well when dealing with complex data patterns and prediction tasks. It 
+is suitable for various types of data. 
+6.2Weakness 
+6.2.1 The validity and accuracy of the model are strongly dependent on the quality of 
+the data. If the quality of the data is poor, the prediction results may be affected. 
+6.2.2 We use person correlation analysis to analyze the correlation, but this method 
+usually only considers the relationship between two variables, without considering 
+other possible influencing factors, which may lead to the limitation of the results. 
+Sample size has an impact on the results of correlation analysis, and small samples tend 
+to produce unstable correlation estimation. 
+6.2.2 We used BP neural network for prediction, which may fall into local optimal 
+solution, resulting in the model performance failing to reach global optimal. For large-
+scale neural networks and complex tasks, training times of BP neural network can be 
+long, especially with limited computing resources. In addition, BP neural network has 
+many hyperparameters that need to be tuned, such as learning rate, number of hidden 
+layer nodes, etc., so it takes a certain amount of time and energy to tune. 
+7.Conclusion 
+This article investigates the relationship between catalyst mixing ratio and product yield, 
+establishes reaction mechanism and reaction kinetics models, and uses BP neural 
+network to predict yield. The model in this article has significant advantages in 
+achieving its goals efficiently and accurately. 
+ 
+ 
+
+----- PAGE 24 (imgs=0) -----
+Team B2023081819323                                                 Page22of 22 
+                                           
+References 
+[1] 沈力. 木质素热解反应动力学与模型研究[D].厦门学,2021 
+[2] 夏玫.BP神经网络泛化能力改进研究[D].太原，2009 
+[3] 李锋,田霞,宋文渊.基于BP神经网络的设备维修人员训练数量预测方法研究
+[J].计算机与数字工程,2017,45(07) 
+
+----- PAGE 25 (imgs=0) -----
+                                               
+                                           
+Appendix 
+function [RMSE, MAPE, R2] = calculate_metrics(actual, predicted) 
+    % Calculate root mean square error (RMSE) 
+    RMSE = sqrt(mean((actual - predicted).^2)); 
+ 
+    % Calculate Average Absolute Percentage Error (MAPE) 
+    MAPE = mean(abs((actual - predicted) ./ actual)) * 100; 
+ 
+    % Calculate the coefficient of determination (R2) 
+    ssRes = sum((actual - predicted).^2); 
+    ssTot = sum((actual - mean(actual)).^2); 
+    R2 = 1 - (ssRes / ssTot); 
+End 
+ 
+function eq = generateFitEquation(coeffs, modelType) 
+    if startsWith(modelType, 'poly') 
+        % for polynomial models 
+        degree = str2double(extractAfter(modelType, 'poly')) - 1; 
+        terms = cell(1, length(coeffs)); 
+ 
+        % Constructing polynomial equations item by item 
+        for idx = 1:length(coeffs) 
+            coeff = coeffs(idx); 
+            power = degree - idx + 1;  
+ 
+            if power == 0 
+                terms{idx} = sprintf('%f', coeff); 
+            elseif power == 1 
+                terms{idx} = sprintf('%f*x', coeff); 
+            else 
+                terms{idx} = sprintf('%f*x^%d', coeff, power); 
+            end 
+        end 
+ 
+        eq = strjoin(terms, ' + '); 
+    elseif any(strcmp(modelType, {'exp1', 'exp2'})) 
+        % For exponential models, add equation generation logic for exponential models 
+        eq = 'exp model equation here...'; 
+    else 
+        eq = 'Other model equation here...'; 
+    end 
+end 
+
+----- PAGE 26 (imgs=0) -----
+                                               
+                                           
+ 
+data=[19.46 
+26.84 
+29.21 
+24.49 
+17.25 
+27.64 
+29.11 
+26 
+15.43 
+28.11 
+29.3 27.16 
+14.14 
+28.23 
+29.34 
+28.29 
+13.89 
+28.62 
+29.14 
+28.35 
+13.21 
+29.01 
+29.33 
+28.45 
+12.84 
+30.07 
+29.47 
+27.62 
+12.57 
+30.68 
+29.64 
+27.11 
+12.13 
+31.02 
+29.87 
+26.98 
+]; 
+numCols = size(data, 2); 
+ 
+% Go through each column and perform the Jarque-Bera test 
+for i = 1:numCols 
+    [h, p] = jbtest(data(:, i)); 
+    if h == 0 
+        fprintf('Column %d data follows a normal distribution (p-value = %.5f)\n', i, p); 
+    else 
+        fprintf('Column %d data does not follow a normal distribution (p-value = %.5f)\n', i, p); 
+    end 
+end 
+% Select the column for which you want to plot a normal probability graph 
+selectedColumns = [1, 2, 3,4]; 
+ 
+% Plot a normal probability plot for each column 
+for i = selectedColumns 
+    figure; 
+    normplot(data(:, i)); 
+    hold on; 
+    h = probplot(gca,'normal'); 
+    set(h,'marker','*'); 
+    title(sprintf('Normal probability graph - Column %d', i)); 
+    hold off; 
+end 
+ 
+DFA_CS = [0, 10, 20, 30, 40, 50, 60, 80, 100]; % Due to the naming requirements of the matlab 
+language, DFA CS is used instead of DFA/CS 
+TarYield = [19.46, 17.25, 15.43, 14.14, 13.89, 13.21, 12.84, 12.57, 12.13]; 
+WaterYield = [26.84, 27.64, 28.11, 28.23, 28.62, 29.01, 30.07, 30.68, 31.02]; 
+CharYield = [29.21, 29.11, 29.3, 29.34, 29.14, 29.33, 29.47, 29.64, 29.87]; 
+SyngasYield = [24.49, 26, 27.16, 28.29, 28.35, 28.45, 27.62, 27.11, 26.98]; 
+ 
+%  Create a graphics window，Draw scatter line plots 
+
+----- PAGE 27 (imgs=0) -----
+                                               
+                                           
+figure; 
+hold on; %Make the graphics appear on a picture 
+ 
+% Scatter plot and line plot of yield of four kinds of products were drawn 
+scatter(DFA_CS, TarYield, 'filled'); 
+plot(DFA_CS, TarYield, 'DisplayName', 'Tar Yield'); 
+ 
+scatter(DFA_CS, WaterYield, 'filled'); 
+plot(DFA_CS, WaterYield, 'DisplayName', 'Water Yield'); 
+ 
+scatter(DFA_CS, CharYield, 'filled'); 
+plot(DFA_CS, CharYield, 'DisplayName', 'Char Yield'); 
+ 
+scatter(DFA_CS, SyngasYield, 'filled'); 
+plot(DFA_CS, SyngasYield, 'DisplayName', 'Syngas Yield'); 
+ 
+% add legend 
+legend show; 
+ 
+%Add title and axis labels 
+title('Yield of Decomposition Products vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('Yield (wt.%)'); 
+ 
+% Display grid 
+grid on; 
+ 
+% end 
+hold off; 
+ 
+DFA_CE = [10, 20, 30, 40, 50, 60, 80, 100];  
+TarYield = [34.42 38.31 
+42.69 
+43.78 
+44.53 
+44.41 
+43.24 
+45.28 
+]; 
+WaterYield = [27.42 
+21.37 
+17.84 
+16.9 16.25 
+18.25 
+19.93 
+16.14 
+]; 
+CharYield = [21.43 24.91 
+24.17 
+24.7 24.54 
+24.59 
+23.57 
+24.61 
+]; 
+SyngasYield = [16.73 
+15.41 
+15.3 14.62 
+14.68 
+12.75 
+13.26 
+13.97 
+]; 
+ 
+Yields = {TarYield, WaterYield, CharYield, SyngasYield}; 
+YieldNames = {'Tar Yield', 'Water Yield', 'Char Yield', 'Syngas Yield'}; 
+ 
+% Loop through each yield type and perform linear and polynomial fitting 
+
+----- PAGE 28 (imgs=0) -----
+                                               
+                                           
+for i = 1:length(Yields) 
+    y = Yields{i}; 
+     
+    % Linear fit 
+    [p_lin, S_lin] = polyfit(DFA_CE, y, 1); 
+    y_lin_fit = polyval(p_lin, DFA_CE); 
+     
+    % Polynomial fit (2nd degree) 
+    [p_poly, S_poly] = polyfit(DFA_CE, y, 2); 
+    y_poly_fit = polyval(p_poly, DFA_CE); 
+     
+    % Calculate R-squared for linear and polynomial fits 
+    y_mean = mean(y); 
+    SS_tot = sum((y - y_mean).^2); 
+    SS_res_lin = sum((y - y_lin_fit).^2); 
+    SS_res_poly = sum((y - y_poly_fit).^2); 
+    R2_lin = 1 - SS_res_lin/SS_tot; 
+    R2_poly = 1 - SS_res_poly/SS_tot; 
+     
+    % Plotting the results 
+    figure; 
+    plot(DFA_CE, y, 'ko', 'MarkerFaceColor', 'k'); % Original Data 
+    hold on; 
+    plot(DFA_CE, y_lin_fit, 'b-', 'LineWidth', 2); % Linear Fit 
+    plot(DFA_CE, y_poly_fit, 'r--', 'LineWidth', 2); % Polynomial Fit 
+    hold off; 
+     
+    title([YieldNames{i} ' vs DFA/CE']); 
+    xlabel('DFA/CE'); 
+    ylabel(YieldNames{i}); 
+    legend('Data', ['Linear Fit (R^2 = ' num2str(R2_lin, '%.4f') ')'], ... 
+        ['Polynomial Fit (R^2 = ' num2str(R2_poly, '%.4f') ')']); 
+    grid on; 
+     
+    % Display the fitting equations and R-squared values in the command window 
+    lin_eq = ['Linear Fit: y = ' num2str(p_lin(1), '%.4f') '*x + ' num2str(p_lin(2), '%.4f')]; 
+    poly_eq = ['Polynomial Fit: y = ' num2str(p_poly(1), '%.4f') '*x^2 + ' ... 
+               num2str(p_poly(2), '%.4f') '*x + ' num2str(p_poly(3), '%.4f')]; 
+     
+    disp([YieldNames{i} ':']); 
+    disp(lin_eq); 
+    disp(['R-squared for Linear Fit: ' num2str(R2_lin)]); 
+    disp(poly_eq); 
+    disp(['R-squared for Polynomial Fit: ' num2str(R2_poly)]); 
+
+----- PAGE 29 (imgs=0) -----
+                                               
+                                           
+    disp(' '); 
+end 
+ 
+DFA_CS = [0, 10, 20, 30, 40, 50, 60, 80, 100];  
+TarYield = [19.46, 17.25, 15.43, 14.14, 13.89, 13.21, 12.84, 12.57, 12.13];  
+ 
+% linear fitting 
+fit_lin = polyfit(DFA_CS, TarYield, 1); 
+lin_y = polyval(fit_lin, DFA_CS); 
+ 
+% Draw a fitting graph 
+figure; 
+plot(DFA_CS, TarYield, 'o'); % data point 
+hold on; 
+plot(DFA_CS, lin_y, '-'); % fit line 
+title('Linear Fit of Tar Yield vs DFA/CS'); 
+xlabel('DFA/CS'); 
+ylabel('Tar Yield'); 
+legend('Data Points', 'Linear Fit'); 
+hold off; 
+% The fitting coefficients are converted to symbolic polynomials and displayed 
+syms x 
+lin_poly = poly2sym(fit_lin, x); 
+fprintf('Linear fit equation: y = %s\n', char(lin_poly)); 
+ 
+ 
+ 
+% Polynomial fitting, select the appropriate polynomial order, this time using 2 order polynomial 
+fit_poly = polyfit(DFA_CS, TarYield, 2);  
+poly_y = polyval(fit_poly, DFA_CS); 
+ 
+%Plot the fitted curve and data points 
+figure; 
+plot(DFA_CS, TarYield, 'o'); % data point 
+hold on; 
+plot(DFA_CS, poly_y, '-'); % fitted curve 
+title('Polynomial Fit of Tar Yield vs DFA/CS'); 
+xlabel('DFA/CS'); 
+ylabel('Tar Yield'); 
+legend('Data Points', 'Polynomial Fit'); 
+hold off; 
+ 
+% The fitting coefficients are converted to symbolic polynomials and displayed 
+poly_poly = poly2sym(fit_poly, x); 
+
+----- PAGE 30 (imgs=0) -----
+                                               
+                                           
+fprintf('Polynomial fit equation: y = %s\n', char(poly_poly)); 
+ 
+DFA_LG = [10, 20, 30, 40, 50, 60, 80, 100];  
+TarYield = [18.06 13.77 
+11.29 
+10.28 
+9.49 9.02 10.3 8.19 
+ 
+]; 
+WaterYield = [15.3 18.54 
+20.17 
+20.97 
+21.53 
+21.87 
+21.41 
+23.69 
+ 
+]; 
+CharYield = [58.17 57.46 
+57.13 
+56.98 
+57.14 
+57.23 
+57.15 
+57.43 
+ 
+]; 
+SyngasYield = [8.47 
+10.23 
+11.41 
+11.77 
+11.84 
+11.88 
+11.14 
+10.69 
+ 
+]; 
+ 
+Yields = {TarYield, WaterYield, CharYield, SyngasYield}; 
+YieldNames = {'Tar Yield', 'Water Yield', 'Char Yield', 'Syngas Yield'}; 
+ 
+% Loop through each yield type and perform linear and polynomial fitting 
+for i = 1:length(Yields) 
+    y = Yields{i}; 
+     
+    % Linear fit 
+    [p_lin, S_lin] = polyfit(DFA_LG, y, 1); 
+    y_lin_fit = polyval(p_lin, DFA_LG); 
+     
+    % Polynomial fit (2nd degree) 
+    [p_poly, S_poly] = polyfit(DFA_LG, y, 2); 
+    y_poly_fit = polyval(p_poly, DFA_LG); 
+     
+    % Calculate R-squared for linear and polynomial fits 
+    y_mean = mean(y); 
+    SS_tot = sum((y - y_mean).^2); 
+    SS_res_lin = sum((y - y_lin_fit).^2); 
+    SS_res_poly = sum((y - y_poly_fit).^2); 
+    R2_lin = 1 - SS_res_lin/SS_tot; 
+    R2_poly = 1 - SS_res_poly/SS_tot; 
+     
+    % Plotting the results 
+    figure; 
+    plot(DFA_LG, y, 'ko', 'MarkerFaceColor', 'k'); % Original Data 
+    hold on; 
+    plot(DFA_LG, y_lin_fit, 'b-', 'LineWidth', 2); % Linear Fit 
+
+----- PAGE 31 (imgs=0) -----
+                                               
+                                           
+    plot(DFA_LG, y_poly_fit, 'r--', 'LineWidth', 2); % Polynomial Fit 
+    hold off; 
+     
+    title([YieldNames{i} ' vs DFA/LG']); 
+    xlabel('DFA/LG'); 
+    ylabel(YieldNames{i}); 
+    legend('Data', ['Linear Fit (R^2 = ' num2str(R2_lin, '%.4f') ')'], ... 
+        ['Polynomial Fit (R^2 = ' num2str(R2_poly, '%.4f') ')']); 
+    grid on; 
+     
+    % Display the fitting equations and R-squared values in the command window 
+    lin_eq = ['Linear Fit: y = ' num2str(p_lin(1), '%.4f') '*x + ' num2str(p_lin(2), '%.4f')]; 
+    poly_eq = ['Polynomial Fit: y = ' num2str(p_poly(1), '%.4f') '*x^2 + ' ... 
+               num2str(p_poly(2), '%.4f') '*x + ' num2str(p_poly(3), '%.4f')]; 
+     
+    disp([YieldNames{i} ':']); 
+    disp(lin_eq); 
+    disp(['R-squared for Linear Fit: ' num2str(R2_lin)]); 
+    disp(poly_eq); 
+    disp(['R-squared for Polynomial Fit: ' num2str(R2_poly)]); 
+    disp(' '); 
+end 
+ 
+DFA_CS = [0, 10, 20, 30, 40, 50, 60, 80, 100]'; 
+TarYield = [19.46, 17.25, 15.43, 14.14, 13.89, 13.21, 12.84, 12.57, 12.13]'; 
+WaterYield = [26.84, 27.64, 28.11, 28.23, 28.62, 29.01, 30.07, 30.68, 31.02]'; 
+CharYield = [29.21, 29.11, 29.3, 29.34, 29.14, 29.33, 29.47, 29.64, 29.87]'; 
+SyngasYield = [24.49, 26, 27.16, 28.29, 28.35, 28.45, 27.62, 27.11, 26.98]'; 
+ 
+% Creating a table from the data 
+data = table(DFA_CS, TarYield, WaterYield, CharYield, SyngasYield); 
+ 
+% Calculating the correlation matrix 
+corrMatrix = corr(data{:,:}); 
+ 
+% Plotting the heatmap of the correlation matrix 
+figure; 
+heatmap(data.Properties.VariableNames, data.Properties.VariableNames, corrMatrix); 
+title('Heatmap of Correlation Matrix'); 
+colorbar; 
+ 
+DFA_CS = [0, 10, 20, 30, 40, 50, 60, 80, 100];  
+TarYield = [19.46, 17.25, 15.43, 14.14, 13.89, 13.21, 12.84, 12.57, 12.13];  
+ 
+
+----- PAGE 32 (imgs=0) -----
+                                               
+                                           
+% linear fitting 
+fit_lin = polyfit(DFA_CS, TarYield, 1); 
+lin_y = polyval(fit_lin, DFA_CS); 
+ 
+% Draw a fitting graph 
+figure; 
+plot(DFA_CS, TarYield, 'o'); % data point 
+hold on; 
+plot(DFA_CS, lin_y, '-'); % fit line 
+title('Linear Fit of Tar Yield vs DFA/CS'); 
+xlabel('DFA/CS'); 
+ylabel('Tar Yield'); 
+legend('Data Points', 'Linear Fit'); 
+hold off; 
+% The fitting coefficients are converted to symbolic polynomials and displayed 
+syms x 
+lin_poly = poly2sym(fit_lin, x); 
+fprintf('Linear fit equation: y = %s\n', char(lin_poly)); 
+ 
+ 
+ 
+% Polynomial fitting, select the appropriate polynomial order, this time using 2 order polynomial 
+fit_poly = polyfit(DFA_CS, TarYield, 2);  
+poly_y = polyval(fit_poly, DFA_CS); 
+ 
+%Plot the fitted curve and data points 
+figure; 
+plot(DFA_CS, TarYield, 'o'); % data point 
+hold on; 
+plot(DFA_CS, poly_y, '-'); % fitted curve 
+title('Polynomial Fit of Tar Yield vs DFA/CS'); 
+xlabel('DFA/CS'); 
+ylabel('Tar Yield'); 
+legend('Data Points', 'Polynomial Fit'); 
+hold off; 
+ 
+% The fitting coefficients are converted to symbolic polynomials and displayed 
+poly_poly = poly2sym(fit_poly, x); 
+fprintf('Polynomial fit equation: y = %s\n', char(poly_poly)); 
+ 
+DFA_CE = [20, 40, 50, 80, 100]; 
+H2 = [26.6, 47.8, 55.6, 65.8, 57.9]; 
+CO = [13.7, 10.6, 8.1, 6.5, 5.3]; 
+CO2 = [18.7, 9.8, 5.9, 3.2, 2]; 
+
+----- PAGE 33 (imgs=0) -----
+                                               
+                                           
+CH4 = [3.2, 1.9, 1.3, 1.3, 0.7]; 
+C2H6 = [13.8, 8.6, 4.4, 3.4, 3.2]; 
+ 
+% Create a new graphics window 
+figure; 
+ 
+% Draw a scatter line plot of H2 yield 
+subplot(2,3,1); 
+plot(DFA_CE, H2, 'o-'); 
+title('H2 Yield vs DFA/CE Ratio'); 
+xlabel('DFA/CE Ratio'); 
+ylabel('H2 Yield'); 
+grid on; 
+ 
+% Draw a scatter line plot of CO yield 
+subplot(2,3,2); 
+plot(DFA_CE, CO, 'o-'); 
+title('CO Yield vs DFA/CE Ratio'); 
+xlabel('DFA/CE Ratio'); 
+ylabel('CO Yield'); 
+grid on; 
+ 
+% Draw a scatter line plot of CO2 yield 
+subplot(2,3,3); 
+plot(DFA_CE, CO2, 'o-'); 
+title('CO2 Yield vs DFA/CE Ratio'); 
+xlabel('DFA/CE Ratio'); 
+ylabel('CO2 Yield'); 
+grid on; 
+ 
+% Draw a scatter line plot of CH4 yield 
+subplot(2,3,4); 
+plot(DFA_CE, CH4, 'o-'); 
+title('CH4 Yield vs DFA/CE Ratio'); 
+xlabel('DFA/CE Ratio'); 
+ylabel('CH4 Yield'); 
+grid on; 
+ 
+% Draw a scatter line plot of C2H6 yield 
+subplot(2,3,5); 
+plot(DFA_CE,C2H6,  'o-'); 
+title('C2H6 Yield vs DFA/CE Ratio'); 
+xlabel('DFA/CE Ratio'); 
+ylabel('C2H6 Yield'); 
+
+----- PAGE 34 (imgs=0) -----
+                                               
+                                           
+grid on; 
+ 
+ 
+tight_layout(); 
+set(gcf, 'Position', [100, 100, 1024, 768]); % Set graphic size 
+saveas(gcf, 'Pyrolysis_Yields_vs_DFACERatio.png'); 
+ 
+DFA_CS = [0, 20, 40, 50, 80, 100]; 
+H2 = [6.48, 12.94, 22.65, 30.35, 37.93, 43.62]; 
+CO = [25.93, 21.61, 20.53, 20.95, 22, 23.32]; 
+CO2 = [60.4, 57.84, 52.31, 51.92, 51.53, 50.91]; 
+CH4 = [23.41, 28.79, 33.11, 32.45, 30.83, 30.21]; 
+C2H6 = [2.09, 2.73, 3.08, 2.99, 2.96, 2.94]; 
+C3H8 = [0.55, 0.61, 0.62, 0.71, 0.88, 0.87]; 
+C3H6 = [0.35, 0.37, 0.41, 0.39, 0.37, 0.38]; 
+C2H4 = [0.71, 0.74, 0.81, 0.79, 0.77, 0.75]; 
+C4H10 = [0.32, 0.48, 0.56, 0.37, 0.28, 0.25]; 
+ 
+% Create a new graphics window 
+figure; 
+ 
+% Plot a scatter line plot of H2 yield 
+subplot(3, 3, 1); 
+plot(DFA_CS, H2, '-o'); 
+title('H2 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('H2 Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of CO yield 
+subplot(3, 3, 2); 
+plot(DFA_CS, CO, '-o'); 
+title('CO Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('CO Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of CO2 yield 
+subplot(3, 3, 3); 
+plot(DFA_CS, CO2, '-o'); 
+title('CO2 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('CO2 Yield (%)'); 
+grid on; 
+
+----- PAGE 35 (imgs=0) -----
+                                               
+                                           
+ 
+% Draw a scatter line plot of CH4 yield 
+subplot(3, 3, 4); 
+plot(DFA_CS, CH4, '-o'); 
+title('CH4 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('CH4 Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of C2H6 yield 
+subplot(3, 3, 5); 
+plot(DFA_CS, C2H6, '-o'); 
+title('C2H6 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('C2H6 Yield (%)'); 
+grid on; 
+ 
+%Draw a scatter line plot of C3H8 yield 
+subplot(3, 3, 6); 
+plot(DFA_CS, C3H8, '-o'); 
+title('C3H8 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('C3H6 Yield (%)'); 
+grid on; 
+ 
+%Draw a scatter line plot of C3H6 yield 
+subplot(3, 3, 7); 
+plot(DFA_CS, C3H6, '-o'); 
+title('C3H6 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('C3H6 Yield (%)'); 
+grid on; 
+ 
+%Draw a scatter line plot of C2H4 yield 
+subplot(3, 3, 8); 
+plot(DFA_CS, C2H4, '-o'); 
+title('C2H4 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('C2H4 Yield (%)'); 
+grid on; 
+ 
+%Draw a scatter line plot of C4H10 yield 
+subplot(3, 3, 9); 
+plot(DFA_CS, C4H10, '-o'); 
+
+----- PAGE 36 (imgs=0) -----
+                                               
+                                           
+title('C4H10 Yield vs DFA/CS Ratio'); 
+xlabel('DFA/CS Ratio'); 
+ylabel('C4H10 Yield (%)'); 
+grid on; 
+ 
+set(gcf, 'Position', [100, 100, 1024, 768]); % Set graphic size 
+tight_layout(); 
+ 
+ 
+saveas(gcf, 'Pyrolysis_Gas_Yields_vs_DFACS.png'); 
+ 
+DFA_LG = [20, 40, 50, 80, 100]; 
+H2 = [0.67, 0.72, 0.78, 0.81, 0.79]; 
+CO = [15.23, 15.76, 17.305, 19.075, 20.935]; 
+CO2 = [24.35, 37.91, 39.26, 41.23, 43.56]; 
+CH4 = [27.67, 33.25, 33.86, 30.26, 29.87]; 
+C2H6 = [0.08, 0.06, 0.09, 0.07, 0.05]; 
+ 
+% Create a new graphics window 
+figure; 
+ 
+% Set drawing color 
+colors = lines(5); % 'lines'A is a MATLAB built-in function that generates colors 
+ 
+% Draw a scatter line plot of H2 yield 
+subplot(2, 3, 1); 
+plot(DFA_LG, H2, 'o-'); 
+title('H2 Yield vs DFA/LG Ratio'); 
+xlabel('DFA/LG Ratio'); 
+ylabel('H2 Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of CO yield 
+subplot(2, 3, 2); 
+plot(DFA_LG, CO, 'o-'); 
+title('CO Yield vs DFA/LG Ratio'); 
+xlabel('DFA/LG Ratio'); 
+ylabel('CO Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of CO2 yield 
+subplot(2, 3, 3); 
+plot(DFA_LG, CO2, 'o-'); 
+title('CO2 Yield vs DFA/LG Ratio'); 
+
+----- PAGE 37 (imgs=0) -----
+                                               
+                                           
+xlabel('DFA/LG Ratio'); 
+ylabel('CO2 Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of CH4 yield 
+subplot(2, 3, 4); 
+plot(DFA_LG, CH4, 'o-'); 
+title('CH4 Yield vs DFA/LG Ratio'); 
+xlabel('DFA/LG Ratio'); 
+ylabel('CH4 Yield (%)'); 
+grid on; 
+ 
+% Draw a scatter line plot of C2H6 yield 
+subplot(2, 3, 5); 
+plot(DFA_LG, C2H6,  'o-'); 
+title('C2H6 Yield vs DFA/LG Ratio'); 
+xlabel('DFA/LG Ratio'); 
+ylabel('C2H6 Yield (%)'); 
+grid on; 
+ 
+set(gcf, 'Position', [100, 100, 1024, 768]); % Set graphic size 
+tight_layout(); 
+ 
+saveas(gcf, 'Gas_Yields_vs_DFALG.png'); 
+ 
+DFA_CE = [20, 40, 50, 80, 100]; 
+H2 = [26.6, 47.8, 55.6, 65.8, 57.9]; 
+CO = [13.7, 10.6, 8.1, 6.5, 5.3]; 
+CO2 = [18.7, 9.8, 5.9, 3.2, 2]; 
+CH4 = [3.2, 1.9, 1.3, 1.3, 0.7]; 
+C2H6 = [13.8, 8.6, 4.4, 3.4, 3.2]; 
+ 
+figure; 
+ 
+plot(DFA_CE, [H2', CO', CO2', CH4', C2H6']); 
+title('Effect of DFA/CE on Gas Yields'); 
+xlabel('DFA/CE'); 
+ylabel('Gas Yield (%)'); 
+legend('H2', 'CO', 'CO2', 'CH4', 'C2H6'); 
+grid on; 
+ 
+DFA_CS = [0, 20, 40, 50, 80, 100]; 
+H2 = [6.48, 12.94, 22.65, 30.35, 37.93, 43.62]; 
+CO = [25.93, 21.61, 20.53, 20.95, 22, 23.32]; 
+
+----- PAGE 38 (imgs=0) -----
+                                               
+                                           
+CO2 = [60.4, 57.84, 52.31, 51.92, 51.53, 50.91]; 
+CH4 = [23.41, 28.79, 33.11, 32.45, 30.83, 30.21]; 
+C2H6 = [2.09, 2.73, 3.08, 2.99, 2.96, 2.94]; 
+C3H8 = [0.55, 0.61, 0.62, 0.71, 0.88, 0.87]; 
+C3H6 = [0.35, 0.37, 0.41, 0.39, 0.37, 0.38]; 
+C2H4 = [0.71, 0.74, 0.81, 0.79, 0.77, 0.75]; 
+C4H10 = [0.32, 0.48, 0.56, 0.37, 0.28, 0.25]; 
+ 
+% Plotting 
+figure; 
+ 
+plot(DFA_CS, [H2', CO', CO2', CH4', C2H6', C3H8', C3H6', C2H4', C4H10']); 
+title('Effect of DFA/CS on Gas Yields'); 
+xlabel('DFA/CS'); 
+ylabel('Gas Yield (%)'); 
+legend('H2', 'CO', 'CO2', 'CH4', 'C2H6', 'C3H8', 'C3H6', 'C2H4', 'C4H10'); 
+grid on; 
+ 
+DFA_LG = [20, 40, 50, 80, 100]; 
+H2 = [0.67, 0.72, 0.78, 0.81, 0.79]; 
+CO = [15.23, 15.76, 17.305, 19.075, 20.935]; 
+CO2 = [24.35, 37.91, 39.26, 41.23, 43.56]; 
+CH4 = [27.67, 33.25, 33.86, 30.26, 29.87]; 
+C2H6 = [0.08, 0.06, 0.09, 0.07, 0.05]; 
+ 
+figure; 
+ 
+plot(DFA_LG, [H2', CO', CO2', CH4', C2H6']); 
+title('Effect of DFA/LG on Gas Yields'); 
+xlabel('DFA/LG'); 
+ylabel('Gas Yield (%)'); 
+legend('H2', 'CO', 'CO2', 'CH4', 'C2H6'); 
+grid on; 
+ 
+DFA_CS = [0, 20, 40, 50, 80, 100]; 
+H2 = [6.48, 12.94, 22.65, 30.35, 37.93, 43.62]; 
+CO = [25.93, 21.61, 20.53, 20.95, 22, 23.32]; 
+CO2 = [60.4, 57.84, 52.31, 51.92, 51.53, 50.91]; 
+CH4 = [23.41, 28.79, 33.11, 32.45, 30.83, 30.21]; 
+C2H6 = [2.09, 2.73, 3.08, 2.99, 2.96, 2.94]; 
+C3H8 = [0.55, 0.61, 0.62, 0.71, 0.88, 0.87]; 
+C3H6 = [0.35, 0.37, 0.41, 0.39, 0.37, 0.38]; 
+C2H4 = [0.71, 0.74, 0.81, 0.79, 0.77, 0.75]; 
+C4H10 = [0.32, 0.48, 0.56, 0.37, 0.28, 0.25]; 
+
+----- PAGE 39 (imgs=0) -----
+                                               
+                                           
+ 
+ 
+figure; 
+ 
+plot(DFA_CS, [H2', CO', CO2', CH4', C2H6', C3H8']); 
+title('Major Gas Yields'); 
+xlabel('DFA/CS'); 
+ylabel('Gas Yield (%)'); 
+legend('H2', 'CO', 'CO2', 'CH4', 'C2H6', 'C3H8'); 
+grid on; 
+ 
+H2_CE = [26.6, 47.8, 55.6, 65.8, 57.9]; 
+CO_CE = [13.7, 10.6, 8.1, 6.5, 5.3]; 
+CO2_CE = [18.7, 9.8, 5.9, 3.2, 2]; 
+CH4_CE = [3.2, 1.9, 1.3, 1.3, 0.7]; 
+C2H6_CE = [13.8, 8.6, 4.4, 3.4, 3.2]; 
+ 
+ 
+H2_LG = [0.67, 0.72, 0.78, 0.81, 0.79]; 
+CO_LG = [15.23, 15.76, 17.305, 19.075, 20.935]; 
+CO2_LG = [24.35, 37.91, 39.26, 41.23, 43.56]; 
+CH4_LG = [27.67, 33.25, 33.86, 30.26, 29.87]; 
+C2H6_LG = [0.08, 0.06, 0.09, 0.07, 0.05]; 
+ 
+% Using Rank Sum Test (Mann Whitney U Test) 
+[p_value_H2, ~, stats_H2] = ranksum(H2_CE, H2_LG); 
+[p_value_CO, ~, stats_CO] = ranksum(CO_CE, CO_LG); 
+[p_value_CO2, ~, stats_CO2] = ranksum(CO2_CE, CO2_LG); 
+[p_value_CH4, ~, CH4_syngas] = ranksum(CH4_CE, CH4_LG); 
+[p_value_C2H6, ~, C2H6] = ranksum(C2H6_CE, C2H6_LG); 
+% Output inspection results 
+fprintf('Rank Sum Test (Mann Whitney U Test)\n'); 
+fprintf('H2 P Value: %.4f\n', p_value_H2); 
+fprintf('CO P Value: %.4f\n', p_value_CO); 
+fprintf('CO2 P Value: %.4f\n', p_value_CO2); 
+fprintf('CH4 P Value: %.4f\n', p_value_CH4); 
+fprintf('C2H6 P Value: %.4f\n', p_value_C2H6); 
+% Determine whether to reject the null hypothesis 
+alpha = 0.05; 
+if any([p_value_H2, p_value_CO, p_value_CO2, p_value_CH4,p_value_C2H6] < alpha) 
+    disp('Refusing the null hypothesis, there is a significant difference'); 
+else 
+    disp('Refusing the null hypothesis, there is a significant difference; rejecting the null hypothesis, 
+no significant difference found'); 
+
+----- PAGE 40 (imgs=0) -----
+                                               
+                                           
+end 
+ 
+tar_yield_CE = [34.42, 38.31, 42.69, 43.78, 44.53, 44.41, 43.24, 45.28]; 
+water_yield_CE = [27.42, 21.37, 17.84, 16.9, 16.25, 18.25, 19.93, 16.14]; 
+char_yield_CE = [21.43, 24.91, 24.17, 24.7, 24.54, 24.59, 23.57, 24.61]; 
+syngas_yield_CE = [16.73, 15.41, 15.3, 14.62, 14.68, 12.75, 13.26, 13.97]; 
+ 
+tar_yield_LG = [18.06, 13.77, 11.29, 10.28, 9.49, 9.02, 10.3, 8.19]; 
+water_yield_LG = [15.3, 18.54, 20.17, 20.97, 21.53, 21.87, 21.41, 23.69]; 
+char_yield_LG = [58.17, 57.46, 57.13, 56.98, 57.14, 57.23, 57.15, 57.43]; 
+syngas_yield_LG = [8.47, 10.23, 11.41, 11.77, 11.84, 11.88, 11.14, 10.69]; 
+ 
+% Using Rank Sum Test (Mann Whitney U Test) 
+[p_value_tar, ~, stats_tar] = ranksum(tar_yield_CE, tar_yield_LG); 
+[p_value_water, ~, stats_water] = ranksum(water_yield_CE, water_yield_LG); 
+[p_value_char, ~, stats_char] = ranksum(char_yield_CE, char_yield_LG); 
+[p_value_syngas, ~, stats_syngas] = ranksum(syngas_yield_CE, syngas_yield_LG); 
+ 
+% Output inspection results 
+fprintf('Rank Sum Test (Mann Whitney U Test)\n'); 
+fprintf('Tar yield P Value: %.4f\n', p_value_tar); 
+fprintf('Water yield P Value: %.4f\n', p_value_water); 
+fprintf('Char yield P Value: %.4f\n', p_value_char); 
+fprintf('Syngas yield P Value: %.4f\n', p_value_syngas); 
+ 
+% Determine whether to reject the null hypothesis 
+alpha = 0.05; 
+if any([p_value_tar, p_value_water, p_value_char, p_value_syngas] < alpha) 
+    disp('Refusing the null hypothesis, there is a significant difference'); 
+else 
+    disp('Refusing the null hypothesis, there is a significant difference; rejecting the null hypothesis, 
+no significant difference found'); 
+end 
+ 
+dfa_CE_ratios = {'20/100', '40/100', '50/100',  '80/100', '100/100'}; 
+H2_CE = [26.6, 47.8, 55.6, 65.8, 57.9]; 
+CO_CE = [13.7, 10.6, 8.1, 6.5, 5.3]; 
+CO2_CE = [18.7, 9.8, 5.9, 3.2, 2]; 
+CH4_CE = [3.2, 1.9, 1.3, 1.3, 0.7]; 
+C2H6_CE = [13.8, 8.6, 4.4, 3.4, 3.2]; 
+ 
+ 
+H2_LG = [0.67, 0.72, 0.78, 0.81, 0.79]; 
+CO_LG = [15.23, 15.76, 17.305, 19.075, 20.935]; 
+
+----- PAGE 41 (imgs=0) -----
+                                               
+                                           
+CO2_LG = [24.35, 37.91, 39.26, 41.23, 43.56]; 
+CH4_LG = [27.67, 33.25, 33.86, 30.26, 29.87]; 
+C2H6_LG = [0.08, 0.06, 0.09, 0.07, 0.05]; 
+ 
+% Create a drawing 
+figure; 
+ 
+% Draw a bar chart of DFA/CE 
+subplot(2, 1, 1); 
+bar_data_dfa_CE = [H2_CE; CO_CE; CO2_CE; CH4_CE;C2H6_CE]; 
+bar(bar_data_dfa_CE', 'BarWidth', 0.8); 
+set(gca, 'XTickLabel', dfa_CE_ratios, 'XTick', 1:numel(dfa_CE_ratios)); 
+legend({'H2', 'CO', 'CO2', 'CH4','C2H6'}, 'Location', 'BestOutside'); 
+title('DFA/CE'); 
+xlabel('DFA/CE Ratios'); 
+ylabel('Productivity(%)'); 
+ 
+% Draw a bar chart of DFA/LG 
+subplot(2, 1, 2); 
+bar_data_dfa_LG = [H2_LG; CO_LG; CO2_LG;CH4_LG;C2H6_LG]; 
+bar(bar_data_dfa_LG', 'BarWidth', 0.8); 
+set(gca, 'XTickLabel', dfa_CE_ratios, 'XTick', 1:numel(dfa_CE_ratios)); 
+legend({'H2', 'CO', 'CO2', 'CH4','C2H6'}, 'Location', 'BestOutside'); 
+title('DFA/LG'); 
+xlabel('DFA/LG Ratios'); 
+ylabel('Productivity(%)'); 
+ 
+ 
+sgtitle('Productivity(%) (DFA/CE and DFA/LG)'); 
+ 
+dfa_CE_ratios = {'10/100', '20/100', '30/100', '40/100', '50/100', '60/100', '80/100', '100/100'}; 
+tar_yield_dfa_CE = [34.42, 38.31, 42.69, 43.78, 44.53, 44.41, 43.24, 45.28]; 
+water_yield_dfa_CE = [27.42, 21.37, 17.84, 16.9, 16.25, 18.25, 19.93, 16.14]; 
+char_yield_dfa_CE = [21.43, 24.91, 24.17, 24.7, 24.54, 24.59, 23.57, 24.61]; 
+syngas_yield_dfa_CE = [16.73, 15.41, 15.3, 14.62, 14.68, 12.75, 13.26, 13.97]; 
+ 
+tar_yield_dfa_LG = [18.06, 13.77, 11.29, 10.28, 9.49, 9.02, 10.3, 8.19]; 
+water_yield_dfa_LG = [15.3, 18.54, 20.17, 20.97, 21.53, 21.87, 21.41, 23.69]; 
+char_yield_dfa_LG = [58.17, 57.46, 57.13, 56.98, 57.14, 57.23, 57.15, 57.43]; 
+syngas_yield_dfa_LG = [8.47, 10.23, 11.41, 11.77, 11.84, 11.88, 11.14, 10.69]; 
+ 
+% Create a drawing 
+figure; 
+ 
+
+----- PAGE 42 (imgs=0) -----
+                                               
+                                           
+% Draw a bar chart of DFA/CE 
+subplot(2, 1, 1); 
+bar_data_dfa_CE 
+= 
+[tar_yield_dfa_CE; 
+water_yield_dfa_CE; 
+char_yield_dfa_CE; 
+syngas_yield_dfa_CE]; 
+bar(bar_data_dfa_CE', 'BarWidth', 0.8); 
+set(gca, 'XTickLabel', dfa_CE_ratios, 'XTick', 1:numel(dfa_CE_ratios)); 
+legend({'Tar Yield', 'Water Yield', 'Char Yield', 'Syngas Yield'}, 'Location', 'BestOutside'); 
+title('DFA/CE'); 
+xlabel('DFA/CE Ratios'); 
+ylabel('Yield (%)'); 
+ 
+% Draw a bar chart of DFA/LG 
+subplot(2, 1, 2); 
+bar_data_dfa_LG 
+= 
+[tar_yield_dfa_LG; 
+water_yield_dfa_LG; 
+char_yield_dfa_LG; 
+syngas_yield_dfa_LG]; 
+bar(bar_data_dfa_LG', 'BarWidth', 0.8); 
+set(gca, 'XTickLabel', dfa_CE_ratios, 'XTick', 1:numel(dfa_CE_ratios)); 
+legend({'Tar Yield', 'Water Yield', 'Char Yield', 'Syngas Yield'}, 'Location', 'BestOutside'); 
+title('DFA/LG'); 
+xlabel('DFA/LG Ratios'); 
+ylabel('Yield (%)'); 
+ 
+ 
+sgtitle('Comparison of Yields (DFA/CE and DFA/LG)'); 
+ 
+DFA_over_CE = [10, 20, 30, 40, 50, 60, 80, 100]; 
+Tar_yield = [34.42, 38.31, 42.69, 43.78, 44.53, 44.41, 43.24, 45.28]; 
+Water_yield = [27.42, 21.37, 17.84, 16.9, 16.25, 18.25, 19.93, 16.14]; 
+Char_yield = [21.43, 24.91, 24.17, 24.7, 24.54, 24.59, 23.57, 24.61]; 
+Syngas_yield = [16.73, 15.41, 15.3, 14.62, 14.68, 12.75, 13.26, 13.97]; 
+ 
+%Set initial guess parameter values 
+k_Tar_initial = 0.1; 
+m_Tar_initial = 2; 
+n_Tar_initial = 1; 
+k_dec_Tar_initial = 0.01; 
+ 
+k_Water_initial = 0.1; 
+m_Water_initial = 2; 
+n_Water_initial = 1; 
+k_dec_Water_initial = 0.01; 
+ 
+k_Char_initial = 0.1; 
+m_Char_initial = 2; 
+
+----- PAGE 43 (imgs=0) -----
+                                               
+                                           
+n_Char_initial = 1; 
+k_dec_Char_initial = 0.01; 
+ 
+k_Syngas_initial = 0.1; 
+m_Syngas_initial = 2; 
+n_Syngas_initial = 1; 
+k_dec_Syngas_initial = 0.01; 
+ 
+% Initial Guess Parameter Values 
+initial_guess = [k_Tar_initial, m_Tar_initial, n_Tar_initial, k_dec_Tar_initial, ... 
+                  k_Water_initial, m_Water_initial, n_Water_initial, k_dec_Water_initial, ... 
+                  k_Char_initial, m_Char_initial, n_Char_initial, k_dec_Char_initial, ... 
+                  k_Syngas_initial, 
+m_Syngas_initial, 
+n_Syngas_initial, 
+k_dec_Syngas_initial]; 
+ 
+% Fitting using lsqcurvefit 
+fit_params = lsqcurvefit(@reaction_model, initial_guess, DFA_over_CE, [Tar_yield; Water_yield; 
+Char_yield; Syngas_yield]); 
+ 
+% Output fitted parameters 
+disp('Fitted parameters:'); 
+disp(['k_Tar = ', num2str(fit_params(1))]); 
+disp(['m_Tar = ', num2str(fit_params(2))]); 
+disp(['n_Tar = ', num2str(fit_params(3))]); 
+disp(['k_dec_Tar = ', num2str(fit_params(4))]); 
+ 
+disp(['k_Water = ', num2str(fit_params(5))]); 
+disp(['m_Water = ', num2str(fit_params(6))]); 
+disp(['n_Water = ', num2str(fit_params(7))]); 
+disp(['k_dec_Water = ', num2str(fit_params(8))]); 
+ 
+disp(['k_Char = ', num2str(fit_params(9))]); 
+disp(['m_Char = ', num2str(fit_params(10))]); 
+disp(['n_Char = ', num2str(fit_params(11))]); 
+disp(['k_dec_Char = ', num2str(fit_params(12))]); 
+ 
+disp(['k_Syngas = ', num2str(fit_params(13))]); 
+disp(['m_Syngas = ', num2str(fit_params(14))]); 
+disp(['n_Syngas = ', num2str(fit_params(15))]); 
+disp(['k_dec_Syngas = ', num2str(fit_params(16))]); 
+ 
+% Calculate R ² value 
+y_pred = reaction_model(fit_params, DFA_over_CE); 
+R2 = 1 - sum((y_pred - [Tar_yield; Water_yield; Char_yield; Syngas_yield]).^2) / 
+
+----- PAGE 44 (imgs=0) -----
+                                               
+                                           
+sum((mean([Tar_yield; Water_yield; Char_yield; Syngas_yield]) - [Tar_yield; Water_yield; 
+Char_yield; Syngas_yield]).^2); 
+ 
+disp(['R² value: ', num2str(R2)]); 
+ 
+% Draw fitting curve 
+DFA_over_CE_fit = linspace(10, 100, 100); 
+rates_fit = reaction_model(fit_params, DFA_over_CE_fit); 
+ 
+figure; 
+ 
+subplot(2, 1, 1); 
+plot(DFA_over_CE, [Tar_yield; Water_yield; Char_yield; Syngas_yield], 'o', 'DisplayName', 
+'experimental data'); 
+hold on; 
+plot(DFA_over_CE_fit, rates_fit, '-', 'DisplayName', 'Fit curve'); 
+xlabel('DFA/CE'); 
+ylabel('Product yield'); 
+legend('Location', 'Best'); 
+title('DFA catalytic reaction kinetics fitting'); 
+grid on; 
+ 
+% Draw a schematic diagram of the dynamic model 
+subplot(2, 1, 2); 
+DFA_over_CE_model = linspace(10, 100, 100); 
+rates_model = reaction_model(fit_params, DFA_over_CE_model); 
+ 
+plot(DFA_over_CE_model, rates_model, '-', 'LineWidth', 2); 
+xlabel('DFA/CE'); 
+ylabel('Product yield'); 
+title('Schematic diagram of dynamic model'); 
+grid on; 
+ 
+function rates = reaction_model(params, DFA_over_LG) 
+    k1a = params(1); 
+    k1b = params(2); 
+    m = params(3); 
+    n = params(4); 
+    k2a = params(5); 
+    p = params(6); 
+    q = params(7); 
+    k3 = params(8); 
+    k4 = params(9); 
+    k5 = params(10); 
+
+----- PAGE 45 (imgs=0) -----
+                                               
+                                           
+    k6 = params(11); 
+ 
+    %Use the selected dynamic equation 
+    Rate_LG = k1a * DFA_over_LG.^m + k1b * DFA_over_LG; 
+    Rate_Syngas = k2a * Rate_LG.^p; 
+    Rate_Surface = k3 * Rate_Syngas; 
+    Rate_Tar = k4 * Rate_Syngas; 
+    Rate_Water = k5 * Rate_Syngas; 
+    Rate_Char = k6 * Rate_LG; 
+ 
+    % Combine rates into a vector 
+    rates = [Rate_Tar; Rate_Water; Rate_Char; Rate_Syngas]; 
+end 
+ 
+figure; 
+ 
+%Set coordinate mapping range 
+x_scale = 5; % Adjust this value to fit the specific situation 
+y_scale = 5; % Adjust this value to fit the specific situation 
+% Set the coordinates of reactants and products 
+LG_x = 1 / x_scale; 
+Syngas_x = 2 / x_scale; 
+Tar_x = 2 / x_scale; 
+Water_x = 2 / x_scale; 
+Char_x = 2 / x_scale; 
+ 
+LG_y = 2 / y_scale; 
+Syngas_y = 4 / y_scale; 
+Tar_y = 3 / y_scale; 
+Water_y = 2 / y_scale; 
+Char_y = 1 / y_scale; 
+ 
+% Draw arrows to indicate reactions 
+annotation('arrow', [LG_x, Syngas_x], [LG_y, Syngas_y], 'HeadWidth', 0.05, 'HeadLength', 0.05); 
+annotation('arrow', [LG_x, Tar_x], [LG_y, Tar_y], 'HeadWidth', 0.05, 'HeadLength', 0.05); 
+annotation('arrow', [LG_x, Water_x], [LG_y, Water_y], 'HeadWidth', 0.05, 'HeadLength', 0.05); 
+annotation('arrow', [LG_x, Char_x], [LG_y, Char_y], 'HeadWidth', 0.05, 'HeadLength', 0.05); 
+ 
+% Add text labels to the diagram 
+text(LG_x, LG_y, 'LG', 'FontSize', 12, 'HorizontalAlignment', 'right'); 
+text(Syngas_x, Syngas_y, 'Syngas', 'FontSize', 12, 'HorizontalAlignment', 'left'); 
+text(Tar_x, Tar_y, 'Tar', 'FontSize', 12, 'HorizontalAlignment', 'left'); 
+text(Water_x, Water_y, 'Water', 'FontSize', 12, 'HorizontalAlignment', 'left'); 
+text(Char_x, Char_y, 'Char', 'FontSize', 12, 'HorizontalAlignment', 'left'); 
+
+----- PAGE 46 (imgs=0) -----
+                                               
+                                           
+ 
+% Set axis labels and titles 
+xlabel('x-axis'); 
+ylabel('Y-axis'); 
+title('Schematic diagram of gasification and cracking reactions'); 
+ 
+% show grid 
+grid on; 
+ 
+A=[0/100 
+10/100 
+20/100 
+30/100 
+40/100 
+50/100 
+60/100 
+80/100 
+100/100 
+];  %The A matrix row represents the number of groups of input data in the training set, and the 
+list shows the number of input indicators; 
+  
+y=[19.46    26.84   29.21   24.49 
+17.25   27.64   29.11   26 
+15.43   28.11   29.3    27.16 
+14.14   28.23   29.34   28.29 
+13.89   28.62   29.14   28.35 
+13.21   29.01   29.33   28.45 
+12.84   30.07   29.47   27.62 
+12.57   30.68   29.64   27.11 
+12.13   31.02   29.87   26.98 
+  
+]';% The y-matrix row represents the number of groups of input data in the training set, and the list 
+shows the number of input indicators; 
+  
+[n1,n]=size(A); %%n represents the number of independent variables 
+[m,m1]=size(y); %m represents the number of dependent variables 
+p=A';  %Merge all independent variables to obtain the input data matrix 
+t=y; %Merge all dependent variables into the target data matrix 
+%Normalizing data using the premnmx function 
+  
+[pn,minp,maxp,tn,mint,maxt]=premnmx(p,t); % Normalize the input matrix p and output matrix t 
+u=ones(n,1); 
+dx=[-1*u,1*u];                   %After normalization, the minimum value is -1 and the 
+maximum value is 1 
+
+----- PAGE 47 (imgs=0) -----
+                                               
+                                           
+%BP network training 
+net=newff(dx,[n,7,m],{'tansig','tansig','purelin'},'traingdx'); %Establish a model and train it using 
+gradient descent method． 
+  
+net.trainParam.show=1000;               %Display results once every 1000 cycles 
+net.trainParam.Lr=0.05;                 %The learning speed is 0.05 
+net.trainParam.epochs=50000;           %The maximum training cycle is 50000 times 
+net.trainParam.goal=0.65*10^(-3);     %mean squared error 
+net=train(net,pn,tn);                   %Start training, where pn and tn are input and output 
+samples respectively 
+%Simulating BP Networks Using Raw Data 
+an=sim(net,pn);           %Simulate with trained models 
+a=postmnmx(an,mint,maxt); % Restore the simulated data to the original order of magnitude; 
+pnew=[p 
+  
+     ]  %%Enter the parameters of the independent variable, with each row representing one 
+independent variable and the number of columns representing the number of predictions 
+  
+pnewn=tramnmx(pnew,minp,maxp); %Normalize the new data using the normalization parameters 
+of the original input data; 
+anewn=sim(net,pnewn);            %Simulate using normalized data; 
+anew=postmnmx(anewn,mint,maxt);  %Restore the simulated data to the original order of 
+magnitude; 
+  
+disp('Using BP neural network to predict') 
+disp(anew) 
+wucha=abs(t-anew)./t;   %relative error 
+disp('The error predicted using the BP neural network is') 
+disp(wucha) 
+  

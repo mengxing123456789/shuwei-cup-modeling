@@ -1,0 +1,150 @@
+{
+ "meta": {
+  "clock": "time.perf_counter",
+  "reps": 5,
+  "warmup": "每个 call 先跑 1 次不计入",
+  "unit": "ms",
+  "median_rule": "排序后取 runs[len//2]（奇数样本真中位）",
+  "serial": true,
+  "note": "BLAS 被禁（见 numlib），故 numpy 不并行；单次测量噪声本机实测可到 ±56%，故报中位不报单次",
+  "interpreter": "3.11.18",
+  "numpy": "2.4.6"
+ },
+ "calls": [
+  {
+   "name": "selftest",
+   "reps": 5,
+   "runs_ms": [
+    14.729,
+    16.659,
+    15.061,
+    14.675,
+    15.564
+   ],
+   "median_ms": 15.061,
+   "min_ms": 14.675,
+   "max_ms": 16.659,
+   "stdev_ms": 0.733
+  },
+  {
+   "name": "load_annex_i",
+   "reps": 5,
+   "runs_ms": [
+    1.877,
+    1.72,
+    1.598,
+    1.644,
+    2.165
+   ],
+   "median_ms": 1.72,
+   "min_ms": 1.598,
+   "max_ms": 2.165,
+   "stdev_ms": 0.205
+  },
+  {
+   "name": "load_annex_ii",
+   "reps": 5,
+   "runs_ms": [
+    1.676,
+    2.599,
+    2.112,
+    1.659,
+    1.894
+   ],
+   "median_ms": 1.894,
+   "min_ms": 1.659,
+   "max_ms": 2.599,
+   "stdev_ms": 0.347
+  },
+  {
+   "name": "q1",
+   "reps": 5,
+   "runs_ms": [
+    223.083,
+    194.991,
+    167.101,
+    174.665,
+    189.718
+   ],
+   "median_ms": 189.718,
+   "min_ms": 167.101,
+   "max_ms": 223.083,
+   "stdev_ms": 19.385
+  },
+  {
+   "name": "q2",
+   "reps": 5,
+   "runs_ms": [
+    1.228,
+    0.852,
+    1.012,
+    1.347,
+    1.464
+   ],
+   "median_ms": 1.228,
+   "min_ms": 0.852,
+   "max_ms": 1.464,
+   "stdev_ms": 0.222
+  },
+  {
+   "name": "q3",
+   "reps": 5,
+   "runs_ms": [
+    0.226,
+    0.22,
+    0.222,
+    0.248,
+    0.232
+   ],
+   "median_ms": 0.226,
+   "min_ms": 0.22,
+   "max_ms": 0.248,
+   "stdev_ms": 0.01
+  },
+  {
+   "name": "q4",
+   "reps": 5,
+   "runs_ms": [
+    0.285,
+    0.254,
+    0.27,
+    0.246,
+    0.255
+   ],
+   "median_ms": 0.255,
+   "min_ms": 0.246,
+   "max_ms": 0.285,
+   "stdev_ms": 0.014
+  },
+  {
+   "name": "q5",
+   "reps": 5,
+   "runs_ms": [
+    73.302,
+    67.448,
+    64.305,
+    71.347,
+    68.1
+   ],
+   "median_ms": 68.1,
+   "min_ms": 64.305,
+   "max_ms": 73.302,
+   "stdev_ms": 3.138
+  },
+  {
+   "name": "pipeline_q1_to_q5",
+   "reps": 5,
+   "runs_ms": [
+    302.156,
+    295.935,
+    254.609,
+    234.303,
+    229.84
+   ],
+   "median_ms": 254.609,
+   "min_ms": 229.84,
+   "max_ms": 302.156,
+   "stdev_ms": 30.367
+  }
+ ]
+}

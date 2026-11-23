@@ -1,0 +1,12 @@
+﻿pages 27 findings 11
+PASS C4 | obs= p1 has summary/abstract=True | why= 第一页必须是摘要页
+PASS C4 | obs= p2 has contents/directory=True | why= 第二页必须是目录页
+PASS C5 | obs= header lines matched=25 | why= 页眉必须形如 Team#apmcm2600001 Page 10 of 20
+PASS C5 | obs= headers leaking identity=0 | why= 页眉里不许出现学校/指导教师
+PASS C7 | obs= chinese chars in body=0 (appendix, not judged=0) | why= 正文与图表不得出现中文（官方口径是 main body，附录代码不在其内）
+PASS C6 | obs= total pages=27 | why= 正文页数上限按年份不同（2023 规范 25 页 / 中文赛项模板 20 页）；2026 英文规则未给页数上限
+PASS C9 | obs= appendix=True code=True | why= 附录须给软件名与全部源代码
+PASS C11 | obs= placeholder team number hits=0 | why= 占位队号=提交前必须替换，否则违规
+PASS C11 | obs= self-declared invalid identifier in body=0 | why= 正文自称队号无效，与印 XXXXX 同等致命，而字形正则查不到
+PASS C11 | obs= has References section=True | why= 参考文献是官方要求的部分之一
+PASS C8 | obs= reference type markers=16 | why= 官方给了 [M]/[J] 的形式，应照着写

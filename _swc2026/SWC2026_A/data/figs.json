@@ -1,0 +1,32 @@
+{
+ "_meta": {
+  "script": "figs.py",
+  "script_sha256": "7cd144fcd6059b91d1df7a85febde304d77c1b6bc5fb4c65c1020349837ef923",
+  "run_at": "2026-11-20T10:43:55+08:00",
+  "python": "3.11.18",
+  "numpy": "2.4.6",
+  "pandas": "3.1.1",
+  "host": "梦醒",
+  "inputs": {
+   "附件C Synthetic_Production_Data（英文版）.xlsx": "5ba477df29c5d4d63e6a24837d3f7a9caba542954ed8e7c86a518658879d34aa"
+  }
+ },
+ "fig5_order": [
+  "tau",
+  "csoak",
+  "Ainf",
+  "Poil",
+  "D",
+  "cprod",
+  "Cfrac",
+  "a"
+ ],
+ "figures": [
+  "fig1_decline_family",
+  "fig2_soak_saturation",
+  "fig3_npv_vs_soak",
+  "fig4_pareto",
+  "fig5_sobol_ts",
+  "fig6_scaling"
+ ]
+}

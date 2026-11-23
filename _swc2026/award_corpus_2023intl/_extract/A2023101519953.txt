@@ -1,0 +1,2888 @@
+=== A2023101519953.pdf | pages=37 ===
+
+----- PAGE 1 (imgs=0) -----
+Problem Chosen
+A
+2023
+ShuWei Cup
+Summary Sheet
+Team Control Number
+2023101519953
+Summary
+The compound helicopter is widely used in various fields. Its flight attitude, i.e. pitch, yaw
+and roll angles, is influenced by the coaxial rigid rotor, the propeller booster, the horizontal
+tail and the vertical tail. This paper focuses on the control relationship of these four dynamic
+components on the flight attitude of the helicopter.
+For problem 1, the pitch moment equation is established from the data and the equa-
+tion for the pitch moment 𝑀2 given in the Annex.
+It was found that the solution has a
+constant pitch moment 𝑀2 =58.59 𝐽.Then, according to the angular momentum theo-
+rem, the second order differential relationship between the pitch moment and the pitch-
+ing angle 𝜃is established, and the solution gives the pitch angle as a function of time
+as 𝜃(t) = 0.00146t2.
+Finally, substituting the three moments into the function to obtain
+𝜃(5) = 0.0366degree,𝜃(10) = 0.1464degree,and𝜃(20) = 0.5858degree .
+For problem 2, from the information provided, the solution is the same as for problem
+1. Using the equations given in the Appendix, the three moments are solved and found to
+be constant. We obtain the roll moment M1 = −35.91J , the pitch moment M2 = 58.59J
+and the yaw moment M3 = 10.084J. Next, the second order differential equation is set up
+using the angular momentum theorem. By solving the equation we obtain the attitude angle
+time function, roll angle 𝜙(t) = 0.00449t2 ,
+pitch angle 𝜃(t) = 0.00146t2 and yaw angle
+𝜓(t) = 0.0002 ∗t2.Finally, substituting time wen can gives corresponding angle.
+For problem 3, we first establish the moment equations for low and high speed flight.
+Then, the problem of solving the equations is transformed into a single objective optimisation
+problem. The maximum value of the inverse of the sum of the absolute values of the three
+moments is taken as the objective function, and the initial ranges of the manoeuvring parts
+are taken as the constraints. We use the genetic algorithm to solve it. The peculiarity of
+this optimization model is that the optimal solution of the model is not one. Therefore, each
+optimization yields one of the countless optimization solutions. Then, using the idea of Monte
+Carlo simulation, the optimization is repeated so many times that it is highly probable that the
+boundary value of the optimal solution is reached if the number of iterations is sufficiently
+large. To obtain the manoeuvring amplitude of each component , the boundary values in the
+simulation results are recorded.
+For problem 4, we first determine the expression for horizontal flight speed with time.
+Then,the flight process is divided into low speed phase, medium speed phase and high speed
+phase. The set of moment equations for each of the three phases follows the genetic algorithm
+optimisation model of the problem 3. The dynamic values of the helicopter manoeuvring
+components with respect to time are obtained.
+Key word: attitude angle, moment, angular momentum theorem, genetic algorithm, Monte Carlo
+
+----- PAGE 2 (imgs=0) -----
+Content
+Content . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+1. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.1 Background. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.2 Our work. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+2. Problem Analysis. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+2.1 Information Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+2.2 Analysis of Question One. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+2.3 Analysis of Question Two. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+2.4 Analysis of Question Three . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+2.5 Analysis of Question Four . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3. Symbol and Assumptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.1 Symbol Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.2 Assumptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+4. Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+4.1 Model of Question One . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+4.1.1 Data Preparation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+4.1.2 Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+4.2 Model of Question Two . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+4.2.1 Data Preparation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+4.2.2 Roll Moment 𝑀1 and Rll Angle 𝜙. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+4.2.3 Yaw Moment 𝑀3 and Yaw Angle Ψ. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+4.3 Model of Question Three . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+4.3.1 Establishment of Moment equations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+4.3.2 Transformation of the Target Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+4.3.3 Determination of the Objective Function and its Constraints. . . . . . . . . . . .
+16
+4.3.4 Improvement of Genetic Algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+4.3.5 Application of Monte Carlo thinking . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+20
+4.3.6 Result. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+20
+4.4 Model of Question Four . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+4.4.1 Establishment of moment equations in the medium speed stage. . . . . . . . . .
+22
+4.4.2 Maneuvering Range results for each component over time . . . . . . . . . . . . .
+23
+4.4.3 Correlation Analysis and Model Improvement . . . . . . . . . . . . . . . . . . . . . . .
+24
+5. Strengths and Weaknesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+5.1 Strengths . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+5.2 Weaknesses. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+
+----- PAGE 3 (imgs=0) -----
+Team # 2023101519953
+Page 3 of 37
+References. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+25
+Appendix. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+5.3 the result of problem 4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+5.4 the most Appropriate value of problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+
+----- PAGE 4 (imgs=1) -----
+Team # 2023101519953
+Page 4 of 37
+1.
+Introduction
+1.1
+Background
+The compound helicopter is widely used in a variety of applications. Its flight attitude, i.e.
+pitch, yaw and roll angles, are influenced by the co-axial rigid rotor, the propeller booster, the
+horizontal stabilizer and the vertical stabilizer. The co-axial rigid rotor generates roll, pitch and
+yaw moments. The propeller booster generates thrust and roll torque. Thrust generates roll
+moment. The horizontal tail generates pitching torque. The vertical tail generates yaw and roll
+moments. Controlling these four power components controls the helicopter’s flight state.
+1.2
+Our work
+Task 1:We need to calculate the formulae for pitch moment and pitch angle for the helicopter
+state given in Problem 1 and give the values of pitch angle for 5s,10s,10s.
+Task 2:We need to calculate the formulae for pitch, roll and yaw moments and the formulae
+for pitch, roll and yaw angles for the helicopter state given in Problem 2 and give their values at
+5s,10s,10s respectively.
+Task 3:We need to design the magnitude of change of each component so that the helicopter
+maintains zero attitude angle at high and low speeds respectively.
+Task 4:We need to design the magnitude of change of each component so that the helicopter
+can accelerate at zero attitude angle.
+2.
+Problem Analysis
+2.1
+Information Analysis
+We analyzed the given material and got the following useful information:
+Figure 1 The image of information
+
+----- PAGE 5 (imgs=0) -----
+Team # 2023101519953
+Page 5 of 37
+2.2
+Analysis of Question One
+For the problem one, we need to calculate the pitch moment and the pitch angle of the
+helicopter under the conditions given in the problem one. The formula for the pitching moment
+and data from the annex can be utilized to determine the pitching moment expression. Then,
+using Newton’s second law and the angular momentum theorem, it is possible to establish a
+second-order differential relationship between the pitching moment and the pitch angle. The
+second-order differential equation can then be solved to find the expression of pitch angle
+concerning time.
+2.3
+Analysis of Question Two
+For the problem two, we need to establish the expressions for the compound helicopter’s
+roll, pitch, and yaw moments and the variation of attitude angles.The approach to calculating
+roll moment, roll angle, yaw moment, and yaw angle is identical to the technique employed for
+pitch moment and pitch angle in Problem 1, with the only difference being the substitution of
+some parameters.
+2.4
+Analysis of Question Three
+For problem 3, to achieve horizontal flight (zero attitude angle) of the vehicle,we need to
+design the maneuvering amplitude of each component, based on the low and high speed flight
+characteristics.Zero attitude angle for a helicopter means that the roll angle, pitch angle, and
+yaw angle are maintained at 0 degree. In addition, the attitude angle of the helicopter is affected
+by different factors at low and high speeds, so we should first establish the system of moment
+equations for the two cases for the two cases separately.
+In the solution process, the problem of solving the system of equations can be transformed
+into an optimization problem, and the single-objective optimization model can be processed
+by the improved genetic algorithm.
+At the same time, based on the idea of Monte Carlo
+simulation, the optimization process of the genetic algorithm is repeated several times. The
+maximum and minimum values of each component in all the optimization results are compared
+and recorded. This will give the maneuvering range of each component when the helicopter is
+flying horizontally (zero attitude).
+2.5
+Analysis of Question Four
+For problem 4, we consider the dynamics of the helicopter components under uniform
+acceleration and horizontal flight (zero attitude angle). Since the rotor pitch ratio is proportional
+to the flight speed, we consider time as the independent variable. We divide the flight process
+
+----- PAGE 6 (imgs=0) -----
+Team # 2023101519953
+Page 6 of 37
+into a low speed phase (80m/s 84m/s), a medium speed phase (85m/s 100m/s) and a high speed
+phase (101m/s 180m/s). Following the idea of the third question, when the time is fixed, the
+genetic algorithm optimisation model of the third question can be applied to derive a series of
+corresponding manoeuvre amplitudes for each component of the helicopter over time. Since
+there is a range solution for each component of the helicopter at each moment that satisfies
+the zero attitude angle, in order to make the changes of the helicopter at different moments as
+continuous as possible, we should introduce the optimised value of the previous moment when
+considering the optimised value of the next moment, and take the minimum of the Euclidean
+distance between the two optimised values as the basis of the optimisation.
+3.
+Symbol and Assumptions
+3.1
+Symbol Description
+Symbol
+Description
+𝐼1
+roll axis moment of inertia
+𝐼2
+pitch axis moment of inertia
+𝐼3
+yaw axis moment of inertia
+𝑀1
+roll moment
+𝑀2
+pitch moment
+𝑀3
+yaw moment
+𝑚1
+rotor roll moment coefficien
+𝑚2
+rotor pitch moment coefficien
+𝑚3
+rotor yaw moment coefficien
+𝜙
+roll angle
+𝜃
+pitch angle
+𝜓
+yaw angle
+𝑆𝑐
+dotor disc area
+𝑉𝑜
+blade centre-of-mass linear velocity
+𝜌
+air density
+
+----- PAGE 7 (imgs=0) -----
+Team # 2023101519953
+Page 7 of 37
+3.2
+Assumptions
+1. Assume that the angle of attitude of the helicopter in flight relates only to the coaxial
+rotor, the propeller engine, the horizontal stabilizer and the vertical stabilizer as given in the
+question.
+The question does not deal with the calculation of the various drag forces and other parameters
+of the other components of the helicopter, but only considers the main factors given in the question
+and in the appendices.
+2. Assume that the propeller blades of a coaxial rotor have a regular shape and uniform mass
+distribution.
+The shape and mass distribution of the rotor blades can affect the speed of the rotor tip and
+this assumption can simplify the model calculations.
+3. Assume that we do not consider the effect of weather factors on helicopter flight.
+Weather is a complex factor and this question is a theoretical analysis of the ideal state, so
+this factor is ignored.
+4.
+Model
+4.1
+Model of Question One
+4.1.1
+Data Preparation
+Directly useable parameters:
+From the annex and the question 1, directly useable parameters can be extracted as shown in
+Table 1 below:
+Table 1
+Directly useable parameters used in the question one
+Parameters
+𝐼2
+𝑢𝑐
+𝑢𝑒
+𝑢𝑐𝑑
+𝑆𝑐
+𝑉𝑜
+Value
+20000
+0
+-3.4817
+-2.1552
+36𝜋
+180
+Unit
+kilogram-meter-square
+degree
+degree
+degree
+meter-square
+meter per second
+where 𝐼2 represents pitch axis moment of inertia, 𝑆𝑐represents dotor disc area, 𝑉𝑜represents
+blade centre-of-mass linear velocity,coaxial rotor overall distance is 𝑢𝑐,coaxial rotor differential
+total distance is 𝑢𝑐𝑑and coaxial rotor longitudinal cycle pitch is 𝑢𝑒.
+Parameters needed to be solved:
+1.Rotor Advance Ratio
+The formula for the Rotor Advance Ratio: Rotor Advance Ratio = Flight Speed / Rotor
+Blade Tip Speed can be found in the Appendix: Rotor moment factor.
+
+----- PAGE 8 (imgs=0) -----
+Team # 2023101519953
+Page 8 of 37
+The flight speed v can be calculated from the speed synthesis formula:
+𝑣=
+√︃
+𝑣2
+𝑓+ 𝑣2𝑣
+(1)
+where 𝑣𝑓is the forward component 80 m/s, 𝑣𝑣is the vertical ascent component 2 m/s, and
+by substituting the data, the flight speed 𝑣is approximately equal to the flight speed forward
+component ,𝑣= 80𝑚/𝑠.
+The Rotor Blade Tip Speed 𝑉𝑐is related to the Coaxial Rigid Rotor Speed 𝑉𝑜, which can be
+viewed as the linear velocity of the blade’s centre of mass. Assuming that the blade is a cylinder
+with uniformly distributed mass, the centre of mass is located at the geometric centre of the
+blade. Then there is the following relationship:
+𝑅𝑐= 2𝑅𝑜
+(2)
+where 𝑅𝑐is the distance of the tip from the rotor centre and 𝑅𝑜is the distance of the centre of
+mass from the rotor centre. According to the formula of linear velocity :
+𝑉𝑜= 𝜔𝑅𝑜
+𝑉𝑐= 𝜔𝑅𝑐
+(3)
+where 𝜔is the angular velocity, we can get 𝑉𝑐= 2𝑉𝑜= 360𝑚/𝑠. Then,
+𝑅𝑜𝑡𝑜𝑟𝐴𝑑𝑣𝑎𝑛𝑐𝑒𝑅𝑎𝑡𝑖𝑜=
+𝐹𝑙𝑖𝑔ℎ𝑡𝑆𝑝𝑒𝑒𝑑
+𝑅𝑜𝑡𝑜𝑟𝐵𝑙𝑎𝑑𝑒𝑇𝑖𝑝𝑆𝑝𝑒𝑒𝑑= 𝑣
+𝑉𝑐
+= 0.22
+(4)
+2.Pitch deviation value,Longitudinal variable pitch coefficient,Total pitch coefficient
+and Differential total pitch coefficient
+Pitch deviation value 𝑎2, Longitudinal variable pitch coefficient 𝑏2, Total pitch coefficient 𝑐,
+and Differential total pitch coefficient 𝑑2, these four parameters are solved in the same way.
+For instance, to obtain 𝑎2, we utilize the weighted average method with relevant data from the
+appendix.The correlation between the Pitch deviation value and rotor advance ratio can be located
+in the Rotor moment factor appendix,described as (𝑃𝑖𝑡𝑐ℎ𝑑𝑒𝑣𝑖𝑎𝑡𝑖𝑜𝑛𝑣𝑎𝑙𝑢𝑒, 𝑟𝑜𝑡𝑜𝑟𝑎𝑑𝑣𝑎𝑛𝑐𝑒𝑟𝑎𝑡𝑖𝑜).
+Two correlations must be utilized: (0.0029, 0.2) and(0.0042, 0.3). The method of weighted
+averages was implemented to determine a2.And the weights were determined based on the value
+of the difference in rotor advance ratio.The formula is as follows:
+𝑎2 = 0.0029 ∗(0.22 −0.2) + 0.0042 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.0032
+(5)
+Similarly,
+𝑏2 = 0.00045 ∗(0.22 −0.2) + 0.0005 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.00046
+(6)
+𝑐= 0.00034 ∗(0.22 −0.2) + 0.00043 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.00036
+(7)
+
+----- PAGE 9 (imgs=0) -----
+Team # 2023101519953
+Page 9 of 37
+𝑑2 = −0.000001 ∗(0.22 −0.2) −0.000001 ∗(0.3 −0.22)
+0.3 −0.2
+= −0.0000008
+(8)
+3.Air density
+By checking the relevant information[3], we can obtain the relationship between air density
+𝜌and altitude ℎ:
+𝜌= 1.2097 −9.799 ∗10−5 ∗ℎ
+(9)
+where h=3000 meters.we obtain 𝜌= 0.9091𝑘𝑔/𝑚3.
+The above available parameters are summarised in Table 2 below:
+Table 2
+parameters used in the question one
+Parameters
+𝑎2
+𝑏2
+𝑐
+𝑑2
+𝑉𝑐
+𝜌
+Value
+0.0032
+0.00046
+0.00036
+-8e-7
+360m/s
+0.9091 𝑘𝑔/𝑚3
+4.1.2
+Model
+1.Pitch Moment 𝑀2
+According to the information given in question A and relevant material[2], the rotor and pro-
+peller thruster generate the pitch moment 𝑀2. Because the flight speed at this point, 𝑣= 80𝑚/𝑠,
+is relatively low, only the impact of the rotor and propeller thrust is taken into account.Since the
+Propeller thruster operating capacity 𝑢𝑡= 0, the pitch moment𝑀2 in this question is generated
+by the rotor only. The pitch moment generated by the coaxial rigid rotors can be approximated
+as a function proportional to the air density𝜌, rotor disc area 𝑆𝑐, and rotor blade tip velocity 𝑉𝑐
+, the positive scale factor is called the rotor moment factor 𝑚2 with the following equation:
+𝑀2 = 𝑚2𝜌𝑆𝑐𝑉𝑐
+(10)
+where the values of 𝜌,𝑆𝑐,and 𝑉𝑐can be found in Table 1 and Table 2.
+The equations given in the appendix for 𝑚2 is Rotor pitch moment coefficient = pitch deviation
+value + longitudinal variable pitch coefficient * longitudinal cycle pitch + total pitch coefficient
+* overall distance + differential total pitch coefficient * differential total distance .Express the
+formula as letters:
+𝑚2 = 𝑎2 + 𝑏2 ∗𝑢𝑒+ 𝑐∗𝑢𝑐+ 𝑑2 ∗𝑢𝑐𝑑
+(11)
+where the values of 𝑎2 ,𝑏2, 𝑐,𝑑2,𝑢𝑒,𝑢𝑐and 𝑢𝑐𝑑can be found in Table 1 and Table 2. We obtain
+𝑚2 = 0.0016.
+Then,substituting the datas we solve for the pitch moment 𝑀2 = 58.59𝐽.
+2.Pitch Angle Variation
+
+----- PAGE 10 (imgs=1) -----
+Team # 2023101519953
+Page 10 of 37
+Using Newton’s second law and the angular momentum theorem[4], it is possible to establish
+a second-order differential relationship between the pitching moment𝑀2 and the pitch angle 𝜃.
+The second-order differential equation is:
+𝑀2 = 𝐼2 ∗𝑑2𝜃
+𝑑𝑡2
+(12)
+Assuming the initial value of fo the pitch angle is 0 and the initial change rate of the pitch angle
+is 0, we obtain:
+𝜃(𝑡) = 1
+2
+𝑀2
+𝐼2
+𝑡2 = 0.00146𝑡2
+(13)
+The attitude angles of the flying machine at 5s, 10s, and 20s respectively are:
+𝜃(5) = 0.0366𝑑𝑒𝑔𝑟𝑒𝑒
+𝜃(10) = 0.1464𝑑𝑒𝑔𝑟𝑒𝑒
+𝜃(20) = 0.5858𝑑𝑒𝑔𝑟𝑒𝑒
+The positive 𝜃represents a positive pitch moment, which causes the nose of the helicopter to
+stick up.
+The image of the function of 𝜃(𝑡) is shown below in Figure 2 :
+Figure 2 The image of pitch angle 𝜃(𝑡)
+From the graph shown in Figure 2, it is evident that the pitch angle 𝜃steadily increases over
+time, with a corresponding increase in the rate of change. However, this trend is limited in
+practice as the pitch angle cannot reach infinity in real-world driving situations.
+
+----- PAGE 11 (imgs=0) -----
+Team # 2023101519953
+Page 11 of 37
+4.2
+Model of Question Two
+The helicopter remains in the same state as it was in Problem 1 while solving Problem
+2. Therefore, the pitch moment and pitch angle remain the same as in Problem 1. The only
+variables that need to be solved in Problem 2 are the roll moment 𝑀1, roll angle 𝜙, yaw moment
+𝑀3, and yaw angle Ψ.
+4.2.1
+Data Preparation
+Firstly, solve for roll deflection value 𝑎1,lateral pitch roll factor 𝑏1 ,differential total distance
+roll coefficient 𝑑1,yaw deviation value 𝑎3 ,and differential total pitch yaw coefficient 𝑑3 . The
+solution is identical to that of 𝑎2 in Problem 1, merely replace the relevant data in the formula
+for 𝑎2 with the appropriate datas from the Annex.Their equation is as follows:
+𝑎1 = 0.0004 ∗(0.22 −0.2) + 0.0004 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.0004
+(14)
+𝑏1 = 0.0004 ∗(0.22 −0.2) + 0.00044 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.000409
+(15)
+𝑑1 = −0.00024 ∗(0.22 −0.2) −0.00025 ∗(0.3 −0.22)
+0.3 −0.2
+= −0.000242
+(16)
+𝑎3 = 0.0001 ∗(0.22 −0.2) + 0.0001 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.0001
+(17)
+𝑑3 = 0.00008 ∗(0.22 −0.2) + 0.00008 ∗(0.3 −0.22)
+0.3 −0.2
+= 0.00008
+(18)
+The above available parameters are summarised in Table 3 below:
+Table 3
+parameters used in the question two
+Parameters
+𝑎1
+𝑏1
+𝑑1
+𝑎3
+𝑑3
+𝑢𝑎
+𝐼1
+𝐼3
+Value
+0.0004
+0.000409
+0.000242
+0.0001
+0.00008
+-2.70743
+8000
+25000
+where 𝑢𝑎is coaxial rotor lateral cycle pitch, 𝐼1 is Roll Axis Moment of Inertia and 𝐼2 is Yaw
+Axis Moment of Inertia .
+4.2.2
+Roll Moment 𝑀1 and Rll Angle 𝜙
+Consistent with Problem 1, at this point, the helicopter is at low speed and only the effects of
+the rotor and propeller thrusters are considered.Since the Propeller thruster operating capacity
+𝑢𝑡= 0, the pitch moment𝑀2 in this question is generated by the rotor only. The pitch moment
+generated by the coaxial rigid rotors can be approximated as a function proportional to the air
+
+----- PAGE 12 (imgs=0) -----
+Team # 2023101519953
+Page 12 of 37
+density𝜌, rotor disc area 𝑆𝑐, and rotor blade tip velocity 𝑉𝑐, the positive scale factor is called
+the rotor moment factor 𝑚1 with the following equation:
+𝑀1 = 𝑚1𝜌𝑆𝑐𝑉𝑐
+(19)
+where 𝑚1 is rotor roll moment coefficient = roll deviation value + lateral pitch roll factor *lateral
+cycle pitch + differential total distance roll coefficient * differential total distance .Express the
+dormula as letters:
+𝑚1 = 𝑎1 + 𝑏1 ∗𝑢𝑎+ 𝑑1 ∗𝑢𝑐𝑑
+(20)
+Then,substituting the datas we solve for the roll moment 𝑀1 = −35.91𝐽.
+Then,using Newton’s second law and the angular momentum theorem, it is possible to
+establish a second-order differential relationship between the roll moment𝑀1 and the roll angle
+𝜙. The second-order differential equation is:
+𝑀1 = 𝐼1 ∗𝑑2𝜙
+𝑑𝑡2
+(21)
+Assuming the initial value of fo the roll angle is 0 and the initial change rate of the pitch angle
+is 0, we obtain:
+𝜙(𝑡) = 1
+2
+𝑀1
+𝐼1
+𝑡2 = 0.00449𝑡2
+(22)
+The attitude angles of the flying machine at 5s, 10s, and 20s respectively are:
+𝜙(5) = −0.0561𝑑𝑒𝑔𝑟𝑒𝑒
+𝜙(10) = −0.2245𝑑𝑒𝑔𝑟𝑒𝑒
+𝜙(20) = −0.8979𝑑𝑒𝑔𝑟𝑒𝑒
+The negative 𝜙represents a negative roll moment, which causes the helicopter rotates clockwise
+looking back from the nose of the helicopter.
+The image of the function of 𝜃(𝑡) is shown below in Figure 3 :
+
+----- PAGE 13 (imgs=1) -----
+Team # 2023101519953
+Page 13 of 37
+Figure 3 The image of roll angle 𝜙(𝑡)
+From the graph shown in Figure 3, it is evident that the roll angle 𝜙steadily declines over
+time, with a increase in the rate of change.
+4.2.3
+Yaw Moment 𝑀3 and Yaw Angle Ψ
+Solving for the yaw moment and yaw angle is identical to solving for the pitch moment and
+pitch angle. By combining the information provided in the annex and Problem A, we directly
+list and solve the following equations:
+
+
+𝑀3 = 𝑚3𝜌𝑆𝑐𝑉𝑐
+𝑚3 = 𝑎3 + 𝑑3 ∗𝑢𝑐𝑑
+𝑀3 = 𝐼3 ∗𝑑2𝜓
+𝑑𝑡2
+(23)
+where 𝑀3 is yaw moment and yaw angle Ψ We obtain:
+𝑀3 = 10.084𝐽
+𝜓(𝑡) = 0.0002 ∗𝑡2
+𝜓(5) = 0.00504𝑑𝑒𝑔𝑟𝑒𝑒
+𝜓(10) = 0.02017𝑑𝑒𝑔𝑟𝑒𝑒
+
+----- PAGE 14 (imgs=1) -----
+Team # 2023101519953
+Page 14 of 37
+𝜓(20) = 0.08067𝑑𝑒𝑔𝑟𝑒𝑒
+The image of the function of 𝜓(𝑡) is shown below in Figure 4 :
+Figure 4 The image of yaw angle 𝜙(𝑡)
+From the graph shown in Figure 4, it is evident that the yaw angle 𝜓steadily increases over
+time, with a increase in the rate of change.
+4.3
+Model of Question Three
+4.3.1
+Establishment of Moment equations
+First of all, the moments are analyzed when the helicopter is flying at low speeds.
+According to the information on Problem A and relevant material[5], we know that the
+attitude angle control of the aircraft in low-speed flight is mainly realized by the coaxial rotor
+and the propeller thruster. Based on Problem 1 and Problem 2, we can just add the moment
+component brought by the propeller thruster to the original moment equation system.
+It is known that the propeller thruster generates thrust and rotational moment by rotation.
+The thrust𝐹is parallel to the longitudinal axis where the center of mass of the helicopter is
+located. The longitudinal distance from the propeller to the center of mass is𝐷, which generates
+the pitch moment component 𝑚𝑝2, calculated as:
+𝑚𝑝2 = 𝐹× 𝐷
+(24)
+
+----- PAGE 15 (imgs=1) -----
+Team # 2023101519953
+Page 15 of 37
+The direction is opposite to the pitch moment component generated by the rotor blades.
+The graphic description is shown below Figure 4:
+Figure 5 The image of thrust 𝜙(𝑡)
+In addition, the rotational torque 𝑚𝑝1 generated by the propeller is part of the roll moment,
+and its direction is opposite to the pitch moment component generated by the rotor.
+The moment equations as follows:
+
+
+𝑀1 = 𝑚1 ∗𝜌∗𝑆𝑐∗𝑉𝑐−𝑚𝑝1
+𝑀2 = 𝑚2 ∗𝜌∗𝑆𝑐∗𝑉𝑐−𝑚𝑝2
+𝑀3 = 𝑚3 ∗𝜌∗𝑆𝑐∗𝑉𝑐
+(25)
+The following is an analysis of the helicopter in high speed flight (forward speed component
+of 180m/s, vertical climb component of 0.2m/s).
+From the information in Problem A, we know that the control of the attitude angle of the
+aircraft in low speed flight is mainly achieved by the propeller, elevator and rudder. The analysis
+of the pitch and roll moments generated by the propeller is the same as above.
+The pitching moment component generated by the horizontal tail rudder is:
+𝑀ℎ= 𝑚ℎ∗𝑃∗𝑆ℎ∗𝐿ℎ
+(26)
+𝑚ℎ= 𝑇1 + 𝑒1 ∗𝑢𝑒ℎ
+(27)
+𝑃= 1
+2 ∗𝜌∗𝑉2
+(28)
+The roll moment component generated by the vertical tail rudder is:
+𝑀𝑣1 = 𝑚𝑣∗𝑃∗𝑆𝑣∗𝐿𝑣𝑜
+(29)
+𝑚𝑣= 𝑇2 + 𝑒2 ∗𝑢𝑎𝑣
+(30)
+The yaw moment generated by the vertical tail rudder is:
+𝑀𝑣2 = 𝑚𝑣∗𝑃∗𝑆𝑣∗𝐿𝑣𝑎
+(31)
+
+----- PAGE 16 (imgs=0) -----
+Team # 2023101519953
+Page 16 of 37
+where 𝑀ℎis the pitching moment component generated by the elevator and rudder,
+𝑀𝑣1 and 𝑀𝑣2 are the roll moment and yaw moment generated by the rudder,
+𝑚ℎand 𝑚𝑣are the horizontal tail moment coefficient and the vertical tail moment coefficient
+respectively,
+𝑃is the dynamic pressure,
+𝑆ℎand 𝑆𝑣are the horizontal tail area and the vertical tail area respectively,
+𝐿𝑣𝑜and 𝐿𝑣𝑎are the longitudinal distance from the centre of gravity to the tail and the transverse
+distance from the centre of gravity to the tail,
+𝑇1 and 𝑇2 are the horizontal tail moment coefficient and the vertical tail moment coefficient
+respectively,
+𝐿𝑣𝑜and 𝐿𝑣𝑎are the longitudinal distance from the centre of gravity to the tail and the transverse
+distance from the centre of gravity to the tail, respectively,
+𝑒1 and 𝑒2 are the elevator and rudder coefficients, respectively,
+𝐿ℎis transverse distance from the center of mass to the horizontal tailplane.
+The system of moment equations for the helicopter at high speed after collation is as follows
+(the equations take the direction of the moment generated by the propeller as positive):
+
+
+𝑀1 = 𝑚𝑝1 + 𝑀𝑣1
+𝑀2 = 𝑚𝑝2 + 𝑀ℎ
+𝑀3 = 𝑀𝑣2
+(32)
+4.3.2
+Transformation of the Target Problem
+Since the helicopter components have a certain manoeuvre range, this means that if we
+directly set the three moment equations in the system of equations equal to zero, there will be
+an infinite number of solutions, which cannot be calculated directly by Matlab. In this case,
+we convert the original manoeuvre range solution problem into a singleobjective optimisation
+model, and repeat the optimisation process several times according to the idea of the Monte Carlo
+algorithm, and use the improved genetic algorithm to deal with the singleobjective optimisation
+model in this problem.
+4.3.3
+Determination of the Objective Function and its Constraints
+The initial solution is to make all three moment equations in the system of moment equations
+equal to 0 at the same time, in the optimisation model we take the maximum value of the inverse
+of the sum of the absolute values of the three moments as the objective function, i.e:
+𝑚𝑎𝑥{−(|𝑀1| + |𝑀2| + |𝑀3|)}
+(33)
+where the constraints of the objective function are the initial ranges of each component of the
+helicopter in the Appendix.
+
+----- PAGE 17 (imgs=0) -----
+Team # 2023101519953
+Page 17 of 37
+4.3.4
+Improvement of Genetic Algorithms
+Genetic algorithm (GA) is an intelligent technique for solving practical problems by mod-
+elling biological evolutionary processes and mechanisms. It is also known as a heuristic algo-
+rithm, a search heuristic algorithm used to solve optimisation problems in the field of artificial
+intelligence in computer science, and is a type of evolutionary algorithm. Genetic algorithms use
+heuristics to generate useful solutions to optimisation and search problems. Genetic algorithms
+were originally based on a number of phenomena in evolutionary biology, such as heredity, mu-
+tation, natural selection and hybridisation. A basic genetic algorithm (also known as a standard
+genetic algorithm or a simple genetic algorithm) is a population-based operation that targets all
+individuals in a population and uses only the basic genetic operators: selection, crossover, and
+mutation. This evolutionary genetic operation process is simple and easy to understand, and
+is the basis for some other genetic algorithms, which not only provides a basic framework for
+various genetic algorithms, but also has some application value. In genetic algorithms, selec-
+tion, crossover and mutation are the three main operators that make up the genetic operation and
+give the genetic algorithm some features not found in other methods. The representation of the
+genetic algorithm is as follows:
+𝑆𝐺𝐴= (𝐶, 𝐸, 𝑃0, 𝑀, 𝜙, 𝜓,𝑇)
+(34)
+1.Chromosome coding
+In genetic algorithms, the solutions in the solution space are described by a representation.
+This representation maps the solution to the problem onto the genotype, a process known as
+encoding. Encoding is the method of converting the feasible solution of the problem from the
+solution space to the search space of the genetic algorithm. Before performing the search, the
+genetic algorithm represents the solution in the solution space as the genetic algorithm’s genotype
+string (also known as a chromosome) structured data, where different combinations of genotype
+strings form different points.
+Common coding methods include binary coding, gray code
+coding, floating point coding, cascade coding for each parameter, and multi-parameter cross-
+coding. These coding methods are chosen according to the characteristics and requirements of
+the specific problem, so that they can effectively represent the solution space of the problem,
+and can be manipulated and optimised during the search process of the genetic algorithm. By
+appropriately selecting and designing the coding methods, the quality of the search efficiency
+and solution of the genetic algorithm can be improved.
+Let the value range of a parameter is [𝑈1,𝑈2].we use the binary coding notation of the length
+as to represent the parameter, then it produces a total of 2k different types of coding, which can
+
+----- PAGE 18 (imgs=0) -----
+Team # 2023101519953
+Page 18 of 37
+make the parameter coding when the correspondence:
+000000 · · · 0000 = 0 →𝑈1
+000000 · · · 0001 = 1 →𝑈1 + 𝛿
+000000 · · · 0010 = 2 →𝑈1 + 2𝛿
+(35)
+where
+𝛿= 𝑈2 −𝑈1
+2𝑘−1
+2.Chromosome decoding
+Genetic algorithm chromosome to solve the problem. Given the coding of a given individual,
+the corresponding decoding equation is:
+𝑋= 𝑈1 +
+ 𝑘
+∑︁
+𝑖=1
+𝑏𝑖· 2𝑖−1
+!
+· 𝑈2 −𝑈1
+2𝑘−1
+3.Initial stock formation
+Set the maximum number of evolutionary generations 𝑇, population size 𝑀, crossover prob-
+ability 𝑃𝑐, variation probability 𝑃𝑚, and randomly generate 𝑀individuals as the initialisation
+population 𝑃0.
+4. Evaluating and determining the fitness value
+The fitness function indicates the superiority or inferiority of an individual or a solution. For
+different problems, the fitness function is defined in different ways. According to the specific
+problem, the fitness of each individual in the population 𝑃(𝑡) is calculated.
+Since the traditional genetic algorithm has the disadvantages of slow convergence speed
+and easy to fall into local optimum, in order to improve the efficiency, we made the following
+improvements to the traditional genetic algorithm[1] model:
+(1) Retention of elite individuals In each iteration, the optimal individuals of the previous
+generation are directly retained in the next generation to prevent the optimal solution from being
+most damaged.
+(2) Adaptive scaling By linearly scaling the fitness, the fitness value is mapped to a more suitable
+range of the selection algorithm, thus speeding up the convergence process. Let the original
+fitness be 𝐹, then the fitness function after linear scaling is:
+𝐹′ = 𝐴∗𝐹+ 𝐵
+(36)
+where 𝐴and 𝐵are the scaling coefficients.
+The general flow of the algorithm for this problem is shown below:
+Step1: Initialisation. Set the evolution iterator epoch=M, set the maximum number of evolu-
+tionary generations G, and take the freight volume change line on the day of the first normal
+operation as the initial population. and will later be screened, mutated and evolved on the basis
+
+----- PAGE 19 (imgs=0) -----
+Team # 2023101519953
+Page 19 of 37
+of this population.
+Step 2: Evaluation of the first generation. Calculate the sum of the absolute values of the three
+helicopter moments in the first generation as the degree of adaptation of the first generation
+population.
+Step3: Selection operation. According to the number of sums of the absolute values of the
+moments of several helicopters at the time of the first generation, the first generation population
+is divided into good individuals and bad individuals, where good individuals, i.e. the sums of
+the absolute values of the forces, are closer to zero and bad individuals, i.e. the sums of the
+absolute values of the moments, are further away from zero.
+Step 4: Crossover operator. The crossover operator is applied to the target group for site selec-
+tion, and the inferior individuals will operate with the superior individuals, which can be close
+to the superior individuals to some extent after the operation.
+Step5: Variation operation. The variation operator will be applied to the optimisation target
+group, the inferior individuals will have a higher probability of generating variation, where
+the smaller probability is left to prevent entering the local optimal solution, and the superior
+individuals will have a smaller probability of generating variation. Both groups will produce
+mutation, the difference in addition to the probability is not the same, the inferior individuals
+before and after the mutation of the relatively large difference, while the excellent individuals
+will be less change.
+Step6: Cyclic operation. The target population of helicopter component parameters will get the
+next generation population after selection, crossover and mutation operations, the fitness value
+of this target population of helicopter component parameters will be calculated and compared
+with the fitness value of the target population of helicopter component parameters of the previous
+generation. If it is better, the optimal result is replaced; if it is worse, it is prepared for the next
+genetic operation.
+Step7: Judgement of the termination condition. If the number of iterations has reached the
+target number of iterations, the computation can be terminated and the algorithm can be exited,
+otherwise it will continue to step3. Among them, the fitness function and the selection method
+are the most important parts of the genetic algorithm. The fitness function is used to measure
+the fitness of individuals in order to select better individuals for crossover and mutation. The
+selection method selects individuals based on their fitness values, so that individuals with higher
+fitness have a higher probability of being selected, thus achieving the purpose of evolutionary
+optimisation, and the flowchart of the whole algorithm is shown in the following Figure 6:
+
+----- PAGE 20 (imgs=1) -----
+Team # 2023101519953
+Page 20 of 37
+Figure 6 Schematic diagram of the genetic algorithm process
+4.3.5
+Application of Monte Carlo thinking
+Since the system of moment equations has an infinite number of solutions, with a large
+enough number of iterations, the value of the objective function can definitely be brought to
+zero, and there is an infinite number of corresponding cases. So the optimisation process is
+repeated many times to aggregate the different cases, based on the idea of Monte Carlo. As long
+as the number of iterations is large enough, there is a high probability that the boundary value
+that satisfies the condition can be taken. As long as we compare the values of each helicopter
+component in each optimisation result, superimposing the update of the maximum and minimum
+values, we can finally obtain the manoeuvring range of the helicopter components.
+4.3.6
+Result
+At low speeds only the role of the rotor and propeller need be considered, hence only coaxial
+rotor overall distance 𝑢𝑐, coaxial rotor longitudinal cycle pitch 𝑢𝑒, coaxial rotor lateral cycle
+pitch 𝑢𝑎, propeller thruster operating capacity 𝑢𝑡and coaxial rotor differential total distance
+𝑢𝑐𝑑. The iteration process of the genetic algorithm at low speed is shown in Figure 7:
+
+----- PAGE 21 (imgs=1) -----
+Team # 2023101519953
+Page 21 of 37
+Figure 7 The iteration process of the genetic algorithm at low speed
+The results are as follows in Table 4:
+Table 4
+parameters Range at low speeds
+Parameters
+𝑢𝑐
+𝑢𝑒
+𝑢𝑎
+𝑢𝑡
+𝑢𝑐𝑑
+min
+0.0001
+-24.0658
+-6.3786
+0.0001
+-20.7936
+max
+24.0123
+0
+24.8298
+6.9759
+19.0643
+Most appropriate value
+0.0001
+-24.0658
+-6.3786
+0.0001
+-20.7936
+At high speeds, only the role of the propeller and the horizontal and vertical tail need be
+considered, hence propeller thruster operating capacity 𝑢𝑡, elevator deflection values 𝑢𝑒ℎ, rudder
+deflection values 𝑢𝑎𝑣.The iteration process of the genetic algorithm at low speed is shown in
+Figure 8:
+
+----- PAGE 22 (imgs=1) -----
+Team # 2023101519953
+Page 22 of 37
+Figure 8 The iteration process of the genetic algorithm at high speed
+The results are as follows in Table 5:
+Table 5
+parameters Range at high speeds
+Parameters
+𝑢𝑡
+𝑢𝑒ℎ
+𝑢𝑎𝑣
+min
+0
+-0.7771
+-8.6277
+max
+0.0045
+0
+0
+Most appropriate value
+0
+-0.7962
+-7.1429
+4.4
+Model of Question Four
+4.4.1
+Establishment of moment equations in the medium speed stage
+According to the given information, the equation for the horizontal speed of the helicopter
+in relation to time is:
+𝑉= 𝑣0 + 𝑎∗𝑡(0 <= 𝑡<= 20)
+(37)
+Where 𝑣0 is the initial horizontal speed of the helicopter, which is 80m/s, 𝑎is the horizontal
+acceleration of the helicopter, which is 5𝑚/𝑠2.
+The system of moment equations for the helicopter at low and high speeds is given in Problem
+3 and will not be repeated here.
+
+----- PAGE 23 (imgs=1) -----
+Team # 2023101519953
+Page 23 of 37
+Considering that the medium speed phase of the helicopter is equivalent to the transition
+phase from low speed to high speed[6], we take into account the helicopter rotor blades,
+propellers and horizontal and vertical tail blades when calculating the moments. The system of
+moment equations is as follows (the moment components in the system of moment equations all
+contain directions):
+
+
+𝑀1 = 𝑚1 ∗𝜌∗𝑆𝑐∗𝑉𝑐+ 𝑚𝑝1 + 𝑀𝑣1
+𝑀2 = 𝑚2 ∗𝜌∗𝑆𝑐∗𝑉𝑐+ 𝑚𝑝2 + 𝑀ℎ
+𝑀3 = 𝑚3 ∗𝜌∗𝑆𝑐∗𝑉𝑐+ 𝑀𝑣2
+(38)
+where 𝑚1 ∗𝜌∗𝑆𝑐∗𝑆𝑐,𝑚2 ∗𝜌∗𝑆𝑐∗𝑉𝑐and 𝑚3 ∗𝜌∗𝑆𝑐∗𝑉𝑐are the roll moment component, pitch
+moment component and yaw moment component generated by the rotor blade respectively; 𝑚𝑝1
+and 𝑚𝑝2 are the torque and pitch moment components generated by the propeller respectively;
+𝑀ℎis the pitch moment component generated by the horizontal tail; Mv1 and 𝑀𝑣2 are the roll
+moment component and yaw moment component generated by the vertical tail respectively.
+4.4.2
+Maneuvering Range results for each component over time
+Applying the genetic algorithm optimisation model of the third question in each of the three
+speed cases with time as the independent variable, the results of the manoeuvring ranges of the
+individual components of the helicopter as a function of time can be found in the Excel: Problem
+4 Results table in the Supporting Materials document we submitted and our appendix.The result
+is graphically represented in the Figure 9 below:
+Figure 9 Maneuvering Range
+
+----- PAGE 24 (imgs=0) -----
+Team # 2023101519953
+Page 24 of 37
+4.4.3
+Correlation Analysis and Model Improvement
+The above is just to get the manoeuvre magnitude of each component of the helicopter at
+different flight moments. To make the helicopter’s input parameters as continuous as possible
+over time, we further optimise the genetic algorithm of the third question. The single-objective
+optimisation problem is improved to a multi-objective optimisation problem. The size of the
+Euclidean distance of the optimisation results at adjacent times is used as an indicator of
+continuity. Assuming that Pi is the optimal result vector of the genetic algorithm at the ith
+instant, the modified objective function is:
+
+
+𝑚𝑖𝑛{|𝑀1| + |𝑀2| + |𝑀3|}
+𝑚𝑖𝑛
+
+|𝑃𝑖+ 1 −𝑃𝑖|2	
+(39)
+Although the model is strongly influenced by the input parameters at the initial moment, in
+practical situations the input parameters are usually determined at the initial moment of the
+helicopter. Therefore, the model has some feasibility. The results of the dynamic values of the
+helicopter components over time that we obtained after taking one case of the optimisation result
+of the genetic algorithm at the initial moment as the initial parameter can be found in the Excel:
+Problem 4 Results table in the Supporting Materials document we submitted and our appendix.
+5.
+Strengths and Weaknesses
+5.1
+Strengths
+1. The modelling is from specific to general, from simple to complex, which can realise the
+solution under specific conditions and is also applicable to general situations. 2. A combination
+of improved genetic algorithm and Monte Carlo simulation is used to make the solution results
+more robust.
+5.2
+Weaknesses
+1. The influence of other factors such as the damping torque on the helicopter’s attitude
+angle is not considered.
+2. There is some subjectivity in the determination of the initial conditions when solving the
+second order differential equation for the attitude angle.
+
+----- PAGE 25 (imgs=0) -----
+Team # 2023101519953
+Page 25 of 37
+References
+[1] Zeng Yilan,Han Dong,Liu Zhuangzhuang. Optimization of flight performance parameters
+of conventional composite high-speed helicopter based on genetic algorithm[J]. Aviation
+Science and Technology,2023,34(09):52-61.DOI:10.19452/j.issn1007-5453.2023.09.006.
+[2] She Mingren. Research on flight dynamics modeling and flight characteristics of a
+coaxial rigid rotor high-speed helicopter[D]. Nanjing University of Aeronautics and
+Astronautics,2021.37-75
+[3] Yi-Qiang
+Xu,Dandan
+Chen.
+Research
+on
+air
+density
+derivation
+method
+for
+decentralized
+wind
+power[J].
+Shanghai
+Energy
+Conservation,2023(03):284-
+289.DOI:10.13770/j.cnki.issn2095-705x.2023.03.007.
+[4] Chen Yuemin. Relationship between angular momentum, angular velocity, moment and
+angular acceleration of rigid bodies[J]. Journal of Anyang Normal College,2000,(02):1-4.
+[5] Ye Y, Thomson D, Renliang C, et al. Heading control strategy assessment for coaxial
+compound helicopters[J]. Chinese Journal of Aeronautics, 2019, 32(9): 2037-2046.
+[6] Floros M W, Johnson W. Stability and Control Analysis of the Slowed-Rotor Compound
+Helicopter Configuration[J]. Journal of the American Helicopter Society, 2007, 52(3): 239-
+253.
+
+----- PAGE 26 (imgs=0) -----
+Team # 2023101519953
+Page 26 of 37
+Appendix
+5.3
+the result of problem 4
+Horizontal speed(m/s)
+uc
+ucd
+ue
+ua
+80
+(0.005,23.294)
+(-13.157,4.926)
+(-24.546,-0.125)
+(-0.147,23.693)
+81
+(0.001,22.709)
+(-6.614,2.254)
+(-24.616,-2.963)
+(-0.947,24.883)
+82
+(0.001,24.416)
+(-12.663,1.995)
+(-24.253,-6.615)
+(-1.585,17.631)
+83
+(0.135,23.361)
+(-16.162,19.204)
+(-23.412,0.663)
+(-1.167,24.072)
+84
+(0.000,25.068)
+(-6.769,8.339)
+(-23.006,-5.193)
+(-1.570,23.540)
+85
+(0.206,19.757)
+(-2.743,3.143)
+(-22.640,-5.189)
+(-1.966,21.858)
+86
+(0.000,28.651)
+(-8.129,3.605)
+(-22.758,-6.900)
+(-1.347,25.000)
+87
+(0.043,25.136)
+(-2.818,1.633)
+(-22.866,-6.583)
+(-0.790,20.884)
+88
+(1.378,22.068)
+(-2.801,3.495)
+(-22.552,-7.614)
+(-1.074,19.330)
+89
+(1.000,26.716)
+(-2.868,2.722)
+(-23.884,-6.183)
+(-1.736,24.014)
+90
+(0.473,23.160)
+(-2.918,-0.164)
+(-23.793,-1.536)
+(-1.121,24.893)
+91
+(0.003,20.958)
+(-2.960,1.291)
+(-22.634,-6.646)
+(-1.049,23.149)
+92
+(0.030,24.626)
+(-3.002,2.110)
+(-23.030,-6.259)
+(-0.263,22.428)
+93
+(0.502,25.377)
+(-5.226,0.208)
+(-23.139,-6.505)
+(-0.534,25.000)
+94
+(0.911,24.456)
+(-3.081,1.223)
+(-24.712,-5.728)
+(-1.046,24.906)
+95
+(0.237,22.077)
+(-6.050,1.474)
+(-23.965,-3.782)
+(-1.132,25.000)
+96
+(0.016,20.999)
+(-2.975,2.349)
+(-24.071,-6.667)
+(-2.330,24.445)
+97
+(0.000,22.758)
+(-4.154,1.765)
+(-24.569,-2.914)
+(-0.472,25.000)
+98
+(0.016,20.174)
+(-3.240,1.450)
+(-24.388,-6.215)
+(-1.548,22.026)
+99
+(0.001,18.938)
+(-3.247,0.256)
+(-21.816,-7.726)
+(-0.712,18.262)
+100
+(0.113,20.019)
+(-3.322,3.036)
+(-23.564,-5.555)
+(-1.466,22.586)
+101
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+102
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+103
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+104
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+105
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+106
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+107
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+108
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+109
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+110
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+111
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+
+----- PAGE 27 (imgs=0) -----
+Team # 2023101519953
+Page 27 of 37
+112
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+113
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+114
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+115
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+116
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+117
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+118
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+119
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+120
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+121
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+122
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+123
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+124
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+125
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+126
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+127
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+128
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+129
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+130
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+131
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+132
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+133
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+134
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+135
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+136
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+137
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+138
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+139
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+140
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+141
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+142
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+143
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+144
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+145
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+146
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+147
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+148
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+
+----- PAGE 28 (imgs=0) -----
+Team # 2023101519953
+Page 28 of 37
+149
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+150
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+151
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+152
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+153
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+154
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+155
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+156
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+157
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+158
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+159
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+160
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+161
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+162
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+163
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+164
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+165
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+166
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+167
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+168
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+169
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+170
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+171
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+172
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+173
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+174
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+175
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+176
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+177
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+178
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+179
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+180
+(0.000,30.000)
+(-25.000,25.000)
+(-25.000,25.000)
+(-25.000,25.000)
+Horizontal speed(m/s)
+ut
+ueh
+uav
+80
+(0.000,6.331)
+(-25.000,25.000)
+(-25.000,25.000)
+81
+(0.000,6.014)
+(-25.000,25.000)
+(-25.000,25.000)
+82
+(0.004,4.784)
+(-25.000,25.000)
+(-25.000,25.000)
+
+----- PAGE 29 (imgs=0) -----
+Team # 2023101519953
+Page 29 of 37
+83
+(0.004,6.393)
+(-25.000,25.000)
+(-25.000,25.000)
+84
+(0.150,5.472)
+(-25.000,25.000)
+(-25.000,25.000)
+85
+(0.000,5.210)
+(-24.067,20.659)
+(-25.000,24.919)
+86
+(0.250,6.182)
+(-24.972,14.811)
+(-25.000,25.000)
+87
+(0.254,5.265)
+(-23.895,19.005)
+(-25.000,24.990)
+88
+(0.100,5.085)
+(-24.983,17.056)
+(-25.000,23.923)
+89
+(0.004,5.609)
+(-17.823,24.801)
+(-25.000,24.542)
+90
+(0.126,5.804)
+(-21.129,22.763)
+(-25.000,24.795)
+91
+(0.085,5.456)
+(-24.808,23.382)
+(-25.000,24.882)
+92
+(0.070,5.535)
+(-17.736,19.550)
+(-25.000,24.971)
+93
+(0.257,6.033)
+(-24.801,18.511)
+(-25.000,25.000)
+94
+(0.139,5.847)
+(-20.994,24.297)
+(-25.000,25.000)
+95
+(0.122,6.110)
+(-24.421,24.837)
+(-25.000,25.000)
+96
+(0.063,5.624)
+(-24.555,22.893)
+(-25.000,21.886)
+97
+(0.188,5.989)
+(-20.835,23.901)
+(-25.000,25.000)
+98
+(0.016,5.415)
+(-22.297,23.033)
+(-25.000,25.000)
+99
+(0.117,4.997)
+(-23.203,24.990)
+(-25.000,24.458)
+100
+(0.004,5.623)
+(-24.864,18.734)
+(-25.000,25.000)
+101
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-7.124)
+102
+(0.000,0.001)
+(-0.772,-0.769)
+(-9.120,-2.186)
+103
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-1.794)
+104
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-3.279)
+105
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,0.606)
+106
+(0.000,0.001)
+(-0.772,-0.769)
+(-8.573,-4.113)
+107
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-0.492)
+108
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-5.200)
+109
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-1.748)
+110
+(0.000,0.001)
+(-0.772,-0.769)
+(-8.860,-1.917)
+111
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-2.699)
+112
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.700)
+113
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-1.237)
+114
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.540,-1.500)
+115
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-5.126)
+116
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-1.050)
+117
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-2.435)
+118
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-4.432)
+119
+(0.000,0.001)
+(-0.772,-0.769)
+(-8.825,-2.927)
+
+----- PAGE 30 (imgs=0) -----
+Team # 2023101519953
+Page 30 of 37
+120
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-7.143)
+121
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-3.694)
+122
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-0.962)
+123
+(0.000,0.000)
+(-0.771,-0.769)
+(-8.201,-0.547)
+124
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.718,-3.484)
+125
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-2.333)
+126
+(0.000,0.000)
+(-0.771,-0.769)
+(-7.144,-3.103)
+127
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.727,-6.170)
+128
+(0.000,0.001)
+(-0.772,-0.769)
+(-9.041,-2.249)
+129
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-4.748)
+130
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.161,-2.652)
+131
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-1.035)
+132
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-0.725)
+133
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-4.425)
+134
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.069)
+135
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-3.670)
+136
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-5.937)
+137
+(0.000,0.000)
+(-0.771,-0.769)
+(-8.048,3.141)
+138
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-6.296)
+139
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,-3.247)
+140
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.177)
+141
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.143,0.041)
+142
+(0.000,0.000)
+(-0.771,-0.769)
+(-7.396,-1.378)
+143
+(0.000,0.000)
+(-0.769,-0.768)
+(-7.143,-1.003)
+144
+(0.000,0.000)
+(-0.771,-0.769)
+(-7.143,-4.858)
+145
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-0.927)
+146
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-3.977)
+147
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.614)
+148
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.447)
+149
+(0.000,0.001)
+(-0.771,-0.769)
+(-8.494,-0.197)
+150
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.090)
+151
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,0.081)
+152
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.368,-2.184)
+153
+(0.000,0.003)
+(-0.775,-0.769)
+(-11.376,-6.329)
+154
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.182)
+155
+(0.000,0.000)
+(-0.770,-0.769)
+(-7.226,-2.738)
+156
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-0.617)
+
+----- PAGE 31 (imgs=0) -----
+Team # 2023101519953
+Page 31 of 37
+157
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-7.004)
+158
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.274)
+159
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-4.519)
+160
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.813)
+161
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.624)
+162
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-3.715)
+163
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.959)
+164
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-6.292)
+165
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.868)
+166
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.463)
+167
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.547)
+168
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.235)
+169
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.155,-1.410)
+170
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.474)
+171
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-2.964)
+172
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.564)
+173
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,0.992)
+174
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.184)
+175
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-3.007)
+176
+(0.000,0.002)
+(-0.773,-0.769)
+(-9.680,-1.307)
+177
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-0.341)
+178
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-1.945)
+179
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-4.493)
+180
+(0.000,0.000)
+(-0.769,-0.769)
+(-7.143,-4.905)
+5.4
+the most Appropriate value of problem
+Horizontal speed(m/s)
+uc
+ucd
+ue
+80
+2.984999
+-1.24962
+-8.66167
+81
+3.576278
+-1.24627
+-9.40651
+82
+3.951469
+0.233645
+-9.75637
+83
+4.714198
+0.294419
+-10.6417
+84
+1.653987
+-0.05894
+-8.3456
+85
+1.203584
+1.283763
+-7.79517
+86
+2.501465
+-0.26436
+-9.41632
+87
+0.000186
+-0.65803
+-7.28085
+88
+2.563502
+-0.33343
+-9.2329
+
+----- PAGE 32 (imgs=0) -----
+Team # 2023101519953
+Page 32 of 37
+89
+0.753174
+-0.60739
+-7.96066
+90
+4.022193
+-0.9168
+-10.3068
+91
+3.614001
+-0.91665
+-10.2157
+92
+7.400234
+-0.89781
+-13.9299
+93
+9.718995
+-0.79182
+-15.243
+94
+10.10754
+-0.28699
+-15.6394
+95
+8.564949
+1.208105
+-14.6101
+96
+9.007368
+0.083906
+-15.5435
+97
+12.1931
+-0.27035
+-18.4916
+98
+7.289541
+-0.45638
+-14.2496
+99
+9.854195
+-0.95522
+-15.9332
+100
+15.72853
+-0.29057
+-20.4391
+101
+0
+0
+0
+102
+0
+0
+0
+103
+0
+0
+0
+104
+0
+0
+0
+105
+0
+0
+0
+106
+0
+0
+0
+107
+0
+0
+0
+108
+0
+0
+0
+109
+0
+0
+0
+110
+0
+0
+0
+111
+0
+0
+0
+112
+0
+0
+0
+113
+0
+0
+0
+114
+0
+0
+0
+115
+0
+0
+0
+116
+0
+0
+0
+117
+0
+0
+0
+118
+0
+0
+0
+119
+0
+0
+0
+120
+0
+0
+0
+121
+0
+0
+0
+122
+0
+0
+0
+123
+0
+0
+0
+124
+0
+0
+0
+125
+0
+0
+0
+
+----- PAGE 33 (imgs=0) -----
+Team # 2023101519953
+Page 33 of 37
+126
+0
+0
+0
+127
+0
+0
+0
+128
+0
+0
+0
+129
+0
+0
+0
+130
+0
+0
+0
+131
+0
+0
+0
+132
+0
+0
+0
+133
+0
+0
+0
+134
+0
+0
+0
+135
+0
+0
+0
+136
+0
+0
+0
+137
+0
+0
+0
+138
+0
+0
+0
+139
+0
+0
+0
+140
+0
+0
+0
+141
+0
+0
+0
+142
+0
+0
+0
+143
+0
+0
+0
+144
+0
+0
+0
+145
+0
+0
+0
+146
+0
+0
+0
+147
+0
+0
+0
+148
+0
+0
+0
+149
+0
+0
+0
+150
+0
+0
+0
+151
+0
+0
+0
+152
+0
+0
+0
+153
+0
+0
+0
+154
+0
+0
+0
+155
+0
+0
+0
+156
+0
+0
+0
+157
+0
+0
+0
+158
+0
+0
+0
+159
+0
+0
+0
+160
+0
+0
+0
+161
+0
+0
+0
+162
+0
+0
+0
+
+----- PAGE 34 (imgs=0) -----
+Team # 2023101519953
+Page 34 of 37
+163
+0
+0
+0
+164
+0
+0
+0
+165
+0
+0
+0
+166
+0
+0
+0
+167
+0
+0
+0
+168
+0
+0
+0
+169
+0
+0
+0
+170
+0
+0
+0
+171
+0
+0
+0
+172
+0
+0
+0
+173
+0
+0
+0
+174
+0
+0
+0
+175
+0
+0
+0
+176
+0
+0
+0
+177
+0
+0
+0
+178
+0
+0
+0
+179
+0
+0
+0
+180
+0
+0
+0
+Horizontal speed(m/s)
+ua
+ut
+ueh
+uav
+80
+1.58894
+1.001176
+0
+0
+81
+0.3828
+0.636046
+0
+0
+82
+1.322088
+0.656502
+0
+0
+83
+0.151287
+0.289314
+0
+0
+84
+-0.38869
+0.187801
+0
+0
+85
+0.64463
+0.262383
+-20.2268
+-25
+86
+-0.79081
+0.100571
+6.467197
+-24.9999
+87
+-0.53449
+0.250198
+-0.28677
+-19.2735
+88
+1.331292
+0.768207
+7.305321
+-25
+89
+-0.16139
+0.356114
+0.709426
+-19.726
+90
+1.82727
+1.030554
+1.850285
+-13.5232
+91
+1.260173
+0.855426
+5.825732
+-13.3865
+92
+-0.27558
+0.373191
+21.20216
+-13.5968
+93
+2.108852
+1.10113
+7.21068
+-15.3595
+94
+2.073687
+1
+3.685776
+-24.0472
+95
+1.700371
+0.611447
+0.563988
+-24.9999
+96
+-0.36633
+0.164935
+12.59406
+-24.8774
+
+----- PAGE 35 (imgs=0) -----
+Team # 2023101519953
+Page 35 of 37
+97
+-0.89377
+0.062501
+20.63067
+-23.2921
+98
+0.460692
+0.525923
+20.88671
+-19.9597
+99
+3.303808
+1.522846
+21.34658
+-11.8078
+100
+6.348778
+2.375655
+19.45384
+-22.024
+101
+0
+1.49E-08
+-0.76922
+-7.14286
+102
+0
+0
+-0.76921
+-7.14286
+103
+0
+0
+-0.76921
+-7.14285
+104
+0
+0
+-0.76922
+-7.14286
+105
+0
+0
+-0.76923
+-7.14285
+106
+0
+0
+-0.76923
+-7.14286
+107
+0
+0
+-0.76922
+-7.14286
+108
+0
+9.86E-07
+-0.76923
+-7.14286
+109
+0
+0
+-0.76923
+-7.14286
+110
+0
+0
+-0.76923
+-7.14286
+111
+0
+0
+-0.76923
+-7.14285
+112
+0
+1.49E-08
+-0.76923
+-7.14285
+113
+0
+1.67E-06
+-0.76923
+-7.14286
+114
+0
+2.28E-06
+-0.76922
+-7.14285
+115
+0
+0
+-0.76923
+-7.14286
+116
+0
+0
+-0.76922
+-7.14285
+117
+0
+0
+-0.76923
+-7.14285
+118
+0
+5.96E-08
+-0.76923
+-7.14286
+119
+0
+1.49E-08
+-0.76923
+-7.14286
+120
+0
+1.49E-08
+-0.76922
+-7.14286
+121
+0
+1.49E-08
+-0.76923
+-7.14286
+122
+0
+0
+-0.76922
+-7.14286
+123
+0
+1.08E-06
+-0.76923
+-7.14286
+124
+0
+0
+-0.76923
+-7.14286
+125
+0
+0
+-0.76923
+-7.14285
+126
+0
+0
+-0.76922
+-7.14285
+127
+0
+0
+-0.76923
+-7.14285
+128
+0
+2.02E-06
+-0.76923
+-7.14285
+129
+0
+1.49E-08
+-0.76923
+-7.14286
+130
+0
+2.86E-07
+-0.76923
+-7.14286
+131
+0
+0
+-0.76923
+-7.14286
+132
+0
+1.49E-08
+-0.76923
+-7.14286
+133
+0
+0
+-0.76923
+-7.14285
+
+----- PAGE 36 (imgs=0) -----
+Team # 2023101519953
+Page 36 of 37
+134
+0
+1.32E-06
+-0.76923
+-7.14285
+135
+0
+0
+-0.76923
+-7.14286
+136
+0
+8.05E-07
+-0.76924
+-7.14286
+137
+0
+5.96E-08
+-0.76923
+-7.14286
+138
+0
+1.49E-08
+-0.76923
+-7.14286
+139
+0
+1.49E-08
+-0.76923
+-7.14286
+140
+0
+1.49E-08
+-0.76923
+-7.14286
+141
+0
+5.96E-08
+-0.76923
+-7.14285
+142
+0
+1.30E-06
+-0.76923
+-7.14286
+143
+0
+4.05E-06
+-0.76923
+-7.14286
+144
+0
+0
+-0.76923
+-7.14286
+145
+0
+0
+-0.76923
+-7.14285
+146
+0
+0
+-0.76923
+-7.14285
+147
+0
+1.34E-06
+-0.76922
+-7.14286
+148
+0
+1.49E-08
+-0.76923
+-7.14285
+149
+0
+0
+-0.76923
+-7.14286
+150
+0
+0
+-0.76923
+-7.14286
+151
+0
+3.13E-07
+-0.76923
+-7.14286
+152
+0
+0
+-0.76923
+-7.14285
+153
+0
+0
+-0.76923
+-7.14286
+154
+0
+0
+-0.76922
+-7.14286
+155
+0
+0
+-0.76923
+-7.14286
+156
+0
+2.93E-06
+-0.76922
+-7.14286
+157
+0
+0
+-0.76923
+-7.14286
+158
+0
+1.01E-06
+-0.76923
+-7.14286
+159
+0
+1.49E-08
+-0.76923
+-7.14286
+160
+0
+0
+-0.76923
+-7.14286
+161
+0
+0
+-0.76922
+-7.14285
+162
+0
+1.49E-08
+-0.76923
+-7.14285
+163
+0
+1.49E-08
+-0.76922
+-7.14285
+164
+0
+1.06E-06
+-0.76922
+-7.14286
+165
+0
+0
+-0.76923
+-7.14286
+166
+0
+6.48E-07
+-0.76923
+-7.14286
+167
+0
+0
+-0.76923
+-7.14286
+168
+0
+9.54E-07
+-0.76923
+-7.14286
+169
+0
+0
+-0.76923
+-7.14286
+170
+0
+0
+-0.76923
+-7.14286
+
+----- PAGE 37 (imgs=0) -----
+Team # 2023101519953
+Page 37 of 37
+171
+0
+2.38E-07
+-0.76923
+-7.14286
+172
+0
+1.49E-08
+-0.76923
+-7.14285
+173
+0
+5.96E-08
+-0.76923
+-7.14286
+174
+0
+7.89E-07
+-0.76923
+-7.14286
+175
+0
+1.13E-06
+-0.76923
+-7.14286
+176
+0
+1.49E-08
+-0.76922
+-7.14286
+177
+0
+1.49E-08
+-0.76923
+-7.14285
+178
+0
+1.49E-08
+-0.76923
+-7.14285
+179
+0
+5.96E-08
+-0.76923
+-7.14285
+180
+0
+0
+-0.76923
+-7.14285

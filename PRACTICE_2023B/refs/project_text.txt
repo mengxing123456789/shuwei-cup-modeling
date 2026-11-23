@@ -1,0 +1,1757 @@
+                         Team Number:         apmcm2699001
+                         Problem Chosen:      B
+
+
+
+                                   2026 APMCM summary sheet
+
+
+         Desulfurized Ash in Cotton-Stalk Pyrolysis:
+ Compositional Signal, Species Tiers, and a Prediction Envelope
+
+       Background and Task Co-pyrolysing cotton stalk with desulfurized fly ash (DFA) is promoted
+as a way to upgrade the gas, yet the two annexes of Problem B report four product yields that must
+sum to one and a separate gas table in a different unit, with a declared relative error near 5 percent
+on every cell. We ask five questions: whether DFA changes the product distribution and by how
+much, how each gas species responds, whether cellooligosaccharide (CE) and lignin (LG) differ at
+equal ash loading, which mechanism and kinetics are consistent with those responses, and what can
+be predicted at an untried loading. The annexes sample the three mixtures on grids that only partly
+coincide, so every comparison is built on the levels they share.
+       Modeling Framework Because the four yields are one composition, the analysis works in
+isometric log-ratio (ILR) coordinates on a three-part simplex instead of four independent regressions.
+Question 1 is answered by an ILR linear model in the ash mass fraction. Question 2 adds a species-
+level, noise-calibrated tiering and a mole-fraction bridge between the two annexes. Question 3 turns
+the fit into a paired contrast at equal ash level. Question 4 combines a centred log-selectivity, a gas-
+phase carbon account, and an isothermal iso-conversion ridge. Question 5 propagates the fitted
+residual through a Monte-Carlo prediction envelope and checks it by leave-one-out.
+       Results per Question DFA reshapes the distribution rather than diluting it: on a dry-ash-free
+basis the ash cannot lower a yield mechanically, yet for cotton stalk tar falls by -37.7 percent between
+the zero-ash and the richest level, while the dominant lignin product stays inside its noise floor. The
+strongest gas signal is hydrogen in cotton stalk, whose span is 14.47 times its own floor. At equal
+ash level CE and LG separate most sharply on char, with a mean gap of -33.27 points, and water is
+the only product that changes sign. The gas-phase carbon account falls by 77.2 percent along the
+CE series, which links the yield shifts to a carbon-partition change. The cotton-stalk leave-one-out
+error is 5.50 percent, the smallest of the three mixtures.
+       Validation and Limitation Mass closure holds to machine precision, and every reported num-
+ber is recomputed from the stored result files. A perturbation audit of the fitted parameters and the
+query points leaves a single headline reversal, 6.67 percent of the feasible model runs. The main
+limitation is that neither annex reports the pyrolysis temperature, so the kinetics reduce to an iso-
+conversion ridge and no rate law is identified; the CE and LG series also show a lack-of-fit ratio of
+3.42 or more, which marks their predictions as trend-only.
+
+Keywords: Compositional data; Isometric log-ratio regression; Noise-calibrated species tiering;
+Paired contrast at equal ash level; Selectivity and carbon accounting; Monte-Carlo prediction enve-
+lope
+CONTENTS                                                                                                         CONTENTS
+
+
+
+                                                       Contents
+
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   1
+2. Problem Analysis. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      2
+3. Assumptions and Justifications. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .            2
+4. Notations and Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .       3
+5. Question 1: Product Yields against Ash Loading . . . . . . . . . . . . . . . . . . . . . . . . . . . .                     4
+6. Question 2: Gas Species against Ash Loading . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                    7
+7. Question 3: CE against LG at Equal Ash Level . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+8. Question 4: Mechanism and Kinetics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+9. Question 5: Prediction with Limited Data. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+10. Sensitivity Analysis and Error Analysis. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+11. Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+12. Strengths and Weaknesses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+13. References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+A. Appendix A: Symbols . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+B. Appendix B: Software and Reproduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+
+
+
+                                                               2
+Team # apmcm2699001                                                                        Page 1 of 27
+
+
+
+                                        I. Introduction
+
+1 . 1 Background
+     Cotton stalk is one of the largest dry agricultural residues in the cotton belt, and pyrolysis
+converts it into a solid char, a condensable tar, water, and a non-condensable gas whose hydrogen
+content determines its value as a fuel or a reducing agent [1, 2]. Ash-rich industrial residues such as
+desulfurized fly ash (DFA) are abundant, and their lime and sulfate content makes them plausible
+catalysts for tar cracking and carbon dioxide uptake [3, 4]. Co-processing therefore looks attractive,
+but it raises a measurement question that a yield table alone can answer only if the table is read
+correctly: the four product yields are percentages of one dry-ash-free mass, so they are a composition
+with three degrees of freedom, not four independent responses.
+
+
+1 . 2 Restatement of the Problems
+     Write a for the DFA mass charged per 100 g of dry biomass, r = a/100, and w = r/(1 + r) =
+a/(100 + a) for the ash mass fraction of the feed. For mixture c ∈ {CS, CE, LG} and product
+                                        (c)                                                      (c)
+p ∈ {Tar, Water, Char, Syngas}, let yp be the yield in wt.% (daf), and for gas species g let zg be
+the yield in mL/g (daf). The five tasks are:
+                            (c)
+ 1. estimate how each yp responds to w, and decide for each product whether the response exceeds
+     the declared experimental error;
+                            (c)
+ 2. describe how each zg responds to w, and present the gas composition in a form that is com-
+     parable across mixtures;
+ 3. compare CE with LG at the same ash level, decide which product and gas gaps are real, and
+     explain the pattern;
+ 4. propose a reaction mechanism consistent with Questions 1–3, and determine which kinetic
+     parameters the data can and cannot identify;
+              (c)
+ 5. predict yp on a requested ash grid for a mixture with no further experiments, with an uncer-
+     tainty statement.
+
+
+1 . 3 Our Work
+     This paper delivers five linked results. (i) An ILR linear model of the full composition, with
+a noise-calibrated decision for all twelve product–mixture combinations; tar and water respond in
+every mixture, char responds only through a derived column. (ii) A species-level tiering by absolute
+span and a mole-fraction bridge that shows the gas annex and the product annex are not the same
+measurement. (iii) A paired CE–LG contrast on eight product levels and five gas levels, which sep-
+arates the feedstocks on tar, char, hydrogen, carbon dioxide, and methane but not on water. (iv) A
+mechanism reading in three independent signatures, and an honest kinetic result: an iso-conversion
+ridge, not a rate law. (v) A prediction table on a seven-level grid with 5–95% intervals, whose
+reliability is established by leave-one-out rather than asserted. Every number printed below is re-
+computed from data/results_*.json by code/verify_numbers.py; the 547 stored claims and
+their provenance are itemised in that script.
+Team # apmcm2699001                                                                        Page 2 of 27
+
+
+
+                                      II. Problem Analysis
+     Three features of the data decide the whole modelling strategy.
+     The response is a composition. Each Annex I row sums to 100 by construction (the largest
+observed deviation is 1.4 × 10−14 ), so the four yields carry three degrees of freedom. Fitting four
+separate regressions would count the same information twice and would produce coefficients that
+cannot be compared across mixtures, a defect of ordinary univariate treatment of shares that has been
+documented repeatedly [5, 8]. Working in log-ratio coordinates removes both defects and makes the
+coefficients interpretable as elasticities: the fitted model predicts shares, and the inverse transform
+returns a composition that sums to one exactly [6, 9].
+     The dry-ash-free basis removes dilution. Because yp is expressed per gram of dry ash-free
+biomass, adding inert ash cannot lower a yield by replacing fuel with ash. Any change in yp is
+therefore chemical, or an artefact of the normalisation, and the paper is careful to distinguish the
+two. This is why the phrase “the ash dilutes the products” is not available as an explanation here,
+and why the observed tar loss in cotton stalk is a statement about chemistry rather than about mass
+balance.
+     The declared error is the object of inference. Every cell carries a relative error near 5%, so
+a smooth curve drawn through four points is not evidence of a trend. Three thresholds are therefore
+defined and kept separate: a step threshold for adjacent levels, a difference threshold for the paired
+CE–LG contrast, and a trend threshold for a whole series. They answer different questions and are
+never substituted for one another. A ratio of span to threshold above one is reported as a signal, and
+the denominator is always named, because the same word “significant” would otherwise mean three
+different things in three sections.
+     Two secondary features matter as well. First, the two annexes use different units (mass fraction
+against volume per gram), so a bridge is needed before they can be discussed together; the bridge is a
+diagnostic, not a correction. Second, three product columns are stored as formulas rather than mea-
+surements (CS syngas, CE char, and LG tar), which makes their fitted responses partly arithmetic;
+these cells are flagged wherever they are used.
+
+
+                         III. Assumptions and Justifications
+  1. Independent 5% relative error. Each reported cell is treated as a measurement with inde-
+     pendent relative error ε = 0.05; this is the only error statement the problem supplies, and no
+     replicate exists to estimate it. Used by every threshold in Sections 5–9 and by the surrogate
+     noise simulation.
+  2. Exact closure. The four product yields of a row sum to unity, so the composition lives on the
+     simplex. Verified on all rows (maximum deviation 1.4 × 10−14 ); used by the ILR transform.
+  3. Uniform preparation precision. Columns within one annex were measured with the same
+     precision, so a single ε applies to all of them. Structural, not testable from the annex; used
+     when pooling residuals.
+  4. Smooth, linear response in ILR coordinates. Over the sampled ash range each ILR coordi-
+     nate is linear in w. Tested by a lack-of-fit ratio against the surrogate noise floor; it holds for
+Team # apmcm2699001                                                                          Page 3 of 27
+
+
+
+     CS and is rejected for CE and LG, which are then reported as trend descriptions only.
+ 5. Comparable pyrolysis conditions across feedstocks. CE and LG were pyrolysed under the
+     same conditions as CS, so a CE–LG contrast at equal ash level is a feedstock contrast. Partly
+     supported by the shared level grid; used by Section 7 and by the ranking of mechanisms in
+     Section 8.
+ 6. The gas annex measures relative composition only. Annex II volumes are used to compare
+     species and mixtures, never to close a mass balance against Annex I. Tested by the bridge ratio,
+     whose range shows the two annexes do not report the same quantity.
+ 7. A reporting threshold of 5 mL/g (daf) separates major from minor species. This is a pre-
+     sentation convention, not a physical constant; the interval of thresholds that preserves every
+     tier is reported, and the sensitivity of the tiers is measured.
+ 8. The isothermal endpoint identifies only the product k(T )t. With one temperature and one
+     holding time, the pre-exponential factor and the activation energy cannot be separated. Used
+     in Section 8: an iso-conversion ridge is reported instead of a point estimate.
+ 9. Stability is assessed by perturbation, not replication. With no replicate runs, stability is
+     measured by perturbing inputs, thresholds, and query points, and by leave-one-out refitting.
+     Used in Sections 9 and 10.
+10. The prediction grid lies inside the observed support. All seven requested ash levels fall be-
+     tween the smallest and largest calibrated levels of each mixture, so the exercise is interpolation;
+     the boundary check confirms this and flags the levels that sit on the support edge.
+
+
+                                 IV. Notations and Data
+
+4 . 1 Notations
+     Symbols are listed with their ranges in Appendix A. In the body, w is the ash mass fraction of
+the feed, Sp = yp /100 is a product share, zg is a gas yield, φg is a gas mole fraction, γp is a centred
+log-selectivity, β is the annex bridge ratio, nC is gas-phase carbon, and k, A, Ea , n, f (α) are kinetic
+quantities.
+
+
+4 . 2 Data Sources and Structure
+     Annex I contains 25 product rows (CS 9, CE 8, LG 8) and four product columns, 100 cells in
+all; Annex II contains 16 gas rows (CS 6, CE 5, LG 5) and 54 + 25 + 25 = 104 gas cells, with species
+counts 9, 5, 5. The two grids are nested rather than identical: Annex I uses nine levels for CS and
+eight for CE and LG, Annex II six and five. The shared product levels number eight for the CE–LG
+contrast, and the shared gas levels number five. The level 100/100 means a DFA mass fraction of
+50.0000%, not pure ash; the mapping w = r/(1 + r) is applied before any fitting, and the unequal
+spacing of r (steps of 10 up to 60, then 20) is one reason the response is modelled in w rather than
+in r. Both annexes are used exactly as published in the problem statement [16]; no value is edited,
+imputed, or rescaled.
+Team # apmcm2699001                                                                           Page 4 of 27
+
+
+
+4 . 3 Cleaning and Cross-Checks
+     No cell is missing. Three product columns are derived by subtraction (CS syngas, CE char, LG
+tar; 24 cells), and they are marked in every table and every claim. Closure holds to 1.4 × 10−14 . A
+surrogate experiment draws 4000 compositions with independent 5% multiplicative noise, recloses
+them, and transforms them by ILR; the standard deviation of the transformed surrogate is the noise
+floor used in Section 5. Its value, 0.0502 on the CS grid and 0.0501 on the CE and LG grids, is close
+to the analytic expectation for a four-part composition and confirms that the declared error and the
+fitted residual are on the same scale.
+
+
+4 . 4 Rationality of the Comparison
+     The declared 5% is a property of the measurement, not an accuracy target for the model; a
+model whose residual is smaller than the floor is not “better”, it is merely consistent. Conversely, a
+fitted residual above the floor indicates lack of fit, not precision. This asymmetry is used explicitly:
+CS has a residual below the floor, so its linear ILR model is accepted; CE and LG have residuals
+above it, so their models are demoted to trend descriptions. The three derived columns are treated
+as arithmetic consequences of the other three, and a response that appears only in a derived column
+is never promoted to a chemical finding.
+
+
+          V. Question 1: Product Yields against Ash Loading
+
+5 . 1 Mechanism and Rationale
+     DFA brings lime, sulfate, and silica into the bed. Lime is a carbon dioxide sorbent and a tar-
+cracking contact; sulfate can act as an oxygen carrier; silica is largely inert [3, 4]. Two responses
+are therefore plausible on chemical grounds: tar should fall as volatiles are cracked, and gas should
+rise as the fragments become non-condensable. Char is expected to be the least responsive product,
+because the dry-ash-free basis already removes the inert fraction and because char is the residue that
+the ash does not consume. The data are asked whether these expectations survive the noise floor,
+not whether they are plausible.
+
+
+5 . 2 Model
+     The ash fraction is
+                                        a               r       a
+                                  r=       ,      w=       =         ,                                 (1)
+                                       100             1+r   100 + a
+and the composition is
+                                                yp      X
+                                       Sp =        ,          Sp = 1.                                  (2)
+                                               100        p
+
+With four parts, a Helmert contrast basis gives three orthonormal coordinates,
+        ln S1 − ln S2             ln S1 + ln S2 − 2 ln S3            ln S1 + ln S2 + ln S3 − 3 ln S4
+ v1 =        √        ,    v2 =             √             ,   v3 =                √                  , (3)
+               2                              6                                     12
+Team # apmcm2699001                                                                        Page 5 of 27
+
+
+
+which is the isometric log-ratio transform of [6] in the Helmert form used by the compositions
+package [7]; each coordinate is modelled as
+
+                               vj = βj0 + βj1 w + ej ,           j = 1, 2, 3,                      (4)
+
+and the composition is recovered from a prediction v̂ by
+
+                             X
+                             3
+                                                       exp up             X
+                      up =         v̂j Vjp ,    Ŝp = P          ,              Ŝp = 1.           (5)
+                             j=1                        q exp uq           p
+
+
+The fitted slopes also define the selectivity used in Section 8: with bp = d ln Sp /dw obtained by
+regressing ln Sp on w,
+                                                1X            X
+                                   γ p = bp −       bq ,             γp = 0.                       (6)
+                                                4 q              p
+
+Three thresholds are used, all with the declared ε = 0.05 and a factor two for a two-standard-
+deviation band:
+
+                                       τs (k) = 2ε max{|yk |, |yk+1 |},                            (7)
+                                           τT = 2ε |y|,                                            (8)
+                                                  q
+                                           τD = 2ε ya2 + yb2 .                                     (9)
+
+A series is called a trend when its end-to-end span exceeds τT ; a step is called resolved when its
+change exceeds τs ; a paired gap is called real when it exceeds τD .
+
+
+5 . 3 Results
+     Table 1 reports the twelve product–mixture combinations, Figure 1 the fitted curves, and Fig-
+ure 2 the span-to-floor ratios. Fitting is a six-parameter linear least squares per mixture on 27 (CS)
+or 24 (CE, LG) observations; the three-coordinate fit takes a median of 189.7 ms in the reference
+implementation, so the cost is negligible and the algorithm is ordinary least squares on a 27 × 2
+design.
+     Tar falls in cotton stalk (-37.7%, a span of 7.33 against a floor of 1.45) and in lignin (-54.7%,
+span 9.87 against 1.13), but rises in CE (31.6%) and in the CE series the rise is 10.86 against a
+floor of 4.21. Water moves the other way in CS (+15.6%) and LG (+54.8%) and falls sharply in
+CE (-41.1%). Char is flat in CS (ratio 0.259) and in LG (ratio 0.208) but rises by 14.8% in CE; that
+rise belongs to a derived column, so the chemical claim is withheld. Syngas rises in CS (+10.2%)
+and LG (+26.2%) and falls in CE (-16.5%). The answer to “is DFA significant” is therefore: for tar
+and for water, yes, in every mixture; for syngas, yes in two of three; for char, no measured column
+moves outside its floor, and the single apparent char response is arithmetic.
+
+
+5 . 4 A Counter-Intuitive Reading and Validation
+     Two results contradict the intuitive picture. First, the largest product in lignin, char at
+58.17 wt.%, is the one product that does not respond (span 1.19 against a floor of 5.73), while tar,
+which is a fifth of the mass, changes by more than half. Second, the CS syngas series is a trend
+that contains no resolved step: its span clears the trend floor by a factor of 1.46 while all eight
+Team # apmcm2699001                                                                                                           Page 6 of 27
+
+
+
+
+                                               Tar                                                               Water
+
+                                                                                       30
+                   40
+    Yield (wt.%)
+
+
+
+
+                   30                                                                  25
+
+
+                   20                                                                  20
+
+
+                   10
+                                                                                       15
+
+
+
+                                               Char                                                             Syngas
+                   60                                                                  30
+
+
+                                                                                       25
+                   50
+    Yield (wt.%)
+
+
+
+
+                                                                                       20
+                   40
+
+                                                                                       15
+                   30
+                                                                                       10
+                   20
+                        0.0              0.2                0.4        0.5                  0.0                0.2           0.4        0.5
+                                               w (-)                                                                 w (-)
+
+
+                                                                  CS          CE            LG
+
+
+Q1: product yields from stored Annex I levels
+source: data/results_q1.json; generator: code/make_figures.py
+
+Figure 1 Product yields (wt.%) of the three mixtures against the ash-to-biomass ratio w: Tar, Water, Char
+                    and Syngas. Each panel keeps its own yield axis; colour and marker identify CS, CE and LG, and
+                    the lines pass through the stored Annex I levels.
+
+
+
+
+                                Q1 trend span against the Monte-Carlo noise floor
+
+                          Tar
+
+
+
+                        Water
+
+
+
+                         Char
+
+
+
+                    Syngas
+
+
+                              0.1                                                  1                                               10
+                                                                  Observed span / noise floor (-)
+                                                       CS    CE          LG            noise floor (ratio 1)
+
+
+Q1: observed span against the surrogate noise floor
+source: data/results_q1.json; generator: code/make_figures.py
+
+Figure 2 Observed end-to-end span of each product series divided by the Monte-Carlo noise floor, on a log
+                    axis; the dashed line at 1 is the noise floor itself. Points left of the line move less across the whole level
+                    range than the surrogate noise does.
+Team # apmcm2699001                                                                                   Page 7 of 27
+
+
+
+Table 1   Product response to ash loading. First and last are the yields at the first and last stored level of each
+          mixture (CS: w = 0 to 0.50; CE and LG: w = 0.0909 to 0.50). The span is max y − min y, τ is
+          the trend threshold of Eq. (8), and the last column gives the span-to-floor ratio. A dagger marks a
+          column stored as a formula rather than measured.
+
+
+                        Mixture Product     First Last     ∆y ∆% Span Span/τ Call
+
+                        CS       Tar       19.46 12.13 -7.33 -37.7 7.33        5.04 trend
+
+                        CS       Water     26.84 31.02    4.18 15.6 4.18       1.45 trend
+
+                        CS       Char      29.21 29.87    0.66 2.26 0.76      0.259 flat
+
+                        CS       Syngas† 24.49 26.98      2.49 10.2 3.96       1.46 trend
+
+                        CE       Tar       34.42 45.28 10.86 31.6 10.86        2.58 trend
+
+                        CE       Water     27.42 16.14 -11.28 -41.1 11.28      5.86 trend
+
+                        CE       Char†     21.43 24.61    3.18 14.8 3.48       1.45 trend
+
+                        CE       Syngas 16.73 13.97 -2.76 -16.5 3.98           2.73 trend
+
+                        LG       Tar†      18.06 8.19 -9.87 -54.7 9.87         8.73 trend
+
+                        LG       Water      15.3 23.69    8.39 54.8 8.39       4.11 trend
+
+                        LG       Char      58.17 57.43 -0.74 -1.27 1.19       0.208 flat
+
+                        LG       Syngas     8.47 10.69    2.22 26.2 3.41       3.12 trend
+
+
+
+adjacent changes sit inside their step thresholds. A reader who only tested steps would call this
+series flat; a reader who only tested ends would miss that the movement is spread evenly rather than
+concentrated.
+     The linear ILR model is tested against the noise floor rather than against a null of zero, and
+Figure 3 shows the paired residuals. For CS the residual is 0.0333 against a floor of 0.0502, a lack-
+of-fit ratio of 0.44, so the model is inside the measurement error; the coordinate-level R2 values are
+0.977, 0.909 and 0.564. For CE the residual is 0.0929 and the ratio 3.42 (R2 0.575, 0.250, 0.563);
+for LG the residual is 0.0941 and the ratio 3.52 (R2 0.822, 0.774, 0.482). Model selection by AIC
+prefers a square-root form for CS (−187.9 against −178.6 for the linear form) and a log form for CE
+(−119.4 against −109.0) and LG (−128.0 against −108.4). We nevertheless keep the linear form
+in w everywhere, for two reasons: it makes γ an analytic log-derivative with the exact centring
+property of Eq. (6), and it keeps the twelve combinations on one comparable scale. The cost of that
+choice is the lack of fit in CE and LG, which is carried forward as a stated limitation.
+
+
+             VI. Question 2: Gas Species against Ash Loading
+
+6 . 1 Mechanism and Rationale
+     A gas table reports species that are produced by different reactions: hydrogen by dehydrogena-
+tion and aromatisation, carbon monoxide and carbon dioxide by decarbonylation and decarboxyla-
+tion, methane by the cleavage of methoxy groups that lignin is rich in, and two- and three-carbon
+species by secondary cracking [1, 3]. A single “gas yield” would therefore average responses of op-
+Team # apmcm2699001                                                                                                          Page 8 of 27
+
+
+
+
+                                                              Q1 ILR fit residual vs the noise floor
+                                           F = 0.44                             F = 3.42                        F = 3.52
+                          0.10                                               0.093                           0.094
+     ILR residual σ (-)
+
+
+                          0.08
+
+                          0.06                      0.050                                 0.050                           0.050
+
+                          0.04         0.033
+
+                          0.02
+
+                          0.00
+                                               CS                                    CE                              LG
+
+
+                                                            fit residual σ       noise floor σ (MC)
+
+
+Q1: ILR residual against the Monte-Carlo noise floor
+source: data/results_q1.json; generator: code/make_figures.py
+
+Figure 3 ILR fit residual σ against the Monte-Carlo noise floor for the three mixtures; the number above each
+                           pair is the lack-of-fit F and the number on each bar is the stored σ. Bars are grouped, not stacked.
+
+
+
+posite sign. The analysis keeps species separate, ranks them by the absolute size of their response,
+and only then converts to mole fractions, which are the form in which a gas is actually used.
+
+
+6 . 2 Model
+               For mixture c with gas species set Gc , the mole fraction and the tier rule are
+                                                             
+                                     zg                      major, span(zg ) ≥ 5 mL/g,
+                          φg = P           ,      tier(g) =                                                                         (10)
+                                   h∈Gc zh
+                                                             minor, otherwise,
+
+where the span is taken over the stored levels and the 5 mL/g is the reporting convention of Assump-
+tion 7. The annex bridge compares the gas mass implied by Annex II with the syngas mass reported
+by Annex I,
+                                                             1 X                                  mg /10
+                                                    mg =           zh M h ,               β=             ,                          (11)
+                                                            Vm h∈G                                 yS
+                                                                     c
+
+
+with Vm = 22.414 L/mol and Mh the molar mass; both numerator and denominator are then in
+wt.%, so β is dimensionless. It is a diagnostic of unit systems, not a rescaling factor: a value below
+one means Annex II accounts for only part of the syngas mass, which is expected because it lists
+light species only.
+
+
+6 . 3 Results
+               Table 2 gives all nineteen species–mixture combinations; Figures 4–7 show absolute yields,
+mole fractions, and the bridge.
+               The ranking is mixture-specific. In CS the four major species are H2 , CO, CO2 and CH4 ; in CE
+they are H2 , CO, CO2 and C2 H6 , with CH4 demoted to 2.50 mL/g; in LG they are CO, CO2 and CH4 ,
+with H2 at 0.14 mL/g. Hydrogen is the strongest single signal anywhere in the data: 37.14 mL/g in
+CS with a span-to-floor ratio of 14.47 and five resolved steps out of five, and 39.2 mL/g in CE with
+Team # apmcm2699001                                                                                Page 9 of 27
+
+
+
+Table 2   Gas response by species. The span is in mL/g (daf), τ is the trend threshold of Eq. (8), and the ratio
+          is the span-to-floor value. The tier threshold is 5 mL/g. Steps counts resolved adjacent changes out
+          of the available steps.
+
+
+                             Mixture Gas      Span Span/τ Tier      Monotone Steps
+
+                             CS      H2       37.14   14.47 major        yes 5/5
+
+                             CS      CO        5.40    2.41 major         no 0/5
+
+                             CS      CO2       9.49    1.75 major         no 0/5
+
+                             CS      CH4       9.70    3.26 major         no 0/5
+
+                             CS      C 2 H6    0.99    3.54 minor         no 0/5
+
+                             CS      C 3 H8    0.33    4.67 minor         no 0/5
+
+                             CS      C 3 H6    0.06    1.59 minor         no 0/5
+
+                             CS      C 2 H4    0.10    1.31 minor         no 0/5
+
+                             CS      C4 H10 0.31       8.23 minor         no 0/5
+
+                             CE      H2        39.2    7.73 major        yes 4/4
+
+                             CE      CO        8.40    9.50 major         no 0/4
+
+                             CE      CO2       16.7   21.09 major         no 0/4
+
+                             CE      CH4       2.50   14.88 minor         no 0/4
+
+                             CE      C 2 H6    10.6   15.87 major         no 0/4
+
+                             LG      H2        0.14    1.86 minor         no 0/4
+
+                             LG      CO        5.71    3.23 major        yes 0/4
+
+                             LG      CO2      19.21    5.16 major         no 0/4
+
+                             LG      CH4       6.19    2.00 major         no 0/4
+
+                             LG      C2 H6 0.040       5.71 minor         no 0/4
+
+
+
+a ratio of 7.73. In LG the same species is below one tenth of a millilitre per gram and its ratio,
+although above one, is carried by a mean of 0.0754 rather than by a large movement.
+     The bridge gives β in the range 0.570–0.713 for CS, 0.147–0.500 for CE and 0.849–1.246
+for LG, and 0.147–1.246 over the whole domain. A ratio near one in LG and near a half in CS
+says that the share of the syngas mass that Annex II resolves into named light species differs by
+feedstock, which is exactly what a different tar composition would produce. Rescaling Annex II to
+match Annex I would therefore destroy information rather than improve consistency, and no such
+rescaling is used anywhere in this paper.
+
+
+6 . 4 A Counter-Intuitive Reading and Validation
+     The ratio column is a trap when read alone. CE methane has the largest span-to-floor ratio in the
+table (14.88) and is nevertheless the smallest absolute response among the CE species (2.50 mL/g);
+CE carbon dioxide has a ratio of 21.09 because its mean is small, while its absolute span, 16.7 mL/g,
+is what matters for the gas. Conversely, LG carbon monoxide is strictly increasing over all four steps
+Team # apmcm2699001                                                                                                   Page 10 of 27
+
+
+
+
+                                       CS                                      CE                             LG
+                         60
+                                                              60                                40
+                         50                                                                     35
+                                                              50
+      Yield (mL/g daf)
+
+
+
+                                                                                                30
+                         40
+                                                              40                                25
+                         30
+                                                              30                                20
+
+                         20                                                                     15
+                                                              20
+                                                                                                10
+                         10                                   10
+                                                                                                 5
+
+                          0                                    0                                 0
+                              0.0    0.2       0.4                 0.0    0.2           0.4           0.0   0.2         0.4
+                                       w (-)                                   w (-)                          w (-)
+
+                                                     H2         CO       CO2           CH4    C2H6
+
+
+Q2: absolute gas yields for the major species
+source: data/results_q2.json; generator: code/make_figures.py
+
+Figure 4 Absolute gas yields of the major species (mL/g daf) against w; each panel draws only the species
+                         assigned to the absolute tier for that mixture, so the shared five-entry legend is a union rather than
+                         a per-panel inventory.
+
+
+
+                                       CS                                      CE                             LG
+                 1.00                                       1.00                               1.00
+
+
+
+                 0.75                                       0.75                               0.75
+   φ (-)
+
+
+
+
+                 0.50                                       0.50                               0.50
+
+
+
+                 0.25                                       0.25                               0.25
+
+
+
+                 0.00                                       0.00                               0.00
+                              0.0    0.2       0.4                 0.0    0.2           0.4           0.0   0.2         0.4
+                                       w (-)                                   w (-)                          w (-)
+
+                                                     H2         CO       CO2           CH4    C2H6
+
+
+Q2: major-species mole fractions on a fixed scale
+source: data/results_q2.json; generator: code/make_figures.py
+                                                     ∑
+Figure 5 Mole fractions φ = z/                           z of the same major species, on a fixed 0–1 axis, so panel heights are
+                         comparable across mixtures.
+
+
+
+and resolves none of them, because each increment is smaller than the 10% step band of a level that
+is already 15–21 mL/g. Magnitude and significance are separate axes, and the table reports both.
+           Row closure is used as an arithmetic check on the mole fractions: every φ row sums to one
+to machine precision, and the compositions are recomputed from the stored volumes rather than
+from printed percentages. The tier assignment is stable for every threshold in the open interval
+(2.50, 5.40); at the lower endpoint CE methane becomes major, at the upper endpoint CS carbon
+monoxide becomes minor, and at a threshold of 8 mL/g three species change tier. These are reported
+Team # apmcm2699001                                                                                                                                            Page 11 of 27
+
+
+
+
+  φ (-, log scale)                                                   CS                                        CE                                      LG
+
+
+
+
+                                         0.01                                             0.01                                       0.01
+
+
+
+
+                             0.001                                                     0.001                                     0.001
+
+
+
+                                                     0.0          0.2        0.4                 0.0      0.2          0.4                  0.0    0.2           0.4
+                                                                    w (-)                                   w (-)                                      w (-)
+
+                                                                                     H2            C2H6         C3H6         C4H10
+                                                                                     CH4           C3H8         C2H4
+
+
+Q2: minor-species mole fractions on a log scale
+source: data/results_q2.json; generator: code/make_figures.py
+
+Figure 6 Mole fractions of the minor species on a log axis; the minor tier is mixture-specific, so a panel can
+                                                hold a single line (CE: CH4 only) and the seven-entry legend is a union.
+
+
+
+                                                     Q2 bridge: the two annexes do not close on the 1:1 line
+                                                30
+                                                           β = y/x: CS 0.57-0.71; CE 0.15-0.50; LG 0.85-1.25
+
+                                                25
+                     Annex II gas mass (wt.%)
+
+
+
+
+                                                20
+
+
+                                                15
+
+
+                                                10
+
+
+                                                 5
+
+
+                                                 0
+                                                     0                  5                  10               15                 20                 25                   30
+                                                                                                   Annex I syngas (wt.%)
+
+                                                                                      CS           CE      LG          1:1 closure
+
+
+Q2: Annex II gas mass against Annex I syngas mass
+source: data/results_q2.json; generator: code/make_figures.py
+
+Figure 7 Annex II gas mass against Annex I syngas mass at each level; the dashed line is 1:1. β is the per-
+                                                mixture range of y/x; points below the line mean the two annexes do not report the same quantity,
+                                                so the gap is a caliber difference rather than a closure error to be rescaled away.
+
+
+
+in Section 10 as the unfavourable half of the sensitivity story.
+Team # apmcm2699001                                                                               Page 12 of 27
+
+
+
+          VII. Question 3: CE against LG at Equal Ash Level
+
+7 . 1 Mechanism and Rationale
+     Cellooligosaccharide is a carbohydrate model compound and lignin an aromatic polymer, so
+their pyrolysis chemistry should differ in a specific direction: the carbohydrate should favour con-
+densable anhydro-sugars and hydrogen-rich gas, and the lignin should favour a cross-linked char
+and methoxy-derived methane and carbon dioxide [1, 2]. The interesting question is not whether
+they differ, but which products carry the difference and whether the ash changes the size of the gap.
+
+
+7 . 2 Model
+     At a shared ash level the paired gap and its threshold are
+                                                         q
+                        ∆p = ypCE − ypLG ,      τD = 2ε (ypCE )2 + (ypLG )2 ,                              (12)
+
+and the same construction applies to each gas. The denominator of a “k of n levels” statement is the
+number of level pairs, eight for products and five for gases, not the number of steps; the two counts
+differ because a step needs two levels and a pair needs one.
+
+
+7 . 3 Results
+     Table 3 summarises the contrast and Figures 8–9 display it.
+
+Table 3   CE minus LG at equal ash level. Ranges are over the shared levels; the ratio range is CE/LG for
+          gases and the reciprocal is used for char, where LG exceeds CE. ‘Beyond’ counts pairs whose gap
+          exceeds Eq. (9); ‘max level’ is the largest absolute yield involved, which shows whether a large ratio
+          rides on a small base.
+
+
+                   Quantity           ∆ range Mean ∆ Beyond Ratio range Max level Flips
+
+                   Tar        +16.36 ... +37.09    30.78    8/8   1.91–5.53      45.28     0
+
+                   Water       -7.55 ... +12.12     -1.17   6/8          —       31.02     1
+
+                   Char        -36.74 ... -32.28   -33.27   8/8 0.368–0.434      58.17     0
+
+                   Syngas       +0.87 ... +8.26     3.66    7/8          —       26.98     0
+
+                   H2         +25.93 ... +64.99    49.99    5/5   39.7–81.2       65.8     0
+
+                   CO           -15.64 ... -1.53    -8.82   4/5 0.253–0.900       20.9     0
+
+                   CO2          -41.56 ... -5.65   -29.34   5/5 0.046–0.768      43.56     0
+
+                   CH4         -32.56 ... -24.47   -29.30   5/5 0.023–0.116      33.86     0
+
+                   C2 H6       +3.15 ... +13.72     6.61    5/5 48.6–172.5        13.8     0
+
+
+
+     CE produces more tar at every one of the eight shared levels, with a mean gap of 30.78 points
+and ratios from 1.91 to 5.53; LG produces more char at every level, with a mean gap of -33.27 and
+an LG/CE ratio between 2.3 and 2.7. Those two are the strongest structural differences and they do
+not depend on the ash level. Hydrogen is more than thirty-nine times larger in CE at every level
+Team # apmcm2699001                                                                                                                          Page 13 of 27
+
+
+
+
+                                                     Tar (8/8 beyond band)                                          Water (6/8 beyond band)
+
+                                                                                                       10
+                                   30
+                  Δ yield (wt.%)
+
+
+
+                                                                                                        5
+                                   20
+
+                                   10                                                                   0
+
+
+                                    0                                                                  −5
+
+
+
+
+                                                  Char (8/8 beyond band)                                            Syngas (7/8 beyond band)
+                                                                                                        8
+                                    0
+                                                                                                        6
+    Δ yield (wt.%)
+
+
+
+
+                             −10                                                                        4
+
+                             −20                                                                        2
+
+                             −30                                                                        0
+
+                                                                                                       −2
+                                          0.1        0.2        0.3          0.4         0.5                  0.1     0.2        0.3       0.4       0.5
+                                                                w (-)                                                           w (-)
+
+
+                                                                                    CE - LG          ±thr band
+
+
+Q3: CE minus LG product yields with the noise band
+source: data/results_q3.json; generator: code/make_figures.py
+
+Figure 8 CE minus LG product yield at equal ash level, with the per-level ± noise band as a grey ribbon; the
+                                     title of each panel gives how many levels fall outside that band.
+
+
+
+
+                                         Q3 gas yield ratio at equal ash level
+
+                               100
+  CE / LG ratio (-, log)
+
+
+
+
+                                   10
+
+
+
+                                    1
+
+
+
+                                   0.1
+
+
+                            0.02
+                                            20/100                                 40/100        50/100                           80/100         100/100
+                                                                                         ash / biomass level
+
+
+                                                           H2           CO         CO2         CH4          C2H6     parity (ratio 1)
+
+
+Q3: CE/LG gas-yield ratio at equal ash level
+source: data/results_q3.json; generator: code/make_figures.py
+
+Figure 9 CE/LG yield ratio of each gas at equal ash level, log axis; the dotted line is parity. Values above 1
+                                     mean CE yields more of that species at the same ash level, and the split is species-dependent rather
+                                     than a single scale factor.
+Team # apmcm2699001                                                                       Page 14 of 27
+
+
+
+(ratio range 39.7–81.2), and the ratio is trustworthy in direction although its upper end rides on the
+LG base of 0.67–0.81 mL/g. Carbon dioxide and methane go the other way, by factors of 1.3 to 21.9
+and 8.6 to 43.5, which is the lignin signature. Carbon monoxide is the softest gas result: 4 of 5 pairs
+exceed the threshold and the ratio range 0.253–0.900 crosses parity, so its direction is not stable.
+     Water is the one quantity that fails the direction test: six of eight pairs exceed the band, but
+the sign changes once, and the mean gap, -1.17, is indistinguishable from zero at the level of the
+noise. Reporting a mean without the flip count would therefore claim a separation that the data do
+not support. The reason is visible in the mechanism: at low ash CE releases more water as a primary
+product, while at high ash the CE series is the one where water is consumed most strongly (its own
+water yield falls by 41.1%), so the two feedstocks cross.
+
+
+7 . 4 Validation and Conclusion
+     The contrast is computed at equal w, not at equal r, because w is the physical ash fraction; using
+r would compare different solids loadings. The count denominators are stated in every row. Derived
+columns are flagged through the char row: CE char is the derived column and its gap, although large,
+is the arithmetic mirror of the tar and syngas gaps, so the char separation is reported as consistent
+with, not independent of, the tar result. We conclude that CE and LG differ in feedstock chemistry
+on tar, char, hydrogen, carbon dioxide, methane and ethane, and not on water.
+
+
+                 VIII. Question 4: Mechanism and Kinetics
+
+8 . 1 Mechanism and Rationale
+     The yield data cannot identify elementary steps, but they can select among candidate channels.
+Three independent signatures are available: the sign and size of the log-selectivity γp , which says
+whether a product’s share grows or shrinks with ash; the gas-phase carbon account nC , which says
+whether carbon leaves the solid or stays in it; and the shape of the gas response, which separates a
+cracking channel (more H2 and CO, less tar) from a carbonation channel (less CO2 , more H2 through
+the water–gas shift, water consumed). The two channels are not exclusive, and different feedstocks
+can give them different access.
+
+
+8 . 2 Model
+     Selectivity is defined in Eq. (6). The gas-phase carbon per gram of dry ash-free biomass is
+                                                1 X
+                                        nC =        C g zg ,                                      (13)
+                                               Vm g
+
+where Cg is the carbon number of species g (0 for H2 , 1 for CO, CO2 and CH4 , 2 for C2 H6 and
+C2 H4 , 3 for C3 H8 and C3 H6 , 4 for C4 H10 ). The kinetics are written for an isothermal endpoint,
+                                                                           
+                           dα                                           Ea
+                                = k(T )f (α),       k(T ) = A exp −           ,                    (14)
+                           dt                                          RT
+Team # apmcm2699001                                                                            Page 15 of 27
+
+
+
+with α = 0.95 at t = 1800 s and T = 800 K, both self-assumed because the annexes report neither
+the temperature programme nor the holding time. For the three reaction models considered,
+                                  
+                                  
+                                   α,                n = 0,
+                                  
+                                  
+                           kt = − ln(1 − α),          n = 1 (R2),                                      (15)
+                                  
+                                  
+                                  
+                                  (1 − α)−1 − 1, n = 2,
+
+and the pair (A, Ea ) is not identified: any pair that keeps k(T )t fixed fits the endpoint equally well,
+so the result is the ridge
+                                               Ea
+                     log10 A = log10 k +              ,       Ea ∈ [100, 250] kJ/mol.                  (16)
+                                             RT ln 10
+The single-heating-rate methods that would normally supply (A, Ea ) presuppose a known temper-
+ature programme [12, 13], and the isoconversional literature treats the trade-off between the two
+parameters as a compensation effect rather than as an identified pair [10, 11]; with one isothermal
+endpoint the honest report is the ridge of Eq. (16), not a point.
+
+
+8 . 3 Results
+     Table 4 reports the selectivity and carbon account, Table 5 the kinetic endpoint, and Figures 10–
+12 display them.
+
+Table 4   Centred log-selectivity γp (per unit ash mass fraction) and the gas-phase carbon account. The four
+          γ values of each mixture sum to zero by construction; the residual is below 1.2 × 10−16 . Carbon
+          entries are start and end of the Annex II series in mmol/g (daf).
+
+
+                                       Quantity       CS     CE      LG
+
+                                       γ (Tar)     -0.826 0.750    -1.58
+
+                                       γ (Water)   0.397 -0.727 0.956
+
+                                       γ (Char)    0.148 0.340 0.0555
+
+                                       γ (Syngas) 0.281 -0.363 0.569
+
+                                       nC start     5.32    2.82    3.01
+
+                                       nC end       5.20    0.64    4.21
+
+                                       ∆nC         -0.123 -2.177 1.207
+
+                                       ∆nC (%)      -2.30 -77.2     40.1
+
+
+     The selectivity pattern is coherent with the yield results and sharpens them. In CS the tar
+share falls fastest (-0.826), water rises (0.397), and both char (0.148) and syngas (0.281) rise; in
+CE the signs reverse on tar (0.750) and water (-0.727); in LG tar falls hardest (-1.58), water rises
+most (0.956), and char is essentially neutral (0.0555). The near-zero char selectivity in LG is an
+independent confirmation of the flat char series in Table 1: two different statistics, the end-to-end
+span and the log-share slope, agree that lignin char does not respond.
+     The carbon account separates the mixtures more sharply than any single yield. In CS the gas-
+phase carbon moves from 5.32 to 5.20 mmol/g, a change of -0.123 mmol/g or -2.30%; in CE it
+Team # apmcm2699001                                                                                            Page 16 of 27
+
+
+
+Table 5      Isothermal endpoint at α = 0.95 and t = 1800 s. The required rate depends on the reaction model
+             because the model changes what kt must equal; the ratio between the second- and first-order rates
+             is the confounding factor reported in the text.
+
+
+                                            Order f (α)           kt          k (s−1 )
+
+                                            n = 0 zero order 0.95 5.278 × 10−4
+
+                                            n = 1 R2            2.996 1.664 × 10−3
+
+                                            n = 2 R3             19.0 1.056 × 10−2
+
+
+
+                 Q4 product-share selectivity γ (centered, Σγ = 0)
+           1.0
+
+
+           0.5
+
+
+           0.0
+  γ (-)
+
+
+
+
+          −0.5
+
+
+          −1.0
+
+
+          −1.5
+
+                             Tar                       Water                    Char                      Syngas
+
+
+                                                         CS      CE      LG
+
+
+Q4: centred log-selectivity by product
+source: data/results_q4.json; generator: code/make_figures.py
+                                                                                   ∑
+Figure 10 Centred log-selectivity γ = d ln Sp /dw of each product, with                  p γp = 0 by construction; a positive
+                 bar means that product’s share grows with w.
+
+
+
+collapses from 2.82 to 0.64 mmol/g (-2.177 mmol/g, -77.2%); in LG it rises from 3.01 to 4.21 mmol/g
+(1.207 mmol/g, +40.1%). The CE collapse is the strongest single number in the paper and it is not
+monotone in the same way as the yields: it is monotone here, whereas the CS series is not. For
+CS the end-to-end change (-2.30%) is smaller than the largest excursion within the series (a span of
+2.91%), so “no net carbon loss” is a statement about the endpoints only and not about the path.
+          The kinetics are deliberately reported as a ridge. For n = 1 the endpoint requires kt = 2.996,
+hence k = 1.664 × 10−3 s−1 at 800 K; choosing n = 2 instead requires 19.0 and a rate 6.342
+times larger, so the reaction order is a first-order modelling decision rather than a measured quan-
+tity. Sweeping Ea from 100 to 250 kJ/mol and solving Eq. (16) for A gives a ridge whose first point
+is log10 A = 3.751 and whose last is 13.545; every point on it reproduces the same endpoint. Re-
+porting a single (A, Ea ) pair would be a precision claim that the data cannot support, and a second
+temperature or a non-isothermal series would be needed to break the compensation.
+
+
+8 . 4 Interpretation
+          The three signatures select a two-channel reading. A cracking channel, visible in CS and CE,
+moves tar carbon into H2 and CO and is consistent with the negative tar selectivity and the hydro-
+Team # apmcm2699001                                                                                                                               Page 17 of 27
+
+
+
+
+                                                 CS (end Δ -2.3%)                           CE (end Δ -77.2%)                         LG (end Δ +40.1%)
+                                                                                3.0
+                       5.350                                                                                              4.2
+                                                                                2.5                                       4.0
+                       5.325
+   nC (mmol/g daf)
+
+
+
+
+                       5.300                                                    2.0                                       3.8
+
+                       5.275                                                                                              3.6
+                                                                                1.5
+                       5.250                                                                                              3.4
+
+                       5.225                                                    1.0                                       3.2
+
+                       5.200                                                                                              3.0
+                                                                                0.5
+                                          0.0          0.2         0.4                0.0       0.2           0.4               0.0        0.2        0.4
+                                                         w (-)                                    w (-)                                     w (-)
+
+
+
+Q4: gas-phase carbon against ash level
+source: data/results_q4.json; generator: code/make_figures.py
+
+Figure 11 Gas-phase carbon nC (mmol/g daf) against w, with the first level drawn as a dashed baseline; the
+                                     title of each panel carries the stored end-to-end change. Panel ranges differ, so compare slopes
+                                     rather than heights.
+
+
+
+                                          Q4 compensation ridge for fixed reaction order n = 1
+                                     14
+                                                kt = 2.996 at 1800 s, 800 K; each point is one (Ea, A) pair
+
+
+                                     12
+                     log10 A (1/s)
+
+
+
+
+                                     10
+
+
+
+                                      8
+
+
+
+                                      6
+
+
+
+                                      4
+
+                                                100          120          140           160           180           200         220         240         260
+                                                                                              Ea (kJ/mol)
+
+
+Q4: compensation ridge at fixed reaction order
+source: data/results_q4.json; generator: code/make_figures.py
+
+Figure 12 Compensation ridge for fixed reaction order n = 1: each point is an (Ea , A) pair that reproduces
+                                     kt = 2.996 at 1800 s and 800 K, so the line is an iso-conversion locus rather than a fit to rate data.
+
+
+
+gen rise. A carbon-uptake channel, visible most clearly in CE, removes CO2 and consumes water
+through the water–gas shift, which is consistent with the CE water fall (-0.727), its CO2 fall from
+18.7 to 2.0 mL/g, and its hydrogen rise to 55.6 mL/g. Lignin shows the cracking channel without the
+uptake channel: its CO2 rises rather than falls, its char does not move, and its carbon account gains
+40.1%. The data therefore select the channel, not the elementary step, and the paper does not claim a
+surface mechanism. What it does claim is that any proposed mechanism must reproduce three signs
+at once: negative tar selectivity, the sign of the water response, and the sign of the carbon account.
+Team # apmcm2699001                                                                            Page 18 of 27
+
+
+
+                IX. Question 5: Prediction with Limited Data
+
+9 . 1 Model and Algorithm
+     For each mixture the ILR regression of Eq. (4) is refitted, evaluated on the requested grid,
+and mapped back to a composition by Eq. (5). Uncertainty is propagated from the fit rather than
+assumed: with σ̂ the residual standard deviation of the three-coordinate fit and n the number of
+levels,
+                                                                                             
+           ṽj (w∗ ) = v̂j (w∗ ) + ηj + ζj ,    ηj ∼ N (0, σ̂ 2 ),   ζj ∼ N 0, σ̂ 2 (1 + 1/n) ,         (17)
+
+drawing 4000 replicates with a fixed seed and reporting the 5th and 95th percentiles of the back-
+transformed yields. The extra term is the predictive inflation for a new level. Reliability is measured
+by leave-one-out,                             v
+                                              u n             2
+                                            1u   X (−i)
+                                 RMSErel =    t1     ŷp − yp,i ,                                       (18)
+                                     p
+                                           ȳp n i=1
+
+which refits without level i and predicts it back. The algorithm is O(n) per fit and O(4000 × 7) per
+mixture for the envelope; the whole five-question pipeline runs in a median of 254.609 ms.
+
+
+9 . 2 Results
+     The grid is r ∈ {0.15, 0.25, 0.35, 0.45, 0.55, 0.70, 0.90}, i.e. w = 0.1304, 0.2000, 0.2593,
+0.3103, 0.3548, 0.4118 and 0.4737. Table 6 gives the predictive mean at every point, Table 7 the
+leave-one-out error, and Figures 13–15 the envelope, the error profile, and the support.
+
+Table 6   Predicted product yields (wt.%, daf) on the seven-level ash grid. Columns are the ash mass fraction
+          w; rows are mixture and product. Every row sums to 100 by construction.
+
+
+                       Mix Product 0.1304 0.2000 0.2593 0.3103 0.3548 0.4118 0.4737
+
+                       CS Tar        16.41 15.39 14.56 13.87 13.29 12.59 11.86
+
+                       CS Water      27.79 28.38 28.86 29.28 29.63 30.08 30.56
+
+                       CS Char       29.27 29.37 29.43 29.48 29.51 29.53 29.55
+
+                       CS Syngas     26.53 26.87 27.15 27.37 27.56 27.80 28.04
+
+                       CE Tar        38.16 39.77 41.13 42.30 43.32 44.61 46.00
+
+                       CE Water      22.30 20.97 19.87 18.96 18.18 17.21 16.20
+
+                       CE Char       23.49 23.79 24.01 24.19 24.32 24.47 24.60
+
+                       CE Syngas     16.05 15.47 14.98 14.56 14.19 13.71 13.20
+
+                       LG Tar        14.67 13.10 11.87 10.89 10.09        9.15    8.20
+
+                       LG Water      17.50 18.65 19.64 20.52 21.29 22.28 23.38
+
+                       LG Char       57.81 57.85 57.78 57.63 57.44 57.12 56.69
+
+                       LG Syngas     10.03 10.40 10.71 10.96 11.18 11.45 11.73
+Team # apmcm2699001                                                                                                                        Page 19 of 27
+
+
+
+
+Table 7                         Leave-one-out relative RMSE (%) by mixture and product. The last column is the count of cells
+                                above the 5% declared error, which is the standard the model is asked to meet.
+
+
+                                                         Mixture      Tar Water Char Syngas Cells above 5%
+
+                                                         CS          5.50     1.37 0.89      4.91                       1
+
+                                                         CE          6.34 18.71 6.03         6.00                       4
+
+                                                         LG         17.08     6.92 1.53     12.40                       3
+
+
+
+
+                                CS · Tar                           CS · Water                    CS · Char                       CS · Syngas
+                          20                                                                                                30
+                                                              32
+                          18                                                                31
+           Yield (wt.%)
+
+
+
+
+                                                              30                            30                              28
+                          16
+
+                          14                                                                29
+                                                              28                                                            26
+                          12                                                                28
+                                                              26
+                                                                                            27                              24
+
+
+
+                                CE · Tar                           CE · Water                    CE · Char                       CE · Syngas
+                                                                                          30.0                              20
+                          50
+                                                              25                                                            18
+                                                                                          27.5
+           Yield (wt.%)
+
+
+
+
+                          45                                                                                                16
+                                                                                          25.0
+                                                              20
+                          40                                                                                                14
+                                                                                          22.5
+                          35                                  15                                                            12
+                                                                                          20.0
+                                                                                                                            10
+
+
+
+                                LG · Tar                           LG · Water                    LG · Char                       LG · Syngas
+                                                              30                            65
+                    17.5                                                                                                    14
+   Yield (wt.%)
+
+
+
+
+                    15.0                                      25                            60
+                                                                                                                            12
+                    12.5
+                                                              20
+                                                                                            55                              10
+                    10.0
+
+                          7.5                                 15
+                                                                                            50                              8
+
+                                    0.2            0.4                0.2           0.4             0.2           0.4               0.2           0.4
+                                           w (-)                            w (-)                         w (-)                           w (-)
+
+
+                                                         observed (Annex I)          prediction (mean)        5-95% band
+
+
+Q5: prediction grid with stored observations
+source: data/results_q5.json; generator: code/make_figures.py
+
+Figure 13 Prediction grid: open circles are Annex I observations, the solid line is the predictive mean and the
+                                grey ribbon the 5–95% interval; rows are mixtures and columns products, and the grid holds seven
+                                query levels rather than the observed ones.
+Team # apmcm2699001                                                                                    Page 20 of 27
+
+
+
+                  The three mixtures behave differently, and the difference is the answer. Cotton stalk is pre-
+dictable: every leave-one-out error is at or below 5.50%, which is the size of the declared mea-
+surement error itself, and the interval half-width at the first grid point is 7.7% of the midpoint for
+tar. CE and LG are not: CE water has a leave-one-out error of 18.71% and LG tar one of 17.08%,
+three to four times the measurement error. Eight of the twelve cells sit above the 5% line, and they
+are exactly the cells whose mixture failed the lack-of-fit test in Section 5. The prediction table is
+therefore usable as a point forecast for CS and as a trend description for CE and LG, with intervals
+that widen accordingly: the CE tar interval at the first grid point is [32.16, 44.17], a half-width of
+15.73% of the midpoint, against 7.7% for the same product in CS.
+
+
+                         Q5 leave-one-out relative RMSE
+                  20.0
+
+                  17.5
+
+                  15.0
+   LOO RMSE (%)
+
+
+
+
+                  12.5
+
+                  10.0
+
+                   7.5
+
+                   5.0
+
+                   2.5
+
+                   0.0
+                                      Tar                    Water                   Char         Syngas
+
+
+
+                                                   CS       CE       LG       5% reference line
+
+
+Q5: leave-one-out relative RMSE
+source: data/results_q5.json; generator: code/make_figures.py
+
+Figure 14 Leave-one-out relative RMSE per mixture and product, with the 5% reference line; eight of the
+                         twelve cells sit above it, and the CE/LG cells are the ones that do.
+
+
+
+
+9 . 3 Support and Boundary
+                  The support check is the guard against reading a forecast as a measurement. All seven query
+levels lie inside the calibrated range of each mixture, so no point is an extrapolation; the check
+nevertheless marks five levels as boundary stars and twelve as edge-adjacent, because they sit within
+one grid step of the support edge and the linear model has no information beyond it. Widening
+the grid would not change the predictive mean much, but it would invalidate the interval, which
+is why the request is answered only on the stated grid. A counter-intuitive consequence is that the
+uncertainty, not the fit, is what fails first outside the support: the point forecast of LG tar at w = 0.60
+would still look smooth while its interval would be meaningless.
+Team # apmcm2699001                                                                                              Page 21 of 27
+
+
+
+
+              Q5 calibration support vs the widened query grid
+
+
+         CS
+
+
+
+
+         CE
+
+
+
+
+         LG
+
+
+                       0.1            0.2             0.3             0.4              0.5       0.6            0.7
+                                                                       w (-)
+
+                        calibration support          inside support            at support edge   extrapolated
+
+
+Q5: calibration support against the widened grid
+source: data/results_boundary.json; data/results_q5.json; generator: code/make_figures.py
+
+Figure 15 Calibration support against the widened query grid: the thick translucent segment spans the w
+              range covered by Annex I, grey dots are query levels inside it, triangles mark an observed level that
+              coincides with the support edge, and crosses are the extrapolated levels. Dotted verticals mark the
+              seven levels of the prediction grid.
+
+
+
+                       X. Sensitivity Analysis and Error Analysis
+
+10 . 1 Threshold Paths
+      The declared error enters every decision, so it is scanned rather than fixed. Over the open
+interval (0.012934, 0.065646) every trend call on the product side is preserved; each endpoint flips
+exactly one cell, the lower endpoint making CS char significant and the upper endpoint making CS
+ethylene non-significant. The interval is open because the endpoints are the flip points themselves.
+The same scan covers 31 cells in total (twelve product series and nineteen gas series), and within
+the interval 25 step counts change even though no trend call does: a cell can keep its direction and
+lose its resolved steps. That asymmetry is the unfavourable half of the story and it is the reason the
+paper reports steps and trends side by side instead of choosing one.
+      The tier threshold is scanned the same way. Every assignment in Table 2 is preserved for any
+threshold in the open interval (2.50, 5.40); the lower endpoint promotes CE methane to major, the
+upper endpoint demotes CS carbon monoxide, and a threshold of 8 mL/g would move three species.
+Since 5 mL/g is a reporting convention and not a physical constant, the tier table is a description of
+the data at a stated convention, and the interval is the correct way to report it.
+
+
+10 . 2 Perturbation Audit
+      A structured audit perturbs each input and each query point by ±10% and records whether a
+headline call changes. Of 42 attempted runs, twelve never reach the model (they are control cases
+that test the harness), fourteen only move the query point, and sixteen change a model input; of those
+sixteen, fifteen are feasible and one, a raised conversion target, is infeasible as posed because α ≥ 1
+makes the endpoint equation undefined. Exactly one feasible perturbation reverses a headline call:
+Team # apmcm2699001                                                                                                              Page 22 of 27
+
+
+
+a 10% rise in the tier threshold moves CS carbon monoxide from major to minor. That is 6.67% of
+the fifteen feasible runs, and it is the same flip that the threshold scan identifies, which is a useful
+consistency check between two independent procedures.
+      The audit also shows which parameters are load-bearing. The intersection between the eleven
+binding identifiers and the twenty-one perturbation sources is not empty: the pyrolysis temperature
+and the relative error appear in both, so the model is not insulated from the assumptions that matter
+most. That is the honest reading; a disjoint intersection would have suggested a robustness that the
+structure does not have.
+
+
+10 . 3 Numerical Checks and Cost
+      Closure is exact by construction and is verified after every transform: the inverse ILR map
+returns rows that sum to one with a largest deviation of 2.8 × 10−14 over the whole prediction table.
+The surrogate experiment reproduces the analytic noise scale (0.0502 against an expected 0.05), and
+the twelve fitted residuals are all positive and of the expected order. Cost is measured over five serial
+repetitions: the full pipeline takes a median of 254.609 ms, of which the Q1 fit takes 189.718 ms;
+the remaining questions are below a millisecond each except Q5, whose 4000-draw envelope takes
+68.1 ms. The implementation is pure Python on top of NumPy [14], with the normal equations solved
+by a hand-written elimination that avoids any dependency on a BLAS runtime, and the figures are
+drawn with Matplotlib [15]; the timings are therefore conservative for a compiled environment.
+
+
+
+                       (a) perturbation audit (42 runs)                                  (b) wall time, median of 5 serial runs
+                                                                              selftest                                   15.06
+          never read                               12
+                                                                        load Annex I                        1.72
+
+                                                                        load Annex II                       1.894
+
+        query move                                      14                  Q1 solve                                                     189.7
+
+                                                                            Q2 solve                       1.228
+
+     model feasible                                       15                Q3 solve           0.226
+
+                                                                            Q4 solve            0.255
+
+                                                                            Q5 solve                                              68.1
+   model infeasible        1
+                                                                     Q1-Q5 pipeline                                                       254.6
+
+                       0          5         10          15                            0.1              1            10           100
+                                      Runs (count)                                             Median wall time (ms, log scale)
+
+
+
+Q5: perturbation audit and call timing
+source: data/results_perturb.json; data/results_timing.json; generator: code/make_figures.py
+
+Figure 16 (a) Outcomes of the 42-run perturbation audit, counted by class; (b) median wall time of five serial
+            repetitions per call, log axis, with the median printed beside each point.
+
+
+
+
+                                                     XI. Conclusion
+      DFA is not an inert filler in this system. On a dry-ash-free basis, where dilution cannot operate,
+it still moves tar by -37.7% in cotton stalk and by -54.7% in lignin, and it moves water by -41.1% in
+Team # apmcm2699001                                                                     Page 23 of 27
+
+
+
+CE. The strongest single gas response is hydrogen in cotton stalk, 14.47 times its noise floor. The
+two model feedstocks separate on tar and char at every shared level (mean gaps 30.78 and -33.27
+points) and on hydrogen, carbon dioxide, methane and ethane, but not on water, whose mean gap
+of -1.17 is inside the noise. The gas-phase carbon account identifies the CE series as the one where
+carbon leaves the solid most strongly (-77.2%), and the lignin series as the one where it accumulates
+(+40.1%). The kinetic endpoint is a ridge, not a rate law: Ea between 100 and 250 kJ/mol with
+log10 A from 3.751 to 13.545 reproduces the same conversion. Prediction is reliable for cotton stalk
+(leave-one-out 5.50%) and trend-only for the other two (18.71% and 17.08% at their worst cells).
+
+
+                         XII. Strengths and Weaknesses
+
+12 . 1 Strengths
+  • The composition is modelled as a composition. Three ILR coordinates replace four regressions,
+     the coefficients are comparable across mixtures, and the inverse transform returns a closed
+     composition by construction rather than by clipping. The payoff is visible in the agreement
+     between the char span (0.208 in LG) and the char selectivity (0.0555), two statistics that share
+     no arithmetic.
+  • Every claim carries its own denominator and threshold path. The paper distinguishes 31
+     scanned cells from 12 trend calls, 15 feasible perturbations from 42 attempts, and 8 product
+     pairs from 5 gas pairs; a reader can recompute any of them from the stored JSON with one
+     script.
+  • The negative results are reported with the same care as the positive ones. The CS char flat call,
+     the CE and LG lack of fit, and the water sign flip are not footnotes; they are the reason the
+     prediction table is qualified mixture by mixture.
+
+
+12 . 2 Weaknesses
+  • The independent 5% error is an assumption, not an estimate. If errors are correlated within a
+     column, the trend tests are too liberal and more cells would be called significant than the data
+     support; the direction of that bias is known and stated, but its size is not measurable without
+     replicates.
+  • The linear ILR model is rejected for CE and LG (F = 3.42 and 3.52). Their quadratic or log
+     alternatives fit better, and the intervals of Section 9 are consequently too narrow at the grid
+     ends for those two mixtures; the reported leave-one-out errors are the empirical correction, and
+     they exceed 5% in seven of eight cells for those mixtures.
+  • The kinetics are not identifiable. No temperature programme or holding time is reported, so
+     α = 0.95, T = 800 K and t = 1800 s are assumptions, and the ridge spans 9.8 decades in A; a
+     second temperature would be needed before any rate law could be claimed.
+Team # apmcm2699001                                                                      Page 24 of 27
+
+
+
+                                     XIII. References
+ [1] Bridgwater, A. V. Review of fast pyrolysis of biomass and product upgrading[J]. Biomass and
+     Bioenergy, 2012, 38: 68–94.
+
+ [2] Czernik, S., Bridgwater, A. V. Overview of applications of biomass fast pyrolysis oil[J]. Energy
+     & Fuels, 2004, 18(2): 590–598.
+
+ [3] Sutton, D., Kelleher, B., Ross, J. R. H. Review of literature on catalysts for biomass gasifica-
+     tion[J]. Fuel Processing Technology, 2001, 73(3): 155–173.
+
+ [4] Blamey, J., Anthony, E. J., Wang, J., Fennell, P. S. The calcium looping cycle for large-scale
+     CO2 capture[J]. Progress in Energy and Combustion Science, 2010, 36(2): 260–279.
+
+ [5] Aitchison, J. The statistical analysis of compositional data[J]. Journal of the Royal Statistical
+     Society, Series B, 1982, 44(2): 139–177.
+
+ [6] Egozcue, J. J., Pawlowsky-Glahn, V., Mateu-Figueras, G., Barceló-Vidal, C. Isometric logratio
+     transformations for compositional data analysis[J]. Mathematical Geology, 2003, 35(3): 279–
+     300.
+
+ [7] van den Boogaart, K. G., Tolosana-Delgado, R. “compositions”: a unified R package to ana-
+     lyze compositional data[J]. Computers & Geosciences, 2008, 34(4): 320–338.
+
+ [8] Filzmoser, P., Hron, K., Reimann, C. Univariate statistical analysis of environmental (compo-
+     sitional) data: problems and possibilities[J]. Science of the Total Environment, 2009, 407(23):
+     6100–6108.
+
+ [9] Pawlowsky-Glahn, V., Buccianti, A. Compositional Data Analysis: Theory and Applica-
+     tions[M]. Chichester: Wiley, 2011.
+
+[10] Vyazovkin, S., Burnham, A. K., Criado, J. M., et al. ICTAC Kinetics Committee recommenda-
+     tions for performing kinetic computations on thermal analysis data[J]. Thermochimica Acta,
+     2011, 520(1–2): 1–19.
+
+[11] Brown, M. E., Maciejewski, M., Vyazovkin, S., et al. Computational aspects of kinetic analy-
+     sis: part A, the ICTAC kinetics project[J]. Thermochimica Acta, 2000, 355(1–2): 125–143.
+
+[12] Kissinger, H. E. Reaction kinetics in differential thermal analysis[J]. Analytical Chemistry,
+     1957, 29(11): 1702–1706.
+
+[13] Ozawa, T. A new method of analyzing thermogravimetric data[J]. Bulletin of the Chemical
+     Society of Japan, 1965, 38(11): 1881–1886.
+
+[14] Harris, C. R., Millman, K. J., van der Walt, S. J., et al. Array programming with NumPy[J].
+     Nature, 2020, 585(7825): 357–362.
+
+[15] Hunter, J. D. Matplotlib: a 2D graphics environment[J]. Computing in Science & Engineering,
+     2007, 9(3): 90–95.
+Team # apmcm2699001                                                                         Page 25 of 27
+
+
+
+[16] ShuWei Cup Organizing Committee. Problem B: catalytic pyrolysis of cotton stalk with desul-
+        furized fly ash, annex tables I and II[R]. 2023.
+
+
+                                      I. Appendix A: Symbols
+
+ Symbol                Meaning, range and unit
+
+ c                     Mixture index, c ∈ {CS, CE, LG}.
+ p                     Product index, p ∈ {Tar, Water, Char, Syngas}.
+ g, h                  Gas species index.
+ a                     DFA mass charged per 100 g dry biomass, 0–100 g.
+ r                     a/100, dimensionless, 0–1.
+ w                     Ash mass fraction, r/(1 + r), 0–0.50.
+ yp                    Product yield, wt.% (daf), 8.19–58.17.
+ Sp                    Product share, yp /100, 0.0819–0.5817.
+ vj                    ILR coordinate, j = 1, 2, 3, −1.16–0.95.
+ βj0 , βj1             Intercept and slope of the ILR regression.
+ bp                    Slope of ln Sp on w, before centring.
+                                              ∑
+ γp                    Centred log-selectivity,  p γp = 0, −1.58–0.96.
+ zg                    Gas yield, mL/g (daf), 0.05–65.80.
+                                          ∑
+ φg                    Mole fraction, zg / h zh , 5.3 × 10−4 –0.838.
+ ε                     Declared relative error, 0.05.
+ τs                    Step threshold, 2ε max{|yk |, |yk+1 |}, 0.007–5.817.
+ τT                    Trend threshold, 2ε|y|, 0.007–5.734.
+                                               √
+ τD                    Paired-gap threshold, 2ε ya2 + yb2 , 0.320–6.580.
+ σF                    ILR residual standard deviation, 0.0333–0.0941.
+ σN                    Surrogate noise floor, 0.0501–0.0502.
+ F                     Lack-of-fit ratio (σF /σN )2 , 0.44–3.52.
+ no                    Number of level observations, 24–27.
+ β                     Annex bridge ratio mg /10yS , 0.147–1.246.
+ mg                    Gas mass from Annex II, mg/g (daf), 0.060–118.6.
+ Mg                    Molar mass, 2.016–58.124 g/mol.
+ Vm                    Molar volume, 22.414 L/mol.
+ Cg                    Carbon number of a species, 0–4.
+ nC                    Gas-phase carbon, mmol/g (daf), 0.64–5.32.
+ ∆p                    CE minus LG gap at equal ash level, −41.56–+64.99.
+ n                     Reaction order, 0, 1 or 2.
+ f (α)                 Reaction model, R2, R3 or D1.
+ α                     Conversion at the endpoint, 0.95 (self-assumed).
+ T                     Pyrolysis temperature, 800 K (self-assumed).
+ t                     Holding time, 1800 s (self-assumed).
+ k                     Rate constant at the endpoint, 1.664 × 10−3 s−1 .
+ A                     Pre-exponential factor, 5.63 × 103 –3.51 × 1013 s−1 .
+ Ea                    Activation energy, 100–250 kJ/mol (self-assumed range).
+ R                     Gas constant, 8.314 J mol−1 K−1 .
+ κ                     Order confounding ratio k(n=2)/k(n=1), 6.342.
+
+
+
+
+                  II. Appendix B: Software and Reproduction
+        All results are produced by the scripts below, whose sizes are read from disk at generation time.
+The complete source is submitted with the paper; the excerpt after the table is the core of the ILR
+transform and the threshold construction, reproduced with comments removed so that the listing
+stays in one language.
+Team # apmcm2699001                                                                                    Page 26 of 27
+
+
+
+Table 9   Script inventory. Sizes are the byte counts read from disk at generation time; the inventory holds
+          15 scripts totalling 242,037 bytes.
+
+
+                    Script                   Bytes Role
+
+                    check_figures.py         3,875 figure gate: size, font, margins
+
+                    check_md.py              2,564 report gate: calibers, pointers, column counts
+
+                    check_no_peek.py         3,083 provenance guard: no reference to other papers
+
+                    fetch_annex.py           30,061 data ledger: build and replay the annex tables
+
+                    fix_bytes.py             1,665 rewrites the BYTES header of a report from disk
+
+                    gen_appendix.py          1,735 notation table from model_skeleton.SYMBOLS
+
+                    gen_index.py             15,546 this table, from the sizes on disk
+
+                    make_figures.py          33,570 all sixteen figures, from data/results_*.json
+
+                    mk_appendix_src.py 9,367 ASCII copies of the scripts for the listing
+
+                    model_skeleton.py        19,793 constants, symbols, data contract
+
+                    numlib.py                3,860 linear algebra that avoids BLAS and LAPACK
+
+                    s3_deliver.py            31,406 timing, binding constraints, perturbation runs
+
+                    seal.py                  7,594 caption seals: escaped provenance lines
+
+                    solve.py                 23,696 Q1-Q5 solvers, writes data/results_q*.json
+
+                    verify_numbers.py        54,222 number ledger: paper figures against data/*.json
+
+
+
+
+import numpy as np
+
+
+def ilr_basis(k=4):
+   V = np.zeros((k - 1, k))
+   for i in range(k - 1):
+      V[i, : i + 1] = 1.0
+      V[i, i + 1] = -(i + 1)
+      V[i] = V[i] / np.sqrt((V[i] * V[i]).sum())
+   return V
+
+
+V4 = ilr_basis(4)
+
+
+def ilr(S):
+   S = np.atleast_2d(np.asarray(S, dtype=float))
+   lg = np.log(S)
+   u = lg - lg.mean(axis=1, keepdims=True)
+   return np.einsum("nk,jk->nj", u, V4)
+
+
+def ilr_inv(v):
+   v = np.atleast_2d(np.asarray(v, dtype=float))
+   u = np.einsum("nj,jk->nk", v, V4)
+   e = np.exp(u)
+   return e / e.sum(axis=1, keepdims=True)
+
+
+def thr_single(y, eps):
+   y = np.abs(np.asarray(y, dtype=float))
+   return 2.0 * eps * y
+
+
+def thr_trend(y, eps):
+   y = np.asarray(y, dtype=float)
+   return 2.0 * eps * np.abs(y).mean()
+Team # apmcm2699001                                                                        Page 27 of 27
+
+
+
+     The excerpt is a reconstruction of the ILR basis, the forward and inverse transforms, and two
+of the three thresholds in code/solve.py; type annotations and comments are removed, and the
+script remains the authority. The paired-difference threshold differs only by the quadrature in Eq. (9).
+Reproduction runs all 15 scripts following BUILD.md, ends with the number check, and compares
+the printed page count of the body against the thirty-page limit.
+

@@ -1,0 +1,100 @@
+{
+ "ANALYSIS_PATTERNS": [
+  "PROBLEM_ANALYSIS.md",
+  "PROBLEM_FACTS.json",
+  "CAPABILITY_CHECKLIST.json",
+  "DATA_FACTS.json",
+  "SUBMISSION_SPEC.json"
+ ],
+ "RESULT_PATTERNS": [
+  "code/**",
+  "output/**",
+  "submission/**",
+  "figures/all_results.json",
+  "figures/results.json",
+  "figures/problem_*_results.json",
+  "results.json",
+  "RESULTS.md",
+  "MODELING_REPORT.md",
+  "PROBLEM_ANALYSIS.md",
+  "PROBLEM_FACTS.json",
+  "CAPABILITY_CHECKLIST.json",
+  "CAPABILITY_VERDICT.json",
+  "DATA_FACTS.json",
+  "DELIVERABLES.json",
+  "SUBMISSION_SPEC.json",
+  "TOPIC_PLAN.md",
+  "DATA_SOURCES.json"
+ ],
+ "STATS_ANALYSIS_PATTERNS": [
+  "TOPIC_PLAN.md"
+ ],
+ "EVIDENCE_PATTERNS": [
+  "_tmp/figure_use_plan.tsv",
+  "_tmp/refs_raw*.jsonl",
+  "_tmp/refs_raw.json",
+  "_tmp/scholar_raw.jsonl"
+ ],
+ "DOWNSTREAM_SKILLS": [
+  "comp-compile-en",
+  "comp-compile-zh",
+  "comp-paper-en",
+  "comp-paper-en-docx",
+  "comp-paper-huawei-zh",
+  "comp-paper-huawei-zh-docx",
+  "comp-paper-zh",
+  "comp-paper-zh-docx",
+  "docx-export",
+  "docx-format-check",
+  "nature-figure",
+  "paper-figure",
+  "paper-figure-drawio",
+  "paper-figure-html",
+  "paper-illustration"
+ ],
+ "ACTIVE": "<ContextVar name='mh_upstream_guard' default=None at 0x000001D5A9B51440>",
+ "sigs": {
+  "prepare_step": "(workspace: 'Path', template: 'str', skill: 'str') -> 'StepGuard | None'",
+  "end_step": "() -> 'None'",
+  "patterns_for": "(template: 'str', skill: 'str') -> 'tuple[str, ...]'",
+  "matches": "(rel: 'str', patterns) -> 'bool'",
+  "activate": "(guard: 'StepGuard | None') -> 'None'",
+  "restore_active": "(record: 'bool' = True) -> 'tuple[StepGuard | None, list[str]]'",
+  "env_value": "() -> 'str | None'"
+ },
+ "docs": {
+  "prepare_step": "Snapshot upstream artifacts for one pipeline step (safe to run in a thread).\n\nCall ``activate`` with the result from the step's own task afterwards.",
+  "activate": "Bind the guard to the current task; other tasks (chat, editor) never see it."
+ },
+ "StepGuard_fields": [
+  [
+   "workspace",
+   "Path"
+  ],
+  [
+   "skill",
+   "str"
+  ],
+  [
+   "patterns",
+   "tuple[str, ...]"
+  ],
+  [
+   "hashes",
+   "dict"
+  ],
+  [
+   "copied",
+   "set"
+  ],
+  [
+   "kept",
+   "dict"
+  ],
+  [
+   "revived",
+   "list"
+  ]
+ ],
+ "StepGuard_doc": "StepGuard(workspace: 'Path', skill: 'str', patterns: 'tuple[str, ...]', hashes: 'dict' = <factory>, copied: 'set' = <factory>, kept: 'dict' = <factory>, revived: 'list' = <factory>)"
+}

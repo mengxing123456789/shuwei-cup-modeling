@@ -1,0 +1,155 @@
+{
+ "cum@Case1_low-permeability high-stress@ts30": {
+  "cn0.5": 272.6,
+  "cn1.0": 285.9,
+  "cn1.5": 299.2
+ },
+ "cum@Case2_medium-permeability low-stress@ts30": {
+  "cn0.5": 1260.2,
+  "cn1.0": 1317.9,
+  "cn1.5": 1385.9
+ },
+ "cum@Case3_high-permeability complex fractures@ts30": {
+  "cn0.5": 3295.1,
+  "cn1.0": 3434.0,
+  "cn1.5": 3643.3
+ },
+ "soak@Case1_low-permeability high-stress@cn1.0": {
+  "ts_min": 5,
+  "cum_min": 154.0,
+  "ts_max": 60,
+  "cum_max": 290.2,
+  "rel_gain_pct": 88.46,
+  "curve": {
+   "5": 154.0,
+   "10": 223.3,
+   "15": 257.8,
+   "20": 271.7,
+   "25": 284.5,
+   "30": 285.9,
+   "35": 288.4,
+   "40": 289.3,
+   "45": 287.9,
+   "50": 286.9,
+   "55": 290.0,
+   "60": 290.2
+  },
+  "monotone_increasing": false
+ },
+ "soak@Case2_medium-permeability low-stress@cn1.0": {
+  "ts_min": 5,
+  "cum_min": 609.4,
+  "ts_max": 60,
+  "cum_max": 1367.4,
+  "rel_gain_pct": 124.38,
+  "curve": {
+   "5": 609.4,
+   "10": 944.5,
+   "15": 1138.0,
+   "20": 1236.0,
+   "25": 1283.0,
+   "30": 1317.9,
+   "35": 1352.5,
+   "40": 1363.4,
+   "45": 1355.8,
+   "50": 1355.6,
+   "55": 1371.6,
+   "60": 1367.4
+  },
+  "monotone_increasing": false
+ },
+ "soak@Case3_high-permeability complex fractures@cn1.0": {
+  "ts_min": 5,
+  "cum_min": 1425.5,
+  "ts_max": 60,
+  "cum_max": 3614.9,
+  "rel_gain_pct": 153.58,
+  "curve": {
+   "5": 1425.5,
+   "10": 2292.5,
+   "15": 2826.9,
+   "20": 3136.6,
+   "25": 3313.7,
+   "30": 3434.0,
+   "35": 3511.7,
+   "40": 3545.2,
+   "45": 3584.7,
+   "50": 3601.7,
+   "55": 3627.5,
+   "60": 3614.9
+  },
+  "monotone_increasing": false
+ },
+ "corr_bhp_rate_median": 0.9626,
+ "corr_bhp_rate_p10_p90": [
+  0.923,
+  0.977
+ ],
+ "decay": {
+  "Case1_low-permeability high-stress": {
+   "q_day1": 7.99,
+   "q_day360": 0.0,
+   "ratio": 0.0,
+   "exp_decay_per_day": -0.078365,
+   "half_life_days": 8.8
+  },
+  "Case2_medium-permeability low-stress": {
+   "q_day1": 27.0,
+   "q_day360": 0.02,
+   "ratio": 0.001,
+   "exp_decay_per_day": -0.019983,
+   "half_life_days": 34.7
+  },
+  "Case3_high-permeability complex fractures": {
+   "q_day1": 45.5,
+   "q_day360": 0.23,
+   "ratio": 0.005,
+   "exp_decay_per_day": -0.01502,
+   "half_life_days": 46.1
+  }
+ },
+ "npv_curve_cn1.0_1e4": {
+  "Case1_low-permeability high-stress": {
+   "5": -688.6,
+   "10": -682.8,
+   "15": -687.5,
+   "20": -698.4,
+   "25": -709.6,
+   "30": -724.3,
+   "35": -738.6,
+   "40": -753.5,
+   "45": -769.0,
+   "50": -784.3,
+   "55": -798.5,
+   "60": -813.5
+  },
+  "Case2_medium-permeability low-stress": {
+   "5": -551.9,
+   "10": -466.5,
+   "15": -423.8,
+   "20": -409.8,
+   "25": -411.2,
+   "30": -416.1,
+   "35": -421.2,
+   "40": -433.4,
+   "45": -451.1,
+   "50": -466.5,
+   "55": -477.2,
+   "60": -493.9
+  },
+  "Case3_high-permeability complex fractures": {
+   "5": -308.1,
+   "10": -64.1,
+   "15": 79.9,
+   "20": 156.4,
+   "25": 193.2,
+   "30": 213.0,
+   "35": 220.1,
+   "40": 213.9,
+   "45": 209.6,
+   "50": 198.5,
+   "55": 190.2,
+   "60": 170.1
+  }
+ }
+}

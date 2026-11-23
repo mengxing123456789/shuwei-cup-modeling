@@ -1,0 +1,19 @@
+{
+ "sigs": {
+  "_free_recheck": "(db, workflow_id, workspace, skill_name, primary, template, params) -> 'tuple[bool, str]'",
+  "_free_recheck_outputs": "(outputs, planned=()) -> 'List[str]'",
+  "_primary_output_size": "(workspace: 'Path', skill_name: 'str', primary_path: 'Path') -> 'int'",
+  "_check_figures_step_health": "(workspace: 'Path', skill_name: 'str', files_created: 'Optional[List[str]]', files_modified: 'Optional[List[str]]', params: 'Dict[str, Any]') -> 'Tuple[bool, str]'",
+  "_check_figures_step_health_static": "(workspace: 'Path', skill_name: 'str', params: 'Dict[str, Any]') -> 'Tuple[bool, str]'",
+  "_check_figures_step_health_off_loop": "(workspace: 'Path', skill_name: 'str', files_created, files_modified, params: 'Dict[str, Any]') -> 'Tuple[bool, str]'",
+  "_step_data_problem": "(workspace: 'Path', skill_name: 'str', template: 'str', params: 'dict') -> 'str'",
+  "_health_requires_repair": "(workspace, skill_name, primary, health_ok, reason, quality_failure, files_created=(), files_modified=()) -> 'bool'",
+  "_complete_step_without_model": "(db, workflow_id, step, step_id, skill_name, workspace, summary: 'str', review_since=None, planned=()) -> 'list'",
+  "_check_paper_body_pages": "(workspace: 'Path', skill_name: 'str', max_pages: 'Optional[int]', page_policy: 'str' = 'advisory_max') -> 'tuple'",
+  "_check_step_companions": "(workspace: 'Path', skill_name: 'str') -> 'tuple'"
+ },
+ "free_tiny": "ERR TypeError: _free_recheck() takes exactly 7 positional arguments (5 given)",
+ "free_ok": "ERR TypeError: _free_recheck() takes exactly 7 positional arguments (5 given)",
+ "size_tiny": 7210,
+ "min_for": 1500
+}

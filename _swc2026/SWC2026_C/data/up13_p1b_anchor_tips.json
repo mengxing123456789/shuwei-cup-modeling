@@ -1,0 +1,695 @@
+{
+ "_meta": {
+  "script": "up2_p1b_v2.py",
+  "gate": {
+   "seeds": [
+    20261120,
+    20261122,
+    20261123
+   ],
+   "mean_test_ap_min": 0.13,
+   "mean_worst_env_auc_min": 0.7646370912154993,
+   "worst_env_baseline_source": "data/p1b_gpu.json A 臂 seed 20261120 的 min per-env AUC",
+   "selection_rule": "按 validation mean AUC 选配置（不看 test）",
+   "test_discipline": "每个 (config, seed) 的 test 只在训练结束后评一次"
+  },
+  "protocol": {
+   "windows": [
+    [
+     15,
+     1
+    ],
+    [
+     60,
+     1
+    ],
+    [
+     120,
+     2
+    ]
+   ],
+   "batch": 1024,
+   "lr": 0.0015,
+   "wd": 0.0001,
+   "epochs": 18,
+   "aux_weight": 0.3,
+   "dropout": 0.15,
+   "norm_prefix": 90,
+   "selection": "best epoch by validation AUC; test scored once"
+  },
+  "configs": {
+   "V1": {
+    "desc": "三窗 + attention pooling + 辅助头（raw 特征）",
+    "views": "raw",
+    "adv": false,
+    "dro": false,
+    "drop": 0.15,
+    "lr": 0.0015,
+    "wd": 0.0001,
+    "jitter": 0,
+    "loss": "bce"
+   },
+   "V2": {
+    "desc": "V1 + 记录级因果归一化视图（raw+norm 并排）",
+    "views": "both",
+    "adv": false,
+    "dro": false,
+    "drop": 0.15,
+    "lr": 0.0015,
+    "wd": 0.0001,
+    "jitter": 0,
+    "loss": "bce"
+   },
+   "V3": {
+    "desc": "V2 + 环境分类 GRL（梯度反转）",
+    "views": "both",
+    "adv": true,
+    "dro": false,
+    "drop": 0.15,
+    "lr": 0.0015,
+    "wd": 0.0001,
+    "jitter": 0,
+    "loss": "bce"
+   },
+   "V4": {
+    "desc": "V2 + Group-DRO（环境分层采样 + q_e 重加权）",
+    "views": "both",
+    "adv": false,
+    "dro": true,
+    "drop": 0.15,
+    "lr": 0.0015,
+    "wd": 0.0001,
+    "jitter": 0,
+    "loss": "bce"
+   },
+   "V5": {
+    "desc": "V1 + 强正则（dropout .25 / wd 3e-4 / lr 1e-3 / 时间抖动 ±2）",
+    "views": "raw",
+    "adv": false,
+    "dro": false,
+    "drop": 0.25,
+    "lr": 0.001,
+    "wd": 0.0003,
+    "jitter": 2,
+    "loss": "bce"
+   },
+   "V6": {
+    "desc": "V1 + focal loss（alpha .75, gamma 2）替代 pos_weight BCE",
+    "views": "raw",
+    "adv": false,
+    "dro": false,
+    "drop": 0.15,
+    "lr": 0.0015,
+    "wd": 0.0001,
+    "jitter": 0,
+    "loss": "focal"
+   },
+   "V7": {
+    "desc": "V5 + focal loss",
+    "views": "raw",
+    "adv": false,
+    "dro": false,
+    "drop": 0.25,
+    "lr": 0.001,
+    "wd": 0.0003,
+    "jitter": 2,
+    "loss": "focal"
+   },
+   "V8": {
+    "desc": "V1 + 左右手交换增广 + 交换 TTA（标签对左右对称）",
+    "views": "raw",
+    "adv": false,
+    "dro": false,
+    "drop": 0.15,
+    "lr": 0.0015,
+    "wd": 0.0001,
+    "jitter": 0,
+    "loss": "bce",
+    "swap_aug": true,
+    "tta": true
+   }
+  }
+ },
+ "results": {
+  "V8": {
+   "desc": "V1 + 左右手交换增广 + 交换 TTA（标签对左右对称）",
+   "per_seed": {
+    "20261120": {
+     "config": "V8",
+     "seed": 20261120,
+     "params": 318790,
+     "seconds": 41.5,
+     "best_epoch": 8,
+     "epochs": 18,
+     "val_auc": 0.8643908648482517,
+     "val_ap": 0.09519755884418636,
+     "val_auc_selected": 0.8613888102377201,
+     "val_ap_selected": 0.09861428800067312,
+     "test_auc": 0.8357587677601108,
+     "test_ap": 0.06903782944926795,
+     "per_env": [
+      {
+       "env": "logistics_x_courier_station_0011",
+       "n": 6275,
+       "positives": 213,
+       "auc_bad": 0.7818202517646294
+      },
+      {
+       "env": "logistics_x_courier_station_0041",
+       "n": 3623,
+       "positives": 18,
+       "auc_bad": 0.8877639081522577
+      },
+      {
+       "env": "retail_x_supermarket_0078",
+       "n": 620,
+       "positives": 0,
+       "auc_bad": null
+      },
+      {
+       "env": "retail_x_supermarket_0159",
+       "n": 1625,
+       "positives": 0,
+       "auc_bad": null
+      }
+     ],
+     "worst_env": 0.7818202517646294,
+     "worst_env_name": "logistics_x_courier_station_0011",
+     "calib": {
+      "temperature": 1.0512710963760241,
+      "ece_before": 0.06287357847584484,
+      "ece_after": 0.06412891319976759,
+      "precision_at_half": 0.06874189364461739,
+      "recall_at_half": 0.22943722943722944,
+      "drop_rate": 0.06349337066622746,
+      "good_dropped_rate": 0.06027535258562794
+     },
+     "history": [
+      {
+       "epoch": 1,
+       "loss": 1.2342,
+       "val_auc": 0.8216723900517162,
+       "val_ap": 0.10639138937910152
+      },
+      {
+       "epoch": 2,
+       "loss": 0.9196,
+       "val_auc": 0.8257876612046455,
+       "val_ap": 0.10434411259420669
+      },
+      {
+       "epoch": 3,
+       "loss": 0.8755,
+       "val_auc": 0.839377373147765,
+       "val_ap": 0.10076776286054165
+      },
+      {
+       "epoch": 4,
+       "loss": 0.6778,
+       "val_auc": 0.825700539910023,
+       "val_ap": 0.08872443506853875
+      },
+      {
+       "epoch": 5,
+       "loss": 0.6227,
+       "val_auc": 0.8145006134791162,
+       "val_ap": 0.07371391122912886
+      },
+      {
+       "epoch": 6,
+       "loss": 0.4468,
+       "val_auc": 0.8594479413964092,
+       "val_ap": 0.11253497438267375
+      },
+      {
+       "epoch": 7,
+       "loss": 0.4333,
+       "val_auc": 0.8561760527761442,
+       "val_ap": 0.09310478421911386
+      },
+      {
+       "epoch": 8,
+       "loss": 0.3851,
+       "val_auc": 0.8613888102377201,
+       "val_ap": 0.09861428800067312
+      },
+      {
+       "epoch": 9,
+       "loss": 0.2436,
+       "val_auc": 0.8274151353889119,
+       "val_ap": 0.07254447144576702
+      },
+      {
+       "epoch": 10,
+       "loss": 0.255,
+       "val_auc": 0.824334429609624,
+       "val_ap": 0.08084949955164537
+      },
+      {
+       "epoch": 11,
+       "loss": 0.1615,
+       "val_auc": 0.8538431381090323,
+       "val_ap": 0.09806177297487079
+      },
+      {
+       "epoch": 12,
+       "loss": 0.1243,
+       "val_auc": 0.8303421688846296,
+       "val_ap": 0.08660385850338007
+      },
+      {
+       "epoch": 13,
+       "loss": 0.0881,
+       "val_auc": 0.8202990196434318,
+       "val_ap": 0.08174568070684651
+      },
+      {
+       "epoch": 14,
+       "loss": 0.0884,
+       "val_auc": 0.8279136627970292,
+       "val_ap": 0.0776416455645873
+      },
+      {
+       "epoch": 15,
+       "loss": 0.0847,
+       "val_auc": 0.8470367869666544,
+       "val_ap": 0.0793928290190787
+      },
+      {
+       "epoch": 16,
+       "loss": 0.0624,
+       "val_auc": 0.843395842862225,
+       "val_ap": 0.07955877243778924
+      },
+      {
+       "epoch": 17,
+       "loss": 0.0525,
+       "val_auc": 0.8390784987064906,
+       "val_ap": 0.07614191316835489
+      },
+      {
+       "epoch": 18,
+       "loss": 0.0532,
+       "val_auc": 0.8382508464075775,
+       "val_ap": 0.07632933331005795
+      }
+     ]
+    },
+    "20261122": {
+     "config": "V8",
+     "seed": 20261122,
+     "params": 318790,
+     "seconds": 38.0,
+     "best_epoch": 14,
+     "epochs": 18,
+     "val_auc": 0.8697633446833021,
+     "val_ap": 0.14758343475361077,
+     "val_auc_selected": 0.881288765951062,
+     "val_ap_selected": 0.15718690401421553,
+     "test_auc": 0.7765427710860888,
+     "test_ap": 0.058659563385526435,
+     "per_env": [
+      {
+       "env": "logistics_x_courier_station_0011",
+       "n": 6275,
+       "positives": 213,
+       "auc_bad": 0.7143662591406793
+      },
+      {
+       "env": "logistics_x_courier_station_0041",
+       "n": 3623,
+       "positives": 18,
+       "auc_bad": 0.9140699645554015
+      },
+      {
+       "env": "retail_x_supermarket_0078",
+       "n": 620,
+       "positives": 0,
+       "auc_bad": null
+      },
+      {
+       "env": "retail_x_supermarket_0159",
+       "n": 1625,
+       "positives": 0,
+       "auc_bad": null
+      }
+     ],
+     "worst_env": 0.7143662591406793,
+     "worst_env_name": "logistics_x_courier_station_0011",
+     "calib": {
+      "temperature": 1.915540829013896,
+      "ece_before": 0.04204551580295373,
+      "ece_after": 0.038053544353867666,
+      "precision_at_half": 0.1046831955922865,
+      "recall_at_half": 0.1645021645021645,
+      "drop_rate": 0.029893765955694637,
+      "good_dropped_rate": 0.0272834116856951
+     },
+     "history": [
+      {
+       "epoch": 1,
+       "loss": 1.307,
+       "val_auc": 0.7951391157672603,
+       "val_ap": 0.11036112426631549
+      },
+      {
+       "epoch": 2,
+       "loss": 0.8803,
+       "val_auc": 0.8052802764649081,
+       "val_ap": 0.0802513730925457
+      },
+      {
+       "epoch": 3,
+       "loss": 0.7187,
+       "val_auc": 0.8015134904904687,
+       "val_ap": 0.08537490783366632
+      },
+      {
+       "epoch": 4,
+       "loss": 0.7218,
+       "val_auc": 0.7949999636994607,
+       "val_ap": 0.08653011435890265
+      },
+      {
+       "epoch": 5,
+       "loss": 0.5113,
+       "val_auc": 0.8511254377240046,
+       "val_ap": 0.11387260191683934
+      },
+      {
+       "epoch": 6,
+       "loss": 0.6286,
+       "val_auc": 0.8263987202849834,
+       "val_ap": 0.10463282000315839
+      },
+      {
+       "epoch": 7,
+       "loss": 0.4756,
+       "val_auc": 0.8407918841673986,
+       "val_ap": 0.0980433405310217
+      },
+      {
+       "epoch": 8,
+       "loss": 0.3267,
+       "val_auc": 0.8330743894854278,
+       "val_ap": 0.09547035213296104
+      },
+      {
+       "epoch": 9,
+       "loss": 0.292,
+       "val_auc": 0.8713666185079509,
+       "val_ap": 0.13345512784954805
+      },
+      {
+       "epoch": 10,
+       "loss": 0.1915,
+       "val_auc": 0.8447123424254085,
+       "val_ap": 0.12355753921538136
+      },
+      {
+       "epoch": 11,
+       "loss": 0.1725,
+       "val_auc": 0.8701045697539065,
+       "val_ap": 0.13911976154525854
+      },
+      {
+       "epoch": 12,
+       "loss": 0.1276,
+       "val_auc": 0.8386562024311682,
+       "val_ap": 0.12005018567709984
+      },
+      {
+       "epoch": 13,
+       "loss": 0.0984,
+       "val_auc": 0.8515683043050019,
+       "val_ap": 0.12879670364079213
+      },
+      {
+       "epoch": 14,
+       "loss": 0.087,
+       "val_auc": 0.881288765951062,
+       "val_ap": 0.15718690401421553
+      },
+      {
+       "epoch": 15,
+       "loss": 0.0647,
+       "val_auc": 0.8779926769711799,
+       "val_ap": 0.15753405516569227
+      },
+      {
+       "epoch": 16,
+       "loss": 0.063,
+       "val_auc": 0.8592119878901401,
+       "val_ap": 0.13485832787280816
+      },
+      {
+       "epoch": 17,
+       "loss": 0.0563,
+       "val_auc": 0.8604074856552368,
+       "val_ap": 0.13622194113067304
+      },
+      {
+       "epoch": 18,
+       "loss": 0.0519,
+       "val_auc": 0.8602271929760875,
+       "val_ap": 0.13637604811340323
+      }
+     ]
+    },
+    "20261123": {
+     "config": "V8",
+     "seed": 20261123,
+     "params": 318790,
+     "seconds": 37.4,
+     "best_epoch": 5,
+     "epochs": 18,
+     "val_auc": 0.878264931016875,
+     "val_ap": 0.11504327343133508,
+     "val_auc_selected": 0.8860973774070283,
+     "val_ap_selected": 0.10905582512588567,
+     "test_auc": 0.8173750359781252,
+     "test_ap": 0.11814712417651835,
+     "per_env": [
+      {
+       "env": "logistics_x_courier_station_0011",
+       "n": 6275,
+       "positives": 213,
+       "auc_bad": 0.7596138803568138
+      },
+      {
+       "env": "logistics_x_courier_station_0041",
+       "n": 3623,
+       "positives": 18,
+       "auc_bad": 0.9007705347511172
+      },
+      {
+       "env": "retail_x_supermarket_0078",
+       "n": 620,
+       "positives": 0,
+       "auc_bad": null
+      },
+      {
+       "env": "retail_x_supermarket_0159",
+       "n": 1625,
+       "positives": 0,
+       "auc_bad": null
+      }
+     ],
+     "worst_env": 0.7596138803568138,
+     "worst_env_name": "logistics_x_courier_station_0011",
+     "calib": {
+      "temperature": 0.8607079764250579,
+      "ece_before": 0.0432465561633152,
+      "ece_after": 0.0428879716449921,
+      "precision_at_half": 0.12224448897795591,
+      "recall_at_half": 0.26406926406926406,
+      "drop_rate": 0.04109363419253891,
+      "good_dropped_rate": 0.0367696440564137
+     },
+     "history": [
+      {
+       "epoch": 1,
+       "loss": 1.2393,
+       "val_auc": 0.8343884690126495,
+       "val_ap": 0.12789936725767476
+      },
+      {
+       "epoch": 2,
+       "loss": 0.8785,
+       "val_auc": 0.8467052420398966,
+       "val_ap": 0.10533401436489456
+      },
+      {
+       "epoch": 3,
+       "loss": 0.7439,
+       "val_auc": 0.8542327638988716,
+       "val_ap": 0.09516794265261667
+      },
+      {
+       "epoch": 4,
+       "loss": 0.6068,
+       "val_auc": 0.8781475592727309,
+       "val_ap": 0.1444102412799102
+      },
+      {
+       "epoch": 5,
+       "loss": 0.5919,
+       "val_auc": 0.8860973774070283,
+       "val_ap": 0.10905582512588567
+      },
+      {
+       "epoch": 6,
+       "loss": 0.5272,
+       "val_auc": 0.8713714585798745,
+       "val_ap": 0.11020006894094868
+      },
+      {
+       "epoch": 7,
+       "loss": 0.5456,
+       "val_auc": 0.8287860857612345,
+       "val_ap": 0.06040281136417657
+      },
+      {
+       "epoch": 8,
+       "loss": 0.3513,
+       "val_auc": 0.8607959014270952,
+       "val_ap": 0.10389125806124373
+      },
+      {
+       "epoch": 9,
+       "loss": 0.2521,
+       "val_auc": 0.8591188165056133,
+       "val_ap": 0.08236730919149668
+      },
+      {
+       "epoch": 10,
+       "loss": 0.2435,
+       "val_auc": 0.869399129271061,
+       "val_ap": 0.11044787117321801
+      },
+      {
+       "epoch": 11,
+       "loss": 0.1978,
+       "val_auc": 0.8422535858882864,
+       "val_ap": 0.0931428112969653
+      },
+      {
+       "epoch": 12,
+       "loss": 0.1436,
+       "val_auc": 0.8505797196146335,
+       "val_ap": 0.0891472184802262
+      },
+      {
+       "epoch": 13,
+       "loss": 0.1115,
+       "val_auc": 0.8539332844486069,
+       "val_ap": 0.09586927991474263
+      },
+      {
+       "epoch": 14,
+       "loss": 0.082,
+       "val_auc": 0.8396907678048096,
+       "val_ap": 0.0866952297235041
+      },
+      {
+       "epoch": 15,
+       "loss": 0.0669,
+       "val_auc": 0.8606869998088171,
+       "val_ap": 0.11119872474630856
+      },
+      {
+       "epoch": 16,
+       "loss": 0.0504,
+       "val_auc": 0.8561651626143165,
+       "val_ap": 0.10098829721130151
+      },
+      {
+       "epoch": 17,
+       "loss": 0.0587,
+       "val_auc": 0.8528351931309699,
+       "val_ap": 0.09821238148891578
+      },
+      {
+       "epoch": 18,
+       "loss": 0.0486,
+       "val_auc": 0.8522350242124598,
+       "val_ap": 0.097610388650463
+      }
+     ]
+    }
+   },
+   "aggregate": {
+    "n_seeds": 3,
+    "val_auc": 0.8708063801828095,
+    "val_ap": 0.11927475567637741,
+    "test_auc": 0.8098921916081082,
+    "test_ap": 0.08194817233710425,
+    "test_ap_std": 0.03177577988541931,
+    "test_auc_std": 0.030308881296145965,
+    "worst_env": 0.7519334637540408,
+    "worst_env_per_seed": {
+     "20261120": 0.7818202517646294,
+     "20261122": 0.7143662591406793,
+     "20261123": 0.7596138803568138
+    },
+    "test_ap_per_seed": {
+     "20261120": 0.06903782944926795,
+     "20261122": 0.058659563385526435,
+     "20261123": 0.11814712417651835
+    },
+    "test_auc_per_seed": {
+     "20261120": 0.8357587677601108,
+     "20261122": 0.7765427710860888,
+     "20261123": 0.8173750359781252
+    },
+    "val_auc_per_seed": {
+     "20261120": 0.8643908648482517,
+     "20261122": 0.8697633446833021,
+     "20261123": 0.878264931016875
+    },
+    "params": 318790,
+    "train_seconds_total": 116.9,
+    "calib": {
+     "temperature": {
+      "20261120": 1.0512710963760241,
+      "20261122": 1.915540829013896,
+      "20261123": 0.8607079764250579
+     },
+     "ece_after": 0.04835680973287578,
+     "ece_before": 0.04938855014737126,
+     "precision_at_half": {
+      "20261120": 0.06874189364461739,
+      "20261122": 0.1046831955922865,
+      "20261123": 0.12224448897795591
+     },
+     "recall_at_half": {
+      "20261120": 0.22943722943722944,
+      "20261122": 0.1645021645021645,
+      "20261123": 0.26406926406926406
+     },
+     "good_dropped_rate": 0.041442802775912245
+    },
+    "gate": {
+     "mean_test_ap_ge": false,
+     "mean_worst_env_auc_ge": false,
+     "ap_margin": -0.04805182766289576,
+     "worst_margin": -0.012703627461458478,
+     "passes": false
+    }
+   }
+  }
+ },
+ "passes": false,
+ "gate": {
+  "seeds": [
+   20261120,
+   20261122,
+   20261123
+  ],
+  "mean_test_ap_min": 0.13,
+  "mean_worst_env_auc_min": 0.7646370912154993,
+  "worst_env_baseline_source": "data/p1b_gpu.json A 臂 seed 20261120 的 min per-env AUC",
+  "selection_rule": "按 validation mean AUC 选配置（不看 test）",
+  "test_discipline": "每个 (config, seed) 的 test 只在训练结束后评一次"
+ }
+}

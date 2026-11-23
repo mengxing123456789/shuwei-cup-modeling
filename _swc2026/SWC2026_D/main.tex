@@ -1,0 +1,110 @@
+\documentclass[<<options>>]{apmcmthesis}
+\tihao{<<A>>}
+\baominghao{apmcm2699001}   % <-- 队号，提交前必须填；必须 apmcm+数字，否则页眉正则配不上
+\begin{document}
+% 官方格式（2017-2023 每年 Essay format p.67 起；2026 扫描件 p3/p4 同义）：
+%   第 1 页 = Summary Sheet（摘要页），第 2 页 = Contents，第 3 页起正文。
+% 英文赛项**没有** Control Sheet（承诺书是中文赛项那一套）。
+% 实测坑（2018A 练习稿）：HEAD 原来先 \makecontrolsheet 再 \maketitle，承诺书占第 1 页，
+% review_check 的 C4「第一页必须是摘要页」直接判红。而且 \makecontrolsheet 会把 \maketitle
+% \let 成 relax，所以删一行不够 —— 两行都要去掉，直接从 \begin{abstract} 起。
+\thispagestyle{empty}
+\begin{abstract}
+\textbf{Background and Task} <<one sentence with a number>>. This paper addresses
+<<N>> problems: <<task 1>>; <<task 2>>; <<task 3>>. <<N>> models are developed.
+
+\textbf{Modeling Framework} <<Q1 model>>, based on which <<Q2 model>>, and extending
+to <<Q3 model>>.
+
+\textbf{Results per Question} <<Q1 number + conclusion>>; <<Q2 number + conclusion>>;
+<<Q3 number + conclusion>>.
+
+\textbf{Validation and Limitation} <<validation 1 with number>>; <<validation 2 with
+number>>. The main limitation is that <<one concrete limitation with a number>>.
+
+\keywords{<<model names in the order they appear above>>}
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+% 必须是 mainmatterstyle：它才是 \fancyhead 里带 "Team # ... Page n of N" 的那个。
+% 用 plain 会丢掉页眉，gauntlet 的 R-V02 直接判 body=0。
+\pagestyle{mainmatterstyle}
+\setcounter{page}{1}
+
+\section{Introduction}
+\subsection{Background}
+<<why this matters now, one paragraph>>
+\subsection{Restatement of the Problems}
+<<restate each question in your own variables>>
+\subsection{Our Work}
+<<what this paper delivers, one line per question>>
+\section{Problem Analysis}
+<<the mechanism, the key tension, what you simplify and why>>
+\section{Assumptions and Justifications}
+\begin{enumerate}
+  \item <<assumption>> --- <<why>>; used by Section~<<x>>.
+  \item <<assumption>> --- <<why>>; used by Section~<<x>>.
+\end{enumerate}
+\section{Notations}
+\begin{table}[htbp]\centering\caption{Notations}\label{tab:notation}
+\begin{tabular}{@{}lll@{}}\toprule Symbol & Meaning & Unit \\ \midrule
+$<<sym>>$ & <<meaning>> & <<unit>> \\ \bottomrule\end{tabular}\end{table}
+\section{Question 1: <<What it does>>}
+\subsection{Image Pre-processing}
+<<fill>>
+\subsection{<<Discriminant>> Modeling}
+<<fill>>
+\subsection{Solution and Results}
+<<fill>>
+\subsection{Test Analysis}
+<<fill>>
+\subsection{Short Summary}
+<<fill>>
+\section{Question 2: <<What it does>>}
+\subsection{Pre-processing}
+<<fill>>
+\subsection{Model}
+<<fill>>
+\subsection{Solution and Results}
+<<fill>>
+\subsection{Test Analysis}
+<<fill>>
+\subsection{Short Summary}
+<<fill>>
+\section{Sensitivity Analysis and Error Analysis}
+<<perturbation / resampling / variance decomposition; report the unfavourable half>>
+\section{Conclusion}
+<<per-question summary, each pointing at a number>>
+\section{Strengths and Weaknesses}
+\subsection{Strengths}
+\begin{itemize}
+  \item <<strength 1, points to a result>>
+  \item <<strength 2>>
+  \item <<strength 3>>
+\end{itemize}
+\subsection{Weaknesses}
+\begin{itemize}
+  \item <<weakness 1, with a number>>
+  \item <<weakness 2, with a number>>
+  \item <<weakness 3, with a number>>
+\end{itemize}
+
+\begin{thebibliography}{99}
+\bibitem{ref1} <<author>>. <<title>>[J]. <<journal>>, <<year>>, <<vol>>(<<no>>): <<pages>>.
+\bibitem{ref2} <<author>>. <<book>>[M]. <<place>>: <<publisher>>, <<year>>.
+\bibitem{ref3} <<institution>>. <<report>>[R]. <<year>>.
+\bibitem{ref4} <<institution>>. <<dataset>>[DB/OL]. <<url>>, accessed <<YYYY-MM-DD>>.
+\end{thebibliography}
+
+\appendix
+% 必须用 \section{Appendix A: Code}：apmcmthesis.cls 里 \section 被改成罗马数字（I. ），
+% \appendix 不会把它变成 "Appendix A"。而 gauntlet 认正文首页的锚点正是字面 "Appendix A"。
+\section{Appendix A: Code}
+% 先把 code/main.py 写出来，再把下一行取消注释。模板默认不启用：
+% 缺文件时 listings 抛 "! Package Listings Error: File `code/main(.py)' not found"
+% + "! Emergency stop."，exit=1，且 lastpage 跳号让页眉变成 "Page N of ??"。
+%\lstinputlisting{code/main.py}
+<<paste the full source of every script that produced a number, one appendix per script>>
+\end{document}

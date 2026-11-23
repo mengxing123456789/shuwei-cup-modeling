@@ -1,0 +1,169 @@
+{
+ "_meta": {
+  "script": "p6_checks.py",
+  "purpose": "工程可行性核验：约束越界比例 + 注入能力上限 + 限流后的 NPV 代价",
+  "q_design": 800.0,
+  "q_ref_pi9": 300.0
+ },
+ "grid": {
+  "n_per_case": 20664,
+  "cases": [
+   "Case1",
+   "Case2",
+   "Case3"
+  ],
+  "ts_range": [
+   5,
+   60
+  ],
+  "Vinj_range": [
+   1000,
+   5000,
+   100
+  ],
+  "cn_levels": [
+   0.5,
+   1.0,
+   1.5
+  ],
+  "fCO2_levels": [
+   0.2,
+   0.5,
+   0.8
+  ],
+  "qinj": 800.0
+ },
+ "m_nano_t": {
+  "min": 0.9999999999999998,
+  "max": 60.0,
+  "median": 11.099999999999998
+ },
+ "tinj_d": {
+  "max": 6.25
+ },
+ "ratios": {
+  "m_nano_over_30t": 0.13008130081300814,
+  "tinj_plus_ts_over_90d": 0.0,
+  "pass_material_and_time": 0.8699186991869918
+ },
+ "counts": {
+  "m_nano_over": 2688,
+  "time_over": 0,
+  "pass_material_and_time": 17976,
+  "n": 20664
+ },
+ "bind": {
+  "m_nano": "binding",
+  "time_window": "never",
+  "note": "比例 0 = 该约束在设计域内恒不紧；1 = 恒不满足（设计域为空）"
+ },
+ "qinj_capacity": {
+  "Case1": {
+   "Pi9": 0.2274,
+   "q_ref": 300.0,
+   "q_allow_m3d": 68.22,
+   "feasible_at_800": false,
+   "shortfall_factor": 11.726766344180593,
+   "note": "Π9<1 表示该压差下地层接受不了 imposed 排量，需要更高的井底压力 → 压力越界"
+  },
+  "Case2": {
+   "Pi9": 1.637,
+   "q_ref": 300.0,
+   "q_allow_m3d": 491.1,
+   "feasible_at_800": false,
+   "shortfall_factor": 1.6289961311341885,
+   "note": "Π9<1 表示该压差下地层接受不了 imposed 排量，需要更高的井底压力 → 压力越界"
+  },
+  "Case3": {
+   "Pi9": 12.73,
+   "q_ref": 300.0,
+   "q_allow_m3d": 3819.0,
+   "feasible_at_800": true,
+   "shortfall_factor": 0.2094789211835559,
+   "note": "Π9<1 表示该压差下地层接受不了 imposed 排量，需要更高的井底压力 → 压力越界"
+  }
+ },
+ "cost_of_capping": {
+  "Case1": {
+   "plan": {
+    "ts": 10.0,
+    "cn": 1.0,
+    "Vinj": 3000.0
+   },
+   "curve_caliber": {
+    "q_base": 300.0,
+    "npv_base": -7202081.589055286,
+    "tinj_base": 10.0,
+    "q_used": 68.22,
+    "npv_capped": -17347964.07230313,
+    "tinj_capped": 43.975373790677224,
+    "d_npv": -10145882.483247846,
+    "sign_unchanged": true
+   },
+   "front_caliber": {
+    "q_base": 800.0,
+    "npv_base": -5404048.84850293,
+    "tinj_base": 3.75,
+    "q_used": 68.22,
+    "npv_capped": -17347964.07230313,
+    "tinj_capped": 43.975373790677224,
+    "d_npv": -11943915.223800201,
+    "sign_unchanged": true
+   }
+  },
+  "Case2": {
+   "plan": {
+    "ts": 23.0,
+    "cn": 1.0,
+    "Vinj": 3000.0
+   },
+   "curve_caliber": {
+    "q_base": 300.0,
+    "npv_base": -4454037.6985397395,
+    "tinj_base": 10.0,
+    "q_used": 300.0,
+    "npv_capped": -4454037.6985397395,
+    "tinj_capped": 10.0,
+    "d_npv": 0.0,
+    "sign_unchanged": true
+   },
+   "front_caliber": {
+    "q_base": 800.0,
+    "npv_base": -2652381.1269055256,
+    "tinj_base": 3.75,
+    "q_used": 491.1,
+    "npv_capped": -3552988.97711549,
+    "tinj_capped": 6.108735491753206,
+    "d_npv": -900607.8502099644,
+    "sign_unchanged": true
+   }
+  },
+  "Case3": {
+   "plan": {
+    "ts": 35.0,
+    "cn": 1.0,
+    "Vinj": 3000.0
+   },
+   "curve_caliber": {
+    "q_base": 300.0,
+    "npv_base": 1842595.1292537171,
+    "tinj_base": 10.0,
+    "q_used": 300.0,
+    "npv_capped": 1842595.1292537171,
+    "tinj_capped": 10.0,
+    "d_npv": 0.0,
+    "sign_unchanged": true
+   },
+   "front_caliber": {
+    "q_base": 800.0,
+    "npv_base": 3652555.0376108875,
+    "tinj_base": 3.75,
+    "q_used": 800.0,
+    "npv_capped": 3652555.0376108875,
+    "tinj_capped": 3.75,
+    "d_npv": 0.0,
+    "sign_unchanged": true
+   }
+  }
+ }
+}

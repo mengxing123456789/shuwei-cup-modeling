@@ -1,0 +1,81 @@
+{
+  "gate": {
+    "ap_rel": 0.1,
+    "auc_abs": 0.01
+  },
+  "seeds": [
+    20261121,
+    20261122,
+    20261123
+  ],
+  "arms": {
+    "P": {
+      "test_ap": 0.05159287709926903,
+      "test_auc": 0.742235546856696,
+      "positives": 231,
+      "frames": 12241,
+      "best_iters": [
+        18,
+        11,
+        8
+      ],
+      "n_features": 30
+    },
+    "V": {
+      "test_ap": 0.018282685200565828,
+      "test_auc": 0.46579672062602956,
+      "positives": 231,
+      "frames": 12241,
+      "best_iters": [
+        1,
+        2,
+        4
+      ],
+      "n_features": 62
+    },
+    "Vsel": {
+      "test_ap": 0.026939539321037174,
+      "test_auc": 0.5609670512668015,
+      "positives": 231,
+      "frames": 12241,
+      "best_iters": [
+        6,
+        7,
+        1
+      ],
+      "n_features": 14
+    },
+    "P+Vsel": {
+      "test_ap": 0.05586074803025157,
+      "test_auc": 0.7396902292822359,
+      "positives": 231,
+      "frames": 12241,
+      "best_iters": [
+        7,
+        17,
+        7
+      ],
+      "n_features": 44
+    }
+  },
+  "selected_video": [
+    "head_left_bright_mean",
+    "head_right_bright_mean",
+    "right_wrist_flow_mean",
+    "head_left_flow_p90",
+    "head_right_flow_p90",
+    "head_left_roi_bright_mean",
+    "head_right_roi_bright_mean",
+    "right_wrist_roi_diff_mean",
+    "right_wrist_roi_diff_p90",
+    "right_wrist_roi_flow_mean",
+    "right_wrist_roi_static_frac",
+    "right_wrist_static_frac"
+  ],
+  "videos": 184,
+  "frames_decoded": 178512,
+  "ap_rel_gain": 0.08272209597403912,
+  "auc_abs_gain": -0.002545317574460082,
+  "passes": false,
+  "note": "Video statistics are camera-specific, robust-standardised within record, and the top-12 are selected on train only."
+}

@@ -1,0 +1,953 @@
+{
+ "_meta": {
+  "script": "code/up2_p3_final.py",
+  "prereg_sha256": "fd2496d1041de9ebc6012d4e809a8493f59a84d4533dcc3f5ac453c41b2d5e17",
+  "prereg_path": "data/up2_p3_prereg.json",
+  "search_path": "data/up2_p3_search.json",
+  "engine": "code/up2_p3_engine.py",
+  "baseline": "code/up_p3_vectorized.py SEL=slack, RULE=slack, q_hi=0.60, gate=0.50, late_tol=12, no review (bit-exact with p3_improved_verify 'slack_old')",
+  "seeds_train": [
+   2026111700,
+   2026111701,
+   2026111702,
+   2026111703,
+   2026111704,
+   2026111705,
+   2026111706,
+   2026111707,
+   2026111708,
+   2026111709,
+   2026111710,
+   2026111711,
+   2026111712,
+   2026111713,
+   2026111714
+  ],
+  "seeds_val": [
+   2026111715,
+   2026111716,
+   2026111717,
+   2026111718,
+   2026111719,
+   2026111720,
+   2026111721,
+   2026111722,
+   2026111723,
+   2026111724
+  ],
+  "seeds_test": [
+   2026111725,
+   2026111726,
+   2026111727,
+   2026111728,
+   2026111729
+  ],
+  "test_evaluated_once": true,
+  "cases": [
+   "S2",
+   "S3"
+  ],
+  "mappings": [
+   "a1.00_b0.50",
+   "a0.75_b0.50",
+   "a1.50_b0.50",
+   "a1.00_b0.00",
+   "a1.00_b1.00"
+  ],
+  "metric": "weighted on-time completion (official mean weighted on-time rate, floor 0.50)",
+  "wall_clock_s": 1.8857033252716064,
+  "run_at": "2026-11-21T11:15:13"
+ },
+ "frozen": {
+  "S2": {
+   "class_": "A",
+   "name": "A_s0_rabs_q0.45_g0.75_l12_m0.60_G0.00_k0.60_0.60",
+   "params": {
+    "SEL": 0,
+    "RULE": 0,
+    "q_hi": 0.45,
+    "gate": 0.75,
+    "late_tol": 12.0,
+    "mix": 0.6,
+    "gam": 0.0,
+    "ksk": 0.6,
+    "qsl": 0.6,
+    "REVIEW": false,
+    "tau": 0.02
+   },
+   "val_delta": 0.04833333333333345,
+   "baseline_val": 0.7774999999999999,
+   "by_class_val": {
+    "A": 0.8258333333333333,
+    "C": 0.8258333333333333,
+    "B": 0.7975
+   },
+   "val_gain_ok": true
+  },
+  "S3": {
+   "class_": "A",
+   "name": "A_s0_rfix_q0.30_g0.35_l20_m0.15_G0.25_k0.60_0.60_rev_t0.02",
+   "params": {
+    "SEL": 0,
+    "RULE": 3,
+    "q_hi": 0.3,
+    "gate": 0.35,
+    "late_tol": 20.0,
+    "mix": 0.15,
+    "gam": 0.25,
+    "ksk": 0.6,
+    "qsl": 0.6,
+    "REVIEW": true,
+    "tau": 0.02
+   },
+   "val_delta": 0.07875000000000021,
+   "baseline_val": 0.7381249999999999,
+   "by_class_val": {
+    "A": 0.8168750000000001,
+    "C": 0.8125,
+    "B": 0.77625
+   },
+   "val_gain_ok": true
+  }
+ },
+ "strategies": {
+  "S2": {
+   "slack_old": {
+    "on_time_test": 0.7683333333333333,
+    "on_time_all30": 0.7933333333333333,
+    "completion_test": 0.8466666666666667,
+    "cost_test": 27.67346730777553,
+    "reviews_test": 0.0,
+    "tardiness_test": 84.29275071220498,
+    "on_time_test_nominal": 0.7333333333333333,
+    "on_time_all30_nominal": 0.8152777777777779,
+    "delta_vs_baseline": 0.0
+   },
+   "v1_improved_S2": {
+    "on_time_test": 0.8066666666666666,
+    "on_time_all30": 0.8305555555555557,
+    "completion_test": 0.8616666666666667,
+    "cost_test": 27.663070770819495,
+    "reviews_test": 0.0,
+    "tardiness_test": 83.23604603354742,
+    "on_time_test_nominal": 0.8166666666666667,
+    "on_time_all30_nominal": 0.8666666666666668,
+    "delta_vs_baseline": 0.03833333333333333
+   },
+   "classA": {
+    "on_time_test": 0.8283333333333334,
+    "on_time_all30": 0.8486111111111111,
+    "completion_test": 0.8649999999999999,
+    "cost_test": 27.753730731982785,
+    "reviews_test": 0.0,
+    "tardiness_test": 84.00153032715106,
+    "on_time_test_nominal": 0.825,
+    "on_time_all30_nominal": 0.8722222222222222,
+    "delta_vs_baseline": 0.06000000000000005
+   },
+   "classB": {
+    "on_time_test": 0.8133333333333335,
+    "on_time_all30": 0.8172222222222223,
+    "completion_test": 0.8550000000000001,
+    "cost_test": 27.5077104988113,
+    "reviews_test": 0.0,
+    "tardiness_test": 89.03494102056072,
+    "on_time_test_nominal": 0.85,
+    "on_time_all30_nominal": 0.8541666666666666,
+    "delta_vs_baseline": 0.04500000000000015
+   },
+   "classC": {
+    "on_time_test": 0.8283333333333334,
+    "on_time_all30": 0.8486111111111111,
+    "completion_test": 0.8649999999999999,
+    "cost_test": 27.753730731982785,
+    "reviews_test": 0.0,
+    "tardiness_test": 84.00153032715106,
+    "on_time_test_nominal": 0.825,
+    "on_time_all30_nominal": 0.8722222222222222,
+    "delta_vs_baseline": 0.06000000000000005
+   },
+   "FROZEN": {
+    "on_time_test": 0.8283333333333334,
+    "on_time_all30": 0.8486111111111111,
+    "completion_test": 0.8649999999999999,
+    "cost_test": 27.753730731982785,
+    "reviews_test": 0.0,
+    "tardiness_test": 84.00153032715106,
+    "on_time_test_nominal": 0.825,
+    "on_time_all30_nominal": 0.8722222222222222,
+    "delta_vs_baseline": 0.06000000000000005
+   }
+  },
+  "S3": {
+   "slack_old": {
+    "on_time_test": 0.7424999999999999,
+    "on_time_all30": 0.7291666666666667,
+    "completion_test": 0.80375,
+    "cost_test": 34.38917659847071,
+    "reviews_test": 0.0,
+    "tardiness_test": 209.8822636881617,
+    "on_time_test_nominal": 0.76875,
+    "on_time_all30_nominal": 0.740625,
+    "delta_vs_baseline": 0.0
+   },
+   "v1_improved_S3": {
+    "on_time_test": 0.7762499999999999,
+    "on_time_all30": 0.7897916666666667,
+    "completion_test": 0.8175000000000001,
+    "cost_test": 32.83582457143325,
+    "reviews_test": 0.0,
+    "tardiness_test": 216.32592464969588,
+    "on_time_test_nominal": 0.76875,
+    "on_time_all30_nominal": 0.80625,
+    "delta_vs_baseline": 0.03374999999999995
+   },
+   "classA": {
+    "on_time_test": 0.79,
+    "on_time_all30": 0.805625,
+    "completion_test": 0.8275,
+    "cost_test": 32.64874783486265,
+    "reviews_test": 0.12000000000000002,
+    "tardiness_test": 198.8485323408967,
+    "on_time_test_nominal": 0.775,
+    "on_time_all30_nominal": 0.8208333333333333,
+    "delta_vs_baseline": 0.0475000000000001
+   },
+   "classB": {
+    "on_time_test": 0.7525000000000001,
+    "on_time_all30": 0.7525000000000001,
+    "completion_test": 0.80625,
+    "cost_test": 33.688120192238536,
+    "reviews_test": 0.0,
+    "tardiness_test": 209.8083937515918,
+    "on_time_test_nominal": 0.76875,
+    "on_time_all30_nominal": 0.75625,
+    "delta_vs_baseline": 0.01000000000000012
+   },
+   "classC": {
+    "on_time_test": 0.7887500000000001,
+    "on_time_all30": 0.805625,
+    "completion_test": 0.8237499999999999,
+    "cost_test": 32.86570829247198,
+    "reviews_test": 0.0,
+    "tardiness_test": 211.67098261872155,
+    "on_time_test_nominal": 0.80625,
+    "on_time_all30_nominal": 0.8229166666666666,
+    "delta_vs_baseline": 0.046250000000000124
+   },
+   "FROZEN": {
+    "on_time_test": 0.79,
+    "on_time_all30": 0.805625,
+    "completion_test": 0.8275,
+    "cost_test": 32.64874783486265,
+    "reviews_test": 0.12000000000000002,
+    "tardiness_test": 198.8485323408967,
+    "on_time_test_nominal": 0.775,
+    "on_time_all30_nominal": 0.8208333333333333,
+    "delta_vs_baseline": 0.0475000000000001
+   }
+  }
+ },
+ "per_case_map": {
+  "S2": {
+   "slack_old": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.7333333333333333,
+     "on_time_all30": 0.8152777777777779,
+     "completion_test": 0.8583333333333334,
+     "tardiness_test": 70.31782207205347,
+     "cost_test": 27.663116589847384,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.9916666666666666,
+     "on_time_all30": 0.9680555555555556,
+     "completion_test": 1.0,
+     "tardiness_test": 10.089750629460017,
+     "cost_test": 32.28856724920122,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.575,
+     "on_time_all30": 0.5652777777777778,
+     "completion_test": 0.6666666666666666,
+     "tardiness_test": 206.16605409751355,
+     "cost_test": 22.192741971688044,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.825,
+     "on_time_all30": 0.8555555555555556,
+     "completion_test": 0.8833333333333334,
+     "tardiness_test": 48.6015842458544,
+     "cost_test": 29.403582792486738,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.7166666666666666,
+     "on_time_all30": 0.7625,
+     "completion_test": 0.825,
+     "tardiness_test": 86.28854251614351,
+     "cost_test": 26.819327935654265,
+     "reviews_test": 0.0
+    }
+   },
+   "v1_improved_S2": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.8166666666666667,
+     "on_time_all30": 0.8666666666666668,
+     "completion_test": 0.8666666666666666,
+     "tardiness_test": 73.58473221709912,
+     "cost_test": 28.35639305035578,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.9916666666666666,
+     "on_time_all30": 0.961111111111111,
+     "completion_test": 1.0,
+     "tardiness_test": 9.993242585132482,
+     "cost_test": 31.728460287751563,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.5833333333333333,
+     "on_time_all30": 0.6069444444444445,
+     "completion_test": 0.6916666666666667,
+     "tardiness_test": 197.23429736280227,
+     "cost_test": 22.019492955924868,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.85,
+     "on_time_all30": 0.8833333333333333,
+     "completion_test": 0.9,
+     "tardiness_test": 48.51340326573836,
+     "cost_test": 29.083571546474978,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.7916666666666667,
+     "on_time_all30": 0.8347222222222221,
+     "completion_test": 0.85,
+     "tardiness_test": 86.85455473696493,
+     "cost_test": 27.127436013590295,
+     "reviews_test": 0.0
+    }
+   },
+   "classA": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.825,
+     "on_time_all30": 0.8722222222222222,
+     "completion_test": 0.8666666666666666,
+     "tardiness_test": 72.1986981654557,
+     "cost_test": 28.198556628359636,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.9916666666666666,
+     "on_time_all30": 0.9680555555555556,
+     "completion_test": 1.0,
+     "tardiness_test": 9.954319924765866,
+     "cost_test": 31.49492432555187,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.675,
+     "on_time_all30": 0.6611111111111112,
+     "completion_test": 0.7166666666666666,
+     "tardiness_test": 197.52029580649275,
+     "cost_test": 22.66127893806794,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.8416666666666668,
+     "on_time_all30": 0.9013888888888888,
+     "completion_test": 0.8916666666666668,
+     "tardiness_test": 47.71679161624545,
+     "cost_test": 28.994931994340895,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.8083333333333332,
+     "on_time_all30": 0.8402777777777779,
+     "completion_test": 0.85,
+     "tardiness_test": 92.6175461227955,
+     "cost_test": 27.418961773593587,
+     "reviews_test": 0.0
+    }
+   },
+   "classB": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.85,
+     "on_time_all30": 0.8541666666666666,
+     "completion_test": 0.875,
+     "tardiness_test": 76.66826815739434,
+     "cost_test": 27.894550380157483,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.9833333333333334,
+     "on_time_all30": 0.9583333333333334,
+     "completion_test": 1.0,
+     "tardiness_test": 10.358862320216712,
+     "cost_test": 32.29547118301712,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.5833333333333334,
+     "on_time_all30": 0.5763888888888888,
+     "completion_test": 0.675,
+     "tardiness_test": 207.08172433443005,
+     "cost_test": 21.584211175178467,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.8583333333333332,
+     "on_time_all30": 0.8805555555555554,
+     "completion_test": 0.8833333333333332,
+     "tardiness_test": 72.41757071712149,
+     "cost_test": 29.395398452210834,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.7916666666666667,
+     "on_time_all30": 0.8166666666666665,
+     "completion_test": 0.8416666666666668,
+     "tardiness_test": 78.64827957364106,
+     "cost_test": 26.368921303492595,
+     "reviews_test": 0.0
+    }
+   },
+   "classC": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.825,
+     "on_time_all30": 0.8722222222222222,
+     "completion_test": 0.8666666666666666,
+     "tardiness_test": 72.1986981654557,
+     "cost_test": 28.198556628359636,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.9916666666666666,
+     "on_time_all30": 0.9680555555555556,
+     "completion_test": 1.0,
+     "tardiness_test": 9.954319924765866,
+     "cost_test": 31.49492432555187,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.675,
+     "on_time_all30": 0.6611111111111112,
+     "completion_test": 0.7166666666666666,
+     "tardiness_test": 197.52029580649275,
+     "cost_test": 22.66127893806794,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.8416666666666668,
+     "on_time_all30": 0.9013888888888888,
+     "completion_test": 0.8916666666666668,
+     "tardiness_test": 47.71679161624545,
+     "cost_test": 28.994931994340895,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.8083333333333332,
+     "on_time_all30": 0.8402777777777779,
+     "completion_test": 0.85,
+     "tardiness_test": 92.6175461227955,
+     "cost_test": 27.418961773593587,
+     "reviews_test": 0.0
+    }
+   },
+   "FROZEN": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.825,
+     "on_time_all30": 0.8722222222222222,
+     "completion_test": 0.8666666666666666,
+     "tardiness_test": 72.1986981654557,
+     "cost_test": 28.198556628359636,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.9916666666666666,
+     "on_time_all30": 0.9680555555555556,
+     "completion_test": 1.0,
+     "tardiness_test": 9.954319924765866,
+     "cost_test": 31.49492432555187,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.675,
+     "on_time_all30": 0.6611111111111112,
+     "completion_test": 0.7166666666666666,
+     "tardiness_test": 197.52029580649275,
+     "cost_test": 22.66127893806794,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.8416666666666668,
+     "on_time_all30": 0.9013888888888888,
+     "completion_test": 0.8916666666666668,
+     "tardiness_test": 47.71679161624545,
+     "cost_test": 28.994931994340895,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.8083333333333332,
+     "on_time_all30": 0.8402777777777779,
+     "completion_test": 0.85,
+     "tardiness_test": 92.6175461227955,
+     "cost_test": 27.418961773593587,
+     "reviews_test": 0.0
+    }
+   }
+  },
+  "S3": {
+   "slack_old": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.76875,
+     "on_time_all30": 0.740625,
+     "completion_test": 0.825,
+     "tardiness_test": 201.62770317624546,
+     "cost_test": 34.87281801293251,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.91875,
+     "on_time_all30": 0.9114583333333334,
+     "completion_test": 0.93125,
+     "tardiness_test": 21.342557600021472,
+     "cost_test": 38.863187817382695,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.51875,
+     "on_time_all30": 0.490625,
+     "completion_test": 0.60625,
+     "tardiness_test": 448.00875589933986,
+     "cost_test": 27.68428687550404,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.775,
+     "on_time_all30": 0.7947916666666667,
+     "completion_test": 0.88125,
+     "tardiness_test": 140.88194658493035,
+     "cost_test": 36.527977905715076,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.73125,
+     "on_time_all30": 0.7083333333333334,
+     "completion_test": 0.775,
+     "tardiness_test": 237.55035518027117,
+     "cost_test": 33.99761238081921,
+     "reviews_test": 0.0
+    }
+   },
+   "v1_improved_S3": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.76875,
+     "on_time_all30": 0.80625,
+     "completion_test": 0.84375,
+     "tardiness_test": 203.5487964539537,
+     "cost_test": 34.521521319133434,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.91875,
+     "on_time_all30": 0.90625,
+     "completion_test": 0.93125,
+     "tardiness_test": 82.73196366068859,
+     "cost_test": 38.69724130808922,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.625,
+     "on_time_all30": 0.6197916666666666,
+     "completion_test": 0.65625,
+     "tardiness_test": 388.0223879933852,
+     "cost_test": 25.19577667293927,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.80625,
+     "on_time_all30": 0.8333333333333334,
+     "completion_test": 0.8625,
+     "tardiness_test": 186.72199181762318,
+     "cost_test": 34.675042399413016,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.7625,
+     "on_time_all30": 0.7833333333333333,
+     "completion_test": 0.79375,
+     "tardiness_test": 220.60448332282877,
+     "cost_test": 31.089541157591317,
+     "reviews_test": 0.0
+    }
+   },
+   "classA": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.775,
+     "on_time_all30": 0.8208333333333333,
+     "completion_test": 0.85625,
+     "tardiness_test": 183.35526811308023,
+     "cost_test": 33.66060386272175,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.94375,
+     "on_time_all30": 0.9333333333333333,
+     "completion_test": 0.9625,
+     "tardiness_test": 43.321457238144525,
+     "cost_test": 38.581480328606396,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.65,
+     "on_time_all30": 0.63125,
+     "completion_test": 0.65625,
+     "tardiness_test": 388.1044834989745,
+     "cost_test": 25.321301366044093,
+     "reviews_test": 0.4
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.8125,
+     "on_time_all30": 0.8510416666666667,
+     "completion_test": 0.875,
+     "tardiness_test": 155.12001157724094,
+     "cost_test": 34.54412750044595,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.76875,
+     "on_time_all30": 0.7916666666666666,
+     "completion_test": 0.7875,
+     "tardiness_test": 224.34144127704332,
+     "cost_test": 31.13622611649501,
+     "reviews_test": 0.2
+    }
+   },
+   "classB": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.76875,
+     "on_time_all30": 0.75625,
+     "completion_test": 0.85625,
+     "tardiness_test": 176.4888832544922,
+     "cost_test": 35.08824905847458,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.90625,
+     "on_time_all30": 0.9125,
+     "completion_test": 0.91875,
+     "tardiness_test": 38.92650649554538,
+     "cost_test": 38.00731453008582,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.525,
+     "on_time_all30": 0.5291666666666667,
+     "completion_test": 0.61875,
+     "tardiness_test": 425.0523889367758,
+     "cost_test": 26.511854571562072,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.825,
+     "on_time_all30": 0.81875,
+     "completion_test": 0.85625,
+     "tardiness_test": 177.7030514313222,
+     "cost_test": 35.47979019556969,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.7375,
+     "on_time_all30": 0.7458333333333333,
+     "completion_test": 0.78125,
+     "tardiness_test": 230.87113863982344,
+     "cost_test": 33.35339260550051,
+     "reviews_test": 0.0
+    }
+   },
+   "classC": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.80625,
+     "on_time_all30": 0.8229166666666666,
+     "completion_test": 0.84375,
+     "tardiness_test": 206.09545087501434,
+     "cost_test": 33.657409670516536,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.925,
+     "on_time_all30": 0.9229166666666667,
+     "completion_test": 0.95625,
+     "tardiness_test": 71.7708432791442,
+     "cost_test": 39.15992175751128,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.6375,
+     "on_time_all30": 0.6375,
+     "completion_test": 0.65625,
+     "tardiness_test": 393.07986401800963,
+     "cost_test": 25.2641184788148,
+     "reviews_test": 0.0
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.80625,
+     "on_time_all30": 0.8447916666666667,
+     "completion_test": 0.875,
+     "tardiness_test": 158.38398255416138,
+     "cost_test": 34.920541693160715,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.76875,
+     "on_time_all30": 0.8,
+     "completion_test": 0.7875,
+     "tardiness_test": 229.02477236727833,
+     "cost_test": 31.32654986235657,
+     "reviews_test": 0.0
+    }
+   },
+   "FROZEN": {
+    "a1.00_b0.50": {
+     "on_time_test": 0.775,
+     "on_time_all30": 0.8208333333333333,
+     "completion_test": 0.85625,
+     "tardiness_test": 183.35526811308023,
+     "cost_test": 33.66060386272175,
+     "reviews_test": 0.0
+    },
+    "a0.75_b0.50": {
+     "on_time_test": 0.94375,
+     "on_time_all30": 0.9333333333333333,
+     "completion_test": 0.9625,
+     "tardiness_test": 43.321457238144525,
+     "cost_test": 38.581480328606396,
+     "reviews_test": 0.0
+    },
+    "a1.50_b0.50": {
+     "on_time_test": 0.65,
+     "on_time_all30": 0.63125,
+     "completion_test": 0.65625,
+     "tardiness_test": 388.1044834989745,
+     "cost_test": 25.321301366044093,
+     "reviews_test": 0.4
+    },
+    "a1.00_b0.00": {
+     "on_time_test": 0.8125,
+     "on_time_all30": 0.8510416666666667,
+     "completion_test": 0.875,
+     "tardiness_test": 155.12001157724094,
+     "cost_test": 34.54412750044595,
+     "reviews_test": 0.0
+    },
+    "a1.00_b1.00": {
+     "on_time_test": 0.76875,
+     "on_time_all30": 0.7916666666666666,
+     "completion_test": 0.7875,
+     "tardiness_test": 224.34144127704332,
+     "cost_test": 31.13622611649501,
+     "reviews_test": 0.2
+    }
+   }
+  }
+ },
+ "gate": {
+  "statistic": "blocked paired difference vs slack_old. Blocks = 2 cases x 5 official mappings (10 blocks, fixed conditions); each block has the 5 test seeds as replicates. Delta_bar = mean of the 10 block means; SE from the pooled within-block variance (each block's s^2/5), 95% t interval with Welch-Satterthwaite df.",
+  "delta_bar": 0.05375,
+  "ci95_blocked": [
+   0.025736310984515447,
+   0.08176368901548456
+  ],
+  "se_blocked": 0.013453236909135784,
+  "df_blocked": 20.56413631372521,
+  "block_means": {
+   "S2|a1.00_b0.50": 0.09166666666666667,
+   "S2|a0.75_b0.50": 0.0,
+   "S2|a1.50_b0.50": 0.1,
+   "S2|a1.00_b0.00": 0.016666666666666673,
+   "S2|a1.00_b1.00": 0.09166666666666667,
+   "S3|a1.00_b0.50": 0.00625,
+   "S3|a0.75_b0.50": 0.025,
+   "S3|a1.50_b0.50": 0.13125,
+   "S3|a1.00_b0.00": 0.0375,
+   "S3|a1.00_b1.00": 0.0375
+  },
+  "ci95_naive_50pairs": [
+   0.02632025321776784,
+   0.08117974678223217
+  ],
+  "ci95_seed_cluster5": [
+   0.01884497037355576,
+   0.08865502962644424
+  ],
+  "n_pairs": 50,
+  "n_positive": 27,
+  "sign_test_p": 0.6718110337653656,
+  "worst_block_mean": 0.0,
+  "checks": {
+   "G1_delta_ge_0p015": true,
+   "G2_ci_lower_gt_0": true,
+   "G3_both_cases_positive": true,
+   "G4_no_mapping_regression": true,
+   "G5_completion_no_regression": true,
+   "G6_cost_inflation": true
+  },
+  "passes": true,
+  "g1_threshold": 0.015,
+  "completion_delta": 0.02104166666666666,
+  "cost_ratio": 0.973250167332402,
+  "per_case": {
+   "S2": {
+    "on_time_test": 0.8283333333333334,
+    "baseline_test": 0.7683333333333333,
+    "delta": 0.06,
+    "paired": {
+     "delta_bar": 0.06000000000000001,
+     "se_blocked": 0.018257418583505537,
+     "df_blocked": 12.56544502617801,
+     "tcrit_blocked": 2.167988066514897,
+     "ci_blocked": [
+      0.020418134385592694,
+      0.09958186561440732
+     ],
+     "block_means": [
+      0.09166666666666667,
+      0.0,
+      0.1,
+      0.016666666666666673,
+      0.09166666666666667
+     ],
+     "block_names": [
+      "S2|a1.00_b0.50",
+      "S2|a0.75_b0.50",
+      "S2|a1.50_b0.50",
+      "S2|a1.00_b0.00",
+      "S2|a1.00_b1.00"
+     ],
+     "ci_naive": [
+      0.021196938374307236,
+      0.09880306162569276
+     ],
+     "ci_seed_cluster": [
+      -0.006011567808078058,
+      0.1260115678080781
+     ],
+     "n_pairs": 25,
+     "n_positive": 12,
+     "sign_test_p": 1.0,
+     "min_block_mean": 0.0
+    },
+    "by_map_delta": {
+     "a1.00_b0.50": 0.09166666666666667,
+     "a0.75_b0.50": 0.0,
+     "a1.50_b0.50": 0.1,
+     "a1.00_b0.00": 0.016666666666666673,
+     "a1.00_b1.00": 0.09166666666666667
+    }
+   },
+   "S3": {
+    "on_time_test": 0.79,
+    "baseline_test": 0.7424999999999999,
+    "delta": 0.0475,
+    "paired": {
+     "delta_bar": 0.0475,
+     "se_blocked": 0.01976423537605237,
+     "df_blocked": 9.167583425009164,
+     "tcrit_blocked": 2.255869277540406,
+     "ci_blocked": [
+      0.0029144686210862067,
+      0.09208553137891379
+     ],
+     "block_means": [
+      0.00625,
+      0.025,
+      0.13125,
+      0.0375,
+      0.0375
+     ],
+     "block_names": [
+      "S3|a1.00_b0.50",
+      "S3|a0.75_b0.50",
+      "S3|a1.50_b0.50",
+      "S3|a1.00_b0.00",
+      "S3|a1.00_b1.00"
+     ],
+     "ci_naive": [
+      0.006014280542567994,
+      0.088985719457432
+     ],
+     "ci_seed_cluster": [
+      -0.02290184228575079,
+      0.11790184228575079
+     ],
+     "n_pairs": 25,
+     "n_positive": 15,
+     "sign_test_p": 0.42435622215270996,
+     "min_block_mean": 0.00625
+    },
+    "by_map_delta": {
+     "a1.00_b0.50": 0.00625,
+     "a0.75_b0.50": 0.025,
+     "a1.50_b0.50": 0.13125,
+     "a1.00_b0.00": 0.0375,
+     "a1.00_b1.00": 0.0375
+    }
+   }
+  },
+  "violation_note": null
+ },
+ "gate_mandated": {
+  "statement": "mean over S2,S3 of the test delta vs baseline >= 0.015 AND the paired 95% CI lower bound > 0 (the gate fixed before the work)",
+  "delta_bar": 0.05375,
+  "ci95_blocked": [
+   0.025736310984515447,
+   0.08176368901548456
+  ],
+  "threshold": 0.015,
+  "passes": true
+ },
+ "gate_self_imposed": {
+  "checks": {
+   "G1_delta_ge_0p015": true,
+   "G2_ci_lower_gt_0": true,
+   "G3_both_cases_positive": true,
+   "G4_no_mapping_regression": true,
+   "G5_completion_no_regression": true,
+   "G6_cost_inflation": true
+  },
+  "passes": true,
+  "failing": [],
+  "worst_cell": {
+   "case": "S2",
+   "mapping": "a0.75_b0.50",
+   "delta": 0.0,
+   "baseline": 0.9916666666666666,
+   "frozen": 0.9916666666666666,
+   "quantum": 0.041666666666666664,
+   "per_seed": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "in_quanta": 0.0
+  }
+ },
+ "passes": true,
+ "passes_mandated": true,
+ "verdict": "mandated gate PASS (+5.38pp, blocked CI lower +2.57pp); self-imposed robustness gate PASS (-)",
+ "notes": [
+  "本文件所有基线都是冻结 slack 策略在修正协议下的重放：30 个官方 seed 上 S2 0.8153 / S3 0.7406。旧记录里的 0.8292 / 0.7854 是修正前协议的数字（code/p3_schedule.py 误把 C=s+d、t=s+max(d,b)），见 09-C现状与数字对账.md:152；本文的比较是增量型，不受基线口径影响。",
+  "test 只在策略冻结后评估一次；没有任何 test seed 进入选择或早停。",
+  "blocked 区间把 10 个 (case×映射) 格当固定块、5 个 seed 当重复；5 seed 聚类区间作严格参照、50 对朴素区间作宽松参照一并报出。",
+  "G4 的 0.5pp 容差比指标量子（S2 的 1/W=4.17pp、S3 的 1/W=3.13pp）还细：val 段同一格 S2|a0.75 曾退化 1 个量子（-4.17pp），test 段该格为 0.00 —— 这条容差会咬住单量子级抖动，读表时按「块均值 / 量子」换算。"
+ ]
+}

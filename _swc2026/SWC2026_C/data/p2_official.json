@@ -1,0 +1,212 @@
+{
+ "_meta": {
+  "script": "p2_official.py",
+  "protocol": "common_conditions.json -> observation: prefix_seconds [0.2,0.6,1.0], delay_s 1.0, cost 1.0, max_per_job 2",
+  "predictor": "ridge alpha=10 on rel/vel/acc of the last c frames (recipe of p2_predict.py), fitted per (c, lead) on train, evaluated once on test",
+  "deadline_s": 3.0,
+  "note": "no cost-to-centimetre conversion is assumed; the output is the (error, requests) frontier plus prefix gain and delay penalty",
+  "answers": [
+   "\\slotPOfficialA",
+   "\\slotPOfficialB",
+   "\\slotPOfficialC",
+   "\\slotPPrefixGain",
+   "\\slotPDelayPenalty"
+  ]
+ },
+ "grid": [
+  {
+   "ctx_frames": 6,
+   "ctx_s": 0.2,
+   "lead_frames": 30,
+   "lead_s": 1.0,
+   "rmse_cm": 6.221,
+   "rmse_coord_cm": 3.592,
+   "end_rmse_cm": 9.178,
+   "median_end_cm": 6.386,
+   "q90_m": 0.1019,
+   "coverage_test": 0.8967,
+   "within_2cm": 0.0713,
+   "n_val": 400,
+   "n_test": 743
+  },
+  {
+   "ctx_frames": 6,
+   "ctx_s": 0.2,
+   "lead_frames": 60,
+   "lead_s": 2.0,
+   "rmse_cm": 8.688,
+   "rmse_coord_cm": 5.016,
+   "end_rmse_cm": 11.395,
+   "median_end_cm": 8.383,
+   "q90_m": 0.1386,
+   "coverage_test": 0.885,
+   "within_2cm": 0.0457,
+   "n_val": 185,
+   "n_test": 350
+  },
+  {
+   "ctx_frames": 6,
+   "ctx_s": 0.2,
+   "lead_frames": 90,
+   "lead_s": 3.0,
+   "rmse_cm": 9.911,
+   "rmse_coord_cm": 5.722,
+   "end_rmse_cm": 11.668,
+   "median_end_cm": 8.689,
+   "q90_m": 0.1512,
+   "coverage_test": 0.8658,
+   "within_2cm": 0.009,
+   "n_val": 116,
+   "n_test": 221
+  },
+  {
+   "ctx_frames": 18,
+   "ctx_s": 0.6,
+   "lead_frames": 30,
+   "lead_s": 1.0,
+   "rmse_cm": 6.234,
+   "rmse_coord_cm": 3.599,
+   "end_rmse_cm": 9.163,
+   "median_end_cm": 6.445,
+   "q90_m": 0.1044,
+   "coverage_test": 0.9044,
+   "within_2cm": 0.0746,
+   "n_val": 387,
+   "n_test": 724
+  },
+  {
+   "ctx_frames": 18,
+   "ctx_s": 0.6,
+   "lead_frames": 60,
+   "lead_s": 2.0,
+   "rmse_cm": 8.786,
+   "rmse_coord_cm": 5.072,
+   "end_rmse_cm": 11.736,
+   "median_end_cm": 8.619,
+   "q90_m": 0.1414,
+   "coverage_test": 0.8875,
+   "within_2cm": 0.0323,
+   "n_val": 179,
+   "n_test": 341
+  },
+  {
+   "ctx_frames": 18,
+   "ctx_s": 0.6,
+   "lead_frames": 90,
+   "lead_s": 3.0,
+   "rmse_cm": 9.886,
+   "rmse_coord_cm": 5.708,
+   "end_rmse_cm": 11.872,
+   "median_end_cm": 8.947,
+   "q90_m": 0.1427,
+   "coverage_test": 0.8469,
+   "within_2cm": 0.028,
+   "n_val": 112,
+   "n_test": 214
+  },
+  {
+   "ctx_frames": 30,
+   "ctx_s": 1.0,
+   "lead_frames": 30,
+   "lead_s": 1.0,
+   "rmse_cm": 6.244,
+   "rmse_coord_cm": 3.605,
+   "end_rmse_cm": 9.079,
+   "median_end_cm": 6.394,
+   "q90_m": 0.1009,
+   "coverage_test": 0.8919,
+   "within_2cm": 0.0678,
+   "n_val": 373,
+   "n_test": 708
+  },
+  {
+   "ctx_frames": 30,
+   "ctx_s": 1.0,
+   "lead_frames": 60,
+   "lead_s": 2.0,
+   "rmse_cm": 8.632,
+   "rmse_coord_cm": 4.983,
+   "end_rmse_cm": 11.055,
+   "median_end_cm": 8.062,
+   "q90_m": 0.1351,
+   "coverage_test": 0.8886,
+   "within_2cm": 0.033,
+   "n_val": 175,
+   "n_test": 333
+  },
+  {
+   "ctx_frames": 30,
+   "ctx_s": 1.0,
+   "lead_frames": 90,
+   "lead_s": 3.0,
+   "rmse_cm": 9.452,
+   "rmse_coord_cm": 5.457,
+   "end_rmse_cm": 10.986,
+   "median_end_cm": 8.488,
+   "q90_m": 0.1437,
+   "coverage_test": 0.8633,
+   "within_2cm": 0.019,
+   "n_val": 109,
+   "n_test": 210
+  }
+ ],
+ "options": [
+  {
+   "options": "A_no_request",
+   "ctx_frames": 6,
+   "ctx_s": 0.2,
+   "usable_lead_frames": 90,
+   "usable_lead_s": 3.0,
+   "requests": 0,
+   "cost_units": 0.0,
+   "rmse_cm": 9.911,
+   "rmse_coord_cm": 5.722,
+   "end_rmse_cm": 11.668
+  },
+  {
+   "options": "B_one_request",
+   "ctx_frames": 18,
+   "ctx_s": 0.6,
+   "usable_lead_frames": 60,
+   "usable_lead_s": 2.0,
+   "requests": 1,
+   "cost_units": 1.0,
+   "rmse_cm": 8.786,
+   "rmse_coord_cm": 5.072,
+   "end_rmse_cm": 11.736
+  },
+  {
+   "options": "C_two_requests",
+   "ctx_frames": 30,
+   "ctx_s": 1.0,
+   "usable_lead_frames": 30,
+   "usable_lead_s": 1.0,
+   "requests": 2,
+   "cost_units": 2.0,
+   "rmse_cm": 6.244,
+   "rmse_coord_cm": 3.605,
+   "end_rmse_cm": 9.079
+  }
+ ],
+ "derived": {
+  "prefix_gain_cm_by_lead": {
+   "30": -0.023,
+   "60": 0.056,
+   "90": 0.459
+  },
+  "delay_penalty_cm_by_ctx": {
+   "6": 2.467,
+   "18": 2.552,
+   "30": 2.388
+  },
+  "option_B_vs_A_cm": -1.125,
+  "option_C_vs_B_cm": -2.542,
+  "delay_exceeds_gain": true,
+  "seconds": 8.7,
+  "prefix_gain_max_cm": 0.459,
+  "prefix_gain_min_cm": -0.023,
+  "delay_penalty_min_cm": 2.388,
+  "delay_penalty_max_cm": 2.552
+ },
+ "created": "2026-11-20 20:19:07"
+}

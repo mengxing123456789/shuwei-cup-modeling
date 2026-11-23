@@ -1,0 +1,44 @@
+﻿[selftest] Annex I 闭合 max|Σ-100| = 1.42e-14 （25 列）
+[selftest] 公式派生单元格 24 个，行分布 {'Syngas': 8, 'Char': 8, 'Tar': 8}
+[selftest] 网格嵌套 {'DFA/CS': True, 'DFA/CE': True, 'DFA/LG': True}；Annex II 16 列
+
+=== 关键读数（口径逐条标注）
+[Q1 CS] Tar 19.46→12.13 Δ-7.33 (-37.7%) span/thr=5.04 显著=True
+[Q1 CS] Char Δ+0.66 span/thr=0.26 显著=False
+[Q1 CS] ILR σ_fit=0.0333 σ_noise=0.0502 F=0.44 R²=[0.977, 0.909, 0.564] best=M3_sqrt_w
+[Q1 CE] Tar 34.42→45.28 Δ+10.86 (+31.6%) span/thr=2.58 显著=True
+[Q1 CE] Char Δ+3.18 span/thr=1.45 显著=True [派生列]
+[Q1 CE] ILR σ_fit=0.0929 σ_noise=0.0502 F=3.42 R²=[0.575, 0.25, 0.563] best=M2_linear_logw
+[Q1 LG] Tar 18.06→8.19 Δ-9.87 (-54.7%) span/thr=8.73 显著=True
+[Q1 LG] Char Δ-0.74 span/thr=0.21 显著=False
+[Q1 LG] ILR σ_fit=0.0941 σ_noise=0.0501 F=3.52 R²=[0.822, 0.774, 0.482] best=M2_linear_logw
+[Q2] CS 主量级 ['H2', 'CO', 'CO2', 'CH4']
+[Q2] CS 次量级 ['C2H6', 'C3H8', 'C3H6', 'C2H4', 'C4H10']
+[Q2] CS 行和 120.24–153.25（≠100，只作相对组成）
+[Q2] CS beta_bridge [0.713, 0.626, 0.574, 0.57, 0.598, 0.603]
+[Q3] 产物 8 对 / 气体 5 对
+[Q3] Tar Δ=+16.36…+37.09 超噪 8/8 翻转 0
+[Q3] Char Δ=-36.74…-32.82 超噪 8/8 翻转 0
+[Q3] Water Δ=+12.12…-7.55 超噪 6/8 翻转 1
+[Q3] 翻转清单：产物 ['Water'] 气体 []
+[Q4] 级数混淆 n=2/n=1 = 6.34×
+[Q4] 脊线 Ea 100→250 kJ/mol ⇒ log10A 3.75→13.55
+[Q4 CS] gamma {'Tar': -0.826, 'Water': 0.397, 'Char': 0.148, 'Syngas': 0.281} Σ=+0.00e+00
+[Q4 CS] 气相碳 5.32→5.20 mmol/g (-2.3%)
+[Q4 CE] gamma {'Tar': 0.75, 'Water': -0.727, 'Char': 0.34, 'Syngas': -0.363} Σ=-1.11e-16
+[Q4 CE] 气相碳 2.82→0.64 mmol/g (-77.2%)
+[Q4 LG] gamma {'Tar': -1.581, 'Water': 0.956, 'Char': 0.055, 'Syngas': 0.569} Σ=+1.11e-16
+[Q4 LG] 气相碳 3.01→4.21 mmol/g (+40.1%)
+[Q5 CS] 外推=False σ_ILR=0.0333 LOO相对RMSE={'Tar': 0.055, 'Water': 0.0137, 'Char': 0.0089, 'Syngas': 0.0491}
+[Q5 CS] 行和 100.00000000–100.00000000
+[Q5 CE] 外推=False σ_ILR=0.0929 LOO相对RMSE={'Tar': 0.0634, 'Water': 0.1871, 'Char': 0.0603, 'Syngas': 0.06}
+[Q5 CE] 行和 100.00000000–100.00000000
+[Q5 LG] 外推=False σ_ILR=0.0941 LOO相对RMSE={'Tar': 0.1708, 'Water': 0.0692, 'Char': 0.0153, 'Syngas': 0.124}
+[Q5 LG] 行和 100.00000000–100.00000000
+
+=== 落盘
+  results_q1.json  15970 B
+  results_q2.json  18832 B
+  results_q3.json  7505 B
+  results_q4.json  5245 B
+  results_q5.json  10363 B

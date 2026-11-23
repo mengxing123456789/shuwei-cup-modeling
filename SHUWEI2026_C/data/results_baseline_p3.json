@@ -1,0 +1,60 @@
+{
+ "protocol": "official validation split and Python random.Random(seed).choice",
+ "reserve_rule": "training-family median duration + 0.5 s",
+ "cases": {
+  "S1": {
+   "jobs": 8,
+   "horizon_s": 100,
+   "cost_budget": 32,
+   "n_trials": 30,
+   "weighted_completion_rate_mean": 1.0,
+   "weighted_on_time_rate_mean": 0.9895833333333334,
+   "weighted_tardiness_s_mean": 0.7155038732783064,
+   "cost_mean": 21.53436419475063,
+   "elapsed_s_mean": 74.54515430708652,
+   "observed_overrun_s_mean": 26.473333333333336,
+   "reserved_idle_s_mean": 2.6999999999999997,
+   "censored_units_mean": 0.0,
+   "unfinished_units_mean": 0.0,
+   "stopped_early_trials": 0,
+   "invalid_actions_total": 0,
+   "valid_protocol_all": true
+  },
+  "S2": {
+   "jobs": 12,
+   "horizon_s": 100,
+   "cost_budget": 34,
+   "n_trials": 30,
+   "weighted_completion_rate_mean": 0.8763888888888889,
+   "weighted_on_time_rate_mean": 0.6347222222222222,
+   "weighted_tardiness_s_mean": 50.266143173268695,
+   "cost_mean": 28.05956760995215,
+   "elapsed_s_mean": 97.58141089188771,
+   "observed_overrun_s_mean": 35.97857284212695,
+   "reserved_idle_s_mean": 3.3866666666666654,
+   "censored_units_mean": 0.2,
+   "unfinished_units_mean": 1.6333333333333333,
+   "stopped_early_trials": 19,
+   "invalid_actions_total": 0,
+   "valid_protocol_all": true
+  },
+  "S3": {
+   "jobs": 16,
+   "horizon_s": 125,
+   "cost_budget": 40,
+   "n_trials": 30,
+   "weighted_completion_rate_mean": 0.8447916666666667,
+   "weighted_on_time_rate_mean": 0.5864583333333333,
+   "weighted_tardiness_s_mean": 124.13839669103506,
+   "cost_mean": 35.98902314879222,
+   "elapsed_s_mean": 123.1840083491444,
+   "observed_overrun_s_mean": 44.96222593851668,
+   "reserved_idle_s_mean": 4.406666666666665,
+   "censored_units_mean": 0.43333333333333335,
+   "unfinished_units_mean": 2.7666666666666666,
+   "stopped_early_trials": 17,
+   "invalid_actions_total": 0,
+   "valid_protocol_all": true
+  }
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "version": 1,
+ "entries": {
+  "2:11e20581f75f177bd15a34825f1765228fe057bf8c1626eeb5cca71b18edc70c": {
+   "figure": "chain",
+   "kind": "datafig",
+   "source": "figures/chain.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795241751.9942153
+   ],
+   "at": "2026-11-21T06:15:51+00:00",
+   "at_ts": 1795241751.9942153
+  },
+  "2:dd39310d0e606c7cb766824e2fd40847fb00bb7cf01583776953a0dc78fe7460": {
+   "figure": "fig0_framework",
+   "kind": "datafig",
+   "source": "figures/fig0_framework.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795241761.9381783
+   ],
+   "at": "2026-11-21T06:16:01+00:00",
+   "at_ts": 1795241761.9381783
+  },
+  "2:ed2a72f353d60f3aaf916721cc2d12013df2d616e2473c6f6e0533612ce09819": {
+   "figure": "fig2_bad_ratio",
+   "kind": "datafig",
+   "source": "figures/fig2_bad_ratio.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795241774.9061382
+   ],
+   "at": "2026-11-21T06:16:14+00:00",
+   "at_ts": 1795241774.9061382
+  },
+  "2:380434889653a0b13b7844d9a913b30a27e713a0678510d5e4c2edccc660d52b": {
+   "figure": "fig4_p2_error_vs_mask",
+   "kind": "datafig",
+   "source": "figures/fig4_p2_error_vs_mask.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795241781.3784132
+   ],
+   "at": "2026-11-21T06:16:21+00:00",
+   "at_ts": 1795241781.3784132
+  },
+  "2:fc6d9d777f7085a51820a47d642a71e2c116cac77a2baba41e61e6bfba4e201b": {
+   "figure": "fig5_p2_cost_tradeoff",
+   "kind": "datafig",
+   "source": "figures/fig5_p2_cost_tradeoff.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242588.3577
+   ],
+   "at": "2026-11-21T06:29:48+00:00",
+   "at_ts": 1795242588.3577
+  },
+  "2:3d9fd1616fec2309ca665342f378db3107c212932f397c722e4509b6a507f299": {
+   "figure": "fig8_p2_crossover",
+   "kind": "datafig",
+   "source": "figures/fig8_p2_crossover.pdf",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795241981.3632317
+   ],
+   "at": "2026-11-21T06:19:41+00:00",
+   "at_ts": 1795241981.3632317
+  },
+  "2:ad1f8ef5d3ccbcf6d5aa13c644b98d7f4edca4c1f89abc60de9ac2fb58717771": {
+   "figure": "chain_v2",
+   "kind": "datafig",
+   "source": "figures/chain_v2.png",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242451.0012856
+   ],
+   "at": "2026-11-21T06:27:31+00:00",
+   "at_ts": 1795242451.0012856
+  },
+  "2:ba3e181160dc446fc1c04d9d5ba396bffba5fb652abadcf7759f72d40f17ad87": {
+   "figure": "fig10_value_ladder",
+   "kind": "datafig",
+   "source": "figures/fig10_value_ladder.png",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242466.0221272
+   ],
+   "at": "2026-11-21T06:27:46+00:00",
+   "at_ts": 1795242466.0221272
+  },
+  "2:c63f68179ebddd582001d6e93d3a12cbee892d421ff26380d6a378c2b6003c03": {
+   "figure": "fig11_video_gain",
+   "kind": "datafig",
+   "source": "figures/fig11_video_gain.png",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242473.69128
+   ],
+   "at": "2026-11-21T06:27:53+00:00",
+   "at_ts": 1795242473.69128
+  },
+  "2:746c35735b26978b656b2ae4700ad425752fb2f5fd9ca9fe13fd157fe570d2bf": {
+   "figure": "fig1_keypoint_tracks",
+   "kind": "datafig",
+   "source": "figures/fig1_keypoint_tracks.png",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242555.8122232
+   ],
+   "at": "2026-11-21T06:29:15+00:00",
+   "at_ts": 1795242555.8122232
+  },
+  "2:23cb75da19a042ecf15ebb3402e07179521e34cd11d439e3f68294455c8b879e": {
+   "figure": "fig3_segmentation",
+   "kind": "datafig",
+   "source": "figures/fig3_segmentation.png",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [R37 负柱下方] 数值标签 \"-3.8\" 被底部坐标轴脊线横穿（看起来像被划掉），且与刻度标签 \"R37\" 挤在一起，难以辨认 [建议：将该标签改为放在负柱内部（白字）或紧贴柱底但抬高 offset，避免压到 x 轴 spine；同时稍微下移/加大底部边距，使 \"-3.8\" 与 \"R37\" 刻度文字留出间距]",
+   "attempts": 1,
+   "calls": [
+    1795242576.364257
+   ],
+   "at": "2026-11-21T06:29:36+00:00",
+   "at_ts": 1795242576.364257
+  },
+  "2:69646d5b64611d9580e5772111d8d0c01db917d0179ce2b0ad20667716f3ec2d": {
+   "figure": "fig6_p3_policy",
+   "kind": "datafig",
+   "source": "figures/fig6_p3_policy.png",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [绘图区顶部图例（横跨 EDF 组与 Slack 组上方）] 图例画在坐标轴内部顶端，与最高的灰色柱顶同高发生碰撞：灰色 S1 色块与 EDF 的灰色柱（≈0.99）连成一片、边界消失，\"S1\" 黑色文字直接压在灰色柱身上；橙色 S3 色块及 \"S3\" 文字压在 Slack 组灰色柱（≈0.985）顶部，图例与数据互相遮挡且同色融合难以辨认。[修复] 将图例移出绘图区（如 `bbox_to_anchor` 放到轴上方、`ncol=3`，或放图下方），或把 y 轴上限提高到约 1.10–1.15，在柱顶与图例之间留出空白带，确保图例完全不与任何柱子相交。",
+   "attempts": 1,
+   "calls": [
+    1795242666.2178516
+   ],
+   "at": "2026-11-21T06:31:06+00:00",
+   "at_ts": 1795242666.2178516
+  },
+  "2:c7c721d020315d8b580f0cc3334765665bafc8ae4981e29259405a3c5cc26cb1": {
+   "figure": "fig7_reliability_roc",
+   "kind": "datafig",
+   "source": "figures/fig7_reliability_roc.png",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242685.8069324
+   ],
+   "at": "2026-11-21T06:31:25+00:00",
+   "at_ts": 1795242685.8069324
+  },
+  "2:2d4d3fd80cda9d21792642ff7ee9db90a51436029698062100a915c05e228f96": {
+   "figure": "fig9_p1a_boundary",
+   "kind": "datafig",
+   "source": "figures/fig9_p1a_boundary.png",
+   "status": "issue",
+   "reason": "",
+   "reply": "ISSUE 1: [右图 (b) 底部图例] 图例框（\"Ward + GMM-BIC / GPU boundary CNN\"）压在 record 17 的两根条形右端上，橙色条尖端伸入图例白底内被截断，真实长度无法读出。修复：把图例移出绘图区（如 `bbox_to_anchor` 放到子图下方/上方），或增大 x 上限并缩短图例宽度，确保不与任何 bar 重叠。\n\nISSUE 2: [左图 (a) 右上角图例] 半透明图例框盖住了约 (103 s, 0.585) 处的 decoded boundary 散点（该点透出呈浅灰色、明显被遮）及对应曲线峰顶，x≈104 s 的橙色标注竖线也从图例背后穿过。修复：将图例移到 axes 外（如面板上方或两图之间），或移至该区域确无数据的位置并设 `framealpha=1`。",
+   "attempts": 1,
+   "calls": [
+    1795242866.4381378
+   ],
+   "at": "2026-11-21T06:34:26+00:00",
+   "at_ts": 1795242866.4381378
+  },
+  "2:c7147860c5675d7115f5bb00f0c7f6714bc7cf80abc6b6e8881bc37fd5de4817": {
+   "figure": "fig9_phase",
+   "kind": "datafig",
+   "source": "figures/fig9_phase.png",
+   "status": "pass",
+   "reason": "",
+   "reply": "PASS",
+   "attempts": 1,
+   "calls": [
+    1795242877.2389443
+   ],
+   "at": "2026-11-21T06:34:37+00:00",
+   "at_ts": 1795242877.2389443
+  },
+  "2:3404cd5a43da8a364ee8dd80a4e5fefb83c42ba971672611ca4e1ca00e94fb63": {
+   "figure": "fig_chain",
+   "kind": "datafig",
+   "source": "figures/fig_chain.png",
+   "status": "unreviewed",
+   "reason": "视觉服务暂时不可用（timed out（共尝试 2 次））",
+   "reply": "",
+   "attempts": 0,
+   "calls": [],
+   "at": "2026-11-21T06:37:41+00:00",
+   "at_ts": 1795243061.4168246
+  }
+ }
+}

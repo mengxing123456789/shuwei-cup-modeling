@@ -1,0 +1,125 @@
+% numerals-ok: begin
+\section{The three algorithms in pseudocode}
+\label{app:algorithms}
+
+The body says what each part does and why; this appendix says how it is run, at the level of a
+reader who wants to re-implement it. Every constant named here is read from \texttt{data/*.json}
+by the scripts in \texttt{code/}, and the three listings follow the control flow of
+\texttt{p1a\_gpu\_segmentation.py}, \texttt{p2\_interval.py} and \texttt{p3\_closedform.py} in
+that order.
+% numerals-ok: end
+
+\begin{algorithm}[H]
+\caption{Boundary decoding: from per-frame scores to stage labels (Part I)}
+\label{alg:p1}
+\begin{algorithmic}[1]
+\Require keypoint windows $X\in\mathbb{R}^{T\times 21\times 3}$, boundary network $f_\theta$,
+smoothing $\sigma$, peak height $h$, minimum peak distance $d$
+\Ensure stage label $y_t\in\{1,\dots,K\}$ for every frame
+\State express each window in the head frame: subtract the head position, rotate by the
+inverse head quaternion
+\State $s_t \gets f_\theta(X)_t$ for $t=1,\dots,T$ \Comment{boundary score in $[0,1]$}
+\State convolve $s$ with a Gaussian kernel of width $\sigma$
+\State $P \gets \textsc{FindPeaks}(s;\;\text{height}=h,\;\text{distance}=d)$
+\State $y_t \gets \#\{\,p\in P : p\le t\,\}$ \Comment{searchsorted, so labels stay contiguous}
+\State \Return $y$, $P$
+\end{algorithmic}
+\end{algorithm}
+
+The three decoding constants $(\sigma,h,d)$ are selected on validation records only and then
+frozen; the alternative route in the body is chain-constrained Ward, which merges only adjacent
+blocks and picks $K$ on the same validation records. The boundary F1 is computed by optimal
+matching between predicted and annotated boundaries with a five-frame tolerance, so a decoder
+that overshoots the count is penalised rather than rewarded.
+
+\begin{algorithm}[H]
+\caption{Ridge prediction and split-conformal radius (Part II)}
+\label{alg:p2}
+\begin{algorithmic}[1]
+\Require context of $c=10$ observed frames, mask length $L\in\{6,15,30,60\}$ frames, training
+windows and validation windows
+\Ensure point prediction $\hat{y}\in\mathbb{R}^{3}$ and radius $q_L$
+\State build the feature vector from the $c$ frames (positions, velocities, aperture, missing
+flags) and standardise it with the training mean and variance
+\State fit $\hat{\beta}_L=\arg\min_{\beta}\|Y-X\beta\|^{2}+\alpha\|\beta\|^{2}$ with
+$\alpha=10$ \Comment{one model per mask length}
+\State compute residuals $r_i=\|\hat{y}_i-y_i\|_{2}$ on the validation windows
+\State $q_L\gets$ the $\lceil (n+1)(1-0.10)\rceil$-th smallest $r_i$
+\Comment{split conformal, nominal coverage $90\%$}
+\State \Return $\hat{y}$ and the ball $\{\,y:\|y-\hat{y}\|_2\le q_L\,\}$
+\end{algorithmic}
+\end{algorithm}
+
+The radius is a single number per mask length rather than a per-axis interval, because the
+error of a three-dimensional position is naturally measured by its norm. Coverage is evaluated
+on test windows once, and the body reports both the radius and the realised coverage so that a
+reader can see whether the nominal level was met.
+
+\begin{algorithm}[H]
+\caption{Reserve, closed-form punctuality, and dispatch (Part III)}
+\label{alg:p3}
+\begin{algorithmic}[1]
+\Require case $c$, horizon $H$, budget $B$, review cap $K$, duration law $F_d$, and the
+residual quantiles $Q_q$ of the duration model
+\Ensure weighted on-time rate and cost
+\State $t\gets 0$, $\mathit{cost}\gets 0$, $n_{\text{rev}}\gets 0$
+\While{$t<H$ and dispatches $<200$}
+  \State $\mathit{pressure}\gets \sum_{j\ \text{unstarted}}\hat{p}_j/(H-t)$
+  \State $q\gets\operatorname{clip}(0.70-0.55\max(0,\mathit{pressure}-0.75),\,0.35,\,0.70)$
+  \For{each feasible job $j$}
+    \State $\hat{p}_j\gets\alpha\,\mathrm{pred}_j+\beta$; $D_j\gets$ travel distance;
+    $s_j\gets t+D_j+0.5$
+    \State $b_j\gets\max\!\big(0.2,\ \alpha(\mathrm{pred}_j+Q_q(r_j))+\beta\big)$
+    \State $c_j\gets 2+0.1b_j+0.2D_j$; admit $j$ if $s_j+b_j\le H$ and $\mathit{cost}+c_j\le B$
+  \EndFor
+  \If{a second look is allowed and $n_{\text{rev}}<K$}
+    \State compute $P_0$ and $P_1$ from the duration law at the current and next prefix
+    \State request the look for the job maximising $w_j(P_1-P_0)-0.02$ if the maximum is positive
+  \EndIf
+  \State choose among admissible jobs the one maximising
+  $w_j\max(0.03,P_j)/\max(0.5,\hat{p}_j)\cdot e^{-\mathrm{slack}_j/12}$,
+  with $\mathrm{slack}_j=\mathrm{due}_j-s_j-\hat{p}_j$
+  \State $\mathit{cost}\gets\mathit{cost}+c_j$; the job completes at $C_j=s_j+p_j$ with
+  $p_j=\alpha d_j+\beta$; the crew is released at $s_j+\max(p_j,b_j)$
+\EndWhile
+\State \Return $\sum_j w_j\mathbf{1}[C_j\le\mathrm{due}_j]/\sum_j w_j$ and $\mathit{cost}$
+\end{algorithmic}
+\end{algorithm}
+
+Line~5 is the only place where a forecast enters the decision, and it enters through the
+quantile $Q_q$ of the residual law. The closed form of the body follows from line~11: since
+$C_j=s_j+\alpha d_j+\beta$, the event $C_j\le\mathrm{due}_j$ is the event
+$d_j\le(\mathrm{due}_j-s_j-\beta)/\alpha$, so its probability is one evaluation of $F_d$ at that
+point and the reserve $b_j$ cancels out of it. That cancellation is why the paper can say that a
+better forecast helps only through $F_d$, and why the paid second look, which changes
+$s_j$ by one second without changing $F_d$, cannot buy punctuality.
+
+\begin{table}[htbp]
+\centering
+\caption{The five columns a reader needs to audit one algorithm against the other two.}
+\label{tab:algo-contract}
+\small
+\begin{tabular}{p{0.12\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.16\textwidth}}
+\toprule
+Part & Input & Output & Pass mark & Fails when \\
+\midrule
+I & keypoints of one record & stage labels, boundary set & ARI above the published decode & records shorter than one stage \\
+II & ten observed frames & position and radius & coverage near $90\%$ and RMSE below hold-last & mask longer than the context carries information \\
+III & duration law and job list & dispatch order and reserves & weighted on-time rate above the fixed-interval baseline & budget or horizon binds before the queue clears \\
+\bottomrule
+\end{tabular}
+\end{table}
+% numerals-ok: begin
+Cost, in the sense the corpus reports it: Part~I is $O(T\log T)$ per record (one convolution
+and one peak scan over $T$ frames); Part~II is $O(p^{3})$ once per mask length with $p$ the
+feature count, and $O(p)$ per window at test time; Part~III is $O(J\log J)$ per dispatch event
+with $J$ the queue length, and the grid search over reserves multiplies that by the number of
+candidate quantiles. The measured wall-clock costs are in Table~\ref{tab:gpu-ledger} and
+Appendix~G.
+% numerals-ok: end
+
+% numerals-ok: begin
+The table is deliberately about failure conditions as well as pass marks: a method that cannot
+say when it stops working is not yet a method. The body's Section~7 collects the same
+conditions in prose, and Appendix~E records the attempts that failed them.
+% numerals-ok: end

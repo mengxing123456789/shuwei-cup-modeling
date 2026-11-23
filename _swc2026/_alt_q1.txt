@@ -1,0 +1,105 @@
+﻿
+======================================================================
+\subsection{Data Insight}
+\subsection{Data Insight}
+The 69 recordings carry 66,070 frames and 349 annotated segments. Segment length is not stationary across archives: the median is 3.40~s in EgoDemo, 6.10~s in EgoPro and 4.00~s in EgoStandard (Table~\ref{tab:p1scale}), so any detector tuned on one archive will mis-fire on the others. More important, the annotated boundaries are \emph{semantic}: they mark the start and end of a subtask such as \emph{search the bin} or \emph{arrange the shelf}, whereas the fingertip speed alternates between near-zero plateaus (the hand resting over a shelf) and bursts above 1~m/s (transport between zones). A single recording therefore contains many kinematic regimes but only a handful of annotated subtasks, and the two are not in one-to-one correspondence. We keep the two claims separate throughout: boundary recovery is judged against the annotations, and reliability is judged against the bad-frame labels, and the second does not inherit the weakness of the first.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Annotated scale per archive. Segment lengths are the released \texttt{end\_s}-\texttt{start\_s} values of the 349 annotated segments.}\label{tab:p1scale}
+\begin{tabular}{lrrr}
+\toprule
+Archive & Records & Segments & Median segment (s) \\
+\midrule
+EgoDemo & 31 & 118 & 3.40 \\
+EgoPro & 14 & 71 & 6.10 \\
+EgoStandard & 24 & 160 & 4.00 \\
+\midrule
+Total & 69 & 349 & 4.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection{Modeling and Solution}
+\textbf{Kinematic summary.} For hand $h$ and time $t$ let $x_{h,k}(t)\in\mathbb{R}^3$ be the $k$-th of the 21 keypoints. We summarise the hand by the centroid of its five fingertip keypoints, $\bar x_h(t)=\frac15\sum_{k\in\mathcal{F}}x_{h,k}(t)$, and by its speed $v_h(t)=\|\bar x_h(t)-\bar x_h(t-\Delta t)\|/\Delta t$ with $\Delta t=1/30$~s.
+
+\textbf{Change-point model.} A recording is a sequence of regimes; within a regime the speed is a noisy constant. We place a Normal--Inverse--Gamma prior~\cite{ref2} on the regime mean and variance and run Bayesian online change-point detection (BOCPD)~\cite{ref1} with a constant hazard $1/\lambda$. The run-length posterior is
+\[
+p(r_t\mid v_{1:t}) \;\propto\; \sum_{r_{t-1}} p(r_t\mid r_{t-1})\,p(v_t\mid r_{t-1},v_{1:t-1}),
+\]
+with the predictive $p(v_t\mid\cdot)$ a Student-$t$ density under the conjugate prior. Thresholding $P(r_t=0)$ does not work on this corpus: under a weak prior that probability is diluted by the many short-run hypotheses and peaks at only 0.119 across all 69 recordings, so no threshold on it finds the boundaries. We therefore read the mode of the run-length posterior instead and declare a change point when the MAP run length falls below 30\% of its own running peak, then merge candidates closer than 3.0~s. The model has four settings: the smoothing scale $\sigma=0.40$~s, the hazard $\lambda=4.0$~s (the median annotated segment length of the training environments), the merge threshold $3.0$~s (the 25\% quantile of the same distribution) and the drop fraction $0.30$. The first three were read off training data and the fourth was set once; none of them was tuned on the test environments, and Section~\ref{sec:sens} reports what moving the hazard and the smoothing scale does (the merge threshold and the drop fraction were fixed once and were not re-run).
+
+\textbf{Reliability model.} For segment $i$ let $y_i$ be its bad-frame count and $n_i$ its frame count. We model
+\[
+y_i \sim \mathrm{Binomial}(n_i,\theta_i),\qquad
+\theta_i \sim \mathrm{Beta}(\mu\kappa,(1-\mu)\kappa),\qquad
+\mu \sim \mathrm{Beta}(a_0,b_0),
+\]
+with $\kappa$ a fixed over-dispersion parameter. The posterior of $\mu$ is obtained by grid integration, and each $\theta_i$ is summarised by its posterior mean and its 2.5\% quantile. Because $\theta_i$ is a \emph{bad-frame} rate, the quantity a user cares about is its complement: the usable probability $\rho_i=1-\theta_i$. A segment is retained when the posterior lower bound $q_{0.025}(\rho_i)\ge0.90$, i.e. when we are 97.5\% confident that fewer than one frame in ten is bad; a record is retained for fitting when it has at least three retained segments. Writing the rule on $\rho$ rather than on $\theta$ matters: stated on $\theta$ the same inequality would demand a bad-frame rate above 0.90, which is the opposite of the intent.
+
+\textbf{Baseline.} A fixed speed threshold (median plus two median absolute deviations of $v$) segments the same trajectories without any probabilistic model. It is deliberately simple and is reported alongside, as the statement requires.
+
+\textbf{Solution.} The full computation is in \texttt{code/alt\_p1\_bocpd.py}; the JSON of record is \texttt{data/alt\_p1.json}. Because a record with $k$ segments carries $k-1$ interior boundaries, the 349 annotated segments correspond to 280 annotated boundaries and the 468 detected segments to 399 detected change points; all boundary statistics below are counted on that interior set. Under greedy one-to-one matching the boundary $F_1$ is 0.100 at $\pm0.2$~s, 0.183 at $\pm0.5$~s, 0.580 at $\pm2$~s and 0.654 at $\pm5$~s; the segment-count MAE is 2.94 with a positive bias of 1.72, i.e. the detector over-segments (Table~\ref{tab:p1f1}). The fixed-threshold baseline is \emph{better} at strict tolerance (0.219 at $\pm0.5$~s, MAE 2.35) and slightly worse at loose tolerance (0.550 and 0.640). We report that instead of hiding it, because it is the honest reading of a semantic-versus-kinematic comparison.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Boundary agreement against the 280 annotated boundaries, greedy one-to-one matching. Lower rows are the fixed-threshold baseline.}\label{tab:p1f1}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Predicted & $F_1$@0.2s & $F_1$@0.5s & $F_1$@2s & $F_1$@5s \\
+\midrule
+BOCPD & 399 & 0.100 & 0.183 & 0.580 & 0.654 \\
+Threshold & 276 & 0.112 & 0.219 & 0.550 & 0.640 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The fair question for a downstream user is not whether a boundary lands in the right frame but whether every annotated segment contains at least one usable kinematic cut. With a tolerance of half the segment length, BOCPD covers 85.1\% of segments (297/349) against 76.2\% for the baseline, at the price of 1.14 detections per segment versus 0.79. Coverage is bought with over-segmentation, and the two numbers are only meaningful together.
+
+\paragraph{Reliability: what it buys, and what it does not.} The two-level Beta--Binomial posterior retains 333 of 349 segments (95.4\% unweighted, 95.70\% duration-weighted) under the rule $q_{0.025}(\rho_i)\ge0.90$. The retention is not vacuous: of the 298 segments that contain no bad frame it keeps all 298, and of the 51 that do it keeps 35, so the rule removes a third of the contaminated segments while touching none of the clean ones. That is a \emph{summary} of quality, and it is what we use it for downstream.
+
+It is not a detector, and we say so explicitly. Asked to rank segments by whether they contain a bad frame, the record-level posterior bound reaches AUC 0.914 and the raw record bad-frame rate 0.915, the segment-level leave-one-out variant 0.675, and the released \texttt{eligible} flag only 0.490 --- indistinguishable from chance. The record-level figures flatter the method, because two of the record-level scores are constant inside a record: on the 21 records that contain both a clean and a contaminated segment, and therefore the only ones where the comparison is defined, those two scores have a within-record AUC of exactly 0.500 by construction, the resampled record posterior bound reaches only 0.565, while the segment-level leave-one-out score falls to \textbf{0.076} --- worse than chance, and pointing the wrong way. The mechanism is not noise: a contaminated segment sits in a record whose remaining segments are cleaner, so removing the segment's own frames from the record total lowers its prior rate and \emph{raises} its usable-probability bound, which is precisely the wrong direction. No choice of $\kappa$ repairs this, because it is a property of any leave-one-out estimator built on the record rate; breaking it needs a source of evidence that is independent of the bad-frame labels, which this release does not provide. Question~1 therefore delivers a calibrated reliability summary and a reproducible retention rule, not a way to pick out the segment that will fail.
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.90\linewidth]{figures/fig1_p1_agreement.pdf}
+\caption{Boundary agreement and coverage. (a) Greedy one-to-one $F_1$ against the
+280 annotated boundaries at four tolerances; the fixed-threshold baseline is better
+at strict tolerance. (b) Share of annotated segments that contain at least one
+detected change point, at three tolerances. Coverage is bought with
+over-segmentation: BOCPD returns 1.14 detections per annotated segment against 0.79
+for the threshold.}
+\label{fig:p1agree}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.90\linewidth]{figures/fig2_p1_reliability.pdf}
+\caption{The reliability layer against an external label. The positive class is a
+segment that contains at least one bad frame (51 of 349, prevalence 14.6\%). The
+record-level posterior bound separates them (AUC 0.914) while the released
+\texttt{eligible} flag is indistinguishable from chance (AUC 0.490). The outer bar
+is AUC; the dark inner bar is the best achievable $F_1$ at the optimal threshold.}
+\label{fig:p1rel}
+\end{figure}
+
+\subsection{Robustness and Conclusion}
+Eight configurations were re-run, varying the smoothing scale and the hazard around their chosen values (Table~\ref{tab:p1sens}); the segment-count MAE stays between 2.88 and 3.13 and the $\pm0.5$~s $F_1$ between 0.136 and 0.183, so the conclusion does not hinge on one parameter. Retention moves by a few points around 95.4\% and never changes sign. Per archive the picture is consistent: EgoDemo, with the shortest segments, is the hardest to segment and the easiest to certify, while EgoPro, with 6.1~s segments, is the reverse. The length distributions are not identical --- the KS statistic is 0.284 on EgoDemo --- and we do not claim they are; the detector produces shorter, more numerous segments than the annotators by construction, which is the same over-segmentation measured above.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Sensitivity of the change-point layer. Each row re-runs the whole detector with one parameter moved.}\label{tab:p1sens}
+\begin{tabular}{lrrrr}
+\toprule
+Parameter & Value & Count MAE & $F_1$@0.5s & $F_1$@2s \\
+\midrule
+hazard\_lambda\_s & 2 & 3.07 & 0.147 & 0.578 \\
+hazard\_lambda\_s & 3 & 3.04 & 0.178 & 0.571 \\
+hazard\_lambda\_s & 4 & 2.94 & 0.183 & 0.580 \\
+hazard\_lambda\_s & 6 & 3.07 & 0.159 & 0.532 \\
+hazard\_lambda\_s & 8 & 2.97 & 0.143 & 0.529 \\
+sigma\_s & 0.25 & 3.13 & 0.136 & 0.546 \\
+sigma\_s & 0.4 & 2.94 & 0.183 & 0.580 \\
+sigma\_s & 0.6 & 2.88 & 0.152 & 0.563 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Conclusion to Question~1.} A kinematic change-point model recovers \emph{where motion changes}, which is not where annotators put subtask boundaries; on this corpus it loses to a trivial threshold at strict tolerance and wins at loose tolerance while over-segmenting. The reliability layer, by contrast, is both internally consistent and externally predictive (AUC 0.914 for bad-frame segments against 0.490 for the released flag), so the segment-level quality model is the part of this question worth carrying forward.
+% === Q1 END ===
+
+% === Q2 BEGIN ===
+

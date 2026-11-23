@@ -1,0 +1,152 @@
+===== page 1 =====
+2023_“ShuWei Cup”
+Problem B：The catalytic reaction of cotton stalk pyrolysis
+With the increasing global demand for renewable energy, biomass
+energy has gained widespread attention as a mature renewable energy
+source. Cotton stalks, as a kind of agricultural waste, are regarded as an
+important biomass resource because of their rich biomass components,
+such as cellulose and lignin. Although the pyrolysis of cotton stalk can
+generate various forms of renewable energy, the quality and yield of its
+pyrolysis products are influenced by various factors, such as pyrolysis
+temperature and catalysts. Therefore, studying the mechanism and
+properties of cotton stalk pyrolysis products (Noun definitions can be
+found in the appendix), as well as investigating the mechanism and
+effects of catalysts during the pyrolysis process, is of great significance
+for the efficient utilization and sustainable development of cotton stalk.
+A certain chemical engineering laboratory employed the model
+compound method to establish pyrolysis combinations: desulfurization
+ash with cotton stalk and desulfurization ash with model compounds. The
+pyrolysis combinations were subjected to pyrolysis at different mixing
+ratios
+to
+investigate
+the
+catalytic
+mechanism
+and
+effects
+of
+desulfurization ash on the generation of pyrolysis products from the
+cotton stalk. Simultaneously, in selecting model compounds, it was
+necessary to consider their controllability and stability in reaction
+
+===== page 2 =====
+performance during the experiment, as well as their contribution to cotton
+stalk
+pyrolysis.
+CE
+(Cellooligosaccharide)
+and
+LG
+(Lignin)
+are
+representative components of cellulose and lignin in the cotton stalk,
+which can represent the biomass characteristics of the cotton stalk itself.
+By
+selecting
+these
+two
+components
+as
+model
+compounds,
+the
+experimental conditions could be more finely controlled to study the
+targeted catalytic effect of desulfurization ash on different biomass
+components. Therefore, the selection of CE and LG as model compounds
+was based on a rational judgment of the biomass composition and
+chemical
+structure
+characteristics
+of
+the
+cotton
+stalk
+itself.
+The
+experimental results are shown in Appendix 1 and Appendix 2.
+The
+desulfurization
+ash/biomass
+pyrolysis
+experiment
+was
+conducted with fixed-bed pyrolysis at mixing ratios of 10/100, 20/100,
+30/100, 40/100, 50/100, 60/100, 80/100, and 100/100. This choice of
+mixing ratios was based on the fact that under these experimental
+conditions, the relative error of parallel experiments is approximately 5%.
+If the mixing ratios were chosen to be too small, such as 5/100 or 7/100,
+the relative error would have a significant impact on the experimental
+results and seriously affect the exploration and optimization process of
+the experiment. If it is possible to use a mathematical model and AI
+learning to predict the pyrolysis product yield or production under
+conditions with limited data, it would not only greatly reduce the time
+
+===== page 3 =====
+required for experimental optimization but also provide accurate guidance
+on the trend of changes in the distribution of pyrolysis products.
+Please complete the following questions through mathematical
+modeling:
+(1) For each pyrolysis combination in Annex I, analyze the yield of
+pyrolysis products (tar, water, coke residue, syngas) in relation to the
+mixing ratios of the corresponding pyrolysis combinations, and explain
+whether desulfurization ash, as far as it is used as a catalyst, plays a
+significant role in facilitating the pyrolysis of cotton stalks, cellulose, and
+lignin?
+(2) According to Annex II, for each of the three pyrolysis
+combinations, the effect of the mixing ratio of the pyrolysis combinations
+on the yield of each group of pyrolysis gas is discussed and explained by
+making corresponding images.
+(3) Under the catalytic action of the same proportion of desulfurized
+ash, is there a significant difference in the yields of the products
+generated from the pyrolysis of CE and LG, as well as the yields of the
+components of the pyrolysis gas? Please provide reasons.
+(4) How do we establish a catalytic reaction mechanism model of
+desulfurized ash for model compounds such as CE and LG and model the
+reaction kinetics for analysis?
+(5) Please use mathematical models or AI learning methods to make
+
+===== page 4 =====
+predictions on the yields or quantities of the pyrolysis products under
+limited data conditions.
+Annexes
+Annex
+I:
+Pyrolysis
+Product
+Yields
+of
+Three
+Pyrolysis
+Combinations.xlsx
+Annex
+II:
+Pyrolysis
+Gas
+Yields
+of
+Three
+Pyrolysis
+Combinations.xlsx
+Appendix
+Pyrolysis
+Combinations:
+Desulfurized
+Ash-Cotton
+Stalk;
+Desulfurized Ash-CE; Desulfurized Ash-LG.
+Pyrolysis Products: Tar, Water, Char, Syngas.
+Pyrolysis Gas Components for Desulfurized Ash and Cotton Stalk:
+H2, CO, CO2, CH4, C2H6, C3H8, C3H6, C2H4, C4H10.
+Pyrolysis Gas Components for Desulfurized Ash and CE: H2, CO,
+CO2, CH4, C2H6.
+Pyrolysis Gas Components for Desulfurized Ash and LG: H2, CO,
+CO2, CH4, C2H6.
+All experiments in this study were conducted at the same
+temperature.
+
+===== page 5 =====
+Title Statement: The questions are only used by the contestants of the 9th “ShuWei Cup”
+International Competition in 2023, and any form of tampering, editing and other purposes is
+strictly prohibited without the authorization of the Organizing Committee of the“ShuWei
+Cup”.Once found, it shall bear the relevant responsibility.

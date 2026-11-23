@@ -1,0 +1,1806 @@
+{
+ "meta": {
+  "question": "参数 ±10% 后结论是否翻转",
+  "n_attempted": 42,
+  "n_sources": 21,
+  "delta": 0.1,
+  "signs": [
+   1,
+   -1
+  ],
+  "denominator_rule": "三类分开记：never-read 参数从未被 solve.py 读取 → 分母剔除；query 类只移动查询点、模型不变 → 不参与「结论翻转」分母；model 类才是真扰动。不可行的单次单列，不进任何分母。",
+  "counts": {
+   "attempted": 42,
+   "never_read": 12,
+   "query_move": 14,
+   "model_perturb": 16,
+   "model_infeasible": 1,
+   "model_feasible": 15,
+   "flip_denominator": 15,
+   "model_runs_with_flip": 1
+  },
+  "headline_keys": 55
+ },
+ "runs": [
+  {
+   "source": "eps_rel",
+   "key": "eps_rel",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q2.CS.C3H8.span_over_thr",
+     "base": 4.669811320754716,
+     "new": 4.245283018867923,
+     "rel": 0.09090909090909112
+    },
+    {
+     "key": "Q1.CS.Char.span_over_thr",
+     "base": 0.2586891569910372,
+     "new": 0.23517196090094283,
+     "rel": 0.0909090909090911
+    },
+    {
+     "key": "Q1.LG.Water.span_over_thr",
+     "base": 4.105701003180817,
+     "new": 3.732455457437106,
+     "rel": 0.09090909090909109
+    },
+    {
+     "key": "Q2.CS.C3H6.span_over_thr",
+     "base": 1.5859030837004404,
+     "new": 1.4417300760913092,
+     "rel": 0.09090909090909108
+    }
+   ],
+   "max_rel_change": 0.09090909090909112
+  },
+  {
+   "source": "eps_rel",
+   "key": "eps_rel",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q1.CS.Water.span_over_thr",
+     "base": 1.4456997924832833,
+     "new": 1.6063331027592038,
+     "rel": 0.11111111111111123
+    },
+    {
+     "key": "Q2.CS.C4H10.span_over_thr",
+     "base": 8.230088495575222,
+     "new": 9.144542772861358,
+     "rel": 0.11111111111111119
+    },
+    {
+     "key": "Q2.LG.CH4.span_over_thr",
+     "base": 1.9979342844232126,
+     "new": 2.2199269826924586,
+     "rel": 0.11111111111111116
+    },
+    {
+     "key": "Q1.CE.Char.span_over_thr",
+     "base": 1.446083523789735,
+     "new": 1.6067594708774833,
+     "rel": 0.11111111111111113
+    }
+   ],
+   "max_rel_change": 0.11111111111111123
+  },
+  {
+   "source": "V_m",
+   "key": "V_m_ASSUMED",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q2.LG.beta_bridge[4]",
+     "base": 1.246098251602237,
+     "new": 1.1328165923656695,
+     "rel": 0.09090909090909133
+    },
+    {
+     "key": "Q2.LG.beta_bridge[3]",
+     "base": 1.136592808194545,
+     "new": 1.0332661892677677,
+     "rel": 0.09090909090909124
+    },
+    {
+     "key": "Q2.CS.beta_bridge[0]",
+     "base": 0.71293218637086,
+     "new": 0.6481201694280543,
+     "rel": 0.09090909090909124
+    },
+    {
+     "key": "Q2.CE.beta_bridge[2]",
+     "base": 0.22848081276566876,
+     "new": 0.20770982978697156,
+     "rel": 0.09090909090909109
+    }
+   ],
+   "max_rel_change": 0.09090909090909133
+  },
+  {
+   "source": "V_m",
+   "key": "V_m_ASSUMED",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q2.CS.beta_bridge[5]",
+     "base": 0.602685909004108,
+     "new": 0.6696510100045647,
+     "rel": 0.11111111111111156
+    },
+    {
+     "key": "Q2.CS.beta_bridge[1]",
+     "base": 0.6261802417960688,
+     "new": 0.6957558242178543,
+     "rel": 0.11111111111111127
+    },
+    {
+     "key": "Q2.CE.beta_bridge[4]",
+     "base": 0.14711491865288456,
+     "new": 0.16346102072542731,
+     "rel": 0.11111111111111126
+    },
+    {
+     "key": "Q2.CE.beta_bridge[2]",
+     "base": 0.22848081276566876,
+     "new": 0.253867569739632,
+     "rel": 0.11111111111111124
+    }
+   ],
+   "max_rel_change": 0.11111111111111156
+  },
+  {
+   "source": "T_py",
+   "key": "T_py_ASSUMED",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 3.157199421484597,
+     "rel": 0.1582588984035428
+    },
+    {
+     "key": "Q4.log10A_hi",
+     "base": 13.545145046207011,
+     "new": 12.061152814103806,
+     "rel": 0.10955897681721473
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.1582588984035428
+  },
+  {
+   "source": "T_py",
+   "key": "T_py_ASSUMED",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 4.476303627798555,
+     "rel": 0.19342754249321847
+    },
+    {
+     "key": "Q4.log10A_hi",
+     "base": 13.545145046207011,
+     "new": 15.358913329888699,
+     "rel": 0.13390541610992857
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.19342754249321847
+  },
+  {
+   "source": "t_hold",
+   "key": "t_hold_ASSUMED",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.k_required.n=2",
+     "base": 0.010555555555555545,
+     "new": 0.009595959595959587,
+     "rel": 0.09090909090909093
+    },
+    {
+     "key": "Q4.k_required.n=1",
+     "base": 0.0016642957075299943,
+     "new": 0.0015129960977545403,
+     "rel": 0.0909090909090909
+    },
+    {
+     "key": "Q4.k_required.n=0",
+     "base": 0.0005277777777777777,
+     "new": 0.0004797979797979798,
+     "rel": 0.09090909090909083
+    },
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 3.7094036291676535,
+     "rel": 0.011035705937997532
+    }
+   ],
+   "max_rel_change": 0.09090909090909093
+  },
+  {
+   "source": "t_hold",
+   "key": "t_hold_ASSUMED",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.k_required.n=1",
+     "base": 0.0016642957075299943,
+     "new": 0.001849217452811105,
+     "rel": 0.11111111111111124
+    },
+    {
+     "key": "Q4.k_required.n=0",
+     "base": 0.0005277777777777777,
+     "new": 0.0005864197530864197,
+     "rel": 0.1111111111111112
+    },
+    {
+     "key": "Q4.k_required.n=2",
+     "base": 0.010555555555555545,
+     "new": 0.011728395061728384,
+     "rel": 0.11111111111111109
+    },
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 3.7965538048865537,
+     "rel": 0.012199406932844518
+    }
+   ],
+   "max_rel_change": 0.11111111111111124
+  },
+  {
+   "source": "alpha",
+   "key": "alpha_target",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "recompute(q4 里 alpha 是字面量)",
+   "feasible": false,
+   "infeasible_reason": "alpha>=1：n=1 需 ln(1-α)、n=2 需 1/(1-α)-1，均无定义",
+   "n_flips": null,
+   "flips": [],
+   "top_rel_changes": [],
+   "max_rel_change": null
+  },
+  {
+   "source": "alpha",
+   "key": "alpha_target",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "recompute(q4 里 alpha 是字面量)",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.k_required.n=2",
+     "base": 0.010555555555555545,
+     "new": 0.003275862068965517,
+     "rel": 0.6896551724137929
+    },
+    {
+     "key": "Q4.k_required.n=1",
+     "base": 0.0016642957075299943,
+     "new": 0.0010727897425342014,
+     "rel": 0.35540917537644534
+    },
+    {
+     "key": "Q4.k_required.n=0",
+     "base": 0.0005277777777777777,
+     "new": 0.000475,
+     "rel": 0.09999999999999992
+    },
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 3.560080433616187,
+     "rel": 0.050846770852703234
+    }
+   ],
+   "max_rel_change": 0.6896551724137929
+  },
+  {
+   "source": "Ea_lo",
+   "key": "Ea_ASSUMED_RANGE",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run",
+   "Ea_range_after": [
+    110.00000000000001,
+    250.0
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 4.403752896451289,
+     "rel": 0.17408478824389706
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.17408478824389706
+  },
+  {
+   "source": "Ea_lo",
+   "key": "Ea_ASSUMED_RANGE",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run",
+   "Ea_range_after": [
+    90.0,
+    250.0
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.log10A_lo",
+     "base": 3.750796314325879,
+     "new": 3.09783973220047,
+     "rel": 0.1740847882438967
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.1740847882438967
+  },
+  {
+   "source": "Ea_hi",
+   "key": "Ea_ASSUMED_RANGE",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run",
+   "Ea_range_after": [
+    100.0,
+    275.0
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.log10A_hi",
+     "base": 13.545145046207011,
+     "new": 15.17753650152053,
+     "rel": 0.1205148744989357
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.1205148744989357
+  },
+  {
+   "source": "Ea_hi",
+   "key": "Ea_ASSUMED_RANGE",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run",
+   "Ea_range_after": [
+    100.0,
+    225.0
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q4.log10A_hi",
+     "base": 13.545145046207011,
+     "new": 11.912753590893487,
+     "rel": 0.1205148744989361
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.1205148744989361
+  },
+  {
+   "source": "tier_thr",
+   "key": "tier_thr",
+   "class": "model",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(分栏由 span 重判)",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 1,
+   "flips": [
+    {
+     "key": "Q2.CS.CO.tier",
+     "base": "major",
+     "new": "minor"
+    }
+   ],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "tier_thr",
+   "key": "tier_thr",
+   "class": "model",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(分栏由 span 重判)",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "grid_r0",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.165,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[0]",
+     "base": 14.665965383783838,
+     "new": 14.404174087805902,
+     "rel": 0.017850260049529283
+    },
+    {
+     "key": "Q5.LG.Water[0]",
+     "base": 17.500543562817114,
+     "new": 17.683418505147923,
+     "rel": 0.010449672130147882
+    },
+    {
+     "key": "Q5.CS.Tar[0]",
+     "base": 16.407571152400827,
+     "new": 16.239432120911207,
+     "rel": 0.010247649083942385
+    },
+    {
+     "key": "Q5.CE.Water[0]",
+     "base": 22.30446105748124,
+     "new": 22.087143976991893,
+     "rel": 0.009743211455739557
+    }
+   ],
+   "max_rel_change": 0.017850260049529283
+  },
+  {
+   "source": "grid_r0",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.135,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[0]",
+     "base": 14.665965383783838,
+     "new": 14.938534114076171,
+     "rel": 0.018585120253571053
+    },
+    {
+     "key": "Q5.LG.Water[0]",
+     "base": 17.500543562817114,
+     "new": 17.313536890552577,
+     "rel": 0.010685763650328275
+    },
+    {
+     "key": "Q5.CS.Tar[0]",
+     "base": 16.407571152400827,
+     "new": 16.581587505756996,
+     "rel": 0.010605856999785513
+    },
+    {
+     "key": "Q5.CE.Water[0]",
+     "base": 22.30446105748124,
+     "new": 22.528690364819344,
+     "rel": 0.010053114789917463
+    }
+   ],
+   "max_rel_change": 0.018585120253571053
+  },
+  {
+   "source": "grid_r1",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.275,
+    0.35,
+    0.45,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[1]",
+     "base": 13.098595542551694,
+     "new": 12.764396756283164,
+     "rel": 0.025514093108903332
+    },
+    {
+     "key": "Q5.CS.Tar[1]",
+     "base": 15.385018028723746,
+     "new": 15.16168375033774,
+     "rel": 0.014516348175155947
+    },
+    {
+     "key": "Q5.LG.Water[1]",
+     "base": 18.647447447666195,
+     "new": 18.909481902522124,
+     "rel": 0.014052028063965586
+    },
+    {
+     "key": "Q5.CE.Water[1]",
+     "base": 20.972813822720955,
+     "new": 20.678792175268864,
+     "rel": 0.014019179778993782
+    }
+   ],
+   "max_rel_change": 0.025514093108903332
+  },
+  {
+   "source": "grid_r1",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.225,
+    0.35,
+    0.45,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[1]",
+     "base": 13.098595542551694,
+     "new": 13.453869362293721,
+     "rel": 0.02712304678680214
+    },
+    {
+     "key": "Q5.CS.Tar[1]",
+     "base": 15.385018028723746,
+     "new": 15.620282718817865,
+     "rel": 0.01529180464103985
+    },
+    {
+     "key": "Q5.CE.Water[1]",
+     "base": 20.972813822720955,
+     "new": 21.281312810468133,
+     "rel": 0.01470947057246869
+    },
+    {
+     "key": "Q5.LG.Water[1]",
+     "base": 18.647447447666195,
+     "new": 18.376030109634566,
+     "rel": 0.014555200586748291
+    }
+   ],
+   "max_rel_change": 0.02712304678680214
+  },
+  {
+   "source": "grid_r2",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.385,
+    0.45,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[2]",
+     "base": 11.872179720380394,
+     "new": 11.504887812479677,
+     "rel": 0.030937192373377383
+    },
+    {
+     "key": "Q5.CS.Tar[2]",
+     "base": 14.555099730971166,
+     "new": 14.300679510829045,
+     "rel": 0.01747979916625039
+    },
+    {
+     "key": "Q5.CE.Water[2]",
+     "base": 19.874513001224244,
+     "new": 19.534706426824012,
+     "rel": 0.017097605077382273
+    },
+    {
+     "key": "Q5.LG.Water[2]",
+     "base": 19.643676984318592,
+     "new": 19.96187021760584,
+     "rel": 0.016198252167415387
+    }
+   ],
+   "max_rel_change": 0.030937192373377383
+  },
+  {
+   "source": "grid_r2",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.315,
+    0.45,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[2]",
+     "base": 11.872179720380394,
+     "new": 12.26936449756986,
+     "rel": 0.033455084621709194
+    },
+    {
+     "key": "Q5.CS.Tar[2]",
+     "base": 14.555099730971166,
+     "new": 14.827061304566952,
+     "rel": 0.018684968060857045
+    },
+    {
+     "key": "Q5.CE.Water[2]",
+     "base": 19.874513001224244,
+     "new": 20.236139367591925,
+     "rel": 0.018195483146953323
+    },
+    {
+     "key": "Q5.LG.Water[2]",
+     "base": 19.643676984318592,
+     "new": 19.310338334163482,
+     "rel": 0.01696925939177332
+    }
+   ],
+   "max_rel_change": 0.033455084621709194
+  },
+  {
+   "source": "grid_r3",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.49500000000000005,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[3]",
+     "base": 10.891970251269724,
+     "new": 10.513352512884797,
+     "rel": 0.034761179993196334
+    },
+    {
+     "key": "Q5.CS.Tar[3]",
+     "base": 13.869416927749468,
+     "new": 13.59853103678105,
+     "rel": 0.019531166477982042
+    },
+    {
+     "key": "Q5.CE.Water[3]",
+     "base": 18.95540853210223,
+     "new": 18.589434647165014,
+     "rel": 0.019307095614289428
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.87366812058385,
+     "rel": 0.01744025816520548
+    }
+   ],
+   "max_rel_change": 0.034761179993196334
+  },
+  {
+   "source": "grid_r3",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.405,
+    0.55,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[3]",
+     "base": 10.891970251269724,
+     "new": 11.307239347849148,
+     "rel": 0.038126168819733436
+    },
+    {
+     "key": "Q5.CS.Tar[3]",
+     "base": 13.869416927749468,
+     "new": 14.162550574954135,
+     "rel": 0.02113525382730226
+    },
+    {
+     "key": "Q5.CE.Water[3]",
+     "base": 18.95540853210223,
+     "new": 19.34961350591446,
+     "rel": 0.020796437763112165
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.137270784800137,
+     "rel": 0.0184537826475405
+    }
+   ],
+   "max_rel_change": 0.038126168819733436
+  },
+  {
+   "source": "grid_r4",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.6050000000000001,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[4]",
+     "base": 10.094023480701665,
+     "new": 9.716199069686446,
+     "rel": 0.03743050645142298
+    },
+    {
+     "key": "Q5.CS.Tar[4]",
+     "base": 13.294221013175664,
+     "new": 13.015912165468485,
+     "rel": 0.02093457355879305
+    },
+    {
+     "key": "Q5.CE.Water[4]",
+     "base": 18.17638812221201,
+     "new": 17.796876977238227,
+     "rel": 0.02087934865948482
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.670486558685166,
+     "rel": 0.018106523443681837
+    }
+   ],
+   "max_rel_change": 0.03743050645142298
+  },
+  {
+   "source": "grid_r4",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.49500000000000005,
+    0.7,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[4]",
+     "base": 10.094023480701665,
+     "new": 10.513352512884797,
+     "rel": 0.04154230797905606
+    },
+    {
+     "key": "Q5.CS.Tar[4]",
+     "base": 13.294221013175664,
+     "new": 13.59853103678105,
+     "rel": 0.022890399016519347
+    },
+    {
+     "key": "Q5.CE.Water[4]",
+     "base": 18.17638812221201,
+     "new": 18.589434647165014,
+     "rel": 0.02272434557271859
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 20.87366812058385,
+     "rel": 0.019329001948618175
+    }
+   ],
+   "max_rel_change": 0.04154230797905606
+  },
+  {
+   "source": "grid_r5",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.77,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[5]",
+     "base": 9.145515423850279,
+     "new": 8.780373089214349,
+     "rel": 0.0399258344350596
+    },
+    {
+     "key": "Q5.CE.Water[5]",
+     "base": 17.209519855599158,
+     "new": 16.82417171641098,
+     "rel": 0.022391568296009374
+    },
+    {
+     "key": "Q5.CS.Tar[5]",
+     "base": 12.587553961043522,
+     "new": 12.308037993292391,
+     "rel": 0.02220574137089606
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.692628223754962,
+     "rel": 0.01844794407656735
+    }
+   ],
+   "max_rel_change": 0.0399258344350596
+  },
+  {
+   "source": "grid_r5",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.63,
+    0.9
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[5]",
+     "base": 9.145515423850279,
+     "new": 9.556635486315095,
+     "rel": 0.04495318671626422
+    },
+    {
+     "key": "Q5.CE.Water[5]",
+     "base": 17.209519855599158,
+     "new": 17.634409758327504,
+     "rel": 0.02468923632347051
+    },
+    {
+     "key": "Q5.CS.Tar[5]",
+     "base": 12.587553961043522,
+     "new": 12.89714041912437,
+     "rel": 0.024594647938667693
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 21.83770761751716,
+     "rel": 0.019920997818850848
+    }
+   ],
+   "max_rel_change": 0.04495318671626422
+  },
+  {
+   "source": "grid_r6",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "+",
+   "factor": 1.1,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.7,
+    0.9900000000000001
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[6]",
+     "base": 8.201330610029881,
+     "new": 7.861459278612987,
+     "rel": 0.04144099873272346
+    },
+    {
+     "key": "Q5.CE.Water[6]",
+     "base": 16.19653518745915,
+     "new": 15.8179780726261,
+     "rel": 0.02337272203292987
+    },
+    {
+     "key": "Q5.CS.Tar[6]",
+     "base": 11.855251531196899,
+     "new": 11.583585114686509,
+     "rel": 0.022915280691894614
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.806670181096763,
+     "rel": 0.018233962991416146
+    }
+   ],
+   "max_rel_change": 0.04144099873272346
+  },
+  {
+   "source": "grid_r6",
+   "key": "grid_pred_ASSUMED",
+   "class": "query",
+   "sign": "-",
+   "factor": 0.9,
+   "mode": "run(只移动查询点)",
+   "grid_after": [
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.7,
+    0.81
+   ],
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Tar[6]",
+     "base": 8.201330610029881,
+     "new": 8.589613260580114,
+     "rel": 0.047343860284742
+    },
+    {
+     "key": "Q5.CE.Water[6]",
+     "base": 16.19653518745915,
+     "new": 16.61971453732444,
+     "rel": 0.026127770227854303
+    },
+    {
+     "key": "Q5.CS.Tar[6]",
+     "base": 11.855251531196899,
+     "new": 12.160207607166104,
+     "rel": 0.025723290236965284
+    },
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 22.914123883987628,
+     "rel": 0.01994109241723065
+    }
+   ],
+   "max_rel_change": 0.047343860284742
+  },
+  {
+   "source": "beta_heat",
+   "key": "beta_heat_ASSUMED",
+   "class": "never-read",
+   "sign": "+",
+   "factor": 1.1,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "beta_heat",
+   "key": "beta_heat_ASSUMED",
+   "class": "never-read",
+   "sign": "-",
+   "factor": 0.9,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "Q_carrier",
+   "key": "Q_carrier_ASSUMED",
+   "class": "never-read",
+   "sign": "+",
+   "factor": 1.1,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "Q_carrier",
+   "key": "Q_carrier_ASSUMED",
+   "class": "never-read",
+   "sign": "-",
+   "factor": 0.9,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "d_p",
+   "key": "d_p_ASSUMED",
+   "class": "never-read",
+   "sign": "+",
+   "factor": 1.1,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "d_p",
+   "key": "d_p_ASSUMED",
+   "class": "never-read",
+   "sign": "-",
+   "factor": 0.9,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "m_sample",
+   "key": "m_sample_ASSUMED",
+   "class": "never-read",
+   "sign": "+",
+   "factor": 1.1,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "m_sample",
+   "key": "m_sample_ASSUMED",
+   "class": "never-read",
+   "sign": "-",
+   "factor": 0.9,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "dfa_CaO",
+   "key": "dfa_comp_ASSUMED",
+   "class": "never-read",
+   "sign": "+",
+   "factor": 1.1,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "dfa_CaO",
+   "key": "dfa_comp_ASSUMED",
+   "class": "never-read",
+   "sign": "-",
+   "factor": 0.9,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "dfa_SiO2",
+   "key": "dfa_comp_ASSUMED",
+   "class": "never-read",
+   "sign": "+",
+   "factor": 1.1,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  },
+  {
+   "source": "dfa_SiO2",
+   "key": "dfa_comp_ASSUMED",
+   "class": "never-read",
+   "sign": "-",
+   "factor": 0.9,
+   "referenced_in_solve_py": false,
+   "mode": "run",
+   "feasible": true,
+   "infeasible_reason": null,
+   "n_flips": 0,
+   "flips": [],
+   "top_rel_changes": [
+    {
+     "key": "Q5.LG.Water[6]",
+     "base": 23.38035367741653,
+     "new": 23.38035367741653,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[5]",
+     "base": 22.28157890222902,
+     "new": 22.28157890222902,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[4]",
+     "base": 21.285087620680493,
+     "new": 21.285087620680493,
+     "rel": 0.0
+    },
+    {
+     "key": "Q5.LG.Water[3]",
+     "base": 20.515866118985944,
+     "new": 20.515866118985944,
+     "rel": 0.0
+    }
+   ],
+   "max_rel_change": 0.0
+  }
+ ],
+ "infeasible": [
+  {
+   "source": "alpha",
+   "sign": "+",
+   "reason": "alpha>=1：n=1 需 ln(1-α)、n=2 需 1/(1-α)-1，均无定义"
+  }
+ ]
+}
