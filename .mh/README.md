@@ -25,3 +25,5 @@ full = C.corpus_root() / rec["file"]     # 拿到真实路径
 ## 重建代价
 
 `corpus_index.py --build` 要读 124 篇 PDF 的首页 + 720 份真题，约 2–4 分钟。索引不进 `.gitignore`（351 KB，比重建便宜）。
+
+<!-- path-note -->
