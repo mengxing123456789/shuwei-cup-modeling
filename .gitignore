@@ -170,7 +170,7 @@ _pkgfinal*/
 *.rej
 *.prev
 *.rerun*
-*~ 
+*~
 .DS_Store
 Thumbs.db
 desktop.ini
