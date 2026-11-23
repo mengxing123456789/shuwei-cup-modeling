@@ -31,7 +31,16 @@ import re
 import sys
 from pathlib import Path
 
-import pymupdf
+try:
+    import pymupdf
+except ModuleNotFoundError:
+    try:
+        import fitz as pymupdf  # 旧版 PyMuPDF 的模块名
+    except ModuleNotFoundError:
+        sys.exit(
+            "需要 PyMuPDF 才能写 PDF 书签：pip install pymupdf\n"
+            "没有它前 5 步（编译与数值校验）已经全部完成，书签可以后补。"
+        )
 
 ROOT = Path(__file__).resolve().parent.parent
 PDF = ROOT / "main.pdf"
