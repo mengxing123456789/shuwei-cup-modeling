@@ -1,0 +1,35 @@
+\section{Data and preprocessing}\label{sec:data}
+
+\subsection{Sources}
+
+Two independent archives are used.
+
+\textbf{(i) The official attachment.} Three GSOD-format workbooks cover the Zhengzhou area and the Shanxi border region. GSOD stores daily summaries in imperial units with sentinel values for missing data; we decode temperature from Fahrenheit to Celsius, precipitation from inches to millimetres (1\,in $=25.4$\,mm), and map 999.9, 9999.9 and 99.99 to missing. Table~\ref{tab:attach} summarises the three records after decoding.
+
+\begin{table}[H]
+\centering
+\caption{Official attachment stations after decoding (precipitation).}
+\label{tab:attach}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Station & Period & Valid years & Missing PRCP & Max daily\\
+\midrule
+57083099999 (Zhengzhou) & 1957-12-03--2021-11-05 & 52 & 18.13\% & 199.9\,mm\\
+57071099999 & 1983-07-01--2021-11-06 & 38 & 0.72\% & 138.7\,mm\\
+53975099999 (Shanxi) & 1961-10-22--2021-11-06 & 50 & 15.76\% & 301.0\,mm\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{(ii) GHCN-Daily.} We retrieved 35 Chinese station files from the NOAA National Centers for Environmental Information \cite{menne2012}, using the documented access pattern \url{https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/} followed by the station identifier and the suffix \texttt{.csv}. GHCN-Daily reports precipitation in tenths of a millimetre, so the conversion is exact. Several identifiers in the Shanxi core rain belt returned no record (Changzhi, Linfen, Jincheng and five neighbouring identifiers), which is why the Shanxi comparison in Section~\ref{sec:q4} relies on Taiyuan and Yuncheng plus provincial aggregates.
+
+\textbf{Quality control.} A year enters the analysis only if it has at least 300 valid precipitation days. This removes the partial years at both ends of each record and the years in which a station reported only part of the season. For GHCN this rule also removes 2013--2019 for many Chinese stations, where precipitation is reported sparsely (Beijing has 132 valid days in 2013 and 78 in 2018). The consequence is stated wherever it matters: in Section~\ref{sec:q3} the held-out window therefore contains 5, 6 or 7 valid years per city rather than the full 14 calendar years, and the forecast target is defined accordingly.
+
+\subsection{Cross-source validation}
+
+Because the attachment and GHCN describe the same city, their overlap is a free validation experiment. On 17\,085 common days in Zhengzhou the daily correlation is 0.6776 and the annual-total correlation is 0.9217; the mean daily intensity is 2.256\,mm in GSOD versus 2.038\,mm in GHCN (ratio 1.107), and 74.28\% of days agree to the 0.1\,mm reporting precision. The disagreement is dominated by days present in one archive and missing in the other, not by conflicting measurements: GSOD alone contains 22 May 1994 (199.9\,mm), a day GHCN does not report at all. Crucially, every day of the July 2021 event agrees exactly between the two sources (40.9, 73.9, 188.7 and 50.8\,mm on 18--21 July). We therefore use GHCN as the primary series for trend work, because it is homogeneous over the full 1951--2024 span, and the attachment for event description and cross-checking.
+
+\subsection{Analysis sample}
+
+Thirty-five GHCN files were downloaded: five are empty placeholders for stations the archive does not hold, thirty carry data, twenty-six clear 45 valid years in 1961--2020, and twenty-five of those form the national panel used in Sections~\ref{sec:q2}--\ref{sec:q3}; Yan'an (53845) is excluded because it belongs to neither comparison. They span the humid south (Guangzhou, Haikou, Fuzhou, Nanchang, Hangzhou, Nanning), the Yangtze basin (Wuhan, Nanjing, Hefei), the north China plain (Beijing, Jinan, Taiyuan, Yuncheng, Zhengzhou), the northwest (Urumqi, Lanzhou, Xining, Yinchuan, Hohhot), the northeast (Harbin, Shenyang, Dalian) and the southwest (Kunming, Guiyang). The four stations with data but fewer than 45 valid years (Qingdao 11, Shanghai 23, Changsha 27, Chengdu 43) serve as context only. The panel is fixed by an explicit station list in the code, not by the contents of the data folder.

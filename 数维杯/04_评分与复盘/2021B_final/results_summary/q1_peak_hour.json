@@ -1,0 +1,11 @@
+{
+  "peak_hour_mm": 201.9,
+  "cn": 85.0,
+  "runoff_mm": 156.562,
+  "capacity_mm_per_h": 36.0,
+  "excess_depth_mm": 120.562,
+  "excess_volume_m3": 142263312.8,
+  "excess_volume_Mm3": 142.263,
+  "area_km2": 1180.0,
+  "note": "SCS-CN runoff of the peak hour minus the one-year drainage depth"
+}

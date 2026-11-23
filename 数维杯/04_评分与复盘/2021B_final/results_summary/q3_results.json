@@ -1,0 +1,378 @@
+{
+ "train": "1961-2010",
+ "test": "2011-2024",
+ "n_cities": 23,
+ "n_record_breakers": 5,
+ "record_breakers": [
+  {
+   "city": "Harbin",
+   "max_rx1day_train": 123.7,
+   "obs_max_rx1day": 146.6,
+   "obs_max_year": 2012,
+   "n_test": 7
+  },
+  {
+   "city": "Urumqi",
+   "max_rx1day_train": 57.7,
+   "obs_max_rx1day": 89.9,
+   "obs_max_year": 2020,
+   "n_test": 6
+  },
+  {
+   "city": "Yinchuan",
+   "max_rx1day_train": 87.1,
+   "obs_max_rx1day": 113.3,
+   "obs_max_year": 2012,
+   "n_test": 7
+  },
+  {
+   "city": "Fuzhou",
+   "max_rx1day_train": 195.6,
+   "obs_max_rx1day": 357.6,
+   "obs_max_year": 2023,
+   "n_test": 7
+  },
+  {
+   "city": "Haikou",
+   "max_rx1day_train": 327.9,
+   "obs_max_rx1day": 331.2,
+   "obs_max_year": 2011,
+   "n_test": 5
+  }
+ ],
+ "mle_unstable_cities": [
+  "Guangzhou"
+ ],
+ "n_test_years": {
+  "7": 18,
+  "5": 3,
+  "6": 2
+ },
+ "data_gap_note": "PRCP for these stations is sparse in 2013-2019; the held-out window keeps only years with >=300 valid days, so each city's T differs.",
+ "comparison": [
+  {
+   "method": "GEV_T14",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 64.78858185351575,
+   "mae_mm": 45.451358112177765,
+   "r2": 0.24165217668468386,
+   "spearman": 0.7467259926505397,
+   "bias_mm": -41.451089063981605,
+   "overlap_top5": 4.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "GEV_LM_T14",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 66.01598955410702,
+   "mae_mm": 46.49099895613336,
+   "r2": 0.2126464825745611,
+   "spearman": 0.7482085723844585,
+   "bias_mm": -42.19801977685033,
+   "overlap_top5": 4.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "GEV_Emax",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 55.65079308884527,
+   "mae_mm": 39.56267926784137,
+   "r2": 0.44048180661112135,
+   "spearman": 0.7457376061612603,
+   "bias_mm": -20.52204083248094,
+   "overlap_top5": 4.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "GEV_Emax_trend",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 53.93117674097331,
+   "mae_mm": 38.45066681704073,
+   "r2": 0.47452593071411,
+   "spearman": 0.6879169965384191,
+   "bias_mm": -17.423138522271103,
+   "overlap_top5": 3.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "GPD_POT_T14",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 70.63545205529434,
+   "mae_mm": 49.34156750300855,
+   "r2": 0.0986012433448269,
+   "spearman": 0.7348653547791876,
+   "bias_mm": -45.83351009931994,
+   "overlap_top5": 3.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "Gumbel_T14",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 65.59428950655318,
+   "mae_mm": 45.839664276479745,
+   "r2": 0.22267334270557826,
+   "spearman": 0.738818900736305,
+   "bias_mm": -39.81533246651602,
+   "overlap_top5": 4.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "Gumbel_trend_T14",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 62.86426979935465,
+   "mae_mm": 44.66638984586588,
+   "r2": 0.286031177321719,
+   "spearman": 0.7432666399380619,
+   "bias_mm": -36.716430271191456,
+   "overlap_top5": 4.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "pred_RF",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 63.763839421938705,
+   "mae_mm": 48.88941297040316,
+   "r2": 0.2654516023821982,
+   "spearman": 0.613293816597829,
+   "bias_mm": 6.413869354116047,
+   "overlap_top5": 1.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "pred_GBR",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 66.26078208130322,
+   "mae_mm": 51.36726507367805,
+   "r2": 0.20679651795214293,
+   "spearman": 0.5979738260139993,
+   "bias_mm": 5.813749797886878,
+   "overlap_top5": 2.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "pred_Ridge",
+   "task": "regression: held-out max Rx1day",
+   "n": 23,
+   "rmse_mm": 61.78916358825419,
+   "mae_mm": 43.6071103968493,
+   "r2": 0.3102429792677758,
+   "spearman": 0.6434396045208488,
+   "bias_mm": -1.2319251924458237,
+   "overlap_top5": 3.0,
+   "auc": NaN,
+   "brier": NaN,
+   "accuracy": NaN
+  },
+  {
+   "method": "p_exceed_record_lmom",
+   "task": "classification: exceeds 1961-2010 record",
+   "n": 23,
+   "rmse_mm": NaN,
+   "mae_mm": NaN,
+   "r2": NaN,
+   "spearman": NaN,
+   "bias_mm": NaN,
+   "overlap_top5": NaN,
+   "auc": 0.7555555555555555,
+   "brier": 0.1741205722484318,
+   "accuracy": 0.782608695652174
+  },
+  {
+   "method": "p_exceed_record_mle",
+   "task": "classification: exceeds 1961-2010 record",
+   "n": 23,
+   "rmse_mm": NaN,
+   "mae_mm": NaN,
+   "r2": NaN,
+   "spearman": NaN,
+   "bias_mm": NaN,
+   "overlap_top5": NaN,
+   "auc": 0.8333333333333335,
+   "brier": 0.14303789520083038,
+   "accuracy": 0.8260869565217391
+  },
+  {
+   "method": "prob_RF",
+   "task": "classification: exceeds 1961-2010 record",
+   "n": 23,
+   "rmse_mm": NaN,
+   "mae_mm": NaN,
+   "r2": NaN,
+   "spearman": NaN,
+   "bias_mm": NaN,
+   "overlap_top5": NaN,
+   "auc": 0.5222222222222223,
+   "brier": 0.182774296520533,
+   "accuracy": 0.7391304347826086
+  },
+  {
+   "method": "prob_GBR",
+   "task": "classification: exceeds 1961-2010 record",
+   "n": 23,
+   "rmse_mm": NaN,
+   "mae_mm": NaN,
+   "r2": NaN,
+   "spearman": NaN,
+   "bias_mm": NaN,
+   "overlap_top5": NaN,
+   "auc": 0.1777777777777778,
+   "brier": 0.26406312228538825,
+   "accuracy": 0.7391304347826086
+  },
+  {
+   "method": "prob_Logit",
+   "task": "classification: exceeds 1961-2010 record",
+   "n": 23,
+   "rmse_mm": NaN,
+   "mae_mm": NaN,
+   "r2": NaN,
+   "spearman": NaN,
+   "bias_mm": NaN,
+   "overlap_top5": NaN,
+   "auc": 0.17777777777777778,
+   "brier": 0.22661982652909018,
+   "accuracy": 0.782608695652174
+  }
+ ],
+ "best_regression": "GEV_Emax_trend",
+ "best_classification": "p_exceed_record_mle",
+ "top10_future_risk": [
+  {
+   "city": "Haikou",
+   "p_exceed_record_10y": 0.2734254149702252,
+   "rl_10yr": 260.8963756958188,
+   "rl_50yr": 358.6803143422407,
+   "pred_next_decade_max_RF": 296.66886965201434
+  },
+  {
+   "city": "Guangzhou",
+   "p_exceed_record_10y": 0.23062665159041618,
+   "rl_10yr": 184.6488927283895,
+   "rl_50yr": 268.29885368300893,
+   "pred_next_decade_max_RF": 205.13412343323304
+  },
+  {
+   "city": "Nanjing",
+   "p_exceed_record_10y": 0.16383492076039208,
+   "rl_10yr": 154.7220475680312,
+   "rl_50yr": 203.65548173916062,
+   "pred_next_decade_max_RF": 219.7892071201024
+  },
+  {
+   "city": "Wuhan",
+   "p_exceed_record_10y": 0.1599364241365817,
+   "rl_10yr": 182.23436672412225,
+   "rl_50yr": 286.948561790946,
+   "pred_next_decade_max_RF": 199.35807416194902
+  },
+  {
+   "city": "Nanning",
+   "p_exceed_record_10y": 0.11152286686155544,
+   "rl_10yr": 150.00419906582067,
+   "rl_50yr": 208.33104770113974,
+   "pred_next_decade_max_RF": 174.14157175657664
+  },
+  {
+   "city": "Zhengzhou",
+   "p_exceed_record_10y": 0.11639940815151006,
+   "rl_10yr": 129.03996794402337,
+   "rl_50yr": 175.24045328637897,
+   "pred_next_decade_max_RF": 170.054980967366
+  },
+  {
+   "city": "Dalian",
+   "p_exceed_record_10y": 0.14386510143038822,
+   "rl_10yr": 149.64853403196662,
+   "rl_50yr": 219.913087764816,
+   "pred_next_decade_max_RF": 161.69545748973243
+  },
+  {
+   "city": "Nanchang",
+   "p_exceed_record_10y": 0.08314336933079702,
+   "rl_10yr": 170.34523995715108,
+   "rl_50yr": 244.00747925110653,
+   "pred_next_decade_max_RF": 183.57455991674962
+  },
+  {
+   "city": "Fuzhou",
+   "p_exceed_record_10y": 0.025913423810238867,
+   "rl_10yr": 172.19125805025425,
+   "rl_50yr": 247.75154782759392,
+   "pred_next_decade_max_RF": 288.70540143523306
+  },
+  {
+   "city": "Hohhot",
+   "p_exceed_record_10y": 0.17922927715279602,
+   "rl_10yr": 86.48354370290552,
+   "rl_50yr": 129.94319206879575,
+   "pred_next_decade_max_RF": 82.84318855477865
+  }
+ ],
+ "zhengzhou": [
+  {
+   "id": "CHM00057083",
+   "city": "Zhengzhou",
+   "lat": 34.717,
+   "lon": 113.65,
+   "gev_xi_lmom": 0.03015358021400013,
+   "gev_xi_mle": -0.007064573988952407,
+   "rl_10yr": 129.03996794402337,
+   "rl_50yr": 175.24045328637897,
+   "rl_10yr_mle": 129.2639710493527,
+   "rl_50yr_mle": 172.04456241079725,
+   "mle_unstable": false,
+   "record_mm": 189.4,
+   "p_exceed_record_10y": 0.11639940815151006,
+   "mean_rx1day_all": 85.17719298245615,
+   "pred_next_decade_max_RF": 170.054980967366,
+   "pred_next_decade_max_GBR": 188.2243894015844,
+   "ratio_to_record_RF": 0.8978615679375184,
+   "rank_prob": 9.0,
+   "rank_rf": 10.0,
+   "risk_rank": 6
+  }
+ ],
+ "features": [
+  "lat",
+  "lon",
+  "elev",
+  "mean_total",
+  "cv_total",
+  "mean_rx1day",
+  "sd_rx1day",
+  "mean_wet_days",
+  "mean_sdii",
+  "mean_r95p",
+  "rx1day_sen",
+  "total_sen",
+  "sdii_sen"
+ ],
+ "note": "GPD_POT_T14 undefined for stations with <10 declustered peaks; those are dropped from its metrics."
+}

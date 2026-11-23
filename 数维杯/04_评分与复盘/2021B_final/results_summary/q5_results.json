@@ -1,0 +1,350 @@
+{
+ "parameters": {
+  "damage_per_m3": 116.93050891808706,
+  "pipe_cost_per_mm_km2": 847457.6271186441,
+  "storage_cost_per_m3": 800.0,
+  "green_cost_per_km2": 150000000.0,
+  "green_cn_drop": 40.0,
+  "vsl_cny": 5000000.0,
+  "discount": 0.04,
+  "horizon": 30,
+  "om_share": 0.02,
+  "deaths_elasticity": 1.5,
+  "damage_exponent": 1.5,
+  "risk_aversion": 0.5
+ },
+ "cities": {
+  "Zhengzhou": {
+   "id": "CHM00057083",
+   "area_km2": 1180.0,
+   "cn": 85.0,
+   "pop": 12600000.0,
+   "deaths_ref": 380.0
+  },
+  "Haikou": {
+   "id": "CHM00059758",
+   "area_km2": 230.0,
+   "cn": 82.0,
+   "pop": 2870000.0,
+   "deaths_ref": 86.55555555555556
+  },
+  "Guangzhou": {
+   "id": "CHM00059287",
+   "area_km2": 1400.0,
+   "cn": 85.0,
+   "pop": 18680000.0,
+   "deaths_ref": 563.3650793650794
+  }
+ },
+ "calibration": {
+  "event_rain_mm": 449.0,
+  "design_depth_mm": 102.93147924234772,
+  "overflow_mm": 296.4240664806609,
+  "overflow_Mm3": 349.7803984471798,
+  "official_loss_cny": 40900000000.0
+ },
+ "baselines": [
+  {
+   "city": "Zhengzhou",
+   "area_km2": 1180.0,
+   "cn": 85.0,
+   "pop": 12600000.0,
+   "rl2": 102.93147924234772,
+   "rl10": 162.24575836267002,
+   "rl50": 207.15559299342334,
+   "rl100": 224.37048321527615,
+   "mean_rx3day": 107.83962264150942,
+   "baseline_ead_cny": 246368025.6549145,
+   "baseline_cvar95_cny": 3618329774.1265006,
+   "baseline_deaths": 2.2889938813904034,
+   "stress2021_overflow_mm": 296.4240664806609,
+   "stress2021_volume_m3": 349780398.4471798,
+   "deaths_ref": 380.0,
+   "deaths_calibrated": true,
+   "green_econ": 0.0,
+   "T_pipe_econ": 2,
+   "storage_mm_econ": 0,
+   "capacity_mm_econ": 102.93147924234772,
+   "ead_cny_econ": 246368025.6549145,
+   "exp_deaths_econ": 2.2889938813904034,
+   "capex_cny_econ": 0.0,
+   "annual_cost_cny_econ": 0.0,
+   "total_econ_cny_econ": 246368025.6549145,
+   "total_social_cny_econ": 2066977882.1251168,
+   "green_soc": 0.0,
+   "T_pipe_soc": 2,
+   "storage_mm_soc": 0,
+   "capacity_mm_soc": 102.93147924234772,
+   "ead_cny_soc": 246368025.6549145,
+   "exp_deaths_soc": 2.2889938813904034,
+   "capex_cny_soc": 0.0,
+   "annual_cost_cny_soc": 0.0,
+   "total_econ_cny_soc": 246368025.6549145,
+   "total_social_cny_soc": 2066977882.1251168,
+   "ead_cut_econ_pct": 0.0,
+   "ead_cut_soc_pct": 0.0,
+   "deaths_cut_soc_pct": 0.0,
+   "bcr_econ": 0.0,
+   "bcr_soc": 0.0
+  },
+  {
+   "city": "Haikou",
+   "area_km2": 230.0,
+   "cn": 82.0,
+   "pop": 2870000.0,
+   "rl2": 201.55207752495267,
+   "rl10": 371.48867321883665,
+   "rl50": 574.645023352279,
+   "rl100": 679.9605287203221,
+   "mean_rx3day": 230.6057692307691,
+   "baseline_ead_cny": 311884699.6759099,
+   "baseline_cvar95_cny": 3310177906.8854966,
+   "baseline_deaths": 7.670028310916857,
+   "stress2021_overflow_mm": 186.8386436779931,
+   "stress2021_volume_m3": 42972888.04593842,
+   "deaths_ref": 86.55555555555556,
+   "deaths_calibrated": true,
+   "green_econ": 0.0,
+   "T_pipe_econ": 2,
+   "storage_mm_econ": 0,
+   "capacity_mm_econ": 201.55207752495267,
+   "ead_cny_econ": 311884699.6759099,
+   "exp_deaths_econ": 7.670028310916857,
+   "capex_cny_econ": 0.0,
+   "annual_cost_cny_econ": 0.0,
+   "total_econ_cny_econ": 311884699.6759099,
+   "total_social_cny_econ": 2005323794.6732423,
+   "green_soc": 0.0,
+   "T_pipe_soc": 2,
+   "storage_mm_soc": 0,
+   "capacity_mm_soc": 201.55207752495267,
+   "ead_cny_soc": 311884699.6759099,
+   "exp_deaths_soc": 7.670028310916857,
+   "capex_cny_soc": 0.0,
+   "annual_cost_cny_soc": 0.0,
+   "total_econ_cny_soc": 311884699.6759099,
+   "total_social_cny_soc": 2005323794.6732423,
+   "ead_cut_econ_pct": 0.0,
+   "ead_cut_soc_pct": 0.0,
+   "deaths_cut_soc_pct": 0.0,
+   "bcr_econ": 0.0,
+   "bcr_soc": 0.0
+  },
+  {
+   "city": "Guangzhou",
+   "area_km2": 1400.0,
+   "cn": 85.0,
+   "pop": 18680000.0,
+   "rl2": 166.4317857547645,
+   "rl10": 259.85054109759335,
+   "rl50": 344.53937461317764,
+   "rl100": 381.14682267090035,
+   "mean_rx3day": 177.4849056603773,
+   "baseline_ead_cny": 1130944035.4154747,
+   "baseline_cvar95_cny": 11028846148.387644,
+   "baseline_deaths": 12.05420817144899,
+   "stress2021_overflow_mm": 232.92375996824413,
+   "stress2021_volume_m3": 326093263.9555418,
+   "deaths_ref": 563.3650793650794,
+   "deaths_calibrated": true,
+   "green_econ": 0.0,
+   "T_pipe_econ": 2,
+   "storage_mm_econ": 0,
+   "capacity_mm_econ": 166.4317857547645,
+   "ead_cny_econ": 1130944035.4154747,
+   "exp_deaths_econ": 12.05420817144899,
+   "capex_cny_econ": 0.0,
+   "annual_cost_cny_econ": 0.0,
+   "total_econ_cny_econ": 1130944035.4154747,
+   "total_social_cny_econ": 6705638150.466541,
+   "green_soc": 0.0,
+   "T_pipe_soc": 2,
+   "storage_mm_soc": 20,
+   "capacity_mm_soc": 186.4317857547645,
+   "ead_cny_soc": 698080871.3788987,
+   "exp_deaths_soc": 7.440520379964163,
+   "capex_cny_soc": 22400000000.0,
+   "annual_cost_cny_soc": 1743394220.5940135,
+   "total_econ_cny_soc": 2441475091.9729123,
+   "total_social_cny_soc": 6487597985.483664,
+   "ead_cut_econ_pct": 0.0,
+   "ead_cut_soc_pct": 38.274499045176455,
+   "deaths_cut_soc_pct": 38.27449904517647,
+   "bcr_econ": 0.0,
+   "bcr_soc": 0.2615195103943008
+  }
+ ],
+ "optimal_economic": [
+  {
+   "city": "Zhengzhou",
+   "green": 0.0,
+   "T_pipe": 2,
+   "storage_mm": 0,
+   "capacity_mm": 102.93147924234772,
+   "ead_cny": 246368025.6549145,
+   "exp_deaths": 2.2889938813904034,
+   "capex_cny": 0.0,
+   "annual_cost_cny": 0.0,
+   "total_econ_cny": 246368025.6549145,
+   "total_social_cny": 2066977882.1251168
+  },
+  {
+   "city": "Haikou",
+   "green": 0.0,
+   "T_pipe": 2,
+   "storage_mm": 0,
+   "capacity_mm": 201.55207752495267,
+   "ead_cny": 311884699.6759099,
+   "exp_deaths": 7.670028310916857,
+   "capex_cny": 0.0,
+   "annual_cost_cny": 0.0,
+   "total_econ_cny": 311884699.6759099,
+   "total_social_cny": 2005323794.6732423
+  },
+  {
+   "city": "Guangzhou",
+   "green": 0.0,
+   "T_pipe": 2,
+   "storage_mm": 0,
+   "capacity_mm": 166.4317857547645,
+   "ead_cny": 1130944035.4154747,
+   "exp_deaths": 12.05420817144899,
+   "capex_cny": 0.0,
+   "annual_cost_cny": 0.0,
+   "total_econ_cny": 1130944035.4154747,
+   "total_social_cny": 6705638150.466541
+  }
+ ],
+ "optimal_social": [
+  {
+   "city": "Haikou",
+   "green": 0.0,
+   "T_pipe": 2,
+   "storage_mm": 0,
+   "capacity_mm": 201.55207752495267,
+   "ead_cny": 311884699.6759099,
+   "exp_deaths": 7.670028310916857,
+   "capex_cny": 0.0,
+   "annual_cost_cny": 0.0,
+   "total_econ_cny": 311884699.6759099,
+   "total_social_cny": 2005323794.6732423
+  },
+  {
+   "city": "Zhengzhou",
+   "green": 0.0,
+   "T_pipe": 2,
+   "storage_mm": 0,
+   "capacity_mm": 102.93147924234772,
+   "ead_cny": 246368025.6549145,
+   "exp_deaths": 2.2889938813904034,
+   "capex_cny": 0.0,
+   "annual_cost_cny": 0.0,
+   "total_econ_cny": 246368025.6549145,
+   "total_social_cny": 2066977882.1251168
+  },
+  {
+   "city": "Guangzhou",
+   "green": 0.0,
+   "T_pipe": 2,
+   "storage_mm": 20,
+   "capacity_mm": 186.4317857547645,
+   "ead_cny": 698080871.3788987,
+   "exp_deaths": 7.440520379964163,
+   "capex_cny": 22400000000.0,
+   "annual_cost_cny": 1743394220.5940135,
+   "total_econ_cny": 2441475091.9729123,
+   "total_social_cny": 6487597985.483664
+  }
+ ],
+ "sensitivity": {
+  "damage_density": [
+   40,
+   80,
+   120,
+   250,
+   500
+  ],
+  "storage_cost": [
+   300,
+   500,
+   800,
+   1500,
+   3000
+  ],
+  "optimal_T_econ": [
+   [
+    2.0,
+    3.0,
+    3.0,
+    10.0,
+    10.0
+   ],
+   [
+    2.0,
+    2.0,
+    3.0,
+    10.0,
+    10.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    10.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ]
+  ],
+  "optimal_T_social": [
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ],
+   [
+    2.0,
+    2.0,
+    10.0,
+    10.0,
+    20.0
+   ]
+  ]
+ },
+ "note": "Hazard, capacity and damage all live on the three-day event scale. Damage density is calibrated so that the modelled 2021 overflow reproduces the official loss of 40.9 bn CNY. EAD and expected deaths are historical-simulation means over the 1961-2020 annual maxima, with no GEV tail extrapolation."
+}

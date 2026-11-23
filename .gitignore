@@ -180,7 +180,7 @@ desktop.ini
 # ---------------------------------------------------------------------------
 _modex_re_work/strings/
 _modex_re_work/strings_*.txt
-_swc2026/modex_re/*.strings.json
+# _swc2026/modex_re/*.strings.json  # kept: first-hand RE evidence (~5 MB)
 _swc2026/_bench_txt/
 
 # ---------------------------------------------------------------------------
