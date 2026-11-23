@@ -66,6 +66,9 @@ def swmcm_donor() -> Path | None:
             return d
     for p in (WS / "数维杯").rglob("swmcmthesis.cls"):
         return p.parent
+    # 仓库自包含候选：corpus/ 里存的官方 LaTeX 模板（克隆即用，不依赖本地“数维杯/”目录）
+    for p in sorted((WS / "corpus").rglob("swmcmthesis.cls")):
+        return p.parent
     return None
 
 NO_PEEK_TEMPLATE = """# 不看优秀论文（练习赛用）
