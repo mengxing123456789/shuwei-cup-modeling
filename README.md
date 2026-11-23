@@ -20,7 +20,7 @@ cd shuwei-cup-modeling\_swc2026\SWC2026_C
 python code\fill_numbers.py       # 1,655 个宏，从 data/*.json 生成 slots.tex
 xelatex main.tex                  # 第一遍
 xelatex main.tex                  # 第二遍
-python code\add_pdf_outline.py    # 58 条书签
+python code\add_pdf_outline.py    # 58 条书签（需 PyMuPDF；缺了会给出安装提示，编译不受影响）
 python code\verify_numbers.py     # 136 条数值不变量 → 期望 0 failed
 python code\page_report.py        # 期望 body 25 / overfull 0 / undefined 0
 ```
