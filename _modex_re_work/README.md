@@ -33,3 +33,5 @@ _modex_re_work/
 ## 注意
 
 `strings/` 与 `zlib*/` 体积较大且已被 `.gitignore` 的 `_modex_re_work/strings/` 规则排除；仓库里只留分析脚本与提取出的文本。
+
+<!-- path-note -->
