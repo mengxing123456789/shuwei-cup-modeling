@@ -40,3 +40,5 @@ PRACTICE_2023B/
 ## 注意
 
 `apmcmthesis.cls` 是历史遗留的模板文件名——APMCM 与数维杯早期共用同一套 cls，**这不代表它是亚太杯题目**。
+
+<!-- path-note -->
