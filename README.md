@@ -4,6 +4,12 @@
 
 目标只有一个：**下一届再打数维杯时，不用从零开始。**
 
+仓库：<https://github.com/mengxing123456789/shuwei-cup-modeling>（private）
+
+```powershell
+git clone https://github.com/mengxing123456789/shuwei-cup-modeling.git 'E:\数学建模'
+```
+
 ---
 
 ## 30 秒上手
