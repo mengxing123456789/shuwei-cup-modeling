@@ -236,3 +236,8 @@ SHUWEI2025_A/logs/_awards/
 
 # the alternate draft ships the same support zip; keep only the submitted copy
 _swc2026/SWC2026_C_ALT_BACKUP/**/*.zip
+
+# ---------------------------------------------------------------------------
+# 17. 放行：官方 LaTeX 模板 zip（213 KB，权威原件，需要能一键取回）
+# ---------------------------------------------------------------------------
+!数维杯/00_官网与规则/*.zip!数维杯/01_往年赛题/**/*.zip
