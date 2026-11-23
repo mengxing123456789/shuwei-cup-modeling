@@ -2,7 +2,7 @@
 
 工作区根：`E:\数学建模`。这份文件解释**每个目录是什么、为什么在仓库里、哪些被 `.gitignore` 排除以及为什么**。
 
-跟踪面：**2,774 文件 / 266.6 MB**（磁盘全量 36,079 文件 / 4,326 MB，其余是被排除的原始数据、虚拟环境、二进制缓存与临时脚手架）。
+跟踪面：**3,262 文件 / 598.9 MB**（2026-11-23 已删 5.6 GB C 题原始视频数据；磁盘剩余约 3.8 GB，其余是被排除的虚拟环境、二进制缓存与临时脚手架）。
 
 ---
 
@@ -126,7 +126,7 @@ cd 'E:\数学建模'
 git check-ignore -v '_swc2026\SWC2026_C\CSWBMCM2634892fj.zip'   # 应输出 !**/ 那条（被放行）
 git check-ignore -v '_swc2026\SWC2026_C\data\panel.npz'         # 应命中 *.npz
 git check-ignore -v '数维杯\.venv'                               # 应命中 .venv/
-git ls-files | Measure-Object -Line          # 跟踪面文件数（2,774）
+git ls-files | Measure-Object -Line          # 跟踪面文件数（3,262）
 ```
 
 ---
@@ -135,7 +135,7 @@ git ls-files | Measure-Object -Line          # 跟踪面文件数（2,774）
 
 | 项 | 磁盘 | 进仓库 | 差额去向 |
 |---|---|---|---|
-| 总计 | 4,326 MB / 36,079 文件 | **266.6 MB / 2,774 文件** | 原始数据、虚拟环境、二进制缓存、脚手架 |
+| 总计 | ~3.8 GB / ~33k 文件 | **598.9 MB / 3,262 文件** | 虚拟环境、二进制缓存、脚手架（原始数据已删） |
 | `_swc2026` | 1,825 MB | 213 MB | `cdata` 440 MB、`SWC2026_C/data` 588 MB（二进制）、`_scratch` 123 MB、B 站视频 141 MB |
 | `数维杯` | 1,040 MB | 38 MB | `.venv` 493 MB、`_downloads` 283 MB、演练结果 |
 | `refs` | 73 MB | 0.2 MB | `contest-code/`（MATLAB/YUV） |

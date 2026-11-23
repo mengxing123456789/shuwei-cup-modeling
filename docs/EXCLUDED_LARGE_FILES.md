@@ -1,18 +1,20 @@
 # 被排除的大文件清单
 
-仓库跟踪面 266.6 MB；被排除的 4,035 MB 全在这里，逐项说明**是什么、多大、怎么重新生成**。
+仓库跟踪面 598.9 MB / 3,262 文件；本机被排除的 3,196.6 MB（原始数据已删，2026-11-23）逐项说明如下，逐项说明**是什么、多大、怎么重新生成**。
 
 原则：**能重跑的就不存，能重下的就不存，重复的只留一份。**
 
 ---
 
-## 一、原始数据（从官方渠道重新下载，不要进仓库）
+## 一、原始数据（已从本机删除，2026-11-23）
 
-| 路径 | 大小 | 内容 | 怎么拿回来 |
+| 路径 | 原大小 | 内容 | 怎么拿回来 |
 |---|---|---|---|
-| `_swc2026/cdata/` | **440.4 MB** / 805 文件 | EgoPro / EgoStandard / EgoDemo 三套原始手部数据：`*_hand_keypoints.csv`、`*_timestamps.csv`、`*_panel_*.csv`、`*_quality_flags.csv` | 官方数据包（题面附件）。C 题原始压缩包在 `数维杯/2026年第十二届…赛题/` 下 |
-| `_swc2026/SWC2026_C/data/raw/` | 与上一项同源 | 工程内的软链接/副本 | 同上 |
-| `SHUWEI2026_C/data/raw/` | **441.0 MB** / 820 文件 | 2026 C 题早期副本的原始数据，与 `cdata/` 逐字节相同 | 同上（**这一份完全可以删掉**） |
+| `C:\Users\29900\Downloads\AsterLink\C_Problem_Data\` | **5,567.8 MB** | 三个官方原始数据包 `EgoDemo.zip` / `EgoPro.zip` / `EgoStandard.zip` + `Restocking_Tasks_and_Constraints` | 从数维杯官网 C 题附件重新下载（`Restocking_Tasks_and_Constraints` 的 7 个小文件**仍保留在仓库里**：`_swc2026/SWC2026_C/problem/Restocking_Problem_and_Data_EN/`） |
+| `_swc2026/cdata/` | **440.4 MB** / 805 文件 | 官方包解压后的关键点 CSV：`*_hand_keypoints.csv`、`*_timestamps.csv`、`*_panel_*.csv`、`*_quality_flags.csv` | 重新下载官方包并解压 |
+| `SHUWEI2026_C/data/raw/` | **441.0 MB** / 820 文件 | 早期副本的原始数据，与 `cdata/` 逐字节相同 | 不必恢复（重复） |
+
+**删除不影响论文复现**：`code/fill_numbers.py` 只读 `data/*.json`，xelatex 只读 tex，`verify_numbers.py` 只读 JSON 与 PDF。原始 CSV 只有在**重建特征缓存**（`pre_cache.npz` 等）时才需要；仓库里已带一份 102.4 MB 的 `pre_cache.npz`（同样被 gitignore，见下节），常规复现链碰不到它。
 | `数维杯/_downloads/` | **283.4 MB** / 233 文件 | 6 个 GitHub 仓库快照（`971851309__shuwei-cup-modeling`、`eric-gitta-moore__2022nmmcm-international`、`Hello-Mr-Crab__ShuWeiCup-D`、`Primer-1-wy__2022-ShuWeiCup-C`、`shyz2006__2026-ShuWei-Spring-B`、`WANG123-A11Y__shuwei-modeling`）+ `noaa` | `git clone` 对应仓库即可 |
 | `refs/contest-code/` | **73.2 MB** / 6,585 文件 | 往年竞赛代码：`.mat` 21 MB / 74、`.yuv` 14.6 MB / 6、`.bmp` 11.9 MB / 5,373、`.m` 4.3 MB / 840 | 原竞赛数据集（部分已不可考） |
 | `_swc2026/bili-C/`、`_swc2026/bili-BV1Zzsv6fELo/` | 74.2 + 66.8 MB | B 站上 C 题讲解视频与抽帧图 | 按 BV 号重新下载；**结论已写进 `C题各家思路评估.md` 与 `48-官网通知逐条核对与AIGC风险.md`** |
@@ -81,7 +83,7 @@
 | `pre_cache.npz` | 2 | 102.4 MB | 只留 `_swc2026/SWC2026_C/data/` |
 | `panel.npz` | 3 | 29.8 MB | 同上 |
 | `v3_video_features.csv` | 5 | 8.24 MB | 同上 |
-| `SHUWEI2026_C/data/raw/EgoStandard/*` vs `_swc2026/cdata/EgoStandard/*` | 2 | 441 MB | 删 `SHUWEI2026_C/data/raw/` |
+| `SHUWEI2026_C/data/raw/EgoStandard/*` vs `_swc2026/cdata/EgoStandard/*` | 2 | 441 MB | **已删**（2026-11-23，两份一并删掉） |
 | `SHUWEI2025_A/logs/_awards/` vs `_swc2026/award_corpus_2025/` | 2 | ~90 MB | 已 gitignore |
 
 ---
@@ -90,9 +92,10 @@
 
 ```powershell
 cd 'E:\数学建模\_swc2026\SWC2026_C'
-$PY = 'E:\Mini\envs\mathmodel\python.exe'
+$PY = "python"   # 或设 MM_PY 指向你的解释器
 
-# 0. 原始数据放回 cdata/（从官方数据包解压）
+# 0. 原始数据放回 cdata/（从官方数据包解压；已删，见第一节）
+#    注意：如果 data/*.json 与 *.npz 都在（仓库外的本地副本），可跳过 1–3，直接从第 4 步复现论文
 # 1. 状态层（生成 panel.npz / state.npz / state_layer.npz）
 & $PY code\p1_state.py
 & $PY code\state_layer.py

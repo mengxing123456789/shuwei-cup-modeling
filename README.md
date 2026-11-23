@@ -94,7 +94,7 @@ python .agents\skills\mathmodeling\scripts\corpus_index.py --year 2023 --problem
 - [`docs/PLAYBOOK.md`](docs/PLAYBOOK.md) — 主手册 25.6 KB：八步二十门表 + 20 道门判据 + C 题全链数字 + Modex 逆向要点 + 23 条踩坑 + 15 分钟开赛检查表
 - [`docs/DIRECTORY_GUIDE.md`](docs/DIRECTORY_GUIDE.md) — 每个目录里到底是什么、为什么在仓库里
 - [`docs/REPO_LAYOUT.md`](docs/REPO_LAYOUT.md) — 每条 `.gitignore` 规则为什么存在
-- [`docs/EXCLUDED_LARGE_FILES.md`](docs/EXCLUDED_LARGE_FILES.md) — 被排除的 4 GB 是什么、怎么重生成
+- [`docs/EXCLUDED_LARGE_FILES.md`](docs/EXCLUDED_LARGE_FILES.md) — 被排除的 3.2 GB 是什么、怎么重生成
 
 ---
 
