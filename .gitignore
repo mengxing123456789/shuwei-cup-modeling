@@ -251,3 +251,6 @@ _swc2026/SWC2026_C/logs/*.png
 _swc2026/SWC2026_C/logs/**/*.png
 **/logs/*.png
 *.err
+
+# Office 打开文件时产生的锁文件（~$ 开头），永远不该进仓库
+~$*
