@@ -33,3 +33,5 @@ SHUWEI2025_A/
 ## 注意 `apmcmthesis.cls`
 
 这是历史遗留的模板文件名——APMCM 与数维杯早期共用同一套 cls，**不代表这是亚太杯题目**。`new_paper.py` 的 `apmcm_donor()` 就是靠「同时含 `apmcmthesis.cls` 与 `refs/official_standard.json`」来识别可用骨架的。
+
+<!-- path-note -->
