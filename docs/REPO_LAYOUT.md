@@ -2,7 +2,7 @@
 
 工作区根：`E:\数学建模`。这份文件解释**每个目录是什么、为什么在仓库里、哪些被 `.gitignore` 排除以及为什么**。
 
-跟踪面：**2,943 文件 / 291.1 MB**（磁盘全量 36,079 文件 / 4,326 MB，其余是被排除的原始数据、虚拟环境、二进制缓存与临时脚手架）。
+跟踪面：**2,774 文件 / 266.6 MB**（磁盘全量 36,079 文件 / 4,326 MB，其余是被排除的原始数据、虚拟环境、二进制缓存与临时脚手架）。
 
 ---
 
@@ -113,6 +113,8 @@ _swc2026/
 | 重复语料 | `SHUWEI2025_A/logs/_awards/` | 与 `award_corpus_2025/` 逐字节重复（约 90 MB） |
 | 压缩包 | `*.zip`，但 `!**/CSWBMCM2634892fj.zip` 放行 | 支撑材料 zip 是交付件，必须进仓库。**否定规则必须写 `!**/xxx`，写 `!*/xxx` 不生效**（`git check-ignore -v` 验证过） |
 | 备用稿 zip | `_swc2026/SWC2026_C_ALT_BACKUP/**/*.zip` | 备用稿目录里也有一份同名 zip，是重复的，只保留提交版 |
+| 临时预览图 | `/_swc2026/_*.png`、`**/logs/*.png` | 根目录 61 张 `_diff*/_preview*` 截图与 `SWC2026_C/logs` 92 张逐页核对图，合计 24.3 MB，全是渲染核对产物，随时可重出 |
+| 空错误文件 | `*.err` | 12 个 0 字节 stderr 占位，无信息量 |
 | CSV 放行 | `!*.csv` | 上面的原始数据规则会连带排除小体积统计 CSV（如 `data/v2_video_features.csv` 8.2 MB 的体积统计、`record_split.csv`），这些是论文引用的，要留 |
 
 ---
@@ -124,7 +126,7 @@ cd 'E:\数学建模'
 git check-ignore -v '_swc2026\SWC2026_C\CSWBMCM2634892fj.zip'   # 应输出 !**/ 那条（被放行）
 git check-ignore -v '_swc2026\SWC2026_C\data\panel.npz'         # 应命中 *.npz
 git check-ignore -v '数维杯\.venv'                               # 应命中 .venv/
-git ls-files | Measure-Object -Line          # 跟踪面文件数（2,943）
+git ls-files | Measure-Object -Line          # 跟踪面文件数（2,774）
 ```
 
 ---
@@ -133,8 +135,8 @@ git ls-files | Measure-Object -Line          # 跟踪面文件数（2,943）
 
 | 项 | 磁盘 | 进仓库 | 差额去向 |
 |---|---|---|---|
-| 总计 | 4,326 MB / 36,079 文件 | **291.1 MB / 2,943 文件** | 原始数据、虚拟环境、二进制缓存、脚手架 |
-| `_swc2026` | 1,825 MB | 66 MB | `cdata` 440 MB、`SWC2026_C/data` 588 MB（二进制）、`_scratch` 123 MB、B 站视频 141 MB |
-| `数维杯` | 1,040 MB | ~26 MB | `.venv` 493 MB、`_downloads` 283 MB、演练结果 |
-| `refs` | 73 MB | <1 MB | `contest-code/`（MATLAB/YUV） |
+| 总计 | 4,326 MB / 36,079 文件 | **266.6 MB / 2,774 文件** | 原始数据、虚拟环境、二进制缓存、脚手架 |
+| `_swc2026` | 1,825 MB | 213 MB | `cdata` 440 MB、`SWC2026_C/data` 588 MB（二进制）、`_scratch` 123 MB、B 站视频 141 MB |
+| `数维杯` | 1,040 MB | 38 MB | `.venv` 493 MB、`_downloads` 283 MB、演练结果 |
+| `refs` | 73 MB | 0.2 MB | `contest-code/`（MATLAB/YUV） |
 | `SHUWEI2026_C` | 443 MB | 2.3 MB | `data/raw/` 441 MB（与 `cdata` 重复） |
