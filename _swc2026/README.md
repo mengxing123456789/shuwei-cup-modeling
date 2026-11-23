@@ -56,3 +56,5 @@ _swc2026/
 ## 下一步
 
 看 `SWC2026_C/README.md`（成品工程逐文件说明），或 `../docs/PLAYBOOK.md`（方法论）。
+
+<!-- path-note -->
