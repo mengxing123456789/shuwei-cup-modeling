@@ -26,3 +26,5 @@
 ## `_src/` 子目录
 
 `shuwei/_src/{2023shuwei,2025autumn,Shuwei2025B}/` 是三个第三方 GitHub 仓库的克隆（含各自的 `.git`），已在 `.gitignore` 里排除，**不进仓库**。它们是抓取时参考过的开源实现。
+
+<!-- path-note -->
