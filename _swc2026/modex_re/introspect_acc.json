@@ -1,0 +1,81 @@
+[
+ {
+  "module": "backend.services.workflow_acceptance",
+  "ok": true,
+  "file": "C:\\modex-mh-agent\\resources\\app\\backend\\services\\workflow_acceptance.cp311-win_amd64.pyd",
+  "doc": "Small, deterministic delivery checks, without length/formula-count quotas.\n\nThese checks establish usable core output, not mathematical correctness or a\nsubmission quality score. Step-specific data/figure/compile checks still apply.\n",
+  "attrs": [
+   {
+    "name": "CORE_FAILURE",
+    "type": "str",
+    "value": "'[CORE_ARTIFACT] '"
+   },
+   {
+    "name": "GENERAL_PDF_SKILLS",
+    "type": "frozenset"
+   },
+   {
+    "name": "Path",
+    "type": "type",
+    "doc": null,
+    "sig": "(*args, **kwargs)",
+    "defaults": "None",
+    "module_of": "pathlib"
+   },
+   {
+    "name": "REPORT_SKILLS",
+    "type": "frozenset"
+   },
+   {
+    "name": "STATS_MODE_MARKER",
+    "type": "str",
+    "value": "'MH_STATS_MODE=1'"
+   },
+   {
+    "name": "STATS_NOT_APPLICABLE",
+    "type": "str",
+    "value": "'不适用（统计建模）'"
+   },
+   {
+    "name": "_PLACEHOLDER",
+    "type": "Pattern"
+   },
+   {
+    "name": "core_file_problem",
+    "type": "cython_function_or_method",
+    "doc": "Return a proven core defect (or unavailable check), never a size hint.",
+    "sig": "(workspace: 'Path', skill: 'str', path: 'Path') -> 'str'",
+    "defaults": "None",
+    "module_of": "workflow_acceptance"
+   },
+   {
+    "name": "has_report_content",
+    "type": "cython_function_or_method",
+    "doc": "Accept concise prose, tables and useful lists, but not headings/TODOs.\n\nFull-line matching is intentional: a real report can discuss TODO entries\nor quote the word 'placeholder' without becoming an empty-shell report.",
+    "sig": "(text: 'str') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_acceptance"
+   },
+   {
+    "name": "is_stats_workspace",
+    "type": "cython_function_or_method",
+    "doc": "是不是统计建模工作区。\n\n以后台写的 ``MH_STATS_MODE=1`` 标记为准；老项目的工作区说明还没重新生成时，\n用“有 TOPIC_PLAN.md、没有 PROBLEM_ANALYSIS.md”兜底（数模第一步必产\nPROBLEM_ANALYSIS.md，统计建模第一步只产 TOPIC_PLAN.md）。兜底比统计检查脚本\n（只看有没有 TOPIC_PLAN.md）更严：后台只在这里判为统计时才调用该脚本，\n数模工作区即使有 TOPIC_PLAN.md 也不会被当成统计建模。",
+    "sig": "(workspace: 'Path') -> 'bool'",
+    "defaults": "None",
+    "module_of": "workflow_acceptance"
+   },
+   {
+    "name": "re",
+    "type": "module"
+   },
+   {
+    "name": "unfinished_sections",
+    "type": "cython_function_or_method",
+    "doc": "Only empty/explicitly unfinished active chapters warrant continuation.\n\nShort valid chapters and unused drafts are not incomplete work. Before\nmain.tex exists, the current plan can still identify missing draft files.\nMissing inputs in an assembled paper remain the compiler's responsibility.",
+    "sig": "(workspace: 'Path') -> 'list[str]'",
+    "defaults": "None",
+    "module_of": "workflow_acceptance"
+   }
+  ]
+ }
+]

@@ -1,0 +1,13 @@
+MODULE backend.services.artifact_display
+DOC: Evidence-backed display aliases. Never modifies/deletes workspace files.
+CONSTANTS:
+_CACHE_LIMIT [int] = 256
+_HASH_MAX [int] = 33554432
+_MIRROR_PREFIXES [tuple] = ('paper/figures/', 'figures/', 'results/', 'output/')
+_SCAN_BUDGET [int] = 134217728
+_TEMPLATE_HASH_BUDGET [int] = 67108864
+_TEMPLATE_STORE [str] = 'user_template/'
+CALLABLES:
+OrderedDict(?) :: Dictionary that remembers insertion order
+Path(*args, **kwargs) :: 
+defaultdict(?) :: defaultdict(default_factory=None, /, [...]) --> dict with default factory |  | The default factory is called without arguments to produce | a new value when a key is not present, in __getitem__ only. | A defaultdict compares equal to a dict with the same items. | All remaining arguments are treated the same as if they were | passed to the dict constructor, including keyword arguments.

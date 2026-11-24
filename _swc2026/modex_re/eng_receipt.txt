@@ -1,0 +1,12 @@
+[0] .rdata@0x4CE448 len=20
+_main_output_receipt
+---
+[1] .rdata@0x4CE460 len=36
+workflow_engine._main_output_receipt
+---
+[2] .rdata@0x4CE4C8 len=27
+_usable_main_output_receipt
+---
+[3] .rdata@0x4CE4E8 len=43
+workflow_engine._usable_main_output_receipt
+---

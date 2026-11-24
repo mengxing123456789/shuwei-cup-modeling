@@ -1,0 +1,199 @@
+[
+ {
+  "name": "run_workflow",
+  "sig": "(workflow_id: str, *, _only_native_skill: str | None = None)",
+  "doc": "逐步执行子步骤。支持从暂停处恢复（跳过已完成步骤）。"
+ },
+ {
+  "name": "run_single_step",
+  "sig": "(workflow_id: str, skill_name: str)",
+  "doc": "单独执行工作流中的单个步骤。"
+ },
+ {
+  "name": "_process_retry_policy",
+  "sig": "(result: 'Optional[dict]', *, allow_unfinished_turn: 'bool' = True) -> 'tuple[str, int]'",
+  "doc": "Classify a failed runner result and return ``(kind, retry_budget)``.\n\nThe budget is the number of *additional* model processes allowed.  It does\nnot weaken any output gate: after the budget is exhausted the step fails\nvisibly instead of repeatedly submitting an identical request."
+ },
+ {
+  "name": "_retry_backoff_seconds",
+  "sig": "(kind: 'str', attempt: 'int') -> 'int'",
+  "doc": "第 attempt 次（从 0 起）重试前的等待秒数；没登记的类别不等。"
+ },
+ {
+  "name": "_fresh_retry_handoff",
+  "sig": "(error_hint: 'str') -> 'str'",
+  "doc": ""
+ },
+ {
+  "name": "_primary_output_health",
+  "sig": "(workspace: 'Path', skill_name: 'str', primary: 'Optional[str]') -> 'tuple[bool, str]'",
+  "doc": "Same artifact/type checks on first execution, retry and checkpoint edits."
+ },
+ {
+  "name": "_primary_output_size",
+  "sig": "(workspace: 'Path', skill_name: 'str', primary_path: 'Path') -> 'int'",
+  "doc": "Return meaningful source size for a possibly split LaTeX manuscript.\n\n``paper/main.tex`` is often only an assembly file whose real content lives\nunder ``paper/sections``.  Measuring the root alone falsely classified a\ncomplete split manuscript as an empty shell and launched paid retries."
+ },
+ {
+  "name": "_main_output_receipt",
+  "sig": "(skill_name: 'str', primary: 'str | None', created: 'list', modified: 'list', started: 'float') -> 'str'",
+  "doc": "started = 那次主调用开始的时间：沿用回执完成时，步骤卡按它取那次执行的看图/预处理记录。"
+ },
+ {
+  "name": "_usable_main_output_receipt",
+  "sig": "(raw, workspace: 'Path', skill_name: 'str', primary: 'str | None', upstream_completed: 'list') -> 'dict | None'",
+  "doc": "回执有效 = 同一技能、同一主产物、之后没有上游步骤重新完成过、主产物现在仍然健康。"
+ },
+ {
+  "name": "_check_step_companions",
+  "sig": "(workspace: 'Path', skill_name: 'str') -> 'tuple'",
+  "doc": "检查二级文件是否齐全. 返回 (ok: bool, missing: List[str]).\n\n每个文件要求:\n    - 文件存在\n    - 文件大小 > 50 字节 (防空文件占位)"
+ },
+ {
+  "name": "_check_figures_step_health",
+  "sig": "(workspace: 'Path', skill_name: 'str', files_created: 'Optional[List[str]]', files_modified: 'Optional[List[str]]', params: 'Dict[str, Any]') -> 'Tuple[bool, str]'",
+  "doc": "对图表步骤做严格健康检查(动态版, 基于本步骤的文件增量)。\n\nReturns: (ok, reason)\n    ok=True: 步骤产出健康(有真实新增图 / 用户禁用 / 无图论文场景 / rerun-skip 合法跳过)\n    ok=False: 步骤摸鱼了, 应触发 AUTO-RECOVER\n\n判定规则:\n    - paper-figure / nature-figure / experiment-bridge: 必须有「数据类」新增图\n      (排除 drawio/tikz 前缀, 因为那些是 paper-figure-drawio 的产出)\n      ⛔ 例外: figures/ 已有该步骤应有的「数据类」图 + 本步骤未新增任何文件\n              → 视为 rerun 时 SKILL 的「恢复检查」让 Claude 合法跳过, 放行\n    - paper-figure-drawio: 必须有「架构图类」新增图(drawio 前缀或 tikz_)\n      ⛔ 例外同上: figures/ 已有架构图 + 本步骤无新增 → 合法跳过\n    - 用户开关 skip_figures/skip_drawio: 直接放行(理论上前置已跳过, 防御性)\n    - PAPER_PLAN.md 声明无图表: 放行(纯文字论文场景)"
+ },
+ {
+  "name": "_check_figures_step_health_static",
+  "sig": "(workspace: 'Path', skill_name: 'str', params: 'Dict[str, Any]') -> 'Tuple[bool, str]'",
+  "doc": "图表步骤健康检查(静态版, 不依赖 files_created)。\n\n用于崩溃恢复 / waiting_checkpoint 等无法获取增量的场景。\n退化为「figures/ 下当前是否存在该步骤应有的图类」。"
+ },
+ {
+  "name": "_check_data_figure_quality",
+  "sig": "(workspace: 'Path', candidates: 'Optional[List[str]]' = None, *, _checker_root: 'Optional[Path]' = None) -> 'Tuple[bool, str]'",
+  "doc": "Check source text budget first, then the PDFs that users will see."
+ },
+ {
+  "name": "_check_figure_pdf_quality",
+  "sig": "(workspace: 'Path', candidates: 'Optional[List[str]]' = None, *, _checker_root: 'Optional[Path]' = None) -> 'Tuple[bool, str]'",
+  "doc": "Run the deterministic PDF visual gate for the requested figure subset.\n\nThe model saying that a chart \"looks fine\" is not evidence.  This guard\ninspects the files that actually landed in ``figures/`` and runs locally,\nso it adds no model calls or token cost.  ``candidates`` may contain source\nnames, PNG paths or PDF paths; only corresponding existing PDFs are passed\nto the checker.  A PNG-only Word workflow is therefore left compatible."
+ },
+ {
+  "name": "_check_paper_body_pages",
+  "sig": "(workspace: 'Path', skill_name: 'str', max_pages: 'Optional[int]', page_policy: 'str' = 'advisory_max') -> 'tuple'",
+  "doc": "按竞赛页数语义做保守的正文字符预检。\n\n正文定义：\n- LaTeX 模式：`paper/sections/*.tex` 总字符数\n- Word 模式：`paper/main.md` 中\"## 附录\"之前的部分\n- 中文 chars_per_page ≈ 800（含图表），英文 ≈ 2200\n\nReturns: (ok: bool, reason: str)"
+ },
+ {
+  "name": "_check_paper_modeling_quality_raw",
+  "sig": "(workspace: 'Path', skill_name: 'str', *, write_report: 'bool' = True) -> 'ModelingQualityReport'",
+  "doc": "Compare upstream formulation depth with the completed paper.\n\nDetect definite structural omissions. A passing result does not certify the\nderivation: the writer must still compare each mechanism chain against its\nactual formulation and solver, as described in the shared paper contract."
+ },
+ {
+  "name": "_check_stats_coherence",
+  "sig": "(workspace: 'Path', stage: 'str' = 'analysis') -> 'Tuple[bool, str]'",
+  "doc": "后台跑 ``stats_coherence_check.py --stage <stage>``（统计建模“前后对得上”）。\n\n只拦零歧义的自相矛盾：退出 0 通过（提示不拦）、1 自相矛盾、2 不适用（非统计工作区）。\n检查器缺失、超时、解密失败或自身出错时返回 ``[CHECK_UNAVAILABLE]``：不算完成，\n也不据此让模型改写数据和结果（与图表质量门的约定一致）。"
+ },
+ {
+  "name": "pending_check_state",
+  "sig": "(step: 'dict') -> 'dict[str, str]'",
+  "doc": "Durable pause metadata in the existing diagnostic column (old DB safe).\n\nIt is not a successful-execution receipt. Continuing still evaluates the\ncurrent step and all its checks; no existing file is treated as approval."
+ },
+ {
+  "name": "step_recovery_state",
+  "sig": "(workflow_id: 'str', skill_name: 'str') -> 'dict[str, str]'",
+  "doc": ""
+ },
+ {
+  "name": "_continue_state",
+  "sig": "(db, step_id: 'int') -> 'dict'",
+  "doc": "本步的交接原因 / 主产物回执 / 付费继续次数；未迁移的旧表结构（测试夹具）里当作没有。"
+ },
+ {
+  "name": "_finish_continue_state",
+  "sig": "(db, workflow_id: 'str', step_id: 'int') -> 'None'",
+  "doc": "本步真正完成：交接原因、回执、付费继续次数清零；有进展了，自动续跑次数也清零。"
+ },
+ {
+  "name": "_uncount_paid_continue",
+  "sig": "(db, workflow_id: 'str') -> 'None'",
+  "doc": "被用户暂停、账号/授权原因暂停的那次不算\"继续了还没成\"：把本次开始时记的一次退回去。\n\n只作用于正在跑的步骤；未迁移的旧表结构里静默跳过。调用方负责提交。"
+ },
+ {
+  "name": "_pause_for_check",
+  "sig": "(db, workflow_id: 'str', exc: 'StepCheckPending') -> 'None'",
+  "doc": "Commit step/workflow/diagnostic together before broadcasting a pause."
+ },
+ {
+  "name": "_pause_for_access_mode",
+  "sig": "(db, workflow_id: 'str', exc: 'AccessModeError | AccountError') -> 'None'",
+  "doc": "Startup recovery must not relabel unavailable billing as model failure."
+ },
+ {
+  "name": "_pause_for_protected_content",
+  "sig": "(db, workflow_id: 'str', exc: 'ProtectedContentUnavailable', *, log_db=None) -> 'None'",
+  "doc": "Persist a safe Skill/License preparation diagnostic before pausing.\n\nPackaged clients used to clear ``error_message`` here and only emit the\n``workflow_license_required`` event.  Re-opening the workflow therefore\nshowed a blank pending card, and clicking Continue immediately hit the\nsame Capsule/License condition again.  Keep the pause fail-closed, but\nmake the reason durable and actionable.  No plaintext Skill or provider\ncredential is copied into the workflow record."
+ },
+ {
+  "name": "_confirm_checkpoint_without_model",
+  "sig": "(db, workflow_id, step, step_id, skill_name, workspace, primary, params, outputs, *, forced_topic=False) -> 'tuple[str, str]'",
+  "doc": "免费重新检查通过、本步又开了检查点：照常停下等用户确认。\n\n返回 (用户的选择, 选题意见)；\"stop\" = 停在这里。与崩溃恢复后重新进入检查点相同，只能确认或\n停止：提交建议要再调用模型改稿。统计建模的强制选题停顿例外：能写\"选候选 N\"，此时不标完成、\n把意见交给调用方按意见重跑选题步。"
+ },
+ {
+  "name": "_verify_checkpoint_revision",
+  "error": "AttributeError(\"module 'backend.services.workflow_engine' has no attribute '_verify_checkpoint_revision'\")"
+ },
+ {
+  "name": "_read_figure_manifest",
+  "sig": "(workspace: 'Path') -> 'Tuple[List[str], List[str]]'",
+  "doc": "从规划文档（PROBLEM_ANALYSIS.md / PAPER_PLAN.md / MODELING_REPORT.md / TOPIC_PLAN.md）读\n<!-- BEGIN FIGURE_MANIFEST --> 区块, 提取规划的图表名字。\n\nReturns: (data_figs, drawio_figs)\n    - data_figs:    数据图章节 (paper-figure 应产出)\n    - drawio_figs:  DrawIO/HTML 章节 + TikZ 章节 (paper-figure-drawio/-html 应产出)\n    - 找不到 manifest 时返回 ([], [])\n\n分类优先级:\n    1. 按 manifest 三章节标题归类(权威) —— 见 _classify_manifest_by_sections\n    2. 无规范章节结构时 fallback 到文件名前缀分类(旧逻辑, 对\n       「关键词在中间」的架构图会误判, 仅作兜底)"
+ },
+ {
+  "name": "_free_recheck",
+  "sig": "(db, workflow_id, workspace, skill_name, primary, template, params) -> 'tuple[bool, str]'",
+  "doc": "不调用模型、只用现有文件重新检查（连续\"继续\"到上限之后，B2）。\n\n与崩溃恢复\"后续步骤已完成时直接认可\"同一套检查：主产物、配套文件、图表静态检查、\n写后检查（含论文提交规范）。返回 (是否通过, 没通过的原因)。"
+ },
+ {
+  "name": "_recovery_outputs_pass",
+  "sig": "(workspace, skill_name, primary, template, params, *, progress, cancelled)",
+  "doc": "A later completed step is not evidence that these current files passed.\n\nReuse the normal current-artifact checks, including stale PDF repair. This\npath never invokes a model and advisory-only issues do not force a rerun.\nMissing evidence returns to the normal bounded repair path, not success."
+ },
+ {
+  "name": "_health_requires_repair",
+  "sig": "(workspace, skill_name, primary, health_ok, reason, quality_failure, files_created=(), files_modified=()) -> 'bool'",
+  "doc": "Never let auxiliary changes override deterministic missing artifacts.\n\nRetain the prior advisory treatment of size/page heuristics; they are not\nauthority to rewrite a correct manuscript. Explicit figure, computation,\ncompanion, checker and submission failures cannot be converted to success."
+ },
+ {
+  "name": "recover_checked_step",
+  "sig": "(*, check: 'Callable[[], Awaitable[list[CheckIssue]]]', repair: 'Callable[[str, int], Awaitable[None]]', snapshot: 'Callable[[], object]', progress: 'Callable[[str, str], Awaitable[None]]', cancelled: 'Callable[[], bool]', max_repairs: 'int' = 3, max_local_rechecks: 'int' = 2, max_advisory_repairs: 'int' = 0, max_fix_repairs: 'int' = 1) -> 'int'",
+  "doc": "Recheck *all* gates after each targeted repair; return actual repairs.\n\nCancellation, unavailable checkers and unsafe runner failures propagate.\nA first unchanged repair gets one fresh diagnostic attempt; a second\nunchanged repair stops. A changed reason is progress even without edits.\nAdvisory-only findings are reported but buy no repair session unless the\ncaller grants a budget (the user's opt-in ``advisory_polish``). Such a\nbest-effort pass never consumes hard repair attempts and never prevents\ncompletion on its own; any hard defect it introduces must pass the same\nchecks again.\n\"Needs fix\" findings (severity=\"fix\") get their own budget, run only\nafter every hard check passes, and are reported (not raised) when the\nbudget is spent. Unresolved blocking issues never become successful execution."
+ },
+ {
+  "name": "_mark_active_step_failed",
+  "sig": "(db, workflow_id: 'str', exc: 'BaseException') -> 'tuple[list[str], str]'",
+  "doc": "Atomically terminate the workflow and every active step.\n\nRunner setup can fail before a Claude subprocess exists (for example a\nCapsule/runtime mismatch).  Historically the outer exception handler only\nmarked ``workflows`` failed, leaving ``workflow_steps`` permanently\n``running`` with no durable reason.  Keep both tables and the audit log in a\nsingle transaction so the UI can never observe that split-brain terminal\nstate after the commit."
+ },
+ {
+  "name": "request_pause",
+  "sig": "(workflow_id: 'str') -> 'None'",
+  "doc": "标记用户要求暂停。pause 接口调用，步骤循环每步开头检查。"
+ },
+ {
+  "name": "is_pause_requested",
+  "sig": "(workflow_id: 'str') -> 'bool'",
+  "doc": ""
+ },
+ {
+  "name": "clear_pause_request",
+  "sig": "(workflow_id: 'str') -> 'None'",
+  "doc": "清除暂停标记。⛔ 所有启动路径（start/resume/restart/rerun/心跳复活/重启恢复/\n检查点续跑）都必须调用，否则工作流会在下一步立刻自杀、再也起不来。"
+ },
+ {
+  "name": "load_run_scope",
+  "sig": "(raw) -> 'Optional[dict]'",
+  "doc": "解析 run_scope；格式不对一律当作没有范围（调用方另行核对步骤是否还在计划里）。"
+ },
+ {
+  "name": "clear_run_scope",
+  "sig": "(db, workflow_id: 'str') -> 'None'",
+  "doc": ""
+ },
+ {
+  "name": "_build_step_prompt",
+  "error": "AttributeError(\"module 'backend.services.workflow_engine' has no attribute '_build_step_prompt'\")"
+ },
+ {
+  "name": "_handoff_text",
+  "error": "AttributeError(\"module 'backend.services.workflow_engine' has no attribute '_handoff_text'\")"
+ }
+]

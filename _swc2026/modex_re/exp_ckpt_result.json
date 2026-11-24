@@ -1,0 +1,53 @@
+{
+ "public": {
+  "active": true,
+  "checkpoint_id": "aee93d3ac4804617b8613e39c4ab5e79",
+  "step_name": "comp-modeling",
+  "display_name": null,
+  "checkpoint_type": "approve",
+  "primary_output_file": null,
+  "allow_feedback": true,
+  "started_at": "2026-11-21T07:40:52.441118+00:00",
+  "deadline_at": "2026-11-21T07:40:54.441118+00:00",
+  "timeout_seconds": 2,
+  "remaining_seconds": 2.0,
+  "on_timeout": "approve"
+ },
+ "current": {
+  "active": true,
+  "checkpoint_id": "aee93d3ac4804617b8613e39c4ab5e79",
+  "step_name": "comp-modeling",
+  "display_name": null,
+  "checkpoint_type": "approve",
+  "primary_output_file": null,
+  "allow_feedback": true,
+  "started_at": "2026-11-21T07:40:52.441118+00:00",
+  "deadline_at": "2026-11-21T07:40:54.441118+00:00",
+  "timeout_seconds": 2,
+  "remaining_seconds": 2.0,
+  "on_timeout": "approve"
+ },
+ "remaining": 2.0,
+ "resolve_bad": "CheckpointConflict: 检查点已变化或等待尚未恢复，请刷新后确认当前检查点",
+ "resolve_ok": {
+  "status": "resolved",
+  "checkpoint_id": "aee93d3ac4804617b8613e39c4ab5e79",
+  "duplicate": false
+ },
+ "after": {
+  "active": false,
+  "checkpoint_id": "aee93d3ac4804617b8613e39c4ab5e79",
+  "step_name": "comp-modeling",
+  "display_name": null,
+  "checkpoint_type": "approve",
+  "primary_output_file": null,
+  "allow_feedback": true,
+  "started_at": "2026-11-21T07:40:52.441118+00:00",
+  "deadline_at": "2026-11-21T07:40:54.441118+00:00",
+  "timeout_seconds": 2,
+  "remaining_seconds": 2.0,
+  "on_timeout": "approve"
+ },
+ "timeout_resp": "AttributeError: 'Checkpoint' object has no attribute 'wait'",
+ "timeout_pause": "AttributeError: 'Checkpoint' object has no attribute 'wait'"
+}

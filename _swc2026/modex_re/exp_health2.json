@@ -1,0 +1,227 @@
+[
+ {
+  "skill": "comp-prob-analysis",
+  "target": 500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 1200,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 1800,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 2500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-prob-analysis",
+  "target": 3500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 1200,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 1800,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 2500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-modeling",
+  "target": 3500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 1200,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 1800,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 2500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-code",
+  "target": 3500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 1200,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 1800,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 2500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-paper-zh",
+  "target": 3500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 1200,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 1800,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 2500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ },
+ {
+  "skill": "comp-compile-zh",
+  "target": 3500,
+  "actual": 18900,
+  "result": [
+   "True",
+   ""
+  ]
+ }
+]

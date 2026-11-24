@@ -1,0 +1,29 @@
+{
+ "stage_for": {
+  "comp-paper-zh": null,
+  "comp-compile-zh": null,
+  "paper-write-zh": "draft",
+  "paper-plan": "plan",
+  "comp-prob-analysis": null,
+  "docx-export": "final",
+  "paper-compile": "final"
+ },
+ "draft_skills_count": 12,
+ "plan_skills": [
+  "course-plan",
+  "course-report-plan",
+  "humanities-plan",
+  "literature-review",
+  "paper-plan",
+  "paper-plan-zh",
+  "thesis-proposal"
+ ],
+ "final_skills": [
+  "docx-export",
+  "paper-compile",
+  "paper-compile-zh"
+ ],
+ "comp_paper_zh_in_draft": false,
+ "step_data_problem": "",
+ "step_data_problem_modeling": ""
+}

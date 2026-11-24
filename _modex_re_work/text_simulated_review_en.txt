@@ -1,0 +1,377 @@
+000f1ee0	simulated_review.Form.decision_label
+000f1f18	simulated_review.Form.criterion_label
+000f1f40	simulated_review.Form.criterion_label.genexpr
+000f1f70	can't send non-None value to a just-started generator
+000f21f0	'NoneType' object is not subscriptable
+000f22d8	simulated_review._latex_lines.name_of
+000f2308	'NoneType' object is not iterable
+000f2368	simulated_review.load_manuscript
+000f2390	simulated_review.load_manuscript.genexpr
+000f23d0	simulated_review.changed_since
+000f23f8	'NoneType' object has no attribute '%.30s'
+000f24a8	simulated_review.model_text.genexpr
+000f2540	simulated_review._manuscript_payload
+000f25a8	simulated_review.doc_fingerprint
+000f2600	simulated_review.build_prompt.genexpr
+000f2680	simulated_review._requirements_excerpt
+000f26b8	simulated_review.ReviewError.__init__
+000f2760	simulated_review._word.genexpr
+000f27a8	simulated_review._claim.lambda6
+000f27c8	simulated_review._claim.genexpr
+000f2808	simulated_review._pick.genexpr
+000f2840	simulated_review._exact_option
+000f2868	simulated_review._exact_option.one
+000f28f8	simulated_review._severity_of.genexpr
+000f2940	simulated_review._escape_stray_backslashes
+000f2980	simulated_review._escape_stray_backslashes.lambda11
+000f29e8	simulated_review._garbled.genexpr
+000f2a58	simulated_review._verbatim.lambda14
+000f2a90	simulated_review._verbatim.lambda15
+000f2ad0	simulated_review._escape_inner_quotes
+000f2b08	simulated_review._answer_object
+000f2b30	simulated_review._answer_object.read
+000f2b68	simulated_review._answer_object.read.lambda16
+000f2ba8	simulated_review._answer_object.genexpr
+000f2be8	simulated_review._original_end
+000f2c38	simulated_review.cut_short.genexpr
+000f2cb0	argument after ** must be a mapping, not NoneType
+000f2cf8	simulated_review._severity_named
+000f2d88	simulated_review.parse_review.texts
+000f2db8	simulated_review.parse_review.genexpr
+000f2df0	simulated_review.parse_review.lambda20
+000f2e50	simulated_review._find_quote.genexpr
+000f2ee8	simulated_review.settle.genexpr
+000f2f50	simulated_review.vendor_of.genexpr
+000f3010	can't send non-None value to a just-started coroutine
+000f3058	simulated_review._reviewer_sig
+000f3078	simulated_review._reviewer_sig.genexpr
+000f30c0	simulated_review._account_text
+000f3190	simulated_review.error_kind.genexpr
+000f3230	simulated_review._writer_model
+000f3250	simulated_review._writer_model.genexpr
+000f32a8	simulated_review.render_report
+000f32f8	simulated_review.summary_text.genexpr
+000f33c0	simulated_review.restore_report
+000f3530	simulated_review.start.lambda31
+000f35f8	simulated_review._execute.genexpr
+000f3630	simulated_review._execute.prompt_for
+000f3678	simulated_review._execute.prompt_for.make
+000f36c8	simulated_review._execute.ask_and_read.lambda32
+000f3708	simulated_review._execute.ask_and_read
+000f37a0	simulated_review._finish_failed
+000f37d0	simulated_review._attach_to_step
+000f3840	simulated_review._write_notice
+000f3890	simulated_review._finish_notice
+000f3920	simulated_review.recheck_prompt
+000f3950	simulated_review.parse_recheck
+000f3980	simulated_review.settle_recheck
+000f39b0	simulated_review.recheck_counts
+000f39e0	simulated_review.recheck_summary
+000f3a08	simulated_review.recheck_summary.genexpr
+000f3a48	simulated_review._recheck_lines
+000f3a68	simulated_review._recheck_lines.genexpr
+000f3ab8	simulated_review.recheck.genexpr
+000f3af0	simulated_review.recheck.lambda38
+000f3b78	simulated_review.schedule_recheck
+000f3bb0	simulated_review._auto_recheck
+000f3be8	simulated_review._execute_recheck
+000f3c10	simulated_review._execute_recheck.prompt_for
+000f3c40	simulated_review._execute_recheck.prompt_for.make
+000f3c88	simulated_review._execute_recheck.ask_and_read.lambda39
+000f3cc0	simulated_review._execute_recheck.ask_and_read
+000f3d00	simulated_review._store_recheck
+000f3d38	simulated_review._open_recheck_notice
+000f3d78	simulated_review._finish_recheck_notice
+000f3db8	simulated_review.sweep_interrupted
+000f3df0	simulated_review.snapshot_line
+000f3e20	simulated_review._reset_for_test
+000f3e48	simulated_review.__pyx_defaults
+000f3e68	simulated_review.__pyx_scope_struct__criterion_label
+000f3ea0	simulated_review.__pyx_scope_struct_1_genexpr
+000f3ed0	simulated_review.__pyx_scope_struct_2__latex_lines
+000f3f08	simulated_review.__pyx_scope_struct_3_genexpr
+000f3f38	simulated_review.__pyx_scope_struct_4_genexpr
+000f3f68	simulated_review.__pyx_scope_struct_5_genexpr
+000f3f98	simulated_review.__pyx_scope_struct_6_genexpr
+000f3fc8	simulated_review.__pyx_scope_struct_7_genexpr
+000f3ff8	simulated_review.__pyx_scope_struct_8_genexpr
+000f4028	simulated_review.__pyx_scope_struct_9__pick
+000f4058	simulated_review.__pyx_scope_struct_10_genexpr
+000f4088	simulated_review.__pyx_scope_struct_11__exact_option
+000f40c0	simulated_review.__pyx_scope_struct_12_genexpr
+000f40f0	simulated_review.__pyx_scope_struct_13_genexpr
+000f4120	simulated_review.__pyx_scope_struct_14_genexpr
+000f4150	simulated_review.__pyx_scope_struct_15_genexpr
+000f4180	simulated_review.__pyx_scope_struct_16__answer_object
+000f41b8	simulated_review.__pyx_scope_struct_17_genexpr
+000f41e8	simulated_review.__pyx_scope_struct_18_cut_short
+000f4220	simulated_review.__pyx_scope_struct_19_genexpr
+000f4250	simulated_review.__pyx_scope_struct_20_parse_review
+000f4288	simulated_review.__pyx_scope_struct_21_genexpr
+000f42b8	simulated_review.__pyx_scope_struct_22_genexpr
+000f42e8	simulated_review.__pyx_scope_struct_23_locate
+000f4318	simulated_review.__pyx_scope_struct_24_settle
+000f4348	simulated_review.__pyx_scope_struct_25_genexpr
+000f4378	simulated_review.__pyx_scope_struct_26_vendor_of
+000f43b0	simulated_review.__pyx_scope_struct_27_genexpr
+000f43e0	simulated_review.__pyx_scope_struct_28_genexpr
+000f4410	simulated_review.__pyx_scope_struct_29__reviewer
+000f4448	simulated_review.__pyx_scope_struct_30__reviewer_sig
+000f4480	simulated_review.__pyx_scope_struct_31_genexpr
+000f44b0	simulated_review.__pyx_scope_struct_32__account_text
+000f44e8	simulated_review.__pyx_scope_struct_33__ask
+000f4518	simulated_review.__pyx_scope_struct_34_error_kind
+000f4550	simulated_review.__pyx_scope_struct_35_genexpr
+000f4580	simulated_review.__pyx_scope_struct_36__consult
+000f45b0	simulated_review.__pyx_scope_struct_37__writer_model
+000f45e8	simulated_review.__pyx_scope_struct_38_genexpr
+000f4618	simulated_review.__pyx_scope_struct_39_genexpr
+000f4648	simulated_review.__pyx_scope_struct_40_genexpr
+000f4678	simulated_review.__pyx_scope_struct_41__spawn
+000f46a8	simulated_review.__pyx_scope_struct_42__auto
+000f46d8	simulated_review.__pyx_scope_struct_43_start
+000f4708	simulated_review.__pyx_scope_struct_44_review_now
+000f4740	simulated_review.__pyx_scope_struct_45__execute
+000f4770	simulated_review.__pyx_scope_struct_46_prompt_for
+000f47a8	simulated_review.__pyx_scope_struct_47_ask_and_read
+000f47e0	simulated_review.__pyx_scope_struct_48_genexpr
+000f4810	simulated_review.__pyx_scope_struct_49__still_there
+000f4848	simulated_review.__pyx_scope_struct_50__finish_failed
+000f4880	simulated_review.__pyx_scope_struct_51__attach_to_step
+000f48b8	simulated_review.__pyx_scope_struct_52__open_notice
+000f48f0	simulated_review.__pyx_scope_struct_53__write_notice
+000f4928	simulated_review.__pyx_scope_struct_54__emit
+000f4958	simulated_review.__pyx_scope_struct_55__finish_notice
+000f4990	simulated_review.__pyx_scope_struct_56_genexpr
+000f49c0	simulated_review.__pyx_scope_struct_57_genexpr
+000f49f0	simulated_review.__pyx_scope_struct_58_genexpr
+000f4a20	simulated_review.__pyx_scope_struct_59_recheck
+000f4a50	simulated_review.__pyx_scope_struct_60_genexpr
+000f4a80	simulated_review.__pyx_scope_struct_61_recheck_now
+000f4ab8	simulated_review.__pyx_scope_struct_62__auto_recheck
+000f4af0	simulated_review.__pyx_scope_struct_63__execute_recheck
+000f4b28	simulated_review.__pyx_scope_struct_64_prompt_for
+000f4b60	simulated_review.__pyx_scope_struct_65_ask_and_read
+000f4b98	simulated_review.__pyx_scope_struct_66__open_recheck_notice
+000f4bd8	simulated_review.__pyx_scope_struct_67__finish_recheck_notice
+000f4c18	simulated_review.__pyx_scope_struct_68_sweep_interrupted
+000f4c58	simulated_review.__pyx_scope_struct_69_snapshot_line
+000f4cb0	Interpreter change detected - this module can only be loaded into one interpreter per process.
+000f4d90	Module 'simulated_review' has already been imported. Re-initialisation is not supported.
+000fba60	 while calling a Python object
+000fba80	NULL result without error in PyObject_Call
+000fbac8	%s() got multiple values for keyword argument '%U'
+000fbb00	%.200s() keywords must be strings
+000fbb28	%s() got an unexpected keyword argument '%U'
+000fbb80	%.200s() takes %.8s %zd positional argument%.1s (%zd given)
+000fbbc0	'%.200s' object is unsliceable
+000fbbe0	join() result is too long for a Python string
+000fbc10	local variable '%s' referenced before assignment
+000fbc48	too many values to unpack (expected %zd)
+000fbc78	need more than %zd value%.1s to unpack
+000fbca0	free variable '%s' referenced before assignment in enclosing scope
+000fbce8	generator raised StopIteration
+000fbd08	%.200s object is not an iterator
+000fbd30	hasattr(): attribute name must be string
+000fbd98	strings are too large to concat
+000fbdb8	cannot fit '%.200s' into an index-sized integer
+000fbde8	'%.200s' object is not subscriptable
+000fbe20	Shared Cython type %.200s is not a type object
+000fbe50	Shared Cython type %.200s has the wrong size, try recompiling
+000fbea0	_cython_3_2_5._common_types_metatype
+000fbec8	__name__ must be set to a string object
+000fbef0	__qualname__ must be set to a string object
+000fbf20	__defaults__ must be set to a tuple object
+000fbf50	changes to cyfunction.__defaults__ will not currently affect the values used in function calls
+000fbfb0	__kwdefaults__ must be set to a dict object
+000fbfe0	changes to cyfunction.__kwdefaults__ will not currently affect the values used in function calls
+000fc048	__annotations__ must be set to a dict object
+000fc298	unbound method %.200S() needs an argument
+000fc2e0	_cython_3_2_5.cython_function_or_method
+000fc308	dictionary changed size during iteration
+000fc358	'%.200s' object does not support slice %.10s
+000fc388	%s() needs keyword-only argument %U
+000fc3b0	raise: arg 3 must be a traceback or None
+000fc3e0	instance exception may not have a separate value
+000fc420	calling %R should have returned an instance of BaseException, not %R
+000fc468	raise: exception class must be a subclass of BaseException
+000fc4a8	exception causes must derive from BaseException
+000fc518	cannot reuse already awaited coroutine
+000fc540	coroutine ignored GeneratorExit
+000fc560	generator ignored GeneratorExit
+000fc588	coroutine '%.50S' was never awaited
+000fc5d0	cannot instantiate type, use 'await coroutine' instead
+000fc610	send(arg) -> send 'arg' into coroutine,
+000fc638	return next yielded value or raise StopIteration.
+000fc670	throw(typ[,val[,tb]]) -> raise exception in coroutine,
+000fc6e8	close() -> raise GeneratorExit inside coroutine.
+000fc730	_cython_3_2_5.coroutine_wrapper
+000fc750	invalid input, expected coroutine
+000fc7a8	return next iterated value or raise StopIteration.
+000fc8a0	qualified name of the coroutine
+000fc910	'async for' received an invalid object from __anext__: %.200s
+000fc950	__await__() returned non-iterator of type '%.200s'
+000fc988	__await__() returned a coroutine
+000fc9b0	object %.200s can't be used in 'await' expression
+000fc9e8	coroutine is being awaited already
+000fca10	'%.200s' object is not a mapping
+000fca38	base class '%.200s' is not a heap type
+000fca60	extension type '%.200s' has no __dict__ slot, but base type '%.200s' has: either add 'cdef dict __dict__' to the extension type or add '__slots__ = [...]' to the base type
+000fcb10	metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
+000fcb90	__mro_entries__ must return a tuple
+000fcbc0	send(arg) -> send 'arg' into generator,
+000fcc20	throw(typ[,val[,tb]]) -> raise exception in generator,
+000fcc90	close() -> raise GeneratorExit inside generator.
+000fccd8	object being iterated by 'yield from', or None
+000fcd28	qualified name of the generator
+000fcdb0	compile time Python version %d.%d of module '%.100s' %s runtime version %d.%d
+000fce20	Failed to import '%.20s.decompress' - cannot initialise module strings. String compression was configured with the C macro 'CYTHON_COMPRESS_STRINGS=%d'.
+000fcec0	主文稿（LaTeX 展开成阅读顺序；Markdown 源稿）。还没写出来返回 None。
+000fcf20	这次失败值不值得自动再试一次：连接中途断了、上游临时出错（过载、排队）、上游一个字没回算；
+000fcfa8	    超时（已经等了很久）、限流（几十秒内再发多半还是被限）、没配好、余额不够、稿件太长、回答格式不对都不算
+000fd046	    （报错里带着 HTTP 500 / 503 也一样：等两轮还是那个结果）。
+000fd0a0	(评审表, 评审对象的说法)。standard = 用户点名的标准（FORMS 的键），不认识就按项目设置选。
+000fd120	设置里这一项的说法（投稿前模拟评审 / 送审前模拟评阅……）。
+000fd180	结果文件里评成的那一次（最近一次没评成时在 previous 里；报告文件也是那一次的）。
+000fd240	对话里 AI 调 review_paper 带 recheck：不等模型回答，开始了就返回。
+000fd2a0	评一次（trigger：auto 编译 / 导出后自动；ai 对话里 AI 调；user 别的入口）。
+000fd305	    返回 {"status": ...}：started（"_runner" 是调模型的后台任务）、unchanged（稿件和标准都没变，带上次的结论）、
+000fd397	    queued（正在评，评完再看一次）、already_running、busy（手动评时项目正在跑步骤或改文件）、not_applicable、
+000fd426	    turned_off、nothing_to_review、quiet、paused、draft、project_gone。
+000fd4c0	模型填的值说的是哪一个选项。options = [(选项, 英文写法们, 中文写法们)]。
+000fd525	    选项的名字互相包含（“通过”在“不通过”“修改后通过”里，“录用”在“小修后录用”里，“接收”在“边缘偏接收”里）：
+000fd5d8	    只按“出现了就算”从好到差找，会把结论读高一档甚至读反（2026-10-14 审查：22 种常见写法读错 16 种）。
+000fd66a	    所以长的先认；认出两个不同的选项就不猜；strict 时旁边还有否定或限定的字眼也不猜。认不出返回空串。
+000fd700	模型名 → 厂商（看不出来返回空串）。只用来写"自审 / 同一家 / 换了一家"，不影响调用。
+000fd780	模型的复查回答 → 每条一项（没答的记“看不出来”）。不是要求的格式抛 ReviewError("format")。
+000fd810	快照里的一句：最近一次评审的结论（稿件之后又改过就写明，免得 AI 把旧结论当现状）。
+000fd890	1–5 分。写成“4/5”“7/10”“85/100”的按满分换算；不知道满分的十分制、百分制裸数（7、85）丢掉——
+000fd91c	    以前截成 5 分，平平的稿子各项全成了满分（10-14 第二次复审）。
+000fd980	复查结果记进评审结果（只记到复查的那一次评审上：期间又整篇评过，编号对不上了，就不记）、重写报告。
+000fda20	严重度：照填 major / minor / nit 或认得的中文；“严重程度：低”先去掉前面的说明；“major（重大）”“重大问题 /
+000fdab8	    major”两种写法说的是同一档才认；“严重问题”“major issue”去掉末尾的“问题 / issue”再认。认不出当一般问题。
+000fdb56	    ⛔ 不从文字里找词：“严重程度：低”里有“严重”，以前被读成重大问题（10-14 第二次复审）。
+000fdbe0	错误代码 → 给人看的话（接入方式、积分模式的错误表）；不认识返回空串。
+000fdc50	逐条找原文、全文统一编号、统计；有定位得到的重大问题却给了最高档结论，降一档并注明。
+000fdcd0	(种类, 给人看的一句)：self 自审 / same_vendor 同一家 / cross_vendor 换了一家 / unknown 看不出来。
+000fdd50	现在会用哪个模型、哪把 Key / 哪个账号审（接入方式 | 角色 | 模型 | Key 的单向指纹）；解析不出来（没配好）给空串。
+000fddef	    只用来看“设置改过没有”：模型没换、只换了 Key（多半是余额不够换了一把），自动评审也不用等满一天（10-14）。
+000fde90	值是 pairs（(英文键, 中文名)…）里的哪一个：照填英文键或中文名最好。
+000fdef2	    strict（结论、是否同意答辩）：只认整个值就是一个选项（见 _exact_option）——读高一档比留空糟得多。
+000fdf80	    不 strict（评分项、问题属于哪一项）：从文字里认（_pick），认错了也只是归错一项。
+000fe000	逐字摘抄的字段（引文、位置）里被读坏的 LaTeX 还原回去：退格、换页、制表符后面紧跟字母，一定是 \beta、\frac、
+000fe09a	    \textbf 被当成转义读了；换行、回车只在后面是 \nabla、\ref 这类命令名时才还原——引文跨行时模型写的合法换行
+000fe134	    要留着（10-14 第二次复审：一律还原的话，“…\nImageNet…”成了字面的 \n，规范化时被当成命令删掉，找不到原文）。
+000fe1e0	调审稿模型（这次评审自己的计费范围）：说稿件太长就换短的再问一次；连接断了等一下再试。
+000fe262	    prompts = {字数上限: 提示词生成函数}。waits = 还能再试几次、各等多久（调用方传同一个列表进来，
+000fe2e9	    提醒格式后重问的那一次和第一次合用这个额度：整次评审最多再试 len(RETRY_WAITS) 次）。
+000fe363	    返回 (审稿模型, 回答, 用的字数上限)。explicit：用户这次点名的审稿模型（积分模式）。
+000fe3e0	值整个就是某一个选项（结论、是否同意答辩用）：照填英文键或中文名（前后的标点、引号不算，前面可以有“建议 /
+000fe47f	    结论：”），或者把同一个选项的两种写法并排写（minor＝小修后录用、小修后录用（minor）、fail / 不通过）。
+000fe516	    带理由、带限定（“不建议通过”“修改后可录用”“录用，但需补充实验”“拒绝录用”）、提到两个选项的一律认不出——
+000fe5c3	    宁可报告里写“模型没给出结论”，也不能读高一档甚至读反（10-14 第二次复审：从自由文字里认，342 种写法读错 142 种，
+000fe66a	    “拒绝录用”“没通过”“don't accept”都读成了最高档）。
+000fe6d0	引文在给模型看过的材料里找得到吗：(找到了, 在哪)。先找正文（"文件:行号"），再找正文之外给模型看的那几样
+000fe768	    （题目、参考文献表、老师的要求……）。不是逐字对上的，位置后面注明“略有出入”。太短（规范化后不到 8 个字）的不算。
+000fe820	只看稿件和依据（不管按哪张评审表、重点看什么）。自动评审拿它判断“这份稿件评过没有”：
+000fe8a2	    用户刚点名标准或重点手动评过，稿件没动，重跑导出时不该再自动评一遍、把用户点名的那份报告盖掉。
+000fe940	模型写的问题清单 → 一条条 dict。只有一条没套方括号、按严重度分组写成对象（{"major":[…],"minor":[…]}）、
+000fe9d1	    写成一句句话，都展开（10-14 第二次复审：分组的、写成一句句话的整个读丢，报告却写“0 条问题”）。
+000fea70	回答是不是写到一半断了（到了模型的输出长度上限）。这种情况原样再问还是会断，要让它写短一些。
+000feb00	英文写法当一个词找：weak_accept 也认 weak accept、weak-accept；前后不能再连着字母。
+000feb70	没写开关时开不开：期刊、会议、学位论文、Nature、全流程开；课程论文、课程报告、综述、开题关（用户 2026-10-13 定）。
+000fec20	除了稿件，评审时还给了模型哪些依据：双盲、老师或用户写的要求、征稿通知。它们变了也要重新评（进指纹）；
+000fecba	    提示词里的"已知事实"用的也是这一份，两边不会对不上。
+000fed10	只认 JSON 里的几个字段：结论不认识的留空，严重度不认识的当"一般问题"，按长度截断。
+000fed90	对话里 AI 调 review_paper：不等模型回答，开始了就返回。
+000fede0	这个词是不是一档严重度（“major”“重大问题”“minor issues”）。
+000fee40	0123456789abcdef0123456789ABCDEF
+000fee70	给模型看的稿件：(文字, 说明哪些没给出, 没给出的字数)。先去附录，再把"相关工作 / 文献综述"只留开头，还长才截中间。
+000fef20	00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
+000feff0	最后一步（编译 PDF / 导出 Word）标完成之后调（同步、不抛异常）：适用、开着、稿件变了就在后台评一次。
+000ff090	在文字里找各个选项的写法：长的先占位置，占过的地方不再给短的（“不通过”占了，“通过”就不算出现）。
+000ff127	    返回 (出现了的选项, 没被占的剩余文字)。needles = [(选项, 正则或原样的字)]。
+000ff1a0	自动评审开着没有：项目里明确写了 True / False 就按它，没写按论文类型的默认。
+000ff210	找原文用的规范化：去掉 LaTeX / Markdown 记号和引用编号，全角半角、中英标点统一，去掉所有空白，小写。
+000ff2a0	模型调用失败 → (种类, 给人看的原因)。⛔ 403 不算"没配好"：Cloudflare 拦一下也是 403，和 Key 好坏无关。
+000ff330	这个项目有没有正在等或正在做的评审（跑完自动汇报等一会儿，好把结论一起说）。
+000ff3b0	日志里的一行错误（类型 + 开头一段；错误文字已经过 llm_client 的目的地脱敏，不含 Key）。
+000ff430	repaired 是在 original 里插了一些反斜杠得到的：repaired 的前 end 个字符对应 original 的前几个字符。
+000ff4b0	这类项目有没有模拟评审：学术论文、学位论文、课程论文 / 报告、综述、开题有；竞赛、市调、软著专利、开发没有。
+000ff550	启动时调：上次软件关掉时还在评的结果行，改成"被打断了"（不然会一直显示正在评）。
+000ff5d0	展开后的每一行 → ("工作区相对路径:原文件行号", 这一行)。按片段的起点顺着走：同一片段里每过一行行号加一，
+000ff66a	    换片段时才数一次换行（逐行调 doc.location 是平方级的，长学位论文要算几十秒）。
+000ff6e0	稿件本身：只去掉空白的原文（LaTeX 已经去了注释）、参考文献表、题目作者，加上另给模型的依据。
+000ff768	    ⛔ 不能用找原文用的那种规范化（去命令、去引用编号、去上下标记号）：那样只换 \cite、把 [0, 1] 改成 [0, 5]、
+000ff801	    \alpha 改 \beta、\leq 改 \geq 都看不出稿件变了，按评审意见改完引用再评，得到的是“稿件没变”。
+000ff890	要复查的意见编号（去重、按大小排，最多 RECHECK_MAX 个）；写法不对的丢掉。
+000ff900	用哪个模型审。Key 模式：审稿角色 → 编辑器 AI → 执行模型；积分模式：这个项目的对话模型 → 项目默认模型。
+000ff998	    explicit：用户这次点名的模型（只有积分模式，第五轮 9）。
+000ff9ec	    payer：用的是哪把 Key / 哪个账号的单向指纹（不是 Key 本身），只用来认“换过没有”，不进报告。
+000ffac0	规范化后的引文在一段规范化的文字里的位置：(位置, 是不是逐字对上)；找不到给 (-1, False)。
+000ffb3d	    逐字对得上最好；模型加了省略号的，各段要按顺序都找得到；改了一两个字的，切成三段要有两段对得上，
+000ffbd2	    而且这两段在原文里挨得和引文里一样近（只是各自在全文某处出现过不算：那样随便拼的句子也能“找到”）。
+000ffc70	最后一步的产出列表里加上评审报告（步骤卡上点得开）。步骤已经重跑、换了状态就不动。
+000ffcf0	导言区里摘要、关键词、中英文题目命令的内容：[(给人看的名字, 内容)]，最多 6 条。
+000ffd70	模型逐字摘抄 LaTeX 原文（5\%、\cite{…}、$\alpha$、\textbf{…}）却没把反斜杠写成两个：
+000ffde1	    前几种让整份回答不是合法的 JSON，\textbf、\beta、\nabla 这类还会被读成制表符、退格、换行，引文变样找不到原文。
+000ffeb0	从回答里取出那个 JSON 对象。前面有说明文字、套了代码块标记、后面还跟着带花括号的话都不碍事：
+000fff38	    从每个后面跟着键名的 { 起试着读一个完整的对象（公式下标 x_{1} 这种不试），要它带评审结果的字段
+000fffc5	    （问题清单里的单条、评分表不算）；有好几份时取最后一份——正式回答在最后，前面的是草稿或被模型自己更正掉的那一版；
+00100075	    最后那份开了头却读不出来（被截断、写坏了），按没读懂算，不退回去用前面的草稿（10-14 第二次复审：以前取最长的，
+00100166	    字符串里直接换行、夹着没转义的英文双引号、照抄的 LaTeX 反斜杠没写成两个（真机和审查里模型都这么写过）也读：
+00100240	投稿前模拟评审（用户 2026-10-13 定"默认要不要审稿"：只读评审报告、不自动改稿；期刊、会议、学位论文、Nature、
+001002d9	全流程默认开，课程论文、课程报告、综述、开题报告默认关；一句话可开关）。
+0010035a	- 自动：论文最后一步（编译 PDF：paper-compile / paper-compile-zh；导出 Word：docx-export）标完成以后，在后台评一次
+001003eb	  （schedule()）。不占用这一步：评审期间步骤和工作流照常结束，暂停、停止不会让已经完成的那一步重跑。
+0010047c	  稿件、评审标准都和上次评过的一样（指纹相同）就不再评，不重复花钱；另给模型的依据（双盲、老师或用户写的要求、
+00100521	  征稿通知）变了也算变了。没变但报告文件不在了（回到旧版本时被拿掉、被删了）就照结果文件补写，补不了才重评；
+001005c3	  重新编译、导出后没变的，把报告挂回这一步的产出列表。开关是项目参数 simulated_review
+0010063a	  （没写就按论文类型的默认，见 default_on）。上次因为模型没配好、余额不够没评成的，24 小时内不再自动试。
+001006cf	- 手动：对话里用户说"帮我审一下 / 模拟审稿 / 能不能投"，AI 调 review_paper（不看开关；稿件没变就说上次的结论）。
+0010076b	  用户可以点名按别的标准审（standard），也可以说想重点看哪方面（focus）。
+001007d2	不评：竞赛论文（数模等）、市调、软著专利、开发项目；稿件还没写出来不评。
+0010083f	⛔ 不另加步骤：打包版的签名计划只认已有的步骤名，加一个新步骤名会让整条流程授权暂停（services/custom_steps.py）。
+001008de	怎么评：按投稿目标选评审表（FORMS），把整篇稿件交给审稿模型，只要一个 JSON 回答（字段见 _SCHEMA）。
+0010096a	- LaTeX 稿按 \input 展开成阅读顺序、去掉注释和导言区；Word 模式评 Markdown 源稿。稿件很长时先去掉附录，
+001009f6	  再把"相关工作 / 文献综述"一节只留开头，还长才截掉中间，并告诉模型哪些没给出（没给出的不许评、不许当缺失）。
+00100a97	- 每条意见都要引用稿件原文；后台逐条在稿件里找，找到的写上文件和行号，找不到的单列"定位不到原文"，不算进统计。
+00100b3b	- 有（定位得到的）重大问题时结论不能是最高一档：模型给了，后台降一档并注明。学位论文"同意答辩"同理改成"修改后答辩"。
+00100be7	- "需要补实验 / 补数据"只作标记，不自动去做；诚信疑点单列，只写疑点、不下定论。
+00100c5b	- 审稿模型：Key 模式按设置页"审稿"角色 → 编辑器 AI → 执行模型（角色绑了预设却失效时照实报错，不悄悄换一把 Key）；
+00100cff	  积分模式用这个项目的对话模型，没选就是项目默认模型。和写正文那一步实际用的模型比：同一个模型是"自审"、
+00100d9a	  同一家是"同厂商"，都在报告里写明（自审偏宽松，只作参考）。
+00100df3	- Key 模式用流式收回答（非流式要等整段写完才回响应头，约一百秒就在等待中被网关断开——真机上硕士论文评不成）；
+00100e96	  连接中途断了、上游临时出错，等一下自动再试（RETRY_WAITS，最多两次；积分通道一次提交只发一次，不重发）；
+00100f2e	  流式回答收尾前断了、但已收到的文字已经是一份完整的回答，照用，不重来。
+00100f9a	- 计费范围：每次评审单独一个（editor:项目:simulated-review-指纹），并发评审互不影响；后台任务在新的上下文里跑，
+00101061	结果：SIMULATED_REVIEW.md（给人看，问题全文统一编号，方便说"改第 1、3 条"）和 .mh/quality/simulated_review.json；
+001010ee	最后一步的产出列表里加上报告；对话项目另出一条结果行和一条任务记忆，AI 据此转述结论、问用户要不要按意见改。
+0010118e	⛔ 只报告：不进健康门、不触发返修、不改步骤状态、绝不改稿；评审自己出错只记"没评成：原因"。
+00101216	模型的回答只当数据：只认 JSON 里的几个字段，按长度截断，不执行任何东西。回答不是 JSON 提醒一次再问；
+001012a7	写到一半被截断（到了输出长度上限）的，再问时让它写短一些（原样再问还是会断）。
+00101320	评的是什么：评审表、评审对象、重点、稿件、参考文献表、题目作者，加上另给模型的依据
+0010139c	    （basis，见 _basis：双盲、老师或用户写的要求、征稿通知）。都没变就不用重评。
+00101410	报告文件还在不在；不在了就照结果文件补写一份。结果文件在 .mh/ 里、不随版本回退变，报告在项目文件夹里：
+001014a7	    回到没有报告的旧版本、或者报告被删了以后，稿件没变时不能只说一句"上次的结论仍然有效"却指着一个不存在的文件。
+0010154d	    补不了（最近一次没评成，结果文件里只留着上次的一句结论）返回 False，调用方重新评。
+001015d0	从 start 起读一个对象：(值, 它在原文里占多长)；读不出给 (None, 0)。
+00101680	读出来的字符串里有退格、换页：正常文字里不会有，是 \beta、\frac 这类被当成转义读了。
+00101700	按评审意见改文件的任务做完（带了 review_items）以后调（同步、不抛异常）：在后台复查那几条。
+00101790	引文到现在的稿件里核一遍：找得到的写上位置；“已解决”引的原文核不到，降成“说已解决、但没核实”。
+00101830	00010203040506071011121314151617202122232425262730313233343536374041424344454647505152535455565760616263646566677071727374757677
+001018c0	模型在字符串里写了没转义的英文双引号（"problem":"把"可检验假说"写成了结论"）：整段就不是合法的 JSON 了。
+00101953	    按"引号后面紧跟 , } ] : 才是字符串的结尾"给里面的引号补上转义。猜错了也只是照旧读不出来（再提醒模型重答）。
+00101a50	复查上次评审的几条意见：只把这几条和现在的稿件给审稿模型，逐条判断解决了没有。不改稿，调一次模型。
+00101ae4	    items：要复查的编号（不写 = 上次评审的全部问题，最多 RECHECK_MAX 条）。
+00101b49	    返回 {"status": ...}：started（"_runner" 是后台任务）、no_review（还没评过）、nothing_to_recheck（编号都不在上次
+00101bd8	    评审里）、already_running、busy、nothing_to_review、project_gone、draft、not_applicable。
+00108002	simulated_review.cp311-win_amd64.pyd
+00108af4	PyImport_ImportModuleLevelObject
+00108b6a	PyArg_ValidateKeywordArguments
+001093a8	_PyObject_GenericGetAttrWithDict
+00109440	PyObject_CallFinalizerFromDealloc
+00109bf2	_initialize_narrow_environment
+00109c50	api-ms-win-crt-runtime-l1-1-0.dll
+00116a60	<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+00116a99	<assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>

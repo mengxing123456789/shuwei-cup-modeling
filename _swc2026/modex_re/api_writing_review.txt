@@ -1,0 +1,38 @@
+MODULE backend.services.writing_review
+DOC: 写作检查的后台接线（论证逻辑与文理分型 第 3、5 期，2026-10-11）。
+
+规划步（paper-plan、paper-plan-zh、humanities-plan、course-plan、course-report-plan，以及开题、综述的规划部分）：
+- 表单模式的"写后复查"（workflow_engine 里的 ``_late_checks``）每查一轮就调 ``step_issues()``：先把 AI 在大纲里写下的
+  判断（研究类型、报告类型、课程学科）读回写作档案，再跑 ``tools/academic_writing_check.py`` 的 P 组，写
+  ``.mh/quality/writing_check.json``（步骤卡读它，见 services/step_review_report.py）。
+- 复查结束后 ``finalize_plan()`` 把仍没补上的需修项记进 OPEN_QUESTIONS.md 末尾的一段（每次覆盖同一段，都补上了就去掉）。
+
+写作步（paper-write*、humanities-write*、course-paper、course-report、thesis-proposal、literature-review，第 5 期）：
+- 同一条写后复查通道跑稿件各组（S/I/R/D/C/N/K/T/H，开题、综述连 P 组一起），写 WRITING_CHECK.md。
+- 需修项变成 ``severity="fix"`` 的 CheckIssue：step_recovery 只让写作步照清单定点改一轮，改完再查；还有就照实显示，
+  不阻断、不判失败。提示合成一条不可修的 warning：只显示，不返修。检查器自己出错只记"检查未完成"，不拦、不返修。
+- 人文稿先给 user_data/ 里的 PDF 补上带分页的 ``<名>_paged.txt``（services/paged_text.py），引语页码才核得了。
+
+编译、导出步（paper-compile、paper-compile-zh、docx-export）：完成后 ``run_final()`` 再查一遍终稿，只报告。
+
+免费复查、崩溃恢复这类不调模型的完成路径只调 ``run_for_step()``：查一遍、记一笔，不返修。
+结论和稿件版本绑定（检查器的 fingerprint）：稿件之后再改过，``is_stale()`` 返回 True，步骤卡显示"已过期"。
+
+对话模式这一版还没接（规划第 6 期）。竞赛、市调、软著专利等没有写作档案的工作区，检查器返回"不适用"。
+CONSTANTS:
+CHECKER_NAME [str] = 'academic_writing_check.py'
+DRAFT_CHECK_SKILLS [frozenset] = frozenset({'paper-write-nature', 'humanities-write', 'course-paper', 'thesis-proposal', 'humanities-write-latex', 'paper-write-docx', 'paper-write-zh', 'literature-review', 'course-report', 'paper-write', 'paper-write-zh-docx', 'paper-write-nature-docx'})
+DRAFT_FIX_PREFIX [str] = '写作检查需修'
+DRAFT_HINT_PREFIX [str] = '写作检查提示'
+FINAL_CHECK_SKILLS [frozenset] = frozenset({'paper-compile-zh', 'docx-export', 'paper-compile'})
+FIX_REASON_PREFIX [str] = '规划核对需修'
+HINT_REASON_PREFIX [str] = '规划核对提示'
+OPEN_QUESTIONS [str] = 'OPEN_QUESTIONS.md'
+PLAN_CHECK_SKILLS [frozenset] = frozenset({'course-report-plan', 'humanities-plan', 'paper-plan', 'paper-plan-zh', 'thesis-proposal', 'course-plan', 'literature-review'})
+REPORT_NAME [str] = 'WRITING_CHECK.md'
+STEP_CHECK_TIMEOUT_SECONDS [int] = 300
+_BEGIN [str] = '<!-- BEGIN MH_PLAN_CHECK -->'
+_END [str] = '<!-- END MH_PLAN_CHECK -->'
+CALLABLES:
+Path(*args, **kwargs) :: 
+datetime(?) :: datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]]) |  | The year, month and day arguments are required. tzinfo may be None, or an | instance of a tzinfo subclass. The remaining arguments may be ints.

@@ -1,0 +1,8 @@
+{
+ "found": [
+  {
+   "name": "_regenerate_claude_md_keeping_extras",
+   "doc": "重新生成 CLAUDE.md，并补回开跑时追加的两段：上传图片的识别描述、材料核对提示。\n\n⛔ 只重写不补，后续步骤就看不到图片里的题面信息（检查点确认后曾经这样丢过）。\n图片描述走 .mh/image-descriptions.json 持久化缓存，开跑时已识别过的命中不付费；\n材料核对只重写 CLAUDE.md 里那一段，不再给用户重复推送提示。"
+  }
+ ]
+}

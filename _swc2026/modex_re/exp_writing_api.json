@@ -1,0 +1,31 @@
+{
+ "doc": "写作检查的后台接线（论证逻辑与文理分型 第 3、5 期，2026-10-11）。\n\n规划步（paper-plan、paper-plan-zh、humanities-plan、course-plan、course-report-plan，以及开题、综述的规划部分）：\n- 表单模式的\"写后复查\"（workflow_engine 里的 ``_late_checks``）每查一轮就调 ``step_issues()``：先把 AI 在大纲里写下的\n  判断（研究类型、报告类型、课程学科）读回写作档案，再跑 ``tools/academic_writing_check.py`` 的 P 组，写\n  ``.mh/quality/writing_check.json``（步骤卡读它，见 services/step_review_report.py）。\n- 复查结束后 ``finalize_plan()`` 把仍没补上的需修项记进 OPEN_QUESTIONS.md 末尾的一段（每次覆盖同一段，都补上了就去掉）。\n\n写作步（paper-write*、humanities-write*、course-paper、course-report、thesis-proposal、literature-review，第 5 期）：\n- 同一条写后复查通道跑稿件各组（S/I/R/D/C/N/K/T/H，开题、综述连 P 组一起），写 WRITING_CHECK.md。\n- 需修项变成 ``severity=\"fix\"`` 的 CheckIssue：step_recovery 只让写作步照清单定点改一轮，改完再查；还有就照实显示，\n  不阻断、不判失败。提示合成一条不可修的 warning：只显示，不返修。检查器自己出错只记\"检查未完成\"，不拦、不返修。\n- 人文稿先给 user_data/ 里的 PDF 补上带分页的 ``<名>_paged.txt``（services/paged_text.py），引语页码才核得了。\n\n编译、导出步（paper-compile、paper-compile-zh、docx-export）：完成后 ``run_final()`` 再查一遍终稿，只报告。\n\n免费复查、崩溃恢复这类不调模型的完成路径只调 ``run_for_step()``：查一遍、记一笔，不返修。\n结论和稿件版本绑定（检查器的 fingerprint）：稿件之后再改过，``is_stale()`` 返回 True，步骤卡显示\"已过期\"。\n\n对话模式这一版还没接（规划第 6 期）。竞赛、市调、软著专利等没有写作档案的工作区，检查器返回\"不适用\"。\n",
+ "run": {
+  "sig": "(workspace: 'Path', skill_name: 'str', stage: 'str' = 'plan', *, source: 'Optional[str]' = None, auto_fix: 'bool' = False) -> 'Optional[dict]'",
+  "doc": "适用就查一遍、写结果；不适用返回 None。任何异常都只记\"检查未完成\"。"
+ },
+ "run_for_step": {
+  "sig": "(workspace: 'Path', skill_name: 'str', *, source: 'Optional[str]' = None) -> 'Optional[dict]'",
+  "doc": "不调模型的完成路径（免费复查、崩溃恢复）：读回判断、查一遍、记一笔，不返修。不查的步骤直接返回 None。"
+ },
+ "run_final": {
+  "sig": "(workspace: 'Path', skill_name: 'str', *, source: 'Optional[str]' = None) -> 'Optional[dict]'",
+  "doc": "编译、导出步完成后的终稿写作检查：只报告（写 WRITING_CHECK.md），不返修。别的步骤直接返回 None。"
+ },
+ "step_issues": {
+  "sig": "(workspace: 'Path', skill_name: 'str') -> 'list'",
+  "doc": "写后复查的一轮：规划步跑 P 组，写作步跑稿件各组（开题、综述连 P 组）。需修 → fix（改一轮、不阻断）；\n规划步的提示 → 不可修的 warning；写作步的提示合成一条不可修的 warning（只显示）。编译、导出步、不适用或没查成返回空。"
+ },
+ "stage_for": {
+  "sig": "(skill_name: 'str') -> 'Optional[str]'",
+  "doc": "这一步跑哪个阶段：写作步 draft（开题、综述也是写作步）、规划步 plan、编译导出步 final；别的步骤不查。"
+ },
+ "is_stale": {
+  "sig": "(workspace: 'Path', summary: 'Optional[dict]') -> 'bool'",
+  "doc": "步骤卡上的稿件阶段结论还对应现在的稿件吗：稿件（含 \\input 的文件）之后改过、删过就是过期。"
+ },
+ "finalize_plan": {
+  "sig": "(workspace: 'Path', skill_name: 'str') -> 'None'",
+  "doc": "复查结束后：规划核对（P 组）仍有需修项就记进 OPEN_QUESTIONS.md 末尾一段（覆盖上一次的同一段）；都补上了就去掉。\n稿件各组的需修项不记这里：它们写在 WRITING_CHECK.md 和步骤卡上。"
+ }
+}

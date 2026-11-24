@@ -1,0 +1,97 @@
+成回执；先核对任务状态，不要重复启动。后台任务已返回失败或停止回执；需核对具体任务错误，不是缺少回执。；同时：[系统] 自动恢复成功 (第  次)[系统] 本轮聚焦修复后，检查范围内的源码、结果与失败原因均未变化；已触发无进展熔断，停止重复消耗额度 张, 实际 [警告]  (但有其他文件变更, 继续)[系统] 论文各章节已写入，正在核对章节完整性、摘要源码与目录结构；核对结束后将等待你确认，确认后由最终步骤统一编译和质检[系统] 论文主体已写入，正在进行写后完整性与数据真实性检查；检查结束后将等待你确认，确认后进入编译/导出步骤检查结束后将自动进入编译/导出步骤[警告] 步骤  未产出任何文件 张, 缺 [系统] 占位章节在上一轮续写后没有变化；已停止重复续写，等待质量门给出明确失败原因[系统] 正在补齐  个占位章节 [系统] 所有章节已写完成（共  次续写）[警告] 续写  次后仍有  个占位章节实际引用的章节仍未完成： 张）；已有产物已保留，检查环境恢复后点继续重新检查。 轮） 轮自检后仍有  轮超时 轮异常：[严重] 数据真实性核对在  轮自动修复后仍有 数据真实性核对未通过（ 轮后仍有  步骤无任何架构图产出[提醒] 数据真实性自检 [系统] 数据真实性聚焦核对  + 
+### 必修：以下硬规则致命问题
+
+
+
+这些是确定性问题，**必须修复**。
+**先核对这 - …另有  个
+
+### 数据真实性自检
+
+`；内容：` 模式，第  轮）
+
+前一次写作完成，现在进入数据真实性自检阶段。**有问题必须修，不能解释或忽略**。
+`，内容为 ``；不要修改源码来登记检查状态。
+[警告] 数据真实性自检第 [系统] 正在根据你的建议修改当前步骤产出...」提出了以下建议：
+
+> 工作区文件:
+[系统] 修改完成，请在弹窗中复审修改结果[警告] 修改未确认完成: ；当前产物已保留，请核对后恢复## 📋 修改审查报告
+
+
+
+---
+
+（修改后）」的第二轮修改意见
+
+[系统] 正在根据你的第二轮建议继续修改...
+
+请按照与第一轮相同的流程执行：读取现有产出 → 分析建议 → 执行修改 → 写入审查报告。
+注意：这是在第一轮修改基础上的进一步调整，不要回退第一轮已采纳的修改。
+检查点已确认，当前产物核验完成所有步骤执行完毕但未产出任何文件。工作流某个步骤失败，请查看日志。上次执行被暂停，没有正常结束」重跑前 步（单步重跑）
+[系统] 正在重做「」：按当前上游重新做一遍，覆盖这一步上次的产出[系统] 正在重新执行「」；可恢复问题将先内部修复，次数受限且保留已有产物[系统] 模型上下文过大，压缩文件索引后进行唯一一次安全重试模型上下文压缩后仍快速回填至上限；为避免重复消耗额度，本步骤在一次安全重试后停止。[系统] 正在内部恢复（，第  次），已有产物保留；恢复后继续检查。工作区中已有文件（按需读取，保留并核对已完成产物，不从头重复运行）：
+[系统] 单步重跑的质量门发现具体问题，正在聚焦修复 上一次单步重跑没有产出 `单步自动修复达到总时限，已有产物已保留；确认执行状态后可继续核验。[系统] 单步返修后，检查范围内的源码、结果与失败原因均未变化；已停止重复模型调用」已重新执行；后面已完成的步骤（）是基于重跑前的结果生成的，数字和图可能对不上。需要前后一致时，请依次重跑这些步骤。
+已跳过：逻辑对抗复核已下线（结论没有后续步骤使用）已跳过：论文改进循环已下线方法精炼+实验规划实验实现+部署+出图实验实现+出图辽宁省/东三省数学建模认证杯国际赛 (小美赛)架构图/流程图绘制] 数据分析（可选）数据图表生成（可选）理论框架图/示意图（可选）已有资产 → 论文缺口补全(代码/结果)缺口补全(图表)缺口补全(架构图/路线图)软件著作权申请资料/草稿/软件著作权申请资料/正式资料/市调大赛（全国大学生市场调查与分析大赛）⛔ 只需要中文摘要，不要英文摘要（国赛不要求英文摘要）正文采用自适应章节：按问题依赖链组织建模—求解—结果—检验，不固定八章，不设空标题每个问题按理论或机理起点→题意映射→关键推导→完整模型→真实求解→结果解释组织，不能只列模型名和结果[网络等待] 本轮生成的图全部进入对应建模/求解/结果/验证过程；每张图前后有实质叙述，禁止图册式连排附录必须列支撑材料文件清单，并包含全部完整、可运行的源程序；确未使用程序时须明确说明正文与附录分开统计，附录代码是正式产出但不计入正文参考页数论文格式有严格要求（参见规程、评审标准）⛔ 华为杯重点考察推导过程深度 — 每个子问题都应按实际需要给出充分图表与逐式编号的公式。结构应是：建模假设 → 公式推导（每一步可解释）→ 算法步骤 → 结果讨论 → 验证。不能「列模型，给结果」，必须展示每个关键步骤怎么来的图表只服务于本题的构型、求解或结果证据，不设按赛事或题号分配的图表数量。机理题先完整推导再配必要图表；过程图和曲线不能代替方程、闭合条件与数值求解过程⛔ 只需要中文摘要，不要英文摘要（华为杯是中文竞赛）灵敏度分析与模型推广按关键参数和真实结果组织，不设固定页数；有必要时配图说明附录包含完整代码、关键数据和必要的补充推导/算法说明，不设固定页数且不计入正文参考页数[授权暂停] 正文按本题依赖链自适应组织建模—求解—结果—检验，不固定章名与章数参考文献按正文引用次序编号，正文用方括号标编号；书籍：[编号] 作者，书名，出版地：出版社，出版年；期刊：[编号] 作者，论文名，杂志名，卷期号：起止页码，出版年；网上资源：[编号] 作者，资源标题，网址，访问时间（年月日）；引用书籍要写页码附录写明实际使用的软件名称、运行命令和自己编写的全部源程序（官方要求）中文撰写，封面含参赛队号、参赛队员正文按本题依赖链自适应组织建模—求解—结果—检验，不固定章名与章数，不生成目录页目录列到三级标题（“目　录”黑体四号）；表格和插图清单先列表、后列图（标题黑体四号），条目与正文题注一致英文摘要可选：默认不写；用户开启英文摘要时才在中文摘要后另起一页写英文摘要数据优先用真实数据（用户上传或可公开获取的来源，写明机构/网址、指标与时间范围）；拿不到真实数据时可以用模拟数据，但必须在数据说明、图表和论文中如实标注“模拟数据”，不得编造真实机构来源正文按数据依赖链自适应组织预处理—建模—结果—检验，不固定章名与章数，不生成目录页；本轮自动重连尚未成功，资料与进度已保留。网络恢复后点击继续，无需重新激活或重建工作流。⛔ 只需要中文摘要，不要英文摘要官方评分四项：论文质量；代码完整、正确、高效并附详细操作说明；不公开测试集上的准确率/召回率等指标；创新性摘要简明写出解决问题的核心思想与效果（模型/算法与真实验证指标），只写中文摘要正文写清数据处理、模型与算法细节、求解过程和结果分析；按本题依赖链自适应组织附录写明实际使用的软件名称、运行命令和自己编写的全部源程序（官方要求），源程序同时作为支撑材料提交题目要求放进正文的结果表原样出现在正文；题目要求的结果文件按规定的文件名、列名和格式生成认证杯数学建模（第一/二阶段）；已保留资料与进度，请检查网络和激活状态后点击继续，无需重建工作流。数维杯数学建模（国内赛）辽宁省大学生数学建模/东三省数学建模联赛论文第一页为承诺书（模板已包含，不要删除）第二页为封面（题目+关键词+摘要，手动排版格式）承诺书与封面之后不生成目录页；正文按本题依赖链自适应组织建模—求解—结果—检验分两阶段：第一阶段提交初步方案，第二阶段提交完整论文正文按问题依赖链自适应组织建模—求解—结果—检验，不固定章名与章数，不生成目录页摘要之后不生成目录页；正文按本题依赖链自适应组织建模—求解—结果—检验上一轮在工具或后台任务未确认完成时中断。请先核对工作区现有文件、检查点与报告，判断哪些已经完成；只补完中断的部分，不要重复已完成的工具操作，也不要覆盖有效结果。上一轮在同一步骤发生临时断线。续接原会话并核对工作区现有文件；不要重复已经完成的工具操作或覆盖有效结果，只完成中断部分。## 工作区文件以上是前面步骤的产物，按需读取。用户上传的材料不在这里逐个列出，见下面说明里的材料清单。【新建任务时在“要求”框里填写的（后台接在上传的要求文档后面，同样是用户要求）】
+## 材料核对（后台自动检查，只提示不拦截）
+这是用户为申请软件著作权上传的图片，多半是软件界面截图、原型图或文档截图：请描述页面用途、菜单与导航、按钮、表单字段、表格列与示例数据、状态提示这是用户为撰写专利技术交底书上传的图片，可能是结构图、示意图、流程图、电路图、实验数据或界面：请描述其中的部件与连接关系、流程步骤、标注文字和数据行距|行间距|段前|段后|首行缩进页边距|边距|装订线|版心页眉|页脚|页码格式模板换过了，原来识别的占位位置（题目、摘要、正文各填在哪）是上一份模板的识别出来的占位位置里没有正文该填在哪（模板里的样例论文还在原处）导出时软件自己出错（模块没载对、调用参数不对……），不是外部原因，重试也一样。以用户提供的图为权威, 重新生成数据匹配图描述[检查暂停] [历史记录] 各自独立保留, 在论文中明确说明差异?{}- 「」：按 
+
+
+## ⛔⛔⛔ 用户在对话里选定的题面理解（最高优先级，本次必须照做）
+
+用户看了上一版赛题分析在「假设敏感性预检」里列出的几处可以有不止一种理解的地方，选了和报告原来倾向不一样的：
+
+候选 （
+
+## ⛔⛔⛔ 用户在选题卡上选定的题目（最高优先级，本次必须照做）
+
+用户已选定：选候选 : 登记为 ai，但没有采用标记 _mcm_ai/adopted/: 只能登记 ai（采用）或 fallback（按原因代码退回）: 登记为 ai，但 figures/ 里没有这张图ai_usage_intake.jsonai_usage_log.jsonall=all_results.json`![alt](figures/...)`` 中用 `![alt](figures/xxx.png)` 嵌入；**必须 `.png` 扩展名**（Word 不能嵌 PDF）。如果只有 PDF，先用脚本转 PNG 再引用。api error: unexpected eof使用 apmcmthesis 或通用模板，pdflatex 编译app.py使用 article 或 mcmthesis 文档类，pdflatex 编译使用 article 文档类，pdflatex 编译_assets_index.json无法解析 _assets_index.json: %sassets-inventory)
+
+用户已通过 assets-inventory 步骤盘点过资产。请**只生成下面缺失的部分**:
+
+, 自动重试 (attempt auto-paper-improvement-loopauto-review-loop.aux\bTABLE_[A-Za-z0-9]\b(?:api error|status(?: code)?|http)\b[^a-z]{0,6}(?:401|403)\b\b(?:api error|status(?: code)?|http)\b[^a-z]{0,6}500(?![\d.])bachelor_main.texbad gateway_base_profile.json```bash
+```bash
+python _utils/get_recipe.py basic 8    # 提取 basic #8 的完整代码
+在 bash 块开头加一行 `source .env_skill 2>/dev/null || true` 就能让\begin{document}.bibbigdata package refresh skipped#!/bin/bashblind_terms.json.bmp.bstbun has crashed.cache- 表格表头 / 单元格 / 题注（caption）全部中文
+。前端编码时 cat 该风格文件，按其配色/字体/组件规格 + 指定的 daisyUI 主题实现。
+`cat figures/TABLE_*.md` 嵌入 chars)checkpoint_feedback.md
+## 用户修改意见
+工作区中存在 `checkpoint_feedback.md`，是用户在检查点提交的修改意见，文件标题写明针对哪一步。
+**开始前先阅读：** 若针对的就是本步，优先遵从（最高优先级）；若针对的是前面的步骤，把它当作用户偏好参考，不要据此改动上游产物，与题面或本步要求冲突时以题面和本步要求为准。
+checkpoint_revision_report.md.clscn_degree_thesis.jsoncode/ + 兜底复制: code=code/backendcode/backend/`code/backend/app.py`（Flask 入口，`app = Flask(__name__)`，末尾 `app.run(host="127.0.0.1", port=int(os.environ.get("PORT", 5000)))` 读 PORT 环境变量）`code/backend/index.js` + `code/backend/package.json`（Express 入口，`package.json` 的 `scripts.start` 设为 `node index.js`，监听端口读 `process.env.PORT`）code/backend/main.py`code/backend/main.py`（FastAPI 入口，`app = FastAPI()`，用 uvicorn 启动）- 目录约定：`code/`（前端项目，入口 `code/index.html` 或框架入口）+ `RUN.md`。
+- 目录约定：`code/`（源码，主脚本如 `code/main.py`）+ `RUN.md`。
+- 目录约定：`code/`（源码，主入口如 `code/main.py` 或 `code/cli.py`）+ `RUN.md`。
+code/frontendcode/frontend/- 目录约定：`code/frontend/`（前端）+ `code/backend/`（后端，入口 code/main.py- **栏数：双栏**（column_layout=double）。⛔ `paper/main.tex` 的 `\documentclass[...]` 选项中**必须包含 `twocolumn`**。
+  非 journal 模板（本科/硕士）默认是单栏，需要在 `\documentclass` 加上 `twocolumn`；摘要建议用 `\twocolumn[\begin{@twocolumnfalse} ... \end{@twocolumnfalse}]` 跨栏显示。
+- **栏数：单栏**（column_layout=single）。⛔ `paper/main.tex` 的 `\documentclass[...]` 选项中**必须去掉 `twocolumn`**（改用默认单栏或显式 `onecolumn`）。
+  若套用的是 journal 模板（默认 twocolumn），除了改 `\documentclass`，还必须把摘要区的 `\twocolumn[\begin{@twocolumnfalse} ... \end{@twocolumnfalse}]` 结构降级为普通单栏写法（直接顺序排布 标题/作者/摘要/关键词），否则单栏下会编译报错。
+_combined_for_pandoc.texcomp-codecomp-compilecomp-compile-encomp-compile-zhcomp-modelingcomp-modeling 设计阶段覆盖comp-paper-comp-papercomp-paper-encomp-paper-en-docxcomp-paper-huawei-zhcomp-paper-huawei-zh-docxcomp-paper-zhcomp-paper-zh-docxcomp-prob-analysiscomp-reviewcomp-stats-analysiscomp-stats-topiccompetition_en.jsoncompetition_mathorcup.jsoncompetition_mcm.jsoncompetition_zh.jsonconnection abortedconnection refusedconnection resetconnection was interrupted before the response completedcontest_rules.jsoncontract skill lookup failed for %s: %sconversation-intakecopyright-buildcopyright-draft- 流程：起草（业务理解、申请表、挑代码文件后由 `copyright_kit.py prepare-code` 从源文件抽取代码、操作手册与截图，最后 `copyright_kit.py check` 核对并生成检查点预览）→ 检查点（用户看预览确认）→ 生成正式资料（程序鉴别材料 PDF 每页 50 行、文档鉴别材料 PDF、Word、申请表 TXT）。
+course-papercourse_paper.jsoncourse-plancourse-reportcourse_report.jsoncourse-report-plan.cppcredit balance.csv使用 ctexart 文档类，XeLaTeX 编译使用 cumcmthesis 文档类，XeLaTeX 编译使用 cumcmthesis 文档类（withoutpreface 选项），XeLaTeX 编译使用 cumcmthesis 文档类（withoutpreface 选项去掉封面），XeLaTeX 编译用户**没有额外要求**时(custom_requirements 为空), 一律按赛题原文要求做, 不要自己加发挥[^.\[\]]+|\[\d+\]等待 %d 个文件异步提取完成 (剩 %.0f 秒超时)(?<![\d.])(?:429|502|503|504|520|521|522|523|524|529)(?![\d.])等待提取超时 (剩 %d 个未完成), 工作流将照常启动, 这些文件 Claude 看不到原文提取完成: %d 个成功, %d 个失败初号|小初|一号|小一|二号|小二|三号|小三|四号|小四|五号|小五|六号|\d+(?:\.\d+)?\s*(?:pt|磅)补提取了 %d 份文档: %s- 前端界面必须使用 daisyUI 组件库（美观、统一），不手写零散 CSS。
+- 界面必须使用 daisyUI 组件库（美观、统一），不手写零散 CSS。
+- 前端编码时按这个风格描述设计配色/布局，配合 daisyUI 组件库实现（选一个最接近的 daisyUI 主题）。
+.datdata/ data=data/clean.csvdefault_cn_thesis.json_derived_profile.json
+</details>
+
+<details>
+<summary>ASSETS_CONFLICTS.md(节选)</summary>
+
+<details>
+<summary>ASSETS_INVENTORY.md(节选, 完整请用 Read 工具)</summary>
+
+dev-codedev-code-backenddev-code-frontenddev-designdev-reportdev-requirementdev-selfcheckdict | Nonedict[str, str]disable.doc_doc_extracted.md_doc_extracted.txt\documentclass{article}.docx-docx专利交底书/交底书.docxdocx 模式兜底: PANDOC_BIN 不可用, 无法转 tex → mddocx-export
+**样式对标说明**：
+- docx-export 会用与 LaTeX 模板对标的样式 profile（A4/25mm/12pt 宋体/1.5 倍行距/2 字符首行缩进/三线表/上标引用）
+- 你**只管按 Markdown 标准写**，不要在文档里手写格式控制（没必要，profile 会负责）
+
+## ⛔ DOCX 渲染陷阱清单（写作时必须遵守，否则导出 Word 会走样）
+**A. 代码块（附录代码最常踩坑）**
+- 任何 ≥ 3 行的代码 **必须** 用 fenced 代码块包围：
+  ````
+  ```python
+  import numpy as np
+  ...
+  ```
+  ````
+- ⛔ **绝不要** 把代码塞成一段普通正文（会全挤成一行）
+- ⛔ **绝不要** 把多段代码用单反引号 `code` 行内格式串起来（行内只能放短表达式）
+- ```` ``` ```` 必须成对出现（开 + 闭都要写）；嵌套代码块要先关闭外层
+- 附录章节的代码：每个完整段落都要单独的 ```python ... ``` 块，**不要** 把多个函数挤进一个块还少换行
+- 代码块 **不要** 加首行缩进（Mark

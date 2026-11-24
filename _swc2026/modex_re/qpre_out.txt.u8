@@ -1,0 +1,34 @@
+== precompile 0
+== pre-compile 0
+== ����Ԥ���� 0
+== .mh/ 5
+'չ��Ͷ���ʽ���д����������.mh/writing_spec.json��VENUE_CFP.md����ûѡ��ʽ���� None��'
+'�Ѹ��������ʵ���м�¼��skill��ʵ��ģ�͡�ʱ�䡢������д�� .mh/ai_usage_log.json���� AI ��¼��ʵ���ɡ�'
+'    ͼƬ������ .mh/image-descriptions.json �־û����棬����ʱ��ʶ��������в����ѣ�'
+'    ȥ�� `_tmp/` �Լ�ű���`.mh/` �����ڲ��ļ������ǽӿڱ����Ͳ��ö����г���ֻ�ǵ㲻�����ļ����������ᱻ���ɳɹ�'
+'��ä���ʱ��ѧУ��ѧԺ��ָ����ʦ����Ա������д�� .mh/blind_terms.json��'
+== vision_ledger 0
+== changes.json 0
+== submission_check 0
+== writing_check 0
+== main_output_receipt 4
+'_main_output_receipt'
+'workflow_engine._main_output_receipt'
+'_usable_main_output_receipt'
+'workflow_engine._usable_main_output_receipt'
+== receipt 8
+'_main_output_receipt'
+'workflow_engine._main_output_receipt'
+'_receipt_started'
+'workflow_engine._receipt_started'
+'_usable_main_output_receipt'
+'workflow_engine._usable_main_output_receipt'
+'    trusted a receipt written after its *own* paid verification session, so every'
+'    It is not a successful-execution receipt. Continuing still evaluates the'
+== ��ִ 6
+'�� asyncio.wait_for����ʱ��ֻ��ģ�͸ɻ��ʱ�䣺�۵��ڼ�����������Ⱥ�̨�����ִ��׼���ܱ�������ʱ������ָ���ʱ�䣬'
+'��ִ��Ч = ͬһ���ܡ�ͬһ�����֮��û�����β���������ɹ���������������Ȼ������'
+'�����Ľ���ԭ�� / �������ִ / ���Ѽ���������δǨ�Ƶľɱ�ṹ�����Լоߣ��ﵱ��û�С�'
+'started = �Ǵ������ÿ�ʼ��ʱ�䣺���û�ִ���ʱ�����迨����ȡ�Ǵ�ִ�еĿ�ͼ/Ԥ�����¼��'
+'����������ɣ�����ԭ�򡢻�ִ�����Ѽ����������㣻�н�չ�ˣ��Զ����ܴ���Ҳ���㡣'
+'    �������ĵĴ��� data/raw/hub_*.csv �ڲ��ڣ���ֻ�����ػ�ִ������ļ�Ų�߻�ɾ��Ҳ�������ݣ���'

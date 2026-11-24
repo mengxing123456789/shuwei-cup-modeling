@@ -1,0 +1,282 @@
+is_stats_workspace
+workflow_acceptance.is_stats_workspace
+has_report_content
+workflow_acceptance.has_report_content
+core_file_problem
+workflow_acceptance.core_file_problem
+workflow_acceptance.core_file_problem.genexpr
+pdf_time
+unfinished_sections
+workflow_acceptance.unfinished_sections
+workflow_acceptance.unfinished_sections.genexpr
+workflow_acceptance
+Interpreter change detected - this module can only be loaded into one interpreter per process.
+__loader__
+__file__
+__package__
+__path__
+submodule_search_locations
+builtins
+cython_runtime
+__builtins__
+init workflow_acceptance
+name '%U' is not defined
+ while calling a Python object
+%s() got multiple values for keyword argument '%U'
+%s() got an unexpected keyword argument '%U'
+keywords must be strings
+local variable '%s' referenced before assignment
+free variable '%s' referenced before assignment in enclosing scope
+generator raised StopIteration
+join() result is too long for a Python string
+_cython_3_2_5
+__module__
+_cython_3_2_5._common_types_metatype
+__name__ must be set to a string object
+__qualname__ must be set to a string object
+__defaults__ must be set to a tuple object
+changes to cyfunction.__defaults__ will not currently affect the values used in function calls
+__kwdefaults__ must be set to a dict object
+changes to cyfunction.__kwdefaults__ will not currently affect the values used in function calls
+__annotations__ must be set to a dict object
+func_doc
+func_name
+__name__
+__qualname__
+func_dict
+__dict__
+func_globals
+__globals__
+func_closure
+__closure__
+func_code
+__code__
+func_defaults
+__defaults__
+__kwdefaults__
+__annotations__
+__dictoffset__
+__vectorcalloffset__
+__weaklistoffset__
+__reduce__
+Bad call flags for CyFunction
+<cyfunction %U at %p>
+takes no arguments
+takes exactly one argument
+takes no keyword arguments
+needs an argument
+_cython_3_2_5.cython_function_or_method
+raise: arg 3 must be a traceback or None
+instance exception may not have a separate value
+calling %R should have returned an instance of BaseException, not %R
+raise: exception class must be a subclass of BaseException
+generator already executing
+generator ignored GeneratorExit
+send(arg) -> send 'arg' into generator,
+return next yielded value or raise StopIteration.
+throw(typ[,val[,tb]]) -> raise exception in generator,
+close() -> raise GeneratorExit inside generator.
+__reduce_ex__
+gi_yieldfrom
+object being iterated by 'yield from', or None
+name of the generator
+qualified name of the generator
+gi_frame
+Frame of the generator
+gi_running
+_cython_3_2_5.generator
+does not match
+decompress
+Small, deterministic delivery checks, without length/formula-count quotas.
+These checks establish usable core output, not mathematical correctness or a
+submission quality score. Step-specific data/figure/compile checks still apply.
+Return a proven core defect (or unavailable check), never a size hint.
+    以后台写的 ``MH_STATS_MODE=1`` 标记为准；老项目的工作区说明还没重新生成时，
+    用“有 TOPIC_PLAN.md、没有 PROBLEM_ANALYSIS.md”兜底（数模第一步必产
+    PROBLEM_ANALYSIS.md，统计建模第一步只产 TOPIC_PLAN.md）。兜底比统计检查脚本
+    数模工作区即使有 TOPIC_PLAN.md 也不会被当成统计建模。
+Accept concise prose, tables and useful lists, but not headings/TODOs.
+    Full-line matching is intentional: a real report can discuss TODO entries
+    or quote the word 'placeholder' without becoming an empty-shell report.
+Only empty/explicitly unfinished active chapters warrant continuation.
+    Short valid chapters and unused drafts are not incomplete work. Before
+    main.tex exists, the current plan can still identify missing draft files.
+    Missing inputs in an assembled paper remain the compiler's responsibility.
+.text$mn
+.text$mn$00
+.idata$5
+.CRT$XCA
+.CRT$XCZ
+.CRT$XIA
+.CRT$XIZ
+.CRT$XPA
+.CRT$XPZ
+.CRT$XTA
+.CRT$XTZ
+.rdata$voltmd
+.rdata$zzzdbg
+.rtc$IAA
+.rtc$IZZ
+.rtc$TAA
+.rtc$TZZ
+.idata$2
+.idata$3
+.idata$4
+.idata$6
+.rsrc$01
+.rsrc$02
+PyFrozenSet_Type
+PySequence_List
+PyBaseObject_Type
+PyGC_Enable
+PyUnicode_InternFromString
+PyCFunction_Type
+PyOS_snprintf
+PyThreadState_Get
+PyExc_Exception
+PyException_GetTraceback
+PyErr_SetObject
+PyDict_SetDefault
+PyCode_NewEmpty
+PyErr_GivenExceptionMatches
+PyErr_WarnEx
+PyExc_RuntimeWarning
+PyThreadState_GetFrame
+PyFrame_New
+PyLong_AsSsize_t
+Py_LeaveRecursiveCall
+PyImport_ImportModule
+PyBytes_AsString
+PyImport_ImportModuleLevelObject
+PyErr_NormalizeException
+PyErr_Occurred
+PyArg_ValidateKeywordArguments
+PyLong_FromSsize_t
+PyUnicode_DecodeUTF8
+PyList_Sort
+PyTraceBack_Here
+_PyThreadState_UncheckedGet
+PyExc_RuntimeError
+PyMethod_New
+PyLong_FromLong
+PyUnicode_Concat
+PyExc_UnboundLocalError
+PyErr_SetNone
+PyDict_GetItemWithError
+PyInterpreterState_GetID
+PyModule_GetName
+_Py_NoneStruct
+PyTuple_New
+PySequence_Contains
+PyDict_SetItemString
+PyDict_Size
+PyLong_FromLongLong
+PyFloat_FromDouble
+PyGC_Disable
+PySet_Add
+PyExc_AttributeError
+PyTuple_GetSlice
+PyUnicode_New
+PyUnicode_Split
+PyErr_SetString
+PyErr_WriteUnraisable
+PyNumber_Add
+PyExc_ValueError
+PyUnicode_InternInPlace
+PyDict_Next
+PyErr_Format
+PyDict_Type
+PyTuple_Type
+_Py_FalseStruct
+PyImport_GetModule
+PyFloat_Type
+PyModule_NewObject
+PyMethod_Type
+PyLong_Type
+PyType_IsSubtype
+PyUnicode_Join
+PyExc_OverflowError
+PyCode_NewWithPosOnlyArgs
+_Py_Dealloc
+PyTuple_GetItem
+PyImport_GetModuleDict
+PyModule_GetDict
+PyExc_UnicodeError
+PyErr_ExceptionMatches
+PyUnicode_FindChar
+PyUnicode_FromFormat
+Py_Version
+PySet_New
+PyList_New
+PyImport_AddModule
+PyType_Ready
+PyErr_Clear
+PyList_Append
+PyException_SetTraceback
+PyDict_SetItem
+PyDict_New
+PyUnicode_Type
+_PyDict_GetItem_KnownHash
+PyNumber_Index
+PyMem_Free
+PyExc_StopIteration
+PyFrozenSet_New
+PyList_Type
+PyErr_NoMemory
+PyDict_GetItemString
+PyExc_OSError
+PyModuleDef_Init
+PyBytes_FromStringAndSize
+PyExc_TypeError
+PyType_FromModuleAndSpec
+PyMem_Realloc
+PyExc_NameError
+PyTuple_Pack
+_PyUnicode_Ready
+PyMem_Malloc
+PyExc_IndexError
+Py_EnterRecursiveCall
+PyExc_ImportError
+_Py_TrueStruct
+PyArg_UnpackTuple
+PyMemoryView_FromMemory
+PyExc_SystemError
+_PyUnicode_FastCopyCharacters
+PyException_SetCause
+PyNumber_TrueDivide
+PyTraceBack_Type
+PyExc_GeneratorExit
+PyUnicode_FromString
+_PyType_Lookup
+PyType_Type
+PyUnicode_Substring
+PyUnicode_FromStringAndSize
+PyIter_Check
+python311.dll
+RtlCaptureContext
+RtlLookupFunctionEntry
+RtlVirtualUnwind
+UnhandledExceptionFilter
+SetUnhandledExceptionFilter
+GetCurrentProcess
+TerminateProcess
+IsProcessorFeaturePresent
+QueryPerformanceCounter
+GetCurrentProcessId
+GetCurrentThreadId
+GetSystemTimeAsFileTime
+DisableThreadLibraryCalls
+InitializeSListHead
+IsDebuggerPresent
+KERNEL32.dll
+__C_specific_handler
+__std_type_info_destroy_list
+VCRUNTIME140.dll
+_initterm
+_initterm_e
+_seh_filter_dll
+_configure_narrow_argv
+_initialize_narrow_environment
+_initialize_onexit_table
+_execute_onexit_table
+api-ms-win-crt-runtime-l1-1-0.dll

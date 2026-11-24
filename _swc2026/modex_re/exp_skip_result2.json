@@ -1,0 +1,18 @@
+{
+ "both_with_missing": [
+  false,
+  "paper-figure FIGURE_MANIFEST 对账: 规划 2 张, 实际 1 张, 缺 1 张"
+ ],
+ "no_issue_mention": [
+  false,
+  "paper-figure FIGURE_MANIFEST 对账: 规划 2 张, 实际 1 张, 缺 1 张"
+ ],
+ "with_issue_mention": [
+  false,
+  "paper-figure FIGURE_MANIFEST 对账: 规划 2 张, 实际 1 张, 缺 1 张"
+ ],
+ "half_rule": [
+  false,
+  "paper-figure FIGURE_MANIFEST 对账: 规划 3 张, 实际 1 张, 缺 2 张"
+ ]
+}
